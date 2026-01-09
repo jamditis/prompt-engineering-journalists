@@ -1,105 +1,156 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Module 5: Agents and RAG | Advanced prompt engineering for journalists</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 5: Agents and RAG | Advanced prompt engineering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="../index.html" class="nav-brand">Advanced prompt engineering for journalists</a>
-      <ul class="nav-links">
-        <li><a href="../module-1/">Module 1</a></li>
-        <li><a href="../module-2/">Module 2</a></li>
-        <li><a href="../module-3/">Module 3</a></li>
-        <li><a href="../module-4/">Module 4</a></li>
-        <li><a href="../module-5/">Module 5</a></li>
-      </ul>
-    </div>
-  </nav>
+<body class="antialiased font-mono bg-void text-chrome">
+    <div class="crt-overlay"></div>
+    <div class="fixed inset-0 bg-grid-pattern bg-[size:40px_40px] opacity-[0.07] pointer-events-none z-0"></div>
 
-  <main class="main">
-    <div class="container">
-      <p class="text-muted text-small mb-sm">Module 5</p>
-      <h1>Agents and RAG</h1>
-      <p class="text-muted">Understand AI agents, retrieval-augmented generation, and how to connect Claude to external data sources.</p>
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <!-- Header with nav -->
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl clip-notch">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../module-5/" class="text-acid">[ 05 ]</a>
+                </nav>
+            </div>
+        </header>
 
-      <div class="alert alert-info mt-lg">
-        <h4 class="mt-0">Learning objectives</h4>
-        <ul class="mb-0">
-          <li>Distinguish between chatbots and AI agents</li>
-          <li>Understand retrieval-augmented generation (RAG) and why it matters</li>
-          <li>Learn the basics of Model Context Protocol (MCP)</li>
-          <li>Configure Claude Code with an MCP server to access local files</li>
-        </ul>
-      </div>
+        <!-- Module header -->
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">:: MODULE_05</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white glitch-text" data-text="AGENTS AND RAG">AGENTS AND RAG</h1>
+                <p class="text-gray-400 text-lg font-mono mt-4 max-w-2xl">Understand AI agents, retrieval-augmented generation, and how to connect Claude to external data sources.</p>
+            </div>
+        </section>
 
-      <h2>Key concepts</h2>
+        <!-- Content sections -->
+        <main class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
 
-      <div class="card mb-md">
-        <h4 class="card-title">Chatbots vs. agents</h4>
-        <p class="card-description">
-          <strong>Chatbot:</strong> Responds to prompts using only its training data. Can't take actions, access external information, or modify files. Like talking to someone who can only answer from memory.<br><br>
-          <strong>Agent:</strong> Can use tools, access data sources, and take actions. Breaks complex tasks into steps, decides what tools to use, and executes multi-step plans. Claude Code is an agent - it can read files, run commands, and make changes to your projects.
-        </p>
-      </div>
+            <!-- Learning objectives -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-ice">LEARNING_OBJECTIVES</h2>
+                </div>
+                <div class="border border-ice/30 bg-iceDim p-6">
+                    <ul class="space-y-2 text-sm font-mono text-gray-300">
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Distinguish between chatbots and AI agents</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand retrieval-augmented generation (RAG) and why it matters</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Learn the basics of Model Context Protocol (MCP)</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Configure Claude Code with an MCP server to access local files</li>
+                    </ul>
+                </div>
+            </section>
 
-      <div class="card mb-md">
-        <h4 class="card-title">Retrieval-augmented generation (RAG)</h4>
-        <p class="card-description mb-0">RAG combines a language model with external data retrieval. Instead of relying only on training data, the model can search relevant documents and include that information in its response. This reduces hallucinations and lets the model work with current, domain-specific information it was never trained on.</p>
-      </div>
+            <!-- Key concepts -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">KEY_CONCEPTS</h2>
+                </div>
+                <div class="space-y-4">
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Chatbots vs. agents</h3>
+                        <div class="text-gray-400 text-sm leading-relaxed space-y-3">
+                            <p><span class="text-ice">Chatbot:</span> Responds to prompts using only its training data. Can't take actions, access external information, or modify files. Like talking to someone who can only answer from memory.</p>
+                            <p><span class="text-acid">Agent:</span> Can use tools, access data sources, and take actions. Breaks complex tasks into steps, decides what tools to use, and executes multi-step plans. Claude Code is an agent - it can read files, run commands, and make changes to your projects.</p>
+                        </div>
+                    </div>
 
-      <div class="card mb-md">
-        <h4 class="card-title">How RAG works</h4>
-        <p class="card-description">A typical RAG pipeline:</p>
-        <ol class="mb-0">
-          <li><strong>Query:</strong> User asks a question</li>
-          <li><strong>Retrieve:</strong> System searches a document collection for relevant passages</li>
-          <li><strong>Augment:</strong> Retrieved passages are added to the prompt as context</li>
-          <li><strong>Generate:</strong> The model generates a response using both the question and retrieved context</li>
-        </ol>
-      </div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Retrieval-augmented generation (RAG)</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">RAG combines a language model with external data retrieval. Instead of relying only on training data, the model can search relevant documents and include that information in its response. This reduces hallucinations and lets the model work with current, domain-specific information it was never trained on.</p>
+                    </div>
 
-      <div class="card mb-md">
-        <h4 class="card-title">Model Context Protocol (MCP)</h4>
-        <p class="card-description mb-0">MCP is an open standard for connecting AI models to external tools and data sources. An MCP server provides capabilities (like file access, database queries, or web searches) that Claude can use. Think of MCP servers as plugins that extend what Claude can do.</p>
-      </div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">How RAG works</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">A typical RAG pipeline:</p>
+                        <ol class="space-y-2 text-sm font-mono text-gray-300">
+                            <li class="flex items-start gap-3"><span class="text-acid">1.</span> <strong class="text-chrome">Query:</strong> User asks a question</li>
+                            <li class="flex items-start gap-3"><span class="text-acid">2.</span> <strong class="text-chrome">Retrieve:</strong> System searches a document collection for relevant passages</li>
+                            <li class="flex items-start gap-3"><span class="text-acid">3.</span> <strong class="text-chrome">Augment:</strong> Retrieved passages are added to the prompt as context</li>
+                            <li class="flex items-start gap-3"><span class="text-acid">4.</span> <strong class="text-chrome">Generate:</strong> The model generates a response using both the question and retrieved context</li>
+                        </ol>
+                    </div>
 
-      <div class="card mb-md">
-        <h4 class="card-title">MCP server types</h4>
-        <p class="card-description">Common MCP servers include:</p>
-        <ul class="mb-0">
-          <li><strong>Filesystem:</strong> Read and write files in specified directories</li>
-          <li><strong>Database:</strong> Query databases (SQLite, PostgreSQL, etc.)</li>
-          <li><strong>Web:</strong> Fetch and parse web pages</li>
-          <li><strong>Search:</strong> Search engines, vector databases for semantic search</li>
-          <li><strong>Custom:</strong> Any tool or API you want Claude to access</li>
-        </ul>
-      </div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Model Context Protocol (MCP)</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">MCP is an open standard for connecting AI models to external tools and data sources. An MCP server provides capabilities (like file access, database queries, or web searches) that Claude can use. Think of MCP servers as plugins that extend what Claude can do.</p>
+                    </div>
 
-      <h2>Exercise: Configure Claude Code with MCP filesystem server</h2>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">MCP server types</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Common MCP servers include:</p>
+                        <ul class="space-y-2 text-sm font-mono text-gray-300">
+                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Filesystem:</strong> Read and write files in specified directories</li>
+                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Database:</strong> Query databases (SQLite, PostgreSQL, etc.)</li>
+                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Web:</strong> Fetch and parse web pages</li>
+                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Search:</strong> Search engines, vector databases for semantic search</li>
+                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Custom:</strong> Any tool or API you want Claude to access</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
 
-      <div class="alert alert-success">
-        <p><strong>Goal:</strong> Set up an MCP server that gives Claude controlled access to a document folder, enabling RAG-style workflows.</p>
-      </div>
+            <!-- Exercise -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-acid">EXERCISE</h2>
+                </div>
 
-      <h3>Step 1: Understand the default file access</h3>
-      <p>Claude Code can already read and write files in your current working directory. MCP extends this by:</p>
-      <ul>
-        <li>Giving access to specific directories you configure</li>
-        <li>Enabling more structured queries (search within files, list by criteria)</li>
-        <li>Supporting additional data sources beyond the filesystem</li>
-      </ul>
+                <div class="border border-acid/30 bg-acidDim p-6 mb-8">
+                    <p class="text-sm font-mono"><span class="text-acid font-bold">GOAL:</span> <span class="text-gray-300">Set up an MCP server that gives Claude controlled access to a document folder, enabling RAG-style workflows.</span></p>
+                </div>
 
-      <h3>Step 2: Create a research documents folder</h3>
-      <p>Set up a folder with some test documents:</p>
-      <pre><code>mkdir -p ~/research-docs
+                <!-- Step 1 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">01</span>
+                        Understand the default file access
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">Claude Code can already read and write files in your current working directory. MCP extends this by:</p>
+                    <ul class="space-y-2 text-sm font-mono text-gray-300 ml-11">
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> Giving access to specific directories you configure</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> Enabling more structured queries (search within files, list by criteria)</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> Supporting additional data sources beyond the filesystem</li>
+                    </ul>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
+                        Create a research documents folder
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">Set up a folder with some test documents:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">mkdir -p ~/research-docs
 cd ~/research-docs
 
 # Create some sample documents
-cat > city-budget-2024.txt &lt;&lt;'EOF'
+cat > city-budget-2024.txt <<'EOF'
 City Budget Summary - Fiscal Year 2024
 
 Total Budget: $142.5 million
@@ -119,7 +170,7 @@ Notable Changes from 2023:
 - New allocation of $2.3 million for affordable housing initiatives
 EOF
 
-cat > school-board-minutes-jan.txt &lt;&lt;'EOF'
+cat > school-board-minutes-jan.txt <<'EOF'
 School Board Meeting Minutes - January 15, 2024
 
 Attendees: Board members Smith, Johnson, Garcia, Kim, O'Brien
@@ -147,7 +198,7 @@ Agenda Items:
 Next Meeting: February 19, 2024
 EOF
 
-cat > crime-stats-q4.txt &lt;&lt;'EOF'
+cat > crime-stats-q4.txt <<'EOF'
 Quarterly Crime Statistics - Q4 2024
 
 Overall Trends:
@@ -168,10 +219,24 @@ Notable:
 - Vehicle theft remains concentrated in mall parking areas
 - No homicides for second consecutive quarter
 EOF</code></pre>
+                    </div>
+                </div>
 
-      <h3>Step 3: Configure MCP in Claude Code</h3>
-      <p>Claude Code's MCP configuration lives in <code>~/.claude/</code>. Create or edit the MCP settings:</p>
-      <pre><code>cat > ~/.claude/claude_desktop_config.json &lt;&lt;'EOF'
+                <!-- Step 3 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
+                        Configure MCP in Claude Code
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">Claude Code's MCP configuration lives in <code class="text-acid bg-surface px-1">~/.claude/</code>. Create or edit the MCP settings:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">claude_desktop_config.json</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">cat > ~/.claude/claude_desktop_config.json <<'EOF'
 {
   "mcpServers": {
     "research-files": {
@@ -185,79 +250,181 @@ EOF</code></pre>
   }
 }
 EOF</code></pre>
-      <p><strong>Important:</strong> Replace <code>YOUR_USERNAME</code> with your actual username. You can find it by running <code>whoami</code> in terminal.</p>
+                    </div>
+                    <div class="border border-signal/30 bg-signalDim p-4">
+                        <p class="text-sm font-mono text-gray-300"><span class="text-signal font-bold">IMPORTANT:</span> Replace <code class="text-acid bg-surface px-1">YOUR_USERNAME</code> with your actual username. You can find it by running <code class="text-acid bg-surface px-1">whoami</code> in terminal.</p>
+                    </div>
+                </div>
 
-      <h3>Step 4: Install the MCP filesystem server</h3>
-      <p>The server will be installed automatically when needed, but you can pre-install it:</p>
-      <pre><code>npm install -g @modelcontextprotocol/server-filesystem</code></pre>
+                <!-- Step 4 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">04</span>
+                        Install the MCP filesystem server
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">The server will be installed automatically when needed, but you can pre-install it:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">npm install -g @modelcontextprotocol/server-filesystem</code></pre>
+                    </div>
+                </div>
 
-      <h3>Step 5: Restart Claude Code and verify</h3>
-      <p>Start a new Claude Code session:</p>
-      <pre><code>claude</code></pre>
-      <p>Ask Claude to list what MCP tools are available:</p>
-      <pre><code>What MCP servers and tools do you have access to?</code></pre>
-      <p>You should see the filesystem server listed with access to your research-docs folder.</p>
+                <!-- Step 5 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">05</span>
+                        Restart Claude Code and verify
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">Start a new Claude Code session:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">Ask Claude to list what MCP tools are available:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">prompt</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">What MCP servers and tools do you have access to?</code></pre>
+                    </div>
+                    <p class="text-gray-500 text-xs mt-2">You should see the filesystem server listed with access to your research-docs folder.</p>
+                </div>
 
-      <h3>Step 6: Query your documents</h3>
-      <p>Now test RAG-style queries against your document collection:</p>
-      <pre><code>Based on my research documents, what was the total city budget for 2024 and what percentage went to education?</code></pre>
-      <pre><code>Search my documents for any mentions of school start times. What's the current status of that discussion?</code></pre>
-      <pre><code>Compare the crime statistics to the budget allocations for public safety. Is there any correlation worth investigating?</code></pre>
+                <!-- Step 6 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
+                        Query your documents
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">Now test RAG-style queries against your document collection:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-2">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">prompt</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Based on my research documents, what was the total city budget for 2024 and what percentage went to education?</code></pre>
+                    </div>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-2">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">prompt</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Search my documents for any mentions of school start times. What's the current status of that discussion?</code></pre>
+                    </div>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">prompt</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Compare the crime statistics to the budget allocations for public safety. Is there any correlation worth investigating?</code></pre>
+                    </div>
+                </div>
 
-      <h3>Step 7: Build a research workflow</h3>
-      <p>Use your document collection to draft a story:</p>
-      <pre><code>I'm writing a story about how the city is allocating resources to address public safety. Using my research documents, help me outline the key facts I should include and identify any gaps where I need more information.</code></pre>
+                <!-- Step 7 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">07</span>
+                        Build a research workflow
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">Use your document collection to draft a story:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">prompt</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">I'm writing a story about how the city is allocating resources to address public safety. Using my research documents, help me outline the key facts I should include and identify any gaps where I need more information.</code></pre>
+                    </div>
+                </div>
+            </section>
 
-      <h2>Checkpoint questions</h2>
+            <!-- Checkpoint questions -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-signal">CHECKPOINT</h2>
+                </div>
+                <div class="border border-signal/30 bg-signalDim p-6">
+                    <p class="text-sm font-mono text-gray-300 mb-4"><span class="text-signal font-bold">SELF_CHECK:</span> Make sure you can answer these before moving on.</p>
+                    <ul class="space-y-2 text-sm font-mono text-gray-300">
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What is the main difference between a chatbot and an AI agent?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What problem does RAG solve that pure language models can't?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What does MCP stand for and what does it enable?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Why might you want to limit which folders an MCP server can access?</li>
+                    </ul>
+                </div>
+            </section>
 
-      <div class="alert alert-warning">
-        <p><strong>Self-check:</strong> Make sure you can answer these before moving on.</p>
-        <ul class="mb-0">
-          <li>What is the main difference between a chatbot and an AI agent?</li>
-          <li>What problem does RAG solve that pure language models can't?</li>
-          <li>What does MCP stand for and what does it enable?</li>
-          <li>Why might you want to limit which folders an MCP server can access?</li>
-        </ul>
-      </div>
+            <!-- Readings and resources -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">RESOURCES</h2>
+                </div>
+                <div class="border border-white/10 bg-panel p-6">
+                    <ul class="space-y-3 text-sm font-mono">
+                        <li><a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-400">Model Context Protocol - Official MCP documentation and specification</span></li>
+                        <li><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-400">Claude Code documentation - MCP configuration reference</span></li>
+                        <li><a href="https://github.com/modelcontextprotocol/servers" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REPO]</a> <span class="text-gray-400">MCP Servers repository - Collection of official and community MCP servers</span></li>
+                        <li><a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[ARTICLE]</a> <span class="text-gray-400">Introducing the Model Context Protocol - Anthropic's announcement explaining MCP</span></li>
+                    </ul>
+                </div>
+            </section>
 
-      <h2>Readings and resources</h2>
+            <!-- Troubleshooting -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">TROUBLESHOOTING</h2>
+                </div>
+                <div class="border border-white/10 bg-panel divide-y divide-white/5">
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">MCP server doesn't appear in Claude Code</h4>
+                        <p class="text-gray-500 text-sm">Check that your config file is valid JSON (no trailing commas, proper quoting). Use <code class="text-acid bg-surface px-1">cat ~/.claude/claude_desktop_config.json</code> to verify the contents. Restart Claude Code after making changes.</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">"Permission denied" accessing files</h4>
+                        <p class="text-gray-500 text-sm">The MCP server can only access directories you've explicitly configured. Check that the path in your config matches the actual directory, and that your user has read permission on those files.</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">Server fails to start</h4>
+                        <p class="text-gray-500 text-sm">Make sure Node.js and npm are installed and in your PATH. Try running the server manually to see error messages: <code class="text-acid bg-surface px-1">npx @modelcontextprotocol/server-filesystem ~/research-docs</code></p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">Claude doesn't seem to use the documents</h4>
+                        <p class="text-gray-500 text-sm">Be explicit in your prompts: "Search my research documents for..." or "Using the files in my research folder...". Claude may not automatically search documents unless asked.</p>
+                    </div>
+                </div>
+            </section>
 
-      <div class="card">
-        <ul class="mb-0">
-          <li><a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">Model Context Protocol</a> - Official MCP documentation and specification</li>
-          <li><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">Claude Code documentation</a> - MCP configuration reference</li>
-          <li><a href="https://github.com/modelcontextprotocol/servers" target="_blank" rel="noopener">MCP Servers repository</a> - Collection of official and community MCP servers</li>
-          <li><a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">Introducing the Model Context Protocol</a> - Anthropic's announcement explaining MCP</li>
-        </ul>
-      </div>
+        </main>
 
-      <h2>Troubleshooting</h2>
-
-      <div class="card">
-        <h4>MCP server doesn't appear in Claude Code</h4>
-        <p class="text-muted">Check that your config file is valid JSON (no trailing commas, proper quoting). Use <code>cat ~/.claude/claude_desktop_config.json</code> to verify the contents. Restart Claude Code after making changes.</p>
-
-        <h4 class="mt-lg">"Permission denied" accessing files</h4>
-        <p class="text-muted">The MCP server can only access directories you've explicitly configured. Check that the path in your config matches the actual directory, and that your user has read permission on those files.</p>
-
-        <h4 class="mt-lg">Server fails to start</h4>
-        <p class="text-muted">Make sure Node.js and npm are installed and in your PATH. Try running the server manually to see error messages: <code>npx @modelcontextprotocol/server-filesystem ~/research-docs</code></p>
-
-        <h4 class="mt-lg">Claude doesn't seem to use the documents</h4>
-        <p class="text-muted mb-0">Be explicit in your prompts: "Search my research documents for..." or "Using the files in my research folder...". Claude may not automatically search documents unless asked.</p>
-      </div>
-
-      <div class="mt-2xl py-lg" style="border-top: 1px solid var(--color-border); display: flex; justify-content: space-between;">
-        <span class="text-muted">Previous: <a href="../module-4/">Module 4: CLI workflows</a></span>
-        <span class="text-muted">Next: <a href="../index.html">Course home</a></span>
-      </div>
+        <!-- Prev/Next navigation -->
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between">
+                <a href="../module-4/" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">< MODULE_04</a>
+                <a href="../" class="text-acid hover:text-white text-sm font-mono transition-colors">HOME ></a>
+            </div>
+        </footer>
     </div>
-  </main>
 
-  <footer class="footer">
-    <div class="container text-center">
-      <p>Advanced prompt engineering for journalists</p>
-    </div>
-  </footer>
+    <script>lucide.createIcons();</script>
 </body>
 </html>

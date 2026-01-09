@@ -3,178 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course templates</title>
+    <title>Templates | Advanced prompt engineering for journalists</title>
+    <meta name="description" content="Downloadable templates for Claude Code projects, skills, pipelines, and course assignments.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: '#050505',
+                        panel: '#0a0a0a',
+                        surface: '#111111',
+                        chrome: '#e8e8e8',
+                        acid: '#c8ff00',
+                        acidDim: 'rgba(200, 255, 0, 0.1)',
+                        ice: '#00f0ff',
+                        iceDim: 'rgba(0, 240, 255, 0.1)',
+                        signal: '#ff3366',
+                        signalDim: 'rgba(255, 51, 102, 0.1)',
+                    },
+                    fontFamily: {
+                        display: ['Chakra Petch', 'sans-serif'],
+                        mono: ['Share Tech Mono', 'monospace'],
+                        sans: ['Chakra Petch', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
     <style>
-        * {
-            box-sizing: border-box;
-        }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: #f8f9fa;
-            color: #333;
+            background-color: #050505;
         }
-        h1 {
-            border-bottom: 2px solid #333;
-            padding-bottom: 0.5rem;
+
+        /* CRT overlay */
+        .crt-overlay {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            z-index: 1000;
         }
-        .intro {
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            border-left: 4px solid #0066cc;
+
+        /* Grid background */
+        .bg-grid-pattern {
+            background-image:
+                linear-gradient(rgba(200, 255, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(200, 255, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
         }
-        .template-grid {
-            display: grid;
-            gap: 1.5rem;
+
+        /* Notch cuts */
+        .clip-notch {
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
         }
-        .template-card {
-            background: #fff;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+        .clip-notch-top {
+            clip-path: polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px);
         }
-        .template-card h2 {
-            margin-top: 0;
-            font-size: 1.25rem;
-            color: #0066cc;
+
+        /* Glow effects */
+        .glow-acid {
+            box-shadow: 0 0 20px rgba(200, 255, 0, 0.2);
         }
-        .template-card p {
-            margin: 0.5rem 0 1rem;
-            color: #666;
-        }
-        .file-type {
-            display: inline-block;
-            background: #e9ecef;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-family: monospace;
-            margin-bottom: 0.5rem;
-        }
-        .actions {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-        .btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 0.9rem;
-            cursor: pointer;
-            border: none;
-        }
-        .btn-primary {
-            background: #0066cc;
-            color: #fff;
-        }
-        .btn-primary:hover {
-            background: #0052a3;
-        }
-        .btn-secondary {
-            background: #e9ecef;
-            color: #333;
-        }
-        .btn-secondary:hover {
-            background: #dee2e6;
-        }
-        .sections {
-            margin-top: 0.75rem;
-            font-size: 0.85rem;
-            color: #888;
-        }
-        footer {
-            margin-top: 3rem;
-            padding-top: 1rem;
-            border-top: 1px solid #dee2e6;
-            font-size: 0.85rem;
-            color: #666;
+
+        .glow-ice {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
         }
     </style>
 </head>
-<body>
-    <h1>Course templates</h1>
+<body class="bg-void text-chrome font-sans min-h-screen">
+    <!-- CRT Overlay -->
+    <div class="crt-overlay"></div>
 
-    <div class="intro">
-        <p><strong>How to use:</strong> Click "Download" to save the template file, or "View" to preview it in your browser. Copy the contents into your own project and customize as needed.</p>
-    </div>
-
-    <div class="template-grid">
-        <div class="template-card">
-            <span class="file-type">.md</span>
-            <h2>CLAUDE.md project file</h2>
-            <p>Template for creating project instruction files that guide Claude Code. Include project overview, structure, commands, and style guidelines.</p>
-            <div class="sections">Sections: overview, structure, commands, style guide, notes</div>
-            <div class="actions">
-                <a href="claude-md-template.md" download class="btn btn-primary">Download</a>
-                <a href="claude-md-template.md" class="btn btn-secondary">View</a>
+    <!-- Header -->
+    <header class="border-b border-white/10 bg-panel/80 backdrop-blur-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="../index.html" class="font-display text-sm text-gray-400 hover:text-acid transition-colors">
+                    &larr; BACK_TO_COURSE
+                </a>
+                <nav class="hidden md:flex items-center gap-6">
+                    <a href="../module-1/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M1</a>
+                    <a href="../module-2/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M2</a>
+                    <a href="../module-3/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M3</a>
+                    <a href="../module-4/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M4</a>
+                    <a href="../module-5/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M5</a>
+                </nav>
             </div>
         </div>
+    </header>
 
-        <div class="template-card">
-            <span class="file-type">.md</span>
-            <h2>Custom skill</h2>
-            <p>Template for creating reusable skills that extend Claude's capabilities. Define domain expertise, methodology, and implementation patterns.</p>
-            <div class="sections">Sections: frontmatter, description, instructions, examples</div>
-            <div class="actions">
-                <a href="skill-template.md" download class="btn btn-primary">Download</a>
-                <a href="skill-template.md" class="btn btn-secondary">View</a>
+    <!-- Main content -->
+    <main class="bg-grid-pattern min-h-screen">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+
+            <!-- Section header -->
+            <div class="mb-12">
+                <div class="text-xs font-mono text-acid mb-2">01 // TEMPLATES</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-chrome mb-4">Course templates</h1>
+                <p class="text-gray-400 font-mono text-sm max-w-2xl">
+                    Starter files for projects, skills, and assignments. Download and customize for your own use.
+                </p>
+            </div>
+
+            <!-- Usage note -->
+            <div class="border border-ice/30 bg-iceDim p-6 mb-12 clip-notch-top">
+                <div class="flex items-start gap-4">
+                    <i data-lucide="info" class="w-5 h-5 text-ice flex-shrink-0 mt-0.5"></i>
+                    <div>
+                        <div class="text-xs font-mono text-ice mb-1">:: USAGE</div>
+                        <p class="text-sm text-gray-400">
+                            Click <span class="text-acid font-mono">DOWNLOAD_FILE</span> to save the template, or <span class="text-ice font-mono">VIEW_SOURCE</span> to preview in your browser. Copy the contents into your own project and customize as needed.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Template grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- CLAUDE.md template -->
+                <div class="border border-white/10 bg-panel hover:border-acid/50 transition-all group clip-notch">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-xs text-acid font-mono">:: TEMPLATE</div>
+                            <i data-lucide="file-text" class="w-5 h-5 text-gray-600 group-hover:text-acid transition-colors"></i>
+                        </div>
+                        <h3 class="font-display text-lg text-white font-bold mb-2">CLAUDE.md template</h3>
+                        <p class="text-sm text-gray-500 font-mono mb-2">Project instruction file for Claude Code. Define commands, structure, and style guidelines.</p>
+                        <div class="text-xs text-gray-600 font-mono mb-4">overview / structure / commands / style</div>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="claude-md-template.md" download class="inline-flex items-center gap-2 px-4 py-2 bg-acidDim border border-acid text-acid text-xs font-mono hover:bg-acid hover:text-black transition-colors">
+                                <i data-lucide="download" class="w-3 h-3"></i>
+                                DOWNLOAD_FILE
+                            </a>
+                            <a href="claude-md-template.md" class="inline-flex items-center gap-2 px-4 py-2 border border-white/10 text-gray-400 text-xs font-mono hover:border-ice hover:text-ice transition-colors">
+                                <i data-lucide="eye" class="w-3 h-3"></i>
+                                VIEW_SOURCE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill template -->
+                <div class="border border-white/10 bg-panel hover:border-acid/50 transition-all group clip-notch">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-xs text-acid font-mono">:: TEMPLATE</div>
+                            <i data-lucide="zap" class="w-5 h-5 text-gray-600 group-hover:text-acid transition-colors"></i>
+                        </div>
+                        <h3 class="font-display text-lg text-white font-bold mb-2">Custom skill</h3>
+                        <p class="text-sm text-gray-500 font-mono mb-2">Reusable skill that extends Claude's capabilities. Define domain expertise and patterns.</p>
+                        <div class="text-xs text-gray-600 font-mono mb-4">frontmatter / description / instructions</div>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="skill-template.md" download class="inline-flex items-center gap-2 px-4 py-2 bg-acidDim border border-acid text-acid text-xs font-mono hover:bg-acid hover:text-black transition-colors">
+                                <i data-lucide="download" class="w-3 h-3"></i>
+                                DOWNLOAD_FILE
+                            </a>
+                            <a href="skill-template.md" class="inline-flex items-center gap-2 px-4 py-2 border border-white/10 text-gray-400 text-xs font-mono hover:border-ice hover:text-ice transition-colors">
+                                <i data-lucide="eye" class="w-3 h-3"></i>
+                                VIEW_SOURCE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pipeline script -->
+                <div class="border border-white/10 bg-panel hover:border-acid/50 transition-all group clip-notch">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-xs text-acid font-mono">:: TEMPLATE</div>
+                            <i data-lucide="terminal" class="w-5 h-5 text-gray-600 group-hover:text-acid transition-colors"></i>
+                        </div>
+                        <h3 class="font-display text-lg text-white font-bold mb-2">Pipeline script</h3>
+                        <p class="text-sm text-gray-500 font-mono mb-2">Shell automation template. Includes validation, processing stages, and error handling.</p>
+                        <div class="text-xs text-gray-600 font-mono mb-4">config / fetch / process / cleanup</div>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="pipeline-template.sh" download class="inline-flex items-center gap-2 px-4 py-2 bg-acidDim border border-acid text-acid text-xs font-mono hover:bg-acid hover:text-black transition-colors">
+                                <i data-lucide="download" class="w-3 h-3"></i>
+                                DOWNLOAD_FILE
+                            </a>
+                            <a href="pipeline-template.sh" class="inline-flex items-center gap-2 px-4 py-2 border border-white/10 text-gray-400 text-xs font-mono hover:border-ice hover:text-ice transition-colors">
+                                <i data-lucide="eye" class="w-3 h-3"></i>
+                                VIEW_SOURCE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MCP config -->
+                <div class="border border-white/10 bg-panel hover:border-acid/50 transition-all group clip-notch">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-xs text-ice font-mono">:: CONFIG</div>
+                            <i data-lucide="settings" class="w-5 h-5 text-gray-600 group-hover:text-ice transition-colors"></i>
+                        </div>
+                        <h3 class="font-display text-lg text-white font-bold mb-2">MCP configuration</h3>
+                        <p class="text-sm text-gray-500 font-mono mb-2">Model Context Protocol setup. Connect Claude to external tools and data sources.</p>
+                        <div class="text-xs text-gray-600 font-mono mb-4">mcpServers / filesystem / custom</div>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="mcp-config-template.json" download class="inline-flex items-center gap-2 px-4 py-2 bg-iceDim border border-ice text-ice text-xs font-mono hover:bg-ice hover:text-black transition-colors">
+                                <i data-lucide="download" class="w-3 h-3"></i>
+                                DOWNLOAD_FILE
+                            </a>
+                            <a href="mcp-config-template.json" class="inline-flex items-center gap-2 px-4 py-2 border border-white/10 text-gray-400 text-xs font-mono hover:border-ice hover:text-ice transition-colors">
+                                <i data-lucide="eye" class="w-3 h-3"></i>
+                                VIEW_SOURCE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project proposal -->
+                <div class="border border-white/10 bg-panel hover:border-signal/50 transition-all group clip-notch">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-xs text-signal font-mono">:: ASSIGNMENT</div>
+                            <i data-lucide="clipboard-list" class="w-5 h-5 text-gray-600 group-hover:text-signal transition-colors"></i>
+                        </div>
+                        <h3 class="font-display text-lg text-white font-bold mb-2">Project proposal</h3>
+                        <p class="text-sm text-gray-500 font-mono mb-2">Final project template. Define your problem, solution, tools, and expected outcomes.</p>
+                        <div class="text-xs text-gray-600 font-mono mb-4">problem / solution / timeline / outcome</div>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="project-proposal-template.md" download class="inline-flex items-center gap-2 px-4 py-2 bg-signalDim border border-signal text-signal text-xs font-mono hover:bg-signal hover:text-black transition-colors">
+                                <i data-lucide="download" class="w-3 h-3"></i>
+                                DOWNLOAD_FILE
+                            </a>
+                            <a href="project-proposal-template.md" class="inline-flex items-center gap-2 px-4 py-2 border border-white/10 text-gray-400 text-xs font-mono hover:border-ice hover:text-ice transition-colors">
+                                <i data-lucide="eye" class="w-3 h-3"></i>
+                                VIEW_SOURCE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise log -->
+                <div class="border border-white/10 bg-panel hover:border-signal/50 transition-all group clip-notch">
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="text-xs text-signal font-mono">:: ASSIGNMENT</div>
+                            <i data-lucide="notebook-pen" class="w-5 h-5 text-gray-600 group-hover:text-signal transition-colors"></i>
+                        </div>
+                        <h3 class="font-display text-lg text-white font-bold mb-2">Exercise log</h3>
+                        <p class="text-sm text-gray-500 font-mono mb-2">Weekly progress tracker. Record what you tried, what worked, and questions for the instructor.</p>
+                        <div class="text-xs text-gray-600 font-mono mb-4">date / module / successes / challenges</div>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="exercise-log-template.md" download class="inline-flex items-center gap-2 px-4 py-2 bg-signalDim border border-signal text-signal text-xs font-mono hover:bg-signal hover:text-black transition-colors">
+                                <i data-lucide="download" class="w-3 h-3"></i>
+                                DOWNLOAD_FILE
+                            </a>
+                            <a href="exercise-log-template.md" class="inline-flex items-center gap-2 px-4 py-2 border border-white/10 text-gray-400 text-xs font-mono hover:border-ice hover:text-ice transition-colors">
+                                <i data-lucide="eye" class="w-3 h-3"></i>
+                                VIEW_SOURCE
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom note -->
+            <div class="mt-12 border-t border-white/10 pt-8">
+                <p class="text-xs font-mono text-gray-600 text-center">
+                    These templates are starting points. Customize them to fit your specific project needs.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-panel">
+        <div class="max-w-6xl mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-xs font-mono text-gray-600">
+                    Advanced prompt engineering for journalists
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="../index.html" class="text-xs font-mono text-gray-500 hover:text-acid transition-colors">HOME</a>
+                    <a href="./" class="text-xs font-mono text-acid">TEMPLATES</a>
+                    <a href="https://github.com/joeamditis/mooc-prompt-engineering" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">GITHUB</a>
+                </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                <p class="text-xs font-mono text-gray-700">
+                    &copy; 2025 Knight Center for Journalism in the Americas
+                </p>
             </div>
         </div>
-
-        <div class="template-card">
-            <span class="file-type">.sh</span>
-            <h2>Shell pipeline</h2>
-            <p>Template for data processing pipelines. Includes environment setup, input validation, processing stages, and error handling.</p>
-            <div class="sections">Sections: config, validation, fetch, process, output, cleanup</div>
-            <div class="actions">
-                <a href="pipeline-template.sh" download class="btn btn-primary">Download</a>
-                <a href="pipeline-template.sh" class="btn btn-secondary">View</a>
-            </div>
-        </div>
-
-        <div class="template-card">
-            <span class="file-type">.json</span>
-            <h2>MCP configuration</h2>
-            <p>Template for configuring Model Context Protocol servers. Connect Claude to external tools and data sources.</p>
-            <div class="sections">Sections: mcpServers, filesystem example, custom server</div>
-            <div class="actions">
-                <a href="mcp-config-template.json" download class="btn btn-primary">Download</a>
-                <a href="mcp-config-template.json" class="btn btn-secondary">View</a>
-            </div>
-        </div>
-
-        <div class="template-card">
-            <span class="file-type">.md</span>
-            <h2>Final project proposal</h2>
-            <p>Template for your course final project. Define your problem, proposed solution, tools, and expected outcomes.</p>
-            <div class="sections">Sections: problem, solution, tools, timeline, outcome</div>
-            <div class="actions">
-                <a href="project-proposal-template.md" download class="btn btn-primary">Download</a>
-                <a href="project-proposal-template.md" class="btn btn-secondary">View</a>
-            </div>
-        </div>
-
-        <div class="template-card">
-            <span class="file-type">.md</span>
-            <h2>Weekly exercise log</h2>
-            <p>Template for tracking your weekly progress. Record what you tried, what worked, and questions for the instructor.</p>
-            <div class="sections">Sections: date, module, time, successes, challenges, questions</div>
-            <div class="actions">
-                <a href="exercise-log-template.md" download class="btn btn-primary">Download</a>
-                <a href="exercise-log-template.md" class="btn btn-secondary">View</a>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <p>These templates are starting points. Customize them to fit your specific project needs.</p>
     </footer>
+
+    <!-- Initialize Lucide icons -->
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

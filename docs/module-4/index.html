@@ -1,89 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Module 4: CLI workflows | Advanced prompt engineering for journalists</title>
-  <link rel="stylesheet" href="../assets/css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4: CLI workflows | Advanced prompt engineering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="../index.html" class="nav-brand">Advanced prompt engineering for journalists</a>
-      <ul class="nav-links">
-        <li><a href="../module-1/">Module 1</a></li>
-        <li><a href="../module-2/">Module 2</a></li>
-        <li><a href="../module-3/">Module 3</a></li>
-        <li><a href="../module-4/">Module 4</a></li>
-        <li><a href="../module-5/">Module 5</a></li>
-      </ul>
-    </div>
-  </nav>
+<body class="antialiased font-mono bg-void text-chrome">
+    <div class="crt-overlay"></div>
+    <div class="fixed inset-0 bg-grid-pattern bg-[size:40px_40px] opacity-[0.07] pointer-events-none z-0"></div>
 
-  <main class="main">
-    <div class="container">
-      <p class="text-muted text-small mb-sm">Module 4</p>
-      <h1>CLI workflows</h1>
-      <p class="text-muted">Chain commands together, pipe data between tools, and automate repetitive tasks with shell scripts.</p>
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <!-- Header with nav -->
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl clip-notch">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../module-4/" class="text-acid">[ 04 ]</a>
+                    <a href="../module-5/" class="text-gray-400 hover:text-ice transition-colors">[ 05 ]</a>
+                </nav>
+            </div>
+        </header>
 
-      <div class="alert alert-info mt-lg">
-        <h4 class="mt-0">Learning objectives</h4>
-        <ul class="mb-0">
-          <li>Understand Unix pipes and how to chain commands</li>
-          <li>Use Claude Code in non-interactive mode for scripting</li>
-          <li>Build shell scripts that automate multi-step workflows</li>
-          <li>Create a practical content pipeline for journalism work</li>
-        </ul>
-      </div>
+        <!-- Module header -->
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">:: MODULE_04</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white glitch-text" data-text="CLI WORKFLOWS">CLI WORKFLOWS</h1>
+                <p class="text-gray-400 text-lg font-mono mt-4 max-w-2xl">Chain commands together, pipe data between tools, and automate repetitive tasks with shell scripts.</p>
+            </div>
+        </section>
 
-      <h2>Key concepts</h2>
+        <!-- Content sections -->
+        <main class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
 
-      <div class="card mb-md">
-        <h4 class="card-title">Pipes and redirection</h4>
-        <p class="card-description">The pipe character (<code>|</code>) sends the output of one command as input to another. This lets you build processing chains:</p>
-        <pre><code>cat article.txt | wc -w    # Count words in article
-ls *.txt | wc -l           # Count text files</code></pre>
-        <p class="card-description mb-0">Redirection (<code>></code> and <code>>></code>) sends output to files instead of the screen. <code>></code> overwrites, <code>>></code> appends.</p>
-      </div>
+            <!-- Learning objectives -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-ice">LEARNING_OBJECTIVES</h2>
+                </div>
+                <div class="border border-ice/30 bg-iceDim p-6">
+                    <ul class="space-y-2 text-sm font-mono text-gray-300">
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand Unix pipes and how to chain commands</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Use Claude Code in non-interactive mode for scripting</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Build shell scripts that automate multi-step workflows</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Create a practical content pipeline for journalism work</li>
+                    </ul>
+                </div>
+            </section>
 
-      <div class="card mb-md">
-        <h4 class="card-title">Non-interactive mode</h4>
-        <p class="card-description">Claude Code can run as a single command without entering the interactive REPL. This is essential for scripting:</p>
-        <pre><code># Interactive (starts a session)
-claude
+            <!-- Key concepts -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">KEY_CONCEPTS</h2>
+                </div>
+                <div class="space-y-4">
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Pipes and redirection</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">The pipe character (<code class="text-acid bg-surface px-1">|</code>) sends the output of one command as input to another. This lets you build processing chains:</p>
+                        <div class="border border-white/10 bg-surface overflow-hidden mb-4">
+                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cat article.txt | wc -w    <span class="text-gray-500"># Count words in article</span>
+ls *.txt | wc -l           <span class="text-gray-500"># Count text files</span></code></pre>
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">Redirection (<code class="text-acid bg-surface px-1">></code> and <code class="text-acid bg-surface px-1">>></code>) sends output to files instead of the screen. <code class="text-acid bg-surface px-1">></code> overwrites, <code class="text-acid bg-surface px-1">>></code> appends.</p>
+                    </div>
 
-# Non-interactive (runs once and exits)
-claude -p "Summarize this article" &lt; article.txt</code></pre>
-        <p class="card-description mb-0">The <code>-p</code> flag specifies the prompt. Input can come from a file or piped from another command.</p>
-      </div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Non-interactive mode</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Claude Code can run as a single command without entering the interactive REPL. This is essential for scripting:</p>
+                        <div class="border border-white/10 bg-surface overflow-hidden">
+                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300"><span class="text-gray-500"># Interactive (starts a session)</span>
+<span class="text-acid">claude</span>
 
-      <div class="card mb-md">
-        <h4 class="card-title">Shell scripts</h4>
-        <p class="card-description mb-0">A shell script is a text file containing commands that run in sequence. Scripts let you save and reuse workflows. On macOS and Linux, scripts typically start with <code>#!/bin/bash</code> and need execute permission (<code>chmod +x script.sh</code>).</p>
-      </div>
+<span class="text-gray-500"># Non-interactive (runs once and exits)</span>
+<span class="text-acid">claude -p "Summarize this article" < article.txt</span></code></pre>
+                        </div>
+                        <p class="text-gray-500 text-xs mt-2">The <code class="text-acid bg-surface px-1">-p</code> flag specifies the prompt. Input can come from a file or piped from another command.</p>
+                    </div>
 
-      <div class="card mb-md">
-        <h4 class="card-title">Variables and loops</h4>
-        <p class="card-description">Shell scripts can use variables and loops to process multiple files:</p>
-        <pre><code>for file in *.txt; do
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Shell scripts</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">A shell script is a text file containing commands that run in sequence. Scripts let you save and reuse workflows. On macOS and Linux, scripts typically start with <code class="text-acid bg-surface px-1">#!/bin/bash</code> and need execute permission (<code class="text-acid bg-surface px-1">chmod +x script.sh</code>).</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Variables and loops</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Shell scripts can use variables and loops to process multiple files:</p>
+                        <div class="border border-white/10 bg-surface overflow-hidden">
+                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">for file in *.txt; do
   echo "Processing $file"
-  claude -p "Summarize" &lt; "$file" > "${file%.txt}-summary.txt"
+  claude -p "Summarize" < "$file" > "${file%.txt}-summary.txt"
 done</code></pre>
-        <p class="card-description mb-0">This loop processes every <code>.txt</code> file and creates a summary for each.</p>
-      </div>
+                        </div>
+                        <p class="text-gray-500 text-xs mt-2">This loop processes every <code class="text-acid bg-surface px-1">.txt</code> file and creates a summary for each.</p>
+                    </div>
+                </div>
+            </section>
 
-      <h2>Exercise: Build an article-to-newsletter pipeline</h2>
+            <!-- Exercise -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-acid">EXERCISE</h2>
+                </div>
 
-      <div class="alert alert-success">
-        <p><strong>Goal:</strong> Create a shell script that takes an article, generates a summary, and formats it for a newsletter.</p>
-      </div>
+                <div class="border border-acid/30 bg-acidDim p-6 mb-8">
+                    <p class="text-sm font-mono"><span class="text-acid font-bold">GOAL:</span> <span class="text-gray-300">Create a shell script that takes an article, generates a summary, and formats it for a newsletter.</span></p>
+                </div>
 
-      <h3>Step 1: Create a test article</h3>
-      <p>First, create a sample article to work with:</p>
-      <pre><code>mkdir -p ~/newsletter-pipeline
+                <!-- Step 1 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">01</span>
+                        Create a test article
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">First, create a sample article to work with:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">mkdir -p ~/newsletter-pipeline
 cd ~/newsletter-pipeline
 
-cat > article.txt &lt;&lt;'EOF'
+cat > article.txt <<'EOF'
 Local Restaurant Week Returns After Three-Year Hiatus
 
 Downtown merchants announced Tuesday that Restaurant Week will return this March after a three-year pause due to the pandemic. The event, which typically draws thousands of visitors to the city center, will run from March 15-22.
@@ -96,28 +147,70 @@ The format will differ slightly from pre-pandemic years. Reservations will be re
 
 A full list of participating restaurants and menus will be available on the Downtown Business Association website starting March 1. Early reservation booking opens March 5 for newsletter subscribers.
 EOF</code></pre>
+                    </div>
+                </div>
 
-      <h3>Step 2: Test the summarization step</h3>
-      <p>First, verify that Claude Code can summarize the article:</p>
-      <pre><code>cat article.txt | claude -p "Summarize this article in 2-3 sentences for a newsletter blurb."</code></pre>
-      <p>You should see a concise summary printed to your terminal.</p>
+                <!-- Step 2 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
+                        Test the summarization step
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">First, verify that Claude Code can summarize the article:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cat article.txt | claude -p "Summarize this article in 2-3 sentences for a newsletter blurb."</code></pre>
+                    </div>
+                    <p class="text-gray-500 text-xs mt-2">You should see a concise summary printed to your terminal.</p>
+                </div>
 
-      <h3>Step 3: Test the formatting step</h3>
-      <p>Now test converting the summary to newsletter format. Save the summary first:</p>
-      <pre><code>cat article.txt | claude -p "Summarize this article in 2-3 sentences." > summary.txt
+                <!-- Step 3 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
+                        Test the formatting step
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">Now test converting the summary to newsletter format. Save the summary first:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cat article.txt | claude -p "Summarize this article in 2-3 sentences." > summary.txt
 
 cat summary.txt | claude -p "Format this summary as an HTML snippet for an email newsletter. Include a headline in an h3 tag and the summary in a paragraph tag. Keep it simple, no inline styles."</code></pre>
+                    </div>
+                </div>
 
-      <h3>Step 4: Create the pipeline script</h3>
-      <p>Now combine these steps into a reusable script:</p>
-      <pre><code>cat > newsletter-pipeline.sh &lt;&lt;'EOF'
+                <!-- Step 4 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">04</span>
+                        Create the pipeline script
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">Now combine these steps into a reusable script:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">newsletter-pipeline.sh</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">cat > newsletter-pipeline.sh <<'EOF'
 #!/bin/bash
 
 # Newsletter Pipeline Script
 # Usage: ./newsletter-pipeline.sh article.txt
 
 if [ -z "$1" ]; then
-  echo "Usage: $0 &lt;article-file>"
+  echo "Usage: $0 <article-file>"
   exit 1
 fi
 
@@ -136,7 +229,7 @@ SUMMARY=$(cat "$ARTICLE" | claude -p "Summarize this article in 2-3 sentences fo
 
 # Step 2: Format for newsletter
 echo "  Formatting for newsletter..."
-cat &lt;&lt;PROMPT | claude -p "$(cat)" > "$OUTPUT_DIR/${BASENAME}-newsletter.html"
+cat <<PROMPT | claude -p "$(cat)" > "$OUTPUT_DIR/${BASENAME}-newsletter.html"
 Format this summary as an HTML snippet for an email newsletter:
 
 $SUMMARY
@@ -157,17 +250,53 @@ echo "  $OUTPUT_DIR/${BASENAME}-summary.txt"
 EOF
 
 chmod +x newsletter-pipeline.sh</code></pre>
+                    </div>
+                </div>
 
-      <h3>Step 5: Run the pipeline</h3>
-      <p>Execute your script on the test article:</p>
-      <pre><code>./newsletter-pipeline.sh article.txt</code></pre>
-      <p>Check the output directory:</p>
-      <pre><code>cat output/article-newsletter.html
+                <!-- Step 5 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">05</span>
+                        Run the pipeline
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">Execute your script on the test article:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">./newsletter-pipeline.sh article.txt</code></pre>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-4">Check the output directory:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cat output/article-newsletter.html
 cat output/article-summary.txt</code></pre>
+                    </div>
+                </div>
 
-      <h3>Step 6: Process multiple articles</h3>
-      <p>Create a second article and process both:</p>
-      <pre><code>cat > article2.txt &lt;&lt;'EOF'
+                <!-- Step 6 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
+                        Process multiple articles
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">Create a second article and process both:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cat > article2.txt <<'EOF'
 City Council Approves New Bike Lane Network
 
 The city council voted 6-1 Monday night to approve a $4.2 million plan for protected bike lanes connecting downtown to three residential neighborhoods. Construction will begin this summer.
@@ -181,57 +310,77 @@ EOF
 for article in article*.txt; do
   ./newsletter-pipeline.sh "$article"
 done</code></pre>
+                    </div>
+                </div>
+            </section>
 
-      <h2>Checkpoint questions</h2>
+            <!-- Checkpoint questions -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-signal">CHECKPOINT</h2>
+                </div>
+                <div class="border border-signal/30 bg-signalDim p-6">
+                    <p class="text-sm font-mono text-gray-300 mb-4"><span class="text-signal font-bold">SELF_CHECK:</span> Make sure you can answer these before moving on.</p>
+                    <ul class="space-y-2 text-sm font-mono text-gray-300">
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What does the pipe character (<code class="text-acid bg-surface px-1">|</code>) do in a shell command?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What's the difference between <code class="text-acid bg-surface px-1">></code> and <code class="text-acid bg-surface px-1">>></code> for redirection?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> How do you run Claude Code non-interactively for use in scripts?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What does <code class="text-acid bg-surface px-1">chmod +x</code> do to a file?</li>
+                    </ul>
+                </div>
+            </section>
 
-      <div class="alert alert-warning">
-        <p><strong>Self-check:</strong> Make sure you can answer these before moving on.</p>
-        <ul class="mb-0">
-          <li>What does the pipe character (<code>|</code>) do in a shell command?</li>
-          <li>What's the difference between <code>></code> and <code>>></code> for redirection?</li>
-          <li>How do you run Claude Code non-interactively for use in scripts?</li>
-          <li>What does <code>chmod +x</code> do to a file?</li>
-        </ul>
-      </div>
+            <!-- Readings and resources -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">RESOURCES</h2>
+                </div>
+                <div class="border border-white/10 bg-panel p-6">
+                    <ul class="space-y-3 text-sm font-mono">
+                        <li><a href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-400">Bash Reference Manual - Complete bash documentation</span></li>
+                        <li><a href="https://missing.csail.mit.edu/2020/shell-tools/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[COURSE]</a> <span class="text-gray-400">The Missing Semester: Shell Tools - MIT's guide to shell scripting</span></li>
+                        <li><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-400">Claude Code documentation - Non-interactive mode reference</span></li>
+                        <li><a href="https://explainshell.com/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[TOOL]</a> <span class="text-gray-400">ExplainShell - Paste any shell command to see what each part does</span></li>
+                    </ul>
+                </div>
+            </section>
 
-      <h2>Readings and resources</h2>
+            <!-- Troubleshooting -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">TROUBLESHOOTING</h2>
+                </div>
+                <div class="border border-white/10 bg-panel divide-y divide-white/5">
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">"Permission denied" when running the script</h4>
+                        <p class="text-gray-500 text-sm">You need to make the script executable: <code class="text-acid bg-surface px-1">chmod +x newsletter-pipeline.sh</code></p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">"command not found: claude"</h4>
+                        <p class="text-gray-500 text-sm">Claude Code isn't in your PATH. Make sure you installed it globally with <code class="text-acid bg-surface px-1">npm install -g @anthropic-ai/claude-code</code> and that npm's global bin directory is in your PATH.</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">Script produces empty output</h4>
+                        <p class="text-gray-500 text-sm">Check that the input file exists and isn't empty. Add <code class="text-acid bg-surface px-1">set -e</code> at the top of your script to stop on errors, making problems easier to diagnose.</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">Special characters in filenames cause errors</h4>
+                        <p class="text-gray-500 text-sm">Always quote variable references in scripts: use <code class="text-acid bg-surface px-1">"$file"</code> not <code class="text-acid bg-surface px-1">$file</code>. This handles spaces and special characters correctly.</p>
+                    </div>
+                </div>
+            </section>
 
-      <div class="card">
-        <ul class="mb-0">
-          <li><a href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank" rel="noopener">Bash Reference Manual</a> - Complete bash documentation</li>
-          <li><a href="https://missing.csail.mit.edu/2020/shell-tools/" target="_blank" rel="noopener">The Missing Semester: Shell Tools</a> - MIT's guide to shell scripting</li>
-          <li><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">Claude Code documentation</a> - Non-interactive mode reference</li>
-          <li><a href="https://explainshell.com/" target="_blank" rel="noopener">ExplainShell</a> - Paste any shell command to see what each part does</li>
-        </ul>
-      </div>
+        </main>
 
-      <h2>Troubleshooting</h2>
-
-      <div class="card">
-        <h4>"Permission denied" when running the script</h4>
-        <p class="text-muted">You need to make the script executable: <code>chmod +x newsletter-pipeline.sh</code></p>
-
-        <h4 class="mt-lg">"command not found: claude"</h4>
-        <p class="text-muted">Claude Code isn't in your PATH. Make sure you installed it globally with <code>npm install -g @anthropic-ai/claude-code</code> and that npm's global bin directory is in your PATH.</p>
-
-        <h4 class="mt-lg">Script produces empty output</h4>
-        <p class="text-muted">Check that the input file exists and isn't empty. Add <code>set -e</code> at the top of your script to stop on errors, making problems easier to diagnose.</p>
-
-        <h4 class="mt-lg">Special characters in filenames cause errors</h4>
-        <p class="text-muted mb-0">Always quote variable references in scripts: use <code>"$file"</code> not <code>$file</code>. This handles spaces and special characters correctly.</p>
-      </div>
-
-      <div class="mt-2xl py-lg" style="border-top: 1px solid var(--color-border); display: flex; justify-content: space-between;">
-        <span class="text-muted">Previous: <a href="../module-3/">Module 3: Custom skills for Claude Code</a></span>
-        <span class="text-muted">Next: <a href="../module-5/">Module 5: Agents and RAG</a></span>
-      </div>
+        <!-- Prev/Next navigation -->
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between">
+                <a href="../module-3/" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">< MODULE_03</a>
+                <a href="../module-5/" class="text-acid hover:text-white text-sm font-mono transition-colors">MODULE_05 ></a>
+            </div>
+        </footer>
     </div>
-  </main>
 
-  <footer class="footer">
-    <div class="container text-center">
-      <p>Advanced prompt engineering for journalists</p>
-    </div>
-  </footer>
+    <script>lucide.createIcons();</script>
 </body>
 </html>
