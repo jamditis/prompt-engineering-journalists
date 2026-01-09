@@ -1,0 +1,55 @@
+{
+  "_comment": "TEMPLATE: MCP configuration file",
+  "_instructions": [
+    "Save this file as: ~/.claude/claude_desktop_config.json (for Claude Desktop)",
+    "Or as: .claude/settings.json in your project root (for Claude Code)",
+    "Remove these _comment and _instructions fields after customizing"
+  ],
+
+  "mcpServers": {
+
+    "_filesystem_comment": "Filesystem server - gives Claude access to local files",
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/path/to/your/project",
+        "/path/to/another/directory"
+      ]
+    },
+
+    "_fetch_comment": "Fetch server - allows Claude to make HTTP requests",
+    "fetch": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-fetch"
+      ]
+    },
+
+    "_custom_comment": "Custom server example - replace with your own server",
+    "custom-server": {
+      "command": "node",
+      "args": [
+        "/path/to/your/mcp-server/index.js"
+      ],
+      "env": {
+        "API_KEY": "your-api-key-here",
+        "DEBUG": "true"
+      }
+    },
+
+    "_python_comment": "Python server example",
+    "python-server": {
+      "command": "python",
+      "args": [
+        "-m",
+        "your_mcp_package"
+      ],
+      "env": {
+        "PYTHONPATH": "/path/to/your/python/modules"
+      }
+    }
+  }
+}

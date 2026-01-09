@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course templates</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: #f8f9fa;
+            color: #333;
+        }
+        h1 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.5rem;
+        }
+        .intro {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            border-left: 4px solid #0066cc;
+        }
+        .template-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        .template-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .template-card h2 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            color: #0066cc;
+        }
+        .template-card p {
+            margin: 0.5rem 0 1rem;
+            color: #666;
+        }
+        .file-type {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-family: monospace;
+            margin-bottom: 0.5rem;
+        }
+        .actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: #0066cc;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: #0052a3;
+        }
+        .btn-secondary {
+            background: #e9ecef;
+            color: #333;
+        }
+        .btn-secondary:hover {
+            background: #dee2e6;
+        }
+        .sections {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: #888;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #dee2e6;
+            font-size: 0.85rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Course templates</h1>
+
+    <div class="intro">
+        <p><strong>How to use:</strong> Click "Download" to save the template file, or "View" to preview it in your browser. Copy the contents into your own project and customize as needed.</p>
+    </div>
+
+    <div class="template-grid">
+        <div class="template-card">
+            <span class="file-type">.md</span>
+            <h2>CLAUDE.md project file</h2>
+            <p>Template for creating project instruction files that guide Claude Code. Include project overview, structure, commands, and style guidelines.</p>
+            <div class="sections">Sections: overview, structure, commands, style guide, notes</div>
+            <div class="actions">
+                <a href="claude-md-template.md" download class="btn btn-primary">Download</a>
+                <a href="claude-md-template.md" class="btn btn-secondary">View</a>
+            </div>
+        </div>
+
+        <div class="template-card">
+            <span class="file-type">.md</span>
+            <h2>Custom skill</h2>
+            <p>Template for creating reusable skills that extend Claude's capabilities. Define domain expertise, methodology, and implementation patterns.</p>
+            <div class="sections">Sections: frontmatter, description, instructions, examples</div>
+            <div class="actions">
+                <a href="skill-template.md" download class="btn btn-primary">Download</a>
+                <a href="skill-template.md" class="btn btn-secondary">View</a>
+            </div>
+        </div>
+
+        <div class="template-card">
+            <span class="file-type">.sh</span>
+            <h2>Shell pipeline</h2>
+            <p>Template for data processing pipelines. Includes environment setup, input validation, processing stages, and error handling.</p>
+            <div class="sections">Sections: config, validation, fetch, process, output, cleanup</div>
+            <div class="actions">
+                <a href="pipeline-template.sh" download class="btn btn-primary">Download</a>
+                <a href="pipeline-template.sh" class="btn btn-secondary">View</a>
+            </div>
+        </div>
+
+        <div class="template-card">
+            <span class="file-type">.json</span>
+            <h2>MCP configuration</h2>
+            <p>Template for configuring Model Context Protocol servers. Connect Claude to external tools and data sources.</p>
+            <div class="sections">Sections: mcpServers, filesystem example, custom server</div>
+            <div class="actions">
+                <a href="mcp-config-template.json" download class="btn btn-primary">Download</a>
+                <a href="mcp-config-template.json" class="btn btn-secondary">View</a>
+            </div>
+        </div>
+
+        <div class="template-card">
+            <span class="file-type">.md</span>
+            <h2>Final project proposal</h2>
+            <p>Template for your course final project. Define your problem, proposed solution, tools, and expected outcomes.</p>
+            <div class="sections">Sections: problem, solution, tools, timeline, outcome</div>
+            <div class="actions">
+                <a href="project-proposal-template.md" download class="btn btn-primary">Download</a>
+                <a href="project-proposal-template.md" class="btn btn-secondary">View</a>
+            </div>
+        </div>
+
+        <div class="template-card">
+            <span class="file-type">.md</span>
+            <h2>Weekly exercise log</h2>
+            <p>Template for tracking your weekly progress. Record what you tried, what worked, and questions for the instructor.</p>
+            <div class="sections">Sections: date, module, time, successes, challenges, questions</div>
+            <div class="actions">
+                <a href="exercise-log-template.md" download class="btn btn-primary">Download</a>
+                <a href="exercise-log-template.md" class="btn btn-secondary">View</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>These templates are starting points. Customize them to fit your specific project needs.</p>
+    </footer>
+</body>
+</html>

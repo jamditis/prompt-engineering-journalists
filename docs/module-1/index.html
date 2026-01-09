@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 1: Escaping the chat window | Advanced prompt engineering for journalists</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-brand">Advanced prompt engineering for journalists</a>
+      <ul class="nav-links">
+        <li><a href="../module-1/">Module 1</a></li>
+        <li><a href="../module-2/">Module 2</a></li>
+        <li><a href="../module-3/">Module 3</a></li>
+        <li><a href="../module-4/">Module 4</a></li>
+        <li><a href="../module-5/">Module 5</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="container">
+      <p class="text-muted text-small mb-sm">Module 1</p>
+      <h1>Escaping the chat window</h1>
+      <p class="text-muted">Move beyond browser-based AI to command-line tools that integrate with your existing workflow.</p>
+
+      <div class="alert alert-info mt-lg">
+        <h4 class="mt-0">Learning objectives</h4>
+        <ul class="mb-0">
+          <li>Install Node.js and essential CLI tools on your computer</li>
+          <li>Understand the differences between web interfaces and terminal-based AI</li>
+          <li>Run the same prompt in both environments and compare results</li>
+          <li>Navigate files and folders using basic terminal commands</li>
+        </ul>
+      </div>
+
+      <h2>Key concepts</h2>
+
+      <div class="card mb-md">
+        <h4 class="card-title">Why leave the browser?</h4>
+        <p class="card-description mb-0">Web-based AI tools like ChatGPT and Claude.ai are convenient, but they force you to copy and paste content back and forth. CLI tools let AI read and write files directly, chain multiple operations together, and integrate with version control. For journalists handling large documents or repetitive tasks, this saves hours.</p>
+      </div>
+
+      <div class="card mb-md">
+        <h4 class="card-title">What is a CLI?</h4>
+        <p class="card-description mb-0">A command-line interface (CLI) is a text-based way to interact with your computer. Instead of clicking buttons, you type commands. This might feel unfamiliar at first, but it gives you precise control and the ability to automate repetitive work. Think of it as learning keyboard shortcuts for your entire computer.</p>
+      </div>
+
+      <div class="card mb-md">
+        <h4 class="card-title">Node.js and npm</h4>
+        <p class="card-description mb-0">Node.js is a runtime that lets you run JavaScript outside a web browser. npm (Node Package Manager) comes with it and lets you install tools others have built. Many AI CLI tools, including Claude Code, are distributed through npm.</p>
+      </div>
+
+      <div class="card mb-md">
+        <h4 class="card-title">The terminal vs. web interface trade-off</h4>
+        <p class="card-description">
+          <strong>Web interface advantages:</strong> No setup required, visual formatting, easy to share conversations.<br>
+          <strong>CLI advantages:</strong> Direct file access, automation, piping between tools, no copy-paste friction, works offline (for local models).
+        </p>
+      </div>
+
+      <h2>Exercise: Compare web and CLI workflows</h2>
+
+      <div class="alert alert-success">
+        <p><strong>Goal:</strong> Run the same prompt in both a web interface and a CLI tool, then compare the experience.</p>
+      </div>
+
+      <h3>Step 1: Install Node.js</h3>
+      <p>Download and install Node.js from <a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a>. Choose the LTS (Long Term Support) version. The installer will also install npm.</p>
+
+      <p>After installation, open your terminal and verify:</p>
+      <pre><code>node --version
+npm --version</code></pre>
+      <p>You should see version numbers for both. If you get "command not found," restart your terminal or computer.</p>
+
+      <h3>Step 2: Install Claude Code</h3>
+      <p>Claude Code is Anthropic's official CLI for Claude. Install it globally:</p>
+      <pre><code>npm install -g @anthropic-ai/claude-code</code></pre>
+
+      <p>Then authenticate with your Anthropic account:</p>
+      <pre><code>claude</code></pre>
+      <p>Follow the prompts to log in. You'll need an Anthropic account with API access.</p>
+
+      <h3>Step 3: Prepare a test document</h3>
+      <p>Create a simple text file for testing. Open your terminal and run:</p>
+      <pre><code>echo "The city council voted 5-2 yesterday to approve a $2.3 million budget for road repairs. Council member Jane Smith opposed the measure, citing concerns about contractor selection. The repairs will begin in March and affect Main Street, Oak Avenue, and Park Road." > test-article.txt</code></pre>
+
+      <h3>Step 4: Run the prompt in a web interface</h3>
+      <p>Go to <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> and paste this prompt:</p>
+      <pre><code>Summarize this article in one sentence:
+
+The city council voted 5-2 yesterday to approve a $2.3 million budget for road repairs. Council member Jane Smith opposed the measure, citing concerns about contractor selection. The repairs will begin in March and affect Main Street, Oak Avenue, and Park Road.</code></pre>
+      <p>Note the time it takes and the steps involved (open browser, navigate to site, paste text, copy response).</p>
+
+      <h3>Step 5: Run the same prompt via CLI</h3>
+      <p>Navigate to the folder containing your test file and run:</p>
+      <pre><code>claude "Read test-article.txt and summarize it in one sentence"</code></pre>
+      <p>Claude Code reads the file directly and returns the summary in your terminal.</p>
+
+      <h3>Step 6: Compare the experience</h3>
+      <p>Consider these questions:</p>
+      <ul>
+        <li>Which workflow had fewer steps?</li>
+        <li>Which would be faster for processing 50 articles?</li>
+        <li>Which result could you more easily pipe to another command?</li>
+      </ul>
+
+      <h2>Checkpoint questions</h2>
+
+      <div class="alert alert-warning">
+        <p><strong>Self-check:</strong> Make sure you can answer these before moving on.</p>
+        <ul class="mb-0">
+          <li>What command shows your installed Node.js version?</li>
+          <li>What is npm and what does it do?</li>
+          <li>Why might a journalist prefer CLI tools over web interfaces for batch processing?</li>
+          <li>What happens if you try to run Claude Code without authenticating first?</li>
+        </ul>
+      </div>
+
+      <h2>Readings and resources</h2>
+
+      <div class="card">
+        <ul class="mb-0">
+          <li><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">Claude Code documentation</a> - Official setup guide and command reference</li>
+          <li><a href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs" target="_blank" rel="noopener">Introduction to Node.js</a> - Background on the runtime</li>
+          <li><a href="https://www.codecademy.com/article/command-line-commands" target="_blank" rel="noopener">Common command line commands</a> - Terminal basics reference</li>
+          <li><a href="https://missing.csail.mit.edu/2020/course-shell/" target="_blank" rel="noopener">The Missing Semester: The Shell</a> - MIT's free course on command-line fundamentals</li>
+        </ul>
+      </div>
+
+      <h2>Troubleshooting</h2>
+
+      <div class="card">
+        <h4>"command not found: node"</h4>
+        <p class="text-muted">Node.js isn't in your system PATH. Try restarting your terminal. On macOS, you may need to restart your computer. On Windows, make sure you checked "Add to PATH" during installation.</p>
+
+        <h4 class="mt-lg">"permission denied" when installing globally</h4>
+        <p class="text-muted">On macOS/Linux, you may need to use sudo: <code>sudo npm install -g @anthropic-ai/claude-code</code>. Alternatively, configure npm to use a different directory for global packages.</p>
+
+        <h4 class="mt-lg">Claude Code says "unauthorized"</h4>
+        <p class="text-muted">Your authentication may have expired or your API key may be invalid. Run <code>claude</code> again to re-authenticate, or check your Anthropic account for API access issues.</p>
+
+        <h4 class="mt-lg">The file isn't found</h4>
+        <p class="text-muted mb-0">Make sure you're in the same directory as the file. Use <code>ls</code> (macOS/Linux) or <code>dir</code> (Windows) to see files in the current folder. Use <code>cd</code> to change directories.</p>
+      </div>
+
+      <div class="mt-2xl py-lg" style="border-top: 1px solid var(--color-border); display: flex; justify-content: space-between;">
+        <span class="text-muted">Previous: <a href="../index.html">Course home</a></span>
+        <span class="text-muted">Next: <a href="../module-2/">Module 2: Voice-controlled AI</a></span>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container text-center">
+      <p>Advanced prompt engineering for journalists</p>
+    </div>
+  </footer>
+</body>
+</html>

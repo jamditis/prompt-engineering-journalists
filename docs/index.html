@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Prompt Engineering for Journalists | Knight Center MOOC</title>
+  <meta name="description" content="Learn to use AI coding assistants in your journalism workflow. A free online course from the Knight Center for Journalism in the Americas.">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container header-content">
+      <div class="logo-area">
+        <img src="assets/images/knight-center-logo.png" alt="Knight Center for Journalism in the Americas" class="logo" width="180" height="60">
+      </div>
+      <div class="header-text">
+        <h1 class="course-title">Advanced Prompt Engineering for Journalists</h1>
+        <p class="instructor">Instructor: Joe Amditis</p>
+      </div>
+      <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="theme-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero section -->
+    <section class="hero">
+      <div class="container">
+        <p class="hero-tagline">Move from chat windows to the command line</p>
+        <p class="hero-description">
+          Learn to use AI coding assistants in your terminal. Write prompts that generate working code,
+          automate repetitive tasks, and build tools for your newsroom.
+        </p>
+        <div class="hero-cta">
+          <a href="#quick-start" class="btn btn-primary">Get started</a>
+          <a href="#modules" class="btn btn-secondary">View syllabus</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Course overview / Modules -->
+    <section id="modules" class="modules">
+      <div class="container">
+        <h2>Course modules</h2>
+        <p class="section-intro">Five weeks covering the fundamentals of CLI-based AI tools for journalism.</p>
+
+        <ol class="module-list">
+          <li class="module-card">
+            <span class="module-number">1</span>
+            <div class="module-content">
+              <h3><a href="module-1/">Getting started with CLI tools</a></h3>
+              <p>Install Node.js, set up your terminal, and run your first AI-assisted coding session. Understand how command-line tools differ from chat interfaces.</p>
+            </div>
+          </li>
+
+          <li class="module-card">
+            <span class="module-number">2</span>
+            <div class="module-content">
+              <h3><a href="module-2/">Writing effective prompts</a></h3>
+              <p>Structure prompts for code generation. Learn to provide context, specify constraints, and iterate on outputs. Build a simple data-processing script.</p>
+            </div>
+          </li>
+
+          <li class="module-card">
+            <span class="module-number">3</span>
+            <div class="module-content">
+              <h3><a href="module-3/">Working with your codebase</a></h3>
+              <p>Use AI assistants to navigate and modify existing projects. Edit files, refactor code, and maintain version control with Git.</p>
+            </div>
+          </li>
+
+          <li class="module-card">
+            <span class="module-number">4</span>
+            <div class="module-content">
+              <h3><a href="module-4/">Building journalism tools</a></h3>
+              <p>Apply your skills to journalism workflows. Scrape public data, clean datasets, generate visualizations, and automate routine tasks.</p>
+            </div>
+          </li>
+
+          <li class="module-card">
+            <span class="module-number">5</span>
+            <div class="module-content">
+              <h3><a href="module-5/">Final project</a></h3>
+              <p>Build a complete tool for your newsroom. Document your process, share your work, and get feedback from peers.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Quick start -->
+    <section id="quick-start" class="quick-start">
+      <div class="container">
+        <h2>Quick start</h2>
+        <p class="section-intro">Get up and running in three steps.</p>
+
+        <div class="steps">
+          <div class="step">
+            <span class="step-number">1</span>
+            <h3>Install Node.js</h3>
+            <p>Download from <a href="https://nodejs.org">nodejs.org</a> and run the installer. This gives you <code>npm</code>, the package manager you'll use to install AI tools.</p>
+            <pre><code>node --version</code></pre>
+          </div>
+
+          <div class="step">
+            <span class="step-number">2</span>
+            <h3>Install an AI tool</h3>
+            <p>Pick one to start. Gemini CLI is free and works well for beginners.</p>
+            <pre><code>npm install -g @anthropic-ai/claude-code
+# or
+npm install -g @google/gemini-cli</code></pre>
+          </div>
+
+          <div class="step">
+            <span class="step-number">3</span>
+            <h3>Run your first prompt</h3>
+            <p>Open your terminal, navigate to a project folder, and start the tool.</p>
+            <pre><code>cd ~/my-project
+claude
+# or
+gemini</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools -->
+    <section id="tools" class="tools">
+      <div class="container">
+        <h2>Tools covered</h2>
+        <p class="section-intro">We focus on four AI coding assistants. You only need one to complete the course.</p>
+
+        <div class="tool-grid">
+          <article class="tool-card">
+            <h3>Claude Code</h3>
+            <p>Anthropic's terminal-based assistant. Strong at reasoning through complex tasks and working with existing codebases.</p>
+            <p class="tool-meta">Requires API key or subscription</p>
+            <a href="https://docs.anthropic.com/en/docs/claude-code" class="tool-link">Documentation</a>
+          </article>
+
+          <article class="tool-card">
+            <h3>Gemini CLI</h3>
+            <p>Google's command-line tool. Free tier available. Good for quick scripts and data processing tasks.</p>
+            <p class="tool-meta">Free tier with Google account</p>
+            <a href="https://github.com/google-gemini/gemini-cli" class="tool-link">Documentation</a>
+          </article>
+
+          <article class="tool-card">
+            <h3>Aider</h3>
+            <p>Open-source pair programming tool. Works with multiple AI providers. Excellent Git integration.</p>
+            <p class="tool-meta">Open source, bring your own API key</p>
+            <a href="https://aider.chat" class="tool-link">Documentation</a>
+          </article>
+
+          <article class="tool-card">
+            <h3>Codex CLI</h3>
+            <p>OpenAI's terminal assistant. Integrates well with existing OpenAI workflows and API keys.</p>
+            <p class="tool-meta">Requires OpenAI API key</p>
+            <a href="https://github.com/openai/codex" class="tool-link">Documentation</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources -->
+    <section id="resources" class="resources">
+      <div class="container">
+        <h2>Resources</h2>
+        <p class="section-intro">Reference materials to support your learning.</p>
+
+        <ul class="resource-list">
+          <li>
+            <a href="templates/quick-reference.html">Quick reference</a>
+            <span class="resource-desc">Common commands and prompt patterns for each tool</span>
+          </li>
+          <li>
+            <a href="templates/troubleshooting.html">Troubleshooting guide</a>
+            <span class="resource-desc">Solutions to common installation and usage problems</span>
+          </li>
+          <li>
+            <a href="templates/">Prompt templates</a>
+            <span class="resource-desc">Reusable prompts for journalism tasks</span>
+          </li>
+          <li>
+            <a href="https://github.com/joeamditis/mooc-prompt-engineering">Course repository</a>
+            <span class="resource-desc">Example code and project files on GitHub</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>About the course</h3>
+          <p>A free online course from the <a href="https://knightcenter.utexas.edu">Knight Center for Journalism in the Americas</a> at the University of Texas at Austin.</p>
+        </div>
+
+        <div class="footer-section">
+          <h3>Instructor</h3>
+          <p>
+            Joe Amditis<br>
+            <a href="https://centerforcooperativemedia.org">Center for Cooperative Media</a><br>
+            Montclair State University
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>License</h3>
+          <p>Course materials are licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. You may share and adapt for any purpose with attribution.</p>
+        </div>
+      </div>
+
+      <p class="copyright">
+        &copy; 2025 Knight Center for Journalism in the Americas
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Dark/light mode toggle
+    (function() {
+      const toggle = document.querySelector('.theme-toggle');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+      // Check for saved preference or system preference
+      function getTheme() {
+        const saved = localStorage.getItem('theme');
+        if (saved) return saved;
+        return prefersDark.matches ? 'dark' : 'light';
+      }
+
+      function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        toggle.setAttribute('aria-pressed', theme === 'dark');
+      }
+
+      // Initialize
+      setTheme(getTheme());
+
+      // Toggle on click
+      toggle.addEventListener('click', function() {
+        const current = document.documentElement.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      });
+
+      // Listen for system preference changes
+      prefersDark.addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) {
+          setTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

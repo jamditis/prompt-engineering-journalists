@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 5: Agents and RAG | Advanced prompt engineering for journalists</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-brand">Advanced prompt engineering for journalists</a>
+      <ul class="nav-links">
+        <li><a href="../module-1/">Module 1</a></li>
+        <li><a href="../module-2/">Module 2</a></li>
+        <li><a href="../module-3/">Module 3</a></li>
+        <li><a href="../module-4/">Module 4</a></li>
+        <li><a href="../module-5/">Module 5</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="container">
+      <p class="text-muted text-small mb-sm">Module 5</p>
+      <h1>Agents and RAG</h1>
+      <p class="text-muted">Understand AI agents, retrieval-augmented generation, and how to connect Claude to external data sources.</p>
+
+      <div class="alert alert-info mt-lg">
+        <h4 class="mt-0">Learning objectives</h4>
+        <ul class="mb-0">
+          <li>Distinguish between chatbots and AI agents</li>
+          <li>Understand retrieval-augmented generation (RAG) and why it matters</li>
+          <li>Learn the basics of Model Context Protocol (MCP)</li>
+          <li>Configure Claude Code with an MCP server to access local files</li>
+        </ul>
+      </div>
+
+      <h2>Key concepts</h2>
+
+      <div class="card mb-md">
+        <h4 class="card-title">Chatbots vs. agents</h4>
+        <p class="card-description">
+          <strong>Chatbot:</strong> Responds to prompts using only its training data. Can't take actions, access external information, or modify files. Like talking to someone who can only answer from memory.<br><br>
+          <strong>Agent:</strong> Can use tools, access data sources, and take actions. Breaks complex tasks into steps, decides what tools to use, and executes multi-step plans. Claude Code is an agent - it can read files, run commands, and make changes to your projects.
+        </p>
+      </div>
+
+      <div class="card mb-md">
+        <h4 class="card-title">Retrieval-augmented generation (RAG)</h4>
+        <p class="card-description mb-0">RAG combines a language model with external data retrieval. Instead of relying only on training data, the model can search relevant documents and include that information in its response. This reduces hallucinations and lets the model work with current, domain-specific information it was never trained on.</p>
+      </div>
+
+      <div class="card mb-md">
+        <h4 class="card-title">How RAG works</h4>
+        <p class="card-description">A typical RAG pipeline:</p>
+        <ol class="mb-0">
+          <li><strong>Query:</strong> User asks a question</li>
+          <li><strong>Retrieve:</strong> System searches a document collection for relevant passages</li>
+          <li><strong>Augment:</strong> Retrieved passages are added to the prompt as context</li>
+          <li><strong>Generate:</strong> The model generates a response using both the question and retrieved context</li>
+        </ol>
+      </div>
+
+      <div class="card mb-md">
+        <h4 class="card-title">Model Context Protocol (MCP)</h4>
+        <p class="card-description mb-0">MCP is an open standard for connecting AI models to external tools and data sources. An MCP server provides capabilities (like file access, database queries, or web searches) that Claude can use. Think of MCP servers as plugins that extend what Claude can do.</p>
+      </div>
+
+      <div class="card mb-md">
+        <h4 class="card-title">MCP server types</h4>
+        <p class="card-description">Common MCP servers include:</p>
+        <ul class="mb-0">
+          <li><strong>Filesystem:</strong> Read and write files in specified directories</li>
+          <li><strong>Database:</strong> Query databases (SQLite, PostgreSQL, etc.)</li>
+          <li><strong>Web:</strong> Fetch and parse web pages</li>
+          <li><strong>Search:</strong> Search engines, vector databases for semantic search</li>
+          <li><strong>Custom:</strong> Any tool or API you want Claude to access</li>
+        </ul>
+      </div>
+
+      <h2>Exercise: Configure Claude Code with MCP filesystem server</h2>
+
+      <div class="alert alert-success">
+        <p><strong>Goal:</strong> Set up an MCP server that gives Claude controlled access to a document folder, enabling RAG-style workflows.</p>
+      </div>
+
+      <h3>Step 1: Understand the default file access</h3>
+      <p>Claude Code can already read and write files in your current working directory. MCP extends this by:</p>
+      <ul>
+        <li>Giving access to specific directories you configure</li>
+        <li>Enabling more structured queries (search within files, list by criteria)</li>
+        <li>Supporting additional data sources beyond the filesystem</li>
+      </ul>
+
+      <h3>Step 2: Create a research documents folder</h3>
+      <p>Set up a folder with some test documents:</p>
+      <pre><code>mkdir -p ~/research-docs
+cd ~/research-docs
+
+# Create some sample documents
+cat > city-budget-2024.txt &lt;&lt;'EOF'
+City Budget Summary - Fiscal Year 2024
+
+Total Budget: $142.5 million
+
+Major Allocations:
+- Public Safety: $45.2 million (32%)
+- Education: $38.1 million (27%)
+- Infrastructure: $22.8 million (16%)
+- Parks and Recreation: $12.4 million (9%)
+- Administration: $11.2 million (8%)
+- Debt Service: $8.6 million (6%)
+- Contingency: $4.2 million (3%)
+
+Notable Changes from 2023:
+- Public Safety increased by $3.1 million for new police positions
+- Infrastructure decreased by $1.5 million after completion of Main St project
+- New allocation of $2.3 million for affordable housing initiatives
+EOF
+
+cat > school-board-minutes-jan.txt &lt;&lt;'EOF'
+School Board Meeting Minutes - January 15, 2024
+
+Attendees: Board members Smith, Johnson, Garcia, Kim, O'Brien
+Absent: None
+
+Agenda Items:
+
+1. Approval of December minutes - Passed unanimously
+
+2. Budget Review
+   - Superintendent presented mid-year budget report
+   - 97% of allocated funds committed
+   - Request for $150,000 supplemental for HVAC repairs at Lincoln Elementary
+   - Motion to approve supplemental: Passed 4-1 (Kim opposed)
+
+3. New Business
+   - Discussion of proposed later start times for high schools
+   - Public comment period: 12 speakers, 8 in favor, 4 opposed
+   - No vote taken; will continue at February meeting
+
+4. Personnel
+   - Approved hiring of 3 new special education aides
+   - Accepted resignation of Assistant Principal Martinez (Wilson High)
+
+Next Meeting: February 19, 2024
+EOF
+
+cat > crime-stats-q4.txt &lt;&lt;'EOF'
+Quarterly Crime Statistics - Q4 2024
+
+Overall Trends:
+- Total incidents: 1,847 (down 8% from Q3)
+- Violent crimes: 124 (down 12% from Q3)
+- Property crimes: 1,203 (down 6% from Q3)
+- Traffic incidents: 520 (up 3% from Q3)
+
+By Category:
+- Burglary: 89 incidents (down from 112)
+- Vehicle theft: 156 incidents (down from 178)
+- Assault: 67 incidents (down from 81)
+- Robbery: 23 incidents (down from 29)
+- Vandalism: 234 incidents (down from 251)
+
+Notable:
+- Downtown patrol increase correlates with 22% drop in downtown incidents
+- Vehicle theft remains concentrated in mall parking areas
+- No homicides for second consecutive quarter
+EOF</code></pre>
+
+      <h3>Step 3: Configure MCP in Claude Code</h3>
+      <p>Claude Code's MCP configuration lives in <code>~/.claude/</code>. Create or edit the MCP settings:</p>
+      <pre><code>cat > ~/.claude/claude_desktop_config.json &lt;&lt;'EOF'
+{
+  "mcpServers": {
+    "research-files": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/YOUR_USERNAME/research-docs"
+      ]
+    }
+  }
+}
+EOF</code></pre>
+      <p><strong>Important:</strong> Replace <code>YOUR_USERNAME</code> with your actual username. You can find it by running <code>whoami</code> in terminal.</p>
+
+      <h3>Step 4: Install the MCP filesystem server</h3>
+      <p>The server will be installed automatically when needed, but you can pre-install it:</p>
+      <pre><code>npm install -g @modelcontextprotocol/server-filesystem</code></pre>
+
+      <h3>Step 5: Restart Claude Code and verify</h3>
+      <p>Start a new Claude Code session:</p>
+      <pre><code>claude</code></pre>
+      <p>Ask Claude to list what MCP tools are available:</p>
+      <pre><code>What MCP servers and tools do you have access to?</code></pre>
+      <p>You should see the filesystem server listed with access to your research-docs folder.</p>
+
+      <h3>Step 6: Query your documents</h3>
+      <p>Now test RAG-style queries against your document collection:</p>
+      <pre><code>Based on my research documents, what was the total city budget for 2024 and what percentage went to education?</code></pre>
+      <pre><code>Search my documents for any mentions of school start times. What's the current status of that discussion?</code></pre>
+      <pre><code>Compare the crime statistics to the budget allocations for public safety. Is there any correlation worth investigating?</code></pre>
+
+      <h3>Step 7: Build a research workflow</h3>
+      <p>Use your document collection to draft a story:</p>
+      <pre><code>I'm writing a story about how the city is allocating resources to address public safety. Using my research documents, help me outline the key facts I should include and identify any gaps where I need more information.</code></pre>
+
+      <h2>Checkpoint questions</h2>
+
+      <div class="alert alert-warning">
+        <p><strong>Self-check:</strong> Make sure you can answer these before moving on.</p>
+        <ul class="mb-0">
+          <li>What is the main difference between a chatbot and an AI agent?</li>
+          <li>What problem does RAG solve that pure language models can't?</li>
+          <li>What does MCP stand for and what does it enable?</li>
+          <li>Why might you want to limit which folders an MCP server can access?</li>
+        </ul>
+      </div>
+
+      <h2>Readings and resources</h2>
+
+      <div class="card">
+        <ul class="mb-0">
+          <li><a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener">Model Context Protocol</a> - Official MCP documentation and specification</li>
+          <li><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">Claude Code documentation</a> - MCP configuration reference</li>
+          <li><a href="https://github.com/modelcontextprotocol/servers" target="_blank" rel="noopener">MCP Servers repository</a> - Collection of official and community MCP servers</li>
+          <li><a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener">Introducing the Model Context Protocol</a> - Anthropic's announcement explaining MCP</li>
+        </ul>
+      </div>
+
+      <h2>Troubleshooting</h2>
+
+      <div class="card">
+        <h4>MCP server doesn't appear in Claude Code</h4>
+        <p class="text-muted">Check that your config file is valid JSON (no trailing commas, proper quoting). Use <code>cat ~/.claude/claude_desktop_config.json</code> to verify the contents. Restart Claude Code after making changes.</p>
+
+        <h4 class="mt-lg">"Permission denied" accessing files</h4>
+        <p class="text-muted">The MCP server can only access directories you've explicitly configured. Check that the path in your config matches the actual directory, and that your user has read permission on those files.</p>
+
+        <h4 class="mt-lg">Server fails to start</h4>
+        <p class="text-muted">Make sure Node.js and npm are installed and in your PATH. Try running the server manually to see error messages: <code>npx @modelcontextprotocol/server-filesystem ~/research-docs</code></p>
+
+        <h4 class="mt-lg">Claude doesn't seem to use the documents</h4>
+        <p class="text-muted mb-0">Be explicit in your prompts: "Search my research documents for..." or "Using the files in my research folder...". Claude may not automatically search documents unless asked.</p>
+      </div>
+
+      <div class="mt-2xl py-lg" style="border-top: 1px solid var(--color-border); display: flex; justify-content: space-between;">
+        <span class="text-muted">Previous: <a href="../module-4/">Module 4: CLI workflows</a></span>
+        <span class="text-muted">Next: <a href="../index.html">Course home</a></span>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container text-center">
+      <p>Advanced prompt engineering for journalists</p>
+    </div>
+  </footer>
+</body>
+</html>

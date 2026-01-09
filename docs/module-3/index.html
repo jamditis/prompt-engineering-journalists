@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 3: Custom skills for Claude Code | Advanced prompt engineering for journalists</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-brand">Advanced prompt engineering for journalists</a>
+      <ul class="nav-links">
+        <li><a href="../module-1/">Module 1</a></li>
+        <li><a href="../module-2/">Module 2</a></li>
+        <li><a href="../module-3/">Module 3</a></li>
+        <li><a href="../module-4/">Module 4</a></li>
+        <li><a href="../module-5/">Module 5</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="container">
+      <p class="text-muted text-small mb-sm">Module 3</p>
+      <h1>Custom skills for Claude Code</h1>
+      <p class="text-muted">Extend Claude Code with reusable skills that encode domain expertise, workflows, and best practices for journalism.</p>
+
+      <div class="alert alert-info mt-lg">
+        <h4 class="mt-0">Learning objectives</h4>
+        <ul class="mb-0">
+          <li>Understand what Claude Code skills are and how they work</li>
+          <li>Install skills from public repositories and personal collections</li>
+          <li>Use skills to apply specialized knowledge to journalism tasks</li>
+          <li>Evaluate the quality and trustworthiness of third-party skills</li>
+        </ul>
+      </div>
+
+      <h2>Key concepts</h2>
+
+      <div class="card mb-md">
+        <h4 class="card-title">What are skills?</h4>
+        <p class="card-description mb-0">Skills are markdown files containing instructions, prompts, and context that Claude Code loads on demand. When you invoke a skill (e.g., <code>/source-verification</code>), Claude reads the skill file and applies that knowledge to your conversation. Skills let you encode expertise once and reuse it across projects.</p>
+      </div>
+
+      <div class="card mb-md">
+        <h4 class="card-title">Skill types</h4>
+        <p class="card-description">Claude Code supports three types of skill files:</p>
+        <ul class="mb-0">
+          <li><strong>SKILL.md:</strong> Domain expertise and methodology. Use when working on tasks that match the skill's domain.</li>
+          <li><strong>RULE.md:</strong> Project constraints and requirements. Defines what must and must not be done.</li>
+          <li><strong>LESSON.md:</strong> Learned patterns from past projects. Captures what worked, what failed, and why.</li>
+        </ul>
+      </div>
+
+      <div class="card mb-md">
+        <h4 class="card-title">Where skills live</h4>
+        <p class="card-description">Skills can be stored in several locations:</p>
+        <ul class="mb-0">
+          <li><strong>Global:</strong> <code>~/.claude/commands/</code> - Available in all projects</li>
+          <li><strong>Project:</strong> <code>.claude/commands/</code> - Available only in that project</li>
+          <li><strong>Remote:</strong> GitHub repositories that you clone or reference</li>
+        </ul>
+      </div>
+
+      <div class="card mb-md">
+        <h4 class="card-title">Skill trust and safety</h4>
+        <p class="card-description mb-0">Skills are just text files with instructions - they can't run arbitrary code. However, they can influence Claude's behavior, so review skills before installing them. Prefer skills from trusted sources, check what instructions they contain, and be cautious of skills that ask Claude to access external services or sensitive data.</p>
+      </div>
+
+      <h2>Exercise: Install and use the source-verification skill</h2>
+
+      <div class="alert alert-success">
+        <p><strong>Goal:</strong> Install a journalism-focused skill and use it to verify a claim from a viral social media post.</p>
+      </div>
+
+      <h3>Step 1: Create your commands directory</h3>
+      <p>If you haven't already, create the global commands directory:</p>
+      <pre><code>mkdir -p ~/.claude/commands</code></pre>
+
+      <h3>Step 2: Create the source-verification skill</h3>
+      <p>Create a new file at <code>~/.claude/commands/source-verification.md</code> with the following content:</p>
+      <pre><code># Source verification skill
+
+You are helping a journalist verify claims and sources. Follow these principles:
+
+## Verification checklist
+1. **Identify the claim**: What specific factual assertion is being made?
+2. **Find the original source**: Trace the claim back to its origin. Screenshots and social posts are not primary sources.
+3. **Check multiple sources**: Look for at least 2-3 independent sources confirming the claim.
+4. **Evaluate source credibility**: Consider the source's track record, expertise, and potential biases.
+5. **Look for counter-evidence**: Actively search for information that contradicts the claim.
+6. **Check the date**: Is this current information or old news being recirculated?
+7. **Verify images/video**: Consider whether media could be manipulated, out of context, or from a different event.
+
+## Red flags
+- Claim originated on social media without attribution
+- No primary source documents available
+- Single source with strong bias
+- Emotional language designed to provoke outrage
+- Missing or vague dates and locations
+- "Trust me" or "I heard from someone who..."
+
+## Response format
+When asked to verify a claim, provide:
+1. The specific claim being evaluated
+2. Sources found (with URLs when available)
+3. Verification status: VERIFIED / UNVERIFIED / FALSE / PARTIALLY TRUE / UNABLE TO VERIFY
+4. Confidence level: HIGH / MEDIUM / LOW
+5. Key evidence supporting your conclusion
+6. Any caveats or limitations in your verification
+
+Always recommend additional steps the journalist should take for complete verification.</code></pre>
+
+      <h3>Step 3: Verify the skill is available</h3>
+      <p>Start Claude Code and check that the skill appears:</p>
+      <pre><code>claude
+/help</code></pre>
+      <p>You should see <code>source-verification</code> listed among available commands.</p>
+
+      <h3>Step 4: Test the skill with a viral claim</h3>
+      <p>Let's verify a hypothetical viral claim. In Claude Code, invoke the skill:</p>
+      <pre><code>/source-verification</code></pre>
+      <p>Then provide a claim to verify:</p>
+      <pre><code>A viral tweet claims that a major US city just banned all plastic bags, effective immediately, with $500 fines for violations. The tweet has 50,000 retweets. Please help me verify this claim before I report on it.</code></pre>
+
+      <h3>Step 5: Review Claude's response</h3>
+      <p>Notice how Claude structures its response according to the skill's format. It should:</p>
+      <ul>
+        <li>Identify the specific factual claims</li>
+        <li>Note the lack of primary source</li>
+        <li>Suggest verification steps (check city council records, contact city communications office)</li>
+        <li>Flag red flags (viral spread, no attribution)</li>
+      </ul>
+
+      <h3>Step 6: Try a real verification</h3>
+      <p>Now try verifying a real claim you've encountered. Use the skill to structure your fact-checking process.</p>
+
+      <h2>Checkpoint questions</h2>
+
+      <div class="alert alert-warning">
+        <p><strong>Self-check:</strong> Make sure you can answer these before moving on.</p>
+        <ul class="mb-0">
+          <li>What is the difference between a SKILL.md and a RULE.md file?</li>
+          <li>Where should you put a skill that you want available in all projects?</li>
+          <li>Why should you review third-party skills before installing them?</li>
+          <li>What command invokes a skill named "source-verification"?</li>
+        </ul>
+      </div>
+
+      <h2>Readings and resources</h2>
+
+      <div class="card">
+        <ul class="mb-0">
+          <li><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">Claude Code documentation</a> - Official guide to skills and commands</li>
+          <li><a href="https://www.poynter.org/ifcn/" target="_blank" rel="noopener">International Fact-Checking Network</a> - Standards and resources for verification</li>
+          <li><a href="https://firstdraftnews.org/articles/verification-handbook/" target="_blank" rel="noopener">First Draft Verification Handbook</a> - Comprehensive guide to verifying digital content</li>
+          <li><a href="https://www.bellingcat.com/resources/how-tos/" target="_blank" rel="noopener">Bellingcat guides</a> - Open-source investigation techniques</li>
+        </ul>
+      </div>
+
+      <h2>Troubleshooting</h2>
+
+      <div class="card">
+        <h4>Skill doesn't appear in /help</h4>
+        <p class="text-muted">Make sure the file is in the correct directory (<code>~/.claude/commands/</code>) and has the <code>.md</code> extension. The filename becomes the command name.</p>
+
+        <h4 class="mt-lg">Skill doesn't seem to affect Claude's responses</h4>
+        <p class="text-muted">Remember to invoke the skill with the slash command (e.g., <code>/source-verification</code>) before asking your question. The skill context is loaded when you invoke it.</p>
+
+        <h4 class="mt-lg">"Permission denied" when creating files</h4>
+        <p class="text-muted">Make sure the <code>~/.claude/commands/</code> directory exists and you have write permission. Run <code>mkdir -p ~/.claude/commands</code> to create it.</p>
+
+        <h4 class="mt-lg">Skill is too generic or not helpful</h4>
+        <p class="text-muted mb-0">Skills work best when they're specific. Edit the skill file to add more detailed instructions, examples, or checklists relevant to your work.</p>
+      </div>
+
+      <div class="mt-2xl py-lg" style="border-top: 1px solid var(--color-border); display: flex; justify-content: space-between;">
+        <span class="text-muted">Previous: <a href="../module-2/">Module 2: Voice-controlled AI</a></span>
+        <span class="text-muted">Next: <a href="../module-4/">Module 4: CLI workflows</a></span>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container text-center">
+      <p>Advanced prompt engineering for journalists</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 4: CLI workflows | Advanced prompt engineering for journalists</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-brand">Advanced prompt engineering for journalists</a>
+      <ul class="nav-links">
+        <li><a href="../module-1/">Module 1</a></li>
+        <li><a href="../module-2/">Module 2</a></li>
+        <li><a href="../module-3/">Module 3</a></li>
+        <li><a href="../module-4/">Module 4</a></li>
+        <li><a href="../module-5/">Module 5</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="container">
+      <p class="text-muted text-small mb-sm">Module 4</p>
+      <h1>CLI workflows</h1>
+      <p class="text-muted">Chain commands together, pipe data between tools, and automate repetitive tasks with shell scripts.</p>
+
+      <div class="alert alert-info mt-lg">
+        <h4 class="mt-0">Learning objectives</h4>
+        <ul class="mb-0">
+          <li>Understand Unix pipes and how to chain commands</li>
+          <li>Use Claude Code in non-interactive mode for scripting</li>
+          <li>Build shell scripts that automate multi-step workflows</li>
+          <li>Create a practical content pipeline for journalism work</li>
+        </ul>
+      </div>
+
+      <h2>Key concepts</h2>
+
+      <div class="card mb-md">
+        <h4 class="card-title">Pipes and redirection</h4>
+        <p class="card-description">The pipe character (<code>|</code>) sends the output of one command as input to another. This lets you build processing chains:</p>
+        <pre><code>cat article.txt | wc -w    # Count words in article
+ls *.txt | wc -l           # Count text files</code></pre>
+        <p class="card-description mb-0">Redirection (<code>></code> and <code>>></code>) sends output to files instead of the screen. <code>></code> overwrites, <code>>></code> appends.</p>
+      </div>
+
+      <div class="card mb-md">
+        <h4 class="card-title">Non-interactive mode</h4>
+        <p class="card-description">Claude Code can run as a single command without entering the interactive REPL. This is essential for scripting:</p>
+        <pre><code># Interactive (starts a session)
+claude
+
+# Non-interactive (runs once and exits)
+claude -p "Summarize this article" &lt; article.txt</code></pre>
+        <p class="card-description mb-0">The <code>-p</code> flag specifies the prompt. Input can come from a file or piped from another command.</p>
+      </div>
+
+      <div class="card mb-md">
+        <h4 class="card-title">Shell scripts</h4>
+        <p class="card-description mb-0">A shell script is a text file containing commands that run in sequence. Scripts let you save and reuse workflows. On macOS and Linux, scripts typically start with <code>#!/bin/bash</code> and need execute permission (<code>chmod +x script.sh</code>).</p>
+      </div>
+
+      <div class="card mb-md">
+        <h4 class="card-title">Variables and loops</h4>
+        <p class="card-description">Shell scripts can use variables and loops to process multiple files:</p>
+        <pre><code>for file in *.txt; do
+  echo "Processing $file"
+  claude -p "Summarize" &lt; "$file" > "${file%.txt}-summary.txt"
+done</code></pre>
+        <p class="card-description mb-0">This loop processes every <code>.txt</code> file and creates a summary for each.</p>
+      </div>
+
+      <h2>Exercise: Build an article-to-newsletter pipeline</h2>
+
+      <div class="alert alert-success">
+        <p><strong>Goal:</strong> Create a shell script that takes an article, generates a summary, and formats it for a newsletter.</p>
+      </div>
+
+      <h3>Step 1: Create a test article</h3>
+      <p>First, create a sample article to work with:</p>
+      <pre><code>mkdir -p ~/newsletter-pipeline
+cd ~/newsletter-pipeline
+
+cat > article.txt &lt;&lt;'EOF'
+Local Restaurant Week Returns After Three-Year Hiatus
+
+Downtown merchants announced Tuesday that Restaurant Week will return this March after a three-year pause due to the pandemic. The event, which typically draws thousands of visitors to the city center, will run from March 15-22.
+
+More than 40 restaurants have already signed up to participate, offering prix-fixe lunch and dinner menus at reduced prices. Participating restaurants span cuisines from Italian to Thai, with options ranging from casual cafes to upscale dining rooms.
+
+"We're thrilled to bring this tradition back," said Maria Chen, president of the Downtown Business Association. "Restaurant Week has always been about showcasing the diversity and quality of our local dining scene."
+
+The format will differ slightly from pre-pandemic years. Reservations will be required at all participating restaurants, and some establishments will offer takeout versions of their prix-fixe menus.
+
+A full list of participating restaurants and menus will be available on the Downtown Business Association website starting March 1. Early reservation booking opens March 5 for newsletter subscribers.
+EOF</code></pre>
+
+      <h3>Step 2: Test the summarization step</h3>
+      <p>First, verify that Claude Code can summarize the article:</p>
+      <pre><code>cat article.txt | claude -p "Summarize this article in 2-3 sentences for a newsletter blurb."</code></pre>
+      <p>You should see a concise summary printed to your terminal.</p>
+
+      <h3>Step 3: Test the formatting step</h3>
+      <p>Now test converting the summary to newsletter format. Save the summary first:</p>
+      <pre><code>cat article.txt | claude -p "Summarize this article in 2-3 sentences." > summary.txt
+
+cat summary.txt | claude -p "Format this summary as an HTML snippet for an email newsletter. Include a headline in an h3 tag and the summary in a paragraph tag. Keep it simple, no inline styles."</code></pre>
+
+      <h3>Step 4: Create the pipeline script</h3>
+      <p>Now combine these steps into a reusable script:</p>
+      <pre><code>cat > newsletter-pipeline.sh &lt;&lt;'EOF'
+#!/bin/bash
+
+# Newsletter Pipeline Script
+# Usage: ./newsletter-pipeline.sh article.txt
+
+if [ -z "$1" ]; then
+  echo "Usage: $0 &lt;article-file>"
+  exit 1
+fi
+
+ARTICLE="$1"
+BASENAME=$(basename "$ARTICLE" .txt)
+OUTPUT_DIR="./output"
+
+# Create output directory if needed
+mkdir -p "$OUTPUT_DIR"
+
+echo "Processing: $ARTICLE"
+
+# Step 1: Generate summary
+echo "  Generating summary..."
+SUMMARY=$(cat "$ARTICLE" | claude -p "Summarize this article in 2-3 sentences for a newsletter blurb. Be concise and focus on the key news.")
+
+# Step 2: Format for newsletter
+echo "  Formatting for newsletter..."
+cat &lt;&lt;PROMPT | claude -p "$(cat)" > "$OUTPUT_DIR/${BASENAME}-newsletter.html"
+Format this summary as an HTML snippet for an email newsletter:
+
+$SUMMARY
+
+Requirements:
+- Use an h3 tag for a compelling headline
+- Use a p tag for the summary
+- Add a "Read more" link placeholder at the end
+- No inline styles, keep it semantic HTML
+PROMPT
+
+# Step 3: Also save plain text version
+echo "$SUMMARY" > "$OUTPUT_DIR/${BASENAME}-summary.txt"
+
+echo "Done! Output files:"
+echo "  $OUTPUT_DIR/${BASENAME}-newsletter.html"
+echo "  $OUTPUT_DIR/${BASENAME}-summary.txt"
+EOF
+
+chmod +x newsletter-pipeline.sh</code></pre>
+
+      <h3>Step 5: Run the pipeline</h3>
+      <p>Execute your script on the test article:</p>
+      <pre><code>./newsletter-pipeline.sh article.txt</code></pre>
+      <p>Check the output directory:</p>
+      <pre><code>cat output/article-newsletter.html
+cat output/article-summary.txt</code></pre>
+
+      <h3>Step 6: Process multiple articles</h3>
+      <p>Create a second article and process both:</p>
+      <pre><code>cat > article2.txt &lt;&lt;'EOF'
+City Council Approves New Bike Lane Network
+
+The city council voted 6-1 Monday night to approve a $4.2 million plan for protected bike lanes connecting downtown to three residential neighborhoods. Construction will begin this summer.
+
+The network will add 12 miles of protected lanes separated from car traffic by concrete barriers. Routes will connect the downtown business district to the Riverside, Hillside, and Eastwood neighborhoods.
+
+Councilmember James Park cast the lone dissenting vote, citing concerns about reduced street parking. Supporters argued the lanes will reduce traffic congestion and provide safe alternatives to driving.
+EOF
+
+# Process both articles
+for article in article*.txt; do
+  ./newsletter-pipeline.sh "$article"
+done</code></pre>
+
+      <h2>Checkpoint questions</h2>
+
+      <div class="alert alert-warning">
+        <p><strong>Self-check:</strong> Make sure you can answer these before moving on.</p>
+        <ul class="mb-0">
+          <li>What does the pipe character (<code>|</code>) do in a shell command?</li>
+          <li>What's the difference between <code>></code> and <code>>></code> for redirection?</li>
+          <li>How do you run Claude Code non-interactively for use in scripts?</li>
+          <li>What does <code>chmod +x</code> do to a file?</li>
+        </ul>
+      </div>
+
+      <h2>Readings and resources</h2>
+
+      <div class="card">
+        <ul class="mb-0">
+          <li><a href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank" rel="noopener">Bash Reference Manual</a> - Complete bash documentation</li>
+          <li><a href="https://missing.csail.mit.edu/2020/shell-tools/" target="_blank" rel="noopener">The Missing Semester: Shell Tools</a> - MIT's guide to shell scripting</li>
+          <li><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener">Claude Code documentation</a> - Non-interactive mode reference</li>
+          <li><a href="https://explainshell.com/" target="_blank" rel="noopener">ExplainShell</a> - Paste any shell command to see what each part does</li>
+        </ul>
+      </div>
+
+      <h2>Troubleshooting</h2>
+
+      <div class="card">
+        <h4>"Permission denied" when running the script</h4>
+        <p class="text-muted">You need to make the script executable: <code>chmod +x newsletter-pipeline.sh</code></p>
+
+        <h4 class="mt-lg">"command not found: claude"</h4>
+        <p class="text-muted">Claude Code isn't in your PATH. Make sure you installed it globally with <code>npm install -g @anthropic-ai/claude-code</code> and that npm's global bin directory is in your PATH.</p>
+
+        <h4 class="mt-lg">Script produces empty output</h4>
+        <p class="text-muted">Check that the input file exists and isn't empty. Add <code>set -e</code> at the top of your script to stop on errors, making problems easier to diagnose.</p>
+
+        <h4 class="mt-lg">Special characters in filenames cause errors</h4>
+        <p class="text-muted mb-0">Always quote variable references in scripts: use <code>"$file"</code> not <code>$file</code>. This handles spaces and special characters correctly.</p>
+      </div>
+
+      <div class="mt-2xl py-lg" style="border-top: 1px solid var(--color-border); display: flex; justify-content: space-between;">
+        <span class="text-muted">Previous: <a href="../module-3/">Module 3: Custom skills for Claude Code</a></span>
+        <span class="text-muted">Next: <a href="../module-5/">Module 5: Agents and RAG</a></span>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container text-center">
+      <p>Advanced prompt engineering for journalists</p>
+    </div>
+  </footer>
+</body>
+</html>
