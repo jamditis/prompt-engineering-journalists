@@ -3,8 +3,11 @@
 ## Advanced prompt engineering for journalists
 
 **Instructor:** Joe Amditis, Associate Director of Operations, Center for Cooperative Media, Montclair State University
+
 **Email:** amditisj@montclair.edu
+
 **Course duration:** 5 weeks
+
 **Time commitment:** 4-6 hours per week
 
 ---
