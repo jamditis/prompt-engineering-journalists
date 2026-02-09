@@ -182,6 +182,49 @@ du -sh *
 
 ---
 
+## Git basics
+
+You don't need to type Git commands yourself — your CLI tool handles them. But understanding the concepts helps you know what to ask for.
+
+### Key concepts
+
+| Concept | What it means |
+|---------|---------------|
+| **Repository (repo)** | A project folder tracked by Git. Has a hidden `.git` folder that stores the history. |
+| **Commit** | A saved snapshot of your project at a point in time, with a message describing what changed. |
+| **Clone** | Download a copy of a repository from GitHub to your computer. |
+| **Push** | Upload your local commits to GitHub. |
+| **Pull** | Download the latest changes from GitHub to your computer. |
+| **Stage** | Mark files to be included in the next commit. |
+
+### What to ask your CLI tool
+
+| What you want to do | What to ask |
+|----------------------|-------------|
+| Start tracking a project | "Initialize this directory as a Git repository" |
+| Save a snapshot | "Commit all changes with the message 'description of what changed'" |
+| Check what's changed | "What is the current Git status?" |
+| Download a project from GitHub | "Clone the repository at https://github.com/user/repo" |
+| Upload to GitHub | "Push this repository to GitHub" |
+| Get the latest version | "Pull the latest changes from the remote repository" |
+
+### Installing Git
+
+Git needs to be installed on your system even if your CLI tool runs the commands.
+
+```bash
+# Check if installed
+git --version
+
+# Install (Mac)
+brew install git
+
+# Install (Windows)
+winget install Git.Git
+```
+
+---
+
 ## Project context file setup
 
 ### Claude Code — CLAUDE.md

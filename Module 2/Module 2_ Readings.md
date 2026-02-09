@@ -43,6 +43,20 @@ Covers patterns for working with LLMs in production, including the importance of
 
 ---
 
+**GitHub "Hello World" guide** by GitHub
+https://docs.github.com/en/get-started/start-your-journey/hello-world
+
+A short walkthrough of GitHub's core concepts: repositories, branches, commits, and pull requests. You don't need to complete every step — read it to understand the vocabulary. When your CLI tool creates a repo or makes a commit, this is what's happening.
+
+---
+
+**"Why journalists should understand version control"** by Jonathan Stray
+https://source.opennews.org/articles/version-control-journalists/
+
+Explains why Git matters for journalism beyond software development: tracking changes to stories, collaborating on investigations, maintaining audit trails, and sharing reusable tools. Short and practical.
+
+---
+
 ### Bonus reading
 
 **"Principles of context engineering"** by Simon Willison

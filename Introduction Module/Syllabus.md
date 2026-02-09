@@ -26,7 +26,7 @@ Each module builds on a concept from the 101 course and extends it: web promptin
 By the end of this course, students will be able to:
 
 1. Install and operate command-line AI tools, and explain the advantages of programmatic AI access over web interfaces
-2. Write project context files (CLAUDE.md, GEMINI.md, AGENTS.md) and process journalism documents using CLI tools
+2. Write project context files (CLAUDE.md, GEMINI.md, AGENTS.md), process journalism documents using CLI tools, and use Git and GitHub for version control and sharing
 3. Create custom skills, hooks, and CLAUDE.md files that encode journalism expertise into reusable tools
 4. Build cost-conscious automation workflows with checkpointing, rate limiting, and multi-stage processing
 5. Configure retrieval-augmented generation pipelines that preserve source attribution
@@ -64,10 +64,11 @@ By the end of this course, students will be able to:
 - What goes in a context file (beat knowledge, style, source standards, terminology)
 - The "deletion test" for context file content
 - Processing journalism documents (press releases, minutes, transcripts) from the filesystem
+- Git basics and GitHub for project management — what repositories, commits, and cloning are
 
 **Activities:**
-- Required readings: Context file documentation for Claude Code, Gemini CLI, and Codex
-- Exercise: Set up a beat project, process documents with and without context, write a CLAUDE.md
+- Required readings: Context file documentation for Claude Code, Gemini CLI, and Codex; Git and GitHub basics
+- Exercise: Set up a beat project, initialize a Git repo, process documents with and without context, write a CLAUDE.md
 - Discussion: What would you put in a context file for your beat?
 - Quiz
 

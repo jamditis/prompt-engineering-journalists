@@ -2,7 +2,7 @@
 
 ## Module 2: Prompting with files and project context
 
-5 multiple choice questions. The correct answer is marked with an asterisk (*).
+6 multiple choice questions. The correct answer is marked with an asterisk (*).
 
 ---
 
@@ -73,3 +73,17 @@ b. When the instructions are generic and apply to all AI interactions everywhere
 c. When the same instructions should apply to every conversation in a specific project*
 
 d. When you want to override the AI's safety guidelines
+
+---
+
+### Question 6
+
+In Module 3, you'll install journalism skills from a GitHub repository. What does "cloning a repository" mean?
+
+a. Creating a new empty repository on GitHub
+
+b. Downloading a copy of a project and its full history from GitHub to your computer*
+
+c. Deleting a repository and starting over
+
+d. Converting a Word document into a Git-compatible format

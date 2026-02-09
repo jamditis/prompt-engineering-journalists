@@ -28,6 +28,10 @@ If you're not seeing differences, your context file might be too generic. Go bac
 
 Yes. Claude Code looks for CLAUDE.md in the current directory and all parent directories. You can have a project-level context file and a more specific one in a subdirectory. The tool merges them. This is useful if you have a newsroom-wide context file and want to add beat-specific instructions for individual projects.
 
+**"I've never used Git before — do I need to learn all of it?"**
+
+No. You need to understand the concepts, not memorize commands. Know what a repository is (a project folder with version tracking), what a commit is (a saved snapshot), and what cloning means (downloading a project from GitHub). Your CLI tool handles the actual Git commands — you just need to know what to ask for. In Module 3, you'll clone a skills repo from GitHub, and the exercise will walk you through it.
+
 ---
 
 ### Exercise reminder
@@ -35,10 +39,11 @@ Yes. Claude Code looks for CLAUDE.md in the current directory and all parent dir
 If you haven't started the hands-on exercise yet, now is the time. The key steps:
 
 1. Create a project directory with the provided sample documents
-2. Process the documents without any context file
-3. Write your CLAUDE.md
-4. Process the same documents again with the context file active
-5. Compare and write up the differences
+2. Initialize a Git repository (use your CLI tool — it handles the commands)
+3. Process the documents without any context file
+4. Write your CLAUDE.md
+5. Process the same documents again with the context file active
+6. Compare and write up the differences
 
 Start early if you can. Writing a good context file takes a few iterations — your first draft probably won't be your final version, and that's fine.
 

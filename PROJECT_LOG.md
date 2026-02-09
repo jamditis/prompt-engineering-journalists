@@ -124,10 +124,35 @@ The course moves journalists from web-based AI chat interfaces to terminal CLI t
 - Voice content fully removed — no partial references retained
 - Sample documents form a coherent narrative (Riverside Park closure in Greenfield) to make the exercise feel like real beat reporting
 
+### 2026-02-09 — Add "Understanding GitHub" section to Module 2
+
+**Context:** Module 3 requires students to install skills from GitHub (git clone or /install-github-plugin), but Git was listed as "optional" in Course Requirements. Students who skip Git would hit a wall in Week 3. GitHub is also where CLI tools, skills, and plugins live. Adding Git/GitHub to Module 2 bridges the gap — CLAUDE.md files live in repos, and this is where students learn that.
+
+**Design decision:** Students use their CLI tool (Claude Code, Gemini CLI, etc.) to run Git commands, not the terminal directly. The focus is on understanding concepts (repos, commits, cloning) so they know what to ask for, not memorizing commands.
+
+**Module 2 files updated (6):**
+- `Module 2_ Orientation Message.md` — Added "Version control and GitHub" section between "Working with files" and "Learning objectives." Explains Git/GitHub concepts, emphasizes CLI tool handles commands. Added learning objective #6. Updated "This week's work" counts.
+- `Module 2_ Exercise.md` — Added Part 2 (initialize Git repo via CLI tool). Students ask Claude Code to init/commit, then learn what happened behind the scenes. Renumbered Parts 3-7. Added optional Part 7 (push to GitHub via CLI tool). Fixed all cross-references.
+- `Module 2_ Readings.md` — Added two required readings: GitHub "Hello World" guide and Jonathan Stray on version control for journalists.
+- `Module 2_ Quiz.md` — Changed from 5 to 6 questions. Added Question 6 on what cloning a repository means.
+- `Module 2_ Midweek Message.md` — Added FAQ entry "I've never used Git before — do I need to learn all of it?" Updated exercise reminder steps.
+- `Module 2_ End of the Week Message.md` — Added Git to "What you learned" list. Updated Module 3 preview to mention cloning the journalism skills library.
+
+**Course docs updated (3):**
+- `Introduction Module/Syllabus.md` — Added Git topics to Module 2 section. Expanded learning objective #2. Updated activities list.
+- `Introduction Module/Course Requirements.md` — Git changed from optional to required. Added install instructions, version check, package manager options. Added "Install Git" as step 3 in pre-Module 1 checklist.
+- `docs/quick-reference.md` — Added "Git basics" section with concepts table, "what to ask your CLI tool" table, and install commands.
+
+**Files not changed (confirmed no updates needed):**
+- `Module 2_ Optional Resources.md` — Required readings cover Git basics sufficiently
+- `Module 2_ Discussion Forums.md` — Q3 already discusses sharing context files; Git is a natural answer
+- Module 1, Module 3-5, Final Project — No changes needed
+
 ## Current status
 
 - All 5 modules complete with strengthened content
 - Module 2 replaced: voice → files and project context
+- Module 2 expanded: Git/GitHub section added, Git now required for course
 - All placeholder URLs replaced with real links
 - File naming normalized
 - Syllabus, welcome message, and CLAUDE.md updated

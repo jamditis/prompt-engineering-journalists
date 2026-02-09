@@ -80,6 +80,28 @@ The AI sees the full document with its formatting intact. No truncation from cop
 
 ---
 
+## Version control and GitHub
+
+Your context file is useful. But right now it only exists on your computer. What happens when you want to share it with a colleague? What happens when you want to use it on a different machine? What happens when you change something and want to go back to the previous version?
+
+This is where Git and GitHub come in.
+
+**Git** is a version control system. It tracks changes to your files over time. Every time you save a snapshot (called a "commit"), Git records what changed, when, and a message describing why. You can go back to any previous version.
+
+**GitHub** is a website where you can store and share Git repositories. A repository (or "repo") is a project folder tracked by Git. When you push a repo to GitHub, other people can download it, use it, and contribute to it.
+
+Why does this matter for this course?
+
+First, context files are designed to live in Git repos. When you create a CLAUDE.md for a project, that file is part of the project — it should be tracked and versioned alongside everything else. If you change your style rules next month, Git keeps the history. If a colleague forks your beat project, they get your context file too.
+
+Second, the tools themselves live on GitHub. Claude Code, Gemini CLI, Codex — their documentation, source code, and plugins are all hosted in GitHub repositories. In Module 3, you'll install journalism skills by cloning a repo from GitHub. Understanding what a repo is and how `git clone` works removes a barrier before you get there.
+
+Third, GitHub is how journalists share reusable tools. The skills library you'll use in Module 3, the workflow scripts in Module 4, the MCP configurations in Module 5 — they're all shared through GitHub repos. Knowing the basics means you can find, download, and use tools other journalists have built.
+
+You don't need to become a Git expert. You don't even need to memorize Git commands — your CLI tool can run them for you. What you need is an understanding of the concepts: what a repository is, what a commit does, what cloning means, and why version control matters. When you ask Claude Code to "initialize a Git repo and commit these files," it handles the details. But you need to know *what you're asking for* and *why*. The exercise this week walks you through it.
+
+---
+
 ## Learning objectives
 
 By the end of this week, you will be able to:
@@ -94,14 +116,16 @@ By the end of this week, you will be able to:
 
 5. **Compare AI outputs** with and without project context to see the practical difference
 
+6. **Understand Git and GitHub** — what repositories, commits, and cloning are, and how context files, skills, and project configurations are stored and shared through GitHub
+
 ---
 
 ## This week's work
 
-- **Readings:** Documentation on context files for Claude Code, Gemini CLI, and Codex CLI, plus practical articles on context engineering
-- **Exercise:** Set up a beat project directory, process journalism documents with and without context, write your own CLAUDE.md
+- **Readings:** Documentation on context files for Claude Code, Gemini CLI, and Codex CLI, plus articles on context engineering and Git basics
+- **Exercise:** Set up a beat project directory, initialize it as a Git repo, process journalism documents with and without context, write your own CLAUDE.md
 - **Discussion:** Share what you'd put in a context file for your beat, and compare results with and without context
-- **Quiz:** 5 questions on context files, the deletion test, and file processing
+- **Quiz:** 6 questions on context files, the deletion test, file processing, and Git basics
 
 ---
 
