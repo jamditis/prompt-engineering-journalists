@@ -9,14 +9,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Instructor:** Joe Amditis, Center for Cooperative Media, Montclair State University
 **Prerequisite:** Prompt Engineering 101 for Journalists (or equivalent)
 
-This is the sequel to Prompt Engineering 101 for Journalists. It moves journalists from web-based AI chat interfaces to terminal CLI tools: Claude Code, Gemini CLI, and Aider. Each module extends a concept from the 101 course: web prompting → CLI, typing → voice, one-off prompts → reusable skills, no-code automation → scripted pipelines, understanding AI → building with agents and RAG.
+This is the sequel to Prompt Engineering 101 for Journalists. It moves journalists from web-based AI chat interfaces to terminal CLI tools: Claude Code, Gemini CLI, and Aider. Each module extends a concept from the 101 course: web prompting → CLI, typing context every time → writing it once in a file, one-off prompts → reusable skills, no-code automation → scripted pipelines, understanding AI → building with agents and RAG.
 
 ## Structure
 
 ```
 ├── Introduction Module/     # Welcome, syllabus, requirements, getting help
 ├── Module 1/                # Escaping the chat window (programmatic AI control)
-├── Module 2/                # Voice-controlled AI (raw vs agent mode, privacy gradient)
+├── Module 2/                # Prompting with files and project context
 ├── Module 3/                # Custom skills (domain expertise → reusable tools, hooks)
 ├── Module 4/                # CLI workflows (Unix philosophy, cost-conscious pipelines)
 ├── Module 5/                # Agents and RAG (grounded knowledge, source attribution)
@@ -34,7 +34,6 @@ This is the sequel to Prompt Engineering 101 for Journalists. It moves journalis
 
 - **Journalism skills:** https://github.com/jamditis/claude-skills-journalism (36 skills, 13 hooks)
 - **AI tools for newsrooms:** https://github.com/jamditis/tools
-- **AudioBash:** https://github.com/jamditis/audiobash
 - **Scrapefruit CLI:** https://github.com/jamditis/scrapefruit-cli
 
 ## Module content pattern
@@ -61,7 +60,7 @@ Each module contains 8 markdown documents:
 - **Gemini CLI:** `npm install -g @google/gemini-cli` (free tier: 1,000 req/day)
 - **Codex CLI:** `npm install -g @openai/codex`
 - **Aider:** `pip install aider-chat`
-- **Voice:** Gemini Flash API, Windows Speech, Whisper
+- **Context files:** CLAUDE.md, GEMINI.md, AGENTS.md
 
 ## Notes
 

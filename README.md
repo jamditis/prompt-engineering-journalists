@@ -9,7 +9,7 @@ A 5-week MOOC by [Joe Amditis](https://github.com/jamditis) for the [Knight Cent
 This course moves you from web-based AI chat interfaces to terminal CLI tools. By the end, you'll:
 
 - Use Claude Code, Gemini CLI, and other AI tools from the command line
-- Control AI with your voice using transcription tools
+- Write project context files that give AI persistent instructions about your beat
 - Build custom Claude skills for journalism workflows
 - Create automated pipelines that chain AI with other tools
 - Connect AI to your own archives using RAG and MCP
@@ -19,7 +19,7 @@ This course moves you from web-based AI chat interfaces to terminal CLI tools. B
 | Week | Topic | What you'll build |
 |------|-------|-------------------|
 | 1 | [Escaping the chat window](docs/module-1/) | Compare web vs CLI workflows |
-| 2 | [Voice-controlled AI](docs/module-2/) | Set up voice dictation to terminal |
+| 2 | [Prompting with files and project context](docs/module-2/) | Write a CLAUDE.md and process documents |
 | 3 | [Custom skills for Claude Code](docs/module-3/) | Install and use journalism skills |
 | 4 | [CLI workflows](docs/module-4/) | Article → summary → newsletter pipeline |
 | 5 | [Agents and RAG](docs/module-5/) | Connect Claude to a knowledge base |

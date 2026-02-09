@@ -1,63 +1,108 @@
-# Orientation message
+# Module 2: Prompting with files and project context
 
-## Module 2: Voice-controlled AI
+## Orientation message
 
-Hello, and welcome to Module 2 of Advanced Prompt Engineering for Journalists.
+Welcome to Week 2. Last week you installed a command-line AI tool and saw how it differs from web chat. This week, you'll use it for real journalism work — and learn the feature that makes CLI tools worth the setup.
 
-This week we focus on voice-controlled AI: speaking to your terminal instead of typing. For many journalists, typing is second nature. But voice input does more than save keystrokes. It changes how you think about prompts. When you speak instead of type, you tend to explain what you want rather than trying to craft the "perfect" phrasing. That shift often produces better results, because you're describing intent instead of performing syntax.
+---
 
-Voice-to-text technology has improved dramatically in recent years. Free and local transcription options now rival expensive commercial services. This module teaches you to set up voice input for your terminal and use it to interact with AI coding assistants like Claude Code.
+## The fresh conversation problem
 
-### Learning objectives
+In the 101 course, you typed everything into a chat window. Every session started blank. If you wanted Claude to follow AP style, you told it. If you wanted it to understand your beat, you explained your beat. If you wanted it to avoid certain phrases, you listed them. Every single time.
 
-By the end of this module, you will be able to:
+That's how web interfaces work. Each conversation is isolated. Your context evaporates when the session ends.
 
-1. Explain the difference between raw transcription mode and agent mode for terminal voice input, and choose the right one for a given task
-2. Set up at least one voice transcription tool on your computer
-3. Use voice dictation to give commands to an AI coding assistant
-4. Evaluate transcription tools along a privacy gradient, from fully offline to cloud-based, and choose appropriately for sensitive reporting
-5. Identify when voice input is faster than typing for journalism workflows
+CLI tools solve this. They read your filesystem. They can follow persistent instructions stored in files. You write your preferences once, and the tool picks them up automatically every time you work in that project directory.
 
-### Raw mode vs. agent mode
+This is the single biggest practical difference between web AI and terminal AI: **persistent project context**.
 
-Before you start, understand the two cognitive modes you'll be working with. **Raw mode** transcribes exactly what you say — word for word, no interpretation. It is useful for dictating text: drafting stories, writing emails, composing notes. **Agent mode** interprets your speech as intent and generates appropriate terminal commands. It is useful for operating your tools: running scripts, navigating files, issuing instructions to Claude Code.
+---
 
-These are different ways of thinking, not just different settings. In raw mode, you are the author and the tool is a stenographer. In agent mode, you are giving direction and the tool decides how to execute. Knowing which mode you need before you start speaking will save you from dictating a paragraph when you meant to run a command, or vice versa.
+## What are context files?
 
-### The privacy gradient
+A context file is a plain-text document that tells the AI tool about your project, your standards, and your preferences. Different tools use different filenames, but the concept is the same:
 
-Not all transcription engines handle your audio the same way, and this matters for journalists. The options fall along a privacy gradient:
+**Claude Code** reads `CLAUDE.md` — a markdown file in your project directory. Everything in this file becomes part of Claude's instructions for that project.
 
-- **OS-level dictation** (Windows Speech, macOS Dictation) — Runs locally, requires no setup, but transcription quality is lower and custom vocabulary support is limited.
-- **Local models** (Whisper, Parakeet) — Runs on your machine using your GPU. Audio never leaves your computer. High-quality transcription with no cloud dependency.
-- **Cloud APIs** (Gemini Flash, OpenAI API) — Sends audio to remote servers for processing. Highest accuracy, but your speech data travels over the internet.
+**Gemini CLI** reads `GEMINI.md` — same concept, different filename.
 
-If you are working with confidential sources, recording sensitive interviews, or handling leaked documents, make a conscious choice about where your audio goes. Local-only transcription costs more in setup time but keeps everything on your machine. Cloud APIs are easier to configure but introduce a third party.
+**OpenAI Codex** reads `AGENTS.md` — again, same idea.
 
-### Custom vocabulary for beat reporters
+When you open any of these tools in a directory that contains the right file, the tool reads it before you type a single word. Your first prompt already has context.
 
-Generic transcription engines mangle the names that matter most to journalists: local officials, municipal agencies, legislation, technical terms specific to your beat. If you cover a city council, you know the difference between getting a council member's name right and getting it wrong.
+---
 
-Tools that support custom vocabulary mapping let you define corrections — telling the transcription engine that "Councilwoman Kowalski" is not "council woman cow walski." This week's exercise touches on setting up vocabulary lists. If you cover a specialized beat, start building yours early.
+## What goes in a context file?
 
-### This week's activities
+Think about what you'd tell a new reporter joining your beat. Not the obvious stuff everyone in journalism knows — the specific things about *your* coverage area, *your* newsroom's conventions, and *your* preferences.
 
-- Watch the video lectures on voice transcription tools and terminal integration
-- Complete the readings on voice-to-text for developers
-- Try the hands-on exercise: dictating a story outline to Claude Code
-- Participate in the discussion forums
-- Complete the quiz
+Good context file content:
 
-The video lectures walk through several transcription options and a purpose-built voice-to-terminal tool:
+- **Beat knowledge:** "I cover Greenfield city government. The current mayor is Diana Torres (D), elected 2023. City council has 7 members."
+- **Style preferences:** "Use AP style. Don't use Oxford commas. Refer to the organization as 'the Center' on second reference."
+- **Source standards:** "Always attribute claims to named sources. Flag any unverified claims."
+- **Terminology:** "In Greenfield, the budget process is called the 'appropriations cycle,' not 'budget season.'"
+- **Things to avoid:** "Never use the phrase 'according to sources.' Always name the source or explain why they're anonymous."
 
-- **AudioBash** (Windows and macOS) — A voice-controlled terminal with built-in transcription, split panes, and context-aware agent mode that converts speech into commands.
+Bad context file content (too generic):
 
-AudioBash supports multiple transcription engines: Gemini Flash (free API, any platform), Windows Speech (built-in, no setup), and OpenAI Whisper. You also have standalone options like Parakeet (local GPU, fully offline) and your OS's built-in dictation. Pick the combination that matches your setup and your privacy requirements.
+- "Be helpful and accurate" (the tool already tries to do this)
+- "Write clearly" (too vague to change behavior)
+- "Follow journalism ethics" (which ethics? be specific)
 
-Check into the discussion forums this week. Voice input is personal. What works for one person may not work for another. Share your experiences, and learn from your classmates.
+---
 
-Please complete all module activities before the end of the week.
+## The deletion test
 
-If you have questions about the course content, post in the "Question for the instructor" forum.
+Here's a useful way to decide what belongs in your context file: **if you can delete a line and nothing changes for someone who knows your beat, that line was unnecessary.**
 
-See you online.
+An experienced city hall reporter wouldn't need to be told "verify facts before publishing." But they might need to know "the city uses 'resolution' for binding votes and 'ordinance' for legislation — don't confuse these." The first is generic knowledge. The second is beat-specific context that changes the AI's output.
+
+Put another way: context files should contain the things that make your project *different* from every other project, not the things that are true of all journalism.
+
+---
+
+## Working with files
+
+The other major feature of CLI tools is file access. In a web chat, you upload files one at a time through a browser. In the terminal, the AI can read any file in your project directory — and you can point it at specific documents.
+
+This changes how you work with press releases, meeting minutes, interview transcripts, and other journalism documents. Instead of copy-pasting text into a chat window, you tell the tool to read the file directly:
+
+```
+claude "Read press-release.md and identify the key claims that need verification"
+```
+
+```
+gemini "Summarize council-minutes.md. Focus on budget items over $100,000"
+```
+
+The AI sees the full document with its formatting intact. No truncation from copy-paste. No formatting lost in a browser upload.
+
+---
+
+## Learning objectives
+
+By the end of this week, you will be able to:
+
+1. **Explain what project context files are** and how they differ across tools (CLAUDE.md, GEMINI.md, AGENTS.md)
+
+2. **Write a context file** with beat-specific instructions, style preferences, and newsroom conventions
+
+3. **Use the deletion test** to decide what belongs in a context file and what doesn't
+
+4. **Process journalism documents** (press releases, transcripts, public records) using a CLI tool
+
+5. **Compare AI outputs** with and without project context to see the practical difference
+
+---
+
+## This week's work
+
+- **Readings:** Documentation on context files for Claude Code, Gemini CLI, and Codex CLI, plus practical articles on context engineering
+- **Exercise:** Set up a beat project directory, process journalism documents with and without context, write your own CLAUDE.md
+- **Discussion:** Share what you'd put in a context file for your beat, and compare results with and without context
+- **Quiz:** 5 questions on context files, the deletion test, and file processing
+
+---
+
+Let's get started.

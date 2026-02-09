@@ -1,71 +1,62 @@
 # Optional resources
 
-## Module 2: Voice-controlled AI
+## Module 2: Prompting with files and project context
 
-These materials go deeper into voice technology if you want to explore beyond the required readings.
-
----
-
-### Accessibility and inclusive design
-
-**"Voice Control on macOS"** by Apple
-https://support.apple.com/guide/mac-help/voice-control-mh40719/mac
-
-Apple's built-in Voice Control lets you operate your entire Mac by speaking. Useful for understanding how accessibility features can apply to journalism workflows.
+These materials go deeper into context files and file processing if you want to explore beyond the required readings.
 
 ---
 
-**"Windows Speech Recognition"** by Microsoft
-https://support.microsoft.com/en-us/windows/use-voice-typing-to-talk-instead-of-type-on-your-pc-fec94565-c4bd-329d-e59a-af033fa5689f
+### Advanced CLAUDE.md examples
 
-Documentation for Windows' built-in voice typing (Win+H). Works in any text field without additional software.
+**Claude Code best practices** by Anthropic
+https://docs.anthropic.com/en/docs/claude-code/best-practices
 
----
-
-### Voice-to-terminal tools
-
-**AudioBash** by Joe Amditis
-https://audiobash.app
-
-The voice-controlled terminal used in this course. Features include split panes (up to 4 terminals), context-aware agent mode, custom vocabulary for newsroom-specific terms, preview pane for HTML/markdown, and CLI notifications. Active development with frequent releases. Windows and macOS.
+Anthropic's own guide to getting the most out of Claude Code, including tips on writing effective CLAUDE.md files and structuring projects for AI-assisted work.
 
 ---
 
-### Dictation tools for writers
+**"My CLAUDE.md"** by various developers (GitHub search)
+https://github.com/search?q=filename%3ACLAUDE.md&type=code
 
-**"Otter.ai"**
-https://otter.ai/
-
-Popular transcription service used by journalists for interview transcription. Free tier available. Useful comparison point for understanding transcription accuracy.
+Search GitHub for real CLAUDE.md files in public repositories. Seeing how other people structure their context files is one of the fastest ways to improve your own. Look for files from journalism or writing-focused projects.
 
 ---
 
-**"Dictation.io"**
-https://dictation.io/
+### Context engineering in practice
 
-A free browser-based dictation tool. No installation required. Good for testing voice-to-text without committing to any setup.
+**"Prompt engineering is dead, long live context engineering"** by Swyx
+https://www.latent.space/p/context-engineering
 
----
-
-### Local/offline transcription
-
-**"Faster Whisper"** (GitHub)
-https://github.com/SYSTRAN/faster-whisper
-
-A faster implementation of OpenAI's Whisper model. Runs locally on your machine. Relevant for journalists who work with sensitive sources and cannot send audio to cloud APIs.
+An argument that the important skill isn't writing better prompts — it's giving the AI better context. Relevant framing for why CLAUDE.md files matter more than individual prompt tricks.
 
 ---
 
-**"NVIDIA Parakeet TDT"**
-https://huggingface.co/nvidia/parakeet-tdt-0.6b-v2
+**"System prompts are a hidden superpower"** by Simon Willison
+https://simonwillison.net/tags/systemprompts/
 
-NVIDIA's open-source speech recognition model. Runs on local GPU. High accuracy with no API costs or data leaving your machine.
+Simon Willison's collected writing on system prompts, including analysis of how major AI products use them. Context files are a form of system prompt that you control.
 
 ---
 
-### Voice coding communities
+### Newsroom configuration examples
 
-**"Cursorless"** (GitHub)
-https://github.com/cursorless-dev/cursorless
+**Journalism skills repository** by Joe Amditis
+https://github.com/jamditis/claude-skills-journalism
 
-A voice coding extension for VS Code. Demonstrates advanced voice control for code editing. Interesting for understanding where voice coding is headed.
+The instructor's skills repository includes example CLAUDE.md patterns designed for newsroom use. Look at the repository's own CLAUDE.md for an example of how a journalism-focused project structures its context file. This repository is covered in depth in Module 3.
+
+---
+
+### Cross-tool comparison
+
+**Aider conventions file documentation**
+https://aider.chat/docs/usage/conventions.html
+
+Aider uses a `.aider.conventions.md` file for the same purpose as CLAUDE.md. This documentation explains how Aider loads and applies project-level instructions, showing yet another implementation of the same pattern.
+
+---
+
+**"How I use AI tools differently"** by Matt Webb
+https://interconnected.org/home/
+
+Matt Webb writes about practical AI workflows from a design perspective. His posts on working with Claude Code and project-level configuration are relevant to understanding how non-engineers use context files.

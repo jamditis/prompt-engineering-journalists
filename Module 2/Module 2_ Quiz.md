@@ -1,6 +1,6 @@
 # Quiz
 
-## Module 2: Voice-controlled AI
+## Module 2: Prompting with files and project context
 
 5 multiple choice questions. The correct answer is marked with an asterisk (*).
 
@@ -8,68 +8,68 @@
 
 ### Question 1
 
-What is the main difference between "raw mode" and "agent mode" in a voice-controlled terminal?
+What is the primary purpose of a CLAUDE.md file?
 
-a. Raw mode is faster; agent mode is more accurate
+a. To store the AI's responses for future reference
 
-b. Raw mode transcribes speech exactly as spoken; agent mode converts speech into terminal commands*
+b. To provide persistent project-level instructions that Claude Code reads automatically*
 
-c. Raw mode works offline; agent mode requires an internet connection
+c. To log errors and debugging information
 
-d. Raw mode is for dictation; agent mode is for voice control of the mouse
+d. To replace the need for writing prompts
 
 ---
 
 ### Question 2
 
-Which of the following is a free, local transcription option that runs on your own GPU without sending audio to external servers?
+You're writing a context file for your city hall beat. Which of the following instructions best passes the "deletion test"?
 
-a. Google Cloud Speech-to-Text
+a. "Write accurate journalism"
 
-b. Amazon Transcribe
+b. "The city calls its annual budget process the 'appropriations cycle' — use this term, not 'budget season'"*
 
-c. NVIDIA Parakeet*
+c. "Be helpful and thorough"
 
-d. Otter.ai
+d. "Follow AP style" (without any specific AP rules listed)
 
 ---
 
 ### Question 3
 
-Why might a journalist choose local transcription over cloud-based transcription?
+How does a context file change the AI's behavior?
 
-a. Local transcription is always more accurate
+a. It replaces the AI's training data with your instructions
 
-b. Local transcription protects sensitive audio from being sent to third-party servers*
+b. It adds your instructions to every conversation in that project directory, so the AI applies them without being asked*
 
-c. Local transcription works without a computer
+c. It prevents the AI from generating responses that contradict your instructions under any circumstances
 
-d. Local transcription is required by most newsroom IT policies
+d. It speeds up the AI's response time by reducing the context it needs to process
 
 ---
 
 ### Question 4
 
-On Windows, what keyboard shortcut activates the built-in voice typing feature?
+What is the equivalent of CLAUDE.md in other CLI tools?
 
-a. Ctrl+Shift+V
+a. Gemini CLI uses GEMINI.md; Codex uses AGENTS.md*
 
-b. Alt+S
+b. All tools use the same CLAUDE.md filename
 
-c. Win+H*
+c. Gemini CLI uses config.json; Codex uses settings.yaml
 
-d. F5
+d. Other tools don't support project context files
 
 ---
 
 ### Question 5
 
-When dictating commands to an AI coding assistant like Claude Code, what is the best practice?
+When should you use a project context file instead of including instructions in each prompt?
 
-a. Speak as fast as possible to save time
+a. When the instructions apply to a single prompt only
 
-b. Use short, clear instructions and pause between separate commands*
+b. When the instructions are generic and apply to all AI interactions everywhere
 
-c. Always spell out punctuation marks like "period" and "comma"
+c. When the same instructions should apply to every conversation in a specific project*
 
-d. Avoid using natural language; stick to exact terminal syntax
+d. When you want to override the AI's safety guidelines

@@ -4,7 +4,7 @@
 
 5-week MOOC for the Knight Center for Journalism at UT Austin. Sequel to Prompt Engineering 101 for Journalists. Instructor: Joe Amditis, Center for Cooperative Media, Montclair State University.
 
-The course moves journalists from web-based AI chat interfaces to terminal CLI tools. Each module extends a concept from the 101 course: web prompting to CLI, typing to voice, one-off prompts to reusable skills, no-code automation to scripted pipelines, understanding AI to building with agents and RAG.
+The course moves journalists from web-based AI chat interfaces to terminal CLI tools. Each module extends a concept from the 101 course: web prompting to CLI, typing context every time to writing it once in a file, one-off prompts to reusable skills, no-code automation to scripted pipelines, understanding AI to building with agents and RAG.
 
 ## Session history
 
@@ -78,13 +78,60 @@ The course moves journalists from web-based AI chat interfaces to terminal CLI t
 - Hallucinated article references replaced with real articles on the same topics
 - Module 3 exercise updated to plugin installation as primary method
 
+### 2026-02-09 — Module 2 curriculum replacement
+
+**Context:** Module 2 previously taught voice input and AudioBash. This content was a detour — it didn't feed into Modules 3-5 and broke the skill-building chain. After Module 1 (install CLI tools, first prompt), students jumped to Module 3 (skills and plugins) with no module where they actually used the tools for real journalism work.
+
+**What changed:**
+
+- Replaced Module 2 "Voice-controlled AI" with "Prompting with files and project context"
+- New module teaches context files (CLAUDE.md, GEMINI.md, AGENTS.md), the deletion test, and file-based document processing
+- Created 5 sample journalism documents in `Resources/examples/beat-project/` for the exercise (press release, council minutes, interview notes, tip email, sample CLAUDE.md)
+- Exercise has students process the same documents with and without a context file, then compare results
+
+**New course progression:**
+1. Install the tools (Module 1)
+2. Use the tools effectively — files and persistent context (Module 2, NEW)
+3. Make your work reusable — skills, hooks, plugins (Module 3)
+4. Chain tools into pipelines (Module 4)
+5. Connect tools to external data — MCP, RAG (Module 5)
+
+**Files rewritten (8):**
+- All 8 files in `Module 2/` — complete replacement
+
+**Files updated (6):**
+- `Introduction Module/Syllabus.md` — Module 2 description, learning objectives, schedule summary, grading, course repositories (removed AudioBash)
+- `CLAUDE.md` — Structure comment, key repos (removed AudioBash), tools covered (replaced voice with context files), 101-to-advanced mapping
+- `README.md` — Module 2 table row and "what you'll learn" bullet
+- `Introduction Module/Course Requirements.md` — Hardware recommendations (removed microphone/GPU, updated for file processing)
+- `docs/quick-reference.md` — Replaced "Voice transcription setup" section with "Project context file setup" section
+- `Module 3/Module 3_ Orientation Message.md` — Removed "CLAUDE.md as project memory" section (now in Module 2), added bridge sentence referencing Module 2
+
+**Files created (5):**
+- `Resources/examples/beat-project/press-release-park-closure.md`
+- `Resources/examples/beat-project/council-minutes-excerpt.md`
+- `Resources/examples/beat-project/interview-notes-martinez.md`
+- `Resources/examples/beat-project/tip-email.md`
+- `Resources/examples/beat-project/sample-claude-md.md`
+
+**Files unchanged (confirmed no updates needed):**
+- `Module 1/Module 1_ End of the Week Message.md` — Already previews the new Module 2 content correctly
+- Module 3 exercise, Modules 4-5, Final Project — No voice/AudioBash references
+
+**Decisions made:**
+- Deletion test moved from Module 3 to Module 2 (where it fits better as part of writing context files)
+- AudioBash removed from course repositories in both syllabus and CLAUDE.md
+- Voice content fully removed — no partial references retained
+- Sample documents form a coherent narrative (Riverside Park closure in Greenfield) to make the exercise feel like real beat reporting
+
 ## Current status
 
 - All 5 modules complete with strengthened content
+- Module 2 replaced: voice → files and project context
 - All placeholder URLs replaced with real links
 - File naming normalized
-- Syllabus and welcome message updated
-- CLAUDE.md updated
+- Syllabus, welcome message, and CLAUDE.md updated
+- Sample journalism documents created for Module 2 exercise
 
 ## Key files
 
@@ -101,7 +148,7 @@ The course moves journalists from web-based AI chat interfaces to terminal CLI t
 
 - Node.js 20+
 - Claude Code, Gemini CLI, or Aider
-- GitHub repos: jamditis/claude-skills-journalism, jamditis/tools, jamditis/audiobash, jamditis/scrapefruit-cli
+- GitHub repos: jamditis/claude-skills-journalism, jamditis/tools, jamditis/scrapefruit-cli
 
 ## Future enhancements
 

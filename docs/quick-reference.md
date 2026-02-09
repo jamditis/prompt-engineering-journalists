@@ -182,55 +182,74 @@ du -sh *
 
 ---
 
-## Voice transcription setup
+## Project context file setup
 
-### Using Whisper (local, free)
+### Claude Code — CLAUDE.md
 
-```bash
-# Install
-pip install openai-whisper
+Create a `CLAUDE.md` file in your project directory:
 
-# Transcribe audio file
-whisper audio.mp3 --model base
+```markdown
+# Project context
 
-# Faster, less accurate
-whisper audio.mp3 --model tiny
+## Beat
+I cover Greenfield city government for the Daily News.
 
-# More accurate, slower
-whisper audio.mp3 --model small
+## Style
+- AP style
+- No Oxford comma
+- "The city" on second reference
+
+## Source standards
+- Attribute all claims to named sources
+- Flag unverified claims separately
 ```
 
-### Using OpenAI API (cloud, paid)
+Claude Code reads this file automatically when you open a session in that directory. You can also have a user-level CLAUDE.md at `~/.claude/CLAUDE.md` for instructions that apply to all projects.
 
-```bash
-# Set API key
-export OPENAI_API_KEY="sk-..."
+### Gemini CLI — GEMINI.md
 
-# Transcribe via API (in Python)
-python -c "
-import openai
-audio_file = open('audio.mp3', 'rb')
-transcript = openai.audio.transcriptions.create(
-  model='whisper-1',
-  file=audio_file
-)
-print(transcript.text)
-"
+Create a `GEMINI.md` file in your project directory with the same kind of instructions. Gemini CLI reads it on startup.
+
+```markdown
+# Project context
+
+## Beat
+I cover Greenfield city government for the Daily News.
+
+## Style
+- AP style, no Oxford comma
 ```
 
-### Voice input for AI tools
+### OpenAI Codex — AGENTS.md
 
-**macOS built-in dictation:**
-1. System Settings > Keyboard > Dictation
-2. Enable dictation
-3. Press `Fn Fn` (or configured key) to start
-4. Speak your prompt, press `Fn` to stop
+Create an `AGENTS.md` file:
 
-**SuperWhisper (macOS app):**
-1. Download from superwhisper.com
-2. Assign global hotkey
-3. Speak, release hotkey
-4. Text appears at cursor
+```markdown
+# Project context
+
+## Instructions
+- Follow AP style
+- Attribute all claims to named sources
+```
+
+### Aider — .aider.conventions.md
+
+Create a `.aider.conventions.md` file:
+
+```markdown
+# Conventions
+- AP style for all writing
+- Flag unverified claims
+```
+
+### Context file inheritance
+
+Claude Code looks for CLAUDE.md in the current directory and all parent directories. You can have:
+- A newsroom-wide file at the top level
+- A beat-specific file in a subdirectory
+- A personal file at `~/.claude/CLAUDE.md`
+
+All are merged, with more specific files taking precedence.
 
 ---
 

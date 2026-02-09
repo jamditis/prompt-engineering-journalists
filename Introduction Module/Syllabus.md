@@ -13,7 +13,7 @@
 
 This course is the sequel to Prompt Engineering 101 for Journalists. The 101 course taught you to use AI through web interfaces — writing prompts, understanding context windows, and working with tools like ChatGPT and Claude.ai. This course moves you from the browser to the terminal, where AI becomes programmable: scriptable, automatable, and integrated with your files and workflows.
 
-Each module builds on a concept from the 101 course and extends it: web prompting becomes CLI prompting, typing becomes speaking, one-off prompts become reusable skills, no-code automation becomes scripted pipelines, and conceptual understanding of AI becomes hands-on work with agents and RAG.
+Each module builds on a concept from the 101 course and extends it: web prompting becomes CLI prompting, typing context every time becomes writing it once in a file, one-off prompts become reusable skills, no-code automation becomes scripted pipelines, and conceptual understanding of AI becomes hands-on work with agents and RAG.
 
 ## Prerequisites
 
@@ -26,7 +26,7 @@ Each module builds on a concept from the 101 course and extends it: web promptin
 By the end of this course, students will be able to:
 
 1. Install and operate command-line AI tools, and explain the advantages of programmatic AI access over web interfaces
-2. Use voice dictation to control AI assistants, and evaluate transcription tools along a privacy gradient
+2. Write project context files (CLAUDE.md, GEMINI.md, AGENTS.md) and process journalism documents using CLI tools
 3. Create custom skills, hooks, and CLAUDE.md files that encode journalism expertise into reusable tools
 4. Build cost-conscious automation workflows with checkpointing, rate limiting, and multi-stage processing
 5. Configure retrieval-augmented generation pipelines that preserve source attribution
@@ -54,21 +54,21 @@ By the end of this course, students will be able to:
 
 ---
 
-### Module 2: Voice-controlled AI
+### Module 2: Prompting with files and project context
 
-**Focus:** Voice as a different thinking mode, not just a different input method
+**Focus:** Persistent context files and file-based journalism workflows
 
 **Topics:**
-- Raw mode vs. agent mode: two cognitive modes for voice input
-- The privacy gradient: OS dictation → local models → cloud APIs
-- Custom vocabulary for beat-specific terms
-- AudioBash and standalone transcription options
-- Voice workflows for reporting and terminal operation
+- The "fresh conversation" problem: why web chat context evaporates
+- Project context files: CLAUDE.md, GEMINI.md, AGENTS.md
+- What goes in a context file (beat knowledge, style, source standards, terminology)
+- The "deletion test" for context file content
+- Processing journalism documents (press releases, minutes, transcripts) from the filesystem
 
 **Activities:**
-- Required readings: AudioBash documentation, transcription API comparisons
-- Exercise: Set up voice input and dictate a story outline to Claude Code
-- Discussion: When voice works better than typing, and privacy tradeoffs
+- Required readings: Context file documentation for Claude Code, Gemini CLI, and Codex
+- Exercise: Set up a beat project, process documents with and without context, write a CLAUDE.md
+- Discussion: What would you put in a context file for your beat?
 - Quiz
 
 ---
@@ -81,7 +81,7 @@ By the end of this course, students will be able to:
 - The progression: ad-hoc prompts → saved prompts → skills → hooks → plugins
 - Writing SKILL.md files with YAML frontmatter
 - Hooks as non-blocking editorial quality checks
-- CLAUDE.md as project memory (the "deletion test")
+- Building on CLAUDE.md: from project context to reusable skills
 - Installing and using the journalism skills library (36 skills, 13 hooks)
 
 **Activities:**
@@ -144,7 +144,7 @@ By the end of this course, students will be able to:
 Each module includes a hands-on exercise. Exercises are graded on completion and demonstrated understanding. You must show your work: screenshots, code snippets, or command output.
 
 - Module 1: CLI tool installation and comparison (10%)
-- Module 2: Voice dictation exercise (10%)
+- Module 2: Context file and document processing exercise (10%)
 - Module 3: Custom skill creation (10%)
 - Module 4: Workflow automation (10%)
 - Module 5: RAG pipeline exercise (10%)
@@ -199,7 +199,6 @@ The following GitHub repositories are used throughout the course:
 
 - **Journalism skills library:** https://github.com/jamditis/claude-skills-journalism — 36 skills and 13 hooks for Claude Code, covering source verification, FOIA requests, data journalism, editorial workflows, and more. Used in Module 3.
 - **AI tools for newsrooms:** https://github.com/jamditis/tools — Guides, templates, and workflow examples for AI in journalism. Referenced across modules.
-- **AudioBash:** https://github.com/jamditis/audiobash — Voice-controlled terminal application for developers. Used in Module 2.
 - **Scrapefruit CLI:** https://github.com/jamditis/scrapefruit-cli — CLI tool for archiving complete web pages. Referenced in Module 4.
 
 ---
@@ -209,7 +208,7 @@ The following GitHub repositories are used throughout the course:
 | Week | Module | Main deliverable |
 |------|--------|------------------|
 | 1 | Escaping the chat window | CLI tool setup |
-| 2 | Voice-controlled AI | Voice dictation exercise |
+| 2 | Prompting with files and project context | Context file exercise |
 | 3 | Custom skills for Claude Code | Custom skill |
 | 4 | CLI workflows for newsrooms | Workflow automation |
 | 5 | Agents and RAG | Final project |

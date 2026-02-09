@@ -465,70 +465,61 @@ apt search package-name
 
 ---
 
-## Voice input issues
+## Context file issues
 
-### Microphone not detected
+### CLAUDE.md not being read
 
-**Symptom:** Voice input tool says no microphone found.
+**Symptom:** Claude Code ignores instructions in your CLAUDE.md file.
 
-**Cause:** Permissions not granted, or wrong input device.
-
-**Fix (macOS):**
-
-1. System Settings > Privacy & Security > Microphone
-2. Enable for Terminal (or your voice app)
-3. Test in System Settings > Sound > Input
-
-**Fix (Windows):**
-
-1. Settings > Privacy > Microphone
-2. Allow apps to access microphone
-3. Check input device in Settings > Sound
-
----
-
-### Transcription is inaccurate
-
-**Symptom:** Whisper or voice tool produces garbled text.
-
-**Cause:** Background noise, unclear speech, or wrong model.
+**Cause:** File is in the wrong directory, has the wrong filename, or contains syntax issues.
 
 **Fix:**
 
+1. Make sure the file is named exactly `CLAUDE.md` (case-sensitive on macOS/Linux)
+2. Make sure you're running `claude` from the same directory or a subdirectory
+3. Run `/config` inside Claude Code to see which files it loaded
+4. Check that the file is valid markdown (no encoding issues)
+
 ```bash
-# Use a better model (slower but more accurate)
-whisper audio.mp3 --model medium
-whisper audio.mp3 --model large
+# Verify the file exists in your project directory
+ls -la CLAUDE.md
 
-# Specify language if not English
-whisper audio.mp3 --language Spanish
-
-# Improve audio quality:
-# - Use a headset microphone
-# - Reduce background noise
-# - Speak clearly and at normal pace
+# Check if Claude Code sees it (inside a session)
+# Type: /config
 ```
 
 ---
 
-### Whisper API key errors
+### Context file not changing AI output
 
-**Symptom:** `AuthenticationError` when using OpenAI Whisper API.
+**Symptom:** You have a CLAUDE.md but the AI's responses look the same with or without it.
 
-**Cause:** Wrong or missing OpenAI API key.
+**Cause:** Instructions are too generic to affect output.
+
+**Fix:**
+
+Apply the deletion test. Replace vague instructions with specific ones:
+
+- Instead of "Be accurate" → "Flag any dollar amounts that differ between the press release and the council minutes"
+- Instead of "Follow AP style" → "Use 'council member,' not 'councilman.' Spell out numbers under 10. Use $2.3 million format."
+
+---
+
+### Context files conflicting across directories
+
+**Symptom:** Unexpected AI behavior when working in subdirectories.
+
+**Cause:** Claude Code merges CLAUDE.md files from the current directory and all parent directories. Conflicting instructions can cause confusion.
 
 **Fix:**
 
 ```bash
-# Set the correct key
-export OPENAI_API_KEY="sk-..."
+# Check all CLAUDE.md files in the path
+ls -la CLAUDE.md
+ls -la ../CLAUDE.md
+ls -la ../../CLAUDE.md
 
-# Verify it's set
-echo $OPENAI_API_KEY
-
-# Test with a small request
-curl https://api.openai.com/v1/models \
-  -H "Authorization: Bearer $OPENAI_API_KEY"
+# More specific (child) files take precedence over general (parent) files
 ```
 
 ---

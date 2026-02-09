@@ -136,11 +136,10 @@ Don't wait until Module 1 to troubleshoot. Installation issues are easier to sol
 
 ## Hardware recommendations
 
-Any computer from the last 5-6 years should work. For voice transcription (Module 2):
+Any computer from the last 5-6 years should work.
 
-- **Microphone:** Built-in laptop microphones work but external mics produce better results
-- **GPU (optional):** Local transcription with Whisper/Parakeet runs faster with a GPU, but cloud options work without one
-- **Internet connection:** Required for all cloud-based tools; stable connection recommended for voice features
+- **Storage:** You'll create project directories with journalism documents and context files. No special storage requirements beyond normal use.
+- **Internet connection:** Required for all cloud-based AI tools. A stable connection is recommended for interactive CLI sessions.
 
 ---
 
@@ -152,4 +151,4 @@ If you need accommodations for any course activities, contact the instructor. We
 - Alternative formats for video content
 - Modified participation requirements
 
-Voice input and terminal tools can be accessibility features themselves. Let us know if you'd like to explore these options.
+Terminal tools and text-based workflows can be accessibility features themselves. Let us know if you'd like to explore these options.

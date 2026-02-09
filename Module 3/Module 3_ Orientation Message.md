@@ -42,11 +42,11 @@ The instructor's journalism skills repository includes 13 hooks that check for c
 
 ---
 
-## CLAUDE.md as project memory
+## From context files to skills
 
-Beyond individual skills, there's another file worth understanding: `CLAUDE.md`. This file sits in your project directory and encodes tribal knowledge — the stuff that's hard to google. It tells Claude Code about your project's conventions, your newsroom's style preferences, your beat's terminology, and the decisions your team has already made.
+Last week you wrote a CLAUDE.md file to give the AI persistent context about your beat. That file changed how the AI responds to *every* prompt in your project. This week, you'll build on that with skills and hooks — reusable tools that you trigger on demand for specific tasks.
 
-A useful test for what belongs in a CLAUDE.md file: if an experienced journalist on your team would already know it, it probably doesn't need to be there. The file should capture the things a new person would need to learn, not the things everyone already knows. We call this the "deletion test" — if you can delete a line and nothing breaks for someone with domain expertise, that line was probably unnecessary.
+If CLAUDE.md is the AI reading your newsroom's style guide before starting work, a skill is the AI following a specific reporting checklist when you tell it to.
 
 ---
 

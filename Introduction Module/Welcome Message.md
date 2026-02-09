@@ -11,7 +11,7 @@ This course picks up where Prompt Engineering 101 left off. In the 101 course, y
 This course moves you past those walls. Each week builds on something you learned in the 101 course and extends it:
 
 - Web prompting becomes terminal prompting — where AI is programmable, not just interactive
-- Typing prompts becomes speaking prompts — using voice as a different way to think, not just a different way to type
+- Typing context every time becomes writing it once in a file — persistent project instructions that the AI follows automatically
 - Writing good prompts becomes encoding them as reusable skills — write it once, use it forever
 - No-code automation becomes scripted pipelines — with cost controls, checkpointing, and rate limiting
 - Understanding AI concepts becomes building with agents and RAG — where source attribution survives the process

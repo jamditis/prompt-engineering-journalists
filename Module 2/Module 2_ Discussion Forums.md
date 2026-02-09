@@ -1,33 +1,33 @@
 # Discussion forums
 
-## Module 2: Voice-controlled AI
+## Module 2: Prompting with files and project context
 
 ---
 
-### Discussion question 1: When would you use voice instead of typing?
+### Discussion question 1: What would you put in a context file for your beat?
 
-Think about your daily journalism work: researching, writing, editing, communicating with sources.
+Think about your current beat or area of coverage. If you were writing a CLAUDE.md file to configure an AI tool for your daily work, what would you include?
 
-In which situations could voice input be faster or more convenient than typing? In which situations would it be worse?
+Share 3-5 specific instructions you would add. For each one, explain why it matters — what would go wrong if the AI didn't have that instruction?
 
-Share at least one specific scenario where you think voice would help, and one where typing is clearly better. Explain your reasoning.
-
----
-
-### Discussion question 2: Privacy concerns with voice transcription
-
-Many voice transcription services send your audio to cloud servers for processing. For journalists, this raises questions about source protection and confidentiality.
-
-How do you think about the tradeoff between convenience (cloud transcription is often more accurate) and privacy (local transcription keeps audio on your machine)?
-
-Would your answer change depending on what you're transcribing? For example, a story outline vs. an interview with a confidential source?
+Apply the deletion test: would a reporter who already covers your beat need these instructions, or are they things only an outsider would need to be told?
 
 ---
 
-### Discussion question 3: Voice input accessibility
+### Discussion question 2: Compare your results with and without context
 
-Voice input was originally developed as an accessibility feature for people who cannot use a keyboard.
+In the exercise, you processed the same documents twice: once without a context file and once with it.
 
-Have you used voice control or dictation features before this course? If so, in what context?
+What changed? Pick one specific example where the with-context response was noticeably different from the without-context response. Describe the difference and explain which instruction in your context file caused it.
 
-How might newsrooms better support journalists who rely on voice input due to disability or injury? What barriers exist?
+If you didn't see much difference, explain why you think that happened. Was the context file too generic? Were the prompts already specific enough that context didn't matter?
+
+---
+
+### Discussion question 3: How could shared context files help a newsroom?
+
+Context files are just text files. They can be shared, version-controlled with Git, and maintained by a team.
+
+Imagine your newsroom created a shared CLAUDE.md that every reporter used. What would go in it? Who would maintain it? How would you handle disagreements about style or standards?
+
+What are the risks of a shared context file? Could it introduce bias or constrain reporters in unhelpful ways?

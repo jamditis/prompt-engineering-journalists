@@ -1,35 +1,29 @@
-# End of the week message
+# Module 2: Prompting with files and project context
 
-## Module 2: Voice-controlled AI
+## End of the week message
 
-Hello everyone,
+You made it through Week 2.
 
-Week 2 is wrapping up. Thank you for your participation in the discussion forums. The conversations about when voice input helps (and when it doesn't) have been useful.
+This week you learned the feature that justifies switching from web chat to CLI tools: persistent project context. Instead of re-explaining your beat, your style, and your standards in every conversation, you write them once in a file and the tool follows them automatically.
 
-### Key takeaways
+**What you learned:**
+- How context files work across tools (CLAUDE.md, GEMINI.md, AGENTS.md) and why they matter
+- The deletion test for deciding what belongs in a context file
+- How to process journalism documents directly from the filesystem
+- The difference context makes — same documents, different results
 
-1. **Voice input is a tool, not a replacement for typing.** Use it when it makes sense: brainstorming, drafting, multitasking. Type when precision matters.
+**Exercise reminder:** Your comparison writeup and CLAUDE.md file are due Sunday at 11:59pm. Submit your before/after comparison (300-500 words) along with the context file you wrote.
 
-2. **Transcription accuracy varies.** Cloud services like Gemini Flash are often more accurate than local options, but local transcription protects sensitive audio.
+**Next week:** Module 3 takes what you learned this week and makes it permanent. You wrote a CLAUDE.md file to give the AI project-level context. Next week, you'll learn to write *skills* — reusable slash commands that encode your journalism expertise into tools you can invoke on demand. If writing a context file felt useful, skills are the next step: instead of the AI passively reading your instructions, you actively trigger specific workflows with commands like `/source-verification` or `/foia-request`.
 
-3. **Raw mode vs. agent mode matters.** Raw mode transcribes exactly what you say. Agent mode interprets your speech as commands. Know which one you're using.
+The progression makes sense once you see it: first you used the tools (Module 1), then you taught the tools about your work (Module 2), and next you'll build custom tools on top of them (Module 3).
 
-4. **Practice helps.** Voice input feels awkward at first. It gets easier.
+**Checklist:**
+- [ ] Completed the hands-on exercise (before/after comparison)
+- [ ] Posted in at least one discussion forum
+- [ ] Responded to at least two classmates
+- [ ] Completed the quiz
 
-### Looking ahead to Module 3
+See you in Week 3.
 
-Next week we'll build on voice input by exploring multimodal prompting: using images, audio, and video with AI tools. If you struggled with voice transcription this week, don't worry. Module 3 doesn't require voice input.
-
-### Before you move on
-
-Make sure you've completed:
-
-- [ ] The hands-on exercise (dictating a story outline)
-- [ ] The discussion forum posts
-- [ ] The quiz
-
-If you're behind, you can catch up over the weekend. The materials will remain available.
-
-Thank you for your work this week.
-
-See you in Module 3.
+Joe Amditis
