@@ -20,4 +20,4 @@ Discussion posts are due Friday. The exercise submission (MCP configuration plus
 
 You're near the end. Keep going.
 
-[Instructor name]
+Joe Amditis

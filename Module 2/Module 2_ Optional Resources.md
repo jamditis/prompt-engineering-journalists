@@ -22,6 +22,15 @@ Documentation for Windows' built-in voice typing (Win+H). Works in any text fiel
 
 ---
 
+### Voice-to-terminal tools
+
+**AudioBash** by Joe Amditis
+https://audiobash.app
+
+The voice-controlled terminal used in this course. Features include split panes (up to 4 terminals), context-aware agent mode, custom vocabulary for newsroom-specific terms, preview pane for HTML/markdown, and CLI notifications. Active development with frequent releases. Windows and macOS.
+
+---
+
 ### Dictation tools for writers
 
 **"Otter.ai"**

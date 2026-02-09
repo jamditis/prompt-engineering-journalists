@@ -64,4 +64,4 @@ You might draw on your own newsroom's situation or experiences from earlier in t
 - Avoid generalizations like "AI will never..." or "AI will always..."
 - Ask follow-up questions of your classmates
 
-Posts are due by **[DATE]**. Responses are due by **[DATE]**.
+Posts are due by **end of the week**. Responses are due by **end of the week**.

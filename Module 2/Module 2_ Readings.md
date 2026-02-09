@@ -8,6 +8,13 @@ Please complete the following readings before the end of the week.
 
 ### Required readings
 
+**AudioBash documentation**
+https://github.com/jamditis/audiobash
+
+AudioBash is a voice-controlled terminal built for developers. Read the README to understand the two voice modes (raw and agent), the supported transcription engines (Gemini Flash, OpenAI Whisper, Windows Speech), and features like split panes and custom vocabulary. This is the primary voice tool for this module.
+
+---
+
 **"Using Voice Coding to Write Code Faster"** by Talon Voice Community
 https://talonvoice.com/
 
@@ -36,7 +43,7 @@ Gemini 2.0 and 2.5 Flash offer free-tier transcription. This quickstart shows ho
 
 ---
 
-**"Voice Interfaces Are Finally Ready"** by Benedict Evans
-https://www.ben-evans.com/
+**"Voice and the uncanny valley of AI"** by Benedict Evans
+https://www.ben-evans.com/benedictevans/2017/2/22/voice-and-the-uncanny-valley-of-ai
 
-Search for the author's writing on voice interfaces. Evans covers why voice technology stalled for years and what changed to make it practical.
+Evans examines why voice technology stalled for years and applies the "uncanny valley" concept to voice interfaces — improvements in technology can paradoxically create worse user experiences until a threshold is crossed. A useful framing for understanding why voice-to-terminal tools are only now becoming practical.

@@ -6,6 +6,22 @@ These materials go deeper into topics from this week. Use them if you want to ex
 
 ---
 
+## Instructor tools and templates
+
+### AI tools and guides for newsrooms
+**jamditis/tools** by Joe Amditis
+https://github.com/jamditis/tools
+
+The instructor's repository of AI tools and guides built for newsrooms. Includes terminal setup guides, workflow templates, and working examples of the kinds of pipelines covered in this module. A good starting point if you want to see how the concepts from this week look in practice.
+
+### scrapefruit-cli
+**jamditis/scrapefruit-cli** by Joe Amditis
+https://github.com/jamditis/scrapefruit-cli
+
+A CLI tool for archiving complete web pages — HTML, assets, and metadata. Useful for preserving source material before it changes or disappears. Pairs well with the pipelines from this week's exercise: archive first, then process.
+
+---
+
 ## Shell scripting tutorials
 
 ### Bash scripting for beginners
@@ -53,7 +69,7 @@ Official documentation for using Claude from the command line.
 ### Ollama (local AI)
 https://ollama.ai/
 
-Run AI models locally on your machine. Useful when you don't want to send content to external APIs.
+Run AI models locally on your machine. Useful for validating inputs before sending them to paid APIs, or when you don't want to send content to external services.
 
 ### LLM CLI by Simon Willison
 https://llm.datasette.io/

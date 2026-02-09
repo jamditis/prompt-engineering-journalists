@@ -11,16 +11,59 @@ In this exercise, you'll install two journalism skills and use one to verify a v
 
 ## Part 1: Install the journalism skills (20 minutes)
 
-### Step 1: Clone the skills repository
+The instructor's journalism skills repository is available as a Claude Code plugin. This is the recommended installation method — it keeps skills up to date and installs everything (36 skills and 13 hooks) in one step. A manual fallback is included below if the plugin method doesn't work for your setup.
+
+### Option A: Install as a plugin (recommended)
+
+#### Step 1: Add the plugin
+
+Open Claude Code in your terminal:
+
+```bash
+claude
+```
+
+Then run the following slash command to install the skills repository as a plugin:
+
+```
+/install-github-plugin https://github.com/jamditis/claude-skills-journalism.git
+```
+
+Claude Code will clone the repository and register its skills automatically. You'll be prompted to confirm the installation.
+
+#### Step 2: Verify installation
+
+After installation, type:
+
+```
+/source-verification
+```
+
+You should see Claude acknowledge the skill and be ready to apply it.
+
+#### Step 3: Review a skill's structure
+
+Before using the skill, take a minute to understand what you installed. Find the plugin directory (Claude Code will tell you where it cloned the repo) and open the `source-verification/SKILL.md` file in your editor. Note:
+- The YAML frontmatter at the top (name, description)
+- The step-by-step instructions for the SIFT method
+- Any examples or templates included
+
+This is what Claude reads when you invoke `/source-verification`. A skill is just a markdown file with structured instructions — there's no magic here, just well-organized prompts.
+
+### Option B: Manual installation (fallback)
+
+If the plugin method doesn't work, you can install skills manually by cloning the repo and copying files.
+
+#### Step 1: Clone the skills repository
 
 Open your terminal and clone the instructor's skills repository:
 
 ```bash
-git clone https://github.com/[instructor-repo]/claude-skills-journalism.git
+git clone https://github.com/jamditis/claude-skills-journalism.git
 cd claude-skills-journalism
 ```
 
-### Step 2: Review the skill structure
+#### Step 2: Review the skill structure
 
 Look at the source-verification skill:
 
@@ -32,14 +75,9 @@ You should see:
 - `SKILL.md` — The main instruction file
 - `examples/` — Sample verification scenarios (if present)
 
-Open `SKILL.md` in your editor and note:
-- The YAML frontmatter at the top (name, description)
-- The step-by-step instructions for the SIFT method
-- Any examples or templates included
+Open `SKILL.md` in your editor and review the YAML frontmatter, the SIFT method instructions, and any included examples.
 
-### Step 3: Install skills to your personal commands directory
-
-Copy the skills to your Claude commands folder:
+#### Step 3: Copy skills to your commands directory
 
 ```bash
 # Create the commands directory if it doesn't exist
@@ -52,7 +90,7 @@ cp -r source-verification ~/.claude/commands/
 cp -r foia-requests ~/.claude/commands/
 ```
 
-### Step 4: Verify installation
+#### Step 4: Verify installation
 
 Start Claude Code and check that the skills are available:
 

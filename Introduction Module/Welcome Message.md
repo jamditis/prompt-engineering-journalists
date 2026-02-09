@@ -6,19 +6,15 @@ Welcome to Advanced Prompt Engineering for Journalists. I'm Joe Amditis, Associa
 
 ### About this course
 
-This course picks up where Prompt Engineering 101 left off. If you've been using ChatGPT or Claude through a web browser, you already know how useful AI can be for journalism. But you've also hit the walls: clunky file uploads, no way to process folders of documents, and a lot of copy-pasting.
+This course picks up where Prompt Engineering 101 left off. In the 101 course, you learned to write effective prompts through web interfaces — ChatGPT, Claude.ai, Gemini. You got good at it. But you also hit the walls: uploading files one at a time, copying and pasting output, no way to process a folder of documents, and starting from scratch every session.
 
-We're going to break through those walls.
+This course moves you past those walls. Each week builds on something you learned in the 101 course and extends it:
 
-Over five weeks, you'll learn to run AI tools directly from your computer's terminal. This means working with your files where they live, automating repetitive tasks, and building custom tools tailored to journalism workflows.
-
-By the end of this course, you will be able to:
-
-- Install and use multiple command-line AI tools
-- Control AI assistants with your voice
-- Create custom Claude Code skills for journalism tasks
-- Build automation workflows for newsroom operations
-- Understand how agents and retrieval-augmented generation (RAG) work
+- Web prompting becomes terminal prompting — where AI is programmable, not just interactive
+- Typing prompts becomes speaking prompts — using voice as a different way to think, not just a different way to type
+- Writing good prompts becomes encoding them as reusable skills — write it once, use it forever
+- No-code automation becomes scripted pipelines — with cost controls, checkpointing, and rate limiting
+- Understanding AI concepts becomes building with agents and RAG — where source attribution survives the process
 
 ### About your instructor
 

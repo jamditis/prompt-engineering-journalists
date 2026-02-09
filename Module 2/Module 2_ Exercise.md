@@ -6,35 +6,39 @@ This hands-on exercise walks you through setting up voice input on your computer
 
 ---
 
-## Part 1: Choose your transcription tool
+## Part 1: Choose your voice tool
 
 Pick one of the following options based on your operating system and preferences.
 
-### Option A: Windows voice typing (easiest, Windows only)
+### Option A: AudioBash (recommended)
+
+AudioBash is a voice-controlled terminal. Instead of recording, copying, and pasting, you speak directly into the terminal.
+
+1. Download AudioBash from https://github.com/jamditis/audiobash/releases (Windows .exe or macOS .dmg)
+2. Run the installer
+3. Set up a transcription engine:
+   - **Gemini Flash** (recommended): Get a free API key from https://aistudio.google.com/
+   - **Windows Speech**: Works immediately with no setup
+4. Open AudioBash — it's a full terminal with voice input built in
+5. Press the record button or use the hotkey to speak
+
+AudioBash supports agent mode, which converts natural speech like "show me the git status" into actual commands.
+
+### Option B: Windows voice typing (simplest, no install)
 
 1. Open any text field (Notepad, a browser, etc.)
 2. Press **Win+H** to activate voice typing
 3. Speak and watch your words appear
 4. Press Win+H again to stop
 
-No setup required. Works immediately.
+No setup required. Works immediately, but you'll need to copy-paste into your terminal.
 
-### Option B: macOS dictation (easiest, Mac only)
+### Option C: macOS dictation (simplest, Mac only)
 
 1. Go to **System Settings > Keyboard > Dictation**
 2. Turn on Dictation
 3. Choose your preferred shortcut (default: press Control key twice)
 4. Open any text field and use the shortcut to start dictating
-
-### Option C: Gemini Flash API (free, any platform)
-
-1. Go to https://aistudio.google.com/
-2. Sign in with a Google account
-3. Click "Get API key" and create a key
-4. Save the key somewhere secure
-5. Use a tool that supports Gemini for transcription (e.g., AudioBash, or build your own with the API)
-
-This option requires more setup but works on any platform and offers high accuracy.
 
 ### Option D: Local Whisper (offline, any platform)
 

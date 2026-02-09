@@ -30,23 +30,23 @@ How language models learn to call external APIs and tools. Useful background for
 
 ## Case studies and industry reports
 
-**"AI in the newsroom: A survey of 100 news organizations"**
-Reuters Institute, 2025
-[Link to be added by instructor]
+**"Generative AI and news report 2025: How people think about AI's role in journalism and society"**
+Reuters Institute for the Study of Journalism, October 2025
+https://reutersinstitute.politics.ox.ac.uk/generative-ai-and-news-report-2025-how-people-think-about-ais-role-journalism-and-society
 
-Survey data on how newsrooms are adopting AI tools, including agent-based systems. Good for benchmarking and understanding industry-wide patterns.
+Survey data on how newsrooms and audiences are engaging with AI tools. Good for benchmarking and understanding industry-wide patterns.
 
 **"The Jay Rosen Digital Archive: AI enrichment and knowledge graphs"**
-Project documentation (launching February 2026)
-[Link to be added by instructor]
+Project documentation
+https://github.com/jamditis/rosen-scraper
 
-Your instructor's project applying entity extraction and RAG to a journalism archive. Shows how these techniques work with primary source materials.
+Your instructor's project applying entity extraction and RAG to a journalism archive of 765+ records. Shows how these techniques work with primary source materials, including entity extraction with the Gemini API and Google Sheets integration.
 
-**"Geneea: Building a RAG research assistant for newsrooms"**
-Company whitepaper
-[Link to be added by instructor]
+**"Geneea Newsroom Assistant"**
+Geneea product documentation
+https://geneea.com/assistant/
 
-Technical details on implementing RAG for news archives, including chunking strategies, embedding models, and retrieval optimization.
+Technical details on implementing RAG for news archives, including how their system handles chunking, retrieval, and source attribution for newsroom search.
 
 ---
 
@@ -74,16 +74,17 @@ RAG systems use vector databases to find relevant documents. This explains how s
 
 ## Podcasts and videos
 
-**"How the Washington Post built Haystacker"**
-[Podcast/video link to be added by instructor]
+**"New Washington Post AI tool sifts massive data sets"**
+Axios, August 2024
+https://www.axios.com/2024/08/20/washington-post-ai-tool-data
 
-Interview with the engineering team behind the Post's investigative AI tool.
+Reporting on Haystacker, the Post's internal AI tool for investigative journalism. Covers how the engineering team built it and how reporters use it.
 
-**"The future of AI agents in journalism"**
-Online News Association conference, 2025
-[Link to be added by instructor]
+**"Journalism, media, and technology trends and predictions 2026"**
+Reuters Institute, January 2026
+https://reutersinstitute.politics.ox.ac.uk/journalism-media-and-technology-trends-and-predictions-2026
 
-Panel discussion featuring editors from several newsrooms using agent-based tools.
+Annual forecast covering AI adoption in newsrooms, including agent-based tools and automation trends across the industry.
 
 ---
 

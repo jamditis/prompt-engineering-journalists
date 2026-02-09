@@ -9,26 +9,33 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Instructor:** Joe Amditis, Center for Cooperative Media, Montclair State University
 **Prerequisite:** Prompt Engineering 101 for Journalists (or equivalent)
 
-This course moves journalists from web-based AI chat interfaces to terminal CLI tools: Claude Code, Gemini CLI, Codex CLI, and Aider.
+This is the sequel to Prompt Engineering 101 for Journalists. It moves journalists from web-based AI chat interfaces to terminal CLI tools: Claude Code, Gemini CLI, and Aider. Each module extends a concept from the 101 course: web prompting → CLI, typing → voice, one-off prompts → reusable skills, no-code automation → scripted pipelines, understanding AI → building with agents and RAG.
 
 ## Structure
 
 ```
-mooc/
 ├── Introduction Module/     # Welcome, syllabus, requirements, getting help
-├── Module 1/                # Escaping the chat window (CLI basics)
-├── Module 2/                # Voice-controlled AI
-├── Module 3/                # Custom skills for Claude Code
-├── Module 4/                # CLI workflows for newsrooms
-├── Module 5/                # Agents and RAG
+├── Module 1/                # Escaping the chat window (programmatic AI control)
+├── Module 2/                # Voice-controlled AI (raw vs agent mode, privacy gradient)
+├── Module 3/                # Custom skills (domain expertise → reusable tools, hooks)
+├── Module 4/                # CLI workflows (Unix philosophy, cost-conscious pipelines)
+├── Module 5/                # Agents and RAG (grounded knowledge, source attribution)
 ├── Final Project/           # Guidelines, proposal template, examples
 ├── Resources/
 │   ├── examples/            # Sample files for exercises
 │   ├── scripts/             # Starter shell scripts
 │   ├── skills/              # Example Claude skills
 │   └── mcp-configs/         # MCP configuration examples
-└── [Original .docx templates]
+├── docs/                    # Course website (GitHub Pages)
+└── [Original .docx templates from Knight Center]
 ```
+
+## Key course repositories
+
+- **Journalism skills:** https://github.com/jamditis/claude-skills-journalism (36 skills, 13 hooks)
+- **AI tools for newsrooms:** https://github.com/jamditis/tools
+- **AudioBash:** https://github.com/jamditis/audiobash
+- **Scrapefruit CLI:** https://github.com/jamditis/scrapefruit-cli
 
 ## Module content pattern
 

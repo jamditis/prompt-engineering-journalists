@@ -18,4 +18,4 @@ Discussion posts are due Friday. The "what skills does your newsroom need" threa
 
 The goal this week is to shift from one-off prompts to reusable workflows. Once you've verified one claim using the skill, you'll see how much easier it is than explaining SIFT from scratch every time.
 
-[Instructor name]
+Joe Amditis

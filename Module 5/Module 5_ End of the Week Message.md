@@ -22,4 +22,4 @@ Over five weeks you moved from browser-based prompting to building automated pip
 
 Thank you for your work this term.
 
-[Instructor name]
+Joe Amditis

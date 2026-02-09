@@ -8,24 +8,24 @@ Complete these readings before the discussion forum and quiz.
 
 ### 1. Agentic AI in newsrooms
 
-**"The Washington Post's Haystacker: How AI agents are reshaping investigative journalism"**
-Nieman Lab, August 2025
-[Link to be added by instructor]
+**"New Washington Post AI tool sifts massive data sets"**
+Axios, August 2024
+https://www.axios.com/2024/08/20/washington-post-ai-tool-data
 
 *Reading time: 12 minutes*
 
-This article examines the Post's internal tool that analyzes video, photos, and text across large document sets. Pay attention to:
+This article examines the Post's internal tool, Haystacker, which analyzes video, photos, and text across large document sets. Pay attention to:
 - How the system handles multi-step research tasks
 - The role of human editors in reviewing agent outputs
 - Privacy and verification protocols
 
-**"Inside the New York Times's 'Echo' system"**
+**"The New York Times will let reporters use AI tools while its lawyers litigate AI tools"**
 Nieman Lab, February 2025
-[Link to be added by instructor]
+https://www.niemanlab.org/2025/02/the-new-york-times-will-let-reporters-use-ai-tools-while-its-lawyers-litigate-ai-tools/
 
 *Reading time: 10 minutes*
 
-The Times built Echo to assist with article summarization, SEO headline generation, and newsletter drafting. Note:
+The Times built an internal tool called Echo for article summarization, SEO headline generation, and newsletter drafting. Note:
 - Which tasks the system handles automatically vs. with human review
 - How editors describe changes to their workflow
 - Concerns raised by newsroom staff
@@ -45,9 +45,9 @@ A technical but accessible explanation of how RAG works. Focus on:
 - Why RAG reduces hallucination
 - The difference between parametric knowledge (in the model) and non-parametric knowledge (retrieved)
 
-**"RAG for journalism: Searching archives with source attribution"**
-Geneea case study
-[Link to be added by instructor]
+**"Newsrooms can save thousands of hours with a RAG-based AI research system"**
+Geneea News, April 2025
+https://geneea.com/news/newsrooms-can-save-thousands-of-hours-with-a-rag-based-ai-research-system
 
 *Reading time: 10 minutes*
 

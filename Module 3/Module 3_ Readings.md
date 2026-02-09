@@ -28,25 +28,39 @@ This documentation explains how Claude Code loads and executes custom commands. 
 ### Reading 2: Journalism skills repository overview
 
 **Source:** Instructor's GitHub repository
-**URL:** [Provided in course materials]
+**URL:** https://github.com/jamditis/claude-skills-journalism
 **Time:** 20 minutes
 
-Review the README and browse the skill directories. The repository contains 14 skills organized into categories:
+Review the README and browse the skill directories. The repository contains 36 skills, 13 hooks, and a plugin organized into categories:
 
-**Journalism and media skills:**
+**Journalism and media skills (11 skills):**
 - `source-verification/` — SIFT method for checking claims
-- `foia-requests/` — Drafting public records requests
+- `foia-requests/` — Drafting public records requests with 50-state reference
 - `data-journalism/` — Data analysis and visualization workflows
-- `web-scraping/` — Collecting web content for research
+- `fact-check-workflow/` — Claim extraction, evidence gathering, rating scales
+- `interview-prep/` — Pre-interview research and question frameworks
+- `interview-transcription/` — Recording workflows and quote management
+- `story-pitch/` — Pitch templates for daily news, features, investigations
+- `editorial-workflow/` — Story assignment tracking and deadline management
+- `crisis-communications/` — Breaking news protocol and rapid verification
+- `social-media-intelligence/` — Multi-platform monitoring and account analysis
+- `web-scraping/` — Content extraction for research
 
-**Academic and research skills:**
-- `academic-writing/` — Scholarly communication patterns
-- `digital-archive/` — Archiving with AI enrichment
+**Writing and quality skills:**
+- `newsroom-style/` — AP Style enforcement and attribution rules
+- `ai-writing-detox/` — Detecting and removing AI-generated filler language
+- `newsletter-publishing/` — Email newsletter creation and management
+
+**Hooks (13 automated checks):**
+- `ap-style-check` — Flags AP Style violations after edits
+- `ai-slop-detector` — Scans for banned AI filler words and phrases
+- `source-attribution-check` — Flags unattributed quotes and statistics
+- And 10 more covering accessibility, data methodology, legal review, and pre-publish checklists
 
 **Focus on these files:**
-- Each skill's `SKILL.md` — Note the structure and instruction style
-- The `examples/` directories — See how skills handle real scenarios
-- Any `templates/` directories — Pre-built formats for common tasks
+- Each skill's `SKILL.md` — Note the YAML frontmatter and instruction style
+- The `hooks/` directory — See how automated checks work
+- The skill descriptions — These tell Claude when to activate each skill
 
 ---
 

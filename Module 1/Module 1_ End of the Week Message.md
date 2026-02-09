@@ -19,4 +19,4 @@ If you struggled this week, you're not alone. The command line has a learning cu
 
 See you in Week 2.
 
-[Instructor name]
+Joe Amditis
