@@ -1,0 +1,37 @@
+# Advanced Prompt Engineering for Journalists
+
+> A free 5-week online course from the Knight Center for Journalism in the Americas, taught by Joe Amditis. Moves journalists from chat-based AI to command-line coding assistants: Claude Code, Gemini CLI, and Codex.
+
+## Course details
+
+- Instructor: Joe Amditis, Center for Cooperative Media, Montclair State University
+- Institution: Knight Center for Journalism in the Americas, UT Austin
+- Format: Free online MOOC, 5 weeks
+- Prerequisite: Prompt Engineering 101 for Journalists (or equivalent)
+- URL: https://jamditis.github.io/prompt-engineering-journalists/
+
+## Modules
+
+- Module 1: Escaping the chat window — Programmatic AI control via terminal CLI tools
+- Module 2: Prompting with files — Project context files (CLAUDE.md, GEMINI.md, AGENTS.md)
+- Module 3: Custom skills — Turning domain expertise into reusable AI tools and hooks
+- Module 4: CLI workflows — Unix philosophy, cost-conscious pipelines, batch processing
+- Module 5: Agents and RAG — Grounded knowledge, source attribution, autonomous workflows
+
+## Tools covered
+
+- Claude Code (Anthropic) — npm install -g @anthropic-ai/claude-code
+- Gemini CLI (Google) — npm install -g @google/gemini-cli
+- Codex CLI (OpenAI) — npm install -g @openai/codex
+- Aider — pip install aider-chat
+- Context files: CLAUDE.md, GEMINI.md, AGENTS.md
+
+## Key concept
+
+"Vibe coding" is using AI coding assistants to build software by describing what you want in plain language. The AI writes the code; you guide the process through iterative prompting. This course teaches journalists how to move from basic chat prompting to building real tools with AI assistance.
+
+## Related resources
+
+- AI tools for newsrooms: https://tools.amditis.tech
+- Claude skills for journalism: https://github.com/jamditis/claude-skills-journalism
+- Center for Cooperative Media: https://centerforcooperativemedia.org

@@ -1,0 +1,26 @@
+# Robots.txt for Advanced Prompt Engineering for Journalists
+# https://jamditis.github.io/prompt-engineering-journalists/
+
+User-agent: *
+Allow: /
+
+# AI search bots: welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://jamditis.github.io/prompt-engineering-journalists/sitemap.xml

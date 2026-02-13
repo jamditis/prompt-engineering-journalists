@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="8" fill="#0a0a0a"/>
+  <text x="10" y="26" font-family="monospace" font-size="14" font-weight="bold" fill="#39ff14">&gt;_</text>
+  <text x="10" y="44" font-family="monospace" font-size="11" fill="#888">PE//</text>
+  <rect x="10" y="50" width="30" height="2" rx="1" fill="#39ff14" opacity="0.6"/>
+</svg>
