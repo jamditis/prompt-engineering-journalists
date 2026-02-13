@@ -1,12 +1,12 @@
 # Advanced Prompt Engineering for Journalists
 
-> A free 5-week online course from the Knight Center for Journalism in the Americas, taught by Joe Amditis. Moves journalists from chat-based AI to command-line coding assistants: Claude Code, Gemini CLI, and Codex.
+> A 5-week online course from the Knight Center for Journalism in the Americas, taught by Joe Amditis. Moves journalists from chat-based AI to command-line coding assistants: Claude Code, Gemini CLI, and Codex.
 
 ## Course details
 
 - Instructor: Joe Amditis, Center for Cooperative Media, Montclair State University
 - Institution: Knight Center for Journalism in the Americas, UT Austin
-- Format: Free online MOOC, 5 weeks
+- Format: Online MOOC, 5 weeks (paid)
 - Prerequisite: Prompt Engineering 101 for Journalists (or equivalent)
 - URL: https://jamditis.github.io/prompt-engineering-journalists/
 
