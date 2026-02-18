@@ -25,7 +25,8 @@ This is the sequel to Prompt Engineering 101 for Journalists. It moves journalis
 │   ├── examples/            # Sample files for exercises
 │   ├── scripts/             # Starter shell scripts
 │   ├── skills/              # Example Claude skills
-│   └── mcp-configs/         # MCP configuration examples
+│   ├── mcp-configs/         # MCP configuration examples
+│   └── mollick-reading-list.md  # Curated Ethan Mollick articles by theme (referenced from Module 1 Optional Resources)
 ├── docs/                    # Course website (GitHub Pages)
 └── [Original .docx templates from Knight Center]
 ```
@@ -79,6 +80,24 @@ Each module contains 8 markdown documents:
 
 - Content is markdown, ready for conversion to .docx or LMS upload
 - Original Knight Center .docx templates preserved for reference
+- All content uses LLM-first framing: exercises describe a workflow to hand to an LLM, not step-by-step technical instructions students follow manually
+- Aider has been removed from all content — tools are Claude Code, Gemini CLI, and Codex CLI only
+
+## Current state (as of Feb 2026)
+
+All 5 modules + Introduction module have complete 8-document sets. Readings are populated across all modules with required articles added and Mollick synthesis document created.
+
+### Readings pool — key sources added
+- **Ethan Mollick** (One Useful Thing): ~15 articles synthesized in `Resources/mollick-reading-list.md`; two pieces assigned as required readings (intro + module 1)
+- **Generative AI in the Newsroom** (generative-ai-newsroom.com): Nick Hagar (coding agents, beat reporting), Clare Spencer (multilingual newsrooms), Joe Amditis (vibe coding), Jessy de Cooker (quote extraction)
+- **Joe Amditis** (925 Struggle Street Substack): agent architecture piece assigned to modules 2 and 5
+- **Author diversity**: Clare Spencer, Jessy de Cooker included; agent research targeted Vicki Boykis, Hilke Schellmann, Meredith Broussard, Rachel Thomas, Joy Buolamwini, Rumman Chowdhury
+
+### Pending work
+- **Optional resources readings**: Willison "Claude Skills are awesome" (Oct 2025), Doctorow skeptical AI piece (Sep 2025), Jesse Vincent "Superpowers" (Oct 2025) — bookmarked candidates not yet added to optional resources files
+- **URL verification**: existing reading URLs across all modules have not been verified as live
+- **Exercise solution keys**: grader model answers not yet written for any module
+- **Syllabus sync**: `SYLLABUS.md` (root) and `Introduction Module/Syllabus.md` are separate files that may have drifted out of sync
 
 # AI Writing Guidelines: Avoiding Slop Phrases
 Use this file as a reference when reviewing AI-generated content. These patterns indicate lazy, filler writing that should be edited or avoided.
