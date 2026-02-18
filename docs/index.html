@@ -187,9 +187,9 @@
                         </div>
                         <div class="p-6">
                             <div class="text-xs text-acid font-mono mb-3">:: MODULE_02</div>
-                            <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-acid transition-colors">Writing effective prompts</h3>
+                            <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-acid transition-colors">Prompting with files and project context</h3>
                             <p class="text-sm text-gray-500 font-mono leading-relaxed">
-                                Structure prompts for code generation. Learn to provide context, specify constraints, and iterate.
+                                Write context files (CLAUDE.md) that persist across sessions. Use Git for version control of your AI-assisted work.
                             </p>
                         </div>
                         <div class="bg-void px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-600 group-hover:text-acid transition-colors">
@@ -205,9 +205,9 @@
                         </div>
                         <div class="p-6">
                             <div class="text-xs text-acid font-mono mb-3">:: MODULE_03</div>
-                            <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-acid transition-colors">Working with your codebase</h3>
+                            <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-acid transition-colors">Custom skills for Claude Code</h3>
                             <p class="text-sm text-gray-500 font-mono leading-relaxed">
-                                Navigate and modify existing projects. Edit files, refactor code, and maintain version control.
+                                Package domain expertise into reusable slash commands. Write skills for source verification, FOIA requests, and beat-specific workflows.
                             </p>
                         </div>
                         <div class="bg-void px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-600 group-hover:text-acid transition-colors">
@@ -223,9 +223,9 @@
                         </div>
                         <div class="p-6">
                             <div class="text-xs text-acid font-mono mb-3">:: MODULE_04</div>
-                            <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-acid transition-colors">Building journalism tools</h3>
+                            <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-acid transition-colors">CLI workflows for newsrooms</h3>
                             <p class="text-sm text-gray-500 font-mono leading-relaxed">
-                                Scrape public data, clean datasets, generate visualizations, and automate routine tasks.
+                                Build shell pipelines for data journalism. Automate scraping, cleaning, and summarization into cost-conscious, repeatable workflows.
                             </p>
                         </div>
                         <div class="bg-void px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-600 group-hover:text-acid transition-colors">
@@ -241,9 +241,9 @@
                         </div>
                         <div class="p-6">
                             <div class="text-xs text-acid font-mono mb-3">:: MODULE_05</div>
-                            <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-acid transition-colors">Final project</h3>
+                            <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-acid transition-colors">Agents and RAG</h3>
                             <p class="text-sm text-gray-500 font-mono leading-relaxed">
-                                Build a complete tool for your newsroom. Document your process and share your work.
+                                Give Claude access to your documents via MCP. Build grounded, source-attributed systems that don't hallucinate facts.
                             </p>
                         </div>
                         <div class="bg-void px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-600 group-hover:text-acid transition-colors">
@@ -300,8 +300,8 @@
                                 Pick one to start. Gemini CLI is free and works well for beginners.
                             </p>
                             <div class="bg-surface border border-white/10 p-4 font-mono text-sm space-y-2">
-                                <div><span class="text-gray-600">$</span> <span class="text-chrome">npm install -g @anthropic-ai/claude-code</span></div>
-                                <div><span class="text-gray-600"># or</span></div>
+                                <div><span class="text-gray-600">$</span> <span class="text-chrome">curl -fsSL https://claude.ai/install.sh | sh</span></div>
+                                <div><span class="text-gray-600"># or Gemini</span></div>
                                 <div><span class="text-gray-600">$</span> <span class="text-chrome">npm install -g @google/gemini-cli</span></div>
                             </div>
                         </div>
@@ -338,13 +338,13 @@
                 </div>
 
                 <p class="font-mono text-gray-500 mb-12 max-w-2xl">
-                    We focus on four AI coding assistants. You only need one to complete the course.
+                    We cover three CLI tools. You only need one to complete the course.
                 </p>
 
                 <!-- Tool cards grid -->
                 <div class="grid gap-4 md:grid-cols-2">
                     <!-- Claude Code -->
-                    <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer" class="group block border border-white/10 bg-surface hover:border-ice transition-all duration-300 relative overflow-hidden">
+                    <a href="https://code.claude.com/docs" target="_blank" rel="noopener noreferrer" class="group block border border-white/10 bg-surface hover:border-ice transition-all duration-300 relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-4 opacity-30 group-hover:opacity-100 transition-opacity text-ice">
                             <i data-lucide="sparkles" class="w-8 h-8"></i>
                         </div>
@@ -379,28 +379,6 @@
                             <div class="inline-flex items-center gap-2 text-xs font-mono text-acid">
                                 <i data-lucide="check-circle" class="w-3 h-3"></i>
                                 Free tier with Google account
-                            </div>
-                        </div>
-                        <div class="bg-void px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-600 group-hover:text-ice transition-colors">
-                            <span>VIEW_DOCS</span>
-                            <i data-lucide="external-link" class="w-3 h-3"></i>
-                        </div>
-                    </a>
-
-                    <!-- Aider -->
-                    <a href="https://aider.chat" target="_blank" rel="noopener noreferrer" class="group block border border-white/10 bg-surface hover:border-ice transition-all duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 p-4 opacity-30 group-hover:opacity-100 transition-opacity text-ice">
-                            <i data-lucide="git-branch" class="w-8 h-8"></i>
-                        </div>
-                        <div class="p-6">
-                            <div class="text-xs text-ice font-mono mb-3">:: OPEN_SOURCE</div>
-                            <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-ice transition-colors">Aider</h3>
-                            <p class="text-sm text-gray-500 font-mono leading-relaxed mb-4">
-                                Open-source pair programming tool. Works with multiple AI providers. Excellent Git integration.
-                            </p>
-                            <div class="inline-flex items-center gap-2 text-xs font-mono text-gray-600">
-                                <i data-lucide="code-2" class="w-3 h-3"></i>
-                                Bring your own API key
                             </div>
                         </div>
                         <div class="bg-void px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-600 group-hover:text-ice transition-colors">
@@ -451,7 +429,7 @@
                 </p>
 
                 <!-- Resource cards -->
-                <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                     <!-- Quick Reference -->
                     <a href="templates/quick-reference.html" class="group block border border-white/10 bg-panel hover:border-acid transition-all duration-300">
                         <div class="p-6">
@@ -491,8 +469,21 @@
                         </div>
                     </a>
 
+                    <!-- Course Review -->
+                    <a href="review.html" class="group block border border-white/10 bg-panel hover:border-acid transition-all duration-300">
+                        <div class="p-6">
+                            <div class="w-12 h-12 bg-surface border border-white/10 flex items-center justify-center mb-4 group-hover:border-acid transition-colors">
+                                <i data-lucide="layout-list" class="w-6 h-6 text-gray-600 group-hover:text-acid transition-colors"></i>
+                            </div>
+                            <h3 class="font-display text-lg text-white font-bold mb-2 group-hover:text-acid transition-colors">Course review</h3>
+                            <p class="text-sm text-gray-600 font-mono">
+                                Browse all course materials in one place.
+                            </p>
+                        </div>
+                    </a>
+
                     <!-- GitHub Repo -->
-                    <a href="https://github.com/joeamditis/mooc-prompt-engineering" target="_blank" rel="noopener noreferrer" class="group block border border-white/10 bg-panel hover:border-acid transition-all duration-300">
+                    <a href="https://github.com/jamditis/prompt-engineering-journalists" target="_blank" rel="noopener noreferrer" class="group block border border-white/10 bg-panel hover:border-acid transition-all duration-300">
                         <div class="p-6">
                             <div class="w-12 h-12 bg-surface border border-white/10 flex items-center justify-center mb-4 group-hover:border-acid transition-colors">
                                 <i data-lucide="github" class="w-6 h-6 text-gray-600 group-hover:text-acid transition-colors"></i>
@@ -542,7 +533,7 @@
             <!-- Copyright bar -->
             <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
                 <p class="font-mono text-xs text-gray-600">
-                    &copy; 2025 Knight Center for Journalism in the Americas
+                    &copy; 2026 Knight Center for Journalism in the Americas
                 </p>
                 <div class="flex items-center gap-4">
                     <span class="font-mono text-xs text-gray-700">SYSTEM_STATUS:</span>

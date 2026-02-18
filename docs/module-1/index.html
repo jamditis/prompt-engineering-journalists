@@ -135,7 +135,7 @@ npm --version</code></pre>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">npm install -g @anthropic-ai/claude-code</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">curl -fsSL https://claude.ai/install.sh | sh</code></pre>
                     </div>
                     <p class="text-gray-400 text-sm mb-4">Then authenticate with your Anthropic account:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
@@ -246,7 +246,7 @@ The city council voted 5-2 yesterday to approve a $2.3 million budget for road r
                 </div>
                 <div class="border border-white/10 bg-panel p-6">
                     <ul class="space-y-3 text-sm font-mono">
-                        <li><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-400">Claude Code documentation - Official setup guide and command reference</span></li>
+                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-400">Claude Code documentation - Official setup guide and command reference</span></li>
                         <li><a href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-400">Introduction to Node.js - Background on the runtime</span></li>
                         <li><a href="https://www.codecademy.com/article/command-line-commands" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-400">Common command line commands - Terminal basics reference</span></li>
                         <li><a href="https://missing.csail.mit.edu/2020/course-shell/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[COURSE]</a> <span class="text-gray-400">The Missing Semester: The Shell - MIT's free course on command-line fundamentals</span></li>
@@ -266,7 +266,7 @@ The city council voted 5-2 yesterday to approve a $2.3 million budget for road r
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">"permission denied" when installing globally</h4>
-                        <p class="text-gray-500 text-sm">On macOS/Linux, you may need to use sudo: <code class="text-acid bg-surface px-1">sudo npm install -g @anthropic-ai/claude-code</code>. Alternatively, configure npm to use a different directory for global packages.</p>
+                        <p class="text-gray-500 text-sm">The native installer handles permissions automatically. If the curl install fails, see <a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">code.claude.com/docs</a> for platform-specific instructions.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">Claude Code says "unauthorized"</h4>
