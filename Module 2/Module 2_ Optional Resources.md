@@ -17,6 +17,20 @@ The Module 2 exercise has you directing your CLI tool to create repos, stage fil
 
 ---
 
+**The Odin Project: Introduction to Git**
+https://www.theodinproject.com/lessons/foundations-introduction-to-git
+
+Text-based lesson on what Git is and why it exists. Covers the problems version control solves and how Git addresses them. Slower and more thorough than the video above — good if you want to read rather than watch.
+
+---
+
+**The Odin Project: Commit Messages**
+https://www.theodinproject.com/lessons/foundations-commit-messages
+
+Short lesson on writing good commit messages: what to include, what to skip, and why the history of your commits matters when something breaks six months later. Directly applicable to the Module 2 exercise, where your CLI tool will be writing commit messages on your behalf.
+
+---
+
 ### Advanced CLAUDE.md examples
 
 **Claude Code best practices** by Anthropic
@@ -46,6 +60,13 @@ An argument that the important skill isn't writing better prompts — it's givin
 https://simonwillison.net/tags/systemprompts/
 
 Simon Willison's collected writing on system prompts, including analysis of how major AI products use them. Context files are a form of system prompt that you control.
+
+---
+
+**"My experience with Claude Code 2.0 and how to get better at using coding agents"** by Sankalp
+https://sankalp.bearblog.dev/my-experience-with-claude-code-20-and-how-to-get-better-at-using-coding-agents/
+
+A practitioner's breakdown of what actually changes when you treat AI tools as agents rather than chat interfaces. Key argument: context engineering — managing what's in the AI's attention window — matters more than chasing model upgrades. Covers CLAUDE.md files, sub-agents, and hooks as ways to reduce cognitive overhead without losing control. Written from a developer perspective but the workflow principles apply directly to what this module teaches.
 
 ---
 

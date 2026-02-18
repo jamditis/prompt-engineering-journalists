@@ -16,6 +16,20 @@ Organized by theme: getting started, working methods, agents and automation, AI 
 
 ### Deeper dives on CLI AI tools
 
+**"Mastering Claude Code in 30 minutes"** — Anthropic (official)
+https://www.youtube.com/watch?v=6eBSHbLKuN0
+
+28-minute video from Anthropic covering advanced Claude Code features: shortcuts, workflow patterns, plan mode, multi-file editing, and how to get consistent results across sessions. Good watch after you've completed the week's exercise and want to see what the tool can do beyond the basics.
+
+---
+
+**Claude Code: everything you need to know** — wesammustafa (GitHub)
+https://github.com/wesammustafa/Claude-Code-Everything-You-Need-to-Know
+
+Community-maintained reference covering prompt engineering for Claude Code, custom slash commands, MCP integrations, hooks, and the BMAD method for structuring complex tasks. Includes ready-to-use skill files. More comprehensive than the official docs for day-to-day workflow questions.
+
+---
+
 - **Simon Willison's LLM CLI tool**
   - https://llm.datasette.io/
   - A lightweight Python CLI for interacting with many LLM providers. Good for quick experiments.
@@ -42,6 +56,10 @@ https://www.youtube.com/watch?v=3jJ6r6e3CTM
 - **The Art of Command Line**
   - https://github.com/jlevy/the-art-of-command-line
   - Reference guide covering everything from basics to advanced tricks.
+
+- **The Odin Project: Text Editors**
+  - https://www.theodinproject.com/lessons/foundations-text-editors
+  - Short lesson on setting up a code editor for working with project files. Covers VS Code basics. Worth reading if you've never configured a text editor for code and plain-text work.
 
 ### Journalism-specific applications
 

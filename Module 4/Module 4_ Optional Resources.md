@@ -61,10 +61,10 @@ On macOS, `launchd` is the native scheduler. This tutorial covers the basics.
 
 ## AI CLI tools
 
-### Claude CLI documentation
-https://docs.anthropic.com/en/docs/claude-cli
+### Claude Code documentation
+https://code.claude.com/docs
 
-Official documentation for using Claude from the command line.
+Official documentation for Claude Code. Covers installation, CLAUDE.md files, custom slash commands, hooks, MCP, sub-agents, and CLI reference. The canonical starting point for anything the tool can do.
 
 ### Ollama (local AI)
 https://ollama.ai/
@@ -75,6 +75,22 @@ Run AI models locally on your machine. Useful for validating inputs before sendi
 https://llm.datasette.io/
 
 A command-line tool that works with multiple AI providers. Good for building pipelines that switch between models.
+
+---
+
+## Web fundamentals
+
+### How the web works
+**"How Does the Web Work?"** — The Odin Project
+https://www.theodinproject.com/lessons/foundations-how-does-the-web-work
+
+Covers what actually happens when you type a URL: DNS resolution, HTTP requests, servers, responses, and status codes. Understanding this makes the pipeline work in this module more legible — when your script fetches a URL, this explains what it's doing at the network level and why some requests fail (403, 404, 429).
+
+### Browser developer tools
+**"Inspecting HTML and CSS"** — The Odin Project
+https://www.theodinproject.com/lessons/foundations-inspecting-html-and-css
+
+How to use browser developer tools to inspect page structure and find the HTML elements that contain the content you want to extract. Useful before building scraping pipelines: if you know what element wraps the article text, you can tell the AI tool exactly what to target rather than guessing.
 
 ---
 
