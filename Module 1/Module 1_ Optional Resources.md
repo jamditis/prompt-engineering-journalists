@@ -4,6 +4,15 @@
 
 These are not required but may be useful depending on your interests and experience level.
 
+### Understanding the tools
+
+**"Think of language models like ChatGPT as a 'calculator for words'"** — Simon Willison
+https://simonwillison.net/2023/Apr/2/calculator-for-words/
+
+A short but useful framing piece: LLMs are tools for manipulating language, not for retrieving facts. The analogy — calculator for words, not a search engine — helps explain why these tools hallucinate and why the right use is giving them facts to work with rather than asking them to find facts on their own. Drawing on Ted Chiang's "blurry JPEG" metaphor. The framing underpins everything else in this course.
+
+---
+
 ### The 2025 AI landscape
 
 **"The year in LLMs"** — Simon Willison

@@ -70,6 +70,11 @@ https://www.pinecone.io/learn/vector-database/
 
 RAG systems use vector databases to find relevant documents. This explains how semantic search works under the hood.
 
+**"Deterministic quoting for healthcare LLM safety"** — Simon Willison
+https://simonwillison.net/2024/May/7/deterministic-quoting/
+
+A technique specifically designed to guarantee quote accuracy in RAG systems: the LLM decides *which* section to cite, but the text retrieval is a traditional database lookup that bypasses the LLM entirely. "That's the only way to guarantee that an LLM has not transformed text: don't send it through the LLM in the first place." Developed for healthcare, but the journalism application is obvious — if your knowledge base contains interview transcripts and source documents, verbatim accuracy matters. This explains one architectural approach to ensuring it.
+
 ---
 
 ## Podcasts and videos
@@ -108,6 +113,20 @@ A skeptical take on the gap between AI capability claims and documented harms, p
 https://simonwillison.net/2026/Jan/12/claude-cowork/
 
 Willison's hands-on look at Claude Cowork, Anthropic's agent tool designed for non-developers. Key observation: the underlying technology is nearly identical to Claude Code, but the interface removes technical barriers and runs in a sandboxed filesystem. He tested it on his own blog drafts — the kind of document-centric task a journalist would actually run. Also covers the ongoing unsolved problem of securing agents against prompt injection when they work with external content.
+
+---
+
+**"The normalization of deviance in AI"** — Simon Willison
+https://simonwillison.net/2025/Dec/10/normalization-of-deviance/
+
+Applies Diane Vaughan's "normalization of deviance" concept — originally used to explain the Challenger disaster — to AI systems. Organizations that repeatedly use risky AI practices without visible consequences begin to treat those practices as safe. The article's warning: "organizations confuse the absence of a successful attack with the presence of robust security." The pattern for journalists is real: if you automate a pipeline that produces mostly-correct output and nothing visibly fails, it becomes easy to stop checking. That's when the failures compound.
+
+---
+
+**"How to stop AI's 'lethal trifecta'"** — Simon Willison
+https://simonwillison.net/2025/Sep/26/how-to-stop-ais-lethal-trifecta/
+
+A practical breakdown of the lethal trifecta framework and what you can actually do about it. The three components are: private data access + untrusted content exposure + external network communication. The recommended defense: eliminate exfiltration vectors entirely, rather than trying to make the AI perfect. In security terms, 99% reliability is still a failing grade. Relevant to the Module 5 exercise, where you're giving Claude access to your documents — understanding what risks that creates and how to mitigate them is part of doing it responsibly.
 
 ---
 

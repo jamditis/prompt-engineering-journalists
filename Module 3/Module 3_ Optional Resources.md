@@ -33,6 +33,22 @@ Background on the Freedom of Information Act and how to write effective requests
 
 ---
 
+### AI hallucinations in practice
+
+**"AI Hallucination Cases database"** — Damien Charlotin (via Simon Willison)
+https://simonwillison.net/2025/May/25/ai-hallucination-cases/
+
+A database of documented cases where lawyers were caught submitting AI-generated hallucinations in legal proceedings — verified instances where courts confirmed the fabricated content. As of May 2025: 116 cases across 12 countries, with 20 in that single month alone. The legal profession has had years of public warnings. It hasn't mattered. The pattern is directly relevant to journalism: professional settings with high stakes and time pressure create conditions where people use AI shortcuts and skip verification. The database is the read; the acceleration is the argument.
+
+---
+
+**"Hallucinations in code are the least dangerous form of LLM mistakes"** — Simon Willison
+https://simonwillison.net/2025/Mar/2/hallucinations-in-code/
+
+The counterintuitive argument: when an LLM hallucinates a method that doesn't exist, you find out immediately when you run the code. Code errors are self-revealing. What's actually dangerous is hallucinated prose — fabricated quotes, invented facts, plausible-sounding information that requires subject expertise to catch. For journalists, this reframes where to focus skepticism: the pipeline ran without errors, but did it produce accurate content?
+
+---
+
 ### MCP servers for newsrooms
 
 **"MCP Quickstart" — Anthropic Documentation**
