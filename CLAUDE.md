@@ -94,10 +94,12 @@ All 5 modules + Introduction module have complete 8-document sets. Readings are 
 - **Author diversity**: Clare Spencer, Jessy de Cooker included; agent research targeted Vicki Boykis, Hilke Schellmann, Meredith Broussard, Rachel Thomas, Joy Buolamwini, Rumman Chowdhury
 
 ### Pending work
-- **Optional resources readings**: ~~Willison "Claude Skills are awesome" (Oct 2025), Doctorow skeptical AI piece (Sep 2025), Jesse Vincent "Superpowers" (Oct 2025)~~ — added: Willison to Module 3, Vincent + Doctorow to Module 5
-- **URL verification**: existing reading URLs across all modules have not been verified as live
-- **Exercise solution keys**: grader model answers not yet written for any module
-- **Syllabus sync**: `SYLLABUS.md` (root) and `Introduction Module/Syllabus.md` are separate files that may have drifted out of sync
+
+All previously pending items are complete as of Feb 2026:
+- **Optional resources readings**: Willison → Module 3; Vincent + Doctorow → Module 5
+- **URL verification**: 7 dead links fixed or removed across all modules; 403s from generative-ai-newsroom.com and Axios flagged as bot-blocking (likely live)
+- **Exercise solution keys**: written for all 5 modules (model answer + grader rubric, one file per module)
+- **Syllabus sync**: both files now identical canonical version
 
 # AI Writing Guidelines: Avoiding Slop Phrases
 Use this file as a reference when reviewing AI-generated content. These patterns indicate lazy, filler writing that should be edited or avoided.
