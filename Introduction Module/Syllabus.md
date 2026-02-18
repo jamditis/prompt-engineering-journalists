@@ -1,27 +1,27 @@
-# Syllabus
+# Advanced prompt engineering for journalists
 
-## Advanced prompt engineering for journalists
+**Instructor:** Joe Amditis, associate director of operations, [Center for Cooperative Media](https://www.centerforcooperativemedia.org/), Montclair State University
 
-**Instructor:** Joe Amditis, Associate Director of Operations, Center for Cooperative Media, Montclair State University
-
-**Email:** amditisj@montclair.edu
+**Email:** [amditisj@montclair.edu](mailto:amditisj@montclair.edu)
+**Github:** [https://github.com/jamditis](https://github.com/jamditis/)
+**Twitter:** [https://twitter.com/jsamditis](https://twitter.com/jsamditis)
+**Substack:** [https://strugglestreet.substack.com](https://strugglestreet.substack.com/)
 
 **Course duration:** 5 weeks
-
-**Time commitment:** 4-6 hours per week
+**Time commitment:** 4–6 hours per week
 
 ---
 
 ## Course description
 
-This course is the sequel to Prompt Engineering 101 for Journalists. The 101 course taught you to use AI through web interfaces — writing prompts, understanding context windows, and working with tools like ChatGPT and Claude.ai. This course moves you from the browser to the terminal, where AI becomes programmable: scriptable, automatable, and integrated with your files and workflows.
+This course is the sequel to [Prompt Engineering 101 for Journalists](https://journalismcourses.org/product/prompt-engineering-101-for-journalists/). The 101 course taught you to use AI through web interfaces — writing prompts, understanding context windows, and working with tools like ChatGPT and Claude.ai. This course moves you from the browser to the terminal, where AI becomes programmable: scriptable, automatable, and integrated with your files and workflows. For example, instead of pasting a city council transcript into ChatGPT and manually copying the summary, you can write a single command that reads the transcript from your hard drive, extracts action items, and formats a story draft — all without opening a browser.
 
-Each module builds on a concept from the 101 course and extends it: web prompting becomes CLI prompting, typing context every time becomes writing it once in a file, one-off prompts become reusable skills, no-code automation becomes scripted pipelines, and conceptual understanding of AI becomes hands-on work with agents and RAG.
+Each module builds on a concept from the 101 course and extends it: web prompting becomes command-line interface (CLI) prompting, typing context every time becomes writing it once in a file, one-off prompts become reusable skills, no-code automation becomes scripted pipelines, and conceptual understanding of AI becomes hands-on work with agents and retrieval-augmented generation (RAG).
 
 ## Prerequisites
 
-- Completion of Prompt Engineering 101 for Journalists (or equivalent experience with AI prompting)
-- Comfort writing prompts and getting useful results from chat-based AI interfaces
+- Completion of [Prompt Engineering 101 for Journalists](https://journalismcourses.org/product/prompt-engineering-101-for-journalists/) (available as a self-directed course at [journalismcourses.org](https://journalismcourses.org/product/prompt-engineering-101-for-journalists/)) or equivalent experience with AI prompting (e.g., writing effective prompts, adjusting tone and format, iterating on outputs). This prerequisite is ideal but not strictly required
+- Comfort with writing prompts and getting useful results from chat-based AI interfaces (e.g., ChatGPT, Claude.ai, Gemini)
 - Access to a computer with administrator privileges (to install software)
 
 ## Learning objectives
@@ -38,6 +38,20 @@ By the end of this course, students will be able to:
 
 ## Weekly schedule
 
+### Pre-course orientation
+
+Before Week 1 begins, complete the following setup steps. This orientation includes a welcome video and a checklist — there are no graded assignments.
+
+**Pre-course checklist:**
+
+- Install Node.js (https://nodejs.org) version 20 or higher and verify your terminal environment
+- Set up Claude Code, Gemini CLI, or Codex CLI (see Required tools below for options)
+- Create a GitHub account (https://github.com) and clone the course repository
+- Review Git basics — what repositories, commits, and cloning are
+- Familiarize yourself with basic terminal commands and navigation
+
+---
+
 ### Module 1: Escaping the chat window
 
 **Focus:** From interactive web interfaces to programmable terminal tools
@@ -45,14 +59,14 @@ By the end of this course, students will be able to:
 **Topics:**
 - The CLI as programmatic control over AI (scripting, piping, scheduling)
 - "Work where your files live" — no more upload/download cycles
-- Installing Node.js and terminal prerequisites
-- Setting up Claude Code, Gemini CLI, or Codex CLI
-- Basic terminal commands and navigation
+- Comparing web and CLI workflows side by side
+- Your first CLI prompt: running a task from the terminal
+- When CLI tools are worth the setup cost and when they are not
 
 **Activities:**
 - Required readings: Tool documentation and CLI background articles
 - Exercise: Install one CLI tool and compare web vs. CLI workflows
-- Discussion: Share your installation experience and first impressions
+- Discussion (choose one): Share your installation experience and first impressions of working in the terminal. Or: What surprised you about the differences between web-based and command-line AI tools?
 - Quiz
 
 ---
@@ -72,14 +86,16 @@ By the end of this course, students will be able to:
 **Activities:**
 - Required readings: Context file documentation for Claude Code, Gemini CLI, and Codex; Git and GitHub basics
 - Exercise: Set up a beat project, initialize a Git repo, process documents with and without context, write a CLAUDE.md
-- Discussion: What would you put in a context file for your beat?
+- Discussion (choose one): What would you put in a context file for your beat, and why? Or: How does processing documents from the file system compare to pasting text into a chat window — what changes about your workflow?
 - Quiz
 
 ---
 
-### Module 3: Custom skills for Claude Code
+### Module 3: Custom skills for Claude Code\*
 
 **Focus:** Encoding domain expertise into reusable, shareable tools
+
+*\*The lessons in this module will generally apply to other models/LLMs, but they will be tailored for Claude Code specifically.*
 
 **Topics:**
 - The progression: ad-hoc prompts → saved prompts → skills → hooks → plugins
@@ -91,7 +107,7 @@ By the end of this course, students will be able to:
 **Activities:**
 - Required readings: Claude Code docs on custom commands, journalism skills repo overview
 - Exercise: Install journalism skills plugin and verify a viral claim using source-verification
-- Discussion: What skills would help your newsroom?
+- Discussion (choose one): What skills would help your newsroom, and how would you share them with colleagues? Or: How do you decide which parts of your editorial process are worth encoding into reusable tools versus handling manually?
 - Quiz
 
 ---
@@ -110,12 +126,12 @@ By the end of this course, students will be able to:
 **Activities:**
 - Required readings: Automated journalism in practice, API key security, handling LLM errors and rate limits
 - Exercise: Build an article-to-newsletter pipeline
-- Discussion: Workflow ideas for your newsroom
+- Discussion (choose one): What repeating task in your newsroom would benefit most from a scripted pipeline? Or: What are the risks of automating editorial workflows, and how would you mitigate them?
 - Quiz
 
 ---
 
-### Module 5: Agents and RAG
+### Module 5: Agents and retrieval-augmented generation (RAG)
 
 **Focus:** Parametric vs. grounded knowledge, and why the citation trail matters
 
@@ -129,61 +145,41 @@ By the end of this course, students will be able to:
 **Activities:**
 - Required readings: Agent architecture, RAG concepts, MCP documentation
 - Exercise: Configure Claude Code with MCP to query a local knowledge base
-- Discussion: Where to draw the line on AI autonomy in newsrooms
+- Discussion (choose one): Where should newsrooms draw the line on AI autonomy, and what safeguards matter most? Or: When does RAG add enough value over a standard prompt to justify the setup cost?
 - Quiz
 - Final project due
 
 ---
 
-## Assignments and grading
+## Assignments and participation
 
-### Participation (30%)
+### Participation
 
 **Discussion forums:** Each module includes a discussion forum. Post at least one original contribution and respond to at least two classmates per module. Posts should be substantive (more than "I agree").
 
 **Engagement:** Complete all required activities by the weekly deadline.
 
-### Weekly exercises (50%)
+### Weekly exercises
 
 Each module includes a hands-on exercise. Exercises are graded on completion and demonstrated understanding. You must show your work: screenshots, code snippets, or command output.
 
-- Module 1: CLI tool installation and comparison (10%)
-- Module 2: Context file and document processing exercise (10%)
-- Module 3: Custom skill creation (10%)
-- Module 4: Workflow automation (10%)
-- Module 5: RAG pipeline exercise (10%)
+- Module 1: CLI tool installation and comparison
+- Module 2: Context file and document processing exercise
+- Module 3: Custom skill creation
+- Module 4: Workflow automation
+- Module 5: Retrieval-augmented generation pipeline exercise
 
-### Final project (20%)
+### Final project
 
-Design and document a CLI-based AI workflow for a real journalism task. This can be for your own newsroom or a hypothetical scenario.
+Design and document a CLI-based AI workflow for a real journalism task. Choose a problem from your own newsroom or a realistic scenario: processing public records, monitoring a beat, automating a recurring story format, or building a source-verification pipeline.
 
 **Requirements:**
-- Written description of the problem and solution (500-1000 words)
+- Written description of the problem and solution (500–1,000 words)
 - Working code or configuration files
-- Screenshots or video demonstrating the workflow
+- Screenshots or a short video demonstrating the workflow
 - Reflection on what you learned
 
 **Due:** End of Module 5
-
----
-
-## Course policies
-
-### Late work
-
-Weekly exercises can be submitted up to 48 hours late with a 10% penalty. After 48 hours, exercises receive no credit. The final project deadline is firm.
-
-### Academic integrity
-
-All submitted work must be your own. You may use AI tools to complete assignments (that's the point of this course), but you must document which tools you used and how. Copying another student's work is not permitted.
-
-### Technical problems
-
-If you encounter technical issues that prevent you from completing an assignment, contact the instructor before the deadline. We will work out a solution.
-
-### Communication
-
-Use the discussion forums for questions about course content. Other students likely have the same questions. Email the instructor for personal matters.
 
 ---
 
@@ -192,18 +188,18 @@ Use the discussion forums for questions about course content. Other students lik
 You will need access to the following (detailed in Course Requirements):
 
 - A computer with terminal access (Mac, Windows, or Linux)
-- Node.js version 20 or higher
-- At least one AI API key or subscription (Gemini API has a free tier)
-- A text editor (VS Code recommended)
-- Git
+- Node.js version 20 or higher (https://nodejs.org)
+- At least one AI API key or paid subscription — options include Google Gemini API (https://ai.google.dev, generous free tier), Anthropic Claude API (https://console.anthropic.com), or OpenAI API (https://platform.openai.com)
+- A text editor: Sublime Text (https://www.sublimetext.com), Notepad++ (https://notepad-plus-plus.org), or VS Code (https://code.visualstudio.com) recommended
+- GitHub account — sign up free at https://github.com (see GitHub's quickstart guide: https://docs.github.com/en/get-started/start-your-journey/creating-an-account)
 
 ## Course repositories
 
 The following GitHub repositories are used throughout the course:
 
-- **Journalism skills library:** https://github.com/jamditis/claude-skills-journalism — 36 skills and 13 hooks for Claude Code, covering source verification, FOIA requests, data journalism, editorial workflows, and more. Used in Module 3.
-- **AI tools for newsrooms:** https://github.com/jamditis/tools — Guides, templates, and workflow examples for AI in journalism. Referenced across modules.
-- **Scrapefruit CLI:** https://github.com/jamditis/scrapefruit-cli — CLI tool for archiving complete web pages. Referenced in Module 4.
+- **Advanced prompt engineering for journalists:** [https://github.com/jamditis/prompt-engineering-journalists](https://github.com/jamditis/prompt-engineering-journalists) — course materials for this 5-week course
+- **Journalism skills library:** [https://github.com/jamditis/claude-skills-journalism](https://github.com/jamditis/claude-skills-journalism) — 36 skills and 13 hooks for Claude Code, covering source verification, FOIA requests, data journalism, editorial workflows, and more. Used in Module 3.
+- **AI tools for newsrooms:** [https://github.com/jamditis/tools](https://github.com/jamditis/tools) — guides, templates, and workflow examples for AI in journalism. Referenced across modules.
 
 ---
 
@@ -211,6 +207,7 @@ The following GitHub repositories are used throughout the course:
 
 | Week | Module | Main deliverable |
 |------|--------|------------------|
+| Pre-course | Orientation | Setup checklist |
 | 1 | Escaping the chat window | CLI tool setup |
 | 2 | Prompting with files and project context | Context file exercise |
 | 3 | Custom skills for Claude Code | Custom skill |
