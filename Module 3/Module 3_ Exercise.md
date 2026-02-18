@@ -192,7 +192,11 @@ Review what Claude drafts. Apply the deletion test: read each instruction and as
 
 ### Save and test it
 
-Ask Claude Code to save the file to your skills directory and invoke it on a real piece of content from your beat — a press release, a document, a claim. Note what it does well and where it needs adjustment.
+Ask Claude Code to save the file to your skills directory and invoke it on a real piece of content from your beat — a press release, a document, a claim.
+
+**Test on material you already know.** Don't use a fresh document you haven't read. Use something you've already worked through — a press release you already fact-checked, a council vote you already looked up, a claim you already verified. Compare what the skill finds against what you found yourself. If it misses something you caught, that tells you what instruction to add. If it flags something that wasn't a problem, that tells you what to cut or refine.
+
+This is how you calibrate a skill before trusting it on live work. You wouldn't rely on a new source until you'd verified something you could already check. The same logic applies here.
 
 ### The commit
 

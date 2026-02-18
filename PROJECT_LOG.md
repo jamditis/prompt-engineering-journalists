@@ -200,10 +200,10 @@ Created `VIDEO_SCRIPTS.md` with outlines for all 12 videos. First version was re
 - Version control, changelog: Module 1 (start from day one), Module 2 (CLAUDE.md as committed infrastructure)
 - Tests/lints before full run: Module 4 (test small before running large — now demonstrated in video)
 - Stop hooks / one-way door checks: Module 3 (hooks as editorial guardrails)
-- Multi-platform testing: Module 4 (cache busting, test on multiple platforms)
+- Multi-platform testing → reframed as "test on known material" and placed in Module 3 (test new skills against documents you've already fact-checked before trusting them on live work)
 - Error logging: Module 4 (ask Claude to audit the script)
-- Containerization: Module 5 (MCP configs, versioned infrastructure at scale)
 - Code as infrastructure: Module 2 → Module 5 (CLAUDE.md first, then skills/hooks, then pipeline scripts, then MCP configs)
+- Containerization: intentionally excluded — veers into software engineering/DevOps territory that's out of scope for a journalism-focused course
 
 **Files updated (5):**
 - `Module 2/Module 2_ Orientation Message.md` — Added "From prompt engineering to context engineering" section; strengthened CLAUDE.md-as-infrastructure in version control section; fixed quiz count from 6 to 5
