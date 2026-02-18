@@ -16,11 +16,11 @@ Choose from:
 - Another CLI-based AI tool (get instructor approval first)
 
 ### 2. Include automation
-Your workflow must go beyond a single prompt. Include at least one of:
-- A shell script that chains multiple operations
-- A cron job or scheduled task
-- A pipeline that processes multiple inputs
-- A custom Claude skill or command
+Your workflow must go beyond a single prompt. Describe what you want to your CLI tool and have it build at least one of:
+- A reusable script that processes multiple inputs
+- A pipeline with multiple stages (fetch, process, format, save)
+- A scheduled or triggerable task
+- A custom skill or hook that encodes domain expertise
 
 ### 3. Solve a real journalism problem
 The project should address an actual challenge in your work:
@@ -42,25 +42,25 @@ Your submission must include a README that explains:
 These are starting points. You can adapt them to your beat or invent something new.
 
 **Newsletter automation pipeline**
-Build a workflow that gathers content from your beat, summarizes recent developments, and drafts newsletter sections. Include a script that runs weekly and outputs markdown ready for your newsletter platform.
+Describe a workflow to your CLI tool that gathers content from your beat, summarizes recent developments, and drafts newsletter sections. Have it build a reusable script you can run weekly that outputs markdown ready for your newsletter platform.
 
 **Interview transcript processor**
-Create a pipeline that takes raw interview audio or transcripts and extracts key quotes, identifies themes, and generates a structured document for story research. Include commands for different interview types (source interviews, press conferences, etc.).
+Build a pipeline that takes raw interview transcripts and extracts key quotes, identifies themes, and generates a structured document for story research. Describe the workflow; let your CLI tool build the processing script.
 
 **Source verification workflow**
-Build a custom skill that helps verify claims, check backgrounds, and document sources. Include prompts for different verification scenarios and output formats compatible with your newsroom's fact-checking process.
+Build a custom skill that encodes your verification process — checking claims, documenting sources, flagging what needs independent confirmation. Designed for your beat's specific document types and fact-checking standards.
 
 **Social media content generator**
-Create a script that takes a published story and generates platform-specific social posts, thread versions, and promotional copy. Include configuration for different platforms and voice guidelines.
+Describe a workflow that takes a published story and produces platform-specific posts, thread versions, and newsletter blurbs. Have your CLI tool build a script that handles each platform's format and your newsroom's voice.
 
-**Custom Claude skill for your beat**
-Build a specialized skill for your coverage area (courts, city hall, schools, etc.). Include domain-specific context, common document types you analyze, and prompts tailored to your beat's recurring tasks.
+**Custom skill for your beat**
+Build a specialized skill for your coverage area (courts, city hall, schools, etc.) that encodes domain knowledge, common document types, and the recurring tasks specific to your beat.
 
 **Meeting notes processor**
-Create a workflow that takes notes from public meetings (city council, school board, etc.) and extracts action items, identifies newsworthy decisions, and flags items requiring follow-up.
+Build a workflow that takes notes from public meetings (city council, school board, etc.) and extracts action items, identifies newsworthy decisions, and flags items needing follow-up.
 
-**Data cleaning pipeline**
-Build an automation that takes messy public records (PDFs, spreadsheets, text files) and standardizes them for analysis. Include error handling and validation steps.
+**Public records processor**
+Build a pipeline that takes messy public records (PDFs, spreadsheets, text files) and standardizes them for analysis. Describe the cleaning and validation steps; your CLI tool builds the automation.
 
 ## Submission format
 
@@ -82,7 +82,7 @@ Final project is worth 20% of your course grade.
 |-----------|--------|-------------|
 | Functionality | 40% | Does the workflow run successfully? Does it produce useful output? Can it handle realistic inputs? |
 | Relevance | 30% | Does this solve an actual journalism problem? Would you use this in your work? Is it appropriate for your newsroom context? |
-| Documentation | 20% | Can someone else understand how to use this? Are setup instructions clear? Is the code commented where needed? |
+| Documentation | 20% | Can someone else understand how to use this? Are setup instructions clear? Is the workflow explained well enough that a colleague could install and run it? |
 | Creativity | 10% | Does this show original thinking? Did you adapt the tools in an interesting way? Does it go beyond the course examples? |
 
 ### Grading scale

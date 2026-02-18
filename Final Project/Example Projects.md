@@ -8,9 +8,9 @@ These examples show acceptable scope for the final project. They range from stra
 
 **Problem**: A local news reporter receives 50+ press releases per week by email. Most are irrelevant to their beat (education). Reading through them to find newsworthy items takes 2-3 hours weekly.
 
-**Solution**: A shell script that:
+**Solution**: A pipeline — described to Claude Code and built by it — that:
 1. Takes a folder of press release text files as input
-2. Uses Claude Code to analyze each release against beat criteria (local education, K-12 or higher ed, NJ-based)
+2. Analyzes each release against beat criteria (local education, K-12 or higher ed, NJ-based)
 3. Categorizes releases as "cover," "follow up later," or "skip"
 4. Outputs a prioritized summary with the key facts from each relevant release
 
@@ -29,7 +29,7 @@ These examples show acceptable scope for the final project. They range from stra
 
 **Problem**: A city hall reporter covers weekly council meetings. Before each meeting, they need to review the agenda, identify items connected to ongoing stories, and prepare questions. This prep work takes 3-4 hours and is rushed before deadline.
 
-**Solution**: A Claude Code workflow with a custom skill that:
+**Solution**: A Claude Code workflow with a custom skill — described to Claude Code and built with its help — that:
 1. Takes the council agenda (PDF or text) as input
 2. Extracts each agenda item and its attachments
 3. Compares items against a "story tracker" file of ongoing coverage
@@ -53,7 +53,7 @@ These examples show acceptable scope for the final project. They range from stra
 
 **Problem**: An investigative reporter files many FOIA requests and receives responses in various formats (PDFs, spreadsheets, scanned documents). Organizing these responses and extracting key information is time-consuming and inconsistent.
 
-**Solution**: A pipeline that:
+**Solution**: A pipeline — described to Claude Code and built with its help — that:
 1. Watches a designated folder for new FOIA response files
 2. Uses Claude Code to identify the document type and agency
 3. Extracts key metadata (dates, names, responsive pages vs. redactions)
@@ -78,7 +78,7 @@ These examples show acceptable scope for the final project. They range from stra
 
 **Problem**: After publishing a story, a reporter needs to create social posts for multiple platforms, each with different character limits, tone, and format requirements. This takes 30-45 minutes per story and often gets skipped under deadline pressure.
 
-**Solution**: A complete distribution workflow that:
+**Solution**: A complete distribution workflow — described to Claude Code and built with its help — that:
 1. Takes a published story URL or text file as input
 2. Analyzes the story for key facts, quotes, and angles
 3. Generates platform-specific content:
