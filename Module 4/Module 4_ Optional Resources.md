@@ -113,6 +113,16 @@ Python tool for web scraping that outputs clean text or markdown. Works from the
 
 ---
 
+## Verification and accountability
+
+### Proving your pipeline worked
+**"Code proven to work"** — Simon Willison
+https://simonwillison.net/2025/Dec/18/code-proven-to-work/
+
+Willison's argument: submitting code (or, for journalists, publishing pipeline outputs) without personally verifying it shifts the verification burden onto the reader. "A computer can never be held accountable." The piece is written for developers, but the principle maps directly to automated newsroom pipelines — you are responsible for checking that what your script produced is actually correct, not just that the script ran without errors. Required reading mindset for anyone automating content production.
+
+---
+
 ## Text processing
 
 ### GNU Coreutils manual

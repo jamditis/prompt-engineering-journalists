@@ -104,6 +104,20 @@ A skeptical take on the gap between AI capability claims and documented harms, p
 
 ---
 
+**"First impressions of Claude Cowork, Anthropic's general agent"** — Simon Willison
+https://simonwillison.net/2026/Jan/12/claude-cowork/
+
+Willison's hands-on look at Claude Cowork, Anthropic's agent tool designed for non-developers. Key observation: the underlying technology is nearly identical to Claude Code, but the interface removes technical barriers and runs in a sandboxed filesystem. He tested it on his own blog drafts — the kind of document-centric task a journalist would actually run. Also covers the ongoing unsolved problem of securing agents against prompt injection when they work with external content.
+
+---
+
+**"Living dangerously with Claude"** — Simon Willison
+https://simonwillison.net/2025/Oct/22/living-dangerously-with-claude/
+
+What happens when you give Claude Code full permissions and let it run without confirmation prompts. Willison completed three research projects in 48 hours — and clearly explains why this is a security risk when agents touch external content. His framework: the "lethal trifecta" of private data access + untrusted content exposure + external network access is what creates actual danger. His recommendation: use YOLO mode in sandboxed environments only. Useful for understanding what the Module 5 exercise is actually doing when it grants Claude file access.
+
+---
+
 ## Tools to explore
 
 **Claude Code**

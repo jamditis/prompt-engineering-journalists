@@ -4,6 +4,15 @@
 
 These are not required but may be useful depending on your interests and experience level.
 
+### The 2025 AI landscape
+
+**"The year in LLMs"** — Simon Willison
+https://simonwillison.net/2025/Dec/31/the-year-in-llms/
+
+Willison's end-of-year review of what actually happened in AI in 2025: the rise of reasoning models, coding agents going from experimental to generating $1 billion in run-rate revenue, Chinese models topping benchmarks, and "vibe coding" entering the vocabulary. A fast, opinionated orientation that covers why CLI tools like Claude Code exist and why they matter now. Good background reading before starting the course.
+
+---
+
 ### Further reading on Mollick's work
 
 Ethan Mollick's framework (models / apps / harnesses) runs through this entire course. If the required readings sparked your interest, a curated list of his other articles is available in the course resources:

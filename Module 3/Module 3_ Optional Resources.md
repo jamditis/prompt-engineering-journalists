@@ -59,6 +59,13 @@ Willison's take on why skills represent something qualitatively different from o
 
 ---
 
+**"OpenAI are quietly adopting skills"** — Simon Willison
+https://simonwillison.net/2025/Dec/12/openai-skills/
+
+A few months after Willison declared skills a bigger deal than MCP, OpenAI added skills support to both ChatGPT and Codex CLI. The same folder-based, markdown-file approach now works across Claude Code, Codex CLI, and ChatGPT. Relevant context for this week: the skills you write here aren't Claude-specific — the concept is converging across platforms.
+
+---
+
 ### Building your own skills
 
 **"Custom slash commands" — Claude Code documentation**
