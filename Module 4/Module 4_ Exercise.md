@@ -2,309 +2,167 @@
 
 ## Exercise: Build an article-to-newsletter pipeline
 
-In this exercise, you'll build a pipeline that:
+In this exercise, you'll describe a pipeline to your CLI LLM and have it build the automation for you. The pipeline:
+
 1. Fetches an article from the web
 2. Extracts the main content
-3. Summarizes it with Claude
+3. Summarizes it with AI
 4. Formats it for a newsletter
 
-By the end, you'll have a reusable script you can run on any URL.
+You won't write shell code. You'll describe what you want, review what the LLM builds, test it on an article you already know, and refine it until the output is good enough to actually use. By the end, you'll have a reusable script you can run on any URL.
 
 ---
 
 ## Prerequisites
 
-Before starting, you need:
+Before starting, make sure you have:
 
-- **A terminal.** On macOS, use Terminal or iTerm. On Windows, use WSL (Windows Subsystem for Linux).
-- **An Anthropic API key.** Get one at https://console.anthropic.com/
-- **Basic tools installed.** We'll check these in Step 1.
+- **Claude Code (or Gemini CLI) installed and running.** If you haven't done this yet, return to Module 1.
+- **An API key with available credits.** Anthropic API at console.anthropic.com, or Gemini API (free tier) at aistudio.google.com.
+- **Node.js installed** (from Module 1).
 
----
+You'll also need a readability tool installed — this is what strips ads and navigation from web pages before summarizing. Ask your CLI tool to install it for you:
 
-## Step 1: Check your environment
+> "I need a command-line tool that can fetch a URL and extract just the article text, stripping out ads, navigation, and other junk. What's the best option and how do I install it?"
 
-Open your terminal and run these commands to verify your tools are installed:
-
-```bash
-# Check if curl is installed
-curl --version
-
-# Check if jq is installed
-jq --version
-```
-
-If any command fails, install the missing tool:
-
-- **macOS:** `brew install jq`
-- **Ubuntu/Debian:** `sudo apt install jq`
-- **Windows (WSL):** `sudo apt install jq`
-
-Install the readability-cli tool for extracting article content:
-
-```bash
-npm install -g @peerless/readability-cli
-```
-
-If you don't have npm, install Node.js first: https://nodejs.org/
+Follow the instructions it gives you. If the install fails, paste the error back and ask it to troubleshoot.
 
 ---
 
-## Step 2: Set up your API key
+## Part 1: Describe the pipeline and review what gets built
 
-Create a file to store your API key. Never put API keys directly in scripts.
+### Step 1: Set up a project folder
 
-```bash
-# Create a config directory
-mkdir -p ~/.config/newsletter-pipeline
+Open your terminal, create a folder for this exercise, and start your CLI LLM:
 
-# Create the API key file (replace with your actual key)
-echo "YOUR_API_KEY_HERE" > ~/.config/newsletter-pipeline/anthropic_key
-
-# Restrict permissions so only you can read it
-chmod 600 ~/.config/newsletter-pipeline/anthropic_key
+```
+mkdir newsletter-pipeline
+cd newsletter-pipeline
+claude
 ```
 
-Test that you can read the key:
+(Or use `gemini` if you're working with Gemini CLI.)
 
-```bash
-cat ~/.config/newsletter-pipeline/anthropic_key
-```
+### Step 2: Describe the full pipeline
 
-You should see your API key printed.
+Start by describing the whole workflow in plain English. Don't worry about implementation details — describe the goal:
+
+> "I want to build a pipeline that takes a news article URL as input, fetches the article, strips out all the junk like ads and navigation, summarizes it in 2-3 sentences in a tone suitable for a newsletter, and saves the output to a markdown file with today's date in the filename. I want to be able to run this from the command line by passing in a URL. Build it."
+
+Your CLI LLM will write a script. **Read it before you run anything.**
+
+### Step 3: Review the script before running it
+
+Ask your CLI tool to walk you through what it built:
+
+> "Walk me through what this script does, step by step. Are there any security concerns I should know about?"
+
+Specifically, check where the API key is handled. It should never be hardcoded in the script — it should read from an environment variable. If it isn't, ask:
+
+> "The API key is hardcoded in the script. Rewrite it to read from an environment variable instead. Also show me how to set that environment variable on my system."
+
+Follow the instructions for setting the environment variable. You'll likely need to add a line to your shell profile (`.zshrc` or `.bashrc`) and either restart your terminal or run `source ~/.zshrc`.
 
 ---
 
-## Step 3: Fetch an article
+## Part 2: Test on something you already know
 
-Pick any news article URL. We'll use this example:
+### Step 4: Pick an article you've actually read
 
-```bash
-# Fetch the HTML and save it
-curl -s "https://www.theverge.com/2024/1/15/24038711/apple-vision-pro-release-date-preorder" > /tmp/article.html
+Before running the pipeline, pick a news article you've actually read recently — something where you know what it says. This is the same principle from Module 3: test new tools on material you can verify.
 
-# Check that it worked
-head -20 /tmp/article.html
+If you test on an article you've never read, you can't tell if a bad summary is a pipeline problem or just a hard-to-summarize article. Use something familiar first.
+
+### Step 5: Run it and check the output
+
+Run the script on your test article. The exact command will depend on what your CLI tool built for you, but it will look something like:
+
+```
+./pipeline.sh "https://[the article URL]"
 ```
 
-You should see HTML content.
+Check the output file. Ask yourself:
+- Is the summary accurate?
+- Is the length and tone right for a newsletter — or does it read like an abstract?
+- Is anything missing that a reader would need?
+
+### Step 6: Refine the output
+
+If the summary isn't what you wanted, describe the problem:
+
+> "The summary reads like an academic abstract. Rewrite the prompt so the output is punchier — one or two sentences that lead with the most newsworthy fact."
+
+Or:
+
+> "The output file has no headline — just the summary and the URL. Add a step that asks the model to extract the article's headline and put it at the top of the output."
+
+Iterate until the output looks like something you'd actually use in a newsletter.
 
 ---
 
-## Step 4: Extract the article text
+## Part 3: Add rate limiting and batch processing
 
-The readability tool removes ads, navigation, and other junk:
+### Step 7: Add rate limiting before processing multiple articles
 
-```bash
-readable /tmp/article.html --low-confidence=keep
-```
+Before you run this on a batch of articles, ask your CLI tool to add rate limiting:
 
-This outputs the clean article text. Let's save it:
+> "I want to process multiple articles. Add a 2-second pause between API calls so I don't get rate-limited. Also add a progress indicator that shows which article it's currently processing."
 
-```bash
-readable /tmp/article.html --low-confidence=keep > /tmp/article.txt
+This isn't optional. Sending 20 requests in 10 seconds will get you throttled. The pause is responsible engineering, not a workaround.
 
-# Check the result
-head -30 /tmp/article.txt
-```
+### Step 8: Add batch processing
 
----
+Ask your CLI tool to extend the pipeline for batch use:
 
-## Step 5: Summarize with Claude
+> "Build a separate script called process-batch.sh that reads URLs from a text file called urls.txt (one URL per line) and runs the pipeline on each one. Collect all the output into a single file called newsletter-draft.md. Include the timestamp in the filename."
 
-Now we'll send the article to Claude's API. Create this command:
+Then create a `urls.txt` file with 3-5 article URLs. Start with articles you've already read so you can verify the output. Run it on the small batch before adding more.
 
-```bash
-API_KEY=$(cat ~/.config/newsletter-pipeline/anthropic_key)
-ARTICLE=$(cat /tmp/article.txt)
+### Step 9: Add checkpointing (optional)
 
-curl -s https://api.anthropic.com/v1/messages \
-  -H "Content-Type: application/json" \
-  -H "x-api-key: $API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d "{
-    \"model\": \"claude-sonnet-4-20250514\",
-    \"max_tokens\": 300,
-    \"messages\": [{
-      \"role\": \"user\",
-      \"content\": \"Summarize this article in 2-3 sentences for a newsletter. Be direct, no preamble:\\n\\n$ARTICLE\"
-    }]
-  }"
-```
+If you plan to process large batches, ask your CLI tool to add checkpointing:
 
-This returns JSON. Extract just the summary text:
+> "If the batch job fails halfway through, I don't want to restart from the beginning. Add a checkpoint log that tracks which URLs have already been processed. On restart, skip the ones already done."
 
-```bash
-API_KEY=$(cat ~/.config/newsletter-pipeline/anthropic_key)
-ARTICLE=$(cat /tmp/article.txt)
-
-curl -s https://api.anthropic.com/v1/messages \
-  -H "Content-Type: application/json" \
-  -H "x-api-key: $API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d "{
-    \"model\": \"claude-sonnet-4-20250514\",
-    \"max_tokens\": 300,
-    \"messages\": [{
-      \"role\": \"user\",
-      \"content\": \"Summarize this article in 2-3 sentences for a newsletter. Be direct, no preamble:\\n\\n$ARTICLE\"
-    }]
-  }" | jq -r '.content[0].text'
-```
+This matters when you're processing 50 or 100 documents. You won't need it for 5 URLs, but it's a good habit to build into any pipeline you plan to reuse.
 
 ---
 
-## Step 6: Format for newsletter
+## Step 10: Schedule it (optional)
 
-Let's add a headline extraction and format the output as a newsletter item:
+If you want the pipeline to run automatically — every morning, or on a schedule — ask your CLI tool:
 
-```bash
-API_KEY=$(cat ~/.config/newsletter-pipeline/anthropic_key)
-ARTICLE=$(cat /tmp/article.txt)
-URL="https://www.theverge.com/2024/1/15/24038711/apple-vision-pro-release-date-preorder"
+> "I want to run this pipeline automatically at 7 AM every weekday. How do I schedule it on my operating system? Walk me through the setup."
 
-SUMMARY=$(curl -s https://api.anthropic.com/v1/messages \
-  -H "Content-Type: application/json" \
-  -H "x-api-key: $API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d "{
-    \"model\": \"claude-sonnet-4-20250514\",
-    \"max_tokens\": 300,
-    \"messages\": [{
-      \"role\": \"user\",
-      \"content\": \"Summarize this article in 2-3 sentences for a newsletter. Be direct, no preamble:\\n\\n$ARTICLE\"
-    }]
-  }" | jq -r '.content[0].text')
-
-# Format as newsletter item
-echo "---"
-echo ""
-echo "$SUMMARY"
-echo ""
-echo "Read more: $URL"
-echo ""
-echo "---"
-```
-
----
-
-## Step 7: Create a reusable script
-
-Save everything as a script you can run on any URL.
-
-Create a file called `summarize-article.sh`:
-
-```bash
-#!/bin/bash
-
-# Usage: ./summarize-article.sh <url>
-
-set -e  # Exit on any error
-
-URL="$1"
-
-if [ -z "$URL" ]; then
-    echo "Usage: ./summarize-article.sh <url>"
-    exit 1
-fi
-
-# Load API key
-API_KEY=$(cat ~/.config/newsletter-pipeline/anthropic_key)
-
-# Fetch and extract article
-echo "Fetching article..." >&2
-curl -s "$URL" > /tmp/article.html
-readable /tmp/article.html --low-confidence=keep > /tmp/article.txt
-
-# Check if we got content
-if [ ! -s /tmp/article.txt ]; then
-    echo "Error: Could not extract article content" >&2
-    exit 1
-fi
-
-ARTICLE=$(cat /tmp/article.txt)
-
-# Summarize with Claude
-echo "Summarizing..." >&2
-SUMMARY=$(curl -s https://api.anthropic.com/v1/messages \
-  -H "Content-Type: application/json" \
-  -H "x-api-key: $API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -d "{
-    \"model\": \"claude-sonnet-4-20250514\",
-    \"max_tokens\": 300,
-    \"messages\": [{
-      \"role\": \"user\",
-      \"content\": \"Summarize this article in 2-3 sentences for a newsletter. Be direct, no preamble:\\n\\n$ARTICLE\"
-    }]
-  }" | jq -r '.content[0].text')
-
-# Output formatted item
-echo "---"
-echo ""
-echo "$SUMMARY"
-echo ""
-echo "Read more: $URL"
-echo ""
-echo "---"
-```
-
-Make it executable and test it:
-
-```bash
-chmod +x summarize-article.sh
-./summarize-article.sh "https://www.theverge.com/2024/1/15/24038711/apple-vision-pro-release-date-preorder"
-```
-
----
-
-## Step 8: Process multiple articles
-
-Create a file called `urls.txt` with several article URLs (one per line).
-
-Then batch process them:
-
-```bash
-while read url; do
-    ./summarize-article.sh "$url"
-    sleep 1  # Pause between requests to avoid rate limits
-done < urls.txt > newsletter-items.md
-```
-
-The output file `newsletter-items.md` now contains formatted summaries of all articles.
-
----
-
-## Step 9: Schedule with cron (optional)
-
-To run this automatically every morning:
-
-```bash
-# Open your crontab
-crontab -e
-
-# Add this line to run at 7 AM every day
-0 7 * * * /path/to/summarize-article.sh "https://example.com/rss-to-process" >> ~/newsletter-items.md
-```
+Follow the instructions. The approach will vary by OS. Review whatever it sets up before you consider it done.
 
 ---
 
 ## Troubleshooting
 
-**"curl: command not found"**
-Install curl with your package manager.
+When something breaks, paste the error directly into your CLI session:
 
-**"jq: command not found"**
-Install jq: `brew install jq` (macOS) or `apt install jq` (Linux).
+> "Here's what I got when I ran the script — what went wrong and how do I fix it?"
+> [paste error message]
 
-**"readable: command not found"**
-Install with npm: `npm install -g @peerless/readability-cli`
+Paste the exact error text. Don't paraphrase. Your CLI tool already knows the code it wrote, so it can read the error in context and usually identify the problem immediately.
 
-**API errors from Claude**
-Check that your API key is correct and has credit. Print the full response (remove the `| jq` part) to see error messages.
+**Common situations:**
 
-**Empty article text**
-Some websites block scrapers. Try a different article from a news site that allows scraping.
+**"API key not found" or similar.**
+Your environment variable probably isn't set, or you need to restart your terminal after adding it. Ask: "The script can't find my API key environment variable. What might be wrong?"
+
+**Article content comes back empty.**
+Some sites block automated requests. Ask: "The content extraction step returned empty output for this URL. How do I check whether the site is blocking the request, and what are my options?"
+
+**Output format looks wrong.**
+Paste a sample of the bad output and describe what you expected: "The summary came back as a bulleted list, but I want flowing prose. How do I fix the prompt that generates it?"
+
+**Rate limit errors.**
+Paste the error: "I'm getting rate limit errors. Can you add exponential backoff to the retry logic?"
+
+**The script runs but produces nothing.**
+Ask: "The script completed without errors but the output file is empty. Walk me through how to add debug output so I can see what's happening at each stage."
 
 ---
 
@@ -312,15 +170,11 @@ Some websites block scrapers. Try a different article from a news site that allo
 
 You now have:
 
-1. A script that turns any article URL into a newsletter-ready summary
-2. Experience with piping data between CLI tools
-3. A pattern you can adapt for other workflows
+1. A working pipeline that turns article URLs into newsletter-ready summaries — built by describing the workflow, not writing code
+2. Output you refined by testing on material you already knew and iterating on the prompt until it was right
+3. A script you understand because you reviewed it and directed its construction
 
-Next steps to consider:
-- Add error handling for rate limits
-- Output to different formats (HTML, Markdown, plain text)
-- Integrate with your newsletter platform's API
-- Add a human review step before publishing
+The technique — describe the workflow, let the LLM build it, test on known material, iterate — works for any automation task you'll encounter. Different pipeline, same method.
 
 ---
 
@@ -328,6 +182,6 @@ Next steps to consider:
 
 Post in the exercise forum:
 
-1. A screenshot of your script running successfully
+1. A screenshot of your pipeline running successfully on at least one article
 2. One example newsletter item it generated
-3. One idea for how you'd modify this pipeline for your newsroom
+3. One thing you changed through iteration — what did the first output look like, and what did you describe to your CLI tool to improve it?

@@ -357,6 +357,71 @@ Added concrete plugin/hook examples to Module 3 orientation message and video sc
 - `Module 4/Module 4_ Readings.md`
 - `Introduction Module/Introductory Readings.md`
 
+### 2026-02-18 — Knight Center deliverables, .docx conversion, bio, headshot
+
+**Context:** Resolved all remaining Knight Center submission requirements. Converted placeholder .docx template files to Markdown. Created instructor bio. Added headshot.
+
+**Knight Center template files (.docx → .md):**
+- `Introduction Module (example messages included)/` — 3 Knight Center template .docx files converted to .md using python-docx:
+  - `Introductory Materials for the Introduction Module.md` — was blank placeholder
+  - `Introductory Module_ Welcome Message.md` — was blank placeholder with one example
+  - `Syllabus (Template to follow).md` — was blank template
+- Modules 1/3/4 already had current .md counterparts — their .docx files were deleted as redundant
+- All .docx files removed from repo; .md is the working format
+
+**Instructor bio:**
+- `Biography and Instructor Photo/Instructor Biography.md` — 230-word third-person bio within Knight Center 200-300 word requirement
+- Content: role at CCM since 2015, workshops on prompt engineering, Struggle Street newsletter, daily Claude Code use, GitHub repos, contact info
+- All details sourced from existing course materials — no fabrication
+
+**Headshot:**
+- `Biography and Instructor Photo/joe-amditis-headshot.png` — downloaded from centerforcooperativemedia.org/about/our-team
+- Original was WebP format despite .png extension; converted to proper PNG using Pillow
+
+**Introduction Module/Syllabus.md — Module 4 section synced:**
+- This file had drifted from root SYLLABUS.md — still had "Unix philosophy applied to AI" framing
+- Synced Module 4 section to match root SYLLABUS.md (LLM-first framing)
+- Risk note: two syllabus files need manual syncing when content changes
+
+**Files updated/created (5):**
+- `Biography and Instructor Photo/Instructor Biography.md` (new)
+- `Biography and Instructor Photo/joe-amditis-headshot.png` (new)
+- `Introduction Module (example messages included)/Introductory Materials for the Introduction Module.md`
+- `Introduction Module (example messages included)/Introductory Module_ Welcome Message.md`
+- `Introduction Module (example messages included)/Syllabus (Template to follow).md`
+- `Introduction Module/Syllabus.md` (Module 4 section synced)
+- All .docx files removed from repo
+
+### 2026-02-18 — Module 4 Exercise rewrite
+
+**Context:** Module 4 Exercise was entirely shell-syntax focused — directly contradicted the LLM-first reframe made to the orientation, syllabus, and readings. The orientation says "you won't write shell code — you'll describe what you want to automate, Claude Code will write the implementation." The exercise had students writing raw bash at every step (curl, jq, chmod, bash scripts, crontab). Complete rewrite needed.
+
+**What the old exercise taught:**
+- Manual curl/jq installation and invocation
+- API calls with raw curl + JSON escaping + jq filters
+- Writing a `summarize-article.sh` bash script by hand
+- Batch processing with a bash while loop
+- Crontab scheduling
+- "What you built: Experience with piping data between CLI tools"
+
+**What the new exercise teaches:**
+- Describe the full pipeline to your CLI LLM; let it build the script
+- Review the script before running it (security practice)
+- Store API key via environment variable — ask CLI tool how
+- Test on known material (callback to Module 3 principle)
+- Iterate by describing problems, not by editing code directly
+- Add rate limiting by describing the requirement
+- Add batch processing by describing the requirement
+- Add checkpointing (optional) by describing the requirement
+- Troubleshoot using the paste-error feedback loop
+
+**The pipeline concept (fetch → extract → summarize → format) is unchanged.** Only the method flipped: students direct the LLM to build it, then review, test, and refine.
+
+**Submit prompt updated:** Now asks for evidence of iteration (what did first output look like; what did you describe to improve it) — not just "here's a screenshot."
+
+**Files updated (1):**
+- `Module 4/Module 4_ Exercise.md` — complete rewrite
+
 ## Current status
 
 - All 5 modules complete with strengthened content
@@ -367,6 +432,7 @@ Added concrete plugin/hook examples to Module 3 orientation message and video sc
 - Module 3 hooks section expanded: notify vs. stop hooks, one-way door concept, one-way-door-check and Superpowers as concrete examples
 - Module 3 exercise expanded: hook exploration + write-your-own-skill added
 - Module 4 orientation message reframed: LLM-first, not terminal-skills
+- Module 4 exercise rewritten: LLM-first framing throughout; no manual bash code
 - Module 5 capstone section added: "your project is infrastructure" names all 5 layers and closes the context engineering arc
 - Module 5 RAG section: journalism attribution rule added ("if you can't cite it, don't publish it")
 - Module 5 MCP section: infrastructure framing added (commit the config, clone gets the connections)
@@ -381,6 +447,7 @@ Added concrete plugin/hook examples to Module 3 orientation message and video sc
 - VIDEO_SCRIPTS.md Module 5: journalism citation rule added to Video 1; infrastructure call-out added to Video 2 GitHub reveal
 - Module 4 SYLLABUS and readings overhauled to match LLM-first orientation framing
 - Introduction Module introductory readings file created (Mollick + Reuters Institute)
+- Knight Center deliverables: instructor bio (230 words), headshot (PNG from CCM website), .docx templates converted to .md
 - Compliance audit complete: all content gaps resolved except video production
 
 ## Key files
