@@ -17,7 +17,23 @@ Pay attention to:
 - Why "auto" mode typically underperforms manually selecting a model
 - The shift from "conversing with AI" to "delegating to AI" — this is the central idea of the course
 
-### 2. Official documentation (pick one tool to start)
+### 2. A journalist building newsroom tools without a coding background
+
+**"Vibe coding for newsrooms"** — Joe Amditis, Generative AI in the Newsroom, December 2025
+https://generative-ai-newsroom.com/vibe-coding-for-newsrooms-6848b17dac99
+
+*Reading time: 10 minutes*
+
+The course instructor describes building newsroom tools with Claude Code and Gemini CLI without a formal coding background. The central argument: the skills that matter for this work aren't technical — they're project management. Clear requirements, direct feedback, organized documentation. These are skills journalists already have.
+
+Pay attention to:
+- Why planning mode matters before writing any code
+- How to describe what you want precisely enough for the tool to act
+- The difference between "vibe coding" (managing the AI) and traditional coding (writing the code yourself)
+
+---
+
+### 3. Official documentation (pick one tool to start)
 
 Choose the tool you plan to install and read its getting started guide:
 
@@ -31,7 +47,7 @@ Choose the tool you plan to install and read its getting started guide:
   - OpenAI's terminal tool. Requires ChatGPT Plus subscription.
 
 
-### 2. Why the command line matters for journalists
+### 4. Why the command line matters for journalists
 
 - Simon Willison, "CLI tools are having a renaissance"
   - https://simonwillison.net/2024/Mar/22/cli-tools/
@@ -41,7 +57,7 @@ Choose the tool you plan to install and read its getting started guide:
   - https://ethanmarcotte.com/wrote/ai-and-the-command-line/
   - Practical perspective on when terminal tools beat web interfaces.
 
-### 3. Terminal basics (if needed)
+### 5. Terminal basics (if needed)
 
 If you are new to the command line:
 

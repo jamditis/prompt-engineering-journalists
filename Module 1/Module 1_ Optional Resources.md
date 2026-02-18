@@ -4,6 +4,16 @@
 
 These are not required but may be useful depending on your interests and experience level.
 
+### Further reading on Mollick's work
+
+Ethan Mollick's framework (models / apps / harnesses) runs through this entire course. If the required readings sparked your interest, a curated list of his other articles is available in the course resources:
+
+**Mollick reading list** — `Resources/mollick-reading-list.md`
+
+Organized by theme: getting started, working methods, agents and automation, AI capabilities and limits, and education. Each entry includes a direct link and a brief description of why it's relevant to journalism work.
+
+---
+
 ### Deeper dives on CLI AI tools
 
 - **Simon Willison's LLM CLI tool**

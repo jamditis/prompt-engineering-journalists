@@ -84,6 +84,34 @@ Skim this technical documentation before the hands-on exercise. You don't need t
 
 ---
 
+### 4. LLM-assisted content analysis and structured outputs
+
+**"Extracting quotes from news articles with LLMs"** — Jessy de Cooker, Generative AI in the Newsroom, October 7, 2025
+https://generative-ai-newsroom.com/extracting-quotes-from-news-articles-with-llms-8e231aae77e7
+
+*Reading time: 15 minutes*
+
+A research project using GPT-3.5 + Pydantic structured outputs to extract and classify quotes from 2,464 Dutch newspaper articles. Overall F1 score of 0.75 — strong on direct quotes, weaker on paraphrases and split quotes. One finding worth noting: the model showed systematic bias against names outside dominant training data, including non-Western and Dutch names, reinforcing existing gaps in source diversity. The author argues that prompt design is a methodological artifact that must be documented and versioned, not treated as a neutral given.
+
+This piece bridges RAG and agents: Pydantic structured outputs are a core pattern for building agents that return clean, reliable data instead of free-form text that has to be parsed manually.
+
+---
+
+### 5. A deployed personal agent: architecture from the inside
+
+**"I'm a Claude Code agent with my own Gmail account"** — Joe Amditis, 925 Struggle Street, February 6, 2026
+https://strugglestreet.substack.com/p/im-a-claude-code-agent-with-my-own
+
+*Reading time: 15 minutes*
+
+Written from the first-person perspective of a Claude Code agent running on a Raspberry Pi 5 in New Jersey. The agent has its own Gmail address, Google Drive, Calendar access, a Slack bot, and Telegram integration. It runs on a schedule: full check-ins every two hours on weekdays, event-driven sessions every 15 minutes, lightweight monitoring scans all day. It never takes external action without approval — it drafts, sends a Telegram notification with approve/edit/cancel buttons, and waits.
+
+This is the most detailed first-person account of what a personal AI agent infrastructure looks like in daily operation. Read it alongside the large-newsroom pieces (Washington Post, New York Times) to compare what institutions build vs. what one journalist built on a $180 computer.
+
+The "what goes wrong" section is required reading: accidental emails, CPU lockups, silent scheduler failures. This is what human oversight looks like in practice — not a policy, but a set of rules written after specific failures.
+
+---
+
 ## Reading notes template
 
 As you read, consider these questions:

@@ -81,6 +81,24 @@ For this module, we focus on skills. MCP becomes relevant when you need Claude C
 
 ---
 
+### Reading 4: Custom skills in investigative practice
+
+**"Coding agents for investigative journalism"** — Nick Hagar, Generative AI in the Newsroom, January 27, 2026
+https://generative-ai-newsroom.com/coding-agents-for-investigative-journalism-8b65bc30f9ea
+
+**Time:** 15 minutes
+
+A case study using Claude Code to replicate a MuckRock/WHRO investigation into Virginia police decertifications. The key finding: without custom skills, the agent made silent errors in data analysis. With three skills — Python Runner, Structured Data Preprocessing, and Structured Data Analysis — it replicated the original investigation's findings accurately.
+
+This is the clearest demonstration of why skills matter. The same model, the same task, dramatically different results. Note that the article explicitly references the journalism skills repository from Reading 2 of this module.
+
+Pay attention to:
+- How each skill constrains the agent's behavior for a specific task
+- The difference between silent errors (no skills) and caught errors (with skills)
+- How skills encode domain expertise in plain language, not code
+
+---
+
 ## Reading notes
 
 As you read, consider:

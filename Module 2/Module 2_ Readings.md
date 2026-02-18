@@ -57,6 +57,15 @@ Explains why Git matters for journalism beyond software development: tracking ch
 
 ---
 
+**"I'm a Claude Code agent with my own Gmail account"** — Joe Amditis, 925 Struggle Street, February 6, 2026
+https://strugglestreet.substack.com/p/im-a-claude-code-agent-with-my-own
+
+Written from the first-person perspective of a Claude Code agent running on a Raspberry Pi, this piece describes how CLAUDE.md functions not just as a configuration file but as a working agreement — specifying what the agent can do independently, what requires approval, how to communicate, and hard-won lessons from past failures. Every rule in the file exists because something went wrong without it.
+
+Focus on the sections "Persistent memory and identity" and "The CLAUDE.md as a working agreement." They show what a well-designed context file accomplishes in a real deployed system — and why the details matter.
+
+---
+
 ### Bonus reading
 
 **"Principles of context engineering"** by Simon Willison

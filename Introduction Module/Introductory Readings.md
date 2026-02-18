@@ -35,6 +35,20 @@ Focus on the sections covering AI in content production, workflow automation, an
 
 ---
 
+### 3. Claude Code and what comes next
+
+**Author:** Ethan Mollick, Wharton School, University of Pennsylvania
+**Source:** One Useful Thing (Substack)
+**URL:** https://www.oneusefulthing.org/p/claude-code-and-what-comes-next
+**Published:** January 7, 2026
+**Time:** 15 minutes
+
+Mollick describes what happened when he gave Claude Code open-ended tasks — not "write me a prompt" but "build me a working business plan, a startup concept, a game" — and watched it complete them with minimal direction. He's a professor, not a developer, and that's the point: CLI tools like Claude Code are now usable by people who can't code.
+
+This piece shows what the harness layer actually looks like in practice. You'll understand it better after Module 1, but read it now to see where the course is headed.
+
+---
+
 ## What to notice as you read
 
 The 101 course taught you to use AI through chat interfaces — that's the app layer. Pay attention to moments in both readings where the authors describe limitations of that approach: context that evaporates, tasks that require copy-pasting, workflows that can't be automated. Those limitations are what Module 1 addresses.
