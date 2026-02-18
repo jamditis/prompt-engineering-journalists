@@ -112,19 +112,19 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 
 ### Module 4: CLI workflows for newsrooms
 
-**Focus:** The Unix philosophy applied to AI — small tools connected by pipes
+**Focus:** Describe the workflow in plain English — let the LLM build the automation
 
 **Topics:**
 
-* From no-code automation to scripted CLI pipelines  
-* Multi-stage processing: fetch, clean, analyze, format  
-* Cost-conscious AI operations (test small before running big)  
-* Checkpoint/resume and rate limiting  
-* API key management and security
+* From no-code automation to LLM-built workflow scripts
+* Describing multi-stage pipelines: fetch, clean, analyze, format
+* Testing small before running large — why this matters in batch work
+* Checkpoint/resume and rate limiting
+* API key security and cost-conscious AI operations
 
 **Activities:**
 
-* Required readings: Unix philosophy, shell basics, curl, jq  
+* Required readings: Automated journalism in practice, API key security, handling LLM errors and rate limits
 * Exercise: Build an article-to-newsletter pipeline  
 * Discussion (choose one): What repeating task in your newsroom would benefit most from a scripted pipeline? Or: What are the risks of automating editorial workflows, and how would you mitigate them?  
 * Quiz

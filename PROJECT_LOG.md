@@ -317,6 +317,46 @@ Added concrete plugin/hook examples to Module 3 orientation message and video sc
 - `Module 3/Module 3_ Orientation Message.md` (examples added)
 - `VIDEO_SCRIPTS.md` (Module 3 Video 1 hooks section expanded)
 
+### 2026-02-18 — Compliance audit and Module 4 readings overhaul
+
+**Context:** Full compliance audit against Knight Center MOOC checklist and narrative coherence review across all 5 modules. Key finding: Modules 2 and 3 readings were actually complete (audit agent was wrong); Module 4 readings were shell-syntax focused and directly contradicted the reframed LLM-first orientation; Introduction Module was missing introductory readings.
+
+**Audit findings (resolved):**
+- Modules 2 & 3 readings: present and well-populated — no changes needed
+- Module 4 SYLLABUS vs. orientation mismatch: SYLLABUS still said "Unix philosophy applied to AI / curl / jq"; orientation says "you won't write shell code" — fixed
+- Introduction Module missing introductory readings: created
+- Bio exists as .docx in "Biography and Instructor Photo" folder — fine for Knight Center submission; instructor bio is also embedded in Welcome Message
+
+**SYLLABUS.md Module 4:**
+- Focus line: "Unix philosophy applied to AI — small tools connected by pipes" → "Describe the workflow in plain English — let the LLM build the automation"
+- Topics: "scripted CLI pipelines" → "LLM-built workflow scripts"
+- Readings line: "Unix philosophy, shell basics, curl, jq" → "Automated journalism in practice, API key security, handling LLM errors and rate limits"
+
+**Module 4_ Readings.md (full replacement):**
+- Removed: 5 shell-syntax readings (~1.5 hrs) — Unix philosophy (ESR), Command Line Crash Course, Pipes and Filters (Software Carpentry), curl tutorial, jq manual
+- Added: 3 journalism-focused readings (~50 min):
+  1. AP automated journalism piece (what's worth automating; automation decision framework)
+  2. 12factor.net/config (API key security — store config in environment; 5 min, confirmed real URL)
+  3. Anthropic API errors reference (rate limits, error handling patterns; students can verify Claude Code's implementation)
+
+**Introduction Module/Introductory Readings.md (new file):**
+- Created with 2 pre-course readings:
+  1. Ethan Mollick's "A Guide to Which AI to Use in the Agentic Era" (already in Module 1; also serves as intro framing)
+  2. Reuters Institute Journalism, Media and Technology Trends 2025 (AI sections; shows where newsrooms are vs. where practitioners are heading)
+- Closing note directs students to watch for limitations of chat/app layer — the limitations this course addresses
+
+**Compliance status after fixes:**
+- Introduction Module: ✓ readings now present
+- Module 4 SYLLABUS: ✓ aligned with orientation
+- Module 4 readings: ✓ aligned with LLM-first framing
+- All other modules: already complete per previous audit
+- Videos: scripts complete, production needed before launch
+
+**Files updated/created (3):**
+- `SYLLABUS.md`
+- `Module 4/Module 4_ Readings.md`
+- `Introduction Module/Introductory Readings.md`
+
 ## Current status
 
 - All 5 modules complete with strengthened content
@@ -339,6 +379,9 @@ Added concrete plugin/hook examples to Module 3 orientation message and video sc
 - Module 2 exercise expanded: hard-won lessons added as required section 6 in CLAUDE.md template
 - VIDEO_SCRIPTS.md: 12 video outlines with LLM-first framing, project arc, crisis/recovery in Module 4, paste-error workflow in Modules 1 and 4
 - VIDEO_SCRIPTS.md Module 5: journalism citation rule added to Video 1; infrastructure call-out added to Video 2 GitHub reveal
+- Module 4 SYLLABUS and readings overhauled to match LLM-first orientation framing
+- Introduction Module introductory readings file created (Mollick + Reuters Institute)
+- Compliance audit complete: all content gaps resolved except video production
 
 ## Key files
 
