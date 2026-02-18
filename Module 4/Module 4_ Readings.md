@@ -6,21 +6,7 @@ Complete these readings before starting the exercise. They don't require any pro
 
 ---
 
-### 1. How the AP uses automation for high-volume reporting
-
-**"The Associated Press' journey with automated journalism"** — AP Blog
-https://blog.ap.org/products-and-services/automated-journalism-expanding-ap-s-earnings-reports-coverage
-*(Instructor: verify this URL before publishing — the AP blog occasionally reorganizes. If broken, search "AP automated journalism earnings reports" for the current link.)*
-
-The AP uses automation to publish thousands of earnings reports, sports recaps, and data-driven stories each year — more than any human team could produce. This piece explains how they decide what's worth automating (high volume, consistent structure, clear data source) and what isn't (anything requiring editorial judgment or original reporting).
-
-Read it to understand the automation decision framework before you describe your own workflow. The question "is this worth automating?" matters more than "can the LLM build this?"
-
-**Time:** 15 minutes
-
----
-
-### 2. Store config in the environment
+### 1. Store config in the environment
 
 **"The Twelve-Factor App: Config (Factor III)"**
 https://12factor.net/config
@@ -35,7 +21,7 @@ The principle applies whether you write the code yourself or have Claude Code wr
 
 ---
 
-### 3. Errors, rate limits, and what to do about them
+### 2. Errors, rate limits, and what to do about them
 
 **Claude Code API errors reference** — Anthropic Documentation
 https://docs.anthropic.com/en/api/errors
@@ -48,7 +34,7 @@ The patterns here — exponential backoff, retry logic, graceful degradation —
 
 ---
 
-### 4. Real pipeline results: beat monitoring and translation
+### 3. Real pipeline results: beat monitoring and translation
 
 **"Augmented beat reporting: where LLMs excel and where reporters still win"** — Nick Hagar, Generative AI in the Newsroom, October 28, 2025
 https://generative-ai-newsroom.com/augmented-beat-reporting-where-llms-excel-and-where-reporters-still-win-135decbe8675
@@ -85,7 +71,7 @@ Simon Willison writes practical, non-hype coverage of working with LLMs in real 
 
 As you read, think about:
 
-1. What recurring task in your own work fits the AP's automation criteria: high volume, consistent structure, clear data source?
+1. What recurring task in your own work is a good automation candidate: high volume, consistent structure, clear data source?
 2. Where do your API keys currently live? (Hint: if the answer is "in a text file somewhere," that's worth changing.)
 3. What would you do if your pipeline failed halfway through processing 50 documents?
 

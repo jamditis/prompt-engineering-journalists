@@ -10,7 +10,7 @@ Complete these before Module 1 starts. They aren't about tools or techniques —
 
 **Author:** Ethan Mollick, Wharton School, University of Pennsylvania
 **Source:** One Useful Thing (Substack)
-**URL:** https://www.oneusefulthing.org/p/a-guide-to-which-ai-to-use-agentic
+**URL:** https://www.oneusefulthing.org/p/a-guide-to-which-ai-to-use-in-the
 **Time:** 20 minutes
 
 Mollick argues that we're in a transition from AI as conversational tools to AI as agents that take actions on your behalf. He introduces a framework that runs through this entire course: **models** (the underlying intelligence), **apps** (the chat interfaces you've been using), and **harnesses** (CLI tools that let AI act on files and systems).

@@ -16,14 +16,14 @@ How Claude Code reads and applies CLAUDE.md files. Covers file location, inherit
 ---
 
 **Gemini CLI customization** by Google
-https://github.com/google-gemini/gemini-cli/blob/main/docs/customization.md
+https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/gemini-md.md
 
 How Gemini CLI reads GEMINI.md files and other configuration. Useful for understanding how the same context concept works in a different tool.
 
 ---
 
 **OpenAI Codex AGENTS.md documentation** by OpenAI
-https://github.com/openai/codex/blob/main/docs/AGENTS.md
+https://github.com/openai/codex/blob/main/AGENTS.md
 
 How Codex CLI reads AGENTS.md files for project instructions. The third implementation of the same pattern — write a file, the tool reads it.
 
@@ -47,13 +47,6 @@ Covers patterns for working with LLMs in production, including the importance of
 https://docs.github.com/en/get-started/start-your-journey/hello-world
 
 A short walkthrough of GitHub's core concepts: repositories, branches, commits, and pull requests. You don't need to complete every step — read it to understand the vocabulary. When your CLI tool creates a repo or makes a commit, this is what's happening.
-
----
-
-**"Why journalists should understand version control"** by Jonathan Stray
-https://source.opennews.org/articles/version-control-journalists/
-
-Explains why Git matters for journalism beyond software development: tracking changes to stories, collaborating on investigations, maintaining audit trails, and sharing reusable tools. Short and practical.
 
 ---
 

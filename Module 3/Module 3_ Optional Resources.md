@@ -50,6 +50,15 @@ A 12-minute walkthrough showing the data-journalism skill applied to FEC filings
 
 ---
 
+### Skills in practice
+
+**"Claude skills are awesome, maybe a bigger deal than MCP"** — Simon Willison
+https://simonwillison.net/2025/Oct/16/claude-skills/
+
+Willison's take on why skills represent something qualitatively different from other Claude customization features. He argues that the ability to package domain expertise into reusable, shareable instructions is more practically significant for most users than the more technically complex MCP system. Good context for understanding why this week's work matters.
+
+---
+
 ### Building your own skills
 
 **"Custom slash commands" — Claude Code documentation**

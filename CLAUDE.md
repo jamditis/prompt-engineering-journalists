@@ -94,7 +94,7 @@ All 5 modules + Introduction module have complete 8-document sets. Readings are 
 - **Author diversity**: Clare Spencer, Jessy de Cooker included; agent research targeted Vicki Boykis, Hilke Schellmann, Meredith Broussard, Rachel Thomas, Joy Buolamwini, Rumman Chowdhury
 
 ### Pending work
-- **Optional resources readings**: Willison "Claude Skills are awesome" (Oct 2025), Doctorow skeptical AI piece (Sep 2025), Jesse Vincent "Superpowers" (Oct 2025) — bookmarked candidates not yet added to optional resources files
+- **Optional resources readings**: ~~Willison "Claude Skills are awesome" (Oct 2025), Doctorow skeptical AI piece (Sep 2025), Jesse Vincent "Superpowers" (Oct 2025)~~ — added: Willison to Module 3, Vincent + Doctorow to Module 5
 - **URL verification**: existing reading URLs across all modules have not been verified as live
 - **Exercise solution keys**: grader model answers not yet written for any module
 - **Syllabus sync**: `SYLLABUS.md` (root) and `Introduction Module/Syllabus.md` are separate files that may have drifted out of sync

@@ -88,6 +88,22 @@ Annual forecast covering AI adoption in newsrooms, including agent-based tools a
 
 ---
 
+## Practitioner perspectives
+
+**"Superpowers: how I'm using coding agents in October 2025"** — Jesse Vincent
+https://blog.fsck.com/2025/10/09/superpowers/
+
+A working developer's account of integrating coding agents into daily work. Less theoretical than the academic papers in this module — Vincent describes specific tasks he's delegating to agents and what breaks down at the edges. Useful for calibrating expectations before the exercise.
+
+---
+
+**"AI psychosis and the warped mirror"** — Cory Doctorow, Pluralistic
+https://pluralistic.net/2025/09/17/automating-gang-stalking-delusion/
+
+A skeptical take on the gap between AI capability claims and documented harms, particularly around agentic systems given autonomous authority. Doctorow's argument: the danger isn't superintelligence, it's that we're building systems that confidently automate bad reasoning at scale. Worth reading before designing any agent-based workflow.
+
+---
+
 ## Tools to explore
 
 **Claude Code**
