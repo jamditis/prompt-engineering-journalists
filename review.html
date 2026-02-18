@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course review — Advanced prompt engineering for journalists</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --border: #2a2d3a;
+    --text: #d4d8e8;
+    --muted: #6b7280;
+    --accent: #7c6af7;
+    --accent-dim: #3d3570;
+    --green: #34d399;
+    --yellow: #fbbf24;
+    --red: #f87171;
+    --sidebar-w: 280px;
+    --header-h: 52px;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  header {
+    height: var(--header-h);
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 12px;
+    flex-shrink: 0;
+    z-index: 10;
+  }
+
+  header h1 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  header .pill {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: var(--accent-dim);
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .header-btns { display: flex; gap: 8px; }
+
+  .btn {
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all .15s;
+  }
+  .btn:hover { background: var(--border); color: var(--text); }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { opacity: .85; }
+
+  .layout { display: flex; flex: 1; overflow: hidden; }
+
+  aside {
+    width: var(--sidebar-w);
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .search-wrap {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .search-wrap input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+    color: var(--text);
+    outline: none;
+  }
+  .search-wrap input::placeholder { color: var(--muted); }
+  .search-wrap input:focus { border-color: var(--accent); }
+
+  .tree { flex: 1; overflow-y: auto; padding: 8px 0; }
+  .tree::-webkit-scrollbar { width: 4px; }
+  .tree::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .group { margin-bottom: 2px; }
+
+  .group-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    cursor: pointer;
+    user-select: none;
+    transition: color .15s;
+  }
+  .group-header:hover { color: var(--text); }
+  .group-header .arrow { font-size: 9px; transition: transform .2s; margin-left: auto; }
+  .group.open .arrow { transform: rotate(90deg); }
+
+  .group-files { display: none; }
+  .group.open .group-files { display: block; }
+
+  .file-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px 5px 22px;
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+    border-left: 2px solid transparent;
+    transition: all .15s;
+    line-height: 1.3;
+  }
+  .file-item:hover { color: var(--text); background: rgba(124,106,247,.08); }
+  .file-item.active { color: var(--accent); background: rgba(124,106,247,.12); border-left-color: var(--accent); }
+  .note-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--yellow);
+    flex-shrink: 0;
+    margin-left: auto;
+    display: none;
+  }
+  .file-item.has-note .note-dot { display: block; }
+
+  main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+  .content-header {
+    padding: 12px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    background: var(--surface);
+  }
+
+  .breadcrumb { font-size: 12px; color: var(--muted); flex: 1; }
+  .breadcrumb strong { color: var(--text); }
+
+  .status-badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    display: none;
+  }
+  .status-badge.saved { background: rgba(52,211,153,.12); color: var(--green); display: inline; }
+  .status-badge.unsaved { background: rgba(251,191,36,.12); color: var(--yellow); display: inline; }
+
+  .panels { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+
+  .md-pane { flex: 1; overflow-y: auto; padding: 32px 40px; }
+  .md-pane::-webkit-scrollbar { width: 6px; }
+  .md-pane::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .md-pane h1 { font-size: 22px; font-weight: 700; margin-bottom: 16px; color: #fff; line-height: 1.3; }
+  .md-pane h2 { font-size: 17px; font-weight: 600; margin: 28px 0 10px; color: #e2e4f0; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+  .md-pane h3 { font-size: 14px; font-weight: 600; margin: 20px 0 8px; color: #c4c8dc; }
+  .md-pane h4 { font-size: 13px; font-weight: 600; margin: 16px 0 6px; color: var(--muted); }
+  .md-pane p { font-size: 14px; line-height: 1.7; margin-bottom: 12px; color: var(--text); }
+  .md-pane ul, .md-pane ol { padding-left: 20px; margin-bottom: 12px; }
+  .md-pane li { font-size: 14px; line-height: 1.7; margin-bottom: 4px; color: var(--text); }
+  .md-pane a { color: var(--accent); text-decoration: none; }
+  .md-pane a:hover { text-decoration: underline; }
+  .md-pane code { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; background: rgba(255,255,255,.06); padding: 2px 5px; border-radius: 3px; color: #a5d8ff; }
+  .md-pane pre { background: #0d0f18; border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin: 14px 0; overflow-x: auto; }
+  .md-pane pre code { background: none; padding: 0; color: #cdd6f4; font-size: 13px; line-height: 1.6; }
+  .md-pane blockquote { border-left: 3px solid var(--accent); padding-left: 14px; margin: 14px 0; color: var(--muted); font-style: italic; }
+  .md-pane hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+  .md-pane table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 13px; }
+  .md-pane th { background: rgba(124,106,247,.12); color: var(--accent); font-weight: 600; padding: 8px 12px; text-align: left; border: 1px solid var(--border); }
+  .md-pane td { padding: 7px 12px; border: 1px solid var(--border); }
+  .md-pane tr:nth-child(even) { background: rgba(255,255,255,.02); }
+  .md-pane strong { color: #fff; font-weight: 600; }
+  .md-pane del { color: var(--muted); }
+
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--muted);
+    gap: 8px;
+  }
+  .empty-state .icon { font-size: 36px; }
+  .empty-state p { font-size: 13px; }
+
+  .notes-pane { border-top: 1px solid var(--border); background: var(--surface); flex-shrink: 0; }
+
+  .notes-header {
+    display: flex;
+    align-items: center;
+    padding: 8px 24px;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid transparent;
+  }
+  .notes-header.open { border-bottom-color: var(--border); }
+  .notes-header span { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; flex: 1; }
+  .notes-toggle { font-size: 11px; color: var(--muted); }
+
+  .notes-body { display: none; padding: 12px 24px 16px; }
+  .notes-body.open { display: block; }
+
+  textarea#notes {
+    width: 100%;
+    height: 120px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--text);
+    resize: vertical;
+    outline: none;
+    line-height: 1.6;
+    font-family: inherit;
+  }
+  textarea#notes::placeholder { color: var(--muted); }
+  textarea#notes:focus { border-color: var(--accent); }
+  .notes-hint { margin-top: 6px; font-size: 11px; color: var(--muted); }
+
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.7);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    width: 680px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    gap: 10px;
+  }
+  .modal-header h2 { font-size: 15px; font-weight: 600; flex: 1; }
+  .modal-close { background: none; border: none; color: var(--muted); font-size: 18px; cursor: pointer; padding: 0 4px; }
+  .modal-close:hover { color: var(--text); }
+
+  .modal-body { flex: 1; overflow-y: auto; padding: 16px 20px; }
+  .modal-body::-webkit-scrollbar { width: 4px; }
+  .modal-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .note-entry { margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .note-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .note-file-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 6px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+  }
+  .note-file-label:hover { text-decoration: underline; }
+
+  .note-text {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    background: var(--bg);
+    border-radius: 6px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+  }
+
+  .no-notes { font-size: 13px; color: var(--muted); text-align: center; padding: 40px 0; }
+
+  .modal-footer {
+    padding: 12px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Advanced prompt engineering for journalists</h1>
+  <span class="pill">Knight Center · MOOC review</span>
+  <div class="header-btns">
+    <button class="btn" id="btn-all-notes">All notes</button>
+    <button class="btn" id="btn-export">Export notes</button>
+    <button class="btn primary" id="btn-clear">Clear note</button>
+  </div>
+</header>
+
+<div class="layout">
+  <aside>
+    <div class="search-wrap">
+      <input type="text" id="search" placeholder="Filter files…">
+    </div>
+    <nav class="tree" id="tree"></nav>
+  </aside>
+
+  <main>
+    <div class="content-header">
+      <div class="breadcrumb" id="breadcrumb">Select a file to begin</div>
+      <span class="status-badge" id="status-badge"></span>
+    </div>
+    <div class="panels">
+      <div class="md-pane" id="content">
+        <div class="empty-state">
+          <div class="icon">📄</div>
+          <p>Select a file from the sidebar to read it</p>
+          <p style="margin-top:4px;font-size:11px;">Notes auto-save to your browser · Cmd+S to save immediately</p>
+        </div>
+      </div>
+      <div class="notes-pane">
+        <div class="notes-header open" id="notes-header">
+          <span>Notes &amp; feedback</span>
+          <span class="notes-toggle" id="notes-toggle">▲ hide</span>
+        </div>
+        <div class="notes-body open" id="notes-body">
+          <textarea id="notes" placeholder="Select a file to start taking notes…" disabled></textarea>
+          <div class="notes-hint">Auto-saved to browser localStorage · persists between sessions</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>All notes</h2>
+      <button class="modal-close" id="modal-close">×</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer">
+      <button class="btn" id="btn-export-modal">Export as text</button>
+      <button class="btn" id="btn-close-modal">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const FILES = [
+  {
+    group: "Introduction module",
+    files: [
+      { label: "Welcome message",        path: "Introduction Module/Welcome Message.md" },
+      { label: "Syllabus",               path: "Introduction Module/Syllabus.md" },
+      { label: "Course requirements",    path: "Introduction Module/Course Requirements.md" },
+      { label: "Getting help",           path: "Introduction Module/Getting Help.md" },
+      { label: "Introductory readings",  path: "Introduction Module/Introductory Readings.md" },
+    ]
+  },
+  {
+    group: "Module 1: Escaping the chat window",
+    files: [
+      { label: "Orientation message",    path: "Module 1/Module 1_ Orientation Message.md" },
+      { label: "Midweek message",        path: "Module 1/Module 1_ Midweek Message.md" },
+      { label: "End of week message",    path: "Module 1/Module 1_ End of the Week Message.md" },
+      { label: "Readings",               path: "Module 1/Module 1_ Readings.md" },
+      { label: "Optional resources",     path: "Module 1/Module 1_ Optional Resources.md" },
+      { label: "Discussion forums",      path: "Module 1/Module 1_ Discussion Forums.md" },
+      { label: "Quiz",                   path: "Module 1/Module 1_ Quiz.md" },
+      { label: "Exercise",               path: "Module 1/Module 1_ Exercise.md" },
+      { label: "Exercise solution key",  path: "Module 1/Module 1_ Exercise Solution Key.md" },
+    ]
+  },
+  {
+    group: "Module 2: Prompting with files",
+    files: [
+      { label: "Orientation message",    path: "Module 2/Module 2_ Orientation Message.md" },
+      { label: "Midweek message",        path: "Module 2/Module 2_ Midweek Message.md" },
+      { label: "End of week message",    path: "Module 2/Module 2_ End of the Week Message.md" },
+      { label: "Readings",               path: "Module 2/Module 2_ Readings.md" },
+      { label: "Optional resources",     path: "Module 2/Module 2_ Optional Resources.md" },
+      { label: "Discussion forums",      path: "Module 2/Module 2_ Discussion Forums.md" },
+      { label: "Quiz",                   path: "Module 2/Module 2_ Quiz.md" },
+      { label: "Exercise",               path: "Module 2/Module 2_ Exercise.md" },
+      { label: "Exercise solution key",  path: "Module 2/Module 2_ Exercise Solution Key.md" },
+    ]
+  },
+  {
+    group: "Module 3: Custom skills",
+    files: [
+      { label: "Orientation message",    path: "Module 3/Module 3_ Orientation Message.md" },
+      { label: "Midweek message",        path: "Module 3/Module 3_ Midweek Message.md" },
+      { label: "End of week message",    path: "Module 3/Module 3_ End of the Week Message.md" },
+      { label: "Readings",               path: "Module 3/Module 3_ Readings.md" },
+      { label: "Optional resources",     path: "Module 3/Module 3_ Optional Resources.md" },
+      { label: "Discussion forums",      path: "Module 3/Module 3_ Discussion Forums.md" },
+      { label: "Quiz",                   path: "Module 3/Module 3_ Quiz.md" },
+      { label: "Exercise",               path: "Module 3/Module 3_ Exercise.md" },
+      { label: "Exercise solution key",  path: "Module 3/Module 3_ Exercise Solution Key.md" },
+    ]
+  },
+  {
+    group: "Module 4: CLI workflows",
+    files: [
+      { label: "Orientation message",    path: "Module 4/Module 4_ Orientation Message.md" },
+      { label: "Midweek message",        path: "Module 4/Module 4_ Midweek Message.md" },
+      { label: "End of week message",    path: "Module 4/Module 4_ End of the Week Message.md" },
+      { label: "Readings",               path: "Module 4/Module 4_ Readings.md" },
+      { label: "Optional resources",     path: "Module 4/Module 4_ Optional Resources.md" },
+      { label: "Discussion forums",      path: "Module 4/Module 4_ Discussion Forums.md" },
+      { label: "Quiz",                   path: "Module 4/Module 4_ Quiz.md" },
+      { label: "Exercise",               path: "Module 4/Module 4_ Exercise.md" },
+      { label: "Exercise solution key",  path: "Module 4/Module 4_ Exercise Solution Key.md" },
+    ]
+  },
+  {
+    group: "Module 5: Agents and RAG",
+    files: [
+      { label: "Orientation message",    path: "Module 5/Module 5_ Orientation Message.md" },
+      { label: "Midweek message",        path: "Module 5/Module 5_ Midweek Message.md" },
+      { label: "End of week message",    path: "Module 5/Module 5_ End of the Week Message.md" },
+      { label: "Readings",               path: "Module 5/Module 5_ Readings.md" },
+      { label: "Optional resources",     path: "Module 5/Module 5_ Optional Resources.md" },
+      { label: "Discussion forums",      path: "Module 5/Module 5_ Discussion Forums.md" },
+      { label: "Quiz",                   path: "Module 5/Module 5_ Quiz.md" },
+      { label: "Exercise",               path: "Module 5/Module 5_ Exercise.md" },
+      { label: "Exercise solution key",  path: "Module 5/Module 5_ Exercise Solution Key.md" },
+    ]
+  },
+  {
+    group: "Final project",
+    files: [
+      { label: "Guidelines",              path: "Final Project/Final Project Guidelines.md" },
+      { label: "Project proposal template", path: "Final Project/Project Proposal Template.md" },
+      { label: "Example projects",        path: "Final Project/Example Projects.md" },
+    ]
+  },
+  {
+    group: "Resources",
+    files: [
+      { label: "Mollick reading list",   path: "Resources/mollick-reading-list.md" },
+      { label: "Course checklist",       path: "COURSE_CHECKLIST.md" },
+      { label: "Syllabus",               path: "SYLLABUS.md" },
+      { label: "README",                 path: "README.md" },
+    ]
+  }
+];
+
+let currentPath = null;
+let saveTimer = null;
+
+// ── localStorage helpers ──────────────────────────────────────────────────────
+
+function getNoteFor(path) {
+  return localStorage.getItem("note:" + path) || "";
+}
+
+function setNoteFor(path, text) {
+  if (text.trim()) {
+    localStorage.setItem("note:" + path, text);
+  } else {
+    localStorage.removeItem("note:" + path);
+  }
+}
+
+// ── Sidebar tree ──────────────────────────────────────────────────────────────
+
+function buildTree(filterText) {
+  const tree = document.getElementById("tree");
+  // Remove existing children safely
+  while (tree.firstChild) tree.removeChild(tree.firstChild);
+
+  const q = (filterText || "").toLowerCase().trim();
+
+  FILES.forEach((group, gi) => {
+    const filtered = q
+      ? group.files.filter(f =>
+          f.label.toLowerCase().includes(q) || f.path.toLowerCase().includes(q))
+      : group.files;
+
+    if (!filtered.length) return;
+
+    const groupEl = document.createElement("div");
+    groupEl.className = "group";
+    if (q || gi === 0) groupEl.classList.add("open");
+
+    // Group header
+    const header = document.createElement("div");
+    header.className = "group-header";
+    header.addEventListener("click", () => groupEl.classList.toggle("open"));
+
+    const label = document.createElement("span");
+    label.textContent = group.group;
+    const arrow = document.createElement("span");
+    arrow.className = "arrow";
+    arrow.textContent = "▶";
+    header.appendChild(label);
+    header.appendChild(arrow);
+
+    // File list
+    const fileList = document.createElement("div");
+    fileList.className = "group-files";
+
+    filtered.forEach(f => {
+      const item = document.createElement("div");
+      item.className = "file-item";
+      if (f.path === currentPath) item.classList.add("active");
+      if (getNoteFor(f.path)) item.classList.add("has-note");
+      item.dataset.path = f.path;
+
+      const nameSpan = document.createElement("span");
+      nameSpan.textContent = f.label;
+
+      const dot = document.createElement("span");
+      dot.className = "note-dot";
+
+      item.appendChild(nameSpan);
+      item.appendChild(dot);
+
+      item.addEventListener("click", () => loadFile(f.path, f.label, group.group));
+      fileList.appendChild(item);
+    });
+
+    groupEl.appendChild(header);
+    groupEl.appendChild(fileList);
+    tree.appendChild(groupEl);
+  });
+}
+
+// ── File loading ──────────────────────────────────────────────────────────────
+
+async function loadFile(path, label, groupName) {
+  currentPath = path;
+  buildTree(document.getElementById("search").value);
+
+  // Breadcrumb — text only, safe
+  const bc = document.getElementById("breadcrumb");
+  while (bc.firstChild) bc.removeChild(bc.firstChild);
+  bc.appendChild(document.createTextNode(groupName + " / "));
+  const strong = document.createElement("strong");
+  strong.textContent = label;
+  bc.appendChild(strong);
+
+  const content = document.getElementById("content");
+  while (content.firstChild) content.removeChild(content.firstChild);
+
+  const loading = makeEmptyState("Loading…");
+  content.appendChild(loading);
+
+  try {
+    const res = await fetch(path);
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const text = await res.text();
+
+    // Parse markdown and sanitize before inserting
+    const rawHtml = marked.parse(text);
+    const safeHtml = DOMPurify.sanitize(rawHtml);
+
+    while (content.firstChild) content.removeChild(content.firstChild);
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = safeHtml;
+    content.appendChild(wrapper);
+    content.scrollTop = 0;
+  } catch (e) {
+    while (content.firstChild) content.removeChild(content.firstChild);
+    const err = makeEmptyState(null);
+    const p1 = document.createElement("p");
+    p1.style.color = "var(--red)";
+    p1.textContent = "Could not load file: " + e.message;
+    const p2 = document.createElement("p");
+    p2.style.cssText = "font-size:12px;margin-top:8px;";
+    p2.textContent = "Make sure you're serving from the project root:";
+    const code = document.createElement("code");
+    code.textContent = "python3 -m http.server 8080";
+    p2.appendChild(document.createElement("br"));
+    p2.appendChild(code);
+    err.appendChild(p1);
+    err.appendChild(p2);
+    content.appendChild(err);
+  }
+
+  // Load note for this file
+  const notes = document.getElementById("notes");
+  notes.value = getNoteFor(path);
+  notes.disabled = false;
+  notes.placeholder = 'Notes for "' + label + '"…';
+  setBadge("");
+}
+
+function makeEmptyState(text) {
+  const div = document.createElement("div");
+  div.className = "empty-state";
+  if (text) {
+    const p = document.createElement("p");
+    p.textContent = text;
+    div.appendChild(p);
+  }
+  return div;
+}
+
+// ── Notes ─────────────────────────────────────────────────────────────────────
+
+function handleNoteInput() {
+  setBadge("unsaved");
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveNote, 800);
+}
+
+function saveNote() {
+  if (!currentPath) return;
+  setNoteFor(currentPath, document.getElementById("notes").value);
+  setBadge("saved");
+  buildTree(document.getElementById("search").value);
+  setTimeout(() => setBadge(""), 2000);
+}
+
+function setBadge(state) {
+  const b = document.getElementById("status-badge");
+  b.className = "status-badge";
+  if (state === "saved")   { b.classList.add("saved");   b.textContent = "Saved"; }
+  if (state === "unsaved") { b.classList.add("unsaved"); b.textContent = "Unsaved…"; }
+}
+
+function toggleNotes() {
+  const body    = document.getElementById("notes-body");
+  const toggle  = document.getElementById("notes-toggle");
+  const header  = document.getElementById("notes-header");
+  const isOpen  = body.classList.toggle("open");
+  toggle.textContent = isOpen ? "▲ hide" : "▼ show";
+  if (isOpen) header.classList.add("open");
+  else header.classList.remove("open");
+}
+
+function clearCurrentNote() {
+  if (!currentPath) return;
+  if (!confirm("Clear the note for this file?")) return;
+  document.getElementById("notes").value = "";
+  setNoteFor(currentPath, "");
+  buildTree(document.getElementById("search").value);
+  setBadge("");
+}
+
+// ── All Notes modal ───────────────────────────────────────────────────────────
+
+function showAllNotes() {
+  const body = document.getElementById("modal-body");
+  while (body.firstChild) body.removeChild(body.firstChild);
+
+  const all = [];
+  FILES.forEach(group => {
+    group.files.forEach(f => {
+      const note = getNoteFor(f.path);
+      if (note) all.push({ path: f.path, label: f.label, group: group.group, note });
+    });
+  });
+
+  if (!all.length) {
+    const p = document.createElement("div");
+    p.className = "no-notes";
+    p.textContent = "No notes yet. Select a file and start writing.";
+    body.appendChild(p);
+  } else {
+    all.forEach(item => {
+      const entry = document.createElement("div");
+      entry.className = "note-entry";
+
+      const btn = document.createElement("button");
+      btn.className = "note-file-label";
+      btn.textContent = item.group + " / " + item.label;
+      btn.addEventListener("click", () => {
+        closeModal();
+        loadFile(item.path, item.label, item.group);
+      });
+
+      const pre = document.createElement("div");
+      pre.className = "note-text";
+      pre.textContent = item.note; // textContent — safe, no HTML injection
+
+      entry.appendChild(btn);
+      entry.appendChild(pre);
+      body.appendChild(entry);
+    });
+  }
+
+  document.getElementById("modal").classList.add("open");
+}
+
+function closeModal() {
+  document.getElementById("modal").classList.remove("open");
+}
+
+// ── Export ────────────────────────────────────────────────────────────────────
+
+function exportNotes() {
+  const lines = [
+    "Course review notes — Advanced prompt engineering for journalists",
+    "Exported: " + new Date().toLocaleString(),
+    "=".repeat(60),
+  ];
+
+  FILES.forEach(group => {
+    let first = true;
+    group.files.forEach(f => {
+      const note = getNoteFor(f.path);
+      if (!note) return;
+      if (first) { lines.push("\n## " + group.group); first = false; }
+      lines.push("\n### " + f.label);
+      lines.push(note);
+    });
+  });
+
+  const blob = new Blob([lines.join("\n")], { type: "text/plain" });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement("a");
+  a.href     = url;
+  a.download = "course-review-notes-" + new Date().toISOString().slice(0, 10) + ".txt";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ── Event wiring ──────────────────────────────────────────────────────────────
+
+document.getElementById("search").addEventListener("input", function() {
+  buildTree(this.value);
+});
+
+document.getElementById("notes").addEventListener("input", handleNoteInput);
+document.getElementById("notes-header").addEventListener("click", toggleNotes);
+document.getElementById("btn-all-notes").addEventListener("click", showAllNotes);
+document.getElementById("btn-export").addEventListener("click", exportNotes);
+document.getElementById("btn-export-modal").addEventListener("click", exportNotes);
+document.getElementById("btn-clear").addEventListener("click", clearCurrentNote);
+document.getElementById("modal-close").addEventListener("click", closeModal);
+document.getElementById("btn-close-modal").addEventListener("click", closeModal);
+
+document.getElementById("modal").addEventListener("click", function(e) {
+  if (e.target === this) closeModal();
+});
+
+document.addEventListener("keydown", function(e) {
+  if ((e.metaKey || e.ctrlKey) && e.key === "s") {
+    e.preventDefault();
+    saveNote();
+  }
+  if (e.key === "Escape") closeModal();
+});
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+
+buildTree();
+</script>
+</body>
+</html>
