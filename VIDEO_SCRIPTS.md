@@ -363,7 +363,7 @@ Watch Claude draft the SKILL.md. Invoke it on a sample transcript.
 **0:30-1:30 — What automation means with a CLI LLM [SLIDE: workflow diagram]**
 Explain that a workflow is a sequence of steps. With a CLI LLM, you describe the sequence in natural language — "fetch this, process it this way, save it here, notify me if anything looks off" — and Claude translates that into a script. The script can be run manually, scheduled, or triggered automatically. You don't write the script. You review it, test it, and decide whether to run it.
 
-"But before Claude builds anything, you can ask it to plan first. In Claude Code, that's the `/plan` command. Gemini CLI and Aider have equivalent modes. You describe what you want, Claude proposes an approach, you review it before any code is written. Think of it as seeing the outline before the reporter writes the story — you catch misunderstandings at the planning stage instead of after the pipeline is already built."
+"But before Claude builds anything, you can ask it to plan first. In Claude Code, that's the `/plan` command. Gemini CLI and Codex CLI have equivalent approaches — ask them to plan before building. You describe what you want, Claude proposes an approach, you review it before any code is written. Think of it as seeing the outline before the reporter writes the story — you catch misunderstandings at the planning stage instead of after the pipeline is already built."
 
 **1:30-2:30 — Multi-stage processing [SLIDE: stages example]**
 Walk through the concept, not the syntax: each stage has a clear input and a clear output. If something goes wrong, you know which stage failed. This is how you build automation you can actually trust — because you can audit each stage separately.

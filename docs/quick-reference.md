@@ -78,38 +78,6 @@ A cheat sheet for AI coding tools covered in this course.
 
 ---
 
-### Aider
-
-| Action | Command |
-|--------|---------|
-| Start with Claude | `aider --model claude-sonnet-4-20250514` |
-| Start with GPT-4 | `aider --model gpt-4o` |
-| Add files to context | `aider file1.py file2.py` |
-| Watch mode | `aider --watch` |
-
-**Common flags:**
-
-| Flag | Purpose |
-|------|---------|
-| `--model MODEL` | Choose AI model |
-| `--edit-format diff` | Use diff format for edits |
-| `--no-auto-commits` | Disable auto git commits |
-| `--dark-mode` | Dark terminal theme |
-| `--yes` | Auto-confirm prompts |
-
-**In-session commands:**
-
-| Command | Purpose |
-|---------|---------|
-| `/add file.py` | Add file to context |
-| `/drop file.py` | Remove file from context |
-| `/undo` | Undo last change |
-| `/diff` | Show pending changes |
-| `/clear` | Clear chat history |
-| `/help` | Show all commands |
-
----
-
 ### OpenAI Codex CLI
 
 | Action | Command |
@@ -275,16 +243,6 @@ Create an `AGENTS.md` file:
 - Attribute all claims to named sources
 ```
 
-### Aider — .aider.conventions.md
-
-Create a `.aider.conventions.md` file:
-
-```markdown
-# Conventions
-- AP style for all writing
-- Flag unverified claims
-```
-
 ### Context file inheritance
 
 Claude Code looks for CLAUDE.md in the current directory and all parent directories. You can have:
@@ -350,8 +308,8 @@ echo $GEMINI_API_KEY
 
 | Variable | Used by | Purpose |
 |----------|---------|---------|
-| `ANTHROPIC_API_KEY` | Claude Code, Aider | Claude API access |
-| `OPENAI_API_KEY` | Aider, Codex, Whisper API | OpenAI API access |
+| `ANTHROPIC_API_KEY` | Claude Code | Claude API access |
+| `OPENAI_API_KEY` | Codex CLI, Whisper API | OpenAI API access |
 | `GEMINI_API_KEY` | Gemini CLI | Google AI API access |
 | `EDITOR` | Many tools | Default text editor |
 | `SHELL` | System | Current shell (bash, zsh) |
@@ -409,5 +367,5 @@ grep --help
 # AI tool help
 claude --help
 gemini --help
-aider --help
+codex --help
 ```

@@ -26,7 +26,7 @@ Every script has bugs. Every pipeline breaks eventually. This feedback loop — 
 
 By the end of this module, you will be able to:
 
-1. **Install and configure at least one command-line AI tool** (Claude Code, Gemini CLI, Codex, or Aider)
+1. **Install and configure at least one command-line AI tool** (Claude Code, Gemini CLI, or Codex CLI)
 2. **Execute basic AI prompts from your terminal** instead of a web browser
 3. **Explain the practical differences** between browser-based and terminal-based AI workflows — specifically around file access, scripting, and automation
 4. **Identify three journalism tasks** that benefit from programmatic AI access over a chat window

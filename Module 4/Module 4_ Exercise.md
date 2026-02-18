@@ -51,7 +51,7 @@ Before asking your CLI tool to build anything, ask it to plan first.
 
 **In Gemini CLI:** Prefix your request: "Before building anything, plan this out step by step and wait for my approval."
 
-**In Aider:** Use `/architect` — Aider will design the approach without writing code until you confirm.
+**In Codex CLI:** Ask it to plan first: "Plan this out step by step and wait for my approval before writing any code." You can also start Codex with `--approval-mode suggest` to see proposed changes before they're applied.
 
 Then describe the workflow in plain English:
 

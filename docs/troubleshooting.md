@@ -229,7 +229,7 @@ curl -I https://api.anthropic.com
 # Disable VPN if using one
 
 # Some tools have timeout settings
-aider --timeout 120
+codex --timeout 120
 ```
 
 ---
@@ -267,9 +267,9 @@ aider --timeout 120
 # In Claude Code
 /compact          # Compress conversation history
 
-# In Aider
-/drop large-file.py    # Remove files from context
-/clear                 # Reset chat
+# In Codex CLI
+# Break large tasks into smaller requests
+# Start a fresh session for a new context
 
 # Break large tasks into smaller pieces
 
@@ -533,7 +533,7 @@ ls -la ../../CLAUDE.md
 3. **Check the tool's documentation:**
    - Claude Code: docs.anthropic.com
    - Gemini CLI: github.com/google-gemini/gemini-cli
-   - Aider: aider.chat/docs
+   - Codex CLI: github.com/openai/codex
    - Codex: github.com/openai/codex
 
 4. **Ask for help:**

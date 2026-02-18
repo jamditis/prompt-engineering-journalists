@@ -46,7 +46,7 @@ By the end of this course, students will be able to:
 - The CLI as programmatic control over AI (scripting, piping, scheduling)
 - "Work where your files live" — no more upload/download cycles
 - Installing Node.js and terminal prerequisites
-- Setting up Claude Code, Gemini CLI, or Aider
+- Setting up Claude Code, Gemini CLI, or Codex CLI
 - Basic terminal commands and navigation
 
 **Activities:**

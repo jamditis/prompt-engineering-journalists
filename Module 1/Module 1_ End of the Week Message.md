@@ -7,7 +7,7 @@ You made it through Week 1.
 This week you installed a command-line AI tool and compared it to web interfaces. The key insight: browser-based AI is convenient for quick questions, but the terminal gives you direct access to files and the ability to script repetitive tasks.
 
 **What you learned:**
-- How to install and authenticate a CLI tool (Claude Code, Gemini CLI, or Aider)
+- How to install and authenticate a CLI tool (Claude Code, Gemini CLI, or Codex CLI)
 - The practical differences between web and terminal AI workflows
 - Where CLI tools outperform chat windows: file processing, automation, and integration with existing tools
 

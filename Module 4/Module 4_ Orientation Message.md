@@ -24,7 +24,7 @@ Most CLI tools have a built-in mode for this:
 
 - **Claude Code:** Type `/plan` before describing your task. Claude enters plan mode: it explores the request, thinks through the approach, and presents a plan for your review. Nothing is executed until you approve.
 - **Gemini CLI:** There's no single `/plan` command, but you get the same result by being explicit: "Before doing anything, plan this out step by step and wait for my approval before taking any action."
-- **Aider:** Use the `/architect` command. Aider will design the changes without writing any code until you confirm.
+- **Codex CLI:** Ask it to plan explicitly: "Plan this out step by step and wait for my approval before writing any code." You can also start with `codex --approval-mode suggest`, which shows proposed changes before applying them.
 
 The underlying habit is the same regardless of tool: **describe what you want, review what it plans to do, then authorize it to proceed.**
 

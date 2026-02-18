@@ -50,9 +50,9 @@ gemini
 npm install -g @anthropic-ai/claude-code
 claude
 
-# Aider (pay-as-you-go, works with multiple LLMs)
-pip install aider-chat
-aider
+# Codex CLI (requires ChatGPT Plus subscription)
+npm install -g @openai/codex
+codex
 ```
 
 ### 3. Try your first CLI prompt
@@ -75,8 +75,7 @@ gemini -p "Summarize the key points of the First Amendment in 3 bullets"
 |------|---------|------|----------|
 | [Gemini CLI](https://github.com/google-gemini/gemini-cli) | `npm i -g @google/gemini-cli` | Free tier | Starting out |
 | [Claude Code](https://claude.ai/code) | `npm i -g @anthropic-ai/claude-code` | $20-100/mo | Skills, MCP |
-| [Aider](https://aider.chat) | `pip install aider-chat` | Pay-as-you-go | Multi-LLM |
-| [Codex CLI](https://github.com/openai/codex-cli) | `npm i -g @openai/codex` | ChatGPT sub | OpenAI users |
+| [Codex CLI](https://github.com/openai/codex) | `npm i -g @openai/codex` | ChatGPT sub | OpenAI users |
 
 ## License
 

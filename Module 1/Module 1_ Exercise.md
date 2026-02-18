@@ -52,9 +52,9 @@ Or on Mac with Homebrew:
 brew install --cask claude-code
 ```
 
-**Option C: Aider**
+**Option C: Codex CLI**
 ```bash
-pip install aider-chat
+npm install -g @openai/codex
 ```
 
 ### Step 5: Verify installation
@@ -70,7 +70,7 @@ claude --version
 ```
 or
 ```bash
-aider --version
+codex --version
 ```
 
 You should see version information, not an error.
@@ -85,7 +85,7 @@ Most tools need an API key or login on first use. Follow the prompts in your ter
 
 - **Gemini CLI:** Will open a browser for Google authentication
 - **Claude Code:** Requires an Anthropic API key or Claude subscription
-- **Aider:** Requires an API key from your chosen LLM provider
+- **Codex CLI:** Requires a ChatGPT Plus subscription or OpenAI API key
 
 ### Step 7: Run a simple prompt
 
@@ -168,13 +168,13 @@ For Claude Code (in interactive mode):
 Summarize the file test_article.txt in one sentence
 ```
 
-For Aider, point it at the file:
+For Codex CLI, start a session and reference the file:
 
 ```bash
-aider test_article.txt
+codex
 ```
 
-Then ask it to summarize.
+Then ask it to summarize `test_article.txt`.
 
 ### Step 13: Try the same in a web interface
 

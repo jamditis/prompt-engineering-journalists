@@ -6,10 +6,6 @@ These are not required but may be useful depending on your interests and experie
 
 ### Deeper dives on CLI AI tools
 
-- **Aider tutorials playlist** (YouTube)
-  - https://www.youtube.com/playlist?list=PLf2TxeIuQfH4zCF2j4gKzxM6oLqvSWMZF
-  - Video walkthroughs of Aider for code assistance and file editing.
-
 - **Simon Willison's LLM CLI tool**
   - https://llm.datasette.io/
   - A lightweight Python CLI for interacting with many LLM providers. Good for quick experiments.

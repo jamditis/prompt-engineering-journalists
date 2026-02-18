@@ -100,16 +100,6 @@ Good choice if you want to start without spending money.
 
 Works well if you already have ChatGPT Plus.
 
-### Option 4: Aider
-
-**Cost:** Pay per use (requires API key from Anthropic, OpenAI, or other provider)
-
-**Setup:**
-1. Install: `pip install aider-chat` (requires Python)
-2. Configure with your preferred API key
-
-Flexible option that works with multiple providers.
-
 ---
 
 ## Time commitment

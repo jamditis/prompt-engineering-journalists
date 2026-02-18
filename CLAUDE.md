@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Instructor:** Joe Amditis, Center for Cooperative Media, Montclair State University
 **Prerequisite:** Prompt Engineering 101 for Journalists (or equivalent)
 
-This is the sequel to Prompt Engineering 101 for Journalists. It moves journalists from web-based AI chat interfaces to terminal CLI tools: Claude Code, Gemini CLI, and Aider. Each module extends a concept from the 101 course: web prompting → CLI, typing context every time → writing it once in a file, one-off prompts → reusable skills, no-code automation → scripted pipelines, understanding AI → building with agents and RAG.
+This is the sequel to Prompt Engineering 101 for Journalists. It moves journalists from web-based AI chat interfaces to terminal CLI tools: Claude Code, Gemini CLI, and Codex CLI. Each module extends a concept from the 101 course: web prompting → CLI, typing context every time → writing it once in a file, one-off prompts → reusable skills, no-code automation → scripted pipelines, understanding AI → building with agents and RAG.
 
 ## Structure
 
@@ -44,7 +44,7 @@ This course is grounded in Ethan Mollick's framework for understanding AI (see "
 - **Apps** — the interfaces users interact with (ChatGPT.com, Claude.ai, Gemini.google.com)
 - **Harnesses** — systems that give models tools, file access, and the ability to take multi-step autonomous action
 
-This course moves students from apps to harnesses. CLI tools (Claude Code, Gemini CLI, Aider) are harnesses. Context files, skills, hooks, pipelines, and MCP are all harness-layer techniques.
+This course moves students from apps to harnesses. CLI tools (Claude Code, Gemini CLI, Codex CLI) are harnesses. Context files, skills, hooks, pipelines, and MCP are all harness-layer techniques.
 
 The philosophical shift the course teaches: from prompting (conversational, one-off) to managing (task delegation, oversight, course-correction). As Mollick puts it: "You aren't prompting, you are managing."
 
@@ -73,7 +73,6 @@ Each module contains 8 markdown documents:
 - **Claude Code:** `npm install -g @anthropic-ai/claude-code`
 - **Gemini CLI:** `npm install -g @google/gemini-cli` (free tier: 1,000 req/day)
 - **Codex CLI:** `npm install -g @openai/codex`
-- **Aider:** `pip install aider-chat`
 - **Context files:** CLAUDE.md, GEMINI.md, AGENTS.md
 
 ## Notes

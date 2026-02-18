@@ -49,13 +49,6 @@ The instructor's skills repository includes example CLAUDE.md patterns designed 
 
 ### Cross-tool comparison
 
-**Aider conventions file documentation**
-https://aider.chat/docs/usage/conventions.html
-
-Aider uses a `.aider.conventions.md` file for the same purpose as CLAUDE.md. This documentation explains how Aider loads and applies project-level instructions, showing yet another implementation of the same pattern.
-
----
-
 **"How I use AI tools differently"** by Matt Webb
 https://interconnected.org/home/
 

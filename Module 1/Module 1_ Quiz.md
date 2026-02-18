@@ -24,11 +24,11 @@ Which of the following CLI tools offers a free tier with 1,000 requests per day?
 A) Claude Code
 B) OpenAI Codex
 C) Gemini CLI
-D) Aider
+D) LiteLLM
 
 **Correct answer:** C
 
-**Explanation:** Gemini CLI from Google includes a free tier with 1,000 requests per day. Claude Code and Codex require paid subscriptions. Aider uses pay-per-use pricing through whichever LLM provider you configure.
+**Explanation:** Gemini CLI from Google includes a free tier with 1,000 requests per day. Claude Code and Codex CLI require paid subscriptions. LiteLLM is a proxy layer for multiple providers — it doesn't provide its own free tier.
 
 ---
 

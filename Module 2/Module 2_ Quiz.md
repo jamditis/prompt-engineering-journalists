@@ -74,7 +74,7 @@ D) Other tools don't support project context files
 
 **Correct answer:** A
 
-**Explanation:** Each CLI tool has its own context file convention. Claude Code uses CLAUDE.md, Gemini CLI uses GEMINI.md, and OpenAI Codex uses AGENTS.md. Aider uses `.aider.conventions.md`. The concept is the same across all of them — a file in your project directory that the tool reads on startup.
+**Explanation:** Each CLI tool has its own context file convention. Claude Code uses CLAUDE.md, Gemini CLI uses GEMINI.md, and OpenAI Codex CLI uses AGENTS.md. The concept is the same across all of them — a project file the tool reads on startup that provides persistent context for every session.
 
 ---
 

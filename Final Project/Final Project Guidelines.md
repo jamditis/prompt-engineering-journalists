@@ -12,7 +12,7 @@ Your project must meet all four criteria:
 Choose from:
 - Claude Code
 - Gemini CLI
-- Aider
+- Codex CLI
 - Another CLI-based AI tool (get instructor approval first)
 
 ### 2. Include automation

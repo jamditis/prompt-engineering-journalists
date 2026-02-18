@@ -464,7 +464,7 @@ Added concrete plugin/hook examples to Module 3 orientation message and video sc
 ## Dependencies
 
 - Node.js 20+
-- Claude Code, Gemini CLI, or Aider
+- Claude Code, Gemini CLI, or Codex CLI
 - GitHub repos: jamditis/claude-skills-journalism, jamditis/tools, jamditis/scrapefruit-cli
 
 ## Future enhancements

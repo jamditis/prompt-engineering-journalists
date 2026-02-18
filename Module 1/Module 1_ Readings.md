@@ -30,8 +30,6 @@ Choose the tool you plan to install and read its getting started guide:
 - **OpenAI Codex CLI:** https://github.com/openai/codex
   - OpenAI's terminal tool. Requires ChatGPT Plus subscription.
 
-- **Aider:** https://aider.chat/docs/install.html
-  - Open source tool that works with multiple LLM providers. Pay-per-use pricing.
 
 ### 2. Why the command line matters for journalists
 
