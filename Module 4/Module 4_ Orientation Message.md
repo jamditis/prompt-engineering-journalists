@@ -6,15 +6,15 @@ Hello, and welcome to Module 4.
 
 In the 101 course, you learned to automate tasks with no-code tools like Zapier and Make. Those tools work well for straightforward workflows: trigger an event, move some data, send a notification. But if you've ever hit the wall where your Zap can't handle a weird edge case, or where you need to process 500 documents and the no-code tool charges per operation, you've felt the limits of that approach.
 
-CLI workflows are the next level. They give you more control, more flexibility, and the ability to handle the messy, unpredictable data that journalism actually produces. This week, you'll learn to chain AI tools with other command-line utilities. By the end, you'll be able to build automated pipelines that fetch content, process it with AI, and output formatted results — all without clicking through browser tabs.
+CLI LLMs are the next level. They give you more control, more flexibility, and the ability to handle the messy, unpredictable data that journalism actually produces. This week, you'll describe workflows in plain English and have your CLI LLM translate them into working scripts. You won't write shell code — you'll describe what you want to automate, Claude Code will write the implementation, and you'll test and refine the result. By the end, you'll have a working pipeline that fetches content, processes it with AI, and outputs formatted results.
 
-### The Unix philosophy, applied to AI
+### Describe the workflow, let the LLM build it
 
-Unix was built on a simple idea: small tools that each do one thing well, connected by pipes. `curl` fetches a web page. `jq` extracts a JSON field. `sort` sorts lines. Each tool is simple on its own, but piped together they become powerful.
+The key shift in Module 4: instead of asking Claude Code to help you with one document, you describe an entire workflow — a sequence of steps from input to output — and it builds the script that automates it.
 
-The same principle applies to AI workflows. Don't build one massive script that tries to do everything. Build stages: fetch, clean, analyze, format. Each stage is independently testable. When something breaks (and it will), you can isolate the problem to one step instead of debugging a monolith.
+"Fetch this URL, strip out the ads, summarize it in three bullets, save it as a markdown file with today's date in the filename" — that's a workflow description. Claude Code turns it into a reusable script. You review the script, test it on a few real examples, and refine it until the output is what you want. Then you can run it on 50 documents, schedule it to run automatically, or share it with a colleague.
 
-A pipeline that clips an article, summarizes it with Claude, and formats it for your newsletter takes seconds to run once you've built it. And because each stage is separate, you can swap out any piece — use a different summarizer, change the output format, add a translation step — without rewriting the whole thing.
+The right way to build a pipeline: separate stages, each with a clear input and output. Fetch. Clean. Analyze. Format. When something breaks, you know which stage failed — and you paste the error back into your session to get a diagnosis. Because each stage is independent, you can fix one without touching the others.
 
 ### Principles for building real pipelines
 
@@ -30,15 +30,15 @@ These aren't abstract best practices. They come from building and running actual
 
 By the end of this module, you will be able to:
 
-1. **Use piping to connect tools.** Chain the output of one command into another using the pipe operator (`|`).
+1. **Describe a multi-step journalism workflow** and have your CLI LLM translate it into a working, reusable script — without writing code yourself.
 
-2. **Build AI-powered shell pipelines.** Combine utilities like `curl`, `jq`, and Claude's CLI to automate content processing.
+2. **Test AI-built scripts** on a small number of real examples before running them on full workloads, and understand why this step prevents wasted API costs and bad output.
 
-3. **Write reusable shell scripts.** Package your pipelines into scripts you can run repeatedly.
+3. **Diagnose pipeline failures** by pasting errors back into your CLI session and iterating on fixes — the core debugging loop you'll use throughout this course and beyond.
 
-4. **Schedule automated tasks.** Use cron jobs to run pipelines on a schedule (e.g., daily news digests, weekly data pulls).
+4. **Apply security practices** — API keys in environment variables, scripts reviewed before deployment, sensitive documents handled appropriately.
 
-5. **Apply cost-conscious practices.** Test on small samples, validate with free tools, and build in rate limiting and checkpointing.
+5. **Apply cost-conscious practices** — test on small samples, add rate limiting, build in checkpointing so long jobs can resume instead of restart.
 
 ### This week's activities
 
@@ -50,11 +50,13 @@ By the end of this module, you will be able to:
 
 ### A note on getting stuck
 
-The command line will feel unfamiliar if you haven't used it before. That's normal. The exercise this week walks you through each step. If you get stuck:
+This week involves more moving parts than previous modules, and you will hit errors. That's expected. When you do:
 
-1. Read the error message carefully — it usually tells you what went wrong
-2. Check that you've installed the required tools
-3. Post in the "Technical help" forum with your error message and what you tried
+1. **Paste the error into your CLI tool and ask what it means.** Don't paraphrase — paste the exact error message. Your tool already knows the code it built for you, so it can read the error in context and usually identify the problem immediately. "Here's what I got when I ran it — what went wrong and how do I fix it?" is often all you need to type. This is one of the most useful things about working with a CLI LLM: your debugging collaborator is already there, already has context, and can read error messages directly.
+
+2. **If it's an installation or setup issue**, check that you've installed the required tools listed in the exercise.
+
+3. **If your CLI tool can't resolve it**, post in the "Technical help" forum with the exact error message and a description of what you tried.
 
 Please complete all activities before the end of the week.
 

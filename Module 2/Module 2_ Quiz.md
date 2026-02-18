@@ -2,7 +2,7 @@
 
 ## Module 2: Prompting with files and project context
 
-6 multiple choice questions. The correct answer is marked with an asterisk (*).
+5 multiple choice questions.
 
 ---
 
@@ -10,13 +10,17 @@
 
 What is the primary purpose of a CLAUDE.md file?
 
-a. To store the AI's responses for future reference
+A) To store the AI's responses for future reference
 
-b. To provide persistent project-level instructions that Claude Code reads automatically*
+B) To provide persistent project-level instructions that Claude Code reads automatically
 
-c. To log errors and debugging information
+C) To log errors and debugging information
 
-d. To replace the need for writing prompts
+D) To replace the need for writing prompts
+
+**Correct answer:** B
+
+**Explanation:** CLAUDE.md is a context file that Claude Code reads automatically when you open a session in that directory. It persists your instructions across every conversation in the project — beat-specific terminology, source standards, style rules — so you don't have to repeat them.
 
 ---
 
@@ -24,13 +28,17 @@ d. To replace the need for writing prompts
 
 You're writing a context file for your city hall beat. Which of the following instructions best passes the "deletion test"?
 
-a. "Write accurate journalism"
+A) "Write accurate journalism"
 
-b. "The city calls its annual budget process the 'appropriations cycle' — use this term, not 'budget season'"*
+B) "The city calls its annual budget process the 'appropriations cycle' — use this term, not 'budget season'"
 
-c. "Be helpful and thorough"
+C) "Be helpful and thorough"
 
-d. "Follow AP style" (without any specific AP rules listed)
+D) "Follow AP style" (without any specific AP rules listed)
+
+**Correct answer:** B
+
+**Explanation:** The deletion test asks: if you removed this line, would the AI behave differently? Option B would change the AI's output — it would use generic language instead of the city's specific term. Options A, C, and D are generic enough that the AI would behave the same way without them.
 
 ---
 
@@ -38,13 +46,17 @@ d. "Follow AP style" (without any specific AP rules listed)
 
 How does a context file change the AI's behavior?
 
-a. It replaces the AI's training data with your instructions
+A) It replaces the AI's training data with your instructions
 
-b. It adds your instructions to every conversation in that project directory, so the AI applies them without being asked*
+B) It adds your instructions to every conversation in that project directory, so the AI applies them without being asked
 
-c. It prevents the AI from generating responses that contradict your instructions under any circumstances
+C) It prevents the AI from generating responses that contradict your instructions under any circumstances
 
-d. It speeds up the AI's response time by reducing the context it needs to process
+D) It speeds up the AI's response time by reducing the context it needs to process
+
+**Correct answer:** B
+
+**Explanation:** A context file is prepended to every conversation as additional context — it doesn't modify the model or override its core behavior. The AI can still make mistakes, but it starts each session already knowing your project's rules and terminology.
 
 ---
 
@@ -52,13 +64,17 @@ d. It speeds up the AI's response time by reducing the context it needs to proce
 
 What is the equivalent of CLAUDE.md in other CLI tools?
 
-a. Gemini CLI uses GEMINI.md; Codex uses AGENTS.md*
+A) Gemini CLI uses GEMINI.md; Codex uses AGENTS.md
 
-b. All tools use the same CLAUDE.md filename
+B) All tools use the same CLAUDE.md filename
 
-c. Gemini CLI uses config.json; Codex uses settings.yaml
+C) Gemini CLI uses config.json; Codex uses settings.yaml
 
-d. Other tools don't support project context files
+D) Other tools don't support project context files
+
+**Correct answer:** A
+
+**Explanation:** Each CLI tool has its own context file convention. Claude Code uses CLAUDE.md, Gemini CLI uses GEMINI.md, and OpenAI Codex uses AGENTS.md. Aider uses `.aider.conventions.md`. The concept is the same across all of them — a file in your project directory that the tool reads on startup.
 
 ---
 
@@ -66,24 +82,14 @@ d. Other tools don't support project context files
 
 When should you use a project context file instead of including instructions in each prompt?
 
-a. When the instructions apply to a single prompt only
+A) When the instructions apply to a single prompt only
 
-b. When the instructions are generic and apply to all AI interactions everywhere
+B) When the instructions are generic and apply to all AI interactions everywhere
 
-c. When the same instructions should apply to every conversation in a specific project*
+C) When the same instructions should apply to every conversation in a specific project
 
-d. When you want to override the AI's safety guidelines
+D) When you want to override the AI's safety guidelines
 
----
+**Correct answer:** C
 
-### Question 6
-
-In Module 3, you'll install journalism skills from a GitHub repository. What does "cloning a repository" mean?
-
-a. Creating a new empty repository on GitHub
-
-b. Downloading a copy of a project and its full history from GitHub to your computer*
-
-c. Deleting a repository and starting over
-
-d. Converting a Word document into a Git-compatible format
+**Explanation:** Context files are for project-specific, recurring instructions. If you're writing the same thing at the start of every session — "I cover city hall for the Daily News, use AP style, always attribute claims" — that belongs in a context file. One-off instructions still go in the prompt.

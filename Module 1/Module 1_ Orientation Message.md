@@ -10,7 +10,17 @@ The difference is how you deliver those prompts.
 
 Web interfaces are interactive: you type, the AI responds, you type again. Terminal-based AI tools are programmable: you can script them, pipe data through them, chain them with other tools, and schedule them to run on their own. This is the real unlock. You already know how to prompt. Now you will learn to prompt at scale and with automation.
 
+Before you install anything, read the first required reading — Ethan Mollick's guide to AI in 2026. He introduces a framework that will help you understand exactly what this course is about. AI systems have three layers: **models** (the underlying intelligence), **apps** (the interfaces like ChatGPT.com and Claude.ai), and **harnesses** (systems that give models tools, file access, and the ability to act). You have been using apps. This course teaches you to use harnesses. The same model — Claude Opus 4.6, for example — behaves very differently in a chat window than it does running inside Claude Code. The chat window lets it respond. The harness lets it act.
+
+That distinction is why this course exists. And as Mollick puts it: you will stop prompting and start managing. This module is where that shift begins.
+
 **Work where your files live.** In a web interface, you upload files one at a time, then download the results. In the terminal, the AI works directly on your file system. It can read entire directories, process batches of documents, and write results to files — no upload/download cycle. If you have 200 PDFs from a FOIA request, you do not need to drag them into a chat box one by one.
+
+**Show the tool what broke.** When something goes wrong in a web chat, debugging is a translation problem. You see an error, you try to describe it, and the AI tries to reconstruct enough context to help — usually from scratch, in a new session, without knowing what it built before. With a CLI tool, you skip the translation. Copy the error message exactly as it appears and paste it back into the same session. Ask: "What does this mean? How do I fix it?" The tool knows the code it just helped you write. It can read the error in that context and usually tell you exactly where the problem is.
+
+This works for terminal errors, Python tracebacks, API error responses, and browser developer console errors. It also works with screenshots — Claude Code is multimodal, so you can drag in a screenshot of a broken webpage, a chart that looks wrong, or a dev console error you don't recognize. "Why does this look like that?" is a 10-second question instead of a paragraph-long explanation.
+
+Every script has bugs. Every pipeline breaks eventually. This feedback loop — see error, paste error, get fix — is one of the most practical benefits of working in the terminal with a CLI LLM, and you'll use it throughout this course.
 
 **The terminal is just a text interface.** If you have never used the command line, this might feel unfamiliar. But you already work in text every day — articles, notes, emails, messages. The terminal is the same thing: you type text, the computer responds with text. There are no buttons or menus, which means there is nothing to click by accident. What you type is what happens.
 

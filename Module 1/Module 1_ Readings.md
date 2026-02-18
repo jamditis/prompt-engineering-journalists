@@ -2,7 +2,22 @@
 
 ## Required readings
 
-### 1. Official documentation (pick one tool to start)
+### 1. The big picture: understanding the AI landscape
+
+**"A guide to which AI to use in the agentic era"**
+Ethan Mollick, One Useful Thing, February 2026
+https://www.oneusefulthing.org/p/a-guide-to-which-ai-to-use-in-the
+
+*Reading time: 15-20 minutes*
+
+Read this first. Mollick's framework for thinking about AI has three layers: the underlying models, the apps that interface with them, and the "harnesses" that enable AI to take real-world actions. This course is fundamentally about moving from apps (ChatGPT.com, Claude.ai) to harnesses — tools that connect AI to your files, scripts, and workflows. Understanding this distinction before you install anything will help everything else in the course make sense.
+
+Pay attention to:
+- The difference between models, apps, and harnesses — and why the same model performs differently in each context
+- Why "auto" mode typically underperforms manually selecting a model
+- The shift from "conversing with AI" to "delegating to AI" — this is the central idea of the course
+
+### 2. Official documentation (pick one tool to start)
 
 Choose the tool you plan to install and read its getting started guide:
 

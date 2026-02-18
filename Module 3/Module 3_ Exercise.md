@@ -50,6 +50,17 @@ Before using the skill, take a minute to understand what you installed. Find the
 
 This is what Claude reads when you invoke `/source-verification`. A skill is just a markdown file with structured instructions — there's no magic here, just well-organized prompts.
 
+#### Step 4: Look at a hook file
+
+Now open one of the hook files in the same repository. Find the hooks directory and open any `.md` file in it. Notice:
+- How it describes what triggers the hook and what it checks
+- Whether it's a notify hook (flags and continues) or a stop hook (pauses for confirmation)
+- How the instructions differ from a skill — a hook doesn't wait for you to invoke it
+
+Ask Claude Code: "What would have to happen for this hook to fire?" This helps you understand when it runs without having to test it against real output.
+
+You now understand what you installed: a set of skills you invoke on demand, and a set of hooks that run automatically. The skills library is the same structure underneath — markdown files with instructions.
+
 ### Option B: Manual installation (fallback)
 
 If the plugin method doesn't work, you can install skills manually by cloning the repo and copying files.
@@ -149,7 +160,53 @@ As you work through the verification, Claude will help you document:
 
 ---
 
-## Part 3: Reflection and submission (10 minutes)
+## Part 3: Write your own skill (15 minutes)
+
+The best way to understand skills is to write one. In this part, you'll create a simple skill for a task you do regularly.
+
+### Choose a task
+
+Pick one thing you do repeatedly that involves a consistent process — not a one-off question, but something with steps you follow every time.
+
+Good candidates:
+- Reviewing a specific type of document (press releases, budget reports, public records)
+- Drafting a recurring story format (meeting recap, weekly data brief, response to an official statement)
+- Checking a specific category of claim (health statistics, crime data, government budget numbers)
+
+Not good candidates:
+- "Summarize text" — too generic, no beat-specific knowledge
+- "Be thorough" — not a process, not checkable
+
+### Write the skill file
+
+Ask Claude Code to help you create the file:
+
+```
+I want to create a custom skill called [your-skill-name]. Here's what it should do:
+[describe the task and the steps in plain English]
+
+Write a SKILL.md file for this skill.
+```
+
+Review what Claude drafts. Apply the deletion test: read each instruction and ask whether removing it would change Claude's behavior. Cut anything that wouldn't.
+
+### Save and test it
+
+Ask Claude Code to save the file to your skills directory and invoke it on a real piece of content from your beat — a press release, a document, a claim. Note what it does well and where it needs adjustment.
+
+### The commit
+
+Once you're satisfied with the skill, commit it to your beat project repository:
+
+```
+Commit this skill file to my beat project with a message describing what it does
+```
+
+Your first custom skill is now versioned alongside your project context.
+
+---
+
+## Part 4: Reflection and submission (10 minutes)
 
 ### What to submit
 
@@ -161,30 +218,34 @@ As you work through the verification, Claude will help you document:
    - What would you have done differently without the skill?
    - Did the skill miss anything you would have checked?
 
-3. **Skill modification idea:** Suggest one change to the source-verification skill that would make it more useful for your beat or newsroom. Be specific about what you would add or change in the SKILL.md file.
+3. **Your custom skill file** — paste the contents of your SKILL.md. Include a one-sentence explanation of the task it encodes and what you cut during the deletion test.
 
 ---
 
 ## Troubleshooting
 
+**First step for any error:** Paste the exact error message into your Claude Code session and ask what it means. The tool has context about what you installed and can usually diagnose the problem directly. Don't paraphrase the error — paste it.
+
 **Skills not loading?**
 - Check that the files are in `~/.claude/commands/`
 - Ensure the directory name matches the skill name
 - Restart Claude Code after adding new skills
+- Ask Claude Code: "Why isn't my [skill-name] skill showing up?"
 
 **Claude not following the skill instructions?**
 - Re-invoke the skill with `/source-verification`
 - Check that `SKILL.md` has valid YAML frontmatter
-- Try the skill on a simpler claim first
+- Ask Claude Code to open the skill file and confirm it can read it
 
-**Need help?**
-Post in the course discussion forum with your error message and what you've tried.
+**Still stuck after trying the above?**
+Post in the "Technical help" forum with the exact error message and what you've already tried.
 
 ---
 
 ## Grading criteria
 
-- **Skill installation:** Skills correctly installed and functional (20%)
-- **SIFT application:** All four SIFT steps documented with evidence (40%)
+- **Skill installation:** Skills correctly installed and functional (15%)
+- **SIFT application:** All four SIFT steps documented with evidence (35%)
 - **Finding accuracy:** Correct assessment of the claim's veracity (20%)
-- **Reflection quality:** Thoughtful analysis of the skill's usefulness (20%)
+- **Custom skill:** Submitted skill file encodes a real beat-specific task and passes the deletion test (20%)
+- **Reflection quality:** Thoughtful analysis of the skill's usefulness (10%)

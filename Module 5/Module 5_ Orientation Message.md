@@ -18,7 +18,7 @@ This distinction matters because parametric knowledge can be wrong or outdated, 
 
 RAG is the technique that adds grounded knowledge to an AI's responses. Instead of relying on what the model "remembers," RAG retrieves relevant documents from a knowledge base and includes them in context before the model generates an answer. The result: you can trace an AI-generated response back to the specific document, paragraph, and source it drew from.
 
-This is what makes RAG safe for newsrooms in ways that plain prompting is not. One of the biggest risks with AI in journalism is losing track of where information came from. RAG, done right, preserves attribution through the entire pipeline -- from retrieval to generation to the final output a reporter reads.
+This is what makes RAG safe for newsrooms in ways that plain prompting is not. One of the biggest risks with AI in journalism is losing track of where information came from. RAG, done right, preserves attribution through the entire pipeline -- from retrieval to generation to the final output a reporter reads. The journalism rule is the same one you already follow: if you can't cite it, don't publish it. Grounded knowledge is citable. Parametric knowledge is not.
 
 ---
 
@@ -35,6 +35,8 @@ But here's the line that can't move: **editorial judgment stays with the journal
 MCP (Model Context Protocol) is the bridge between Claude Code and external data sources -- file systems, databases, APIs. Think of it as giving the AI a library card instead of making it guess from memory.
 
 In this week's exercise, you'll configure an MCP server to connect Claude Code to a folder of markdown files. This is a small-scale version of the same pattern that powers newsroom-scale RAG systems: AI reads your documents, retrieves what's relevant, and generates answers grounded in your sources.
+
+The configuration file you write is infrastructure. Commit it to version control alongside your CLAUDE.md and skills. Anyone who clones your project gets the same data connections.
 
 ---
 
@@ -87,6 +89,22 @@ By the end of this module, you will be able to:
 **Grounding**: The practice of connecting AI responses to specific source documents, reducing hallucination and enabling attribution.
 
 **Human-in-the-loop**: A design pattern where automated systems require human review and approval before outputs are finalized or published.
+
+---
+
+## Your project is infrastructure
+
+Across five weeks, you've built:
+
+- A **CLAUDE.md** that encodes your beat context and newsroom standards
+- **Skills** that encode your verification methods and editorial processes
+- **Hooks** that enforce those standards automatically
+- A **pipeline** that fetches, cleans, and analyzes content at scale
+- An **MCP configuration** that connects it all to your source materials
+
+All of it lives in version control. All of it is portable. Clone the repo on a new machine and the same context, tools, and data sources come with it. Hand it to a colleague and they inherit your methods.
+
+This is context engineering at scale. You started in Module 1 with one-off prompts and a chat window. You're ending Module 5 with a versioned environment any journalist on your team can clone and extend.
 
 ---
 

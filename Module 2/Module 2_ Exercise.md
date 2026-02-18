@@ -125,8 +125,17 @@ Use the sample at `Resources/examples/beat-project/sample-claude-md.md` as a ref
 3. **Source standards** — How to handle attribution, what to flag as unverified
 4. **Terminology** — Any beat-specific terms the AI might get wrong or confuse
 5. **Things to avoid** — Phrases, framing, or patterns you don't want in the output
+6. **Hard-won lessons** — Leave this empty for now. As you use the file and the AI makes mistakes you have to correct, add an entry here: a name for the mistake, one sentence on what happened, and the rule that prevents it. This section grows over time.
 
 **Apply the deletion test:** Before saving, read each line and ask: would this instruction change the AI's output for *these specific documents*? If not, cut it.
+
+**Then commit it.** This is important. Once you've written your CLAUDE.md, ask your CLI tool to commit it:
+
+```
+Commit my CLAUDE.md to the project repository with the message "Add beat context file"
+```
+
+This is not busywork. Your CLAUDE.md is infrastructure, and infrastructure gets versioned. From this point on, every time you change your context file — adding a new source, updating terminology, adding a style rule — commit that change. You're building a record of how your AI environment evolved alongside your beat coverage.
 
 ---
 
@@ -193,5 +202,6 @@ Write a 300-500 word reflection covering:
 2. **What worked** in your context file? Which instructions had the most visible effect?
 3. **What didn't work** or had no noticeable effect? What would you change?
 4. **The deletion test in practice** — Did you cut anything from your first draft? What and why?
+5. **Context vs. prompt** — Looking at what you wrote in your CLAUDE.md, what's in there that you would have typed into a prompt before? What does it mean to have that in a committed file instead?
 
 Submit your reflection along with your CLAUDE.md file (copy-paste the contents or attach the file).

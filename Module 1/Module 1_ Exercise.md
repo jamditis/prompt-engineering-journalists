@@ -182,6 +182,18 @@ Copy the text from `test_article.txt` and paste it into the web interface. Ask f
 
 Notice the extra steps: open file, select text, copy, switch to browser, paste, type prompt.
 
+### Step 14: Start your changelog
+
+Ask your CLI tool to create a changelog file:
+
+```
+Create a file called CHANGELOG.md with today's date and a single entry: "Installed [tool name] and completed the web vs. CLI comparison exercise."
+```
+
+This feels like there's nothing to track yet. That's why you should do it now. A changelog started after a project is already complex is a partial record. One started on day one captures the full arc — including setup problems and what you had to figure out.
+
+You'll add to this file throughout the course. Module 2 will add it to version control.
+
 ---
 
 ## Submission

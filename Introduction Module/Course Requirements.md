@@ -85,7 +85,7 @@ Claude Code is the main tool for Modules 3-5. If you're unsure which tool to use
 **Cost:** Free tier includes 1,000 requests per day
 
 **Setup:**
-1. Install: `npm install -g @anthropic-ai/claude-code` (note: instructions at https://github.com/google-gemini/gemini-cli)
+1. Install: `npm install -g @google/gemini-cli` (see https://github.com/google-gemini/gemini-cli for full setup)
 2. Sign in with your Google account
 
 Good choice if you want to start without spending money.

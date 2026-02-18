@@ -148,15 +148,197 @@ The course moves journalists from web-based AI chat interfaces to terminal CLI t
 - `Module 2_ Discussion Forums.md` — Q3 already discusses sharing context files; Git is a natural answer
 - Module 1, Module 3-5, Final Project — No changes needed
 
+### 2026-02-18 — Quiz standardization and bug fixes
+
+**Context:** Audited all module files against SYLLABUS.md and COURSE_CHECKLIST.md requirements. Found one bug and format inconsistencies across all quizzes.
+
+**Bug fixed:**
+- `Introduction Module/Course Requirements.md` — Gemini CLI setup section had wrong npm install command (`@anthropic-ai/claude-code` instead of `@google/gemini-cli`)
+
+**Quiz standardization (all modules now use Module 1/5 format):**
+- Standard format: 5 questions, letter options (A-D), `**Correct answer:** X`, `**Explanation:**` per question
+- Module 2: Removed Q6 (Git/cloning question added 2026-02-09); trimmed from 6 to 5 to match COURSE_CHECKLIST. Updated header. Converted from asterisk format to standard format. Added explanations.
+- Module 3: Changed `**Correct answer: B**` → `**Correct answer:** B`, changed `*Explanation:*` → `**Explanation:**`. Added expanded explanations.
+- Module 4: Removed asterisk-style answer marking and separate answer key. Added `**Correct answer:**` and `**Explanation:**` per question. Wrote explanations for all 5 questions.
+- Modules 1 and 5 already used the standard format — no changes needed.
+
+**Ethan Mollick readings and framework:**
+- Added Mollick's "A guide to which AI to use in the agentic era" (One Useful Thing, Feb 17, 2026) as the first required reading in Module 1 — the conceptual foundation read before installing tools
+- Source article saved in `Resources/readings/` as HTML
+- Updated Module 1 Orientation Message to introduce Mollick's models/apps/harnesses framework as the conceptual anchor for why CLI tools matter
+- Updated Introduction Module/Welcome Message to add the "from conversing to delegating" framing that runs through all five modules
+- Updated CLAUDE.md with Mollick's framework as course philosophy section for future content development
+
+### 2026-02-18 — Video script outlines (v2 — correct framing)
+
+Created `VIDEO_SCRIPTS.md` with outlines for all 12 videos. First version was revised to correct a fundamental framing error: early outlines treated the videos as terminal/CLI tutorials. Correct framing:
+
+- The course teaches how to work WITH LLMs (Claude Code, Gemini CLI, Codex) — the terminal is just where those interfaces live
+- Demo videos show asking the LLM to do things in plain English, not students typing terminal commands
+- GitHub operations are done by asking the LLM, not by learning git syntax
+- The idea → GitHub → prototype → testing + security → live + shareable arc is the connecting spine through all five modules
+
+**The arc as mapped to modules:**
+- Module 1: Idea — install the tools, understand what's now possible
+- Module 2: GitHub — scaffold the project, write context file, get into version control
+- Module 3: Prototype — build first reusable skill
+- Module 4: Testing + security — automate, test on real data, API key safety, security review
+- Module 5: Live + shareable — MCP knowledge base, publish to GitHub
+
+**The running project:** Demo videos use the same beat project (greenfield-beat) across all five modules — students see one project evolve from empty folder to published GitHub repo.
+
+### 2026-02-18 — Context engineering framing, operational principles, crisis/recovery arc
+
+**Context:** Audited project CLAUDE.md files and CHANGELOG.md files across all real projects (social-scraper, rosen-frontend, springfield, llm-advisor, scrapefruit, python-explorer, houseofjawn) to extract hard-won lessons from actual LLM-assisted development work. Interviewed instructor on course design decisions. Four key decisions made:
+
+1. Use real failure stories from real projects as course teaching examples (not fictionalized, not generic)
+2. Weave 8 operational principles throughout modules where they fit naturally — not siloed into one module
+3. Module 4 demo includes a crisis/recovery moment — rate limit failure, diagnosis, fix
+4. Shift mindset framing from "prompt engineering" to "context engineering" — name it explicitly in Module 2 and seed it in the Welcome Message
+
+**The 8 operational principles and where they're woven in:**
+- Version control, changelog: Module 1 (start from day one), Module 2 (CLAUDE.md as committed infrastructure)
+- Tests/lints before full run: Module 4 (test small before running large — now demonstrated in video)
+- Stop hooks / one-way door checks: Module 3 (hooks as editorial guardrails)
+- Multi-platform testing: Module 4 (cache busting, test on multiple platforms)
+- Error logging: Module 4 (ask Claude to audit the script)
+- Containerization: Module 5 (MCP configs, versioned infrastructure at scale)
+- Code as infrastructure: Module 2 → Module 5 (CLAUDE.md first, then skills/hooks, then pipeline scripts, then MCP configs)
+
+**Files updated (5):**
+- `Module 2/Module 2_ Orientation Message.md` — Added "From prompt engineering to context engineering" section; strengthened CLAUDE.md-as-infrastructure in version control section; fixed quiz count from 6 to 5
+- `Module 2/Module 2_ Exercise.md` — Added commit step and infrastructure framing to Part 4; added context engineering reflection prompt to submission
+- `Introduction Module/Welcome Message.md` — Added context engineering seed paragraph after module progression list
+- `VIDEO_SCRIPTS.md` — Module 4 Video 2 reworked with crisis/recovery arc (rate limit failure → diagnosis → fix → retest); Module 4 Video 1 updated to preview the failure in demo
+- `PROJECT_LOG.md` — This entry
+
+**Decisions made:**
+- "Prompt engineering" vs. "context engineering": don't change the course title (Knight Center controls that), but name the shift explicitly in Module 2 and seed it in the Welcome Message
+- Failure stories should name the actual project (e.g., "a batch processing project") without exposing private project details — give enough specificity to be believable, not enough to be identifiable
+- Crisis/recovery in Module 4 Video 2 is rate limiting, not data loss — rate limiting is universal, recoverable, and teaches two lessons (test small, add delay/backoff)
+- Commit messages should document what broke and how it was fixed — introduced as part of Module 4 video close
+
+### 2026-02-18 — Error feedback loop, Module 4 reframe
+
+**Context:** Added the paste-error-and-fix workflow as a named principle throughout the course. Module 4 orientation message still had terminal-skills framing in its intro and learning objectives — fixed.
+
+**New principle added: the debugging loop**
+- Copy the exact error (don't describe it, don't paraphrase) → paste it into the CLI session → ask what it means and how to fix it
+- Works for: terminal errors, Python tracebacks, API error responses, browser dev console errors, screenshots of broken UI
+- Framed as: your debugging collaborator is already there and already has context — use it first, not the forum
+- Added to: Module 1 Orientation (plant it early), Module 4 Orientation (make it step 1 of getting stuck), VIDEO_SCRIPTS Module 1 Video 2 (closing point), VIDEO_SCRIPTS Module 4 Video 1 (principle), VIDEO_SCRIPTS Module 4 Video 2 (shown explicitly in crisis/recovery demo)
+
+**Module 4 Orientation Message reframe:**
+- Intro rewritten: "describe workflows, let the LLM build them" — removed "chain AI tools with other command-line utilities"
+- "Unix philosophy" section replaced with "Describe the workflow, let the LLM build it" — keeps the stages concept, removes shell-syntax framing
+- Learning objectives rewritten: removed "use piping," "write reusable shell scripts," "schedule cron jobs" — replaced with describe-workflow, test small, debug loop, security, cost-conscious practices
+
+**Files updated (5):**
+- `Module 1/Module 1_ Orientation Message.md` — Added "Show the tool what broke" section (error feedback loop, screenshots, multimodal debugging)
+- `Module 4/Module 4_ Orientation Message.md` — Updated intro, replaced Unix philosophy section, rewrote learning objectives, updated "A note on getting stuck" to make paste-the-error step 1
+- `VIDEO_SCRIPTS.md` — Module 1 Video 2 closing: "paste errors, don't close the session"; Module 4 Video 1: added principle note in multi-stage section; Module 4 Video 2: explicit paste-error scene in crisis/recovery arc
+
+### 2026-02-18 — Module 3 hooks, stop hooks, custom skill exercise
+
+**What changed:**
+
+**Module 3 Orientation Message — Hooks section expanded:**
+- Added notify vs. stop hooks distinction
+- Added "one-way door" concept: stop hooks fire before irreversible actions (bulk delete, publish, push)
+- Framed in journalism terms: the higher the stakes, the more friction you want
+- Added 5th learning objective: write a simple custom skill
+
+**Module 3 Exercise — two additions:**
+- Part 1 now includes Step 4: explore a hook file (same conceptual pattern as exploring a skill file)
+- New Part 3: Write your own skill — choose a beat-specific task, write the SKILL.md, apply deletion test, test it, commit it
+- Current Part 3 (reflection) renumbered to Part 4
+- Submission updated: custom skill file replaces "suggest a modification" (passive → active)
+- Grading criteria updated to include custom skill (20%)
+- Troubleshooting updated: paste-error first, then forum
+
+**Files updated (2):**
+- `Module 3/Module 3_ Orientation Message.md`
+- `Module 3/Module 3_ Exercise.md`
+
+### 2026-02-18 — Self-improvement loop and hard-won lessons format
+
+**Context:** Reviewed officejawn CLAUDE.md (600+ line living document). Key observation: the file has a named "hard-won lessons" section with incident-named entries, a self-improvement loop protocol ("after any correction: document the lesson"), and writing style rules baked in. None of this was in the course. Module 2 was teaching "write a CLAUDE.md" without teaching "come back and update it."
+
+**Module 2 Orientation — new section "Your CLAUDE.md will grow":**
+- Added after the deletion test section
+- Names the self-improvement loop explicitly: AI gets something wrong → correct it → add a rule → mistake doesn't recur
+- Introduces "hard-won lessons" section format: named incident, one sentence on what happened, rule that came out of it
+- Shows a journalism-specific example (vote counts in press releases vs. official minutes)
+- Sets expectation: empty after week 2, should have entries by end of course
+
+**Module 2 Exercise — hard-won lessons as required section:**
+- Added as item 6 in the "Required sections" list for the CLAUDE.md students write
+- Instructed to leave it empty for now but establish the header
+- Framing: this section grows over time as the AI makes mistakes you correct
+
+**Files updated (2):**
+- `Module 2/Module 2_ Orientation Message.md`
+- `Module 2/Module 2_ Exercise.md`
+
+### 2026-02-18 — Changelog-from-day-one and Module 5 capstone framing
+
+**Module 1 Exercise — changelog-from-day-one:**
+- Added Step 14 at end of Part 4: students ask their CLI tool to create a CHANGELOG.md before submitting
+- Framing: "a changelog started before there's anything to track captures the full arc"
+- Sets up Module 2's version control section where the file gets committed
+
+**Module 5 Orientation Message — three additions:**
+- RAG attribution section: added the journalism parallel — "if you can't cite it, don't publish it. Grounded knowledge is citable. Parametric knowledge is not."
+- MCP section: added explicit infrastructure framing — commit the MCP config alongside CLAUDE.md and skills; anyone who clones gets the same data connections
+- New "Your project is infrastructure" capstone section before "What's ahead": lists all five layers built across the course (CLAUDE.md, skills, hooks, pipeline, MCP config), names the portability and shareability, closes the context engineering arc — "You started in Module 1 with one-off prompts and a chat window. You're ending Module 5 with a versioned environment any journalist on your team can clone and extend."
+
+**Files updated (2):**
+- `Module 1/Module 1_ Exercise.md`
+- `Module 5/Module 5_ Orientation Message.md`
+
+### 2026-02-18 — Module 3: one-way-door and Superpowers examples
+
+Added concrete plugin/hook examples to Module 3 orientation message and video script:
+
+**one-way-door-check** (from `jamditis/claude-skills-journalism`):
+- Stop hook that intercepts every Write call and checks filename against irreversible-decision patterns
+- Blocks on: schema files, Dockerfiles, CI/CD configs, API contracts, firebase configs, etc.
+- Exits 0 (silent pass) on two-way door files
+- Requires Claude to present options before proceeding; forces discussion, not just a warning
+- Added as concrete example in hooks section of Module 3 Orientation Message
+
+**Superpowers** (`obra/superpowers`):
+- Third-party plugin for structured development workflow
+- Fires skills automatically at each stage: brainstorming → spec → implementation plan → TDD → code review
+- Cited as example of the upper end of what plugins can do
+- Added to the "Plugins" entry in the maturity progression and Module 3 Video 1 outline
+
+**Files updated (2):**
+- `Module 3/Module 3_ Orientation Message.md` (examples added)
+- `VIDEO_SCRIPTS.md` (Module 3 Video 1 hooks section expanded)
+
 ## Current status
 
 - All 5 modules complete with strengthened content
 - Module 2 replaced: voice → files and project context
 - Module 2 expanded: Git/GitHub section added, Git now required for course
+- Context engineering framing added to Module 2 and Welcome Message
+- Error feedback loop (paste error → get fix) added as named principle in Modules 1, 3, and 4
+- Module 3 hooks section expanded: notify vs. stop hooks, one-way door concept, one-way-door-check and Superpowers as concrete examples
+- Module 3 exercise expanded: hook exploration + write-your-own-skill added
+- Module 4 orientation message reframed: LLM-first, not terminal-skills
+- Module 5 capstone section added: "your project is infrastructure" names all 5 layers and closes the context engineering arc
+- Module 5 RAG section: journalism attribution rule added ("if you can't cite it, don't publish it")
+- Module 5 MCP section: infrastructure framing added (commit the config, clone gets the connections)
+- Module 1 exercise: changelog-from-day-one habit established at Step 14
 - All placeholder URLs replaced with real links
 - File naming normalized
 - Syllabus, welcome message, and CLAUDE.md updated
 - Sample journalism documents created for Module 2 exercise
+- Module 2 orientation expanded: self-improvement loop + hard-won lessons format added after deletion test section
+- Module 2 exercise expanded: hard-won lessons added as required section 6 in CLAUDE.md template
+- VIDEO_SCRIPTS.md: 12 video outlines with LLM-first framing, project arc, crisis/recovery in Module 4, paste-error workflow in Modules 1 and 4
+- VIDEO_SCRIPTS.md Module 5: journalism citation rule added to Video 1; infrastructure call-out added to Video 2 GitHub reveal
 
 ## Key files
 

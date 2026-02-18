@@ -16,6 +16,10 @@ This course moves you past those walls. Each week builds on something you learne
 - No-code automation becomes scripted pipelines — with cost controls, checkpointing, and rate limiting
 - Understanding AI concepts becomes building with agents and RAG — where source attribution survives the process
 
+The underlying shift across all five modules is the same: from conversing with AI to delegating to it. You will stop typing prompts and start assigning work. That change requires different tools, and that is what this course teaches.
+
+There's a related shift in how you think about what you're doing. You may have heard this work called "prompt engineering." By week two, you'll have a better name for it: context engineering. You're not just writing better prompts for individual conversations — you're building the persistent environment in which every future conversation happens. The CLAUDE.md files, the skills, the hooks, the project structure: these are the context you're engineering. That framing will make more sense once you start building, but it's worth naming early.
+
 ### About your instructor
 
 I'm Joe Amditis. I've worked at the Center for Cooperative Media since 2015, where I focus on newsroom technology, AI tools, and helping journalists work more efficiently. I write about AI and journalism at my Substack, and I've led workshops on prompt engineering for news organizations across the country.

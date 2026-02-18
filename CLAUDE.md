@@ -36,6 +36,20 @@ This is the sequel to Prompt Engineering 101 for Journalists. It moves journalis
 - **AI tools for newsrooms:** https://github.com/jamditis/tools
 - **Scrapefruit CLI:** https://github.com/jamditis/scrapefruit-cli
 
+## Course philosophy
+
+This course is grounded in Ethan Mollick's framework for understanding AI (see "A guide to which AI to use in the agentic era," One Useful Thing, Feb 2026):
+
+- **Models** — the underlying AI intelligence (Claude Opus 4.6, GPT-5.2, Gemini 3 Pro)
+- **Apps** — the interfaces users interact with (ChatGPT.com, Claude.ai, Gemini.google.com)
+- **Harnesses** — systems that give models tools, file access, and the ability to take multi-step autonomous action
+
+This course moves students from apps to harnesses. CLI tools (Claude Code, Gemini CLI, Aider) are harnesses. Context files, skills, hooks, pipelines, and MCP are all harness-layer techniques.
+
+The philosophical shift the course teaches: from prompting (conversational, one-off) to managing (task delegation, oversight, course-correction). As Mollick puts it: "You aren't prompting, you are managing."
+
+When writing course content, frame CLI tools as harnesses, not just "different interfaces." The student already knows how to use apps. This course teaches them to delegate work.
+
 ## Module content pattern
 
 Each module contains 8 markdown documents:
