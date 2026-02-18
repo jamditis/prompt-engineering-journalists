@@ -6,6 +6,17 @@ These materials go deeper into context files and file processing if you want to 
 
 ---
 
+### Git fundamentals
+
+**"Git will finally make sense after this"** — LearnThatStack
+https://www.youtube.com/watch?v=Ala6PHlYjmw
+
+13-minute video explaining how Git works internally: commits as complete snapshots (not just diffs), branches as lightweight pointers, the three areas where code lives (working directory, staging area, repository), and when to use checkout vs reset vs revert vs rebase. Conceptual rather than command-by-command.
+
+The Module 2 exercise has you directing your CLI tool to create repos, stage files, and commit. Watching this first means you can verify what the tool actually did — not just trust that it worked.
+
+---
+
 ### Advanced CLAUDE.md examples
 
 **Claude Code best practices** by Anthropic

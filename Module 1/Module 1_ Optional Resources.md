@@ -24,6 +24,15 @@ Organized by theme: getting started, working methods, agents and automation, AI 
   - https://github.com/danielmiessler/fabric
   - Open source framework for augmenting humans with AI. Includes pre-built prompts for summarization, extraction, and analysis.
 
+### Web basics (if needed)
+
+**"HTML for beginners: how to make websites"** — TechSquidTV
+https://www.youtube.com/watch?v=3jJ6r6e3CTM
+
+16-minute video covering HTML elements, tags, attributes, and the DOM structure browsers use to render pages. Not required — but useful background if you've never looked at page source code before. It's relevant to Module 4, where pipelines fetch and extract content from web pages. Knowing what HTML is helps you understand what the extraction step is actually stripping away.
+
+---
+
 ### Terminal skills
 
 - **Warp** (Mac only)
