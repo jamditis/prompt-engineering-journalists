@@ -116,6 +116,8 @@ Save these four responses. You'll compare them to the with-context versions late
 
 Now create a context file. In your `city-hall-beat` directory, create a file called `CLAUDE.md` with instructions for covering this beat.
 
+If you want help structuring your CLAUDE.md, ask your CLI tool to plan the file before writing it — describe your beat and ask for a proposed outline, then review and adjust the structure before it fills in the details. This is a good habit to build: plan mode first, especially when asking the LLM to create something you'll be living with for a while.
+
 Use the sample at `Resources/examples/beat-project/sample-claude-md.md` as a reference, but write your own. Your file should include:
 
 **Required sections:**

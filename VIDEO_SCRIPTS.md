@@ -334,9 +334,15 @@ Show the structured output.
 "This is what you'd do manually in 20-30 minutes. The skill makes it consistent and fast. Notice it tells you what it couldn't verify — it's not suppressing uncertainty, it's flagging it."
 
 **4:30-5:30 — Create a simple custom skill [SCREEN: Claude Code + VS Code]**
-Ask Claude Code: "I want to create a skill called meeting-minutes that extracts action items, votes, and named officials from a city council transcript. Write the skill file for me."
-Watch Claude draft the SKILL.md. Review it. Save it. Invoke it on a sample transcript.
-"You described what you wanted. Claude wrote the skill. You just built a journalism tool."
+Type `/plan` first, then describe the skill:
+"I want to create a skill called meeting-minutes that extracts action items, votes, and named officials from a city council transcript. Plan the structure of the skill file — what sections it will have, what steps it will include — but don't write it yet."
+
+Watch Claude present the proposed structure. Read it.
+"This is the plan. The skill will have a YAML header, a section for what it looks for, a section for how it formats the output. It looks right to me. Now I'll approve and have it write the actual file."
+
+Type: "Looks good — go ahead and write it."
+Watch Claude draft the SKILL.md. Invoke it on a sample transcript.
+"Plan first, then build. You reviewed the approach before any file was written. Same principle applies every time you're asking Claude to build something you'll actually use."
 
 **5:30-6:00 — Arc check + what's next**
 "Your project now has a working prototype. In Module 4, you'll automate it — build a workflow that runs this on new transcripts automatically. See you there."
@@ -356,6 +362,8 @@ Watch Claude draft the SKILL.md. Review it. Save it. Invoke it on a sample trans
 
 **0:30-1:30 — What automation means with a CLI LLM [SLIDE: workflow diagram]**
 Explain that a workflow is a sequence of steps. With a CLI LLM, you describe the sequence in natural language — "fetch this, process it this way, save it here, notify me if anything looks off" — and Claude translates that into a script. The script can be run manually, scheduled, or triggered automatically. You don't write the script. You review it, test it, and decide whether to run it.
+
+"But before Claude builds anything, you can ask it to plan first. In Claude Code, that's the `/plan` command. Gemini CLI and Aider have equivalent modes. You describe what you want, Claude proposes an approach, you review it before any code is written. Think of it as seeing the outline before the reporter writes the story — you catch misunderstandings at the planning stage instead of after the pipeline is already built."
 
 **1:30-2:30 — Multi-stage processing [SLIDE: stages example]**
 Walk through the concept, not the syntax: each stage has a clear input and a clear output. If something goes wrong, you know which stage failed. This is how you build automation you can actually trust — because you can audit each stage separately.
@@ -392,16 +400,22 @@ Three rules, explained in plain terms:
 **0:00-0:30 — What we're building**
 "Today I'm going to describe a journalism workflow in plain English and have Claude Code build it. Then we're going to test it — and something is going to go wrong. That's not an accident. Showing you the failure and how to recover from it is the point."
 
-**0:30-2:00 — Describe the workflow [SCREEN: Claude Code session]**
-Type: "I want a workflow that takes a news article URL, fetches the article, strips out the ads and navigation, summarizes it in three bullets for a weekly newsletter, and saves the result as a markdown file. I'll run this on multiple articles per week. Build me a script I can reuse."
+**0:30-2:00 — Plan the workflow first [SCREEN: Claude Code session]**
+Type `/plan`, then describe the workflow:
+"I want a pipeline that takes a news article URL, fetches the article, strips out the ads and navigation, summarizes it in three bullets for a weekly newsletter, and saves the result as a markdown file. I'll run this on multiple articles per week. Plan this out — don't build anything yet."
+
+Watch Claude present a plan: what stages it proposes, what tool it plans to use for extraction, how it plans to handle the API key.
+
+"Before any code is written, I can see the whole approach. Are the stages right — fetch, extract, summarize, save? Is the API key handled as an environment variable, not hardcoded? Is there anything here I'd want to change before it starts? In this case it looks right, so I'll approve it."
+
+Type: "That looks good — go ahead and build it."
 
 Watch Claude:
-- Ask clarifying questions (what tool to use for fetching? any format preferences for the output?)
-- Propose an approach
+- Ask a clarifying question or two (format preferences for the output?)
 - Write the script
 - Explain what it built
 
-"Notice I didn't say 'use curl' or 'write a bash script.' I described the outcome. Claude figured out the implementation."
+"Notice I didn't say 'use curl' or 'write a bash script.' I described the outcome. The plan stage let me review the approach. Claude figured out the implementation."
 
 **2:00-2:30 — Glance at the script [SCREEN: Script file in VS Code]**
 Ask Claude to open the script file. Read the key sections together — fetch, parse, summarize, save.

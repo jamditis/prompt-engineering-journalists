@@ -43,13 +43,29 @@ claude
 
 (Or use `gemini` if you're working with Gemini CLI.)
 
-### Step 2: Describe the full pipeline
+### Step 2: Use plan mode to describe the pipeline
 
-Start by describing the whole workflow in plain English. Don't worry about implementation details — describe the goal:
+Before asking your CLI tool to build anything, ask it to plan first.
 
-> "I want to build a pipeline that takes a news article URL as input, fetches the article, strips out all the junk like ads and navigation, summarizes it in 2-3 sentences in a tone suitable for a newsletter, and saves the output to a markdown file with today's date in the filename. I want to be able to run this from the command line by passing in a URL. Build it."
+**In Claude Code:** Type `/plan` to enter plan mode. Claude will explore the request and present a plan for your review before writing anything.
 
-Your CLI LLM will write a script. **Read it before you run anything.**
+**In Gemini CLI:** Prefix your request: "Before building anything, plan this out step by step and wait for my approval."
+
+**In Aider:** Use `/architect` — Aider will design the approach without writing code until you confirm.
+
+Then describe the workflow in plain English:
+
+> "I want to build a pipeline that takes a news article URL as input, fetches the article, strips out the junk like ads and navigation, summarizes it in 2-3 sentences in a tone suitable for a newsletter, and saves the output to a markdown file with today's date in the filename. I want to be able to run this from the command line by passing in a URL. Plan this out — don't build anything yet."
+
+Your CLI tool will present its proposed approach: what stages it plans to build, what tools it plans to use, where it plans to put the API key, how it plans to handle errors. **Review this before approving.**
+
+Ask yourself:
+- Does this match what you asked for, or is it proposing something more complex?
+- Is the API key handling mentioned? (It should be.)
+- Are the four stages there — fetch, extract, summarize, format?
+- Is there anything you want to change before it starts building?
+
+If something looks off, say so now. Redirect the plan before any code is written. Once you're satisfied, tell it to proceed.
 
 ### Step 3: Review the script before running it
 

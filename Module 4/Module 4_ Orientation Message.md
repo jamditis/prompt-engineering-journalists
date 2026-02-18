@@ -16,6 +16,24 @@ The key shift in Module 4: instead of asking Claude Code to help you with one do
 
 The right way to build a pipeline: separate stages, each with a clear input and output. Fetch. Clean. Analyze. Format. When something breaks, you know which stage failed — and you paste the error back into your session to get a diagnosis. Because each stage is independent, you can fix one without touching the others.
 
+### Plan before you build
+
+Before you ask your CLI LLM to build anything — a script, a pipeline, a configuration file — ask it to plan first. See the approach before any file is written or any command is run.
+
+Most CLI tools have a built-in mode for this:
+
+- **Claude Code:** Type `/plan` before describing your task. Claude enters plan mode: it explores the request, thinks through the approach, and presents a plan for your review. Nothing is executed until you approve.
+- **Gemini CLI:** There's no single `/plan` command, but you get the same result by being explicit: "Before doing anything, plan this out step by step and wait for my approval before taking any action."
+- **Aider:** Use the `/architect` command. Aider will design the changes without writing any code until you confirm.
+
+The underlying habit is the same regardless of tool: **describe what you want, review what it plans to do, then authorize it to proceed.**
+
+This matters more as tasks get larger. For a one-sentence summary, it doesn't matter much if the LLM gets it wrong on the first try — you just try again. For a pipeline that makes real API calls, writes files, and costs money to run, you want to see the approach before it starts. A misunderstood requirement caught at the planning stage costs you 30 seconds. The same misunderstanding caught after a failed 50-document batch run costs you time and money.
+
+Think of it the same way you'd think about editing: you'd review a reporter's outline before they spend three days writing the story. Plan mode is the outline stage for LLM-built automation. It's also how you catch scope creep — an LLM given a loosely described task will sometimes build something bigger than you asked for. Reviewing the plan tells you that before it happens.
+
+The plan step is also where you refine your description. You might describe a workflow and see the LLM propose a more complex approach than you need, or a simpler one that misses a step. That's a better moment to course-correct than after it's built.
+
 ### Principles for building real pipelines
 
 These aren't abstract best practices. They come from building and running actual data pipelines in newsrooms.

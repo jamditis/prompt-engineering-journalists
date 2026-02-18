@@ -177,18 +177,33 @@ Not good candidates:
 - "Summarize text" — too generic, no beat-specific knowledge
 - "Be thorough" — not a process, not checkable
 
-### Write the skill file
+### Plan the skill before writing it
 
-Ask Claude Code to help you create the file:
+Before asking Claude Code to write your skill file, use plan mode. In Claude Code, type `/plan` and then describe what you want:
 
 ```
+/plan
+
 I want to create a custom skill called [your-skill-name]. Here's what it should do:
 [describe the task and the steps in plain English]
 
-Write a SKILL.md file for this skill.
+Plan out the structure of this skill file — what sections it will have, what steps it will include, what instructions you'd put in each section. Don't write the file yet.
 ```
 
-Review what Claude drafts. Apply the deletion test: read each instruction and ask whether removing it would change Claude's behavior. Cut anything that wouldn't.
+Claude will show you what it plans to build: the structure, the sections, the steps, the framing. Review this before it writes anything. Ask yourself:
+- Are the steps in the right order for how you actually work?
+- Is anything missing that you'd always do in this task?
+- Is there anything in the plan that doesn't belong in a skill file (too generic, not beat-specific)?
+
+Redirect it here if needed. Once the plan reflects what you actually want, tell it to proceed and write the file.
+
+### Write the skill file
+
+```
+Go ahead and write the SKILL.md file based on that plan.
+```
+
+Review what Claude writes. Apply the deletion test: read each instruction and ask whether removing it would change Claude's behavior. Cut anything that wouldn't.
 
 ### Save and test it
 
