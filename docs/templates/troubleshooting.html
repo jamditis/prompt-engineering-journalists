@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troubleshooting | Advanced prompt engineering for journalists</title>
+    <meta name="description" content="Solutions to common installation and usage problems with Claude Code, Gemini CLI, and Codex CLI.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        void: '#050505',
+                        panel: '#0a0a0a',
+                        surface: '#111111',
+                        chrome: '#e8e8e8',
+                        acid: '#c8ff00',
+                        acidDim: 'rgba(200, 255, 0, 0.1)',
+                        ice: '#00f0ff',
+                        iceDim: 'rgba(0, 240, 255, 0.1)',
+                        signal: '#ff3366',
+                        signalDim: 'rgba(255, 51, 102, 0.1)',
+                    },
+                    fontFamily: {
+                        display: ['Chakra Petch', 'sans-serif'],
+                        mono: ['Share Tech Mono', 'monospace'],
+                        sans: ['Chakra Petch', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <style>
+        body {
+            background-color: #050505;
+        }
+
+        /* CRT overlay */
+        .crt-overlay {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15),
+                rgba(0, 0, 0, 0.15) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            z-index: 1000;
+        }
+
+        /* Grid background */
+        .bg-grid-pattern {
+            background-image:
+                linear-gradient(rgba(200, 255, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(200, 255, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* Notch cuts */
+        .clip-notch {
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+        }
+
+        .clip-notch-top {
+            clip-path: polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px);
+        }
+
+        /* Glow effects */
+        .glow-acid {
+            box-shadow: 0 0 20px rgba(200, 255, 0, 0.2);
+        }
+
+        .glow-ice {
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-void text-chrome font-sans min-h-screen">
+    <!-- CRT Overlay -->
+    <div class="crt-overlay"></div>
+
+    <!-- Header -->
+    <header class="border-b border-white/10 bg-panel/80 backdrop-blur-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="../index.html" class="font-display text-sm text-gray-400 hover:text-acid transition-colors">
+                    &larr; BACK_TO_COURSE
+                </a>
+                <nav class="hidden md:flex items-center gap-6">
+                    <a href="../module-1/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M1</a>
+                    <a href="../module-2/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M2</a>
+                    <a href="../module-3/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M3</a>
+                    <a href="../module-4/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M4</a>
+                    <a href="../module-5/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M5</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="bg-grid-pattern min-h-screen">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+
+            <!-- Section header -->
+            <div class="mb-12">
+                <div class="text-xs font-mono text-signal mb-2">// TROUBLESHOOTING</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-chrome mb-4">Troubleshooting</h1>
+                <p class="text-gray-400 font-mono text-sm max-w-2xl">
+                    Solutions to common installation and usage problems.
+                </p>
+            </div>
+
+            <!-- "command not found" -->
+            <section class="mb-10">
+                <div class="border border-signal/30 bg-panel clip-notch">
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="alert-triangle" class="w-5 h-5 text-signal"></i>
+                            <h2 class="font-display text-xl font-bold text-chrome">"command not found" after install</h2>
+                        </div>
+                        <p class="text-sm text-gray-400 font-mono mb-4">The tool installed but your shell can't find it. Your PATH needs to include the npm global bin directory.</p>
+                        <div class="bg-surface border border-white/10 p-4 font-mono text-sm space-y-2">
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 flex-shrink-0">$</span>
+                                <code class="text-ice">source ~/.zshrc</code>
+                                <span class="text-gray-600 ml-auto text-xs"># macOS: reload shell config</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 flex-shrink-0">$</span>
+                                <code class="text-ice">source ~/.bashrc</code>
+                                <span class="text-gray-600 ml-auto text-xs"># Linux/WSL: reload shell config</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 flex-shrink-0">$</span>
+                                <code class="text-ice">npm list -g --depth=0</code>
+                                <span class="text-gray-600 ml-auto text-xs"># check installed packages</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-600 font-mono mt-3">If reloading doesn't work, close your terminal entirely and open a new one.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Node.js version -->
+            <section class="mb-10">
+                <div class="border border-signal/30 bg-panel clip-notch">
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="alert-triangle" class="w-5 h-5 text-signal"></i>
+                            <h2 class="font-display text-xl font-bold text-chrome">Node.js version too old</h2>
+                        </div>
+                        <p class="text-sm text-gray-400 font-mono mb-4">These CLI tools require Node.js 20 or newer.</p>
+                        <div class="bg-surface border border-white/10 p-4 font-mono text-sm space-y-2">
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 flex-shrink-0">$</span>
+                                <code class="text-ice">node --version</code>
+                                <span class="text-gray-600 ml-auto text-xs"># check current version</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 flex-shrink-0">$</span>
+                                <code class="text-ice">nvm install --lts</code>
+                                <span class="text-gray-600 ml-auto text-xs"># install latest LTS via nvm</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-600 font-mono mt-3">If you don't have nvm, install it from <span class="text-ice">github.com/nvm-sh/nvm</span> or use your OS package manager to update Node.js directly.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- npm permission errors -->
+            <section class="mb-10">
+                <div class="border border-signal/30 bg-panel clip-notch">
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="alert-triangle" class="w-5 h-5 text-signal"></i>
+                            <h2 class="font-display text-xl font-bold text-chrome">npm permission errors (EACCES)</h2>
+                        </div>
+                        <p class="text-sm text-gray-400 font-mono mb-4">npm is trying to install to a directory you don't own. Fix by setting a user-level global prefix.</p>
+                        <div class="bg-surface border border-white/10 p-4 font-mono text-sm space-y-2">
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 flex-shrink-0">$</span>
+                                <code class="text-ice">mkdir -p ~/.npm-global</code>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 flex-shrink-0">$</span>
+                                <code class="text-ice">npm config set prefix '~/.npm-global'</code>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 flex-shrink-0">$</span>
+                                <code class="text-ice">echo 'export PATH="$HOME/.npm-global/bin:$PATH"' >> ~/.zshrc</code>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 flex-shrink-0">$</span>
+                                <code class="text-ice">source ~/.zshrc</code>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-600 font-mono mt-3">On Linux, replace <span class="text-gray-400">~/.zshrc</span> with <span class="text-gray-400">~/.bashrc</span>. Never use <span class="text-signal">sudo npm install</span>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- API key issues -->
+            <section class="mb-10">
+                <div class="border border-signal/30 bg-panel clip-notch">
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="key" class="w-5 h-5 text-signal"></i>
+                            <h2 class="font-display text-xl font-bold text-chrome">API key not working</h2>
+                        </div>
+                        <p class="text-sm text-gray-400 font-mono mb-4">Authentication failed or the key isn't being read.</p>
+                        <div class="bg-surface border border-white/10 p-4 font-mono text-sm space-y-2">
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 flex-shrink-0">$</span>
+                                <code class="text-ice">echo $ANTHROPIC_API_KEY</code>
+                                <span class="text-gray-600 ml-auto text-xs"># check key is set</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 flex-shrink-0">$</span>
+                                <code class="text-ice">echo $ANTHROPIC_API_KEY | cat -A</code>
+                                <span class="text-gray-600 ml-auto text-xs"># check for invisible chars</span>
+                            </div>
+                        </div>
+                        <div class="border border-ice/30 bg-iceDim p-4 mt-4 clip-notch-top">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="info" class="w-4 h-4 text-ice flex-shrink-0 mt-0.5"></i>
+                                <p class="text-xs text-gray-400 font-mono">
+                                    Claude Code can also authenticate via <span class="text-ice">claude login</span> (browser-based OAuth). If that's stuck, try <span class="text-ice">claude logout</span> first.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CLAUDE.md not being read -->
+            <section class="mb-10">
+                <div class="border border-signal/30 bg-panel clip-notch">
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="file-x" class="w-5 h-5 text-signal"></i>
+                            <h2 class="font-display text-xl font-bold text-chrome">CLAUDE.md not being read</h2>
+                        </div>
+                        <p class="text-sm text-gray-400 font-mono mb-4">Your context file exists but Claude Code doesn't seem to follow its instructions.</p>
+                        <div class="space-y-3 text-sm text-gray-400 font-mono">
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-acid flex-shrink-0 mt-0.5"></i>
+                                <p>File must be named exactly <span class="text-ice">CLAUDE.md</span> (case-sensitive on macOS and Linux).</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-acid flex-shrink-0 mt-0.5"></i>
+                                <p>Must be in the directory where you run <span class="text-ice">claude</span>, or in a parent directory.</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-acid flex-shrink-0 mt-0.5"></i>
+                                <p>Run <span class="text-ice">/config</span> inside Claude Code to see which files loaded.</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-acid flex-shrink-0 mt-0.5"></i>
+                                <p>Apply the <span class="text-ice">deletion test</span>: generic instructions ("be accurate") won't change behavior. Specific ones ("use 'council member' not 'councilman'") will.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slow responses / token limits -->
+            <section class="mb-10">
+                <div class="border border-signal/30 bg-panel clip-notch">
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="clock" class="w-5 h-5 text-signal"></i>
+                            <h2 class="font-display text-xl font-bold text-chrome">Slow responses or token limit exceeded</h2>
+                        </div>
+                        <p class="text-sm text-gray-400 font-mono mb-4">Long conversations build up context that slows responses and can hit limits.</p>
+                        <div class="bg-surface border border-white/10 p-4 font-mono text-sm space-y-2">
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 flex-shrink-0">$</span>
+                                <code class="text-ice">/compact</code>
+                                <span class="text-gray-600 ml-auto text-xs"># compress conversation history</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 flex-shrink-0">$</span>
+                                <code class="text-ice">/clear</code>
+                                <span class="text-gray-600 ml-auto text-xs"># start fresh</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 flex-shrink-0">$</span>
+                                <code class="text-ice">/cost</code>
+                                <span class="text-gray-600 ml-auto text-xs"># check token usage</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-600 font-mono mt-3">For large tasks, break work into smaller requests and start new sessions between them.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Windows-specific issues -->
+            <section class="mb-10">
+                <div class="border border-signal/30 bg-panel clip-notch">
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="monitor" class="w-5 h-5 text-signal"></i>
+                            <h2 class="font-display text-xl font-bold text-chrome">Windows-specific issues</h2>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="text-sm font-display font-bold text-gray-300 mb-2">Line ending problems</h3>
+                                <div class="bg-surface border border-white/10 p-4 font-mono text-sm">
+                                    <div class="flex items-start gap-3">
+                                        <span class="text-gray-600 flex-shrink-0">$</span>
+                                        <code class="text-ice">git config --global core.autocrlf input</code>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-display font-bold text-gray-300 mb-2">Script execution blocked</h3>
+                                <div class="bg-surface border border-white/10 p-4 font-mono text-sm">
+                                    <div class="flex items-start gap-3">
+                                        <span class="text-gray-600 flex-shrink-0">PS></span>
+                                        <code class="text-ice">Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-display font-bold text-gray-300 mb-2">WSL vs PowerShell</h3>
+                                <p class="text-sm text-gray-400 font-mono">These are separate environments with separate installs. Tools installed in WSL won't appear in PowerShell and vice versa. Pick one and stay consistent.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gemini rate limiting -->
+            <section class="mb-10">
+                <div class="border border-signal/30 bg-panel clip-notch">
+                    <div class="p-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i data-lucide="gauge" class="w-5 h-5 text-signal"></i>
+                            <h2 class="font-display text-xl font-bold text-chrome">Gemini CLI rate limiting</h2>
+                        </div>
+                        <p class="text-sm text-gray-400 font-mono mb-4">The free tier allows 1,000 requests per day. If you hit limits, use a smaller model:</p>
+                        <div class="bg-surface border border-white/10 p-4 font-mono text-sm">
+                            <div class="flex items-start gap-3">
+                                <span class="text-gray-600 flex-shrink-0">$</span>
+                                <code class="text-ice">gemini -m gemini-2.0-flash-lite "your prompt"</code>
+                            </div>
+                        </div>
+                        <p class="text-xs text-gray-600 font-mono mt-3">Flash Lite uses fewer resources per request. For pipelines, add 2-second pauses between API calls.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Still stuck? -->
+            <section class="mb-12">
+                <div class="border border-ice/30 bg-iceDim p-6 clip-notch-top">
+                    <div class="flex items-start gap-4">
+                        <i data-lucide="life-buoy" class="w-5 h-5 text-ice flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <div class="text-xs font-mono text-ice mb-2">:: STILL_STUCK</div>
+                            <p class="text-sm text-gray-400 font-mono mb-2">
+                                Run <span class="text-ice">/doctor</span> inside Claude Code for an automated health check. For Gemini, try <span class="text-ice">gemini --version</span> to confirm it's installed.
+                            </p>
+                            <p class="text-sm text-gray-400 font-mono">
+                                Post in the course discussion forums with your OS, the command you ran, and the full error message. Screenshots help.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-panel">
+        <div class="max-w-6xl mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-xs font-mono text-gray-600">
+                    Advanced prompt engineering for journalists
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="../index.html" class="text-xs font-mono text-gray-500 hover:text-acid transition-colors">HOME</a>
+                    <a href="./" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">TEMPLATES</a>
+                    <a href="https://github.com/jamditis/prompt-engineering-journalists" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">GITHUB</a>
+                </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                <p class="text-xs font-mono text-gray-700">
+                    &copy; 2025 Knight Center for Journalism in the Americas
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
