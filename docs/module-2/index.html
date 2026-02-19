@@ -97,12 +97,12 @@
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Processing journalism documents</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">CLI tools can read files directly from your project folder — press releases, meeting minutes, interview transcripts, public records. You reference the file by name instead of copying and pasting its contents into a chat window.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Inside an interactive Claude Code session, you reference files by name — no copying and pasting required. Claude reads them directly from your project folder.</p>
                         <div class="border border-white/10 bg-surface overflow-hidden mb-3">
-                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude "Read press-release.md and identify claims that need verification"
-claude "Summarize council-minutes.md. Focus on budget items over $100,000"</code></pre>
+                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read press-release.md and identify claims that need verification
+Summarize council-minutes.md. Focus on budget items over $100,000</code></pre>
                         </div>
-                        <p class="text-gray-300 text-sm leading-relaxed">When CLAUDE.md exists in the directory, the tool reads it first — so your style rules and source standards apply automatically to every document you process.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">When CLAUDE.md exists in the directory, Claude reads it before your first message — so your style rules and source standards apply automatically to every document you process.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
@@ -134,9 +134,9 @@ claude "Summarize council-minutes.md. Focus on budget items over $100,000"</code
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">01</span>
-                        Create your project directory
+                        Set up your project folder
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Create a directory for a fictional city hall beat and copy the sample documents from <code class="text-acid bg-surface px-1">Resources/examples/beat-project/</code> into it:</p>
+                    <p class="text-gray-300 text-sm mb-4">Open your terminal and launch Claude Code from your home directory:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
@@ -144,10 +144,30 @@ claude "Summarize council-minutes.md. Focus on budget items over $100,000"</code
                             <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">mkdir city-hall-beat
-cd city-hall-beat</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
                     </div>
-                    <p class="text-gray-300 text-sm">You should have four sample journalism documents: a press release, council meeting minutes, interview notes, and a reader tip email.</p>
+                    <p class="text-gray-300 text-sm mb-4">Ask Claude to create the project folder with sample documents:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a project folder called city-hall-beat in my home directory. Add four sample journalism documents with realistic fictional content: a press release about a park closure, city council meeting minutes (a 1-2 page excerpt), notes from an interview with a local official named Martinez, and a reader tip email about a potential story. Use descriptive filenames and tell me what you created.</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Once Claude confirms, exit the session (press Ctrl+C twice). Then step into the folder:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cd ~/city-hall-beat
+claude</code></pre>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-2">This step matters: Claude Code reads context files from wherever you launch it. Later, when you add a CLAUDE.md to this folder, Claude picks it up automatically — but only if you're inside the folder when you start.</p>
                 </div>
 
                 <!-- Step 2 -->
@@ -175,20 +195,44 @@ cd city-hall-beat</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
                         Process documents without context
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Run these four prompts and save the responses. There is no CLAUDE.md yet — the AI has no knowledge of your beat or preferences.</p>
+                    <p class="text-gray-300 text-sm mb-4">You're already inside a session from Step 1. Paste these four prompts one at a time. There is no CLAUDE.md yet — Claude has no knowledge of your beat or preferences.</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-3">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude "Read press-release-park-closure.md and write a 3-sentence summary suitable for a news brief"
-claude "Read council-minutes-excerpt.md. List every factual claim made by a council member, and note which are attributed to a named source vs. unattributed"
-claude "Read interview-notes-martinez.md. What follow-up questions should I ask? Flag any claims that need independent verification"
-claude "Read tip-email.md. Is this tip actionable? What would you need to verify before pursuing it?"</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read the press release file and write a 3-sentence summary suitable for a news brief</code></pre>
                     </div>
-                    <p class="text-gray-300 text-sm">Save these four responses — you'll compare them to the with-context versions in Step 5.</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-3">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read the council meeting minutes. List every factual claim made by a council member, and note which are attributed to a named source vs. unattributed</code></pre>
+                    </div>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-3">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read the interview notes. What follow-up questions should I ask? Flag any claims that need independent verification</code></pre>
+                    </div>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-3">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read the tip email. Is this tip actionable? What would you need to verify before pursuing it?</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm">Note the responses — you'll compare them to the with-context versions in Step 5.</p>
                 </div>
 
                 <!-- Step 4 -->
@@ -226,8 +270,18 @@ claude "Read tip-email.md. Is this tip actionable? What would you need to verify
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">05</span>
                         Process the same documents with context
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Run the exact same four prompts from Step 3. Don't change anything — the only difference is that CLAUDE.md now exists in the directory.</p>
-                    <p class="text-gray-300 text-sm">Compare the responses side by side. Look for specific differences: terminology, attribution handling, style choices, what the AI flagged as needing verification.</p>
+                    <p class="text-gray-300 text-sm mb-4">Exit the current session (Ctrl+C twice) and relaunch from the same directory. This starts a fresh session that picks up your new CLAUDE.md:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Run the exact same four prompts from Step 3. Don't change anything — the only difference is that CLAUDE.md now exists and Claude read it before you typed a word.</p>
+                    <p class="text-gray-300 text-sm">Compare the responses side by side. Look for specific differences: terminology, attribution handling, style choices, what Claude flagged as needing verification.</p>
                 </div>
 
             </section>
