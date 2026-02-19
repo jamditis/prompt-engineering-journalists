@@ -83,6 +83,69 @@ Each module contains 8 markdown documents:
 - All content uses LLM-first framing: exercises describe a workflow to hand to an LLM, not step-by-step technical instructions students follow manually
 - Aider has been removed from all content — tools are Claude Code, Gemini CLI, and Codex CLI only
 
+## Exercise design rules
+
+This section governs how all exercise steps must be written. These rules apply to the `docs/module-*/index.html` files and any future exercise content.
+
+### Core principle: students launch Claude, then delegate everything
+
+Students open a terminal, type `claude`, and press Enter. They are now inside an interactive session. From that point, they do not type terminal commands — they paste natural-language prompts and Claude does the work.
+
+The student's job is to **specify what they want clearly enough that Claude can execute it**. That is the skill the course teaches.
+
+### Code block visual vocabulary
+
+Every code block in an exercise has a label and a text color. There are exactly three types:
+
+| Label | Text color class | When to use |
+|-------|-----------------|-------------|
+| `terminal` | `text-acid` | Real shell commands the student types in the terminal |
+| `claude code` | `text-gray-300` | Prompts the student pastes inside an active Claude Code interactive session |
+| `claude.ai` | `text-gray-300` | Prompts for the Claude.ai web interface (Module 1 comparison only) |
+
+### The only allowed terminal commands
+
+A `terminal` / `text-acid` block should contain **only** these commands:
+
+- `claude` — bare, no arguments, to launch an interactive session
+- `cd ~/folder-name` — only when a directory change is necessary for CLAUDE.md to load correctly (Module 2 specifically)
+- `npm install -g @anthropic-ai/claude-code` — first-time install
+- The Gemini CLI install command — first-time install
+
+**Nothing else belongs in a terminal block.** File creation, folder setup, git operations, script writing, JSON editing — all of that is done by Claude inside the session, not by the student in the terminal.
+
+### The forbidden pattern: `claude "..."` one-shots
+
+Never write:
+
+```
+claude "Read this file and summarize it"
+```
+
+This is a non-interactive one-shot invocation. Students running it never enter a session, can't see Claude's reasoning, and can't course-correct. It also misrepresents how Claude Code is meant to be used.
+
+Always use the bare `claude` launch + a `claude code` prompt block instead.
+
+### What "LLM-first" means in practice
+
+When writing an exercise step, ask: "Is the student doing this, or is Claude doing this?" If Claude should be doing it, the step is a `claude code` prompt, not a terminal command. Examples:
+
+- Creating a folder → `claude code` prompt asking Claude to create it
+- Writing a config file → `claude code` prompt asking Claude to write it (with correct auto-detected values)
+- Running a script → `claude code` prompt asking Claude to build and run it
+- Verifying a result → `claude code` prompt asking Claude to confirm it worked
+
+Steps where the student does something in the terminal: launch Claude (`claude`), change directory before relaunching when strictly necessary.
+
+### Official Claude Code file types
+
+Only these are official Claude Code patterns:
+
+- **CLAUDE.md** — project context file, read automatically at session start
+- **`.claude/commands/`** — custom slash commands (filename = command name, e.g. `source-check.md` → `/source-check`)
+
+**LESSON.md and RULE.md are not official Claude Code file types.** They were personal conventions. Do not reference them in course content.
+
 ## Current state (as of Feb 2026)
 
 All 5 modules + Introduction module have complete 8-document sets. Readings are populated across all modules with required articles added and Mollick synthesis document created.
@@ -93,13 +156,15 @@ All 5 modules + Introduction module have complete 8-document sets. Readings are 
 - **Joe Amditis** (925 Struggle Street Substack): agent architecture piece assigned to modules 2 and 5
 - **Author diversity**: Clare Spencer, Jessy de Cooker included; agent research targeted Vicki Boykis, Hilke Schellmann, Meredith Broussard, Rachel Thomas, Joy Buolamwini, Rumman Chowdhury
 
-### Pending work
+### Completed work (as of Feb 2026)
 
-All previously pending items are complete as of Feb 2026:
 - **Optional resources readings**: Willison → Module 3; Vincent + Doctorow → Module 5
 - **URL verification**: 7 dead links fixed or removed across all modules; 403s from generative-ai-newsroom.com and Axios flagged as bot-blocking (likely live)
 - **Exercise solution keys**: written for all 5 modules (model answer + grader rubric, one file per module)
 - **Syllabus sync**: both files now identical canonical version
+- **Exercise rewrites**: all 5 module exercises rewritten to follow the LLM-first rules documented above — no more `claude "..."` one-shots, no more heredoc patterns, no more manual terminal commands beyond `claude` and `cd`
+- **LESSON.md/RULE.md removed**: Module 3 skill types card corrected; these are not official Claude Code file types
+- **CSS word wrap**: `pre code` blocks now wrap globally across the course site (`docs/assets/css/amditis.css`)
 
 # AI Writing Guidelines: Avoiding Slop Phrases
 Use this file as a reference when reviewing AI-generated content. These patterns indicate lazy, filler writing that should be edited or avoided.
