@@ -138,87 +138,24 @@
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
                         Create a research documents folder
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Set up a folder with some test documents:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden">
+                    <p class="text-gray-300 text-sm mb-4">Open your terminal, launch Claude Code, and ask it to set up the folder:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">mkdir -p ~/research-docs
-cd ~/research-docs
-
-# Create some sample documents
-cat > city-budget-2024.txt <<'EOF'
-City Budget Summary - Fiscal Year 2024
-
-Total Budget: $142.5 million
-
-Major Allocations:
-- Public Safety: $45.2 million (32%)
-- Education: $38.1 million (27%)
-- Infrastructure: $22.8 million (16%)
-- Parks and Recreation: $12.4 million (9%)
-- Administration: $11.2 million (8%)
-- Debt Service: $8.6 million (6%)
-- Contingency: $4.2 million (3%)
-
-Notable Changes from 2023:
-- Public Safety increased by $3.1 million for new police positions
-- Infrastructure decreased by $1.5 million after completion of Main St project
-- New allocation of $2.3 million for affordable housing initiatives
-EOF
-
-cat > school-board-minutes-jan.txt <<'EOF'
-School Board Meeting Minutes - January 15, 2024
-
-Attendees: Board members Smith, Johnson, Garcia, Kim, O'Brien
-Absent: None
-
-Agenda Items:
-
-1. Approval of December minutes - Passed unanimously
-
-2. Budget Review
-   - Superintendent presented mid-year budget report
-   - 97% of allocated funds committed
-   - Request for $150,000 supplemental for HVAC repairs at Lincoln Elementary
-   - Motion to approve supplemental: Passed 4-1 (Kim opposed)
-
-3. New Business
-   - Discussion of proposed later start times for high schools
-   - Public comment period: 12 speakers, 8 in favor, 4 opposed
-   - No vote taken; will continue at February meeting
-
-4. Personnel
-   - Approved hiring of 3 new special education aides
-   - Accepted resignation of Assistant Principal Martinez (Wilson High)
-
-Next Meeting: February 19, 2024
-EOF
-
-cat > crime-stats-q4.txt <<'EOF'
-Quarterly Crime Statistics - Q4 2024
-
-Overall Trends:
-- Total incidents: 1,847 (down 8% from Q3)
-- Violent crimes: 124 (down 12% from Q3)
-- Property crimes: 1,203 (down 6% from Q3)
-- Traffic incidents: 520 (up 3% from Q3)
-
-By Category:
-- Burglary: 89 incidents (down from 112)
-- Vehicle theft: 156 incidents (down from 178)
-- Assault: 67 incidents (down from 81)
-- Robbery: 23 incidents (down from 29)
-- Vandalism: 234 incidents (down from 251)
-
-Notable:
-- Downtown patrol increase correlates with 22% drop in downtown incidents
-- Vehicle theft remains concentrated in mall parking areas
-- No homicides for second consecutive quarter
-EOF</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
+                    </div>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a folder called research-docs in my home directory with three realistic sample documents I can use to test RAG queries: a city budget summary for fiscal year 2024 with department-level breakdowns, school board meeting minutes from January 2024, and quarterly crime statistics for Q4 2024. Use believable fictional numbers and names throughout.</code></pre>
                     </div>
                 </div>
 
@@ -228,31 +165,18 @@ EOF</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
                         Configure MCP in Claude Code
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Claude Code's MCP configuration lives in <code class="text-acid bg-surface px-1">~/.claude/</code>. Create or edit the MCP settings:</p>
+                    <p class="text-gray-300 text-sm mb-4">Ask Claude to set up the MCP filesystem server configuration. Stay in the same session:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">claude_desktop_config.json</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">cat > ~/.claude/claude_desktop_config.json <<'EOF'
-{
-  "mcpServers": {
-    "research-files": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/Users/YOUR_USERNAME/research-docs"
-      ]
-    }
-  }
-}
-EOF</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Set up MCP filesystem server access to my ~/research-docs folder. Create or update ~/.claude/claude_desktop_config.json with the correct configuration. Use the actual path to my research-docs directory (not a placeholder). Tell me what you wrote so I can verify it.</code></pre>
                     </div>
                     <div class="border border-signal/30 bg-signalDim p-4">
-                        <p class="text-sm font-sans text-gray-300"><span class="text-signal font-bold font-mono">IMPORTANT:</span> Replace <code class="text-acid bg-surface px-1">YOUR_USERNAME</code> with your actual username. You can find it by running <code class="text-acid bg-surface px-1">whoami</code> in terminal.</p>
+                        <p class="text-sm font-sans text-gray-300"><span class="text-signal font-bold font-mono">VERIFY:</span> Check that the path in the config file matches your actual username and home directory. Claude should detect this automatically, but confirm the path before moving on.</p>
                     </div>
                 </div>
 
