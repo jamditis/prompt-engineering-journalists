@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Module 2: Voice-controlled AI | Advanced prompt engineering</title>
+    <title>Module 2: Project context | Advanced prompt engineering</title>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../assets/js/config.js"></script>
@@ -36,8 +36,8 @@
         <section class="py-12 px-6 border-b border-white/10">
             <div class="max-w-5xl mx-auto">
                 <div class="text-xs text-acid font-mono mb-4">MODULE 02</div>
-                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">VOICE-CONTROLLED AI</h1>
-                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Use speech-to-text to interact with AI tools hands-free, enabling new workflows for interviews, dictation, and accessibility.</p>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">PROJECT CONTEXT</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Write your beat knowledge, style rules, and source standards once. Every AI session picks them up automatically.</p>
             </div>
         </section>
 
@@ -51,11 +51,27 @@
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand available voice transcription options and their trade-offs</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Configure voice input for Claude Code using different backends</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Distinguish between RAW mode and Agent mode for voice workflows</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Build a practical voice-to-text workflow for story outlining</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Explain what project context files are and how they differ across tools (CLAUDE.md, GEMINI.md, AGENTS.md)</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Write a context file with beat-specific instructions, style preferences, and source standards</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Use the deletion test to decide what belongs in a context file and what doesn't</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Process journalism documents — press releases, transcripts, public records — using a CLI tool</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Compare AI outputs with and without project context to see the practical difference</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand what Git and GitHub are and why context files should be versioned</li>
                     </ul>
+                </div>
+            </section>
+
+            <!-- Before you start -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">Before you start</h2>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-gray-300 text-sm leading-relaxed">Every time you open a new chat with an AI tool, it starts blank. It doesn't know your beat, your publication, your style rules, or what you were working on last session. You explain the context again, from scratch, every time.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">CLI tools solve this. They can read files in your project directory before you type a single word. A context file — called <code class="text-acid bg-surface px-1">CLAUDE.md</code> for Claude Code — is where you put that background once, so you never have to type it again.</p>
+                    <a href="../concepts/how-context-files-work.html" class="inline-flex items-center gap-2 text-ice text-sm hover:text-acid transition-colors">
+                        Read the full explanation: how context files work →
+                    </a>
                 </div>
             </section>
 
@@ -65,34 +81,42 @@
                     <h2 class="font-display text-xl text-chrome">Key concepts</h2>
                 </div>
                 <div class="space-y-4">
+
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Why voice input matters</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">Voice input lets you brainstorm without context-switching to your keyboard, dictate notes while reviewing documents, and work hands-free when typing isn't practical. For journalists, this means capturing thoughts during research, outlining stories while commuting, or making AI tools accessible for those with mobility limitations.</p>
+                        <h3 class="font-display text-lg text-acid mb-3">What goes in a context file</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">A context file contains the things that make your project different from every other project — not the things that are true of all journalism. Good content: your beat entities, beat-specific terminology, style preferences that differ from defaults, source attribution standards you want enforced, phrases to avoid. Bad content: "be helpful," "write clearly," "verify facts" — generic instructions the tool already tries to follow.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Think of it as a briefing document for a new reporter joining your beat. Not the journalism 101 stuff — the specific things about <em>your</em> coverage area and <em>your</em> newsroom's conventions.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Transcription backends</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Several options exist for converting speech to text:</p>
-                        <ul class="space-y-2 text-sm font-sans text-gray-300">
-                            <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Gemini Flash:</strong> Google's fast, accurate API. Requires a Google Cloud account. Good accuracy, low latency.</li>
-                            <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">OpenAI Whisper:</strong> Can run locally or via API. Excellent accuracy, especially for technical terms. Local version is free but slower.</li>
-                            <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Windows Speech Recognition:</strong> Built into Windows. No setup required, works offline, but less accurate than cloud options.</li>
-                            <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">macOS Dictation:</strong> Built into macOS. Press the microphone key twice or use Fn Fn. Works offline with recent macOS versions.</li>
-                        </ul>
+                        <h3 class="font-display text-lg text-acid mb-3">The deletion test</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Before saving a line to your context file, ask: if I delete this, would the AI's output change for someone who already knows my beat?</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">An experienced city hall reporter doesn't need to be told "verify facts before publishing." But they might need to know "the city uses 'resolution' for binding votes and 'ordinance' for legislation — don't confuse these." The first is generic. The second is beat-specific context that changes the output.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">If deleting a line changes nothing for a knowledgeable reporter, cut the line.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">RAW mode vs. Agent mode</h3>
-                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
-                            <p><span class="text-ice">RAW mode:</span> Your speech is transcribed and sent directly to Claude without modification. Good for dictating content verbatim or when you want full control over the prompt.</p>
-                            <p><span class="text-acid">Agent mode:</span> Claude Code interprets your speech as instructions and may read files, run commands, or take multi-step actions. Good for hands-free coding or document processing.</p>
+                        <h3 class="font-display text-lg text-acid mb-3">Processing journalism documents</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">CLI tools can read files directly from your project folder — press releases, meeting minutes, interview transcripts, public records. You reference the file by name instead of copying and pasting its contents into a chat window.</p>
+                        <div class="border border-white/10 bg-surface overflow-hidden mb-3">
+                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude "Read press-release.md and identify claims that need verification"
+claude "Summarize council-minutes.md. Focus on budget items over $100,000"</code></pre>
                         </div>
+                        <p class="text-gray-300 text-sm leading-relaxed">When CLAUDE.md exists in the directory, the tool reads it first — so your style rules and source standards apply automatically to every document you process.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Latency and accuracy trade-offs</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">Cloud transcription (Gemini, Whisper API) offers better accuracy but adds network latency. Local options (Whisper local, OS built-in) work offline but may be slower or less accurate. For real-time conversation, optimize for latency. For document dictation, optimize for accuracy.</p>
+                        <h3 class="font-display text-lg text-acid mb-3">Context files should be versioned</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Your CLAUDE.md is infrastructure. Not a note to yourself — infrastructure. It gets committed to Git, versioned alongside your project files, and shared with colleagues when you share the project. When you push a project to GitHub, your context file goes with it. When a colleague clones the repo, your accumulated beat knowledge is already there.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">This week introduces Git basics — what a repository is, what a commit does, what cloning means — because context files, skills, and workflow scripts are all shared through GitHub repos. You don't need to memorize Git commands; your CLI tool can run them for you. But you need to know what you're asking for and why.</p>
                     </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">From prompt engineering to context engineering</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">The course is called "Advanced Prompt Engineering," but this module is where the more accurate name becomes clear: context engineering. Prompt engineering is about crafting better individual requests. Context engineering is about building the environment in which every future conversation happens.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Instead of including your style rules in every prompt, you define them once in CLAUDE.md and they're there automatically. Instead of explaining your beat at the start of each session, you write it once and it persists. Every module in this course adds another layer to that environment — skills, hooks, pipelines, agents. Your CLAUDE.md is the foundation.</p>
+                    </div>
+
                 </div>
             </section>
 
@@ -103,140 +127,112 @@
                 </div>
 
                 <div class="border border-acid/30 bg-acidDim p-6 mb-8">
-                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Configure voice input for Claude Code and use it to dictate a story outline for a hypothetical news article.</span></p>
+                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Set up a beat project directory, initialize a Git repo, process journalism documents with and without a context file, and compare the results.</span></p>
                 </div>
 
                 <!-- Step 1 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">01</span>
-                        Choose your transcription backend
+                        Create your project directory
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">For this exercise, we'll use your operating system's built-in dictation as the simplest option. You can later upgrade to Whisper or Gemini for better accuracy.</p>
-
-                    <div class="grid md:grid-cols-2 gap-4 mb-4">
-                        <div class="border border-white/10 bg-panel p-4">
-                            <h4 class="font-mono text-sm text-ice mb-3">macOS</h4>
-                            <ul class="space-y-2 text-sm text-gray-300">
-                                <li class="flex items-start gap-2"><span class="text-acid">></span> Go to System Settings > Keyboard > Dictation</li>
-                                <li class="flex items-start gap-2"><span class="text-acid">></span> Turn on Dictation</li>
-                                <li class="flex items-start gap-2"><span class="text-acid">></span> Note the shortcut (default: press Control twice, or Fn twice on newer Macs)</li>
-                            </ul>
+                    <p class="text-gray-300 text-sm mb-4">Create a directory for a fictional city hall beat and copy the sample documents from <code class="text-acid bg-surface px-1">Resources/examples/beat-project/</code> into it:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
-                        <div class="border border-white/10 bg-panel p-4">
-                            <h4 class="font-mono text-sm text-ice mb-3">Windows</h4>
-                            <ul class="space-y-2 text-sm text-gray-300">
-                                <li class="flex items-start gap-2"><span class="text-acid">></span> Press Win + H to enable voice typing</li>
-                                <li class="flex items-start gap-2"><span class="text-acid">></span> Or go to Settings > Time & Language > Speech to configure</li>
-                            </ul>
-                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">mkdir city-hall-beat
+cd city-hall-beat</code></pre>
                     </div>
+                    <p class="text-gray-300 text-sm">You should have four sample journalism documents: a press release, council meeting minutes, interview notes, and a reader tip email.</p>
                 </div>
 
                 <!-- Step 2 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
-                        Test basic dictation
+                        Initialize a Git repository
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Open any text editor and activate dictation using your shortcut. Speak a few sentences to confirm it's working:</p>
+                    <p class="text-gray-300 text-sm mb-4">Open your CLI tool and ask it to initialize a Git repo and commit your files:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">spoken</span>
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">"The quick brown fox jumps over the lazy dog. Testing one two three."</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Initialize this directory as a Git repository and commit all files with the message "Add sample journalism documents for city hall beat"</code></pre>
                     </div>
-                    <p class="text-gray-400 text-xs">Check that punctuation is handled correctly. Most systems recognize "period," "comma," "question mark" as punctuation commands.</p>
+                    <p class="text-gray-300 text-sm">Watch what the tool does: it runs <code class="text-acid bg-surface px-1">git init</code>, <code class="text-acid bg-surface px-1">git add</code>, and <code class="text-acid bg-surface px-1">git commit</code>. You don't need to memorize the commands — but note what each one does.</p>
                 </div>
 
                 <!-- Step 3 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
-                        Open Claude Code in your terminal
+                        Process documents without context
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Navigate to a project folder and start Claude Code:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden">
+                    <p class="text-gray-300 text-sm mb-4">Run these four prompts and save the responses. There is no CLAUDE.md yet — the AI has no knowledge of your beat or preferences.</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-3">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cd ~/Documents/stories
-claude</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude "Read press-release-park-closure.md and write a 3-sentence summary suitable for a news brief"
+claude "Read council-minutes-excerpt.md. List every factual claim made by a council member, and note which are attributed to a named source vs. unattributed"
+claude "Read interview-notes-martinez.md. What follow-up questions should I ask? Flag any claims that need independent verification"
+claude "Read tip-email.md. Is this tip actionable? What would you need to verify before pursuing it?"</code></pre>
                     </div>
+                    <p class="text-gray-300 text-sm">Save these four responses — you'll compare them to the with-context versions in Step 5.</p>
                 </div>
 
                 <!-- Step 4 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">04</span>
-                        Dictate your prompt
+                        Write your CLAUDE.md
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">With Claude Code waiting for input, activate dictation and speak your prompt. Try this scenario:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                    <p class="text-gray-300 text-sm mb-4">In your <code class="text-acid bg-surface px-1">city-hall-beat</code> directory, create a file called <code class="text-acid bg-surface px-1">CLAUDE.md</code>. Use <code class="text-acid bg-surface px-1">Resources/examples/beat-project/sample-claude-md.md</code> as a reference, but write your own.</p>
+                    <p class="text-gray-300 text-sm mb-4">Required sections:</p>
+                    <ul class="space-y-2 text-sm font-sans text-gray-300 mb-4 ml-4">
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> <strong class="text-chrome">Beat description</strong> — what you cover, key entities (city name, current officials, agencies)</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> <strong class="text-chrome">Style rules</strong> — AP style, Oxford comma, how to refer to the city on second reference</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> <strong class="text-chrome">Source standards</strong> — how to handle attribution, what to flag as unverified</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> <strong class="text-chrome">Terminology</strong> — beat-specific terms the AI might confuse</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> <strong class="text-chrome">Things to avoid</strong> — phrases or patterns you don't want in the output</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> <strong class="text-chrome">Hard-won lessons</strong> — leave this section empty for now. Add entries as you correct the AI over time.</li>
+                    </ul>
+                    <p class="text-gray-300 text-sm mb-4">Apply the deletion test before saving: read each line and ask whether it would change the AI's output for a knowledgeable reporter. If not, cut it.</p>
+                    <p class="text-gray-300 text-sm mb-4">Then commit it — your context file is infrastructure, not a draft:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">spoken</span>
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">"I'm working on a story about a local school board meeting where they voted to change the start time for high schools from 7:30 AM to 8:30 AM. Help me outline the story. I need to cover the vote itself, the reasons behind it, parent reactions, and what happens next."</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Commit my CLAUDE.md to the project repository with the message "Add beat context file"</code></pre>
                     </div>
-                    <p class="text-gray-400 text-xs">Review the transcribed text before pressing Enter. Make corrections if needed.</p>
                 </div>
 
                 <!-- Step 5 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">05</span>
-                        Iterate using voice
+                        Process the same documents with context
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">After Claude responds with an outline, continue the conversation using voice:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden mb-2">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">spoken</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">"Add a section about potential impacts on after-school activities and bus schedules."</code></pre>
-                    </div>
-                    <div class="border border-white/10 bg-panel overflow-hidden">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">spoken</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">"What sources should I contact for this story?"</code></pre>
-                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Run the exact same four prompts from Step 3. Don't change anything — the only difference is that CLAUDE.md now exists in the directory.</p>
+                    <p class="text-gray-300 text-sm">Compare the responses side by side. Look for specific differences: terminology, attribution handling, style choices, what the AI flagged as needing verification.</p>
                 </div>
 
-                <!-- Step 6 -->
-                <div class="mb-8">
-                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
-                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
-                        Save your outline
-                    </h3>
-                    <p class="text-gray-300 text-sm mb-4">Ask Claude to save the completed outline:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">spoken</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">"Save this outline to a file called school-time-outline.md"</code></pre>
-                    </div>
-                </div>
             </section>
 
-            <!-- Checkpoint questions -->
+            <!-- Checkpoint -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
                     <h2 class="font-display text-xl text-signal">Checkpoint</h2>
@@ -244,26 +240,25 @@ claude</code></pre>
                 <div class="border border-signal/30 bg-signalDim p-6">
                     <p class="text-sm font-sans text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What are two advantages of cloud-based transcription over local options?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> When would you choose RAW mode over Agent mode?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> How do you activate dictation on your operating system?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What spoken words typically insert punctuation in dictation mode?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What is the deletion test, and how do you apply it to a line in your CLAUDE.md?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What filename does Gemini CLI use for its context file? What about Codex?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What does a Git commit do? Why should your CLAUDE.md be committed?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What changed in the AI's output once CLAUDE.md was present? Give one specific example.</li>
                     </ul>
                 </div>
             </section>
 
-            <!-- Readings and resources -->
+            <!-- Resources -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
                     <h2 class="font-display text-xl text-chrome">Resources</h2>
                 </div>
                 <div class="border border-white/10 bg-panel p-6">
                     <ul class="space-y-3 text-sm font-sans">
-                        <li><a href="https://support.apple.com/guide/mac-help/use-dictation-mh40584/mac" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">macOS Dictation guide - Apple's official documentation</span></li>
-                        <li><a href="https://support.microsoft.com/en-us/windows/use-voice-typing-to-talk-instead-of-type-on-your-pc-fec94565-c4bd-329d-e59a-af033fa5689f" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Windows Voice Typing guide - Microsoft's official documentation</span></li>
-                        <li><a href="https://github.com/openai/whisper" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[TOOL]</a> <span class="text-gray-300">OpenAI Whisper - Open-source speech recognition model</span></li>
-                        <li><a href="https://cloud.google.com/speech-to-text" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[API]</a> <span class="text-gray-300">Google Cloud Speech-to-Text - Google's transcription API</span></li>
-                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-300">Claude Code documentation - Reference for voice and input modes</span></li>
+                        <li><a href="https://docs.anthropic.com/en/docs/claude-code/memory" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Claude Code memory and CLAUDE.md — official documentation</span></li>
+                        <li><a href="https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/configuration.md" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Gemini CLI configuration and GEMINI.md — official documentation</span></li>
+                        <li><a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[READ]</a> <span class="text-gray-300">What is Git? — Pro Git book, chapter 1</span></li>
+                        <li><a href="https://github.com/jamditis/claude-skills-journalism" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REPO]</a> <span class="text-gray-300">Claude skills for journalism — example repo to clone in Module 3</span></li>
                     </ul>
                 </div>
             </section>
@@ -275,20 +270,20 @@ claude</code></pre>
                 </div>
                 <div class="border border-white/10 bg-panel divide-y divide-white/5">
                     <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">Dictation isn't activating</h4>
-                        <p class="text-gray-400 text-sm">Make sure dictation is enabled in your system settings. On macOS, you may need to download the language model first. On Windows, check that the Speech service is running.</p>
+                        <h4 class="font-mono text-sm text-signal mb-2">CLAUDE.md doesn't seem to be working</h4>
+                        <p class="text-gray-400 text-sm">Make sure the file is named exactly <code class="text-acid bg-surface px-1">CLAUDE.md</code> (all caps) and is in the same directory where you're running the CLI tool. Run <code class="text-acid bg-surface px-1">ls</code> to confirm.</p>
                     </div>
                     <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">Transcription is inaccurate</h4>
-                        <p class="text-gray-400 text-sm">Speak clearly and at a moderate pace. Reduce background noise. If accuracy is critical, consider using Whisper or a cloud API instead of built-in dictation.</p>
+                        <h4 class="font-mono text-sm text-signal mb-2">The AI is ignoring a rule in my context file</h4>
+                        <p class="text-gray-400 text-sm">Check whether the rule is specific enough to affect output. Vague instructions ("write clearly") rarely change behavior. Specific ones ("refer to the agency as 'the Department' on second reference") do. If the rule is specific and still ignored, try moving it higher in the file.</p>
                     </div>
                     <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">The wrong words are being transcribed</h4>
-                        <p class="text-gray-400 text-sm">Technical terms and proper nouns are often mistranscribed. Spell them out if needed ("J-A-N-E S-M-I-T-H") or correct them manually before submitting.</p>
+                        <h4 class="font-mono text-sm text-signal mb-2">Git says "not a git repository"</h4>
+                        <p class="text-gray-400 text-sm">You need to run <code class="text-acid bg-surface px-1">git init</code> (or ask the CLI tool to do it) in your project directory before using Git commands. Check that you're in the right folder with <code class="text-acid bg-surface px-1">pwd</code>.</p>
                     </div>
                     <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">Dictation stops unexpectedly</h4>
-                        <p class="text-gray-400 text-sm">Most systems have a timeout after a pause. Speak continuously or tap the dictation button again to resume. Some systems have a maximum dictation length.</p>
+                        <h4 class="font-mono text-sm text-signal mb-2">The AI can't find my document file</h4>
+                        <p class="text-gray-400 text-sm">File names are case-sensitive on macOS and Linux. Make sure the name in your prompt matches the actual filename exactly. Use <code class="text-acid bg-surface px-1">ls</code> to list files in the current directory.</p>
                     </div>
                 </div>
             </section>
