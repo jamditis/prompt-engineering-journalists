@@ -133,6 +133,12 @@ select:focus-visible,
     border-top: 1px solid #334155;
 }
 
+/* Code block word wrap */
+pre code {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
 /* Code syntax colors - all pass WCAG AA on #1e293b */
 .syntax-keyword {
     color: #f87171;
