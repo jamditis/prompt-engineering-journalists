@@ -54,7 +54,7 @@
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Install Node.js and essential CLI tools on your computer</li>
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Understand the differences between web interfaces and terminal-based AI</li>
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Run the same prompt in both environments and compare results</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Navigate files and folders using basic terminal commands</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand the difference between using AI in a browser and using it in an interactive terminal session</li>
                     </ul>
                 </div>
             </section>
@@ -101,6 +101,19 @@
                             <p><span class="text-acid">CLI advantages:</span> Direct file access, automation, piping between tools, no copy-paste friction, works offline (for local models).</p>
                         </div>
                     </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Working inside a session</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Once you type <code class="text-acid bg-surface px-1">claude</code> and press Enter, you're inside an interactive session. The terminal becomes a conversation interface — paste prompts the same way you would in a browser. A few commands you'll use often:</p>
+                        <ul class="space-y-2 text-sm font-sans text-gray-300 mb-4">
+                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/help</code> <span class="ml-1">— list available commands and installed skills</span></li>
+                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/plan</code> <span class="ml-1">— ask Claude to think through an approach before acting (useful for complex multi-step tasks)</span></li>
+                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/compact</code> <span class="ml-1">— compress conversation history when a long session starts to slow down</span></li>
+                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/clear</code> <span class="ml-1">— start fresh without leaving the session</span></li>
+                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">Ctrl+C</code> <span class="ml-1">— interrupt whatever Claude is doing; press twice to exit</span></li>
+                        </ul>
+                        <p class="text-gray-300 text-sm leading-relaxed">To continue a previous session after a break, run <code class="text-acid bg-surface px-1">claude --resume</code> from the same directory.</p>
+                    </div>
                 </div>
             </section>
 
@@ -111,7 +124,7 @@
                 </div>
 
                 <div class="border border-acid/30 bg-acidDim p-6 mb-8">
-                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Run the same prompt in both a web interface and a CLI tool, then compare the experience.</span></p>
+                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Run the same task in a browser interface and in Claude Code, then compare what each one required of you.</span></p>
                 </div>
 
                 <!-- Step 1 -->
@@ -141,7 +154,7 @@ npm --version</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
                         Install Claude Code
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Claude Code is Anthropic's official CLI for Claude. Install it globally:</p>
+                    <p class="text-gray-300 text-sm mb-4">Claude Code is Anthropic's official CLI for Claude. Install it with:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
@@ -151,7 +164,7 @@ npm --version</code></pre>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">curl -fsSL https://claude.ai/install.sh | sh</code></pre>
                     </div>
-                    <p class="text-gray-300 text-sm mb-4">Then authenticate with your Anthropic account:</p>
+                    <p class="text-gray-300 text-sm mb-4">Then type <code class="text-acid bg-surface px-1">claude</code> to launch it. The first time, you'll go through a one-time setup — granting permissions and logging in with your Anthropic account. After that, typing <code class="text-acid bg-surface px-1">claude</code> opens a session immediately, no setup required each time.</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
@@ -168,25 +181,7 @@ npm --version</code></pre>
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
-                        Prepare a test document
-                    </h3>
-                    <p class="text-gray-300 text-sm mb-4">Create a simple text file for testing. Open your terminal and run:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">echo "The city council voted 5-2 yesterday to approve a $2.3 million budget for road repairs. Council member Jane Smith opposed the measure, citing concerns about contractor selection. The repairs will begin in March and affect Main Street, Oak Avenue, and Park Road." > test-article.txt</code></pre>
-                    </div>
-                </div>
-
-                <!-- Step 4 -->
-                <div class="mb-8">
-                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
-                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">04</span>
-                        Run the prompt in a web interface
+                        Try the task in a browser
                     </h3>
                     <p class="text-gray-300 text-sm mb-4">Go to <a href="https://claude.ai" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">claude.ai</a> and paste this prompt:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
@@ -194,45 +189,47 @@ npm --version</code></pre>
                             <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude.ai</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Summarize this article in one sentence:
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Summarize this news brief in one sentence:
 
 The city council voted 5-2 yesterday to approve a $2.3 million budget for road repairs. Council member Jane Smith opposed the measure, citing concerns about contractor selection. The repairs will begin in March and affect Main Street, Oak Avenue, and Park Road.</code></pre>
                     </div>
-                    <p class="text-gray-400 text-xs mt-2">Note the time it takes and the steps involved (open browser, navigate to site, paste text, copy response).</p>
+                    <p class="text-gray-400 text-xs mt-2">Note what it took: open a browser, navigate to the site, paste the text manually, read the response. That works fine for one article.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">04</span>
+                        Do the same task in Claude Code
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">Open your terminal and type <code class="text-acid bg-surface px-1">claude</code> to start a session. Then paste this prompt:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a file called test-article.txt with this content: "The city council voted 5-2 yesterday to approve a $2.3 million budget for road repairs. Council member Jane Smith opposed the measure, citing concerns about contractor selection. The repairs will begin in March and affect Main Street, Oak Avenue, and Park Road."
+
+Then read the file and summarize it in one sentence. Save the summary to summary.txt.</code></pre>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-2">Claude creates the files, reads them, and saves the output — without you touching the clipboard. Try following up: "Now do the same for every .txt file in this folder."</p>
                 </div>
 
                 <!-- Step 5 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">05</span>
-                        Run the same prompt via CLI
-                    </h3>
-                    <p class="text-gray-300 text-sm mb-4">Navigate to the folder containing your test file and run:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude "Read test-article.txt and summarize it in one sentence"</code></pre>
-                    </div>
-                    <p class="text-gray-400 text-xs mt-2">Claude Code reads the file directly and returns the summary in your terminal.</p>
-                </div>
-
-                <!-- Step 6 -->
-                <div class="mb-8">
-                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
-                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
                         Compare the experience
                     </h3>
                     <p class="text-gray-300 text-sm mb-4">Consider these questions:</p>
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-acid">></span> Which workflow had fewer steps?</li>
-                        <li class="flex items-start gap-3"><span class="text-acid">></span> Which would be faster for processing 50 articles?</li>
-                        <li class="flex items-start gap-3"><span class="text-acid">></span> Which result could you more easily pipe to another command?</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> Which workflow required more steps from you?</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> Which would scale better if there were 50 articles in a folder?</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> What happened to the output in each case — where did it go?</li>
                     </ul>
                 </div>
             </section>
