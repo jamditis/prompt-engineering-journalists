@@ -11,6 +11,11 @@
     color: #111827;
 }
 
+/* Base prose typography */
+p, li {
+    line-height: 1.65;
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
     width: 8px;
@@ -103,7 +108,7 @@ select:focus-visible,
 
 .accordion-header::after {
     content: '+';
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     color: #a3e635;
     font-size: 1.25rem;
     transition: transform 0.2s ease;
@@ -199,7 +204,7 @@ select:focus-visible,
     top: 6px;
     right: 6px;
     padding: 2px 10px;
-    font-family: 'Share Tech Mono', monospace;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 0.7rem;
     color: #94a3b8;
     background: #1e293b;
