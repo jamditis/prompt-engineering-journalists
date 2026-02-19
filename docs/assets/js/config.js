@@ -7,30 +7,17 @@ tailwind.config = {
                 sans: ['Chakra Petch', 'sans-serif'],
             },
             colors: {
-                void: '#050505',
-                panel: '#0a0a0a',
-                surface: '#111111',
-                chrome: '#e5e5e5',
-                acid: '#ccff00',
-                acidDim: 'rgba(204, 255, 0, 0.1)',
-                signal: '#ff2a2a',
-                signalDim: 'rgba(255, 42, 42, 0.1)',
-                ice: '#00f0ff',
-                iceDim: 'rgba(0, 240, 255, 0.1)',
+                void: '#111827',
+                panel: '#1e293b',
+                surface: '#334155',
+                chrome: '#f1f5f9',
+                acid: '#a3e635',
+                acidDim: 'rgba(163, 230, 53, 0.12)',
+                signal: '#f87171',
+                signalDim: 'rgba(248, 113, 113, 0.12)',
+                ice: '#67e8f9',
+                iceDim: 'rgba(103, 232, 249, 0.12)',
             },
-            backgroundImage: {
-                'grid-pattern': "linear-gradient(to right, #222 1px, transparent 1px), linear-gradient(to bottom, #222 1px, transparent 1px)",
-            },
-            animation: {
-                'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                'flash': 'flash 0.5s steps(1) infinite',
-            },
-            keyframes: {
-                flash: {
-                    '0%, 50%': { opacity: '1' },
-                    '51%, 100%': { opacity: '0' },
-                }
-            }
         }
     }
 }

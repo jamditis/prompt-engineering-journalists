@@ -10,13 +10,13 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --border: #2a2d3a;
-    --text: #d4d8e8;
-    --muted: #6b7280;
-    --accent: #7c6af7;
-    --accent-dim: #3d3570;
+    --bg: #111827;
+    --surface: #1e293b;
+    --border: #334155;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --accent: #a3e635;
+    --accent-dim: rgba(163, 230, 53, 0.12);
     --green: #34d399;
     --yellow: #fbbf24;
     --red: #f87171;
@@ -151,8 +151,8 @@
     transition: all .15s;
     line-height: 1.3;
   }
-  .file-item:hover { color: var(--text); background: rgba(124,106,247,.08); }
-  .file-item.active { color: var(--accent); background: rgba(124,106,247,.12); border-left-color: var(--accent); }
+  .file-item:hover { color: var(--text); background: rgba(163, 230, 53, 0.08); }
+  .file-item.active { color: var(--accent); background: rgba(163, 230, 53, 0.12); border-left-color: var(--accent); }
   .note-dot {
     width: 6px; height: 6px;
     border-radius: 50%;
@@ -208,7 +208,7 @@
   .md-pane blockquote { border-left: 3px solid var(--accent); padding-left: 14px; margin: 14px 0; color: var(--muted); font-style: italic; }
   .md-pane hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
   .md-pane table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 13px; }
-  .md-pane th { background: rgba(124,106,247,.12); color: var(--accent); font-weight: 600; padding: 8px 12px; text-align: left; border: 1px solid var(--border); }
+  .md-pane th { background: rgba(163, 230, 53, 0.12); color: var(--accent); font-weight: 600; padding: 8px 12px; text-align: left; border: 1px solid var(--border); }
   .md-pane td { padding: 7px 12px; border: 1px solid var(--border); }
   .md-pane tr:nth-child(even) { background: rgba(255,255,255,.02); }
   .md-pane strong { color: #fff; font-weight: 600; }
@@ -260,6 +260,12 @@
   }
   textarea#notes::placeholder { color: var(--muted); }
   textarea#notes:focus { border-color: var(--accent); }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 3px solid #67e8f9;
+    outline-offset: 2px;
+  }
+
   .notes-hint { margin-top: 6px; font-size: 11px; color: var(--muted); }
 
   .modal-overlay {
@@ -340,6 +346,7 @@
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:999;padding:8px 16px;background:#a3e635;color:#111827;font-weight:600;text-decoration:none;" onfocus="this.style.cssText='position:fixed;left:8px;top:8px;width:auto;height:auto;overflow:visible;z-index:999;padding:8px 16px;background:#a3e635;color:#111827;font-weight:600;text-decoration:none;'" onblur="this.style.cssText='position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:999;padding:8px 16px;background:#a3e635;color:#111827;font-weight:600;text-decoration:none;'">Skip to main content</a>
 
 <header>
   <h1>Advanced prompt engineering for journalists</h1>
@@ -353,13 +360,13 @@
 
 <div class="layout">
   <aside>
-    <div class="search-wrap">
-      <input type="text" id="search" placeholder="Filter files…">
+    <div class="search-wrap" role="search">
+      <input type="text" id="search" placeholder="Filter files…" aria-label="Filter files">
     </div>
-    <nav class="tree" id="tree"></nav>
+    <nav class="tree" id="tree" aria-label="File navigation"></nav>
   </aside>
 
-  <main>
+  <main id="main">
     <div class="content-header">
       <div class="breadcrumb" id="breadcrumb">Select a file to begin</div>
       <span class="status-badge" id="status-badge"></span>

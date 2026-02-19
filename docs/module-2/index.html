@@ -11,18 +11,17 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="antialiased font-mono bg-void text-chrome">
-    <div class="crt-overlay"></div>
-    <div class="fixed inset-0 bg-grid-pattern bg-[size:40px_40px] opacity-[0.07] pointer-events-none z-0"></div>
+    <a href="#main" class="skip-link">Skip to main content</a>
 
     <div class="relative z-10 flex min-h-screen flex-col">
         <!-- Header with nav -->
         <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
             <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
                 <a href="../" class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl clip-notch">P</div>
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
                     <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
                 </a>
-                <nav class="hidden md:flex gap-4 text-xs font-mono">
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
                     <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
                     <a href="../module-2/" class="text-acid">[ 02 ]</a>
                     <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
@@ -35,19 +34,19 @@
         <!-- Module header -->
         <section class="py-12 px-6 border-b border-white/10">
             <div class="max-w-5xl mx-auto">
-                <div class="text-xs text-acid font-mono mb-4">:: MODULE_02</div>
-                <h1 class="font-display text-4xl md:text-5xl font-bold text-white glitch-text" data-text="VOICE-CONTROLLED AI">VOICE-CONTROLLED AI</h1>
-                <p class="text-gray-400 text-lg font-mono mt-4 max-w-2xl">Use speech-to-text to interact with AI tools hands-free, enabling new workflows for interviews, dictation, and accessibility.</p>
+                <div class="text-xs text-acid font-mono mb-4">MODULE 02</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">VOICE-CONTROLLED AI</h1>
+                <p class="text-gray-300 text-lg font-mono mt-4 max-w-2xl">Use speech-to-text to interact with AI tools hands-free, enabling new workflows for interviews, dictation, and accessibility.</p>
             </div>
         </section>
 
         <!-- Content sections -->
-        <main class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
 
             <!-- Learning objectives -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-ice">LEARNING_OBJECTIVES</h2>
+                    <h2 class="font-display text-xl text-ice">Learning objectives</h2>
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-mono text-gray-300">
@@ -62,17 +61,17 @@
             <!-- Key concepts -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">KEY_CONCEPTS</h2>
+                    <h2 class="font-display text-xl text-chrome">Key concepts</h2>
                 </div>
                 <div class="space-y-4">
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Why voice input matters</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Voice input lets you brainstorm without context-switching to your keyboard, dictate notes while reviewing documents, and work hands-free when typing isn't practical. For journalists, this means capturing thoughts during research, outlining stories while commuting, or making AI tools accessible for those with mobility limitations.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Voice input lets you brainstorm without context-switching to your keyboard, dictate notes while reviewing documents, and work hands-free when typing isn't practical. For journalists, this means capturing thoughts during research, outlining stories while commuting, or making AI tools accessible for those with mobility limitations.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Transcription backends</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Several options exist for converting speech to text:</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Several options exist for converting speech to text:</p>
                         <ul class="space-y-2 text-sm font-mono text-gray-300">
                             <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Gemini Flash:</strong> Google's fast, accurate API. Requires a Google Cloud account. Good accuracy, low latency.</li>
                             <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">OpenAI Whisper:</strong> Can run locally or via API. Excellent accuracy, especially for technical terms. Local version is free but slower.</li>
@@ -83,7 +82,7 @@
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">RAW mode vs. Agent mode</h3>
-                        <div class="text-gray-400 text-sm leading-relaxed space-y-3">
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
                             <p><span class="text-ice">RAW mode:</span> Your speech is transcribed and sent directly to Claude without modification. Good for dictating content verbatim or when you want full control over the prompt.</p>
                             <p><span class="text-acid">Agent mode:</span> Claude Code interprets your speech as instructions and may read files, run commands, or take multi-step actions. Good for hands-free coding or document processing.</p>
                         </div>
@@ -91,7 +90,7 @@
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Latency and accuracy trade-offs</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Cloud transcription (Gemini, Whisper API) offers better accuracy but adds network latency. Local options (Whisper local, OS built-in) work offline but may be slower or less accurate. For real-time conversation, optimize for latency. For document dictation, optimize for accuracy.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Cloud transcription (Gemini, Whisper API) offers better accuracy but adds network latency. Local options (Whisper local, OS built-in) work offline but may be slower or less accurate. For real-time conversation, optimize for latency. For document dictation, optimize for accuracy.</p>
                     </div>
                 </div>
             </section>
@@ -112,12 +111,12 @@
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">01</span>
                         Choose your transcription backend
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">For this exercise, we'll use your operating system's built-in dictation as the simplest option. You can later upgrade to Whisper or Gemini for better accuracy.</p>
+                    <p class="text-gray-300 text-sm mb-4">For this exercise, we'll use your operating system's built-in dictation as the simplest option. You can later upgrade to Whisper or Gemini for better accuracy.</p>
 
                     <div class="grid md:grid-cols-2 gap-4 mb-4">
                         <div class="border border-white/10 bg-panel p-4">
                             <h4 class="font-mono text-sm text-ice mb-3">macOS</h4>
-                            <ul class="space-y-2 text-sm text-gray-400">
+                            <ul class="space-y-2 text-sm text-gray-300">
                                 <li class="flex items-start gap-2"><span class="text-acid">></span> Go to System Settings > Keyboard > Dictation</li>
                                 <li class="flex items-start gap-2"><span class="text-acid">></span> Turn on Dictation</li>
                                 <li class="flex items-start gap-2"><span class="text-acid">></span> Note the shortcut (default: press Control twice, or Fn twice on newer Macs)</li>
@@ -125,7 +124,7 @@
                         </div>
                         <div class="border border-white/10 bg-panel p-4">
                             <h4 class="font-mono text-sm text-ice mb-3">Windows</h4>
-                            <ul class="space-y-2 text-sm text-gray-400">
+                            <ul class="space-y-2 text-sm text-gray-300">
                                 <li class="flex items-start gap-2"><span class="text-acid">></span> Press Win + H to enable voice typing</li>
                                 <li class="flex items-start gap-2"><span class="text-acid">></span> Or go to Settings > Time & Language > Speech to configure</li>
                             </ul>
@@ -139,17 +138,17 @@
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
                         Test basic dictation
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Open any text editor and activate dictation using your shortcut. Speak a few sentences to confirm it's working:</p>
+                    <p class="text-gray-300 text-sm mb-4">Open any text editor and activate dictation using your shortcut. Speak a few sentences to confirm it's working:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">spoken</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">spoken</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">"The quick brown fox jumps over the lazy dog. Testing one two three."</code></pre>
                     </div>
-                    <p class="text-gray-500 text-xs">Check that punctuation is handled correctly. Most systems recognize "period," "comma," "question mark" as punctuation commands.</p>
+                    <p class="text-gray-400 text-xs">Check that punctuation is handled correctly. Most systems recognize "period," "comma," "question mark" as punctuation commands.</p>
                 </div>
 
                 <!-- Step 3 -->
@@ -158,13 +157,13 @@
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
                         Open Claude Code in your terminal
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Navigate to a project folder and start Claude Code:</p>
+                    <p class="text-gray-300 text-sm mb-4">Navigate to a project folder and start Claude Code:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cd ~/Documents/stories
 claude</code></pre>
@@ -177,17 +176,17 @@ claude</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">04</span>
                         Dictate your prompt
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">With Claude Code waiting for input, activate dictation and speak your prompt. Try this scenario:</p>
+                    <p class="text-gray-300 text-sm mb-4">With Claude Code waiting for input, activate dictation and speak your prompt. Try this scenario:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">spoken</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">spoken</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">"I'm working on a story about a local school board meeting where they voted to change the start time for high schools from 7:30 AM to 8:30 AM. Help me outline the story. I need to cover the vote itself, the reasons behind it, parent reactions, and what happens next."</code></pre>
                     </div>
-                    <p class="text-gray-500 text-xs">Review the transcribed text before pressing Enter. Make corrections if needed.</p>
+                    <p class="text-gray-400 text-xs">Review the transcribed text before pressing Enter. Make corrections if needed.</p>
                 </div>
 
                 <!-- Step 5 -->
@@ -196,13 +195,13 @@ claude</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">05</span>
                         Iterate using voice
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">After Claude responds with an outline, continue the conversation using voice:</p>
+                    <p class="text-gray-300 text-sm mb-4">After Claude responds with an outline, continue the conversation using voice:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-2">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">spoken</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">spoken</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">"Add a section about potential impacts on after-school activities and bus schedules."</code></pre>
                     </div>
@@ -211,7 +210,7 @@ claude</code></pre>
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">spoken</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">spoken</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">"What sources should I contact for this story?"</code></pre>
                     </div>
@@ -223,13 +222,13 @@ claude</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
                         Save your outline
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Ask Claude to save the completed outline:</p>
+                    <p class="text-gray-300 text-sm mb-4">Ask Claude to save the completed outline:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">spoken</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">spoken</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">"Save this outline to a file called school-time-outline.md"</code></pre>
                     </div>
@@ -239,10 +238,10 @@ claude</code></pre>
             <!-- Checkpoint questions -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-signal">CHECKPOINT</h2>
+                    <h2 class="font-display text-xl text-signal">Checkpoint</h2>
                 </div>
                 <div class="border border-signal/30 bg-signalDim p-6">
-                    <p class="text-sm font-mono text-gray-300 mb-4"><span class="text-signal font-bold">SELF_CHECK:</span> Make sure you can answer these before moving on.</p>
+                    <p class="text-sm font-mono text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
                     <ul class="space-y-2 text-sm font-mono text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What are two advantages of cloud-based transcription over local options?</li>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> When would you choose RAW mode over Agent mode?</li>
@@ -255,15 +254,15 @@ claude</code></pre>
             <!-- Readings and resources -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">RESOURCES</h2>
+                    <h2 class="font-display text-xl text-chrome">Resources</h2>
                 </div>
                 <div class="border border-white/10 bg-panel p-6">
                     <ul class="space-y-3 text-sm font-mono">
-                        <li><a href="https://support.apple.com/guide/mac-help/use-dictation-mh40584/mac" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-400">macOS Dictation guide - Apple's official documentation</span></li>
-                        <li><a href="https://support.microsoft.com/en-us/windows/use-voice-typing-to-talk-instead-of-type-on-your-pc-fec94565-c4bd-329d-e59a-af033fa5689f" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-400">Windows Voice Typing guide - Microsoft's official documentation</span></li>
-                        <li><a href="https://github.com/openai/whisper" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[TOOL]</a> <span class="text-gray-400">OpenAI Whisper - Open-source speech recognition model</span></li>
-                        <li><a href="https://cloud.google.com/speech-to-text" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[API]</a> <span class="text-gray-400">Google Cloud Speech-to-Text - Google's transcription API</span></li>
-                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-400">Claude Code documentation - Reference for voice and input modes</span></li>
+                        <li><a href="https://support.apple.com/guide/mac-help/use-dictation-mh40584/mac" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">macOS Dictation guide - Apple's official documentation</span></li>
+                        <li><a href="https://support.microsoft.com/en-us/windows/use-voice-typing-to-talk-instead-of-type-on-your-pc-fec94565-c4bd-329d-e59a-af033fa5689f" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Windows Voice Typing guide - Microsoft's official documentation</span></li>
+                        <li><a href="https://github.com/openai/whisper" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[TOOL]</a> <span class="text-gray-300">OpenAI Whisper - Open-source speech recognition model</span></li>
+                        <li><a href="https://cloud.google.com/speech-to-text" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[API]</a> <span class="text-gray-300">Google Cloud Speech-to-Text - Google's transcription API</span></li>
+                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-300">Claude Code documentation - Reference for voice and input modes</span></li>
                     </ul>
                 </div>
             </section>
@@ -271,24 +270,24 @@ claude</code></pre>
             <!-- Troubleshooting -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">TROUBLESHOOTING</h2>
+                    <h2 class="font-display text-xl text-chrome">Troubleshooting</h2>
                 </div>
                 <div class="border border-white/10 bg-panel divide-y divide-white/5">
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">Dictation isn't activating</h4>
-                        <p class="text-gray-500 text-sm">Make sure dictation is enabled in your system settings. On macOS, you may need to download the language model first. On Windows, check that the Speech service is running.</p>
+                        <p class="text-gray-400 text-sm">Make sure dictation is enabled in your system settings. On macOS, you may need to download the language model first. On Windows, check that the Speech service is running.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">Transcription is inaccurate</h4>
-                        <p class="text-gray-500 text-sm">Speak clearly and at a moderate pace. Reduce background noise. If accuracy is critical, consider using Whisper or a cloud API instead of built-in dictation.</p>
+                        <p class="text-gray-400 text-sm">Speak clearly and at a moderate pace. Reduce background noise. If accuracy is critical, consider using Whisper or a cloud API instead of built-in dictation.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">The wrong words are being transcribed</h4>
-                        <p class="text-gray-500 text-sm">Technical terms and proper nouns are often mistranscribed. Spell them out if needed ("J-A-N-E S-M-I-T-H") or correct them manually before submitting.</p>
+                        <p class="text-gray-400 text-sm">Technical terms and proper nouns are often mistranscribed. Spell them out if needed ("J-A-N-E S-M-I-T-H") or correct them manually before submitting.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">Dictation stops unexpectedly</h4>
-                        <p class="text-gray-500 text-sm">Most systems have a timeout after a pause. Speak continuously or tap the dictation button again to resume. Some systems have a maximum dictation length.</p>
+                        <p class="text-gray-400 text-sm">Most systems have a timeout after a pause. Speak continuously or tap the dictation button again to resume. Some systems have a maximum dictation length.</p>
                     </div>
                 </div>
             </section>
@@ -298,8 +297,8 @@ claude</code></pre>
         <!-- Prev/Next navigation -->
         <footer class="border-t border-white/10 bg-panel">
             <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between">
-                <a href="../module-1/" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">< MODULE_01</a>
-                <a href="../module-3/" class="text-acid hover:text-white text-sm font-mono transition-colors">MODULE_03 ></a>
+                <a href="../module-1/" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">Module 01</a>
+                <a href="../module-3/" class="text-acid hover:text-white text-sm font-mono transition-colors">Module 03</a>
             </div>
         </footer>
     </div>

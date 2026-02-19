@@ -11,18 +11,17 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="antialiased font-mono bg-void text-chrome">
-    <div class="crt-overlay"></div>
-    <div class="fixed inset-0 bg-grid-pattern bg-[size:40px_40px] opacity-[0.07] pointer-events-none z-0"></div>
+    <a href="#main" class="skip-link">Skip to main content</a>
 
     <div class="relative z-10 flex min-h-screen flex-col">
         <!-- Header with nav -->
         <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
             <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
                 <a href="../" class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl clip-notch">P</div>
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
                     <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
                 </a>
-                <nav class="hidden md:flex gap-4 text-xs font-mono">
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
                     <a href="../module-1/" class="text-acid">[ 01 ]</a>
                     <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
                     <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
@@ -35,19 +34,19 @@
         <!-- Module header -->
         <section class="py-12 px-6 border-b border-white/10">
             <div class="max-w-5xl mx-auto">
-                <div class="text-xs text-acid font-mono mb-4">:: MODULE_01</div>
-                <h1 class="font-display text-4xl md:text-5xl font-bold text-white glitch-text" data-text="ESCAPE THE CHAT WINDOW">ESCAPE THE CHAT WINDOW</h1>
-                <p class="text-gray-400 text-lg font-mono mt-4 max-w-2xl">Move beyond browser-based AI to command-line tools that integrate with your existing workflow.</p>
+                <div class="text-xs text-acid font-mono mb-4">MODULE 01</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">ESCAPE THE CHAT WINDOW</h1>
+                <p class="text-gray-300 text-lg font-mono mt-4 max-w-2xl">Move beyond browser-based AI to command-line tools that integrate with your existing workflow.</p>
             </div>
         </section>
 
         <!-- Content sections -->
-        <main class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
 
             <!-- Learning objectives -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-ice">LEARNING_OBJECTIVES</h2>
+                    <h2 class="font-display text-xl text-ice">Learning objectives</h2>
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-mono text-gray-300">
@@ -62,27 +61,27 @@
             <!-- Key concepts -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">KEY_CONCEPTS</h2>
+                    <h2 class="font-display text-xl text-chrome">Key concepts</h2>
                 </div>
                 <div class="space-y-4">
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Why leave the browser?</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Web-based AI tools like ChatGPT and Claude.ai are convenient, but they force you to copy and paste content back and forth. CLI tools let AI read and write files directly, chain multiple operations together, and integrate with version control. For journalists handling large documents or repetitive tasks, this saves hours.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Web-based AI tools like ChatGPT and Claude.ai are convenient, but they force you to copy and paste content back and forth. CLI tools let AI read and write files directly, chain multiple operations together, and integrate with version control. For journalists handling large documents or repetitive tasks, this saves hours.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">What is a CLI?</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">A command-line interface (CLI) is a text-based way to interact with your computer. Instead of clicking buttons, you type commands. This might feel unfamiliar at first, but it gives you precise control and the ability to automate repetitive work. Think of it as learning keyboard shortcuts for your entire computer.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">A command-line interface (CLI) is a text-based way to interact with your computer. Instead of clicking buttons, you type commands. This might feel unfamiliar at first, but it gives you precise control and the ability to automate repetitive work. Think of it as learning keyboard shortcuts for your entire computer.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Node.js and npm</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Node.js is a runtime that lets you run JavaScript outside a web browser. npm (Node Package Manager) comes with it and lets you install tools others have built. Many AI CLI tools, including Claude Code, are distributed through npm.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Node.js is a runtime that lets you run JavaScript outside a web browser. npm (Node Package Manager) comes with it and lets you install tools others have built. Many AI CLI tools, including Claude Code, are distributed through npm.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">The terminal vs. web interface trade-off</h3>
-                        <div class="text-gray-400 text-sm leading-relaxed space-y-2">
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-2">
                             <p><span class="text-ice">Web interface advantages:</span> No setup required, visual formatting, easy to share conversations.</p>
                             <p><span class="text-acid">CLI advantages:</span> Direct file access, automation, piping between tools, no copy-paste friction, works offline (for local models).</p>
                         </div>
@@ -106,19 +105,19 @@
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">01</span>
                         Install Node.js
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Download and install Node.js from <a href="https://nodejs.org" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">nodejs.org</a>. Choose the LTS (Long Term Support) version. The installer will also install npm.</p>
-                    <p class="text-gray-400 text-sm mb-4">After installation, open your terminal and verify:</p>
+                    <p class="text-gray-300 text-sm mb-4">Download and install Node.js from <a href="https://nodejs.org" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">nodejs.org</a>. Choose the LTS (Long Term Support) version. The installer will also install npm.</p>
+                    <p class="text-gray-300 text-sm mb-4">After installation, open your terminal and verify:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">node --version
 npm --version</code></pre>
                     </div>
-                    <p class="text-gray-500 text-xs mt-2">You should see version numbers for both. If you get "command not found," restart your terminal or computer.</p>
+                    <p class="text-gray-400 text-xs mt-2">You should see version numbers for both. If you get "command not found," restart your terminal or computer.</p>
                 </div>
 
                 <!-- Step 2 -->
@@ -127,27 +126,27 @@ npm --version</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
                         Install Claude Code
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Claude Code is Anthropic's official CLI for Claude. Install it globally:</p>
+                    <p class="text-gray-300 text-sm mb-4">Claude Code is Anthropic's official CLI for Claude. Install it globally:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">curl -fsSL https://claude.ai/install.sh | sh</code></pre>
                     </div>
-                    <p class="text-gray-400 text-sm mb-4">Then authenticate with your Anthropic account:</p>
+                    <p class="text-gray-300 text-sm mb-4">Then authenticate with your Anthropic account:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
                     </div>
-                    <p class="text-gray-500 text-xs mt-2">Follow the prompts to log in. You'll need an Anthropic account with API access.</p>
+                    <p class="text-gray-400 text-xs mt-2">Follow the prompts to log in. You'll need an Anthropic account with API access.</p>
                 </div>
 
                 <!-- Step 3 -->
@@ -156,13 +155,13 @@ npm --version</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
                         Prepare a test document
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Create a simple text file for testing. Open your terminal and run:</p>
+                    <p class="text-gray-300 text-sm mb-4">Create a simple text file for testing. Open your terminal and run:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">echo "The city council voted 5-2 yesterday to approve a $2.3 million budget for road repairs. Council member Jane Smith opposed the measure, citing concerns about contractor selection. The repairs will begin in March and affect Main Street, Oak Avenue, and Park Road." > test-article.txt</code></pre>
                     </div>
@@ -174,19 +173,19 @@ npm --version</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">04</span>
                         Run the prompt in a web interface
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Go to <a href="https://claude.ai" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">claude.ai</a> and paste this prompt:</p>
+                    <p class="text-gray-300 text-sm mb-4">Go to <a href="https://claude.ai" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">claude.ai</a> and paste this prompt:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">prompt</span>
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Summarize this article in one sentence:
 
 The city council voted 5-2 yesterday to approve a $2.3 million budget for road repairs. Council member Jane Smith opposed the measure, citing concerns about contractor selection. The repairs will begin in March and affect Main Street, Oak Avenue, and Park Road.</code></pre>
                     </div>
-                    <p class="text-gray-500 text-xs mt-2">Note the time it takes and the steps involved (open browser, navigate to site, paste text, copy response).</p>
+                    <p class="text-gray-400 text-xs mt-2">Note the time it takes and the steps involved (open browser, navigate to site, paste text, copy response).</p>
                 </div>
 
                 <!-- Step 5 -->
@@ -195,17 +194,17 @@ The city council voted 5-2 yesterday to approve a $2.3 million budget for road r
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">05</span>
                         Run the same prompt via CLI
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Navigate to the folder containing your test file and run:</p>
+                    <p class="text-gray-300 text-sm mb-4">Navigate to the folder containing your test file and run:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude "Read test-article.txt and summarize it in one sentence"</code></pre>
                     </div>
-                    <p class="text-gray-500 text-xs mt-2">Claude Code reads the file directly and returns the summary in your terminal.</p>
+                    <p class="text-gray-400 text-xs mt-2">Claude Code reads the file directly and returns the summary in your terminal.</p>
                 </div>
 
                 <!-- Step 6 -->
@@ -214,7 +213,7 @@ The city council voted 5-2 yesterday to approve a $2.3 million budget for road r
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
                         Compare the experience
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Consider these questions:</p>
+                    <p class="text-gray-300 text-sm mb-4">Consider these questions:</p>
                     <ul class="space-y-2 text-sm font-mono text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-acid">></span> Which workflow had fewer steps?</li>
                         <li class="flex items-start gap-3"><span class="text-acid">></span> Which would be faster for processing 50 articles?</li>
@@ -226,10 +225,10 @@ The city council voted 5-2 yesterday to approve a $2.3 million budget for road r
             <!-- Checkpoint questions -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-signal">CHECKPOINT</h2>
+                    <h2 class="font-display text-xl text-signal">Checkpoint</h2>
                 </div>
                 <div class="border border-signal/30 bg-signalDim p-6">
-                    <p class="text-sm font-mono text-gray-300 mb-4"><span class="text-signal font-bold">SELF_CHECK:</span> Make sure you can answer these before moving on.</p>
+                    <p class="text-sm font-mono text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
                     <ul class="space-y-2 text-sm font-mono text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What command shows your installed Node.js version?</li>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What is npm and what does it do?</li>
@@ -242,14 +241,14 @@ The city council voted 5-2 yesterday to approve a $2.3 million budget for road r
             <!-- Readings and resources -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">RESOURCES</h2>
+                    <h2 class="font-display text-xl text-chrome">Resources</h2>
                 </div>
                 <div class="border border-white/10 bg-panel p-6">
                     <ul class="space-y-3 text-sm font-mono">
-                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-400">Claude Code documentation - Official setup guide and command reference</span></li>
-                        <li><a href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-400">Introduction to Node.js - Background on the runtime</span></li>
-                        <li><a href="https://www.codecademy.com/article/command-line-commands" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-400">Common command line commands - Terminal basics reference</span></li>
-                        <li><a href="https://missing.csail.mit.edu/2020/course-shell/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[COURSE]</a> <span class="text-gray-400">The Missing Semester: The Shell - MIT's free course on command-line fundamentals</span></li>
+                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Claude Code documentation - Official setup guide and command reference</span></li>
+                        <li><a href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-300">Introduction to Node.js - Background on the runtime</span></li>
+                        <li><a href="https://www.codecademy.com/article/command-line-commands" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-300">Common command line commands - Terminal basics reference</span></li>
+                        <li><a href="https://missing.csail.mit.edu/2020/course-shell/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[COURSE]</a> <span class="text-gray-300">The Missing Semester: The Shell - MIT's free course on command-line fundamentals</span></li>
                     </ul>
                 </div>
             </section>
@@ -257,24 +256,24 @@ The city council voted 5-2 yesterday to approve a $2.3 million budget for road r
             <!-- Troubleshooting -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">TROUBLESHOOTING</h2>
+                    <h2 class="font-display text-xl text-chrome">Troubleshooting</h2>
                 </div>
                 <div class="border border-white/10 bg-panel divide-y divide-white/5">
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">"command not found: node"</h4>
-                        <p class="text-gray-500 text-sm">Node.js isn't in your system PATH. Try restarting your terminal. On macOS, you may need to restart your computer. On Windows, make sure you checked "Add to PATH" during installation.</p>
+                        <p class="text-gray-400 text-sm">Node.js isn't in your system PATH. Try restarting your terminal. On macOS, you may need to restart your computer. On Windows, make sure you checked "Add to PATH" during installation.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">"permission denied" when installing globally</h4>
-                        <p class="text-gray-500 text-sm">The native installer handles permissions automatically. If the curl install fails, see <a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">code.claude.com/docs</a> for platform-specific instructions.</p>
+                        <p class="text-gray-400 text-sm">The native installer handles permissions automatically. If the curl install fails, see <a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">code.claude.com/docs</a> for platform-specific instructions.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">Claude Code says "unauthorized"</h4>
-                        <p class="text-gray-500 text-sm">Your authentication may have expired or your API key may be invalid. Run <code class="text-acid bg-surface px-1">claude</code> again to re-authenticate, or check your Anthropic account for API access issues.</p>
+                        <p class="text-gray-400 text-sm">Your authentication may have expired or your API key may be invalid. Run <code class="text-acid bg-surface px-1">claude</code> again to re-authenticate, or check your Anthropic account for API access issues.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">The file isn't found</h4>
-                        <p class="text-gray-500 text-sm">Make sure you're in the same directory as the file. Use <code class="text-acid bg-surface px-1">ls</code> (macOS/Linux) or <code class="text-acid bg-surface px-1">dir</code> (Windows) to see files in the current folder. Use <code class="text-acid bg-surface px-1">cd</code> to change directories.</p>
+                        <p class="text-gray-400 text-sm">Make sure you're in the same directory as the file. Use <code class="text-acid bg-surface px-1">ls</code> (macOS/Linux) or <code class="text-acid bg-surface px-1">dir</code> (Windows) to see files in the current folder. Use <code class="text-acid bg-surface px-1">cd</code> to change directories.</p>
                     </div>
                 </div>
             </section>
@@ -284,8 +283,8 @@ The city council voted 5-2 yesterday to approve a $2.3 million budget for road r
         <!-- Prev/Next navigation -->
         <footer class="border-t border-white/10 bg-panel">
             <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between">
-                <a href="../" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">< HOME</a>
-                <a href="../module-2/" class="text-acid hover:text-white text-sm font-mono transition-colors">MODULE_02 ></a>
+                <a href="../" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">Home</a>
+                <a href="../module-2/" class="text-acid hover:text-white text-sm font-mono transition-colors">Module 02</a>
             </div>
         </footer>
     </div>

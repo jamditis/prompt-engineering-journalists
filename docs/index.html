@@ -66,8 +66,6 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="bg-void text-chrome font-sans">
-    <!-- CRT Scanline Overlay -->
-    <div class="crt-overlay" aria-hidden="true"></div>
 
     <!-- Skip Link -->
     <a href="#main" class="skip-link">Skip to main content</a>
@@ -78,77 +76,68 @@
             <div class="flex items-center justify-between h-16">
                 <!-- Logo / Branding -->
                 <div class="flex items-center gap-4">
-                    <div class="text-acid font-mono text-sm">KNIGHT_CENTER//</div>
-                    <div class="hidden sm:block h-4 w-px bg-white/20"></div>
+                    <div class="text-acid font-mono text-sm">KNIGHT CENTER //</div>
+                    <div class="hidden sm:block h-4 w-px bg-white/20" aria-hidden="true"></div>
                     <div class="hidden sm:block font-display font-semibold text-chrome">Advanced Prompt Engineering</div>
                 </div>
 
                 <!-- Navigation -->
-                <nav class="hidden md:flex items-center gap-6">
-                    <a href="#modules" class="text-sm font-mono text-gray-400 hover:text-acid transition-colors">MODULES</a>
-                    <a href="#quick-start" class="text-sm font-mono text-gray-400 hover:text-acid transition-colors">QUICK_START</a>
-                    <a href="#tools" class="text-sm font-mono text-gray-400 hover:text-acid transition-colors">TOOLS</a>
-                    <a href="#resources" class="text-sm font-mono text-gray-400 hover:text-acid transition-colors">RESOURCES</a>
+                <nav aria-label="Main navigation" class="hidden md:flex items-center gap-6">
+                    <a href="#modules" class="text-sm font-mono text-gray-300 hover:text-acid transition-colors">MODULES</a>
+                    <a href="#quick-start" class="text-sm font-mono text-gray-300 hover:text-acid transition-colors">QUICK START</a>
+                    <a href="#tools" class="text-sm font-mono text-gray-300 hover:text-acid transition-colors">TOOLS</a>
+                    <a href="#resources" class="text-sm font-mono text-gray-300 hover:text-acid transition-colors">RESOURCES</a>
                 </nav>
 
                 <!-- Mobile menu button -->
-                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-400 hover:text-acid transition-colors" aria-label="Toggle menu">
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-300 hover:text-acid transition-colors" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile navigation -->
-        <nav id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-panel">
+        <nav id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-panel" aria-label="Mobile navigation">
             <div class="px-4 py-4 space-y-3">
-                <a href="#modules" class="block text-sm font-mono text-gray-400 hover:text-acid transition-colors">MODULES</a>
-                <a href="#quick-start" class="block text-sm font-mono text-gray-400 hover:text-acid transition-colors">QUICK_START</a>
-                <a href="#tools" class="block text-sm font-mono text-gray-400 hover:text-acid transition-colors">TOOLS</a>
-                <a href="#resources" class="block text-sm font-mono text-gray-400 hover:text-acid transition-colors">RESOURCES</a>
+                <a href="#modules" class="block text-sm font-mono text-gray-300 hover:text-acid transition-colors">MODULES</a>
+                <a href="#quick-start" class="block text-sm font-mono text-gray-300 hover:text-acid transition-colors">QUICK START</a>
+                <a href="#tools" class="block text-sm font-mono text-gray-300 hover:text-acid transition-colors">TOOLS</a>
+                <a href="#resources" class="block text-sm font-mono text-gray-300 hover:text-acid transition-colors">RESOURCES</a>
             </div>
         </nav>
     </header>
 
     <main id="main">
         <!-- Hero Section -->
-        <section class="relative min-h-[80vh] flex items-center justify-center bg-grid-pattern overflow-hidden">
-            <!-- Gradient overlays -->
-            <div class="absolute inset-0 bg-gradient-to-b from-void via-transparent to-void"></div>
-            <div class="absolute inset-0 bg-gradient-to-r from-void via-transparent to-void"></div>
-
+        <section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
             <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-20">
-                <!-- Terminal decoration -->
-                <div class="inline-flex items-center gap-2 px-4 py-2 bg-panel border border-white/10 mb-8">
-                    <span class="w-2 h-2 rounded-full bg-signal animate-pulse"></span>
-                    <span class="font-mono text-xs text-gray-500">COURSE_STATUS: ACTIVE</span>
+                <!-- Status indicator -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-panel border border-white/10 rounded mb-8">
+                    <span class="w-2 h-2 rounded-full bg-acid" aria-hidden="true"></span>
+                    <span class="font-mono text-xs text-gray-300">COURSE STATUS: ACTIVE</span>
                 </div>
 
-                <!-- Main heading with glitch -->
+                <!-- Main heading -->
                 <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-chrome mb-6 leading-tight">
-                    <span class="glitch-text" data-text="ESCAPE THE">ESCAPE THE</span><br>
+                    ESCAPE THE<br>
                     <span class="text-acid">CHAT WINDOW</span>
                 </h1>
 
                 <!-- Subtitle -->
-                <p class="font-mono text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                <p class="font-mono text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
                     Learn to use AI coding assistants from the command line. Write prompts that generate working code, automate tasks, and build tools for your newsroom.
                 </p>
 
                 <!-- CTA buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#quick-start" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-acid text-void font-mono font-bold text-sm hover:bg-acid/90 transition-all clip-notch">
-                        <i data-lucide="terminal" class="w-5 h-5"></i>
-                        BEGIN_SEQUENCE
+                    <a href="#quick-start" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-acid text-void font-mono font-bold text-sm hover:bg-acid/90 transition-all rounded">
+                        <i data-lucide="terminal" class="w-5 h-5" aria-hidden="true"></i>
+                        GET STARTED
                     </a>
-                    <a href="#modules" class="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/20 text-chrome font-mono text-sm hover:border-acid hover:text-acid transition-all">
-                        <i data-lucide="book-open" class="w-5 h-5"></i>
-                        VIEW_SYLLABUS
+                    <a href="#modules" class="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/20 text-chrome font-mono text-sm hover:border-acid hover:text-acid transition-all rounded">
+                        <i data-lucide="book-open" class="w-5 h-5" aria-hidden="true"></i>
+                        VIEW SYLLABUS
                     </a>
-                </div>
-
-                <!-- Scroll indicator -->
-                <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-                    <i data-lucide="chevrons-down" class="w-6 h-6 text-acid/50"></i>
                 </div>
             </div>
         </section>
@@ -159,103 +148,103 @@
                 <!-- Section header -->
                 <div class="flex items-center gap-4 mb-12">
                     <span class="font-mono text-acid text-sm">01 //</span>
-                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-chrome">MODULES</h2>
-                    <div class="flex-1 h-px bg-gradient-to-r from-acid/30 to-transparent"></div>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-chrome">Modules</h2>
+                    <div class="flex-1 h-px bg-gradient-to-r from-acid/30 to-transparent" aria-hidden="true"></div>
                 </div>
 
-                <p class="font-mono text-gray-500 mb-10 max-w-2xl">
+                <p class="font-mono text-gray-300 mb-10 max-w-2xl">
                     Five weeks covering the fundamentals of CLI-based AI tools for journalism.
                 </p>
 
                 <!-- Module cards grid -->
                 <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     <!-- Module 1 -->
-                    <a href="module-1/" class="group block border border-white/10 bg-surface hover:border-acid transition-all duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 p-3 opacity-30 group-hover:opacity-100 transition-opacity text-acid">
+                    <a href="module-1/" class="group block border border-white/10 bg-surface/30 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-3 opacity-30 group-hover:opacity-100 transition-opacity text-acid" aria-hidden="true">
                             <i data-lucide="terminal" class="w-6 h-6"></i>
                         </div>
                         <div class="p-6">
-                            <div class="text-xs text-acid font-mono mb-3">:: MODULE_01</div>
+                            <div class="text-xs text-acid font-mono mb-3">MODULE 01</div>
                             <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-acid transition-colors">Escaping the chat window</h3>
-                            <p class="text-sm text-gray-500 font-mono leading-relaxed">
+                            <p class="text-sm text-gray-300 font-mono leading-relaxed">
                                 Install CLI tools and compare web vs terminal workflows. Set up your development environment.
                             </p>
                         </div>
-                        <div class="bg-void px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-600 group-hover:text-acid transition-colors">
-                            <span>BEGIN_SEQUENCE</span>
-                            <span>-></span>
+                        <div class="bg-void/50 px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-400 group-hover:text-acid transition-colors">
+                            <span>Begin module</span>
+                            <span aria-hidden="true">&rarr;</span>
                         </div>
                     </a>
 
                     <!-- Module 2 -->
-                    <a href="module-2/" class="group block border border-white/10 bg-surface hover:border-acid transition-all duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 p-3 opacity-30 group-hover:opacity-100 transition-opacity text-acid">
+                    <a href="module-2/" class="group block border border-white/10 bg-surface/30 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-3 opacity-30 group-hover:opacity-100 transition-opacity text-acid" aria-hidden="true">
                             <i data-lucide="message-square-code" class="w-6 h-6"></i>
                         </div>
                         <div class="p-6">
-                            <div class="text-xs text-acid font-mono mb-3">:: MODULE_02</div>
+                            <div class="text-xs text-acid font-mono mb-3">MODULE 02</div>
                             <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-acid transition-colors">Prompting with files and project context</h3>
-                            <p class="text-sm text-gray-500 font-mono leading-relaxed">
+                            <p class="text-sm text-gray-300 font-mono leading-relaxed">
                                 Write context files (CLAUDE.md) that persist across sessions. Use Git for version control of your AI-assisted work.
                             </p>
                         </div>
-                        <div class="bg-void px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-600 group-hover:text-acid transition-colors">
-                            <span>BEGIN_SEQUENCE</span>
-                            <span>-></span>
+                        <div class="bg-void/50 px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-400 group-hover:text-acid transition-colors">
+                            <span>Begin module</span>
+                            <span aria-hidden="true">&rarr;</span>
                         </div>
                     </a>
 
                     <!-- Module 3 -->
-                    <a href="module-3/" class="group block border border-white/10 bg-surface hover:border-acid transition-all duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 p-3 opacity-30 group-hover:opacity-100 transition-opacity text-acid">
+                    <a href="module-3/" class="group block border border-white/10 bg-surface/30 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-3 opacity-30 group-hover:opacity-100 transition-opacity text-acid" aria-hidden="true">
                             <i data-lucide="folder-git-2" class="w-6 h-6"></i>
                         </div>
                         <div class="p-6">
-                            <div class="text-xs text-acid font-mono mb-3">:: MODULE_03</div>
+                            <div class="text-xs text-acid font-mono mb-3">MODULE 03</div>
                             <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-acid transition-colors">Custom skills for Claude Code</h3>
-                            <p class="text-sm text-gray-500 font-mono leading-relaxed">
+                            <p class="text-sm text-gray-300 font-mono leading-relaxed">
                                 Package domain expertise into reusable slash commands. Write skills for source verification, FOIA requests, and beat-specific workflows.
                             </p>
                         </div>
-                        <div class="bg-void px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-600 group-hover:text-acid transition-colors">
-                            <span>BEGIN_SEQUENCE</span>
-                            <span>-></span>
+                        <div class="bg-void/50 px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-400 group-hover:text-acid transition-colors">
+                            <span>Begin module</span>
+                            <span aria-hidden="true">&rarr;</span>
                         </div>
                     </a>
 
                     <!-- Module 4 -->
-                    <a href="module-4/" class="group block border border-white/10 bg-surface hover:border-acid transition-all duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 p-3 opacity-30 group-hover:opacity-100 transition-opacity text-acid">
+                    <a href="module-4/" class="group block border border-white/10 bg-surface/30 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-3 opacity-30 group-hover:opacity-100 transition-opacity text-acid" aria-hidden="true">
                             <i data-lucide="newspaper" class="w-6 h-6"></i>
                         </div>
                         <div class="p-6">
-                            <div class="text-xs text-acid font-mono mb-3">:: MODULE_04</div>
+                            <div class="text-xs text-acid font-mono mb-3">MODULE 04</div>
                             <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-acid transition-colors">CLI workflows for newsrooms</h3>
-                            <p class="text-sm text-gray-500 font-mono leading-relaxed">
+                            <p class="text-sm text-gray-300 font-mono leading-relaxed">
                                 Build shell pipelines for data journalism. Automate scraping, cleaning, and summarization into cost-conscious, repeatable workflows.
                             </p>
                         </div>
-                        <div class="bg-void px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-600 group-hover:text-acid transition-colors">
-                            <span>BEGIN_SEQUENCE</span>
-                            <span>-></span>
+                        <div class="bg-void/50 px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-400 group-hover:text-acid transition-colors">
+                            <span>Begin module</span>
+                            <span aria-hidden="true">&rarr;</span>
                         </div>
                     </a>
 
                     <!-- Module 5 -->
-                    <a href="module-5/" class="group block border border-white/10 bg-surface hover:border-acid transition-all duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 p-3 opacity-30 group-hover:opacity-100 transition-opacity text-acid">
+                    <a href="module-5/" class="group block border border-white/10 bg-surface/30 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-3 opacity-30 group-hover:opacity-100 transition-opacity text-acid" aria-hidden="true">
                             <i data-lucide="rocket" class="w-6 h-6"></i>
                         </div>
                         <div class="p-6">
-                            <div class="text-xs text-acid font-mono mb-3">:: MODULE_05</div>
+                            <div class="text-xs text-acid font-mono mb-3">MODULE 05</div>
                             <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-acid transition-colors">Agents and RAG</h3>
-                            <p class="text-sm text-gray-500 font-mono leading-relaxed">
+                            <p class="text-sm text-gray-300 font-mono leading-relaxed">
                                 Give Claude access to your documents via MCP. Build grounded, source-attributed systems that don't hallucinate facts.
                             </p>
                         </div>
-                        <div class="bg-void px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-600 group-hover:text-acid transition-colors">
-                            <span>BEGIN_SEQUENCE</span>
-                            <span>-></span>
+                        <div class="bg-void/50 px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-400 group-hover:text-acid transition-colors">
+                            <span>Begin module</span>
+                            <span aria-hidden="true">&rarr;</span>
                         </div>
                     </a>
                 </div>
@@ -263,70 +252,68 @@
         </section>
 
         <!-- Quick Start Section -->
-        <section id="quick-start" class="py-20 sm:py-28 bg-void bg-grid-pattern relative">
-            <div class="absolute inset-0 bg-gradient-to-b from-panel via-transparent to-panel"></div>
-
+        <section id="quick-start" class="py-20 sm:py-28 bg-void relative">
             <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Section header -->
                 <div class="flex items-center gap-4 mb-12">
                     <span class="font-mono text-acid text-sm">02 //</span>
-                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-chrome">QUICK_START</h2>
-                    <div class="flex-1 h-px bg-gradient-to-r from-acid/30 to-transparent"></div>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-chrome">Quick start</h2>
+                    <div class="flex-1 h-px bg-gradient-to-r from-acid/30 to-transparent" aria-hidden="true"></div>
                 </div>
 
-                <p class="font-mono text-gray-500 mb-12 max-w-2xl">
+                <p class="font-mono text-gray-300 mb-12 max-w-2xl">
                     Get up and running in three steps.
                 </p>
 
                 <!-- Steps -->
                 <div class="grid gap-8 lg:grid-cols-3">
                     <!-- Step 1 -->
-                    <div class="relative border border-white/10 bg-panel p-8">
-                        <div class="absolute -top-4 -left-4 w-12 h-12 bg-acid text-void font-display font-bold text-xl flex items-center justify-center clip-notch">
+                    <div class="relative border border-white/10 bg-panel p-8 rounded-lg">
+                        <div class="absolute -top-4 -left-4 w-12 h-12 bg-acid text-void font-display font-bold text-xl flex items-center justify-center rounded-lg">
                             01
                         </div>
                         <div class="pt-4">
                             <h3 class="font-display text-xl text-chrome font-bold mb-4">Install Node.js</h3>
-                            <p class="text-gray-500 font-mono text-sm mb-6">
-                                Download from <a href="https://nodejs.org" class="text-ice hover:text-acid transition-colors">nodejs.org</a> and run the installer. This gives you <code class="bg-surface px-2 py-1 text-acid">npm</code>, the package manager you will use to install AI tools.
+                            <p class="text-gray-300 font-mono text-sm mb-6">
+                                Download from <a href="https://nodejs.org" class="text-ice hover:text-acid transition-colors underline">nodejs.org</a> and run the installer. This gives you <code class="bg-surface px-2 py-1 text-acid rounded">npm</code>, the package manager you will use to install AI tools.
                             </p>
-                            <div class="bg-surface border border-white/10 p-4 font-mono text-sm">
-                                <span class="text-gray-600">$</span> <span class="text-chrome">node --version</span>
+                            <div class="bg-surface border border-white/10 p-4 font-mono text-sm rounded">
+                                <span class="text-gray-400">$</span> <span class="text-chrome">node --version</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Step 2 -->
-                    <div class="relative border border-white/10 bg-panel p-8">
-                        <div class="absolute -top-4 -left-4 w-12 h-12 bg-acid text-void font-display font-bold text-xl flex items-center justify-center clip-notch">
+                    <div class="relative border border-white/10 bg-panel p-8 rounded-lg">
+                        <div class="absolute -top-4 -left-4 w-12 h-12 bg-acid text-void font-display font-bold text-xl flex items-center justify-center rounded-lg">
                             02
                         </div>
                         <div class="pt-4">
                             <h3 class="font-display text-xl text-chrome font-bold mb-4">Install an AI tool</h3>
-                            <p class="text-gray-500 font-mono text-sm mb-6">
+                            <p class="text-gray-300 font-mono text-sm mb-6">
                                 Pick one to start. Gemini CLI is free and works well for beginners.
                             </p>
-                            <div class="bg-surface border border-white/10 p-4 font-mono text-sm space-y-2">
-                                <div><span class="text-gray-600">$</span> <span class="text-chrome">curl -fsSL https://claude.ai/install.sh | sh</span></div>
-                                <div><span class="text-gray-600"># or Gemini</span></div>
-                                <div><span class="text-gray-600">$</span> <span class="text-chrome">npm install -g @google/gemini-cli</span></div>
+                            <div class="bg-surface border border-white/10 p-4 font-mono text-sm space-y-2 rounded">
+                                <div><span class="text-gray-400">$</span> <span class="text-chrome">curl -fsSL https://claude.ai/install.sh | sh</span></div>
+                                <div><span class="text-gray-400"># or Gemini</span></div>
+                                <div><span class="text-gray-400">$</span> <span class="text-chrome">npm install -g @google/gemini-cli</span></div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Step 3 -->
-                    <div class="relative border border-white/10 bg-panel p-8">
-                        <div class="absolute -top-4 -left-4 w-12 h-12 bg-acid text-void font-display font-bold text-xl flex items-center justify-center clip-notch">
+                    <div class="relative border border-white/10 bg-panel p-8 rounded-lg">
+                        <div class="absolute -top-4 -left-4 w-12 h-12 bg-acid text-void font-display font-bold text-xl flex items-center justify-center rounded-lg">
                             03
                         </div>
                         <div class="pt-4">
                             <h3 class="font-display text-xl text-chrome font-bold mb-4">Run your first prompt</h3>
-                            <p class="text-gray-500 font-mono text-sm mb-6">
+                            <p class="text-gray-300 font-mono text-sm mb-6">
                                 Open your terminal, navigate to a project folder, and start the tool.
                             </p>
-                            <div class="bg-surface border border-white/10 p-4 font-mono text-sm space-y-2">
-                                <div><span class="text-gray-600">$</span> <span class="text-chrome">cd ~/my-project</span></div>
-                                <div><span class="text-gray-600">$</span> <span class="text-acid">claude</span></div>
+                            <div class="bg-surface border border-white/10 p-4 font-mono text-sm space-y-2 rounded">
+                                <div><span class="text-gray-400">$</span> <span class="text-chrome">cd ~/my-project</span></div>
+                                <div><span class="text-gray-400">$</span> <span class="text-acid">claude</span></div>
                             </div>
                         </div>
                     </div>
@@ -340,79 +327,79 @@
                 <!-- Section header -->
                 <div class="flex items-center gap-4 mb-12">
                     <span class="font-mono text-acid text-sm">03 //</span>
-                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-chrome">TOOLS</h2>
-                    <div class="flex-1 h-px bg-gradient-to-r from-acid/30 to-transparent"></div>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-chrome">Tools</h2>
+                    <div class="flex-1 h-px bg-gradient-to-r from-acid/30 to-transparent" aria-hidden="true"></div>
                 </div>
 
-                <p class="font-mono text-gray-500 mb-12 max-w-2xl">
+                <p class="font-mono text-gray-300 mb-12 max-w-2xl">
                     We cover three CLI tools. You only need one to complete the course.
                 </p>
 
                 <!-- Tool cards grid -->
                 <div class="grid gap-4 md:grid-cols-2">
                     <!-- Claude Code -->
-                    <a href="https://code.claude.com/docs" target="_blank" rel="noopener noreferrer" class="group block border border-white/10 bg-surface hover:border-ice transition-all duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 p-4 opacity-30 group-hover:opacity-100 transition-opacity text-ice">
+                    <a href="https://code.claude.com/docs" target="_blank" rel="noopener noreferrer" class="group block border border-white/10 bg-surface/30 hover:border-ice transition-all duration-300 rounded-lg relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-30 group-hover:opacity-100 transition-opacity text-ice" aria-hidden="true">
                             <i data-lucide="sparkles" class="w-8 h-8"></i>
                         </div>
                         <div class="p-6">
-                            <div class="text-xs text-ice font-mono mb-3">:: ANTHROPIC</div>
+                            <div class="text-xs text-ice font-mono mb-3">ANTHROPIC</div>
                             <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-ice transition-colors">Claude Code</h3>
-                            <p class="text-sm text-gray-500 font-mono leading-relaxed mb-4">
+                            <p class="text-sm text-gray-300 font-mono leading-relaxed mb-4">
                                 Terminal-based assistant. Strong at reasoning through complex tasks and working with existing codebases.
                             </p>
-                            <div class="inline-flex items-center gap-2 text-xs font-mono text-gray-600">
-                                <i data-lucide="key" class="w-3 h-3"></i>
+                            <div class="inline-flex items-center gap-2 text-xs font-mono text-gray-400">
+                                <i data-lucide="key" class="w-3 h-3" aria-hidden="true"></i>
                                 Requires API key or subscription
                             </div>
                         </div>
-                        <div class="bg-void px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-600 group-hover:text-ice transition-colors">
-                            <span>VIEW_DOCS</span>
-                            <i data-lucide="external-link" class="w-3 h-3"></i>
+                        <div class="bg-void/50 px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-400 group-hover:text-ice transition-colors">
+                            <span>View docs</span>
+                            <i data-lucide="external-link" class="w-3 h-3" aria-hidden="true"></i>
                         </div>
                     </a>
 
                     <!-- Gemini CLI -->
-                    <a href="https://github.com/google-gemini/gemini-cli" target="_blank" rel="noopener noreferrer" class="group block border border-white/10 bg-surface hover:border-ice transition-all duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 p-4 opacity-30 group-hover:opacity-100 transition-opacity text-ice">
+                    <a href="https://github.com/google-gemini/gemini-cli" target="_blank" rel="noopener noreferrer" class="group block border border-white/10 bg-surface/30 hover:border-ice transition-all duration-300 rounded-lg relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-30 group-hover:opacity-100 transition-opacity text-ice" aria-hidden="true">
                             <i data-lucide="star" class="w-8 h-8"></i>
                         </div>
                         <div class="p-6">
-                            <div class="text-xs text-ice font-mono mb-3">:: GOOGLE</div>
+                            <div class="text-xs text-ice font-mono mb-3">GOOGLE</div>
                             <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-ice transition-colors">Gemini CLI</h3>
-                            <p class="text-sm text-gray-500 font-mono leading-relaxed mb-4">
+                            <p class="text-sm text-gray-300 font-mono leading-relaxed mb-4">
                                 Command-line tool with free tier. Good for quick scripts and data processing tasks.
                             </p>
                             <div class="inline-flex items-center gap-2 text-xs font-mono text-acid">
-                                <i data-lucide="check-circle" class="w-3 h-3"></i>
+                                <i data-lucide="check-circle" class="w-3 h-3" aria-hidden="true"></i>
                                 Free tier with Google account
                             </div>
                         </div>
-                        <div class="bg-void px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-600 group-hover:text-ice transition-colors">
-                            <span>VIEW_DOCS</span>
-                            <i data-lucide="external-link" class="w-3 h-3"></i>
+                        <div class="bg-void/50 px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-400 group-hover:text-ice transition-colors">
+                            <span>View docs</span>
+                            <i data-lucide="external-link" class="w-3 h-3" aria-hidden="true"></i>
                         </div>
                     </a>
 
                     <!-- Codex CLI -->
-                    <a href="https://github.com/openai/codex" target="_blank" rel="noopener noreferrer" class="group block border border-white/10 bg-surface hover:border-ice transition-all duration-300 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 p-4 opacity-30 group-hover:opacity-100 transition-opacity text-ice">
+                    <a href="https://github.com/openai/codex" target="_blank" rel="noopener noreferrer" class="group block border border-white/10 bg-surface/30 hover:border-ice transition-all duration-300 rounded-lg relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-4 opacity-30 group-hover:opacity-100 transition-opacity text-ice" aria-hidden="true">
                             <i data-lucide="cpu" class="w-8 h-8"></i>
                         </div>
                         <div class="p-6">
-                            <div class="text-xs text-ice font-mono mb-3">:: OPENAI</div>
+                            <div class="text-xs text-ice font-mono mb-3">OPENAI</div>
                             <h3 class="font-display text-xl text-white font-bold mb-3 group-hover:text-ice transition-colors">Codex CLI</h3>
-                            <p class="text-sm text-gray-500 font-mono leading-relaxed mb-4">
+                            <p class="text-sm text-gray-300 font-mono leading-relaxed mb-4">
                                 Terminal assistant from OpenAI. Integrates well with existing OpenAI workflows and API keys.
                             </p>
-                            <div class="inline-flex items-center gap-2 text-xs font-mono text-gray-600">
-                                <i data-lucide="key" class="w-3 h-3"></i>
+                            <div class="inline-flex items-center gap-2 text-xs font-mono text-gray-400">
+                                <i data-lucide="key" class="w-3 h-3" aria-hidden="true"></i>
                                 Requires OpenAI API key
                             </div>
                         </div>
-                        <div class="bg-void px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-600 group-hover:text-ice transition-colors">
-                            <span>VIEW_DOCS</span>
-                            <i data-lucide="external-link" class="w-3 h-3"></i>
+                        <div class="bg-void/50 px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-400 group-hover:text-ice transition-colors">
+                            <span>View docs</span>
+                            <i data-lucide="external-link" class="w-3 h-3" aria-hidden="true"></i>
                         </div>
                     </a>
                 </div>
@@ -420,83 +407,81 @@
         </section>
 
         <!-- Resources Section -->
-        <section id="resources" class="py-20 sm:py-28 bg-void bg-grid-pattern relative">
-            <div class="absolute inset-0 bg-gradient-to-b from-panel via-transparent to-panel"></div>
-
+        <section id="resources" class="py-20 sm:py-28 bg-void relative">
             <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Section header -->
                 <div class="flex items-center gap-4 mb-12">
                     <span class="font-mono text-acid text-sm">04 //</span>
-                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-chrome">RESOURCES</h2>
-                    <div class="flex-1 h-px bg-gradient-to-r from-acid/30 to-transparent"></div>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-chrome">Resources</h2>
+                    <div class="flex-1 h-px bg-gradient-to-r from-acid/30 to-transparent" aria-hidden="true"></div>
                 </div>
 
-                <p class="font-mono text-gray-500 mb-12 max-w-2xl">
+                <p class="font-mono text-gray-300 mb-12 max-w-2xl">
                     Reference materials to support your learning.
                 </p>
 
                 <!-- Resource cards -->
                 <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                     <!-- Quick Reference -->
-                    <a href="templates/quick-reference.html" class="group block border border-white/10 bg-panel hover:border-acid transition-all duration-300">
+                    <a href="templates/quick-reference.html" class="group block border border-white/10 bg-panel hover:border-acid transition-all duration-300 rounded-lg">
                         <div class="p-6">
-                            <div class="w-12 h-12 bg-surface border border-white/10 flex items-center justify-center mb-4 group-hover:border-acid transition-colors">
-                                <i data-lucide="file-text" class="w-6 h-6 text-gray-600 group-hover:text-acid transition-colors"></i>
+                            <div class="w-12 h-12 bg-surface border border-white/10 flex items-center justify-center mb-4 group-hover:border-acid transition-colors rounded-lg" aria-hidden="true">
+                                <i data-lucide="file-text" class="w-6 h-6 text-gray-400 group-hover:text-acid transition-colors"></i>
                             </div>
                             <h3 class="font-display text-lg text-white font-bold mb-2 group-hover:text-acid transition-colors">Quick reference</h3>
-                            <p class="text-sm text-gray-600 font-mono">
+                            <p class="text-sm text-gray-400 font-mono">
                                 Common commands and prompt patterns for each tool.
                             </p>
                         </div>
                     </a>
 
                     <!-- Troubleshooting -->
-                    <a href="templates/troubleshooting.html" class="group block border border-white/10 bg-panel hover:border-acid transition-all duration-300">
+                    <a href="templates/troubleshooting.html" class="group block border border-white/10 bg-panel hover:border-acid transition-all duration-300 rounded-lg">
                         <div class="p-6">
-                            <div class="w-12 h-12 bg-surface border border-white/10 flex items-center justify-center mb-4 group-hover:border-acid transition-colors">
-                                <i data-lucide="wrench" class="w-6 h-6 text-gray-600 group-hover:text-acid transition-colors"></i>
+                            <div class="w-12 h-12 bg-surface border border-white/10 flex items-center justify-center mb-4 group-hover:border-acid transition-colors rounded-lg" aria-hidden="true">
+                                <i data-lucide="wrench" class="w-6 h-6 text-gray-400 group-hover:text-acid transition-colors"></i>
                             </div>
                             <h3 class="font-display text-lg text-white font-bold mb-2 group-hover:text-acid transition-colors">Troubleshooting</h3>
-                            <p class="text-sm text-gray-600 font-mono">
+                            <p class="text-sm text-gray-400 font-mono">
                                 Solutions to common installation and usage problems.
                             </p>
                         </div>
                     </a>
 
                     <!-- Prompt Templates -->
-                    <a href="templates/" class="group block border border-white/10 bg-panel hover:border-acid transition-all duration-300">
+                    <a href="templates/" class="group block border border-white/10 bg-panel hover:border-acid transition-all duration-300 rounded-lg">
                         <div class="p-6">
-                            <div class="w-12 h-12 bg-surface border border-white/10 flex items-center justify-center mb-4 group-hover:border-acid transition-colors">
-                                <i data-lucide="copy" class="w-6 h-6 text-gray-600 group-hover:text-acid transition-colors"></i>
+                            <div class="w-12 h-12 bg-surface border border-white/10 flex items-center justify-center mb-4 group-hover:border-acid transition-colors rounded-lg" aria-hidden="true">
+                                <i data-lucide="copy" class="w-6 h-6 text-gray-400 group-hover:text-acid transition-colors"></i>
                             </div>
                             <h3 class="font-display text-lg text-white font-bold mb-2 group-hover:text-acid transition-colors">Prompt templates</h3>
-                            <p class="text-sm text-gray-600 font-mono">
+                            <p class="text-sm text-gray-400 font-mono">
                                 Reusable prompts for journalism tasks.
                             </p>
                         </div>
                     </a>
 
                     <!-- Course Review -->
-                    <a href="review.html" class="group block border border-white/10 bg-panel hover:border-acid transition-all duration-300">
+                    <a href="review.html" class="group block border border-white/10 bg-panel hover:border-acid transition-all duration-300 rounded-lg">
                         <div class="p-6">
-                            <div class="w-12 h-12 bg-surface border border-white/10 flex items-center justify-center mb-4 group-hover:border-acid transition-colors">
-                                <i data-lucide="layout-list" class="w-6 h-6 text-gray-600 group-hover:text-acid transition-colors"></i>
+                            <div class="w-12 h-12 bg-surface border border-white/10 flex items-center justify-center mb-4 group-hover:border-acid transition-colors rounded-lg" aria-hidden="true">
+                                <i data-lucide="layout-list" class="w-6 h-6 text-gray-400 group-hover:text-acid transition-colors"></i>
                             </div>
                             <h3 class="font-display text-lg text-white font-bold mb-2 group-hover:text-acid transition-colors">Course review</h3>
-                            <p class="text-sm text-gray-600 font-mono">
+                            <p class="text-sm text-gray-400 font-mono">
                                 Browse all course materials in one place.
                             </p>
                         </div>
                     </a>
 
                     <!-- GitHub Repo -->
-                    <a href="https://github.com/jamditis/prompt-engineering-journalists" target="_blank" rel="noopener noreferrer" class="group block border border-white/10 bg-panel hover:border-acid transition-all duration-300">
+                    <a href="https://github.com/jamditis/prompt-engineering-journalists" target="_blank" rel="noopener noreferrer" class="group block border border-white/10 bg-panel hover:border-acid transition-all duration-300 rounded-lg">
                         <div class="p-6">
-                            <div class="w-12 h-12 bg-surface border border-white/10 flex items-center justify-center mb-4 group-hover:border-acid transition-colors">
-                                <i data-lucide="github" class="w-6 h-6 text-gray-600 group-hover:text-acid transition-colors"></i>
+                            <div class="w-12 h-12 bg-surface border border-white/10 flex items-center justify-center mb-4 group-hover:border-acid transition-colors rounded-lg" aria-hidden="true">
+                                <i data-lucide="github" class="w-6 h-6 text-gray-400 group-hover:text-acid transition-colors"></i>
                             </div>
                             <h3 class="font-display text-lg text-white font-bold mb-2 group-hover:text-acid transition-colors">Course repository</h3>
-                            <p class="text-sm text-gray-600 font-mono">
+                            <p class="text-sm text-gray-400 font-mono">
                                 Example code and project files on GitHub.
                             </p>
                         </div>
@@ -513,17 +498,17 @@
                 <!-- About -->
                 <div>
                     <h3 class="font-display text-lg text-chrome font-bold mb-4">About the course</h3>
-                    <p class="font-mono text-sm text-gray-500 leading-relaxed">
-                        A free online course from the <a href="https://knightcenter.utexas.edu" class="text-ice hover:text-acid transition-colors">Knight Center for Journalism in the Americas</a> at the University of Texas at Austin.
+                    <p class="font-mono text-sm text-gray-300 leading-relaxed">
+                        A free online course from the <a href="https://knightcenter.utexas.edu" class="text-ice hover:text-acid transition-colors underline">Knight Center for Journalism in the Americas</a> at the University of Texas at Austin.
                     </p>
                 </div>
 
                 <!-- Instructor -->
                 <div>
                     <h3 class="font-display text-lg text-chrome font-bold mb-4">Instructor</h3>
-                    <div class="font-mono text-sm text-gray-500 space-y-1">
+                    <div class="font-mono text-sm text-gray-300 space-y-1">
                         <p class="text-chrome">Joe Amditis</p>
-                        <p><a href="https://centerforcooperativemedia.org" class="text-ice hover:text-acid transition-colors">Center for Cooperative Media</a></p>
+                        <p><a href="https://centerforcooperativemedia.org" class="text-ice hover:text-acid transition-colors underline">Center for Cooperative Media</a></p>
                         <p>Montclair State University</p>
                     </div>
                 </div>
@@ -531,61 +516,25 @@
                 <!-- License -->
                 <div>
                     <h3 class="font-display text-lg text-chrome font-bold mb-4">License</h3>
-                    <p class="font-mono text-sm text-gray-500 leading-relaxed">
-                        Course materials are licensed under <a href="https://creativecommons.org/licenses/by/4.0/" class="text-ice hover:text-acid transition-colors">CC BY 4.0</a>. You may share and adapt for any purpose with attribution.
+                    <p class="font-mono text-sm text-gray-300 leading-relaxed">
+                        Course materials are licensed under <a href="https://creativecommons.org/licenses/by/4.0/" class="text-ice hover:text-acid transition-colors underline">CC BY 4.0</a>. You may share and adapt for any purpose with attribution.
                     </p>
                 </div>
             </div>
 
             <!-- Copyright bar -->
             <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4">
-                <p class="font-mono text-xs text-gray-600">
+                <p class="font-mono text-xs text-gray-400">
                     &copy; 2026 Knight Center for Journalism in the Americas
                 </p>
-                <div class="flex items-center gap-4">
-                    <span class="font-mono text-xs text-gray-700">SYSTEM_STATUS:</span>
-                    <span class="inline-flex items-center gap-2 font-mono text-xs text-acid">
-                        <span class="w-2 h-2 rounded-full bg-acid animate-pulse"></span>
-                        ONLINE
-                    </span>
+                <div class="flex items-center gap-6">
+                    <a href="https://venmo.com/jamditis" class="font-mono text-xs text-gray-400 hover:text-chrome transition-colors" target="_blank" rel="noopener">Venmo</a>
+                    <a href="https://paypal.me/jamditis" class="font-mono text-xs text-gray-400 hover:text-chrome transition-colors" target="_blank" rel="noopener">PayPal</a>
+                    <a href="https://github.com/sponsors/jamditis" class="font-mono text-xs text-gray-400 hover:text-chrome transition-colors" target="_blank" rel="noopener">Sponsor</a>
                 </div>
             </div>
         </div>
-                <!-- Support -->
-            <div style="text-align:center;padding:1.5rem 1rem;">
-              <style>
-                .support-strip{display:flex;align-items:center;justify-content:center;gap:.75rem;flex-wrap:wrap;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-                .support-strip a{display:inline-flex;align-items:center;gap:.4rem;padding:.45rem 1rem;border-radius:2rem;font-size:.8rem;font-weight:600;text-decoration:none;color:#fff;transition:transform .15s,box-shadow .15s}
-                .support-strip a:hover{transform:translateY(-1px)}
-                .support-strip .s-venmo{background:#008CFF}.support-strip .s-venmo:hover{box-shadow:0 4px 14px rgba(0,140,255,.4)}
-                .support-strip .s-paypal{background:#003087}.support-strip .s-paypal:hover{box-shadow:0 4px 14px rgba(0,48,135,.4)}
-                .support-strip .s-github{background:#333}.support-strip .s-github:hover{box-shadow:0 4px 14px rgba(51,51,51,.4)}
-                .support-strip svg{width:16px;height:16px;fill:currentColor}
-              </style>
-              <div class="support-strip">
-                <a href="https://venmo.com/jamditis" class="s-venmo" target="_blank" rel="noopener">
-                  <svg viewBox="0 0 24 24"><path d="M19.5 1.5c.9 1.5 1.3 3 1.3 4.9 0 6.1-5.2 14-9.4 19.6H4.4L1.5 2.1l6.2-.6 1.7 13.4c1.5-2.5 3.4-6.4 3.4-9.1 0-1.8-.3-3-.8-4z"/></svg>
-                  Venmo
-                </a>
-                <a href="https://paypal.me/jamditis" class="s-paypal" target="_blank" rel="noopener">
-                  <svg viewBox="0 0 24 24"><path d="M7.02 21.5L7.8 17h-2L8.6 2.5h5.4c2.6 0 4.4 1.8 4 4.4-.6 3.4-3.2 5.1-6.2 5.1H9.7l-1 5.5H6.6zm10-15.1c.3-2-1-3.4-3.4-3.4h-1L11.4 10h1.2c2.2 0 4-1.2 4.4-3.6zm-1.6 8.1c.3-2-1-3.4-3.4-3.4h-1L9.8 18h1.2c2.2 0 4-1.2 4.4-3.5z"/></svg>
-                  PayPal
-                </a>
-                <a href="https://github.com/sponsors/jamditis" class="s-github" target="_blank" rel="noopener">
-                  <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                  Sponsor
-                </a>
-              </div>
-            </div>
-</footer>
-
-    <!-- Easter egg -->
-    <script>
-        console.log('%c PROMPT ENGINEERING FOR JOURNALISTS ', 'background: #c8f135; color: #0a0a0a; font-weight: bold; font-size: 16px; padding: 4px 8px; border-radius: 4px;')
-        console.log('%c a Knight Center MOOC — escape the chat window, build tools for your newsroom', 'color: #7dd3fc; font-style: italic; font-size: 13px;')
-        console.log('%c stack: HTML, Tailwind CDN, Lucide icons', 'color: #999; font-size: 11px;')
-        console.log('%c built by joe amditis  —  jamditis@gmail.com', 'color: #999; font-size: 11px;')
-    </script>
+    </footer>
 
     <!-- Scripts -->
     <script>
@@ -598,6 +547,8 @@
 
         if (mobileMenuBtn && mobileMenu) {
             mobileMenuBtn.addEventListener('click', () => {
+                const expanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+                mobileMenuBtn.setAttribute('aria-expanded', !expanded);
                 mobileMenu.classList.toggle('hidden');
             });
 
@@ -605,6 +556,7 @@
             mobileMenu.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
                 });
             });
         }
@@ -622,5 +574,6 @@
                 }
             });
         });
-    </script></body>
+    </script>
+</body>
 </html>

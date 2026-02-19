@@ -13,116 +13,43 @@
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        void: '#050505',
-                        panel: '#0a0a0a',
-                        surface: '#111111',
-                        chrome: '#e8e8e8',
-                        acid: '#c8ff00',
-                        acidDim: 'rgba(200, 255, 0, 0.1)',
-                        ice: '#00f0ff',
-                        iceDim: 'rgba(0, 240, 255, 0.1)',
-                        signal: '#ff3366',
-                        signalDim: 'rgba(255, 51, 102, 0.1)',
-                    },
-                    fontFamily: {
-                        display: ['Chakra Petch', 'sans-serif'],
-                        mono: ['Share Tech Mono', 'monospace'],
-                        sans: ['Chakra Petch', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <script src="../assets/js/config.js"></script>
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
-    <style>
-        body {
-            background-color: #050505;
-        }
-
-        /* CRT overlay */
-        .crt-overlay {
-            pointer-events: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.15),
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            z-index: 1000;
-        }
-
-        /* Grid background */
-        .bg-grid-pattern {
-            background-image:
-                linear-gradient(rgba(200, 255, 0, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(200, 255, 0, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-        }
-
-        /* Notch cuts */
-        .clip-notch {
-            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
-        }
-
-        .clip-notch-top {
-            clip-path: polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px);
-        }
-
-        /* Glow effects */
-        .glow-acid {
-            box-shadow: 0 0 20px rgba(200, 255, 0, 0.2);
-        }
-
-        .glow-ice {
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
 </head>
 <body class="bg-void text-chrome font-sans min-h-screen">
-    <!-- CRT Overlay -->
-    <div class="crt-overlay"></div>
+    <a href="#main" class="skip-link">Skip to main content</a>
 
     <!-- Header -->
     <header class="border-b border-white/10 bg-panel/80 backdrop-blur-sm sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <a href="../index.html" class="font-display text-sm text-gray-400 hover:text-acid transition-colors">
-                    &larr; BACK_TO_COURSE
+                <a href="../index.html" class="font-display text-sm text-gray-300 hover:text-acid transition-colors">
+                    &larr; Back to course
                 </a>
-                <nav class="hidden md:flex items-center gap-6">
-                    <a href="../module-1/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M1</a>
-                    <a href="../module-2/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M2</a>
-                    <a href="../module-3/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M3</a>
-                    <a href="../module-4/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M4</a>
-                    <a href="../module-5/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M5</a>
+                <nav aria-label="Page navigation" class="hidden md:flex items-center gap-6">
+                    <a href="../module-1/" class="text-xs font-mono text-gray-300 hover:text-ice transition-colors">M1</a>
+                    <a href="../module-2/" class="text-xs font-mono text-gray-300 hover:text-ice transition-colors">M2</a>
+                    <a href="../module-3/" class="text-xs font-mono text-gray-300 hover:text-ice transition-colors">M3</a>
+                    <a href="../module-4/" class="text-xs font-mono text-gray-300 hover:text-ice transition-colors">M4</a>
+                    <a href="../module-5/" class="text-xs font-mono text-gray-300 hover:text-ice transition-colors">M5</a>
                 </nav>
             </div>
         </div>
     </header>
 
     <!-- Main content -->
-    <main class="bg-grid-pattern min-h-screen">
+    <main id="main" class="min-h-screen">
         <div class="max-w-6xl mx-auto px-6 py-12">
 
             <!-- Section header -->
             <div class="mb-12">
-                <div class="text-xs font-mono text-acid mb-2">// QUICK_REFERENCE</div>
+                <div class="text-xs font-mono text-acid mb-2">Quick reference</div>
                 <h1 class="font-display text-4xl md:text-5xl font-bold text-chrome mb-4">Quick reference</h1>
-                <p class="text-gray-400 font-mono text-sm max-w-2xl">
+                <p class="text-gray-300 font-mono text-sm max-w-2xl">
                     Common commands and prompt patterns for Claude Code, Gemini CLI, and Codex CLI.
                 </p>
             </div>
@@ -135,27 +62,27 @@
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-4">
-                    <div class="border border-white/10 bg-panel p-6 clip-notch">
-                        <div class="text-xs font-mono text-acid mb-3">:: CLAUDE_CODE</div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="text-xs font-mono text-acid mb-3">CLAUDE CODE</div>
                         <code class="text-sm text-ice font-mono block mb-2">npm install -g @anthropic-ai/claude-code</code>
-                        <p class="text-xs text-gray-600 font-mono">Verify: <span class="text-gray-400">claude --version</span></p>
+                        <p class="text-xs text-gray-400 font-mono">Verify: <span class="text-gray-300">claude --version</span></p>
                     </div>
-                    <div class="border border-white/10 bg-panel p-6 clip-notch">
-                        <div class="text-xs font-mono text-acid mb-3">:: GEMINI_CLI</div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="text-xs font-mono text-acid mb-3">GEMINI CLI</div>
                         <code class="text-sm text-ice font-mono block mb-2">npm install -g @google/gemini-cli</code>
-                        <p class="text-xs text-gray-600 font-mono">Verify: <span class="text-gray-400">gemini --version</span></p>
+                        <p class="text-xs text-gray-400 font-mono">Verify: <span class="text-gray-300">gemini --version</span></p>
                     </div>
-                    <div class="border border-white/10 bg-panel p-6 clip-notch">
-                        <div class="text-xs font-mono text-acid mb-3">:: CODEX_CLI</div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="text-xs font-mono text-acid mb-3">CODEX CLI</div>
                         <code class="text-sm text-ice font-mono block mb-2">npm install -g @openai/codex</code>
-                        <p class="text-xs text-gray-600 font-mono">Verify: <span class="text-gray-400">codex --version</span></p>
+                        <p class="text-xs text-gray-400 font-mono">Verify: <span class="text-gray-300">codex --version</span></p>
                     </div>
                 </div>
 
-                <div class="border border-ice/30 bg-iceDim p-4 mt-4 clip-notch-top">
+                <div class="border border-ice/30 bg-iceDim p-4 mt-4">
                     <div class="flex items-start gap-3">
                         <i data-lucide="info" class="w-4 h-4 text-ice flex-shrink-0 mt-0.5"></i>
-                        <p class="text-xs text-gray-400 font-mono">
+                        <p class="text-xs text-gray-300 font-mono">
                             Requires <span class="text-ice">Node.js 20+</span> and <span class="text-ice">Git</span>. Check with <span class="text-gray-300">node --version</span> and <span class="text-gray-300">git --version</span>.
                         </p>
                     </div>
@@ -178,7 +105,7 @@
                                 <th class="text-left text-acid px-4 py-3 text-xs">PURPOSE</th>
                             </tr>
                         </thead>
-                        <tbody class="text-gray-400">
+                        <tbody class="text-gray-300">
                             <tr class="border-b border-white/5">
                                 <td class="px-4 py-3">Claude Code</td>
                                 <td class="px-4 py-3 text-ice">CLAUDE.md</td>
@@ -198,7 +125,7 @@
                     </table>
                 </div>
 
-                <p class="text-xs text-gray-600 font-mono mt-3">Place these files in your project root. Claude Code merges context from parent directories automatically.</p>
+                <p class="text-xs text-gray-400 font-mono mt-3">Place these files in your project root. Claude Code merges context from parent directories automatically.</p>
             </section>
 
             <!-- Claude Code slash commands -->
@@ -216,7 +143,7 @@
                                 <th class="text-left text-acid px-4 py-3 text-xs">PURPOSE</th>
                             </tr>
                         </thead>
-                        <tbody class="text-gray-400">
+                        <tbody class="text-gray-300">
                             <tr class="border-b border-white/5">
                                 <td class="px-4 py-3 text-ice">/help</td>
                                 <td class="px-4 py-3">Show all available commands</td>
@@ -269,7 +196,7 @@
                                 <th class="text-left text-acid px-4 py-3 text-xs">PURPOSE</th>
                             </tr>
                         </thead>
-                        <tbody class="text-gray-400">
+                        <tbody class="text-gray-300">
                             <tr class="border-b border-white/5">
                                 <td class="px-4 py-3 text-ice">--model MODEL</td>
                                 <td class="px-4 py-3">Specify model (e.g. claude-sonnet-4-20250514)</td>
@@ -312,24 +239,24 @@
 
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="border border-white/10 bg-panel p-6">
-                        <div class="text-xs font-mono text-acid mb-3">:: PLAN_FIRST</div>
-                        <p class="text-sm text-gray-400 font-mono mb-3">Always use <span class="text-ice">/plan</span> before describing a task. Review the plan before letting the tool execute.</p>
-                        <p class="text-xs text-gray-600 font-mono">Catches misunderstandings before code is written.</p>
+                        <div class="text-xs font-mono text-acid mb-3">PLAN FIRST</div>
+                        <p class="text-sm text-gray-300 font-mono mb-3">Always use <span class="text-ice">/plan</span> before describing a task. Review the plan before letting the tool execute.</p>
+                        <p class="text-xs text-gray-400 font-mono">Catches misunderstandings before code is written.</p>
                     </div>
                     <div class="border border-white/10 bg-panel p-6">
-                        <div class="text-xs font-mono text-acid mb-3">:: TEST_ON_KNOWN</div>
-                        <p class="text-sm text-gray-400 font-mono mb-3">Test automation on material you've already read and verified. Don't start with fresh documents.</p>
-                        <p class="text-xs text-gray-600 font-mono">Lets you spot pipeline problems vs. hard-to-process content.</p>
+                        <div class="text-xs font-mono text-acid mb-3">TEST ON KNOWN</div>
+                        <p class="text-sm text-gray-300 font-mono mb-3">Test automation on material you've already read and verified. Don't start with fresh documents.</p>
+                        <p class="text-xs text-gray-400 font-mono">Lets you spot pipeline problems vs. hard-to-process content.</p>
                     </div>
                     <div class="border border-white/10 bg-panel p-6">
-                        <div class="text-xs font-mono text-acid mb-3">:: DELETION_TEST</div>
-                        <p class="text-sm text-gray-400 font-mono mb-3">Read each line of your context file: "If I removed this, would AI behave differently?" If not, delete it.</p>
-                        <p class="text-xs text-gray-600 font-mono">Remove generic instructions like "be accurate" that don't change behavior.</p>
+                        <div class="text-xs font-mono text-acid mb-3">DELETION TEST</div>
+                        <p class="text-sm text-gray-300 font-mono mb-3">Read each line of your context file: "If I removed this, would AI behave differently?" If not, delete it.</p>
+                        <p class="text-xs text-gray-400 font-mono">Remove generic instructions like "be accurate" that don't change behavior.</p>
                     </div>
                     <div class="border border-white/10 bg-panel p-6">
-                        <div class="text-xs font-mono text-acid mb-3">:: DELEGATE_GIT</div>
-                        <p class="text-sm text-gray-400 font-mono mb-3">Ask the CLI tool to handle Git: "Initialize a repo," "commit my changes," "show status." No need to memorize commands.</p>
-                        <p class="text-xs text-gray-600 font-mono">Tell the tool what you want, not how to do it.</p>
+                        <div class="text-xs font-mono text-acid mb-3">DELEGATE GIT</div>
+                        <p class="text-sm text-gray-300 font-mono mb-3">Ask the CLI tool to handle Git: "Initialize a repo," "commit my changes," "show status." No need to memorize commands.</p>
+                        <p class="text-xs text-gray-400 font-mono">Tell the tool what you want, not how to do it.</p>
                     </div>
                 </div>
             </section>
@@ -342,18 +269,18 @@
                 </div>
 
                 <div class="border border-white/10 bg-panel p-6">
-                    <div class="text-xs font-mono text-acid mb-4">:: PIPE_INPUT</div>
+                    <div class="text-xs font-mono text-acid mb-4">PIPE INPUT</div>
                     <div class="space-y-3 font-mono text-sm">
                         <div class="flex items-start gap-3">
-                            <span class="text-gray-600 flex-shrink-0">$</span>
+                            <span class="text-gray-400 flex-shrink-0">$</span>
                             <code class="text-ice">cat article.txt | gemini "summarize this"</code>
                         </div>
                         <div class="flex items-start gap-3">
-                            <span class="text-gray-600 flex-shrink-0">$</span>
+                            <span class="text-gray-400 flex-shrink-0">$</span>
                             <code class="text-ice">claude --print "Read press-release.md and extract quotes"</code>
                         </div>
                         <div class="flex items-start gap-3">
-                            <span class="text-gray-600 flex-shrink-0">$</span>
+                            <span class="text-gray-400 flex-shrink-0">$</span>
                             <code class="text-ice">claude --print --output-format json "List sources in article.md"</code>
                         </div>
                     </div>
@@ -369,15 +296,15 @@
 
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="border border-white/10 bg-panel p-6">
-                        <div class="text-xs font-mono text-ice mb-3">:: INSTALL_FROM_GITHUB</div>
-                        <div class="font-mono text-sm text-gray-400 space-y-2">
+                        <div class="text-xs font-mono text-ice mb-3">INSTALL FROM GITHUB</div>
+                        <div class="font-mono text-sm text-gray-300 space-y-2">
                             <p>Inside Claude Code:</p>
                             <code class="text-ice block">/install-github-plugin https://github.com/USER/REPO.git</code>
                         </div>
                     </div>
                     <div class="border border-white/10 bg-panel p-6">
-                        <div class="text-xs font-mono text-ice mb-3">:: SKILL_LOCATION</div>
-                        <div class="font-mono text-sm text-gray-400 space-y-2">
+                        <div class="text-xs font-mono text-ice mb-3">SKILL LOCATION</div>
+                        <div class="font-mono text-sm text-gray-300 space-y-2">
                             <p>Skills are stored at:</p>
                             <code class="text-ice block">~/.claude/commands/[skill-name]/SKILL.md</code>
                             <p>Invoke with <span class="text-ice">/skill-name</span> in Claude Code.</p>
@@ -388,7 +315,7 @@
 
             <!-- Bottom note -->
             <div class="mt-12 border-t border-white/10 pt-8">
-                <p class="text-xs font-mono text-gray-600 text-center">
+                <p class="text-xs font-mono text-gray-400 text-center">
                     For full details, see the course modules. This page covers the most-used commands and patterns.
                 </p>
             </div>
@@ -400,18 +327,18 @@
     <footer class="border-t border-white/10 bg-panel">
         <div class="max-w-6xl mx-auto px-6 py-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div class="text-xs font-mono text-gray-600">
+                <div class="text-xs font-mono text-gray-400">
                     Advanced prompt engineering for journalists
                 </div>
                 <div class="flex items-center gap-6">
-                    <a href="../index.html" class="text-xs font-mono text-gray-500 hover:text-acid transition-colors">HOME</a>
-                    <a href="./" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">TEMPLATES</a>
-                    <a href="https://github.com/jamditis/prompt-engineering-journalists" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">GITHUB</a>
+                    <a href="../index.html" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                    <a href="./" class="text-xs font-mono text-gray-300 hover:text-ice transition-colors">TEMPLATES</a>
+                    <a href="https://github.com/jamditis/prompt-engineering-journalists" class="text-xs font-mono text-gray-300 hover:text-ice transition-colors">GITHUB</a>
                 </div>
             </div>
             <div class="mt-6 pt-6 border-t border-white/5 text-center">
-                <p class="text-xs font-mono text-gray-700">
-                    &copy; 2025 Knight Center for Journalism in the Americas
+                <p class="text-xs font-mono text-gray-400">
+                    &copy; 2026 Knight Center for Journalism in the Americas
                 </p>
             </div>
         </div>

@@ -1,14 +1,14 @@
-/* Amditis Design System - Core Styles */
+/* Amditis Design System - Core Styles (WCAG 2.1 AA compliant) */
 
 /* Selection colors */
 ::selection {
-    background: #ccff00;
-    color: #050505;
+    background: #a3e635;
+    color: #111827;
 }
 
 ::-moz-selection {
-    background: #ccff00;
-    color: #050505;
+    background: #a3e635;
+    color: #111827;
 }
 
 /* Scrollbar styling */
@@ -18,114 +18,74 @@
 }
 
 ::-webkit-scrollbar-track {
-    background: #0a0a0a;
+    background: #1e293b;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #333;
-    border-radius: 0;
+    background: #475569;
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #ccff00;
+    background: #64748b;
 }
 
 /* Firefox scrollbar */
 * {
     scrollbar-width: thin;
-    scrollbar-color: #333 #0a0a0a;
+    scrollbar-color: #475569 #1e293b;
 }
 
-/* Clip notch utilities */
-.clip-notch {
-    clip-path: polygon(
-        0 8px,
-        8px 0,
-        100% 0,
-        100% calc(100% - 8px),
-        calc(100% - 8px) 100%,
-        0 100%
-    );
-}
-
-.clip-notch-top {
-    clip-path: polygon(
-        0 8px,
-        8px 0,
-        calc(100% - 8px) 0,
-        100% 8px,
-        100% 100%,
-        0 100%
-    );
-}
-
-/* CRT overlay effect */
-.crt-overlay {
-    pointer-events: none;
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(0, 0, 0, 0.15) 0px,
-            rgba(0, 0, 0, 0.15) 1px,
-            transparent 1px,
-            transparent 2px
-        );
-    opacity: 0.3;
-}
-
-/* Glitch text animation */
-.glitch-text {
-    position: relative;
-}
-
-.glitch-text::before,
-.glitch-text::after {
-    content: attr(data-text);
+/* Skip link for keyboard navigation */
+.skip-link {
     position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 10000;
+    padding: 0.75rem 1.5rem;
+    background: #a3e635;
+    color: #111827;
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-decoration: none;
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.skip-link:focus {
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    outline: 3px solid #67e8f9;
+    outline-offset: 2px;
 }
 
-.glitch-text::before {
-    animation: glitch-1 0.3s infinite linear alternate-reverse;
-    color: #ff2a2a;
-    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
-.glitch-text::after {
-    animation: glitch-2 0.3s infinite linear alternate-reverse;
-    color: #00f0ff;
-    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
-}
-
-@keyframes glitch-1 {
-    0% { transform: translateX(0); }
-    20% { transform: translateX(-2px); }
-    40% { transform: translateX(2px); }
-    60% { transform: translateX(-1px); }
-    80% { transform: translateX(1px); }
-    100% { transform: translateX(0); }
-}
-
-@keyframes glitch-2 {
-    0% { transform: translateX(0); }
-    20% { transform: translateX(2px); }
-    40% { transform: translateX(-2px); }
-    60% { transform: translateX(1px); }
-    80% { transform: translateX(-1px); }
-    100% { transform: translateX(0); }
+/* Focus visible styles for all interactive elements */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid #67e8f9;
+    outline-offset: 2px;
 }
 
 /* Accordion styles */
 .accordion-item {
-    border: 1px solid #333;
-    background: #0a0a0a;
+    border: 1px solid #334155;
+    background: #1e293b;
     margin-bottom: 4px;
+    border-radius: 4px;
 }
 
 .accordion-header {
@@ -138,19 +98,19 @@
 }
 
 .accordion-header:hover {
-    background: #111111;
+    background: #334155;
 }
 
 .accordion-header::after {
     content: '+';
     font-family: 'Share Tech Mono', monospace;
-    color: #ccff00;
+    color: #a3e635;
     font-size: 1.25rem;
     transition: transform 0.2s ease;
 }
 
 .accordion-item.active .accordion-header::after {
-    content: '−';
+    content: '\2212';
 }
 
 .accordion-content {
@@ -165,24 +125,24 @@
 
 .accordion-body {
     padding: 16px;
-    border-top: 1px solid #222;
+    border-top: 1px solid #334155;
 }
 
-/* Code syntax colors */
+/* Code syntax colors - all pass WCAG AA on #1e293b */
 .syntax-keyword {
-    color: #ff2a2a;
+    color: #f87171;
 }
 
 .syntax-string {
-    color: #ccff00;
+    color: #a3e635;
 }
 
 .syntax-func {
-    color: #00f0ff;
+    color: #67e8f9;
 }
 
 .syntax-comment {
-    color: #666;
+    color: #94a3b8;
     font-style: italic;
 }
 
@@ -200,40 +160,35 @@
     -webkit-appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid #333;
-    background: #0a0a0a;
+    border: 2px solid #475569;
+    background: #1e293b;
     cursor: pointer;
     position: relative;
     transition: all 0.2s ease;
+    border-radius: 3px;
 }
 
 .cyber-checkbox input[type="checkbox"]:hover {
-    border-color: #ccff00;
+    border-color: #a3e635;
 }
 
 .cyber-checkbox input[type="checkbox"]:checked {
-    border-color: #ccff00;
-    background: rgba(204, 255, 0, 0.1);
+    border-color: #a3e635;
+    background: rgba(163, 230, 53, 0.15);
 }
 
 .cyber-checkbox input[type="checkbox"]:checked::after {
-    content: '✓';
+    content: '\2713';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #ccff00;
+    color: #a3e635;
     font-size: 14px;
     font-weight: bold;
 }
 
-.cyber-checkbox input[type="checkbox"]:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(204, 255, 0, 0.3);
-}
-
-/* Focus visible for accessibility */
 .cyber-checkbox input[type="checkbox"]:focus-visible {
-    outline: 2px solid #ccff00;
+    outline: 3px solid #67e8f9;
     outline-offset: 2px;
 }

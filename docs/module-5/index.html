@@ -11,18 +11,17 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="antialiased font-mono bg-void text-chrome">
-    <div class="crt-overlay"></div>
-    <div class="fixed inset-0 bg-grid-pattern bg-[size:40px_40px] opacity-[0.07] pointer-events-none z-0"></div>
+    <a href="#main" class="skip-link">Skip to main content</a>
 
     <div class="relative z-10 flex min-h-screen flex-col">
         <!-- Header with nav -->
         <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
             <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
                 <a href="../" class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl clip-notch">P</div>
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
                     <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
                 </a>
-                <nav class="hidden md:flex gap-4 text-xs font-mono">
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
                     <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
                     <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
                     <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
@@ -35,19 +34,19 @@
         <!-- Module header -->
         <section class="py-12 px-6 border-b border-white/10">
             <div class="max-w-5xl mx-auto">
-                <div class="text-xs text-acid font-mono mb-4">:: MODULE_05</div>
-                <h1 class="font-display text-4xl md:text-5xl font-bold text-white glitch-text" data-text="AGENTS AND RAG">AGENTS AND RAG</h1>
-                <p class="text-gray-400 text-lg font-mono mt-4 max-w-2xl">Understand AI agents, retrieval-augmented generation, and how to connect Claude to external data sources.</p>
+                <div class="text-xs text-acid font-mono mb-4">MODULE 05</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">AGENTS AND RAG</h1>
+                <p class="text-gray-300 text-lg font-mono mt-4 max-w-2xl">Understand AI agents, retrieval-augmented generation, and how to connect Claude to external data sources.</p>
             </div>
         </section>
 
         <!-- Content sections -->
-        <main class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
 
             <!-- Learning objectives -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-ice">LEARNING_OBJECTIVES</h2>
+                    <h2 class="font-display text-xl text-ice">Learning objectives</h2>
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-mono text-gray-300">
@@ -62,12 +61,12 @@
             <!-- Key concepts -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">KEY_CONCEPTS</h2>
+                    <h2 class="font-display text-xl text-chrome">Key concepts</h2>
                 </div>
                 <div class="space-y-4">
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Chatbots vs. agents</h3>
-                        <div class="text-gray-400 text-sm leading-relaxed space-y-3">
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
                             <p><span class="text-ice">Chatbot:</span> Responds to prompts using only its training data. Can't take actions, access external information, or modify files. Like talking to someone who can only answer from memory.</p>
                             <p><span class="text-acid">Agent:</span> Can use tools, access data sources, and take actions. Breaks complex tasks into steps, decides what tools to use, and executes multi-step plans. Claude Code is an agent - it can read files, run commands, and make changes to your projects.</p>
                         </div>
@@ -75,12 +74,12 @@
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Retrieval-augmented generation (RAG)</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">RAG combines a language model with external data retrieval. Instead of relying only on training data, the model can search relevant documents and include that information in its response. This reduces hallucinations and lets the model work with current, domain-specific information it was never trained on.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">RAG combines a language model with external data retrieval. Instead of relying only on training data, the model can search relevant documents and include that information in its response. This reduces hallucinations and lets the model work with current, domain-specific information it was never trained on.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">How RAG works</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">A typical RAG pipeline:</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">A typical RAG pipeline:</p>
                         <ol class="space-y-2 text-sm font-mono text-gray-300">
                             <li class="flex items-start gap-3"><span class="text-acid">1.</span> <strong class="text-chrome">Query:</strong> User asks a question</li>
                             <li class="flex items-start gap-3"><span class="text-acid">2.</span> <strong class="text-chrome">Retrieve:</strong> System searches a document collection for relevant passages</li>
@@ -91,12 +90,12 @@
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Model Context Protocol (MCP)</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">MCP is an open standard for connecting AI models to external tools and data sources. An MCP server provides capabilities (like file access, database queries, or web searches) that Claude can use. Think of MCP servers as plugins that extend what Claude can do.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">MCP is an open standard for connecting AI models to external tools and data sources. An MCP server provides capabilities (like file access, database queries, or web searches) that Claude can use. Think of MCP servers as plugins that extend what Claude can do.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">MCP server types</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Common MCP servers include:</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Common MCP servers include:</p>
                         <ul class="space-y-2 text-sm font-mono text-gray-300">
                             <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Filesystem:</strong> Read and write files in specified directories</li>
                             <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Database:</strong> Query databases (SQLite, PostgreSQL, etc.)</li>
@@ -124,7 +123,7 @@
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">01</span>
                         Understand the default file access
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Claude Code can already read and write files in your current working directory. MCP extends this by:</p>
+                    <p class="text-gray-300 text-sm mb-4">Claude Code can already read and write files in your current working directory. MCP extends this by:</p>
                     <ul class="space-y-2 text-sm font-mono text-gray-300 ml-11">
                         <li class="flex items-start gap-3"><span class="text-acid">></span> Giving access to specific directories you configure</li>
                         <li class="flex items-start gap-3"><span class="text-acid">></span> Enabling more structured queries (search within files, list by criteria)</li>
@@ -138,13 +137,13 @@
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
                         Create a research documents folder
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Set up a folder with some test documents:</p>
+                    <p class="text-gray-300 text-sm mb-4">Set up a folder with some test documents:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">mkdir -p ~/research-docs
 cd ~/research-docs
@@ -228,13 +227,13 @@ EOF</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
                         Configure MCP in Claude Code
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Claude Code's MCP configuration lives in <code class="text-acid bg-surface px-1">~/.claude/</code>. Create or edit the MCP settings:</p>
+                    <p class="text-gray-300 text-sm mb-4">Claude Code's MCP configuration lives in <code class="text-acid bg-surface px-1">~/.claude/</code>. Create or edit the MCP settings:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">claude_desktop_config.json</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude_desktop_config.json</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">cat > ~/.claude/claude_desktop_config.json <<'EOF'
 {
@@ -262,13 +261,13 @@ EOF</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">04</span>
                         Install the MCP filesystem server
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">The server will be installed automatically when needed, but you can pre-install it:</p>
+                    <p class="text-gray-300 text-sm mb-4">The server will be installed automatically when needed, but you can pre-install it:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">npm install -g @modelcontextprotocol/server-filesystem</code></pre>
                     </div>
@@ -280,27 +279,27 @@ EOF</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">05</span>
                         Restart Claude Code and verify
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Start a new Claude Code session:</p>
+                    <p class="text-gray-300 text-sm mb-4">Start a new Claude Code session:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
                     </div>
-                    <p class="text-gray-400 text-sm mb-4">Ask Claude to list what MCP tools are available:</p>
+                    <p class="text-gray-300 text-sm mb-4">Ask Claude to list what MCP tools are available:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">prompt</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">What MCP servers and tools do you have access to?</code></pre>
                     </div>
-                    <p class="text-gray-500 text-xs mt-2">You should see the filesystem server listed with access to your research-docs folder.</p>
+                    <p class="text-gray-400 text-xs mt-2">You should see the filesystem server listed with access to your research-docs folder.</p>
                 </div>
 
                 <!-- Step 6 -->
@@ -309,13 +308,13 @@ EOF</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
                         Query your documents
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Now test RAG-style queries against your document collection:</p>
+                    <p class="text-gray-300 text-sm mb-4">Now test RAG-style queries against your document collection:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-2">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">prompt</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Based on my research documents, what was the total city budget for 2024 and what percentage went to education?</code></pre>
                     </div>
@@ -324,7 +323,7 @@ EOF</code></pre>
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">prompt</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Search my documents for any mentions of school start times. What's the current status of that discussion?</code></pre>
                     </div>
@@ -333,7 +332,7 @@ EOF</code></pre>
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">prompt</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Compare the crime statistics to the budget allocations for public safety. Is there any correlation worth investigating?</code></pre>
                     </div>
@@ -345,13 +344,13 @@ EOF</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">07</span>
                         Build a research workflow
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Use your document collection to draft a story:</p>
+                    <p class="text-gray-300 text-sm mb-4">Use your document collection to draft a story:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">prompt</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">I'm writing a story about how the city is allocating resources to address public safety. Using my research documents, help me outline the key facts I should include and identify any gaps where I need more information.</code></pre>
                     </div>
@@ -361,10 +360,10 @@ EOF</code></pre>
             <!-- Checkpoint questions -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-signal">CHECKPOINT</h2>
+                    <h2 class="font-display text-xl text-signal">Checkpoint</h2>
                 </div>
                 <div class="border border-signal/30 bg-signalDim p-6">
-                    <p class="text-sm font-mono text-gray-300 mb-4"><span class="text-signal font-bold">SELF_CHECK:</span> Make sure you can answer these before moving on.</p>
+                    <p class="text-sm font-mono text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
                     <ul class="space-y-2 text-sm font-mono text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What is the main difference between a chatbot and an AI agent?</li>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What problem does RAG solve that pure language models can't?</li>
@@ -377,14 +376,14 @@ EOF</code></pre>
             <!-- Readings and resources -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">RESOURCES</h2>
+                    <h2 class="font-display text-xl text-chrome">Resources</h2>
                 </div>
                 <div class="border border-white/10 bg-panel p-6">
                     <ul class="space-y-3 text-sm font-mono">
-                        <li><a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-400">Model Context Protocol - Official MCP documentation and specification</span></li>
-                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-400">Claude Code documentation - MCP configuration reference</span></li>
-                        <li><a href="https://github.com/modelcontextprotocol/servers" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REPO]</a> <span class="text-gray-400">MCP Servers repository - Collection of official and community MCP servers</span></li>
-                        <li><a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[ARTICLE]</a> <span class="text-gray-400">Introducing the Model Context Protocol - Anthropic's announcement explaining MCP</span></li>
+                        <li><a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Model Context Protocol - Official MCP documentation and specification</span></li>
+                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-300">Claude Code documentation - MCP configuration reference</span></li>
+                        <li><a href="https://github.com/modelcontextprotocol/servers" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REPO]</a> <span class="text-gray-300">MCP Servers repository - Collection of official and community MCP servers</span></li>
+                        <li><a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[ARTICLE]</a> <span class="text-gray-300">Introducing the Model Context Protocol - Anthropic's announcement explaining MCP</span></li>
                     </ul>
                 </div>
             </section>
@@ -392,24 +391,24 @@ EOF</code></pre>
             <!-- Troubleshooting -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">TROUBLESHOOTING</h2>
+                    <h2 class="font-display text-xl text-chrome">Troubleshooting</h2>
                 </div>
                 <div class="border border-white/10 bg-panel divide-y divide-white/5">
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">MCP server doesn't appear in Claude Code</h4>
-                        <p class="text-gray-500 text-sm">Check that your config file is valid JSON (no trailing commas, proper quoting). Use <code class="text-acid bg-surface px-1">cat ~/.claude/claude_desktop_config.json</code> to verify the contents. Restart Claude Code after making changes.</p>
+                        <p class="text-gray-400 text-sm">Check that your config file is valid JSON (no trailing commas, proper quoting). Use <code class="text-acid bg-surface px-1">cat ~/.claude/claude_desktop_config.json</code> to verify the contents. Restart Claude Code after making changes.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">"Permission denied" accessing files</h4>
-                        <p class="text-gray-500 text-sm">The MCP server can only access directories you've explicitly configured. Check that the path in your config matches the actual directory, and that your user has read permission on those files.</p>
+                        <p class="text-gray-400 text-sm">The MCP server can only access directories you've explicitly configured. Check that the path in your config matches the actual directory, and that your user has read permission on those files.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">Server fails to start</h4>
-                        <p class="text-gray-500 text-sm">Make sure Node.js and npm are installed and in your PATH. Try running the server manually to see error messages: <code class="text-acid bg-surface px-1">npx @modelcontextprotocol/server-filesystem ~/research-docs</code></p>
+                        <p class="text-gray-400 text-sm">Make sure Node.js and npm are installed and in your PATH. Try running the server manually to see error messages: <code class="text-acid bg-surface px-1">npx @modelcontextprotocol/server-filesystem ~/research-docs</code></p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">Claude doesn't seem to use the documents</h4>
-                        <p class="text-gray-500 text-sm">Be explicit in your prompts: "Search my research documents for..." or "Using the files in my research folder...". Claude may not automatically search documents unless asked.</p>
+                        <p class="text-gray-400 text-sm">Be explicit in your prompts: "Search my research documents for..." or "Using the files in my research folder...". Claude may not automatically search documents unless asked.</p>
                     </div>
                 </div>
             </section>
@@ -419,8 +418,8 @@ EOF</code></pre>
         <!-- Prev/Next navigation -->
         <footer class="border-t border-white/10 bg-panel">
             <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between">
-                <a href="../module-4/" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">< MODULE_04</a>
-                <a href="../" class="text-acid hover:text-white text-sm font-mono transition-colors">HOME ></a>
+                <a href="../module-4/" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">Module 04</a>
+                <a href="../" class="text-acid hover:text-white text-sm font-mono transition-colors">Home</a>
             </div>
         </footer>
     </div>
