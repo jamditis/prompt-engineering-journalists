@@ -11,18 +11,17 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="antialiased font-mono bg-void text-chrome">
-    <div class="crt-overlay"></div>
-    <div class="fixed inset-0 bg-grid-pattern bg-[size:40px_40px] opacity-[0.07] pointer-events-none z-0"></div>
+    <a href="#main" class="skip-link">Skip to main content</a>
 
     <div class="relative z-10 flex min-h-screen flex-col">
         <!-- Header with nav -->
         <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
             <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
                 <a href="../" class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl clip-notch">P</div>
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
                     <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
                 </a>
-                <nav class="hidden md:flex gap-4 text-xs font-mono">
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
                     <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
                     <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
                     <a href="../module-3/" class="text-acid">[ 03 ]</a>
@@ -35,19 +34,19 @@
         <!-- Module header -->
         <section class="py-12 px-6 border-b border-white/10">
             <div class="max-w-5xl mx-auto">
-                <div class="text-xs text-acid font-mono mb-4">:: MODULE_03</div>
-                <h1 class="font-display text-4xl md:text-5xl font-bold text-white glitch-text" data-text="CUSTOM SKILLS">CUSTOM SKILLS</h1>
-                <p class="text-gray-400 text-lg font-mono mt-4 max-w-2xl">Extend Claude Code with reusable skills that encode domain expertise, workflows, and best practices for journalism.</p>
+                <div class="text-xs text-acid font-mono mb-4">MODULE 03</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">CUSTOM SKILLS</h1>
+                <p class="text-gray-300 text-lg font-mono mt-4 max-w-2xl">Extend Claude Code with reusable skills that encode domain expertise, workflows, and best practices for journalism.</p>
             </div>
         </section>
 
         <!-- Content sections -->
-        <main class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
 
             <!-- Learning objectives -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-ice">LEARNING_OBJECTIVES</h2>
+                    <h2 class="font-display text-xl text-ice">Learning objectives</h2>
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-mono text-gray-300">
@@ -62,17 +61,17 @@
             <!-- Key concepts -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">KEY_CONCEPTS</h2>
+                    <h2 class="font-display text-xl text-chrome">Key concepts</h2>
                 </div>
                 <div class="space-y-4">
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">What are skills?</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Skills are markdown files containing instructions, prompts, and context that Claude Code loads on demand. When you invoke a skill (e.g., <code class="text-acid bg-surface px-1">/source-verification</code>), Claude reads the skill file and applies that knowledge to your conversation. Skills let you encode expertise once and reuse it across projects.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Skills are markdown files containing instructions, prompts, and context that Claude Code loads on demand. When you invoke a skill (e.g., <code class="text-acid bg-surface px-1">/source-verification</code>), Claude reads the skill file and applies that knowledge to your conversation. Skills let you encode expertise once and reuse it across projects.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Skill types</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Claude Code supports three types of skill files:</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Claude Code supports three types of skill files:</p>
                         <ul class="space-y-2 text-sm font-mono text-gray-300">
                             <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">SKILL.md:</strong> Domain expertise and methodology. Use when working on tasks that match the skill's domain.</li>
                             <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">RULE.md:</strong> Project constraints and requirements. Defines what must and must not be done.</li>
@@ -82,7 +81,7 @@
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Where skills live</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Skills can be stored in several locations:</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Skills can be stored in several locations:</p>
                         <ul class="space-y-2 text-sm font-mono text-gray-300">
                             <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Global:</strong> <code class="text-acid bg-surface px-1">~/.claude/commands/</code> - Available in all projects</li>
                             <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Project:</strong> <code class="text-acid bg-surface px-1">.claude/commands/</code> - Available only in that project</li>
@@ -92,7 +91,7 @@
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Skill trust and safety</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Skills are just text files with instructions - they can't run arbitrary code. However, they can influence Claude's behavior, so review skills before installing them. Prefer skills from trusted sources, check what instructions they contain, and be cautious of skills that ask Claude to access external services or sensitive data.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Skills are just text files with instructions - they can't run arbitrary code. However, they can influence Claude's behavior, so review skills before installing them. Prefer skills from trusted sources, check what instructions they contain, and be cautious of skills that ask Claude to access external services or sensitive data.</p>
                     </div>
                 </div>
             </section>
@@ -113,13 +112,13 @@
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">01</span>
                         Create your commands directory
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">If you haven't already, create the global commands directory:</p>
+                    <p class="text-gray-300 text-sm mb-4">If you haven't already, create the global commands directory:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">mkdir -p ~/.claude/commands</code></pre>
                     </div>
@@ -131,13 +130,13 @@
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
                         Create the source-verification skill
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Create a new file at <code class="text-acid bg-surface px-1">~/.claude/commands/source-verification.md</code> with the following content:</p>
+                    <p class="text-gray-300 text-sm mb-4">Create a new file at <code class="text-acid bg-surface px-1">~/.claude/commands/source-verification.md</code> with the following content:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">source-verification.md</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">source-verification.md</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300"># Source verification skill
 
@@ -179,18 +178,18 @@ Always recommend additional steps the journalist should take for complete verifi
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
                         Verify the skill is available
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Start Claude Code and check that the skill appears:</p>
+                    <p class="text-gray-300 text-sm mb-4">Start Claude Code and check that the skill appears:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude
 /help</code></pre>
                     </div>
-                    <p class="text-gray-500 text-xs mt-2">You should see <code class="text-acid bg-surface px-1">source-verification</code> listed among available commands.</p>
+                    <p class="text-gray-400 text-xs mt-2">You should see <code class="text-acid bg-surface px-1">source-verification</code> listed among available commands.</p>
                 </div>
 
                 <!-- Step 4 -->
@@ -199,23 +198,23 @@ Always recommend additional steps the journalist should take for complete verifi
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">04</span>
                         Test the skill with a viral claim
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Let's verify a hypothetical viral claim. In Claude Code, invoke the skill:</p>
+                    <p class="text-gray-300 text-sm mb-4">Let's verify a hypothetical viral claim. In Claude Code, invoke the skill:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">/source-verification</code></pre>
                     </div>
-                    <p class="text-gray-400 text-sm mb-4">Then provide a claim to verify:</p>
+                    <p class="text-gray-300 text-sm mb-4">Then provide a claim to verify:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">prompt</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">A viral tweet claims that a major US city just banned all plastic bags, effective immediately, with $500 fines for violations. The tweet has 50,000 retweets. Please help me verify this claim before I report on it.</code></pre>
                     </div>
@@ -227,7 +226,7 @@ Always recommend additional steps the journalist should take for complete verifi
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">05</span>
                         Review Claude's response
                     </h3>
-                    <p class="text-gray-400 text-sm mb-4">Notice how Claude structures its response according to the skill's format. It should:</p>
+                    <p class="text-gray-300 text-sm mb-4">Notice how Claude structures its response according to the skill's format. It should:</p>
                     <ul class="space-y-2 text-sm font-mono text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-acid">></span> Identify the specific factual claims</li>
                         <li class="flex items-start gap-3"><span class="text-acid">></span> Note the lack of primary source</li>
@@ -242,17 +241,17 @@ Always recommend additional steps the journalist should take for complete verifi
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
                         Try a real verification
                     </h3>
-                    <p class="text-gray-400 text-sm">Now try verifying a real claim you've encountered. Use the skill to structure your fact-checking process.</p>
+                    <p class="text-gray-300 text-sm">Now try verifying a real claim you've encountered. Use the skill to structure your fact-checking process.</p>
                 </div>
             </section>
 
             <!-- Checkpoint questions -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-signal">CHECKPOINT</h2>
+                    <h2 class="font-display text-xl text-signal">Checkpoint</h2>
                 </div>
                 <div class="border border-signal/30 bg-signalDim p-6">
-                    <p class="text-sm font-mono text-gray-300 mb-4"><span class="text-signal font-bold">SELF_CHECK:</span> Make sure you can answer these before moving on.</p>
+                    <p class="text-sm font-mono text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
                     <ul class="space-y-2 text-sm font-mono text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What is the difference between a SKILL.md and a RULE.md file?</li>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> Where should you put a skill that you want available in all projects?</li>
@@ -265,14 +264,14 @@ Always recommend additional steps the journalist should take for complete verifi
             <!-- Readings and resources -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">RESOURCES</h2>
+                    <h2 class="font-display text-xl text-chrome">Resources</h2>
                 </div>
                 <div class="border border-white/10 bg-panel p-6">
                     <ul class="space-y-3 text-sm font-mono">
-                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-400">Claude Code documentation - Official guide to skills and commands</span></li>
-                        <li><a href="https://www.poynter.org/ifcn/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[ORG]</a> <span class="text-gray-400">International Fact-Checking Network - Standards and resources for verification</span></li>
-                        <li><a href="https://firstdraftnews.org/articles/verification-handbook/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-400">First Draft Verification Handbook - Verifying digital content</span></li>
-                        <li><a href="https://www.bellingcat.com/resources/how-tos/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-400">Bellingcat guides - Open-source investigation techniques</span></li>
+                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Claude Code documentation - Official guide to skills and commands</span></li>
+                        <li><a href="https://www.poynter.org/ifcn/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[ORG]</a> <span class="text-gray-300">International Fact-Checking Network - Standards and resources for verification</span></li>
+                        <li><a href="https://firstdraftnews.org/articles/verification-handbook/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-300">First Draft Verification Handbook - Verifying digital content</span></li>
+                        <li><a href="https://www.bellingcat.com/resources/how-tos/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-300">Bellingcat guides - Open-source investigation techniques</span></li>
                     </ul>
                 </div>
             </section>
@@ -280,24 +279,24 @@ Always recommend additional steps the journalist should take for complete verifi
             <!-- Troubleshooting -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">TROUBLESHOOTING</h2>
+                    <h2 class="font-display text-xl text-chrome">Troubleshooting</h2>
                 </div>
                 <div class="border border-white/10 bg-panel divide-y divide-white/5">
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">Skill doesn't appear in /help</h4>
-                        <p class="text-gray-500 text-sm">Make sure the file is in the correct directory (<code class="text-acid bg-surface px-1">~/.claude/commands/</code>) and has the <code class="text-acid bg-surface px-1">.md</code> extension. The filename becomes the command name.</p>
+                        <p class="text-gray-400 text-sm">Make sure the file is in the correct directory (<code class="text-acid bg-surface px-1">~/.claude/commands/</code>) and has the <code class="text-acid bg-surface px-1">.md</code> extension. The filename becomes the command name.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">Skill doesn't seem to affect Claude's responses</h4>
-                        <p class="text-gray-500 text-sm">Remember to invoke the skill with the slash command (e.g., <code class="text-acid bg-surface px-1">/source-verification</code>) before asking your question. The skill context is loaded when you invoke it.</p>
+                        <p class="text-gray-400 text-sm">Remember to invoke the skill with the slash command (e.g., <code class="text-acid bg-surface px-1">/source-verification</code>) before asking your question. The skill context is loaded when you invoke it.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">"Permission denied" when creating files</h4>
-                        <p class="text-gray-500 text-sm">Make sure the <code class="text-acid bg-surface px-1">~/.claude/commands/</code> directory exists and you have write permission. Run <code class="text-acid bg-surface px-1">mkdir -p ~/.claude/commands</code> to create it.</p>
+                        <p class="text-gray-400 text-sm">Make sure the <code class="text-acid bg-surface px-1">~/.claude/commands/</code> directory exists and you have write permission. Run <code class="text-acid bg-surface px-1">mkdir -p ~/.claude/commands</code> to create it.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">Skill is too generic or not helpful</h4>
-                        <p class="text-gray-500 text-sm">Skills work best when they're specific. Edit the skill file to add more detailed instructions, examples, or checklists relevant to your work.</p>
+                        <p class="text-gray-400 text-sm">Skills work best when they're specific. Edit the skill file to add more detailed instructions, examples, or checklists relevant to your work.</p>
                     </div>
                 </div>
             </section>
@@ -307,8 +306,8 @@ Always recommend additional steps the journalist should take for complete verifi
         <!-- Prev/Next navigation -->
         <footer class="border-t border-white/10 bg-panel">
             <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between">
-                <a href="../module-2/" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">< MODULE_02</a>
-                <a href="../module-4/" class="text-acid hover:text-white text-sm font-mono transition-colors">MODULE_04 ></a>
+                <a href="../module-2/" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">Module 02</a>
+                <a href="../module-4/" class="text-acid hover:text-white text-sm font-mono transition-colors">Module 04</a>
             </div>
         </footer>
     </div>

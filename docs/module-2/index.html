@@ -11,18 +11,17 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="antialiased font-mono bg-void text-chrome">
-    <div class="crt-overlay"></div>
-    <div class="fixed inset-0 bg-grid-pattern bg-[size:40px_40px] opacity-[0.07] pointer-events-none z-0"></div>
+    <a href="#main" class="skip-link">Skip to main content</a>
 
     <div class="relative z-10 flex min-h-screen flex-col">
         <!-- Header with nav -->
         <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
             <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
                 <a href="../" class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl clip-notch">P</div>
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
                     <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
                 </a>
-                <nav class="hidden md:flex gap-4 text-xs font-mono">
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
                     <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
                     <a href="../module-2/" class="text-acid">[ 02 ]</a>
                     <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
@@ -35,19 +34,19 @@
         <!-- Module header -->
         <section class="py-12 px-6 border-b border-white/10">
             <div class="max-w-5xl mx-auto">
-                <div class="text-xs text-acid font-mono mb-4">:: MODULE_02</div>
-                <h1 class="font-display text-4xl md:text-5xl font-bold text-white glitch-text" data-text="VOICE-CONTROLLED AI">VOICE-CONTROLLED AI</h1>
-                <p class="text-gray-400 text-lg font-mono mt-4 max-w-2xl">Use speech-to-text to interact with AI tools hands-free, enabling new workflows for interviews, dictation, and accessibility.</p>
+                <div class="text-xs text-acid font-mono mb-4">MODULE 02</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">VOICE-CONTROLLED AI</h1>
+                <p class="text-gray-300 text-lg font-mono mt-4 max-w-2xl">Use speech-to-text to interact with AI tools hands-free, enabling new workflows for interviews, dictation, and accessibility.</p>
             </div>
         </section>
 
         <!-- Content sections -->
-        <main class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
 
             <!-- Learning objectives -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-ice">LEARNING_OBJECTIVES</h2>
+                    <h2 class="font-display text-xl text-ice">Learning objectives</h2>
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-mono text-gray-300">
@@ -62,17 +61,17 @@
             <!-- Key concepts -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">KEY_CONCEPTS</h2>
+                    <h2 class="font-display text-xl text-chrome">Key concepts</h2>
                 </div>
                 <div class="space-y-4">
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Why voice input matters</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Voice input lets you brainstorm without context-switching to your keyboard, dictate notes while reviewing documents, and work hands-free when typing isn't practical. For journalists, this means capturing thoughts during research, outlining stories while commuting, or making AI tools accessible for those with mobility limitations.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Voice input lets you brainstorm without context-switching to your keyboard, dictate notes while reviewing documents, and work hands-free when typing isn't practical. For journalists, this means capturing thoughts during research, outlining stories while commuting, or making AI tools accessible for those with mobility limitations.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Transcription backends</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed mb-4">Several options exist for converting speech to text:</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Several options exist for converting speech to text:</p>
                         <ul class="space-y-2 text-sm font-mono text-gray-300">
                             <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Gemini Flash:</strong> Google's fast, accurate API. Requires a Google Cloud account. Good accuracy, low latency.</li>
                             <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">OpenAI Whisper:</strong> Can run locally or via API. Excellent accuracy, especially for technical terms. Local version is free but slower.</li>
@@ -83,7 +82,7 @@
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">RAW mode vs. Agent mode</h3>
-                        <div class="text-gray-400 text-sm leading-relaxed space-y-3">
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
                             <p><span class="text-ice">RAW mode:</span> Your speech is transcribed and sent directly to Claude without modification. Good for dictating content verbatim or when you want full control over the prompt.</p>
                             <p><span class="text-acid">Agent mode:</span> Claude Code interprets your speech as instructions and may read files, run commands, or take multi-step actions. Good for hands-free coding or document processing.</p>
                         </div>
@@ -91,7 +90,7 @@
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Latency and accuracy trade-offs</h3>
-                        <p class="text-gray-400 text-sm leading-relaxed">Cloud transcription (Gemini, Whisper API) offers better accuracy but adds network latency. Local options (Whisper local, OS built-in) work offline but may be slower or less accurate. For real-time conversation, optimize for latency. For document dictation, optimize for accuracy.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Cloud transcription (Gemini, Whisper API) offers better accuracy but adds network latency. Local options (Whisper local, OS built-in) work offline but may be slower or less accurate. For real-time conversation, optimize for latency. For document dictation, optimize for accuracy.</p>
                     </div>
                 </div>
             </section>
@@ -239,10 +238,10 @@ claude</code></pre>
             <!-- Checkpoint questions -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-signal">CHECKPOINT</h2>
+                    <h2 class="font-display text-xl text-signal">Checkpoint</h2>
                 </div>
                 <div class="border border-signal/30 bg-signalDim p-6">
-                    <p class="text-sm font-mono text-gray-300 mb-4"><span class="text-signal font-bold">SELF_CHECK:</span> Make sure you can answer these before moving on.</p>
+                    <p class="text-sm font-mono text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
                     <ul class="space-y-2 text-sm font-mono text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What are two advantages of cloud-based transcription over local options?</li>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> When would you choose RAW mode over Agent mode?</li>
@@ -255,7 +254,7 @@ claude</code></pre>
             <!-- Readings and resources -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">RESOURCES</h2>
+                    <h2 class="font-display text-xl text-chrome">Resources</h2>
                 </div>
                 <div class="border border-white/10 bg-panel p-6">
                     <ul class="space-y-3 text-sm font-mono">
@@ -271,7 +270,7 @@ claude</code></pre>
             <!-- Troubleshooting -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">TROUBLESHOOTING</h2>
+                    <h2 class="font-display text-xl text-chrome">Troubleshooting</h2>
                 </div>
                 <div class="border border-white/10 bg-panel divide-y divide-white/5">
                     <div class="p-6">

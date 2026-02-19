@@ -13,95 +13,22 @@
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        void: '#050505',
-                        panel: '#0a0a0a',
-                        surface: '#111111',
-                        chrome: '#e8e8e8',
-                        acid: '#c8ff00',
-                        acidDim: 'rgba(200, 255, 0, 0.1)',
-                        ice: '#00f0ff',
-                        iceDim: 'rgba(0, 240, 255, 0.1)',
-                        signal: '#ff3366',
-                        signalDim: 'rgba(255, 51, 102, 0.1)',
-                    },
-                    fontFamily: {
-                        display: ['Chakra Petch', 'sans-serif'],
-                        mono: ['Share Tech Mono', 'monospace'],
-                        sans: ['Chakra Petch', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <script src="../assets/js/config.js"></script>
 
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
-    <style>
-        body {
-            background-color: #050505;
-        }
-
-        /* CRT overlay */
-        .crt-overlay {
-            pointer-events: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.15),
-                rgba(0, 0, 0, 0.15) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            z-index: 1000;
-        }
-
-        /* Grid background */
-        .bg-grid-pattern {
-            background-image:
-                linear-gradient(rgba(200, 255, 0, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(200, 255, 0, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-        }
-
-        /* Notch cuts */
-        .clip-notch {
-            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
-        }
-
-        .clip-notch-top {
-            clip-path: polygon(12px 0, 100% 0, 100% 100%, 0 100%, 0 12px);
-        }
-
-        /* Glow effects */
-        .glow-acid {
-            box-shadow: 0 0 20px rgba(200, 255, 0, 0.2);
-        }
-
-        .glow-ice {
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
 </head>
 <body class="bg-void text-chrome font-sans min-h-screen">
-    <!-- CRT Overlay -->
-    <div class="crt-overlay"></div>
+    <a href="#main" class="skip-link">Skip to main content</a>
 
     <!-- Header -->
     <header class="border-b border-white/10 bg-panel/80 backdrop-blur-sm sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <a href="../index.html" class="font-display text-sm text-gray-400 hover:text-acid transition-colors">
-                    &larr; BACK_TO_COURSE
+                    &larr; Back to course
                 </a>
                 <nav class="hidden md:flex items-center gap-6">
                     <a href="../module-1/" class="text-xs font-mono text-gray-500 hover:text-ice transition-colors">M1</a>
@@ -115,7 +42,7 @@
     </header>
 
     <!-- Main content -->
-    <main class="bg-grid-pattern min-h-screen">
+    <main id="main" class="min-h-screen">
         <div class="max-w-6xl mx-auto px-6 py-12">
 
             <!-- Section header -->
@@ -128,7 +55,7 @@
             </div>
 
             <!-- Usage note -->
-            <div class="border border-ice/30 bg-iceDim p-6 mb-12 clip-notch-top">
+            <div class="border border-ice/30 bg-iceDim p-6 mb-12">
                 <div class="flex items-start gap-4">
                     <i data-lucide="info" class="w-5 h-5 text-ice flex-shrink-0 mt-0.5"></i>
                     <div>
@@ -144,7 +71,7 @@
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
                 <!-- CLAUDE.md template -->
-                <div class="border border-white/10 bg-panel hover:border-acid/50 transition-all group clip-notch">
+                <div class="border border-white/10 bg-panel hover:border-acid/50 transition-all group">
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
                             <div class="text-xs text-acid font-mono">:: TEMPLATE</div>
@@ -167,7 +94,7 @@
                 </div>
 
                 <!-- Skill template -->
-                <div class="border border-white/10 bg-panel hover:border-acid/50 transition-all group clip-notch">
+                <div class="border border-white/10 bg-panel hover:border-acid/50 transition-all group">
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
                             <div class="text-xs text-acid font-mono">:: TEMPLATE</div>
@@ -190,7 +117,7 @@
                 </div>
 
                 <!-- Pipeline script -->
-                <div class="border border-white/10 bg-panel hover:border-acid/50 transition-all group clip-notch">
+                <div class="border border-white/10 bg-panel hover:border-acid/50 transition-all group">
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
                             <div class="text-xs text-acid font-mono">:: TEMPLATE</div>
@@ -213,7 +140,7 @@
                 </div>
 
                 <!-- MCP config -->
-                <div class="border border-white/10 bg-panel hover:border-acid/50 transition-all group clip-notch">
+                <div class="border border-white/10 bg-panel hover:border-acid/50 transition-all group">
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
                             <div class="text-xs text-ice font-mono">:: CONFIG</div>
@@ -236,7 +163,7 @@
                 </div>
 
                 <!-- Project proposal -->
-                <div class="border border-white/10 bg-panel hover:border-signal/50 transition-all group clip-notch">
+                <div class="border border-white/10 bg-panel hover:border-signal/50 transition-all group">
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
                             <div class="text-xs text-signal font-mono">:: ASSIGNMENT</div>
@@ -259,7 +186,7 @@
                 </div>
 
                 <!-- Exercise log -->
-                <div class="border border-white/10 bg-panel hover:border-signal/50 transition-all group clip-notch">
+                <div class="border border-white/10 bg-panel hover:border-signal/50 transition-all group">
                     <div class="p-6">
                         <div class="flex justify-between items-start mb-4">
                             <div class="text-xs text-signal font-mono">:: ASSIGNMENT</div>
