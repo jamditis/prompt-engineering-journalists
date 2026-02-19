@@ -107,6 +107,53 @@ done</code></pre>
                 </div>
             </section>
 
+            <!-- How AI session memory works -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">How AI session memory works</h2>
+                </div>
+                <div class="space-y-4">
+                    <div class="border border-white/10 bg-panel p-6">
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            When you run <code class="text-acid bg-surface px-1">claude -p</code> in a pipeline, the AI session caches the beginning of your prompt and reuses it across calls. The ordering of that prompt determines how well the cache works. The rule: <strong class="text-chrome">stable content first, dynamic content last.</strong>
+                        </p>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Think of it like a briefing file. Your beat background and newsroom standards are stable — they belong at the top. Today's document, the date, the specific task — those are dynamic and belong at the bottom.
+                            Source: <a href="https://twitter.com/trq212/status/2024574133011673516" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">@trq212</a> (Anthropic)
+                        </p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Four practical rules</h3>
+                        <div class="space-y-4 text-sm font-mono text-gray-300">
+                            <div class="border-l-2 border-acid/40 pl-4">
+                                <p class="text-chrome mb-1">Stable context first, current task last</p>
+                                <p>Structure your CLAUDE.md with your beat, newsroom, and standards at the top. Session-specific context goes at the bottom. Same for individual prompts: background first, then the ask.</p>
+                            </div>
+                            <div class="border-l-2 border-acid/40 pl-4">
+                                <p class="text-chrome mb-1">Don't switch models mid-investigation</p>
+                                <p>A session's memory is tied to the specific model you started with. Switching to a different model mid-session — even to save money on a quick question — means the new model starts from scratch. You spend more, not less. Stick with one model; start a separate session for unrelated tasks.</p>
+                            </div>
+                            <div class="border-l-2 border-acid/40 pl-4">
+                                <p class="text-chrome mb-1">Plan your session setup before you start</p>
+                                <p>When you connect the AI to external data sources (files, databases, MCP servers), that connection becomes part of the active session context. Adding or removing connections mid-session resets the AI's understanding of your workspace. Set up once, then leave it alone.</p>
+                            </div>
+                            <div class="border-l-2 border-acid/40 pl-4">
+                                <p class="text-chrome mb-1">Add new context as notes, don't rewrite your briefing</p>
+                                <p>If something changes mid-session — a source calls back, a document arrives — add it as a message in the conversation. Rewriting your CLAUDE.md mid-session resets everything that came before it. Reporters don't rewrite the top of their notes every time they get new information. Add to the bottom.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Why this matters for pipelines</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            When your pipeline scripts spawn AI sessions to process documents, how you structure the initial prompt affects efficiency and cost. A pipeline that starts each session with a stable briefing is more efficient than one that reconstructs context each run. When writing a pipeline prompt, ask: which parts are the same every run, and which parts change? Put the stable parts first.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
             <!-- Exercise -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
