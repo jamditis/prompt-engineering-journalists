@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concepts | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../module-5/" class="text-gray-400 hover:text-ice transition-colors">[ 05 ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">CONCEPTS</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">Plain-English explainers</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Short articles that explain the core ideas behind each module — written for journalists, not developers.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="space-y-4">
+
+                <a href="what-is-a-cli.html" class="block border border-white/10 bg-panel p-6 hover:border-ice/40 transition-colors group">
+                    <div class="text-xs text-ice font-mono mb-2">MODULE 01</div>
+                    <h2 class="font-display text-xl text-white group-hover:text-ice transition-colors mb-2">What is a CLI?</h2>
+                    <p class="text-gray-300 text-sm leading-relaxed">You've been typing prompts into a browser. A CLI is a different window to the same capability — and it unlocks things the browser can't do.</p>
+                </a>
+
+                <a href="how-context-files-work.html" class="block border border-white/10 bg-panel p-6 hover:border-ice/40 transition-colors group">
+                    <div class="text-xs text-ice font-mono mb-2">MODULE 02</div>
+                    <h2 class="font-display text-xl text-white group-hover:text-ice transition-colors mb-2">How context files work</h2>
+                    <p class="text-gray-300 text-sm leading-relaxed">Every time you start a new chat, the AI has no memory of you. A context file changes that — you write your briefing once, and the AI reads it every session.</p>
+                </a>
+
+                <a href="how-ai-session-memory-works.html" class="block border border-white/10 bg-panel p-6 hover:border-ice/40 transition-colors group">
+                    <div class="text-xs text-ice font-mono mb-2">MODULE 04</div>
+                    <h2 class="font-display text-xl text-white group-hover:text-ice transition-colors mb-2">How AI session memory works</h2>
+                    <p class="text-gray-300 text-sm leading-relaxed">AI tools don't remember conversations the way people do. Understanding how their memory actually works helps you structure sessions that stay focused and cost less.</p>
+                </a>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="./" class="text-xs font-mono text-acid">CONCEPTS</a>
+                        <a href="https://github.com/jamditis/prompt-engineering-journalists" class="text-xs font-mono text-gray-300 hover:text-ice transition-colors">GITHUB</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
