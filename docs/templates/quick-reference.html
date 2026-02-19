@@ -63,17 +63,17 @@
 
                 <div class="grid md:grid-cols-3 gap-4">
                     <div class="border border-white/10 bg-panel p-6">
-                        <div class="text-xs font-mono text-acid mb-3">:: CLAUDE_CODE</div>
+                        <div class="text-xs font-mono text-acid mb-3">CLAUDE CODE</div>
                         <code class="text-sm text-ice font-mono block mb-2">npm install -g @anthropic-ai/claude-code</code>
                         <p class="text-xs text-gray-600 font-mono">Verify: <span class="text-gray-400">claude --version</span></p>
                     </div>
                     <div class="border border-white/10 bg-panel p-6">
-                        <div class="text-xs font-mono text-acid mb-3">:: GEMINI_CLI</div>
+                        <div class="text-xs font-mono text-acid mb-3">GEMINI CLI</div>
                         <code class="text-sm text-ice font-mono block mb-2">npm install -g @google/gemini-cli</code>
                         <p class="text-xs text-gray-600 font-mono">Verify: <span class="text-gray-400">gemini --version</span></p>
                     </div>
                     <div class="border border-white/10 bg-panel p-6">
-                        <div class="text-xs font-mono text-acid mb-3">:: CODEX_CLI</div>
+                        <div class="text-xs font-mono text-acid mb-3">CODEX CLI</div>
                         <code class="text-sm text-ice font-mono block mb-2">npm install -g @openai/codex</code>
                         <p class="text-xs text-gray-600 font-mono">Verify: <span class="text-gray-400">codex --version</span></p>
                     </div>
@@ -239,22 +239,22 @@
 
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="border border-white/10 bg-panel p-6">
-                        <div class="text-xs font-mono text-acid mb-3">:: PLAN_FIRST</div>
+                        <div class="text-xs font-mono text-acid mb-3">PLAN FIRST</div>
                         <p class="text-sm text-gray-400 font-mono mb-3">Always use <span class="text-ice">/plan</span> before describing a task. Review the plan before letting the tool execute.</p>
                         <p class="text-xs text-gray-600 font-mono">Catches misunderstandings before code is written.</p>
                     </div>
                     <div class="border border-white/10 bg-panel p-6">
-                        <div class="text-xs font-mono text-acid mb-3">:: TEST_ON_KNOWN</div>
+                        <div class="text-xs font-mono text-acid mb-3">TEST ON KNOWN</div>
                         <p class="text-sm text-gray-400 font-mono mb-3">Test automation on material you've already read and verified. Don't start with fresh documents.</p>
                         <p class="text-xs text-gray-600 font-mono">Lets you spot pipeline problems vs. hard-to-process content.</p>
                     </div>
                     <div class="border border-white/10 bg-panel p-6">
-                        <div class="text-xs font-mono text-acid mb-3">:: DELETION_TEST</div>
+                        <div class="text-xs font-mono text-acid mb-3">DELETION TEST</div>
                         <p class="text-sm text-gray-400 font-mono mb-3">Read each line of your context file: "If I removed this, would AI behave differently?" If not, delete it.</p>
                         <p class="text-xs text-gray-600 font-mono">Remove generic instructions like "be accurate" that don't change behavior.</p>
                     </div>
                     <div class="border border-white/10 bg-panel p-6">
-                        <div class="text-xs font-mono text-acid mb-3">:: DELEGATE_GIT</div>
+                        <div class="text-xs font-mono text-acid mb-3">DELEGATE GIT</div>
                         <p class="text-sm text-gray-400 font-mono mb-3">Ask the CLI tool to handle Git: "Initialize a repo," "commit my changes," "show status." No need to memorize commands.</p>
                         <p class="text-xs text-gray-600 font-mono">Tell the tool what you want, not how to do it.</p>
                     </div>
@@ -269,7 +269,7 @@
                 </div>
 
                 <div class="border border-white/10 bg-panel p-6">
-                    <div class="text-xs font-mono text-acid mb-4">:: PIPE_INPUT</div>
+                    <div class="text-xs font-mono text-acid mb-4">PIPE INPUT</div>
                     <div class="space-y-3 font-mono text-sm">
                         <div class="flex items-start gap-3">
                             <span class="text-gray-600 flex-shrink-0">$</span>
@@ -296,14 +296,14 @@
 
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="border border-white/10 bg-panel p-6">
-                        <div class="text-xs font-mono text-ice mb-3">:: INSTALL_FROM_GITHUB</div>
+                        <div class="text-xs font-mono text-ice mb-3">INSTALL FROM GITHUB</div>
                         <div class="font-mono text-sm text-gray-400 space-y-2">
                             <p>Inside Claude Code:</p>
                             <code class="text-ice block">/install-github-plugin https://github.com/USER/REPO.git</code>
                         </div>
                     </div>
                     <div class="border border-white/10 bg-panel p-6">
-                        <div class="text-xs font-mono text-ice mb-3">:: SKILL_LOCATION</div>
+                        <div class="text-xs font-mono text-ice mb-3">SKILL LOCATION</div>
                         <div class="font-mono text-sm text-gray-400 space-y-2">
                             <p>Skills are stored at:</p>
                             <code class="text-ice block">~/.claude/commands/[skill-name]/SKILL.md</code>

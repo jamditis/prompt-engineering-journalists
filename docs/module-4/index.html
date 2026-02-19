@@ -13,8 +13,6 @@
 <body class="antialiased font-mono bg-void text-chrome">
     <a href="#main" class="skip-link">Skip to main content</a>
 
-
-
     <div class="relative z-10 flex min-h-screen flex-col">
         <!-- Header with nav -->
         <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
@@ -70,8 +68,8 @@
                         <h3 class="font-display text-lg text-acid mb-3">Pipes and redirection</h3>
                         <p class="text-gray-300 text-sm leading-relaxed mb-4">The pipe character (<code class="text-acid bg-surface px-1">|</code>) sends the output of one command as input to another. This lets you build processing chains:</p>
                         <div class="border border-white/10 bg-surface overflow-hidden mb-4">
-                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cat article.txt | wc -w    <span class="text-gray-500"># Count words in article</span>
-ls *.txt | wc -l           <span class="text-gray-500"># Count text files</span></code></pre>
+                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cat article.txt | wc -w    <span class="text-gray-400"># Count words in article</span>
+ls *.txt | wc -l           <span class="text-gray-400"># Count text files</span></code></pre>
                         </div>
                         <p class="text-gray-300 text-sm leading-relaxed">Redirection (<code class="text-acid bg-surface px-1">></code> and <code class="text-acid bg-surface px-1">>></code>) sends output to files instead of the screen. <code class="text-acid bg-surface px-1">></code> overwrites, <code class="text-acid bg-surface px-1">>></code> appends.</p>
                     </div>
@@ -80,13 +78,13 @@ ls *.txt | wc -l           <span class="text-gray-500"># Count text files</span>
                         <h3 class="font-display text-lg text-acid mb-3">Non-interactive mode</h3>
                         <p class="text-gray-300 text-sm leading-relaxed mb-4">Claude Code can run as a single command without entering the interactive REPL. This is essential for scripting:</p>
                         <div class="border border-white/10 bg-surface overflow-hidden">
-                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300"><span class="text-gray-500"># Interactive (starts a session)</span>
+                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300"><span class="text-gray-400"># Interactive (starts a session)</span>
 <span class="text-acid">claude</span>
 
-<span class="text-gray-500"># Non-interactive (runs once and exits)</span>
+<span class="text-gray-400"># Non-interactive (runs once and exits)</span>
 <span class="text-acid">claude -p "Summarize this article" < article.txt</span></code></pre>
                         </div>
-                        <p class="text-gray-500 text-xs mt-2">The <code class="text-acid bg-surface px-1">-p</code> flag specifies the prompt. Input can come from a file or piped from another command.</p>
+                        <p class="text-gray-400 text-xs mt-2">The <code class="text-acid bg-surface px-1">-p</code> flag specifies the prompt. Input can come from a file or piped from another command.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
@@ -103,7 +101,7 @@ ls *.txt | wc -l           <span class="text-gray-500"># Count text files</span>
   claude -p "Summarize" < "$file" > "${file%.txt}-summary.txt"
 done</code></pre>
                         </div>
-                        <p class="text-gray-500 text-xs mt-2">This loop processes every <code class="text-acid bg-surface px-1">.txt</code> file and creates a summary for each.</p>
+                        <p class="text-gray-400 text-xs mt-2">This loop processes every <code class="text-acid bg-surface px-1">.txt</code> file and creates a summary for each.</p>
                     </div>
                 </div>
             </section>
@@ -130,7 +128,7 @@ done</code></pre>
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">mkdir -p ~/newsletter-pipeline
 cd ~/newsletter-pipeline
@@ -163,11 +161,11 @@ EOF</code></pre>
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cat article.txt | claude -p "Summarize this article in 2-3 sentences for a newsletter blurb."</code></pre>
                     </div>
-                    <p class="text-gray-500 text-xs mt-2">You should see a concise summary printed to your terminal.</p>
+                    <p class="text-gray-400 text-xs mt-2">You should see a concise summary printed to your terminal.</p>
                 </div>
 
                 <!-- Step 3 -->
@@ -182,7 +180,7 @@ EOF</code></pre>
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cat article.txt | claude -p "Summarize this article in 2-3 sentences." > summary.txt
 
@@ -202,7 +200,7 @@ cat summary.txt | claude -p "Format this summary as an HTML snippet for an email
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">newsletter-pipeline.sh</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">newsletter-pipeline.sh</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">cat > newsletter-pipeline.sh <<'EOF'
 #!/bin/bash
@@ -266,7 +264,7 @@ chmod +x newsletter-pipeline.sh</code></pre>
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">./newsletter-pipeline.sh article.txt</code></pre>
                     </div>
@@ -276,7 +274,7 @@ chmod +x newsletter-pipeline.sh</code></pre>
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cat output/article-newsletter.html
 cat output/article-summary.txt</code></pre>
@@ -295,7 +293,7 @@ cat output/article-summary.txt</code></pre>
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-500 ml-2 font-mono">terminal</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cat > article2.txt <<'EOF'
 City Council Approves New Bike Lane Network
@@ -354,19 +352,19 @@ done</code></pre>
                 <div class="border border-white/10 bg-panel divide-y divide-white/5">
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">"Permission denied" when running the script</h4>
-                        <p class="text-gray-500 text-sm">You need to make the script executable: <code class="text-acid bg-surface px-1">chmod +x newsletter-pipeline.sh</code></p>
+                        <p class="text-gray-400 text-sm">You need to make the script executable: <code class="text-acid bg-surface px-1">chmod +x newsletter-pipeline.sh</code></p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">"command not found: claude"</h4>
-                        <p class="text-gray-500 text-sm">Claude Code isn't in your PATH. If you used the native installer (<code class="text-acid bg-surface px-1">curl -fsSL https://claude.ai/install.sh | sh</code>), restart your terminal. See <a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">code.claude.com/docs</a> for troubleshooting steps.</p>
+                        <p class="text-gray-400 text-sm">Claude Code isn't in your PATH. If you used the native installer (<code class="text-acid bg-surface px-1">curl -fsSL https://claude.ai/install.sh | sh</code>), restart your terminal. See <a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">code.claude.com/docs</a> for troubleshooting steps.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">Script produces empty output</h4>
-                        <p class="text-gray-500 text-sm">Check that the input file exists and isn't empty. Add <code class="text-acid bg-surface px-1">set -e</code> at the top of your script to stop on errors, making problems easier to diagnose.</p>
+                        <p class="text-gray-400 text-sm">Check that the input file exists and isn't empty. Add <code class="text-acid bg-surface px-1">set -e</code> at the top of your script to stop on errors, making problems easier to diagnose.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">Special characters in filenames cause errors</h4>
-                        <p class="text-gray-500 text-sm">Always quote variable references in scripts: use <code class="text-acid bg-surface px-1">"$file"</code> not <code class="text-acid bg-surface px-1">$file</code>. This handles spaces and special characters correctly.</p>
+                        <p class="text-gray-400 text-sm">Always quote variable references in scripts: use <code class="text-acid bg-surface px-1">"$file"</code> not <code class="text-acid bg-surface px-1">$file</code>. This handles spaces and special characters correctly.</p>
                     </div>
                 </div>
             </section>
@@ -376,8 +374,8 @@ done</code></pre>
         <!-- Prev/Next navigation -->
         <footer class="border-t border-white/10 bg-panel">
             <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between">
-                <a href="../module-3/" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">< MODULE_03</a>
-                <a href="../module-5/" class="text-acid hover:text-white text-sm font-mono transition-colors">MODULE_05 ></a>
+                <a href="../module-3/" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">Module 03</a>
+                <a href="../module-5/" class="text-acid hover:text-white text-sm font-mono transition-colors">Module 05</a>
             </div>
         </footer>
     </div>
