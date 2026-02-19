@@ -13,16 +13,16 @@ The current font stack uses Share Tech Mono as body text across all course pages
 
 | Role | Font | Used for |
 |------|------|----------|
-| `font-hero` | Fraunces (serif, variable) | Hero h1 text only — "ESCAPE THE CHAT WINDOW", "CLI WORKFLOWS" banners |
-| `font-display` | Chakra Petch (unchanged) | Section headers, card titles, UI labels, nav |
+| `font-display` | Fraunces (variable optical serif) | All headings — h1, h2, h3, nav logo, card titles, section labels |
 | `font-sans` | Inter | All prose body text — paragraphs, lists, descriptions, learning objectives |
 | `font-mono` | JetBrains Mono | Code blocks, terminal commands, short UI strings like "MODULE 01" |
+
+No `font-hero` class needed. Chakra Petch removed entirely.
 
 ### Google Fonts
 
 Remove: `Chakra+Petch`, `Share+Tech+Mono`
 Add: `Fraunces` (ital,opsz,wght 300/400/700), `Inter` (wght 400/500/600/700), `JetBrains+Mono` (wght 400/500)
-Keep: `Chakra+Petch` (used for `font-display` — still loaded)
 
 ### Color adjustments
 
@@ -41,13 +41,9 @@ p, li, td, th {
 
 Update hardcoded `Share Tech Mono` references in accordion and copy-btn to use `JetBrains Mono`.
 
-### Hero h1 treatment
-
-Fraunces is designed for mixed case. Since hero text is ALL CAPS, add `tracking-wide` on hero h1 elements to compensate.
-
 ## Files affected
 
-- `docs/assets/js/config.js` — add `hero: ['Fraunces', 'serif']`, remap `sans` to Inter, remap `mono` to JetBrains Mono, update `void` color
+- `docs/assets/js/config.js` — remap `display` to Fraunces, `sans` to Inter, `mono` to JetBrains Mono, update `void` color
 - `docs/assets/css/amditis.css` — base body line-height/size, replace Share Tech Mono references
 - `docs/index.html` — Google Fonts link, body class, `font-mono` → `font-sans` on prose, hero h1 `font-hero`
 - `docs/module-1/index.html` through `docs/module-5/index.html` — same as above for each
