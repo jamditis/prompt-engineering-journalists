@@ -11,7 +11,7 @@
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="antialiased font-mono bg-void text-chrome">
+<body class="antialiased font-sans bg-void text-chrome">
     <a href="#main" class="skip-link">Skip to main content</a>
 
     <div class="relative z-10 flex min-h-screen flex-col">
@@ -37,7 +37,7 @@
             <div class="max-w-5xl mx-auto">
                 <div class="text-xs text-acid font-mono mb-4">MODULE 02</div>
                 <h1 class="font-display text-4xl md:text-5xl font-bold text-white">VOICE-CONTROLLED AI</h1>
-                <p class="text-gray-300 text-lg font-mono mt-4 max-w-2xl">Use speech-to-text to interact with AI tools hands-free, enabling new workflows for interviews, dictation, and accessibility.</p>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Use speech-to-text to interact with AI tools hands-free, enabling new workflows for interviews, dictation, and accessibility.</p>
             </div>
         </section>
 
@@ -50,7 +50,7 @@
                     <h2 class="font-display text-xl text-ice">Learning objectives</h2>
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
-                    <ul class="space-y-2 text-sm font-mono text-gray-300">
+                    <ul class="space-y-2 text-sm font-sans text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Understand available voice transcription options and their trade-offs</li>
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Configure voice input for Claude Code using different backends</li>
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Distinguish between RAW mode and Agent mode for voice workflows</li>
@@ -73,7 +73,7 @@
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Transcription backends</h3>
                         <p class="text-gray-300 text-sm leading-relaxed mb-4">Several options exist for converting speech to text:</p>
-                        <ul class="space-y-2 text-sm font-mono text-gray-300">
+                        <ul class="space-y-2 text-sm font-sans text-gray-300">
                             <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Gemini Flash:</strong> Google's fast, accurate API. Requires a Google Cloud account. Good accuracy, low latency.</li>
                             <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">OpenAI Whisper:</strong> Can run locally or via API. Excellent accuracy, especially for technical terms. Local version is free but slower.</li>
                             <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Windows Speech Recognition:</strong> Built into Windows. No setup required, works offline, but less accurate than cloud options.</li>
@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="border border-acid/30 bg-acidDim p-6 mb-8">
-                    <p class="text-sm font-mono"><span class="text-acid font-bold">GOAL:</span> <span class="text-gray-300">Configure voice input for Claude Code and use it to dictate a story outline for a hypothetical news article.</span></p>
+                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Configure voice input for Claude Code and use it to dictate a story outline for a hypothetical news article.</span></p>
                 </div>
 
                 <!-- Step 1 -->
@@ -242,8 +242,8 @@ claude</code></pre>
                     <h2 class="font-display text-xl text-signal">Checkpoint</h2>
                 </div>
                 <div class="border border-signal/30 bg-signalDim p-6">
-                    <p class="text-sm font-mono text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
-                    <ul class="space-y-2 text-sm font-mono text-gray-300">
+                    <p class="text-sm font-sans text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
+                    <ul class="space-y-2 text-sm font-sans text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What are two advantages of cloud-based transcription over local options?</li>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> When would you choose RAW mode over Agent mode?</li>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> How do you activate dictation on your operating system?</li>
@@ -258,7 +258,7 @@ claude</code></pre>
                     <h2 class="font-display text-xl text-chrome">Resources</h2>
                 </div>
                 <div class="border border-white/10 bg-panel p-6">
-                    <ul class="space-y-3 text-sm font-mono">
+                    <ul class="space-y-3 text-sm font-sans">
                         <li><a href="https://support.apple.com/guide/mac-help/use-dictation-mh40584/mac" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">macOS Dictation guide - Apple's official documentation</span></li>
                         <li><a href="https://support.microsoft.com/en-us/windows/use-voice-typing-to-talk-instead-of-type-on-your-pc-fec94565-c4bd-329d-e59a-af033fa5689f" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Windows Voice Typing guide - Microsoft's official documentation</span></li>
                         <li><a href="https://github.com/openai/whisper" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[TOOL]</a> <span class="text-gray-300">OpenAI Whisper - Open-source speech recognition model</span></li>

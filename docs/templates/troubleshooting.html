@@ -50,7 +50,7 @@
             <div class="mb-12">
                 <div class="text-xs font-mono text-signal mb-2">TROUBLESHOOTING</div>
                 <h1 class="font-display text-4xl md:text-5xl font-bold text-chrome mb-4">Troubleshooting</h1>
-                <p class="text-gray-300 font-mono text-sm max-w-2xl">
+                <p class="text-gray-300 font-sans text-sm max-w-2xl">
                     Solutions to common installation and usage problems.
                 </p>
             </div>
@@ -63,7 +63,7 @@
                             <i data-lucide="alert-triangle" class="w-5 h-5 text-signal"></i>
                             <h2 class="font-display text-xl font-bold text-chrome">"command not found" after install</h2>
                         </div>
-                        <p class="text-sm text-gray-300 font-mono mb-4">The tool installed but your shell can't find it. Your PATH needs to include the npm global bin directory.</p>
+                        <p class="text-sm text-gray-300 font-sans mb-4">The tool installed but your shell can't find it. Your PATH needs to include the npm global bin directory.</p>
                         <div class="bg-surface border border-white/10 p-4 font-mono text-sm space-y-2">
                             <div class="flex items-start gap-3">
                                 <span class="text-gray-400 flex-shrink-0">$</span>
@@ -81,7 +81,7 @@
                                 <span class="text-gray-400 ml-auto text-xs"># check installed packages</span>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-400 font-mono mt-3">If reloading doesn't work, close your terminal entirely and open a new one.</p>
+                        <p class="text-xs text-gray-400 font-sans mt-3">If reloading doesn't work, close your terminal entirely and open a new one.</p>
                     </div>
                 </div>
             </section>
@@ -94,7 +94,7 @@
                             <i data-lucide="alert-triangle" class="w-5 h-5 text-signal"></i>
                             <h2 class="font-display text-xl font-bold text-chrome">Node.js version too old</h2>
                         </div>
-                        <p class="text-sm text-gray-300 font-mono mb-4">These CLI tools require Node.js 20 or newer.</p>
+                        <p class="text-sm text-gray-300 font-sans mb-4">These CLI tools require Node.js 20 or newer.</p>
                         <div class="bg-surface border border-white/10 p-4 font-mono text-sm space-y-2">
                             <div class="flex items-start gap-3">
                                 <span class="text-gray-400 flex-shrink-0">$</span>
@@ -107,7 +107,7 @@
                                 <span class="text-gray-400 ml-auto text-xs"># install latest LTS via nvm</span>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-400 font-mono mt-3">If you don't have nvm, install it from <span class="text-ice">github.com/nvm-sh/nvm</span> or use your OS package manager to update Node.js directly.</p>
+                        <p class="text-xs text-gray-400 font-sans mt-3">If you don't have nvm, install it from <span class="text-ice">github.com/nvm-sh/nvm</span> or use your OS package manager to update Node.js directly.</p>
                     </div>
                 </div>
             </section>
@@ -120,7 +120,7 @@
                             <i data-lucide="alert-triangle" class="w-5 h-5 text-signal"></i>
                             <h2 class="font-display text-xl font-bold text-chrome">npm permission errors (EACCES)</h2>
                         </div>
-                        <p class="text-sm text-gray-300 font-mono mb-4">npm is trying to install to a directory you don't own. Fix by setting a user-level global prefix.</p>
+                        <p class="text-sm text-gray-300 font-sans mb-4">npm is trying to install to a directory you don't own. Fix by setting a user-level global prefix.</p>
                         <div class="bg-surface border border-white/10 p-4 font-mono text-sm space-y-2">
                             <div class="flex items-start gap-3">
                                 <span class="text-gray-400 flex-shrink-0">$</span>
@@ -139,7 +139,7 @@
                                 <code class="text-ice">source ~/.zshrc</code>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-400 font-mono mt-3">On Linux, replace <span class="text-gray-300">~/.zshrc</span> with <span class="text-gray-300">~/.bashrc</span>. Never use <span class="text-signal">sudo npm install</span>.</p>
+                        <p class="text-xs text-gray-400 font-sans mt-3">On Linux, replace <span class="text-gray-300">~/.zshrc</span> with <span class="text-gray-300">~/.bashrc</span>. Never use <span class="text-signal">sudo npm install</span>.</p>
                     </div>
                 </div>
             </section>
@@ -152,7 +152,7 @@
                             <i data-lucide="key" class="w-5 h-5 text-signal"></i>
                             <h2 class="font-display text-xl font-bold text-chrome">API key not working</h2>
                         </div>
-                        <p class="text-sm text-gray-300 font-mono mb-4">Authentication failed or the key isn't being read.</p>
+                        <p class="text-sm text-gray-300 font-sans mb-4">Authentication failed or the key isn't being read.</p>
                         <div class="bg-surface border border-white/10 p-4 font-mono text-sm space-y-2">
                             <div class="flex items-start gap-3">
                                 <span class="text-gray-400 flex-shrink-0">$</span>
@@ -168,8 +168,8 @@
                         <div class="border border-ice/30 bg-iceDim p-4 mt-4">
                             <div class="flex items-start gap-3">
                                 <i data-lucide="info" class="w-4 h-4 text-ice flex-shrink-0 mt-0.5"></i>
-                                <p class="text-xs text-gray-300 font-mono">
-                                    Claude Code can also authenticate via <span class="text-ice">claude login</span> (browser-based OAuth). If that's stuck, try <span class="text-ice">claude logout</span> first.
+                                <p class="text-xs text-gray-300 font-sans">
+                                    Claude Code can also authenticate via <span class="text-ice font-mono">claude login</span> (browser-based OAuth). If that's stuck, try <span class="text-ice font-mono">claude logout</span> first.
                                 </p>
                             </div>
                         </div>
@@ -185,19 +185,19 @@
                             <i data-lucide="file-x" class="w-5 h-5 text-signal"></i>
                             <h2 class="font-display text-xl font-bold text-chrome">CLAUDE.md not being read</h2>
                         </div>
-                        <p class="text-sm text-gray-300 font-mono mb-4">Your context file exists but Claude Code doesn't seem to follow its instructions.</p>
-                        <div class="space-y-3 text-sm text-gray-300 font-mono">
+                        <p class="text-sm text-gray-300 font-sans mb-4">Your context file exists but Claude Code doesn't seem to follow its instructions.</p>
+                        <div class="space-y-3 text-sm text-gray-300 font-sans">
                             <div class="flex items-start gap-3">
                                 <i data-lucide="check" class="w-4 h-4 text-acid flex-shrink-0 mt-0.5"></i>
-                                <p>File must be named exactly <span class="text-ice">CLAUDE.md</span> (case-sensitive on macOS and Linux).</p>
+                                <p>File must be named exactly <span class="text-ice font-mono">CLAUDE.md</span> (case-sensitive on macOS and Linux).</p>
                             </div>
                             <div class="flex items-start gap-3">
                                 <i data-lucide="check" class="w-4 h-4 text-acid flex-shrink-0 mt-0.5"></i>
-                                <p>Must be in the directory where you run <span class="text-ice">claude</span>, or in a parent directory.</p>
+                                <p>Must be in the directory where you run <span class="text-ice font-mono">claude</span>, or in a parent directory.</p>
                             </div>
                             <div class="flex items-start gap-3">
                                 <i data-lucide="check" class="w-4 h-4 text-acid flex-shrink-0 mt-0.5"></i>
-                                <p>Run <span class="text-ice">/config</span> inside Claude Code to see which files loaded.</p>
+                                <p>Run <span class="text-ice font-mono">/config</span> inside Claude Code to see which files loaded.</p>
                             </div>
                             <div class="flex items-start gap-3">
                                 <i data-lucide="check" class="w-4 h-4 text-acid flex-shrink-0 mt-0.5"></i>
@@ -216,7 +216,7 @@
                             <i data-lucide="clock" class="w-5 h-5 text-signal"></i>
                             <h2 class="font-display text-xl font-bold text-chrome">Slow responses or token limit exceeded</h2>
                         </div>
-                        <p class="text-sm text-gray-300 font-mono mb-4">Long conversations build up context that slows responses and can hit limits.</p>
+                        <p class="text-sm text-gray-300 font-sans mb-4">Long conversations build up context that slows responses and can hit limits.</p>
                         <div class="bg-surface border border-white/10 p-4 font-mono text-sm space-y-2">
                             <div class="flex items-start gap-3">
                                 <span class="text-gray-400 flex-shrink-0">$</span>
@@ -234,7 +234,7 @@
                                 <span class="text-gray-400 ml-auto text-xs"># check token usage</span>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-400 font-mono mt-3">For large tasks, break work into smaller requests and start new sessions between them.</p>
+                        <p class="text-xs text-gray-400 font-sans mt-3">For large tasks, break work into smaller requests and start new sessions between them.</p>
                     </div>
                 </div>
             </section>
@@ -268,7 +268,7 @@
                             </div>
                             <div>
                                 <h3 class="text-sm font-display font-bold text-gray-300 mb-2">WSL vs PowerShell</h3>
-                                <p class="text-sm text-gray-300 font-mono">These are separate environments with separate installs. Tools installed in WSL won't appear in PowerShell and vice versa. Pick one and stay consistent.</p>
+                                <p class="text-sm text-gray-300 font-sans">These are separate environments with separate installs. Tools installed in WSL won't appear in PowerShell and vice versa. Pick one and stay consistent.</p>
                             </div>
                         </div>
                     </div>
@@ -283,14 +283,14 @@
                             <i data-lucide="gauge" class="w-5 h-5 text-signal"></i>
                             <h2 class="font-display text-xl font-bold text-chrome">Gemini CLI rate limiting</h2>
                         </div>
-                        <p class="text-sm text-gray-300 font-mono mb-4">The free tier allows 1,000 requests per day. If you hit limits, use a smaller model:</p>
+                        <p class="text-sm text-gray-300 font-sans mb-4">The free tier allows 1,000 requests per day. If you hit limits, use a smaller model:</p>
                         <div class="bg-surface border border-white/10 p-4 font-mono text-sm">
                             <div class="flex items-start gap-3">
                                 <span class="text-gray-400 flex-shrink-0">$</span>
                                 <code class="text-ice">gemini -m gemini-2.0-flash-lite "your prompt"</code>
                             </div>
                         </div>
-                        <p class="text-xs text-gray-400 font-mono mt-3">Flash Lite uses fewer resources per request. For pipelines, add 2-second pauses between API calls.</p>
+                        <p class="text-xs text-gray-400 font-sans mt-3">Flash Lite uses fewer resources per request. For pipelines, add 2-second pauses between API calls.</p>
                     </div>
                 </div>
             </section>
@@ -302,10 +302,10 @@
                         <i data-lucide="life-buoy" class="w-5 h-5 text-ice flex-shrink-0 mt-0.5"></i>
                         <div>
                             <div class="text-xs font-mono text-ice mb-2">Still stuck?</div>
-                            <p class="text-sm text-gray-300 font-mono mb-2">
-                                Run <span class="text-ice">/doctor</span> inside Claude Code for an automated health check. For Gemini, try <span class="text-ice">gemini --version</span> to confirm it's installed.
+                            <p class="text-sm text-gray-300 font-sans mb-2">
+                                Run <span class="text-ice font-mono">/doctor</span> inside Claude Code for an automated health check. For Gemini, try <span class="text-ice font-mono">gemini --version</span> to confirm it's installed.
                             </p>
-                            <p class="text-sm text-gray-300 font-mono">
+                            <p class="text-sm text-gray-300 font-sans">
                                 Post in the course discussion forums with your OS, the command you ran, and the full error message. Screenshots help.
                             </p>
                         </div>
@@ -330,7 +330,7 @@
                 </div>
             </div>
             <div class="mt-6 pt-6 border-t border-white/5 text-center">
-                <p class="text-xs font-mono text-gray-300">
+                <p class="text-xs font-sans text-gray-300">
                     &copy; 2026 Knight Center for Journalism in the Americas
                 </p>
             </div>

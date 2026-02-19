@@ -11,7 +11,7 @@
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="antialiased font-mono bg-void text-chrome">
+<body class="antialiased font-sans bg-void text-chrome">
     <a href="#main" class="skip-link">Skip to main content</a>
 
     <div class="relative z-10 flex min-h-screen flex-col">
@@ -37,7 +37,7 @@
             <div class="max-w-5xl mx-auto">
                 <div class="text-xs text-acid font-mono mb-4">MODULE 05</div>
                 <h1 class="font-display text-4xl md:text-5xl font-bold text-white">AGENTS AND RAG</h1>
-                <p class="text-gray-300 text-lg font-mono mt-4 max-w-2xl">Understand AI agents, retrieval-augmented generation, and how to connect Claude to external data sources.</p>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Understand AI agents, retrieval-augmented generation, and how to connect Claude to external data sources.</p>
             </div>
         </section>
 
@@ -50,7 +50,7 @@
                     <h2 class="font-display text-xl text-ice">Learning objectives</h2>
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
-                    <ul class="space-y-2 text-sm font-mono text-gray-300">
+                    <ul class="space-y-2 text-sm font-sans text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Distinguish between chatbots and AI agents</li>
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Understand retrieval-augmented generation (RAG) and why it matters</li>
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Learn the basics of Model Context Protocol (MCP)</li>
@@ -81,7 +81,7 @@
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">How RAG works</h3>
                         <p class="text-gray-300 text-sm leading-relaxed mb-4">A typical RAG pipeline:</p>
-                        <ol class="space-y-2 text-sm font-mono text-gray-300">
+                        <ol class="space-y-2 text-sm font-sans text-gray-300">
                             <li class="flex items-start gap-3"><span class="text-acid">1.</span> <strong class="text-chrome">Query:</strong> User asks a question</li>
                             <li class="flex items-start gap-3"><span class="text-acid">2.</span> <strong class="text-chrome">Retrieve:</strong> System searches a document collection for relevant passages</li>
                             <li class="flex items-start gap-3"><span class="text-acid">3.</span> <strong class="text-chrome">Augment:</strong> Retrieved passages are added to the prompt as context</li>
@@ -97,7 +97,7 @@
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">MCP server types</h3>
                         <p class="text-gray-300 text-sm leading-relaxed mb-4">Common MCP servers include:</p>
-                        <ul class="space-y-2 text-sm font-mono text-gray-300">
+                        <ul class="space-y-2 text-sm font-sans text-gray-300">
                             <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Filesystem:</strong> Read and write files in specified directories</li>
                             <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Database:</strong> Query databases (SQLite, PostgreSQL, etc.)</li>
                             <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Web:</strong> Fetch and parse web pages</li>
@@ -115,7 +115,7 @@
                 </div>
 
                 <div class="border border-acid/30 bg-acidDim p-6 mb-8">
-                    <p class="text-sm font-mono"><span class="text-acid font-bold">GOAL:</span> <span class="text-gray-300">Set up an MCP server that gives Claude controlled access to a document folder, enabling RAG-style workflows.</span></p>
+                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Set up an MCP server that gives Claude controlled access to a document folder, enabling RAG-style workflows.</span></p>
                 </div>
 
                 <!-- Step 1 -->
@@ -125,7 +125,7 @@
                         Understand the default file access
                     </h3>
                     <p class="text-gray-300 text-sm mb-4">Claude Code can already read and write files in your current working directory. MCP extends this by:</p>
-                    <ul class="space-y-2 text-sm font-mono text-gray-300 ml-11">
+                    <ul class="space-y-2 text-sm font-sans text-gray-300 ml-11">
                         <li class="flex items-start gap-3"><span class="text-acid">></span> Giving access to specific directories you configure</li>
                         <li class="flex items-start gap-3"><span class="text-acid">></span> Enabling more structured queries (search within files, list by criteria)</li>
                         <li class="flex items-start gap-3"><span class="text-acid">></span> Supporting additional data sources beyond the filesystem</li>
@@ -252,7 +252,7 @@ EOF</code></pre>
 EOF</code></pre>
                     </div>
                     <div class="border border-signal/30 bg-signalDim p-4">
-                        <p class="text-sm font-mono text-gray-300"><span class="text-signal font-bold">IMPORTANT:</span> Replace <code class="text-acid bg-surface px-1">YOUR_USERNAME</code> with your actual username. You can find it by running <code class="text-acid bg-surface px-1">whoami</code> in terminal.</p>
+                        <p class="text-sm font-sans text-gray-300"><span class="text-signal font-bold font-mono">IMPORTANT:</span> Replace <code class="text-acid bg-surface px-1">YOUR_USERNAME</code> with your actual username. You can find it by running <code class="text-acid bg-surface px-1">whoami</code> in terminal.</p>
                     </div>
                 </div>
 
@@ -364,8 +364,8 @@ EOF</code></pre>
                     <h2 class="font-display text-xl text-signal">Checkpoint</h2>
                 </div>
                 <div class="border border-signal/30 bg-signalDim p-6">
-                    <p class="text-sm font-mono text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
-                    <ul class="space-y-2 text-sm font-mono text-gray-300">
+                    <p class="text-sm font-sans text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
+                    <ul class="space-y-2 text-sm font-sans text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What is the main difference between a chatbot and an AI agent?</li>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What problem does RAG solve that pure language models can't?</li>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What does MCP stand for and what does it enable?</li>
@@ -380,7 +380,7 @@ EOF</code></pre>
                     <h2 class="font-display text-xl text-chrome">Resources</h2>
                 </div>
                 <div class="border border-white/10 bg-panel p-6">
-                    <ul class="space-y-3 text-sm font-mono">
+                    <ul class="space-y-3 text-sm font-sans">
                         <li><a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Model Context Protocol - Official MCP documentation and specification</span></li>
                         <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-300">Claude Code documentation - MCP configuration reference</span></li>
                         <li><a href="https://github.com/modelcontextprotocol/servers" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REPO]</a> <span class="text-gray-300">MCP Servers repository - Collection of official and community MCP servers</span></li>

@@ -11,7 +11,7 @@
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="antialiased font-mono bg-void text-chrome">
+<body class="antialiased font-sans bg-void text-chrome">
     <a href="#main" class="skip-link">Skip to main content</a>
 
     <div class="relative z-10 flex min-h-screen flex-col">
@@ -37,7 +37,7 @@
             <div class="max-w-5xl mx-auto">
                 <div class="text-xs text-acid font-mono mb-4">MODULE 03</div>
                 <h1 class="font-display text-4xl md:text-5xl font-bold text-white">CUSTOM SKILLS</h1>
-                <p class="text-gray-300 text-lg font-mono mt-4 max-w-2xl">Extend Claude Code with reusable skills that encode domain expertise, workflows, and best practices for journalism.</p>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Extend Claude Code with reusable skills that encode domain expertise, workflows, and best practices for journalism.</p>
             </div>
         </section>
 
@@ -50,7 +50,7 @@
                     <h2 class="font-display text-xl text-ice">Learning objectives</h2>
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
-                    <ul class="space-y-2 text-sm font-mono text-gray-300">
+                    <ul class="space-y-2 text-sm font-sans text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Understand what Claude Code skills are and how they work</li>
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Install skills from public repositories and personal collections</li>
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Use skills to apply specialized knowledge to journalism tasks</li>
@@ -73,7 +73,7 @@
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Skill types</h3>
                         <p class="text-gray-300 text-sm leading-relaxed mb-4">Claude Code supports three types of skill files:</p>
-                        <ul class="space-y-2 text-sm font-mono text-gray-300">
+                        <ul class="space-y-2 text-sm font-sans text-gray-300">
                             <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">SKILL.md:</strong> Domain expertise and methodology. Use when working on tasks that match the skill's domain.</li>
                             <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">RULE.md:</strong> Project constraints and requirements. Defines what must and must not be done.</li>
                             <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">LESSON.md:</strong> Learned patterns from past projects. Captures what worked, what failed, and why.</li>
@@ -83,7 +83,7 @@
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Where skills live</h3>
                         <p class="text-gray-300 text-sm leading-relaxed mb-4">Skills can be stored in several locations:</p>
-                        <ul class="space-y-2 text-sm font-mono text-gray-300">
+                        <ul class="space-y-2 text-sm font-sans text-gray-300">
                             <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Global:</strong> <code class="text-acid bg-surface px-1">~/.claude/commands/</code> - Available in all projects</li>
                             <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Project:</strong> <code class="text-acid bg-surface px-1">.claude/commands/</code> - Available only in that project</li>
                             <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Remote:</strong> GitHub repositories that you clone or reference</li>
@@ -104,7 +104,7 @@
                 </div>
 
                 <div class="border border-acid/30 bg-acidDim p-6 mb-8">
-                    <p class="text-sm font-mono"><span class="text-acid font-bold">GOAL:</span> <span class="text-gray-300">Install a journalism-focused skill and use it to verify a claim from a viral social media post.</span></p>
+                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Install a journalism-focused skill and use it to verify a claim from a viral social media post.</span></p>
                 </div>
 
                 <!-- Step 1 -->
@@ -228,7 +228,7 @@ Always recommend additional steps the journalist should take for complete verifi
                         Review Claude's response
                     </h3>
                     <p class="text-gray-300 text-sm mb-4">Notice how Claude structures its response according to the skill's format. It should:</p>
-                    <ul class="space-y-2 text-sm font-mono text-gray-300">
+                    <ul class="space-y-2 text-sm font-sans text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-acid">></span> Identify the specific factual claims</li>
                         <li class="flex items-start gap-3"><span class="text-acid">></span> Note the lack of primary source</li>
                         <li class="flex items-start gap-3"><span class="text-acid">></span> Suggest verification steps (check city council records, contact city communications office)</li>
@@ -252,8 +252,8 @@ Always recommend additional steps the journalist should take for complete verifi
                     <h2 class="font-display text-xl text-signal">Checkpoint</h2>
                 </div>
                 <div class="border border-signal/30 bg-signalDim p-6">
-                    <p class="text-sm font-mono text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
-                    <ul class="space-y-2 text-sm font-mono text-gray-300">
+                    <p class="text-sm font-sans text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
+                    <ul class="space-y-2 text-sm font-sans text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What is the difference between a SKILL.md and a RULE.md file?</li>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> Where should you put a skill that you want available in all projects?</li>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> Why should you review third-party skills before installing them?</li>
@@ -268,7 +268,7 @@ Always recommend additional steps the journalist should take for complete verifi
                     <h2 class="font-display text-xl text-chrome">Resources</h2>
                 </div>
                 <div class="border border-white/10 bg-panel p-6">
-                    <ul class="space-y-3 text-sm font-mono">
+                    <ul class="space-y-3 text-sm font-sans">
                         <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Claude Code documentation - Official guide to skills and commands</span></li>
                         <li><a href="https://www.poynter.org/ifcn/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[ORG]</a> <span class="text-gray-300">International Fact-Checking Network - Standards and resources for verification</span></li>
                         <li><a href="https://firstdraftnews.org/articles/verification-handbook/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-300">First Draft Verification Handbook - Verifying digital content</span></li>
