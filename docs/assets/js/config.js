@@ -2,12 +2,12 @@ tailwind.config = {
     theme: {
         extend: {
             fontFamily: {
-                display: ['Chakra Petch', 'sans-serif'],
-                mono: ['Share Tech Mono', 'monospace'],
-                sans: ['Chakra Petch', 'sans-serif'],
+                display: ['Fraunces', 'serif'],
+                sans: ['Inter', 'sans-serif'],
+                mono: ['JetBrains Mono', 'monospace'],
             },
             colors: {
-                void: '#111827',
+                void: '#0f172a',
                 panel: '#1e293b',
                 surface: '#334155',
                 chrome: '#f1f5f9',
