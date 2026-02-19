@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How context files work | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../module-5/" class="text-gray-400 hover:text-ice transition-colors">[ 05 ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">CONCEPTS — MODULE 02</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">How context files work</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">AI tools start every session with no memory of you. A context file is how you fix that — once.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">The blank slate problem</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Every time you open a new chat with an AI tool, it has no memory of previous conversations. It doesn't know your beat, your publication, your style guide, your sources, or what you worked on last week. You start from zero every session.</p>
+                    <p class="text-gray-300 leading-relaxed">For a one-off question, that's fine. For ongoing investigative work, it means spending the first few minutes of every session re-explaining the same background — time you could spend on the actual work.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What a context file does</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">A context file — called <code class="text-acid bg-surface px-1 text-sm">CLAUDE.md</code> for Claude Code — is a plain text file you create in your project folder. When you start a session, Claude reads it automatically before you type anything.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">You write the briefing once. The AI gets it every time, without you pasting it in manually.</p>
+                    <p class="text-gray-300 leading-relaxed">Think of it like a source file for a beat reporter — a running document with background on your key sources, ongoing story threads, and institutional context. You consult it before every interview. The context file does the same job, except Claude reads it instead of you.</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-6">
+                    <h3 class="font-display text-lg text-acid mb-3">What goes in a context file</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">A context file should contain what makes your project different from every other project — not what's true of all journalism. Common contents for journalism work:</p>
+                    <ul class="space-y-2 text-sm font-sans text-gray-300">
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> Your beat and publication</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> Key people, organizations, and their relationships to your stories</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> Style preferences (AP style, your publication's house style)</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> Recurring tasks you want handled consistently</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> Folder structure for your project files</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Project context vs. global context</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">You can have multiple context files. A global one covers preferences that apply to all your work — your writing style, common instructions. A project-level one lives inside a specific story folder and covers just that investigation.</p>
+                    <p class="text-gray-300 leading-relaxed">When you're inside a project folder, Claude reads both: global context first, then project context. General rules live in one place, project-specific details in another. You don't repeat yourself.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What this changes about how you work</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">With a context file, your first message in a session can be the actual task — not the background. "Analyze the new budget documents against last year's" instead of "I'm a reporter covering city hall, our publication is X, here's some background..."</p>
+                    <p class="text-gray-300 leading-relaxed">The setup cost shifts from every session to once per project. As your context file improves over time — corrected when the AI gets something wrong, updated when your beat changes — so does the AI's usefulness.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">NEXT:</span> Head to <a href="../module-2/" class="text-ice hover:text-acid transition-colors">Module 2</a> to write your first context file for a real journalism project.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="./" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">CONCEPTS</a>
+                        <a href="../module-2/" class="text-xs font-mono text-acid">MODULE 02</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
