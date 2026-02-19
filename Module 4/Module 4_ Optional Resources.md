@@ -59,6 +59,36 @@ On macOS, `launchd` is the native scheduler. This tutorial covers the basics.
 
 ---
 
+## How AI session memory works
+
+*Source: ["Lessons from Building Claude Code: Prompt Caching Is Everything"](https://twitter.com/trq212/status/2024574133011673516) by @trq212 — a thread from someone at Anthropic on how Claude Code manages prompt caching internally. The four rules below are the practical takeaways translated for journalism workflows.*
+
+Understanding how AI sessions manage memory helps you build better workflows and avoid unexpected costs.
+
+The short version: **put stable context first, put the current task last.** This isn't just organizational preference — it's how the tool's memory works. Whatever you write at the top of your CLAUDE.md or session instructions is what the AI holds onto most efficiently across tasks. The specific assignment you're working on right now goes at the bottom.
+
+Think of it like a briefing file. Your beat background, your newsroom's attribution standards, the names of recurring sources — that's stable. Today's document, the current question, the date — that's dynamic. A briefing works better when you lead with the stable background and end with the specific ask. AI sessions work the same way.
+
+### Four practical rules
+
+**Stable context first, current task last.** Structure your CLAUDE.md with the most durable content at the top — who you are, your newsroom, your beat, your standards — and the most session-specific context at the bottom. The same applies to individual prompts: lead with background context before the specific ask. If the first thing in your project context is a date or a story-specific detail, you're working against how the session handles memory.
+
+**Don't switch models mid-investigation.** A session's memory is tied to the specific AI model you're using. If you've spent two hours working through a complex project with one model and then switch to a different model — even to ask something quick and save money — the new model starts from scratch. It has no memory of your briefing. You end up spending more, not less. For complex, context-heavy work, stick with one model per session. Start a separate session for unrelated quick tasks.
+
+**Plan your session setup before you start.** When you connect the AI to external data sources — files, databases, MCP servers — that connection becomes part of the session's active context. Adding or removing connections mid-session resets the AI's understanding of your workspace. Know which files and data sources you'll need, connect them at the beginning, and leave the configuration alone while you work.
+
+**Add new context as notes, don't rewrite your briefing.** If something changes mid-session — a source calls back, a new document arrives — add it as a message in the conversation rather than rewriting your CLAUDE.md. Rewriting your context file mid-session resets everything that came before. The session loses its accumulated context and has to reload.
+
+The pattern is the same one reporters use in their notes: you don't rewrite the top of your story file every time you get new information. You add to the bottom.
+
+### Why this matters for the pipelines you're building
+
+When scripts spawn AI sessions to process documents, how you structure the initial context directly affects efficiency and cost. A pipeline that starts each session with a well-structured, stable briefing is more reliable than one that reconstructs context from scratch every time.
+
+When writing a pipeline prompt, ask yourself: which parts of this will be the same every time I run it, and which parts change? Put the stable parts first.
+
+---
+
 ## AI CLI tools
 
 ### Claude Code documentation
