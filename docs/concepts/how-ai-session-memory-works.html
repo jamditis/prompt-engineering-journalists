@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How AI session memory works | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../module-4/" class="text-acid">[ 04 ]</a>
+                    <a href="../module-5/" class="text-gray-400 hover:text-ice transition-colors">[ 05 ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">CONCEPTS — MODULE 04</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">How AI session memory works</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">AI tools don't remember conversations the way people do. Understanding how their memory actually works changes how you set up sessions.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Not memory — context</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">When people talk about AI "remembering" things, they're using the wrong word. AI language models don't have memory the way you do. They don't store information between sessions. They don't have a filing cabinet somewhere with notes about past conversations.</p>
+                    <p class="text-gray-300 leading-relaxed">What they have is a context window: a block of text that they can see at any given moment. Everything the AI "knows" during a session is in that block — your messages, its responses, and any files you've shared. When the session ends, that block is gone.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What fits in a context window</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Context windows are measured in tokens — roughly, chunks of text. A typical long-form article is about 2,000–3,000 tokens. Current Claude models have context windows large enough to hold hundreds of pages of text.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">The practical limit isn't the window size — it's your attention to what you're putting in it. A context window loaded with irrelevant background, repeated instructions, and conversational filler gives the AI more noise to work through when finding what's relevant to your question.</p>
+                    <p class="text-gray-300 leading-relaxed">The quality of the AI's output depends heavily on the quality of what's in the context window.</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-6">
+                    <h3 class="font-display text-lg text-acid mb-3">A filing analogy</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-3">Imagine you're briefing a researcher on a complex investigation. You could hand them a folder with your most relevant documents on top — or you could hand them an unsorted box of everything you've ever written, including grocery lists.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">They're equally capable either way. But one setup produces better research faster. The context window is the folder. You decide what goes in it.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">How the cache works — and why order matters</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">When you send a message to Claude, it processes everything in the context window. For long sessions, this processing has a cost — both in time and, for API users, in money. To reduce that cost, Claude caches parts of the context that haven't changed.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">The cache works by prefix: it stores the beginning of the context window and reuses it for subsequent messages. If the beginning of your context doesn't change between messages, Claude doesn't have to reprocess it — it reads from cache.</p>
+                    <p class="text-gray-300 leading-relaxed">This means order matters. Put stable content — your context file, system instructions, background documents — at the top. Put dynamic content — today's task, this specific question — at the bottom. A timestamp or session-specific note at the top busts the cache on every message, which slows things down.</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-6">
+                    <h3 class="font-display text-lg text-acid mb-3">Four rules for efficient sessions</h3>
+                    <ul class="space-y-3 text-sm font-sans text-gray-300">
+                        <li class="flex items-start gap-3"><span class="text-acid font-mono">1.</span> <span><strong class="text-chrome">Stable context first, current task last.</strong> Your briefing document goes at the top. The specific question you're asking right now goes at the bottom.</span></li>
+                        <li class="flex items-start gap-3"><span class="text-acid font-mono">2.</span> <span><strong class="text-chrome">Don't switch models mid-session.</strong> Each model has its own cache. Switching from Claude Sonnet to Claude Opus mid-session discards the cached context and starts fresh.</span></li>
+                        <li class="flex items-start gap-3"><span class="text-acid font-mono">3.</span> <span><strong class="text-chrome">Add new context by appending, not rewriting.</strong> Adding a note at the end of your context file preserves the cached prefix. Rewriting the existing briefing forces Claude to reprocess everything from the edit point down.</span></li>
+                        <li class="flex items-start gap-3"><span class="text-acid font-mono">4.</span> <span><strong class="text-chrome">Plan your session setup before starting.</strong> Five minutes spent thinking about what context you need saves a scattered session where you keep adding background mid-conversation.</span></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What this means for journalism workflows</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">If you're building an automated pipeline — a script that processes new documents daily, or a scheduled task that checks sources — session setup matters a lot. A pipeline that starts each run with a stable briefing document is faster and cheaper than one that reconstructs context each time.</p>
+                    <p class="text-gray-300 leading-relaxed">For one-off research sessions, the practical rule is simpler: start with context, end with task. Your CLAUDE.md file handles the first part automatically.</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-4">
+                    <p class="text-xs font-sans text-gray-400"><span class="text-ice font-mono">SOURCE:</span> The cache behavior described here was documented by <a href="https://twitter.com/trq212/status/2024574133011673516" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">@trq212 on Twitter/X</a>, based on analysis of Claude Code's internals.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">NEXT:</span> Head to <a href="../module-4/" class="text-ice hover:text-acid transition-colors">Module 4</a> to build your first CLI workflow pipeline.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="./" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">CONCEPTS</a>
+                        <a href="../module-4/" class="text-xs font-mono text-acid">MODULE 04</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
