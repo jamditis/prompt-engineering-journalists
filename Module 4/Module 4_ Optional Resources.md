@@ -65,7 +65,7 @@ On macOS, `launchd` is the native scheduler. This tutorial covers the basics.
 
 Understanding how AI sessions manage memory helps you build better workflows and avoid unexpected costs.
 
-The short version: **put stable context first, put the current task last.** This isn't just organizational preference — it's how the tool's memory works. Whatever you write at the top of your CLAUDE.md or session instructions is what the AI holds onto most efficiently across tasks. The specific assignment you're working on right now goes at the bottom.
+The short version: **put stable context first, put the current task last.** That order matches how the tool's memory works. Whatever you write at the top of your CLAUDE.md or session instructions is what the AI caches most reliably. The specific assignment you're working on right now goes at the bottom.
 
 Think of it like a briefing file. Your beat background, your newsroom's attribution standards, the names of recurring sources — that's stable. Today's document, the current question, the date — that's dynamic. A briefing works better when you lead with the stable background and end with the specific ask. AI sessions work the same way.
 
@@ -83,7 +83,7 @@ The pattern is the same one reporters use in their notes: you don't rewrite the 
 
 ### Why this matters for the pipelines you're building
 
-When scripts spawn AI sessions to process documents, how you structure the initial context directly affects efficiency and cost. A pipeline that starts each session with a well-structured, stable briefing is more reliable than one that reconstructs context from scratch every time.
+When scripts spawn AI sessions to process documents, how you structure the initial context affects efficiency and cost. A pipeline that starts each session with a stable briefing is more efficient than one that reconstructs context each run.
 
 When writing a pipeline prompt, ask yourself: which parts of this will be the same every time I run it, and which parts change? Put the stable parts first.
 
