@@ -192,3 +192,45 @@ select:focus-visible,
     outline: 3px solid #67e8f9;
     outline-offset: 2px;
 }
+
+/* Copy-to-clipboard button for code blocks */
+.copy-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    padding: 2px 10px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: #94a3b8;
+    background: #1e293b;
+    border: 1px solid #475569;
+    border-radius: 3px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    z-index: 1;
+    line-height: 1.6;
+}
+
+/* Show on hover of the code block wrapper */
+div:hover > .copy-btn,
+pre:hover > .copy-btn,
+.copy-btn:focus-visible {
+    opacity: 1;
+}
+
+.copy-btn:hover {
+    color: #a3e635;
+    border-color: #a3e635;
+    background: #334155;
+}
+
+.copy-btn:focus-visible {
+    outline: 3px solid #67e8f9;
+    outline-offset: 2px;
+}
+
+.copy-btn.copied {
+    color: #a3e635;
+    border-color: #a3e635;
+}
