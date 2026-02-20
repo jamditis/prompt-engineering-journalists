@@ -70,7 +70,7 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 
 **Activities:**
 - Required readings: Mollick's "A guide to which AI to use in the agentic era," Amditis's "Vibe coding for newsrooms," tool documentation (choose one: Claude Code, Gemini CLI, or Codex CLI)
-- Exercise: Install Claude Code and compare web vs. CLI workflows on the same summarization task
+- Exercise: Install Claude Code and compare web vs. CLI workflows — process the same press release in both environments and note what each required of you
 - Discussion (choose one): Share your installation experience and first impressions of working in the terminal. Or: What surprised you about the differences between web-based and command-line AI tools?
 - Quiz
 
@@ -127,18 +127,18 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 
 **Topics:**
 - From no-code automation to LLM-built workflow scripts
-- Interactive mode vs. non-interactive mode (`claude -p`): when to use each
+- Asking Claude to build, explain, and run shell scripts inside an interactive session
+- Interactive vs. non-interactive mode: what `claude -p` is and when it matters
 - Describing multi-stage pipelines: fetch, clean, analyze, format
 - Testing small before running large — why this matters in batch work
-- Checkpoint/resume, rate limiting, and error handling
 - API key security (environment variables, not source files) and cost-conscious operations
 
 **Supplementary material:** [How AI session memory works](https://jamditis.github.io/prompt-engineering-journalists/concepts/how-ai-session-memory-works.html) — plain-English explainer on context windows, caching, and why session setup matters
 
 **Activities:**
 - Required readings: Twelve-Factor App config (API key security), Claude Code API errors reference, Hagar's "Augmented beat reporting," Spencer's "Inside the new multilingual newsrooms using GenAI for translation"
-- Exercise: Build a newsletter pipeline using `claude -p` to process articles through summarization and HTML formatting
-- Discussion (choose one): What repeating task in your newsroom would benefit most from a scripted pipeline? Or: What are the risks of automating editorial workflows, and how would you mitigate them?
+- Exercise: Ask Claude to build a shell script that processes a week of city council agenda items into a reporter's prep sheet — then walk through what it built and why
+- Discussion (choose one): Think about the tasks you do every week that follow the same pattern — meeting previews, weekly roundups, data pulls. Which one would you hand to an AI assistant first, and what instructions would it need? Or: What are the risks of automating editorial workflows, and how would you mitigate them?
 - Quiz
 
 ---
@@ -157,7 +157,7 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 
 **Activities:**
 - Required readings: WaPo Haystacker and NYT Echo case studies, IBM's RAG explainer, Anthropic's MCP introduction and quickstart guide, de Cooker's "Extracting quotes from news articles with LLMs," Amditis's "I'm a Claude Code agent with my own Gmail account"
-- Exercise: Configure Claude Code with an MCP filesystem server, create a local research document collection, and run RAG-style queries with source attribution
+- Exercise: Connect Claude to a folder of local documents (budget data, meeting minutes, crime stats) via an MCP filesystem server, then query across them the way you would when backgrounding a story
 - Discussion (choose one): Where should newsrooms draw the line on AI autonomy, and what safeguards matter most? Or: When does RAG add enough value over a standard prompt to justify the setup cost?
 - Quiz
 - Final project due
@@ -176,15 +176,15 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 
 Each module includes a hands-on exercise. Exercises are completed through the course website and demonstrate understanding of the module concepts. You must show your work: screenshots, code snippets, or command output.
 
-- Module 1: Install Claude Code and compare web vs. CLI workflows on the same summarization task
-- Module 2: Set up a beat project, create a CLAUDE.md, and process documents with and without context
+- Module 1: Install Claude Code and compare web vs. CLI workflows on the same press release
+- Module 2: Set up a city hall beat project, create a CLAUDE.md, and compare document processing with and without context
 - Module 3: Create a source-verification skill and test it on a viral claim
-- Module 4: Build a newsletter pipeline using `claude -p` (non-interactive mode)
-- Module 5: Configure an MCP filesystem server and run RAG-style document queries
+- Module 4: Ask Claude to build an automation script for a recurring newsroom task, then examine what it built
+- Module 5: Connect Claude to local documents via MCP and query across them for a story
 
 ### Final project
 
-Design and document a CLI-based AI workflow for a real journalism task. Choose a problem from your own newsroom or a realistic scenario: processing public records, monitoring a beat, automating a recurring story format, or building a source-verification pipeline.
+Design and document a CLI-based AI workflow for a real journalism task. Choose a problem from your own work or a realistic scenario: processing FOIA responses, prepping for recurring meetings, building a weekly roundup from a folder of stories, tracking promises made in public hearings, or standardizing messy public records.
 
 **Project proposal due:** End of Week 3
 
@@ -230,8 +230,8 @@ The following GitHub repositories are used throughout the course:
 | Week | Module | Main deliverable |
 |------|--------|------------------|
 | Pre-course | Orientation | Setup checklist |
-| 1 | Escaping the chat window | CLI tool setup |
-| 2 | Prompting with files and project context | Context file exercise |
-| 3 | Custom skills for Claude Code | Custom skill |
-| 4 | CLI workflows for newsrooms | Workflow automation |
+| 1 | Escaping the chat window | Web vs. CLI comparison |
+| 2 | Prompting with files and project context | Beat context file + document processing |
+| 3 | Custom skills for Claude Code | Source-verification skill |
+| 4 | CLI workflows for newsrooms | Automation script for a recurring task |
 | 5 | Agents and RAG | Final project |
