@@ -101,6 +101,8 @@ You won't have anything to put in this section after Week 2. That's fine — lea
 
 The other major feature of CLI tools is file access. In a web chat, you upload files one at a time through a browser. In the terminal, the AI can read any file in your project directory — and you can point it at specific documents.
 
+The Reuters Institute's 2025 survey found that 71% of UK journalists have never used AI for summarization, 81% have never used it for document analysis, and 52% have never used it for translation — even though these are the exact tasks where AI is most reliable and where CLI tools add the most value. The friction of web interfaces partly explains the gap: uploading a press release, reading the output, copying it somewhere useful, then repeating for the next document. Context files eliminate the other part of the friction: you don't have to re-explain your beat, your style, or your standards each time.
+
 This changes how you work with press releases, meeting minutes, interview transcripts, and other journalism documents. Instead of copy-pasting text into a chat window, you tell the tool to read the file directly:
 
 ```

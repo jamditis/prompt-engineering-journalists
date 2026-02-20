@@ -14,6 +14,8 @@ Most people start by typing the same instructions over and over. You explain the
 
 A skill is an instruction file that encodes your domain expertise into something Claude Code can follow on command. The source-verification skill, for example, contains the SIFT method, your newsroom's standards for attribution, and the checks an experienced reporter would run before publishing. You write it once. From then on, you type `/source-verification` and the method is applied automatically.
 
+This matters because the Reuters Institute's 2025 survey found that 84% of UK journalists have never used AI for fact-checking or verification. That's not because AI can't help — it's because doing it well requires encoding specific methods and standards that are different for every beat and every newsroom. A generic chat prompt doesn't know the SIFT method or your source standards. A skill does.
+
 Think of skills as the journalism equivalent of style guides or reporting checklists — except the AI follows them every time without reminders.
 
 The maturity path looks like this:

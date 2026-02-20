@@ -13,6 +13,34 @@ A short but useful framing piece: LLMs are tools for manipulating language, not 
 
 ---
 
+### How journalists actually use AI
+
+**"AI adoption by UK journalists and their newsrooms: Surveying applications, approaches, and attitudes"** — Reuters Institute for the Study of Journalism, November 2025
+https://reutersinstitute.politics.ox.ac.uk/ai-adoption-uk-journalists-and-their-newsrooms-surveying-applications-approaches-and-attitudes
+
+A survey of 949 UK journalists on how often they use AI across five task categories. The findings frame the rest of this course. The tasks with the highest daily adoption are back-office work: transcription (22% daily), translation (15%), story research (12%), and summarization (11%). The tasks with the lowest adoption are production and generation tasks — video, audio, page layout, and bias detection (all 93–97% "never").
+
+The pattern is clear: journalists who use AI at all use it to process information, not to produce content. That maps directly to what CLI tools are good at — reading files, extracting data, summarizing documents, and automating repetitive processing. Selected findings:
+
+| Task | Daily | Never |
+|------|-------|-------|
+| Transcription/captioning | 22% | 39% |
+| Translation | 15% | 52% |
+| Grammar checking/copy-editing | 14% | 66% |
+| Story research | 12% | 69% |
+| Summarization | 11% | 71% |
+| Idea generation/brainstorming | 9% | 75% |
+| Trend detection | — | 77% |
+| Data extraction (OCR, scraping) | — | 80% |
+| Media monitoring/event detection | — | 80% |
+| Data/document analysis | — | 81% |
+| Fact-checking/verification | — | 84% |
+| Data cleaning | — | 87% |
+
+Base: 949 UK journalists surveyed.
+
+---
+
 ### The 2025 AI landscape
 
 **"The year in LLMs"** — Simon Willison

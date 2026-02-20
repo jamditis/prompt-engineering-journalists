@@ -14,6 +14,8 @@ The key shift in Module 4: instead of asking Claude Code to help you with one do
 
 "Fetch this URL, strip out the ads, summarize it in three bullets, save it as a markdown file with today's date in the filename" — that's a workflow description. Claude Code turns it into a reusable script. You review the script, test it on a few real examples, and refine it until the output is what you want. Then you can run it on 50 documents, schedule it to run automatically, or share it with a colleague.
 
+The Reuters Institute's 2025 survey found that transcription is the single most common daily AI task among UK journalists (22% daily). Translation, summarization, and data extraction follow. But 87% have never used AI for data cleaning, and 80% have never used it for data extraction like OCR or scraping. These are all pipeline-shaped problems: file in, process, file out. Once you can describe the workflow and have your CLI tool build the script, the barrier drops. You're not learning to code — you're describing what "clean this data" or "transcribe and summarize these recordings" means for your beat, and the tool handles the implementation.
+
 The right way to build a pipeline: separate stages, each with a clear input and output. Fetch. Clean. Analyze. Format. When something breaks, you know which stage failed — and you paste the error back into your session to get a diagnosis. Because each stage is independent, you can fix one without touching the others.
 
 ### Plan before you build

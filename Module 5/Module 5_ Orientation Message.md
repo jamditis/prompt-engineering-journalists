@@ -20,6 +20,8 @@ RAG is the technique that adds grounded knowledge to an AI's responses. Instead 
 
 This is what makes RAG safe for newsrooms in ways that plain prompting is not. One of the biggest risks with AI in journalism is losing track of where information came from. RAG, done right, preserves attribution through the entire pipeline -- from retrieval to generation to the final output a reporter reads. The journalism rule is the same one you already follow: if you can't cite it, don't publish it. Grounded knowledge is citable. Parametric knowledge is not.
 
+The Reuters Institute's 2025 survey helps explain why RAG matters now: 77% of UK journalists have never used AI for trend detection, 80% have never used it for media monitoring, and 81% have never used it for document analysis. In each case, the gap isn't that AI can't help — it's that without grounded knowledge, the results aren't trustworthy enough for journalism. A generic prompt asking "what are the trends in my beat area?" pulls from training data you can't verify. The same question pointed at your own archive of council minutes, budget documents, and court filings produces answers you can trace to specific sources. RAG is what closes that gap.
+
 ---
 
 ## Agents: tools with autonomy
