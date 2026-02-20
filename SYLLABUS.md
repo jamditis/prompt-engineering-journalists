@@ -16,7 +16,9 @@
 
 This course is the sequel to [Prompt Engineering 101 for Journalists](https://journalismcourses.org/product/prompt-engineering-101-for-journalists/). The 101 course taught you to use AI through web interfaces — writing prompts, understanding context windows, and working with tools like ChatGPT and Claude.ai. This course moves you from the browser to the terminal, where AI becomes programmable: scriptable, automatable, and integrated with your files and workflows. For example, instead of pasting a city council transcript into ChatGPT and manually copying the summary, you can write a single command that reads the transcript from your hard drive, extracts action items, and formats a story draft — all without opening a browser.
 
-Each module builds on a concept from the 101 course and extends it: web prompting becomes command-line interface (CLI) prompting, typing context every time becomes writing it once in a file, one-off prompts become reusable skills, no-code automation becomes scripted pipelines, and conceptual understanding of AI becomes hands-on work with agents and retrieval-augmented generation (RAG).
+The course is grounded in Ethan Mollick's framework for understanding AI in the agentic era. Mollick describes three layers: **models** (the underlying AI intelligence), **apps** (chat interfaces like ChatGPT.com and Claude.ai), and **harnesses** (systems that give models tools, file access, and the ability to take multi-step action). The 101 course taught you to use apps. This course teaches you to use harnesses — CLI tools like Claude Code, Gemini CLI, and Codex CLI that let AI read your files, run commands, and chain tasks together.
+
+The philosophical shift: you stop prompting and start managing. Instead of crafting one-off messages in a chat window, you build persistent environments — context files, skills, workflows, agent configurations — and delegate work. Each module builds on a concept from the 101 course and extends it: web prompting becomes CLI prompting, typing context every time becomes writing it once in a file, one-off prompts become reusable skills, no-code automation becomes scripted pipelines, and understanding AI becomes hands-on work with agents and retrieval-augmented generation (RAG).
 
 ## Prerequisites
 
@@ -40,7 +42,7 @@ By the end of this course, students will be able to:
 
 ### Pre-course orientation
 
-Before Week 1 begins, complete the following setup steps. This orientation includes a welcome video and a checklist — there are no graded assignments.
+Before Week 1 begins, complete the following setup steps. This orientation includes a welcome video and a checklist — there are no assignments this week.
 
 **Pre-course checklist:**
 
@@ -54,18 +56,21 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 
 ### Module 1: Escaping the chat window
 
-**Focus:** From interactive web interfaces to programmable terminal tools
+**Focus:** From apps to harnesses — understanding why the same model behaves differently in a chat window than it does in a CLI tool
 
 **Topics:**
-- The CLI as programmatic control over AI (scripting, piping, scheduling)
+- Models, apps, and harnesses: Mollick's framework for the agentic era
+- The CLI as programmatic control over AI (scripting, piping, file access)
 - "Work where your files live" — no more upload/download cycles
-- Comparing web and CLI workflows side by side
-- Your first CLI prompt: running a task from the terminal
+- Comparing web and CLI workflows side by side on the same task
+- Session commands: `/help`, `/plan`, `/compact`, `/clear`
 - When CLI tools are worth the setup cost and when they are not
 
+**Supplementary material:** [What is a CLI?](https://jamditis.github.io/prompt-engineering-journalists/concepts/what-is-a-cli.html) — plain-English explainer for journalists who haven't used a terminal
+
 **Activities:**
-- Required readings: Tool documentation and CLI background articles
-- Exercise: Install one CLI tool and compare web vs. CLI workflows
+- Required readings: Mollick's "A guide to which AI to use in the agentic era," Amditis's "Vibe coding for newsrooms," tool documentation (choose one: Claude Code, Gemini CLI, or Codex CLI)
+- Exercise: Install Claude Code and compare web vs. CLI workflows — process the same press release in both environments and note what each required of you
 - Discussion (choose one): Share your installation experience and first impressions of working in the terminal. Or: What surprised you about the differences between web-based and command-line AI tools?
 - Quiz
 
@@ -73,7 +78,7 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 
 ### Module 2: Prompting with files and project context
 
-**Focus:** Persistent context files and file-based journalism workflows
+**Focus:** From prompt engineering to context engineering — building persistent environments instead of crafting one-off messages
 
 **Topics:**
 - The "fresh conversation" problem: why web chat context evaporates
@@ -82,10 +87,13 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 - The "deletion test" for context file content
 - Processing journalism documents (press releases, minutes, transcripts) from the filesystem
 - Git basics and GitHub for project management — what repositories, commits, and cloning are
+- Context files as versionable infrastructure, not personal notes
+
+**Supplementary material:** [How context files work](https://jamditis.github.io/prompt-engineering-journalists/concepts/how-context-files-work.html) — plain-English explainer on the blank slate problem and how context files solve it
 
 **Activities:**
-- Required readings: Context file documentation for Claude Code, Gemini CLI, and Codex; Git and GitHub basics
-- Exercise: Set up a beat project, initialize a Git repo, process documents with and without context, write a CLAUDE.md
+- Required readings: Context file documentation for Claude Code, Gemini CLI, and Codex; Schmid's "Prompt engineering vs. context engineering"; GitHub basics; Amditis's "I'm a Claude Code agent with my own Gmail account"
+- Exercise: Set up a city hall beat project, initialize a Git repo, process documents with and without context, write a CLAUDE.md, and compare the results
 - Discussion (choose one): What would you put in a context file for your beat, and why? Or: How does processing documents from the file system compare to pasting text into a chat window — what changes about your workflow?
 - Quiz
 
@@ -99,14 +107,15 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 
 **Topics:**
 - The progression: ad-hoc prompts → saved prompts → skills → hooks → plugins
-- Writing SKILL.md files with YAML frontmatter
-- Hooks as non-blocking editorial quality checks
+- Creating custom slash commands: markdown files in `~/.claude/commands/` (personal) or `.claude/commands/` (project)
+- Notify hooks vs. stop hooks: automated second readers and one-way-door guardrails
 - Building on CLAUDE.md: from project context to reusable skills
 - Installing and using the journalism skills library (36 skills, 13 hooks)
+- Skills vs. MCP servers: static instructions vs. live data connections
 
 **Activities:**
-- Required readings: Claude Code docs on custom commands, journalism skills repo overview
-- Exercise: Install journalism skills plugin and verify a viral claim using source-verification
+- Required readings: Claude Code custom commands documentation, journalism skills repo overview, MCP basics, Hagar's "Coding agents for investigative journalism"
+- Exercise: Create a source-verification skill, invoke it with `/source-verification` on a viral claim, and test it on a real-world example
 - Discussion (choose one): What skills would help your newsroom, and how would you share them with colleagues? Or: How do you decide which parts of your editorial process are worth encoding into reusable tools versus handling manually?
 - Quiz
 
@@ -118,15 +127,18 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 
 **Topics:**
 - From no-code automation to LLM-built workflow scripts
+- Asking Claude to build, explain, and run shell scripts inside an interactive session
+- Interactive vs. non-interactive mode: what `claude -p` is and when it matters
 - Describing multi-stage pipelines: fetch, clean, analyze, format
 - Testing small before running large — why this matters in batch work
-- Checkpoint/resume and rate limiting
-- API key security and cost-conscious AI operations
+- API key security (environment variables, not source files) and cost-conscious operations
+
+**Supplementary material:** [How AI session memory works](https://jamditis.github.io/prompt-engineering-journalists/concepts/how-ai-session-memory-works.html) — plain-English explainer on context windows, caching, and why session setup matters
 
 **Activities:**
-- Required readings: Automated journalism in practice, API key security, handling LLM errors and rate limits
-- Exercise: Build an article-to-newsletter pipeline
-- Discussion (choose one): What repeating task in your newsroom would benefit most from a scripted pipeline? Or: What are the risks of automating editorial workflows, and how would you mitigate them?
+- Required readings: Twelve-Factor App config (API key security), Claude Code API errors reference, Hagar's "Augmented beat reporting," Spencer's "Inside the new multilingual newsrooms using GenAI for translation"
+- Exercise: Ask Claude to build a shell script that processes a week of city council agenda items into a reporter's prep sheet — then walk through what it built and why
+- Discussion (choose one): Think about the tasks you do every week that follow the same pattern — meeting previews, weekly roundups, data pulls. Which one would you hand to an AI assistant first, and what instructions would it need? Or: What are the risks of automating editorial workflows, and how would you mitigate them?
 - Quiz
 
 ---
@@ -136,15 +148,16 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 **Focus:** Parametric vs. grounded knowledge, and why the citation trail matters
 
 **Topics:**
-- AI agents: tools with autonomy, but human-in-the-loop is not optional
-- Retrieval-augmented generation and source attribution
-- Parametric knowledge vs. grounded knowledge
-- MCP (Model Context Protocol) as a bridge between AI and your data
+- Chatbots vs. agents: what makes an AI tool an agent (tools, autonomy, multi-step plans)
+- Retrieval-augmented generation: query → retrieve → augment → generate
+- Parametric knowledge (learned during training, no citations) vs. grounded knowledge (retrieved at query time, citable)
+- MCP (Model Context Protocol) as a standard for connecting AI to external data sources
+- MCP server types: filesystem, database, web, search, custom
 - Real-world examples: Washington Post's Haystacker, NYT's Echo
 
 **Activities:**
-- Required readings: Agent architecture, RAG concepts, MCP documentation
-- Exercise: Configure Claude Code with MCP to query a local knowledge base
+- Required readings: WaPo Haystacker and NYT Echo case studies, IBM's RAG explainer, Anthropic's MCP introduction and quickstart guide, de Cooker's "Extracting quotes from news articles with LLMs," Amditis's "I'm a Claude Code agent with my own Gmail account"
+- Exercise: Connect Claude to a folder of local documents (budget data, meeting minutes, crime stats) via an MCP filesystem server, then query across them the way you would when backgrounding a story
 - Discussion (choose one): Where should newsrooms draw the line on AI autonomy, and what safeguards matter most? Or: When does RAG add enough value over a standard prompt to justify the setup cost?
 - Quiz
 - Final project due
@@ -155,29 +168,31 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 
 ### Participation
 
-**Discussion forums:** Each module includes a discussion forum. Post at least one original contribution and respond to at least two classmates per module. Posts should be substantive (more than "I agree").
+**Discussion forums:** Each module includes a discussion forum with 2–3 prompts. Post at least one original contribution and respond to at least two classmates per module. Posts should be substantive (more than "I agree").
 
 **Engagement:** Complete all required activities by the weekly deadline.
 
 ### Weekly exercises
 
-Each module includes a hands-on exercise. Exercises are graded on completion and demonstrated understanding. You must show your work: screenshots, code snippets, or command output.
+Each module includes a hands-on exercise. Exercises are completed through the course website and demonstrate understanding of the module concepts. You must show your work: screenshots, code snippets, or command output.
 
-- Module 1: CLI tool installation and comparison
-- Module 2: Context file and document processing exercise
-- Module 3: Custom skill creation
-- Module 4: Workflow automation
-- Module 5: Retrieval-augmented generation pipeline exercise
+- Module 1: Install Claude Code and compare web vs. CLI workflows on the same press release
+- Module 2: Set up a city hall beat project, create a CLAUDE.md, and compare document processing with and without context
+- Module 3: Create a source-verification skill and test it on a viral claim
+- Module 4: Ask Claude to build an automation script for a recurring newsroom task, then examine what it built
+- Module 5: Connect Claude to local documents via MCP and query across them for a story
 
 ### Final project
 
-Design and document a CLI-based AI workflow for a real journalism task. Choose a problem from your own newsroom or a realistic scenario: processing public records, monitoring a beat, automating a recurring story format, or building a source-verification pipeline.
+Design and document a CLI-based AI workflow for a real journalism task. Choose a problem from your own work or a realistic scenario: processing FOIA responses, prepping for recurring meetings, building a weekly roundup from a folder of stories, tracking promises made in public hearings, or standardizing messy public records.
+
+**Project proposal due:** End of Week 3
 
 **Requirements:**
-- Written description of the problem and solution (500–1,000 words)
-- Working code or configuration files
-- Screenshots or a short video demonstrating the workflow
-- Reflection on what you learned
+- A GitHub repository (or zip file) containing all code and configuration files
+- A README documenting the problem, setup, usage, expected output, and limitations
+- Sample input and output files
+- Any custom skills or commands used
 
 **Due:** End of Module 5
 
@@ -193,13 +208,20 @@ You will need access to the following (detailed in Course Requirements):
 - A text editor: Sublime Text (https://www.sublimetext.com), Notepad++ (https://notepad-plus-plus.org), or VS Code (https://code.visualstudio.com) recommended
 - GitHub account — sign up free at https://github.com (see GitHub's quickstart guide: https://docs.github.com/en/get-started/start-your-journey/creating-an-account)
 
+## Course website
+
+The course includes a companion website with exercises, templates, and plain-English concept explainers:
+
+[https://jamditis.github.io/prompt-engineering-journalists/](https://jamditis.github.io/prompt-engineering-journalists/)
+
 ## Course repositories
 
 The following GitHub repositories are used throughout the course:
 
-- **Advanced prompt engineering for journalists:** [https://github.com/jamditis/prompt-engineering-journalists](https://github.com/jamditis/prompt-engineering-journalists) — course materials for this 5-week course
+- **Advanced prompt engineering for journalists:** [https://github.com/jamditis/prompt-engineering-journalists](https://github.com/jamditis/prompt-engineering-journalists) — course materials, exercises, and the course website for this 5-week course
 - **Journalism skills library:** [https://github.com/jamditis/claude-skills-journalism](https://github.com/jamditis/claude-skills-journalism) — 36 skills and 13 hooks for Claude Code, covering source verification, FOIA requests, data journalism, editorial workflows, and more. Used in Module 3.
 - **AI tools for newsrooms:** [https://github.com/jamditis/tools](https://github.com/jamditis/tools) — guides, templates, and workflow examples for AI in journalism. Referenced across modules.
+- **Scrapefruit CLI:** [https://github.com/jamditis/scrapefruit-cli](https://github.com/jamditis/scrapefruit-cli) — a CLI tool for web scraping, referenced in workflow examples.
 
 ---
 
@@ -208,8 +230,8 @@ The following GitHub repositories are used throughout the course:
 | Week | Module | Main deliverable |
 |------|--------|------------------|
 | Pre-course | Orientation | Setup checklist |
-| 1 | Escaping the chat window | CLI tool setup |
-| 2 | Prompting with files and project context | Context file exercise |
-| 3 | Custom skills for Claude Code | Custom skill |
-| 4 | CLI workflows for newsrooms | Workflow automation |
+| 1 | Escaping the chat window | Web vs. CLI comparison |
+| 2 | Prompting with files and project context | Beat context file + document processing |
+| 3 | Custom skills for Claude Code | Source-verification skill |
+| 4 | CLI workflows for newsrooms | Automation script for a recurring task |
 | 5 | Agents and RAG | Final project |
