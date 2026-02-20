@@ -24,6 +24,18 @@ For each scenario (or others you imagine), explain:
 
 ---
 
+## Discussion 1b: Verifying what the pipeline produced
+
+When a multi-step AI pipeline processes your documents and produces output — a summary, a quote extraction, a briefing — how do you check that it's right?
+
+Manual verification of every output defeats much of the point of automation. But no verification at all means publishing based on what an automated system claims, not what your sources actually say.
+
+**Question:** How would you design a minimum viable verification step for an AI pipeline that processes large volumes of documents? What would you check, how would you sample, and what would trigger a full manual review?
+
+Think about this in terms of a real newsroom scenario: a pipeline that processes 50 press releases per week and extracts key claims for reporters to follow up on. What could go wrong if a claim is wrong? Who would catch it? When?
+
+---
+
 ## Discussion 2: RAG and the problem of context
 
 RAG systems retrieve relevant documents to ground AI responses in source material. But "relevant" is a judgment call.

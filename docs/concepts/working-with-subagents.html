@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working with subagents | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../module-5/" class="text-acid">[ 05 ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">CONCEPTS — MODULE 05</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">Working with subagents</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">When Claude handles complex tasks, it can spawn sub-sessions to work in parallel. Understanding how this works prevents errors from compounding.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What subagents are</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">When you ask Claude to handle a complex multi-step task, it sometimes delegates parts of the work to separate sub-sessions called subagents. Each subagent runs with its own context window, completes a focused task, and returns its output to the main session.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">You don't always see this happening. The orchestrating Claude manages it, and from your end the session looks continuous. But behind it, multiple instances may have worked in parallel — each without knowledge of what the others did.</p>
+                    <p class="text-gray-300 leading-relaxed">This is what makes agentic workflows faster for complex work. It's also what makes them fail in ways that are harder to trace than single-session errors.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">The model selection problem</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">By default, Claude spawns lighter, cheaper models — Sonnet or Haiku — for subagent tasks, regardless of the complexity of what's being delegated. For knowledge-intensive tasks like research, analysis, or synthesis, this means worse results than if the main session had handled it directly.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">You can override this default. Specifying in your CLAUDE.md that subagents should use Opus changes which model handles delegated work. The difference is pronounced for anything requiring careful reasoning across many sources.</p>
+                    <p class="text-gray-300 leading-relaxed">This is a configuration choice, not a technical constraint. It defaults to cheaper because cheaper is often fine. It's only a problem when you don't know it's happening.</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-6">
+                    <h3 class="font-display text-lg text-acid mb-3">Hallucination chains</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-3">When one subagent's output becomes the next subagent's input, errors compound. A fabricated statistic in step one becomes an assumed fact in the analysis at step two, which becomes a headline candidate at step three.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-3">This is different from a single-session error because you can't easily trace it back. By the time the error surfaces, it's been through multiple layers of processing — each of which treated the previous layer's output as reliable input.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">The mitigation: treat subagent handoffs like source handoffs. Verify outputs before passing them to the next stage. Intermediate results aren't vetted reporting — they're working material.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">A multi-reporter analogy</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Multi-reporter investigations work the same way. You assign different reporters to different document sets, then synthesize their findings into the published story. The synthesis is only as reliable as the verification at each handoff.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">If one reporter passes along a claim they didn't verify, and it enters the synthesis without being checked, it ends up in print. The editor reviewing the synthesis doesn't know which reporter sourced that claim or whether it was confirmed.</p>
+                    <p class="text-gray-300 leading-relaxed">Subagent pipelines have the same failure mode. The orchestrating Claude receives outputs and synthesizes them. It has no way to know which subagent was sloppy and which was careful. The only defense is verification at the handoff points, before outputs become inputs.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Designing for subagent use</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Keep subagent tasks focused: one clear objective, defined inputs, defined output format. Narrower tasks with more subagents handling them outperforms broader tasks with fewer subagents — not just for speed, but because context pollution happens at the subagent level too. A subagent given too broad a mandate will fill in gaps with inference.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">Define the output format explicitly. A subagent that returns prose when you needed structured data forces the next stage to parse ambiguity — or introduces one of its own.</p>
+                    <p class="text-gray-300 leading-relaxed">When you give Claude access to your documents through MCP, you're creating the conditions for subagent use. Files get processed, results get passed around, context windows fill up and spin off. Understanding how those sub-sessions work helps you design those pipelines so errors don't disappear into the handoffs.</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-4">
+                    <p class="text-xs font-sans text-gray-400"><span class="text-ice font-mono">SOURCE:</span> Adapted from "Subagent control" pattern, originally by <a href="https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw" class="text-ice hover:text-acid transition-colors">The Agentic Lab</a>, extracted and organized at <a href="https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns" class="text-ice hover:text-acid transition-colors">github.com/jamditis/stash</a>.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">NEXT:</span> Head to <a href="../module-5/" class="text-ice hover:text-acid transition-colors">Module 5</a> to configure Claude Code with MCP and build your first agent pipeline.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="./" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">CONCEPTS</a>
+                        <a href="../module-5/" class="text-xs font-mono text-acid">MODULE 05</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

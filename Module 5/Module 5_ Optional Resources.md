@@ -137,6 +137,40 @@ What happens when you give Claude Code full permissions and let it run without c
 
 ---
 
+### Subagents, model selection, and hallucination chains
+
+**"Subagent control"** — extracted from *Advanced Claude Code Patterns That Move the Needle* by The Agentic Lab
+https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/05-subagent-control.md
+
+*Reading time: 8 minutes*
+
+When Claude delegates work to subagents, it defaults to lighter models (Sonnet/Haiku) for efficiency. For knowledge-intensive tasks — research, analysis, synthesis — this often means worse results than doing the work in the main session. This piece covers when and how to override that default, plus two failure modes worth understanding before you build any multi-agent pipeline.
+
+The hallucination chain problem is directly relevant to journalism: when one subagent's output becomes the next subagent's input, errors compound. A hallucinated claim in step one becomes an analysis premise in step two, a headline candidate in step three. The mitigation pattern — insert deterministic verification between handoffs, don't trust subagent claims without checking — is the same principle as not treating a model's source citations as verified sources.
+
+The second failure mode is subagent overload: a single subagent handling multiple unrelated tasks accumulates the same context pollution problems that affect main sessions. More subagents, each focused on one task, consistently outperforms fewer subagents with broader mandates.
+
+*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw). Extracted and organized in [jamditis/stash](https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns).*
+
+---
+
+### MCP and the context cost of integrations
+
+**"Lean tool stack"** — extracted from *Advanced Claude Code Patterns That Move the Needle* by The Agentic Lab
+https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/06-lean-tool-stack.md
+
+*Reading time: 8 minutes*
+
+Every MCP server you connect adds tokens to your session context — before you've sent a single prompt. This piece makes a case for treating context as a budget: each integration needs to justify its cost. The author keeps two tools: one for accessing current framework documentation (avoiding hallucinated API references), one for browser automation and visual debugging.
+
+For newsrooms building on MCP: the question worth asking before adding any integration is not "can we connect this?" but "is the capability this adds worth the context cost every session?" A database connection that's only occasionally useful still consumes tokens on sessions where you don't need it.
+
+The Module 5 exercise has you connecting the filesystem MCP server to a knowledge base. This piece helps you think clearly about what to connect going forward — and when a simpler approach (a skill file, a context document) achieves the same result without the integration overhead.
+
+*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw). Extracted and organized in [jamditis/stash](https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns).*
+
+---
+
 ## Tools to explore
 
 **Claude Code**

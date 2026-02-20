@@ -62,7 +62,7 @@ Put another way: context files should contain the things that make your project 
 
 ---
 
-## Your CLAUDE.md will grow
+## Your CLAUDE.md will grow — but watch for bloat
 
 The context file you write this week is a starting point. Come back to it.
 
@@ -75,7 +75,13 @@ Every time the AI gets something wrong for your beat — wrong terminology, misa
 
 The most useful context files aren't the ones written carefully from scratch on day one. They're the ones that have been corrected repeatedly. Each correction makes the file stronger.
 
-Keep a "Hard-won lessons" section at the bottom of your CLAUDE.md for these. Each lesson should have a name, a one-sentence note on what happened, and the rule that came out of it. Here's a journalism-specific example:
+But there's a limit. Context files grow without discipline, and bloated context files hurt performance. Every line the AI has to read before you type a single word is a line competing with your actual request.
+
+The symptom of a bloated context file looks like this: your CLAUDE.md has grown past 50 lines, responses seem less focused than they were a few weeks ago, and you notice the AI referencing rules you barely remember writing. That's not a model problem. That's a context problem.
+
+Apply the deletion test to your CLAUDE.md regularly — not just when you write it, but every few weeks as the project grows. Instructions that haven't changed the AI's output in recent sessions are consuming budget without earning it. Cut them.
+
+Keep a "Hard-won lessons" section at the bottom of your CLAUDE.md for corrections. Each lesson should have a name, a one-sentence note on what happened, and the rule that came out of it. Here's a journalism-specific example:
 
 ```
 ## Hard-won lessons
@@ -142,6 +148,16 @@ But the more powerful move is this one: you stop rewriting the same context ever
 That's context engineering. You're not optimizing a single prompt — you're designing the environment in which every future conversation happens. Your CLAUDE.md, your skills, your hooks, your project structure: these are the context you're engineering. Every module in this course adds another layer to that environment.
 
 The course title won't change. But keep this reframe in mind as you work through the material. When you're writing your CLAUDE.md this week, you're not doing prompt work. You're doing infrastructure work.
+
+---
+
+## When the session itself becomes the problem
+
+Context hygiene applies to the conversation as well as the context file. Long sessions accumulate irrelevant material — discarded drafts, outdated references from earlier in the conversation, corrections that the AI has since moved past. As a session grows, all of that competes with what matters now.
+
+The practical rule: when you switch tasks or pick up work the next day, start a fresh session. Use `/clear` to reset the conversation without losing your context file. If you need to carry key information from the previous session forward, add a brief note — "continuing from yesterday's city council coverage" — at the top of your next message. You're reorienting the AI, not re-briefing it from scratch.
+
+A clean session with a sharp context file outperforms a long session with an accumulated conversation almost every time.
 
 ---
 

@@ -80,19 +80,19 @@ D) RAG systems only work with verified facts
 
 ### Question 5
 
-A news organization builds a RAG system using only its own published articles as the knowledge base. What is a potential limitation of this approach?
+A journalist builds an agent pipeline that works in three stages: a first subagent searches her archive for relevant articles, a second subagent extracts key facts from what the first found, and a third subagent drafts a briefing document from those facts. In stage one, the first subagent misidentifies an article's year, reporting a 2019 event as 2021. What is the most likely outcome?
 
-A) The system will run too slowly
+A) The later subagents will catch and correct the error because they have access to the original documents
 
-B) The system cannot answer questions outside topics the organization has covered
+B) The error will likely compound — the second subagent analyzes incorrect facts, and the third subagent drafts a briefing based on them, making the final document wrong in ways that aren't obvious
 
-C) The system will require too much storage
+C) The pipeline will automatically halt when it detects inconsistent information
 
-D) The system will only work in English
+D) Only the briefing document will be affected; the archive search results are stored separately
 
 **Correct answer:** B
 
-**Explanation:** A RAG system can only retrieve and cite documents that exist in its knowledge base. If the organization never covered a topic, the system will have no relevant documents to retrieve. This can create blind spots that reflect the organization's past editorial decisions and coverage gaps.
+**Explanation:** When subagents pass outputs to each other, errors in early stages become inputs to later stages. The second subagent has no way to know the year was wrong — it works with what it received. The third subagent has no way to know either. The final document is wrong, the error is harder to trace than a single-session mistake, and there's no automatic detection. This is why verification at each handoff matters: check intermediate outputs before passing them to the next stage, the same way you'd verify a source's claims before citing them in a story.
 
 ---
 

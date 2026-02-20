@@ -10,9 +10,11 @@ We're halfway through Week 2. Here are some common questions and tips for the ex
 
 **"How long should my CLAUDE.md be?"**
 
-Short enough to be useful. A context file that's 10 pages long defeats the purpose — the AI has to process all of it on every interaction, and bloated files dilute the important instructions. Start with 10-20 lines of your most important beat knowledge and style rules. You can always add more later.
+Short enough that every line earns its place. If a context file runs past 50 lines, audit it before adding more. Bloated context files dilute the specific instructions that actually matter — every token the AI has to process before your first message is a token that isn't focused on your actual task.
 
-A good starting point: write five instructions you'd give a new reporter on their first day covering your beat. That's your context file.
+Start with 10-20 lines of your most important beat knowledge and style rules. Then apply the deletion test: read each line and ask whether removing it would change the AI's output on the documents you actually work with. If the answer is no, cut the line.
+
+A good starting point: write five instructions you'd give a new reporter on their first day covering your beat. That's your context file. The "Hard-won lessons" section grows from there — one entry per real mistake, not one entry per thing you think might go wrong.
 
 **"What if I use Gemini CLI instead of Claude Code?"**
 

@@ -297,19 +297,43 @@ Expected: Claude should synthesize information from multiple documents.
 
 ---
 
-## Part 5: Reflection questions
+## Part 5: Verify before you trust
+
+Before reflecting on what worked, do a verification pass. This is a habit worth building now, before you use these tools on real reporting.
+
+### Step 5.1: Check the numbers
+
+From your Prompt 2 response (how the parks budget changed over years), find the relevant line in `city-budget-history.md` and confirm the numbers Claude cited match what the document actually says. Don't skim — read the exact figures.
+
+If they match: note it. If they don't: that's a hallucination, and it's the exercise working as intended. Run `/log_error` if you set it up in Module 3.
+
+### Step 5.2: Check the quote
+
+From your Prompt 3 response (the Martinez quote on parks funding), find the quote in `martinez-interview.md` and read it verbatim. Does Claude's response reproduce it exactly, or has it paraphrased, combined, or subtly changed it?
+
+If Claude paraphrased: the paraphrase may be accurate in meaning but it is not a direct quote. A RAG system that retrieves quotes can still hallucinate them if the model summarizes instead of pulling the exact text. Note whether the phrasing Claude used is faithful or not.
+
+### Step 5.3: What this means for pipelines
+
+When you build a pipeline that processes many documents and synthesizes their content — as in Module 4, or in a real newsroom RAG system — errors in step three aren't visible until you check. A fabricated paraphrase at the retrieval stage can become a cited fact at the synthesis stage. The verification you just did manually is what you'd need to build into any automated pipeline: a check that compares AI-generated outputs against the source documents before the output leaves the pipeline.
+
+---
+
+## Part 6: Reflection questions
 
 After completing the exercise, answer these questions in your course journal or discussion post:
 
-1. **Accuracy:** Did Claude correctly cite information from your knowledge base? Did you notice any errors or hallucinations?
+1. **Accuracy:** Did Claude correctly cite information from your knowledge base? Did you notice any errors or hallucinations during the verification step?
 
-2. **Attribution:** How useful was having source documents for verifying Claude's responses?
+2. **Attribution:** How useful was having source documents for verifying Claude's responses? What would you have missed without the originals?
 
 3. **Limitations:** What questions could Claude NOT answer well, given the limited knowledge base?
 
 4. **Journalism applications:** How might you use this setup in your own reporting? What documents would you include in your knowledge base?
 
 5. **Maintenance:** If this were a production system, who would be responsible for keeping the knowledge base current? What processes would you need?
+
+6. **Verification cost:** How long did the verification step in Part 5 take? If you were processing 200 documents instead of 3, what would that cost in time? What's the minimum verification that would give you enough confidence to publish?
 
 ---
 

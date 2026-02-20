@@ -70,6 +70,40 @@ A practitioner's breakdown of what actually changes when you treat AI tools as a
 
 ---
 
+### Context rot and session hygiene
+
+**"Context hygiene"** — extracted from *Advanced Claude Code Patterns That Move the Needle* by The Agentic Lab
+https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/04-context-hygiene.md
+
+*Reading time: 10 minutes*
+
+Research suggests AI model performance can degrade significantly in longer sessions — not because the model gets worse, but because accumulated irrelevant context competes with what matters. This piece covers the practical consequences for anyone building journalist workflows: how to spot context bloat (CLAUDE.md files over 50 lines, Claude referencing outdated material, degraded output quality mid-session), and what to do about it.
+
+The strategies covered — manual compaction control, `/clear` breakpoints, the custom `/handoff` command for clean session transitions, and the double-escape technique for restoring a clean conversation without losing your code — extend directly from the CLAUDE.md discipline introduced in this module's readings.
+
+Also worth noting: the instruction about treating each CLAUDE.md instruction as "earning its place" is the same logic behind this module's deletion test. Context hygiene and the deletion test are the same principle applied at different scales — one to individual instructions, one to full sessions.
+
+*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw). Extracted and organized in [jamditis/stash](https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns).*
+
+---
+
+### Prompt engineering through conversation
+
+**"Prompt engineering on steroids"** — extracted from *Advanced Claude Code Patterns That Move the Needle* by The Agentic Lab
+https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/07-prompt-engineering.md
+
+*Reading time: 8 minutes*
+
+This piece makes two observations that apply directly to how you interact with CLI tools. First, the model interview approach: instead of writing a complete prompt upfront, you ask the tool to interview you about what you want. The tool asks clarifying questions, you answer, and it synthesizes a well-structured request from the dialogue. For journalists who know what story angle they want but find it hard to articulate as a prompt, this removes the bottleneck.
+
+Second, the observation that prompt engineering best practices are themselves repeatable and automatable — role assignment, XML structure, clarifying questions — can be templated and applied automatically to a rough description.
+
+Skip the voice dictation section if your setup doesn't support it. Focus on the model interview approach: it works with any CLI tool and requires no additional software.
+
+*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw). Extracted and organized in [jamditis/stash](https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns).*
+
+---
+
 ### Newsroom configuration examples
 
 **Journalism skills repository** by Joe Amditis

@@ -38,6 +38,20 @@ In this week's exercise, you'll configure an MCP server to connect Claude Code t
 
 The configuration file you write is infrastructure. Commit it to version control alongside your CLAUDE.md and skills. Anyone who clones your project gets the same data connections.
 
+**Every tool you connect costs context.** Each MCP server you configure consumes tokens in your session before you've asked anything — the server's schema, its available tools, its connection overhead. This is a real cost, not a theoretical one. Before connecting a data source, ask whether the capability it adds justifies what it takes from your context budget. A database connection you rarely need still consumes context on every session where you don't use it. A lean, purposeful set of integrations consistently outperforms a crowded one.
+
+## When Claude delegates: the subagent problem
+
+For complex multi-step tasks, Claude sometimes delegates parts of the work to separate sub-sessions — subagents — that each handle a focused piece and return results. This happens automatically. You often won't know it's happening.
+
+Two things are worth knowing about this before you build pipelines in this module.
+
+First, model selection. By default, Claude spawns lighter, cheaper models for subagents, regardless of what's being delegated. For a journalism research task — synthesizing sources, evaluating evidence, identifying patterns — a lighter model produces worse results than the main session would. You can override this default. Add `Always use the most capable available model for research subagents` to your CLAUDE.md to override the default for delegated work.
+
+Second, and more important for journalism: errors compound across handoffs. When one subagent's output becomes the next subagent's input, a fabricated statistic in step one becomes an assumed fact in the analysis at step two. By step three, it's a headline candidate. The failure is harder to trace than a single-session error because you never saw the intermediate steps.
+
+The mitigation is the same principle that applies to any multi-source story: verify at every handoff. Don't pass a subagent's output to the next stage without checking it. Treat intermediate results the way you'd treat information from a source you haven't yet independently confirmed. "The AI said so" is not a source. "The document says so" is.
+
 ---
 
 ## From the field

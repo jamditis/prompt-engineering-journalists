@@ -43,6 +43,18 @@ Discuss the trade-off between customized tools and flexible prompting. When is i
 
 ---
 
+### Discussion 2b: When the AI gets it wrong — do you capture it?
+
+When an AI tool fails you — generates a wrong quote, ignores an instruction, takes the wrong approach — what do you do with that failure?
+
+Most people correct the output and move on. The failure lives in the session, then disappears when the session ends. The next session can make the same mistake because nothing was written down.
+
+Practitioners who work with these tools daily describe a different habit: capture the failure while it's fresh. The exact prompt that triggered it, what category of error it was, what the AI did instead, what you think caused it. That log feeds back into the CLAUDE.md as a rule that prevents the mistake next time.
+
+**Prompt:** Do you have any existing system — in your reporting work or elsewhere — for capturing failures and turning them into process improvements? What would it look like to apply that same discipline to AI workflows? What would you need to log, and how often would you review it?
+
+---
+
 ### Discussion 3: Sharing skills across newsrooms
 
 Skills are just markdown files. They can be shared on GitHub, emailed to colleagues, or published openly.

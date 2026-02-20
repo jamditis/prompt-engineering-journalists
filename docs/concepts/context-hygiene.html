@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Context hygiene | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../module-2/" class="text-acid">[ 02 ]</a>
+                    <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../module-5/" class="text-gray-400 hover:text-ice transition-colors">[ 05 ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">CONCEPTS — MODULE 02</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">Context hygiene</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Your context file keeps AI sessions sharp. Understanding how context degrades helps you maintain that sharpness over time.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What context rot is</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">As conversations grow longer, accumulated irrelevant information competes with what matters. Research suggests AI performance can degrade at longer context lengths — not because the model gets worse, but because the signal-to-noise ratio in the active context drops.</p>
+                    <p class="text-gray-300 leading-relaxed">Imagine a reporter's working document that started as a sharp story brief and has grown to include tangential notes, discarded angles, outdated source contacts, and internal debates. Drafting from it is harder than starting fresh. That's context rot.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Signs your session context has bloated</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Watch for: Claude referencing outdated instructions from earlier in the conversation; responses that drift in quality as a session runs long; needing to re-state something you already said.</p>
+                    <p class="text-gray-300 leading-relaxed">These are symptoms of context rot, not model failure. The model hasn't changed — the context you're feeding it has gotten noisier.</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-6">
+                    <h3 class="font-display text-lg text-acid mb-3">Three things you can do about it</h3>
+                    <ul class="space-y-4 text-sm font-sans text-gray-300">
+                        <li class="flex items-start gap-3">
+                            <span class="text-acid font-mono shrink-0">—</span>
+                            <span><span class="text-chrome font-medium">Use <code class="text-acid bg-surface px-1">/clear</code> when switching between unrelated tasks.</span> The context file persists across clears; the conversation doesn't. A clean conversation is not a loss of work.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-acid font-mono shrink-0">—</span>
+                            <span><span class="text-chrome font-medium">Use <code class="text-acid bg-surface px-1">/compact</code> at natural breakpoints</span> — before switching topics, not just when the system prompts you. You know where your context boundaries are better than an autocompact system does.</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-acid font-mono shrink-0">—</span>
+                            <span><span class="text-chrome font-medium">Create a <code class="text-acid bg-surface px-1">/handoff</code> command</span> that summarizes the current session state before clearing, so you don't lose track of where you were. The handoff becomes the first message of the next session.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">CLAUDE.md discipline as prevention</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Context rot starts before the session does if your CLAUDE.md is bloated. Apply the deletion test to your context file regularly: read each line and ask whether it's actually changing Claude's output. Instructions that aren't changing behavior are consuming context budget without contributing.</p>
+                    <p class="text-gray-300 leading-relaxed">Review your CLAUDE.md once per project — not once forever. As a story evolves, some early context becomes outdated. Deleting stale instructions is as important as adding new ones.</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-4">
+                    <p class="text-xs font-sans text-gray-400"><span class="text-ice font-mono">SOURCE:</span> These patterns are drawn from the "Context hygiene" lesson in <a href="https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns" class="text-ice hover:text-acid transition-colors">jamditis/stash</a>, which extracts and organizes techniques from <a href="https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw" class="text-ice hover:text-acid transition-colors">The Agentic Lab</a>'s advanced Claude Code guide.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">NEXT:</span> Head to <a href="../module-2/" class="text-ice hover:text-acid transition-colors">Module 2</a> to write your first context file and apply the deletion test.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="./" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">CONCEPTS</a>
+                        <a href="../module-2/" class="text-xs font-mono text-acid">MODULE 02</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

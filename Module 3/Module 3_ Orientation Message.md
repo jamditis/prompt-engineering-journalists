@@ -64,6 +64,36 @@ The instructor's journalism skills repository includes 13 hooks that check for c
 
 ---
 
+## Skills vs. commands: the reliability question
+
+Skills and commands look similar on the surface — both are files that shape Claude's behavior, both are invoked with a slash — but they work differently in ways that matter.
+
+A **skill** contains domain knowledge Claude consults and applies using its judgment. When you invoke `/source-verification`, Claude reads the SKILL.md and decides how to apply the SIFT method to your specific situation. This is the right tool when the task requires judgment: evaluating a specific claim, analyzing a particular document, drafting a story with context-specific nuances.
+
+A **command** is a deterministic trigger. When you invoke it, the defined workflow runs exactly as written — the same steps, the same sequence, every time. No interpretation. This is the right tool when consistency matters more than flexibility: a pre-publication checklist that should always run the same checks, a batch process that should always follow the same pipeline, a report format that should always use the same structure.
+
+The journalism analogy: a skill is a style guide. A command is a mandatory pre-publication checklist. The style guide is reference material — reporters consult it when they think something needs checking, and they apply it with judgment. The checklist is a fixed sequence — it runs in the same order before every story, no skips, no interpretation. Both are valuable. They solve different problems.
+
+The rule of thumb: when something needs to happen reliably and the same way every time, build a command. When something needs judgment and contextual interpretation, write a skill. The mistake is treating everything as a skill when some workflows need the determinism of a command.
+
+## Capture failures while they're fresh
+
+Fixing a mistake is not the same as learning from it. The correction that stays only in your head disappears when the session ends.
+
+When an AI tool fails — generates a hallucinated quote, ignores a clear instruction, selects the wrong approach for a task — that failure has two forms. The immediate form: you correct it and move on. The lasting form: you captured the exact prompt that triggered it, what category of failure it was, and what rule should prevent it next time.
+
+Most people take only the first form. The correction disappears into the session history. The next session makes the same mistake.
+
+The practice: when something goes wrong, stop and capture it in a structured log entry before the session context evaporates. What exactly did you ask for? What category of failure was it — hallucination, instruction ignored, context lost, incomplete execution? What's your hypothesis for why it happened? What rule in your CLAUDE.md would prevent it next time?
+
+The flip side: when something works unusually well — a prompt that produced exactly what you needed, a phrasing that landed cleanly — log that too. What made it effective? Can it be templated into a skill?
+
+Over time, this log becomes more valuable than the individual corrections. It's the difference between fixing a source error once and developing a better source-evaluation practice.
+
+In the exercise this week, you'll create `/log_error` and `/log_success` commands to formalize this habit.
+
+---
+
 ## From context files to skills
 
 Last week you wrote a CLAUDE.md file to give the AI persistent context about your beat. That file changed how the AI responds to *every* prompt in your project. This week, you'll build on that with skills and hooks — reusable tools that you trigger on demand for specific tasks.

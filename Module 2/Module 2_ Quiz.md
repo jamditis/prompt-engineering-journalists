@@ -80,16 +80,16 @@ D) Other tools don't support project context files
 
 ### Question 5
 
-When should you use a project context file instead of including instructions in each prompt?
+A journalist has been building a beat project for six weeks. Her CLAUDE.md has grown to 80 lines and includes instructions from early drafts she's since changed, notes she made to herself, and generic reminders like "always verify facts." She notices responses feel less focused than they were in week one. What's the most likely cause?
 
-A) When the instructions apply to a single prompt only
+A) The AI model has been downgraded since she started the project
 
-B) When the instructions are generic and apply to all AI interactions everywhere
+B) Her CLAUDE.md has grown so long that generic and outdated instructions are diluting the specific ones that matter
 
-C) When the same instructions should apply to every conversation in a specific project
+C) She needs to restart Claude Code to clear the cache
 
-D) When you want to override the AI's safety guidelines
+D) Context files stop working after 30 days and need to be rewritten from scratch
 
-**Correct answer:** C
+**Correct answer:** B
 
-**Explanation:** Context files are for project-specific, recurring instructions. If you're writing the same thing at the start of every session — "I cover city hall for the Daily News, use AP style, always attribute claims" — that belongs in a context file. One-off instructions still go in the prompt.
+**Explanation:** Context files work by prepending their content to every conversation. When a context file grows bloated — with generic instructions that don't change the AI's behavior, or outdated rules that conflict with current ones — those tokens compete with the instructions that actually matter. Applying the deletion test to an existing CLAUDE.md is as important as applying it when writing it. If a line wouldn't change the AI's output for someone who knows your beat, cut it.

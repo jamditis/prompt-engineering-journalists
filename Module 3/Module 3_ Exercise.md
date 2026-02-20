@@ -160,7 +160,60 @@ As you work through the verification, Claude will help you document:
 
 ---
 
-## Part 3: Write your own skill (15 minutes)
+## Part 3: Create error and success logging commands (15 minutes)
+
+One of the most consistent lessons from experienced CLI practitioners: when an AI tool fails, the failure is most useful if you capture it immediately. Corrections that stay in your head evaporate. Corrections that get written down become rules.
+
+In this part, you'll create two personal commands that formalize this practice: `/log_error` for failures and `/log_success` for wins.
+
+### Step 1: Create the log directory
+
+Ask your CLI tool to set up a log directory in your home folder:
+
+```
+Create a directory at ~/.claude/logs/ to store my AI error and success logs
+```
+
+### Step 2: Create the /log_error command
+
+```
+Create a personal command called log_error that I can invoke whenever Claude does something wrong. When I invoke it, the command should:
+
+1. Ask me what I was trying to do (the exact prompt or task)
+2. Ask me what category of failure it was — options: hallucination (invented something), instruction ignored, context lost (forgot earlier info), wrong approach, incomplete
+3. Ask what Claude did instead of what I wanted
+4. Ask what I think caused the failure
+5. Write a structured log entry to ~/.claude/logs/errors.md with: date, category, my prompt (verbatim), expected behavior, actual behavior, root cause hypothesis
+
+Save the command to ~/.claude/commands/log_error.md
+```
+
+### Step 3: Create the /log_success command
+
+```
+Create a personal command called log_success that I can invoke when a prompt works well. When I invoke it, the command should:
+
+1. Ask me what I was trying to do
+2. Ask me what made the response unusually good
+3. Ask whether this prompt could be templated into a reusable skill
+4. Write a structured entry to ~/.claude/logs/successes.md with: date, what I asked for, what worked, whether to template
+
+Save the command to ~/.claude/commands/log_success.md
+```
+
+### Step 4: Test both commands
+
+Invoke `/log_error` and document something that went wrong in this exercise — even something minor, like a prompt that needed a second attempt. Then invoke `/log_success` and document something that went well.
+
+Check that the entries were written to the correct files in `~/.claude/logs/`.
+
+### The habit
+
+These commands are only useful if you use them consistently. The trigger: whenever you have to re-ask a question or correct a response, pause and run `/log_error` first. When something works better than expected, run `/log_success`. Over a few weeks, the log becomes a record of what your AI environment actually does — and what instructions prevent the failures from repeating.
+
+---
+
+## Part 4: Write your own skill (15 minutes)
 
 The best way to understand skills is to write one. In this part, you'll create a simple skill for a task you do regularly.
 

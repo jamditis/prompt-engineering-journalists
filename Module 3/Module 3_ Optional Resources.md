@@ -82,6 +82,53 @@ A few months after Willison declared skills a bigger deal than MCP, OpenAI added
 
 ---
 
+### Advanced patterns: commands, hooks, and error logging
+
+The three resources below are drawn from *Advanced Claude Code Patterns That Move the Needle*, a guide based on 2,000+ hours of building with LLMs. They extend directly from this module's core topics — skills, hooks, and workflow automation. Read any or all, in order.
+
+*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw). Extracted and organized in [jamditis/stash](https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns).*
+
+---
+
+**"Commands as lightweight local apps"** — The Agentic Lab via jamditis/stash
+https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/02-commands-as-apps.md
+
+*Reading time: 10 minutes*
+
+The clearest explanation of what makes slash commands different from skills. A skill contains domain knowledge that Claude consults probabilistically — whether it activates and how closely it follows the instructions varies. A `/command` is a deterministic trigger: when you invoke it, the workflow runs as defined, every time.
+
+The framing here — "Claude as a Service" — is useful for newsrooms. Each `/command` is a micro-application with a defined interface, specific workflow, and consistent output. The piece includes a worked example of a multi-phase command that launches parallel subagents, assembles assets, and writes output — showing what's possible when you stop thinking of commands as chat shortcuts and start treating them as automation tools.
+
+For Module 3's exercise, the relevant distinction is: the source-verification skill you installed is knowledge-based and invocable; if you wanted that workflow to run automatically on every article before publication, you'd wrap it in a command.
+
+---
+
+**"Hooks for deterministic safety"** — The Agentic Lab via jamditis/stash
+https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/03-hooks-for-safety.md
+
+*Reading time: 12 minutes*
+
+This extends what Module 3's required readings cover about hooks. Where the journalism skills library uses hooks as editorial quality checks (flagging AP Style violations, source attribution gaps, AI filler language), this piece covers hooks as safety guardrails — programmatic blocks that run before or after any CLI action.
+
+The practical setup described — hooks combined with `--dangerously-skip-permissions` — removes constant permission prompts while maintaining hard blocks on specific patterns (recursive deletes, force pushes to protected branches). The approach illustrates a general principle for any automated journalism workflow: the right place to enforce constraints is in code that cannot be bypassed, not in prompts that might be ignored.
+
+The bash examples translate directly. If you're building pipelines that touch source documents, the pattern of "allow by default, block specific patterns explicitly" is worth understanding before those pipelines touch anything you can't recover.
+
+---
+
+**"The error logging system"** — The Agentic Lab via jamditis/stash
+https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/01-error-logging-system.md
+
+*Reading time: 10 minutes*
+
+The Module 3 exercise asks you to add a "Hard-won lessons" section to your skill file — one entry per correction you have to make. This piece makes the case for why that section is the most important part of your CLAUDE.md over time, and shows how to build a structured system for capturing it.
+
+The core pattern is two slash commands — `/log_error` and `/log_success` — that fork the current conversation, interview you about what went wrong or right, and write a structured entry to a log file. Failure categories covered: hallucination, instruction ignored, context lost, wrong tool selection, incomplete execution. Each entry captures the exact triggering prompt, expected vs. actual behavior, and a hypothesis for the root cause.
+
+For journalists, the practical payoff is a record of what your AI environment gets wrong — and a log of what prompts reliably produce good results. Both are more valuable than they appear now and become more valuable as your beat project accumulates history.
+
+---
+
 ### Building your own skills
 
 **"Custom slash commands" — Claude Code documentation**

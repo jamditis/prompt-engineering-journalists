@@ -80,19 +80,19 @@ D) Import it with `use foia-requests` at the start of your session
 
 ### Question 5
 
-What is the difference between a skill and an MCP server?
+A reporter runs a batch job every Monday that processes 50 press releases, extracts all factual claims, checks each against a source database, and formats the results into a verification report. She wants this to work identically every week. Should she build this as a skill or a command, and why?
 
-A) Skills run on Anthropic's servers; MCP servers run locally
+A) A skill, because skills are designed for repeatable tasks
 
-B) Skills are static instruction files; MCP servers provide live connections to external tools and data
+B) A command, because a command provides a deterministic trigger — the same workflow runs in the same order every time, regardless of how Claude interprets the situation
 
-C) Skills work with Claude Code; MCP servers only work with the API
+C) Either would work equally well
 
-D) Skills are free; MCP servers require a paid subscription
+D) A command, because commands run faster than skills
 
 **Correct answer:** B
 
-**Explanation:** Skills are markdown files containing instructions that Claude follows. MCP (Model Context Protocol) servers are active connections to databases, APIs, or other systems that Claude can query during a task. A FOIA skill tells Claude how to write a request; an MCP server could connect Claude directly to a public records database.
+**Explanation:** Skills are knowledge files that Claude applies using its judgment. When a workflow needs to run the same way every time — same steps, same sequence, no variation — a command is the right tool. Commands are deterministic: you define the workflow, and it executes as written. Skills are probabilistic: Claude reads them and applies them contextually. For batch processes with fixed requirements, consistency matters more than flexibility.
 
 ---
 

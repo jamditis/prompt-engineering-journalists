@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logging errors and wins | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../module-3/" class="text-acid">[ 03 ]</a>
+                    <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../module-5/" class="text-gray-400 hover:text-ice transition-colors">[ 05 ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">CONCEPTS — MODULE 03</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">Logging errors and wins</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">A systematic record of what fails and what works turns one-off corrections into durable improvements.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">The problem with one-off corrections</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">When Claude does something wrong, you correct it and move on. That correction lives only in your head — or at most in a comment to yourself. Next week, when a different session makes the same mistake, you correct it again.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">The pattern repeats without accumulating into anything you can act on. Each correction is isolated. Nothing compounds.</p>
+                    <p class="text-gray-300 leading-relaxed">Think of a reporter who notices every time a source misleads them but never updates how they evaluate that source. The individual corrections are real, but they're not building anything. The same instincts that led to the first mistake lead to the next one.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What error logging is</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Error logging is a structured system for capturing failures when they happen. You record what you asked for, what the AI did instead, what category of failure it was, and a hypothesis about the root cause.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">Common failure categories: hallucination, instruction ignored, wrong tool selected, incomplete execution, context lost between steps. These aren't vague — each one points to a different fix.</p>
+                    <p class="text-gray-300 leading-relaxed">The exact prompt that triggered the failure is the most critical piece. You need the verbatim text, not your recollection of it. Memory smooths over the details that matter most for diagnosis.</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-6">
+                    <h3 class="font-display text-lg text-acid mb-3">The <code class="text-chrome bg-surface px-1 text-sm">/log_error</code> command</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-3">This is a slash command that forks the current conversation to preserve context, asks you what went wrong, and writes a structured entry to a log file. You invoke it immediately after a failure — while the session context is still fresh and before you've started compensating for the mistake.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">Over time, the log becomes a record of what your AI environment gets wrong. It's also a record of conditions: what were you working on, how long had the session been running, what had already been loaded into context. Patterns emerge from that detail that don't emerge from vague recollections.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Log wins too</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">The mirror command is <code class="text-acid bg-surface px-1 text-sm">/log_success</code>. It captures prompts that worked well: what you asked for, what made the phrasing effective, whether it can be templated for reuse.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">Successful patterns are as useful as failure analysis. A prompt that produced exactly the right output — the right level of detail, the right format, the right scope — is the input that eventually becomes a skill or a standing instruction in your CLAUDE.md.</p>
+                    <p class="text-gray-300 leading-relaxed">Without a log, those wins disappear the same way errors do. You remember vaguely that "something like this worked before" but can't reconstruct it precisely enough to reuse it.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Where the logs feed back</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">The Module 2 exercise asks you to add a "hard-won lessons" section to your CLAUDE.md and leave it empty for now. This is where log entries feed back: each one starts as a <code class="text-acid bg-surface px-1 text-sm">/log_error</code> capture, gets analyzed for its root cause, and becomes a rule that prevents the same mistake from recurring.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">Over a project, that section becomes the most useful part of your context file. It's the accumulated record of what this specific AI, in this specific workflow, gets wrong — and what you've figured out about why.</p>
+                    <p class="text-gray-300 leading-relaxed">That's different from generic advice about how to prompt AI. It's specific to your work, your tools, your common tasks. Nobody else has that file. You built it.</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-4">
+                    <p class="text-xs font-sans text-gray-400"><span class="text-ice font-mono">SOURCE:</span> Adapted from "The error logging system" pattern, originally by <a href="https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw" class="text-ice hover:text-acid transition-colors">The Agentic Lab</a>, extracted and organized at <a href="https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns" class="text-ice hover:text-acid transition-colors">github.com/jamditis/stash</a>.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">NEXT:</span> Head to <a href="../module-3/" class="text-ice hover:text-acid transition-colors">Module 3</a> to start building your skills library — and start the habit of logging what works.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="./" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">CONCEPTS</a>
+                        <a href="../module-3/" class="text-xs font-mono text-acid">MODULE 03</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -24,6 +24,16 @@ If you didn't see much difference, explain why you think that happened. Was the 
 
 ---
 
+### Discussion question 3a: Keeping your CLAUDE.md honest
+
+Practitioners who use CLI tools heavily report a consistent pattern: context files start lean and useful, then grow as the project develops, then get bloated enough to start hurting rather than helping.
+
+What's your approach to keeping a context file sharp over time? Do you have a regular review process, or do you wait until you notice something going wrong? What would signal to you that a context file has become a liability instead of an asset?
+
+If you've used a style guide or reporting checklists in your work before, how does the maintenance challenge compare?
+
+---
+
 ### Discussion question 3: How could shared context files help a newsroom?
 
 Context files are just text files. They can be shared, version-controlled with Git, and maintained by a team.
