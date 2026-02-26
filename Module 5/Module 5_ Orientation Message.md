@@ -10,15 +10,67 @@ This week, you'll learn how major news organizations are using these technologie
 
 ---
 
+## Why RAG matters for journalists
+
+Every large language model carries two types of knowledge. **Parametric knowledge** is what the model learned during training -- the patterns, facts, and associations baked into its weights. **Grounded knowledge** comes from documents you provide at query time -- your archives, your source materials, your reporting notes.
+
+This distinction matters because parametric knowledge can be wrong or outdated, and you have no way to check where it came from. Grounded knowledge has a citation trail. For journalists, the citation trail is everything.
+
+RAG is the technique that adds grounded knowledge to an AI's responses. Instead of relying on what the model "remembers," RAG retrieves relevant documents from a knowledge base and includes them in context before the model generates an answer. The result: you can trace an AI-generated response back to the specific document, paragraph, and source it drew from.
+
+This is what makes RAG safe for newsrooms in ways that plain prompting is not. One of the biggest risks with AI in journalism is losing track of where information came from. RAG, done right, preserves attribution through the entire pipeline -- from retrieval to generation to the final output a reporter reads. The journalism rule is the same one you already follow: if you can't cite it, don't publish it. Grounded knowledge is citable. Parametric knowledge is not.
+
+The Reuters Institute's 2025 survey helps explain why RAG matters now: 77% of UK journalists have never used AI for trend detection, 80% have never used it for media monitoring, and 81% have never used it for document analysis. In each case, the gap isn't that AI can't help — it's that without grounded knowledge, the results aren't trustworthy enough for journalism. A generic prompt asking "what are the trends in my beat area?" pulls from training data you can't verify. The same question pointed at your own archive of council minutes, budget documents, and court filings produces answers you can trace to specific sources. RAG is what closes that gap.
+
+---
+
+## Agents: tools with autonomy
+
+AI agents go beyond question-and-answer. An agent can use tools, make decisions, and complete multi-step tasks: searching databases, calling APIs, reading files, and synthesizing results. The Washington Post's Haystacker helps investigative reporters sift through massive datasets. The New York Times's Echo assists with content production workflows.
+
+But here's the line that can't move: **editorial judgment stays with the journalist.** Agents can research, summarize, and draft. They cannot decide what's newsworthy, evaluate source credibility, or make ethical calls about what to publish. The tools covered in this module -- MCP, knowledge bases, retrieval pipelines -- are designed to augment reporting, not replace it. Both Haystacker and Echo keep humans in the review loop. That's by design.
+
+---
+
+## MCP: connecting AI to your data
+
+MCP (Model Context Protocol) is the bridge between Claude Code and external data sources -- file systems, databases, APIs. Think of it as giving the AI a library card instead of making it guess from memory.
+
+In this week's exercise, you'll configure an MCP server to connect Claude Code to a folder of markdown files. This is a small-scale version of the same pattern that powers newsroom-scale RAG systems: AI reads your documents, retrieves what's relevant, and generates answers grounded in your sources.
+
+The configuration file you write is infrastructure. Commit it to version control alongside your CLAUDE.md and skills. Anyone who clones your project gets the same data connections.
+
+**Every tool you connect costs context.** Each MCP server you configure consumes tokens in your session before you've asked anything — the server's schema, its available tools, its connection overhead. This is a real cost, not a theoretical one. Before connecting a data source, ask whether the capability it adds justifies what it takes from your context budget. A database connection you rarely need still consumes context on every session where you don't use it. A lean, purposeful set of integrations consistently outperforms a crowded one.
+
+## When Claude delegates: the subagent problem
+
+For complex multi-step tasks, Claude sometimes delegates parts of the work to separate sub-sessions — subagents — that each handle a focused piece and return results. This happens automatically. You often won't know it's happening.
+
+Two things are worth knowing about this before you build pipelines in this module.
+
+First, model selection. By default, Claude spawns lighter, cheaper models for subagents, regardless of what's being delegated. For a journalism research task — synthesizing sources, evaluating evidence, identifying patterns — a lighter model produces worse results than the main session would. You can override this default. Add `Always use the most capable available model for research subagents` to your CLAUDE.md to override the default for delegated work.
+
+Second, and more important for journalism: errors compound across handoffs. When one subagent's output becomes the next subagent's input, a fabricated statistic in step one becomes an assumed fact in the analysis at step two. By step three, it's a headline candidate. The failure is harder to trace than a single-session error because you never saw the intermediate steps.
+
+The mitigation is the same principle that applies to any multi-source story: verify at every handoff. Don't pass a subagent's output to the next stage without checking it. Treat intermediate results the way you'd treat information from a source you haven't yet independently confirmed. "The AI said so" is not a source. "The document says so" is.
+
+---
+
+## From the field
+
+Your instructor built a working example of this pipeline: the [Jay Rosen Digital Archive](https://github.com/jamditis/rosen-scraper), a collection of 765+ records from journalist Jay Rosen's career. The project applies entity extraction and RAG to primary source materials, using the Gemini API and Google Sheets to turn raw documents into a searchable knowledge base. This kind of archive-to-knowledge-base pipeline is exactly what Module 5 prepares you to build.
+
+---
+
 ## Learning objectives
 
 By the end of this module, you will be able to:
 
-1. **Explain what AI agents are** and how they differ from standard chatbots, including their ability to use tools, make decisions, and complete multi-step tasks.
+1. **Explain the difference between parametric and grounded knowledge** and why grounded, source-attributed AI responses are safer for journalism than responses drawn from training data alone.
 
-2. **Describe how RAG works** and why it matters for journalism, particularly for searching archives, fact-checking, and generating source-attributed content.
+2. **Describe how RAG works** and how it preserves source attribution through the retrieval-to-generation pipeline.
 
-3. **Evaluate the tradeoffs** between AI autonomy and editorial control, identifying where human oversight is necessary in agent-based workflows.
+3. **Evaluate the tradeoffs** between AI autonomy and editorial control, identifying where human oversight is required in agent-based workflows.
 
 4. **Configure a basic MCP server** to connect an AI assistant to a local knowledge base, demonstrating the practical mechanics of RAG.
 
@@ -42,11 +94,33 @@ By the end of this module, you will be able to:
 
 **RAG (Retrieval-Augmented Generation)**: A technique that retrieves relevant documents from a knowledge base and includes them in the AI's context before generating a response.
 
+**Parametric knowledge**: What an LLM learned during training -- patterns and associations stored in the model's weights. Can be outdated or wrong, and has no citation trail.
+
+**Grounded knowledge**: Information provided to the model at query time from external documents. Traceable to specific sources.
+
 **MCP (Model Context Protocol)**: Anthropic's open standard for connecting AI models to external data sources and tools.
 
 **Knowledge base**: A structured collection of documents, data, or information that an AI system can search and reference.
 
 **Grounding**: The practice of connecting AI responses to specific source documents, reducing hallucination and enabling attribution.
+
+**Human-in-the-loop**: A design pattern where automated systems require human review and approval before outputs are finalized or published.
+
+---
+
+## Your project is infrastructure
+
+Across five weeks, you've built:
+
+- A **CLAUDE.md** that encodes your beat context and newsroom standards
+- **Skills** that encode your verification methods and editorial processes
+- **Hooks** that enforce those standards automatically
+- A **pipeline** that fetches, cleans, and analyzes content at scale
+- An **MCP configuration** that connects it all to your source materials
+
+All of it lives in version control. All of it is portable. Clone the repo on a new machine and the same context, tools, and data sources come with it. Hand it to a colleague and they inherit your methods.
+
+This is context engineering at scale. You started in Module 1 with one-off prompts and a chat window. You're ending Module 5 with a versioned environment any journalist on your team can clone and extend.
 
 ---
 

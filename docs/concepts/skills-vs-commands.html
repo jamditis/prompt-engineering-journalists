@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills vs. commands | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../module-3/" class="text-acid">[ 03 ]</a>
+                    <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../module-5/" class="text-gray-400 hover:text-ice transition-colors">[ 05 ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">CONCEPTS — MODULE 03</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">Skills vs. commands</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Both are tools you can give Claude. They work in fundamentally different ways — knowing when to use which matters.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What skills are</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Skills are instruction files Claude reads when you invoke them. When you call <code class="text-acid bg-surface px-1 text-sm">/source-verification</code>, Claude loads the skill's markdown file and applies its knowledge to your session.</p>
+                    <p class="text-gray-300 leading-relaxed">How closely it follows those instructions, which parts it emphasizes, how it formats output — all of that involves Claude's judgment. A skill is reference material the model consults, not a script it executes.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What commands are</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">A slash command is a deterministic trigger. When you invoke it, the workflow it specifies runs exactly as written, every time. Claude executes the specified steps — it doesn't interpret them.</p>
+                    <p class="text-gray-300 leading-relaxed">That's the core distinction: skills are probabilistic (Claude decides how to apply the knowledge); commands are deterministic (the workflow runs as defined, in the order defined, without Claude deciding whether each step is necessary).</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-6">
+                    <h3 class="font-display text-lg text-acid mb-3">A journalism analogy</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-3">Compare a style guide to a pre-publication checklist. A style guide is reference material — reporters consult it when something needs checking, and how strictly they apply it varies by context and experience.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">A pre-publication checklist is a fixed sequence: every story goes through these exact steps before it publishes, in this order, no skips. Skills are style guides. Commands are checklists.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Skill + command = reliable domain expertise</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">The pattern that works: put domain knowledge in a skill — the SIFT verification method, AP Style enforcement, FOIA request guidelines — then wrap that skill in a command for tasks where you need guaranteed execution.</p>
+                    <p class="text-gray-300 leading-relaxed">The skill holds the expertise. The command ensures it always runs when it should, not just when Claude decides it's relevant.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">When to use each</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">If you need contextual judgment about when and how to apply expertise, write a skill. If you need a defined workflow to execute the same way every time — batch processing, pre-publish checks, report generation — build a command around it.</p>
+                    <p class="text-gray-300 leading-relaxed">Many tasks start as skills and get promoted to commands when the process stabilizes. When you find yourself using a skill the same way every time, that's the signal to wrap it in a command.</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-4">
+                    <p class="text-xs font-sans text-gray-400"><span class="text-ice font-mono">SOURCE:</span> These patterns are drawn from the "Commands as lightweight local apps" lesson in <a href="https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns" class="text-ice hover:text-acid transition-colors">jamditis/stash</a>, which extracts and organizes techniques from <a href="https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw" class="text-ice hover:text-acid transition-colors">The Agentic Lab</a>'s advanced Claude Code guide.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">NEXT:</span> Head to <a href="../module-3/" class="text-ice hover:text-acid transition-colors">Module 3</a> to write your first skill and understand when you'd convert it to a command.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="./" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">CONCEPTS</a>
+                        <a href="../module-3/" class="text-xs font-mono text-acid">MODULE 03</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -9,26 +9,47 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Instructor:** Joe Amditis, Center for Cooperative Media, Montclair State University
 **Prerequisite:** Prompt Engineering 101 for Journalists (or equivalent)
 
-This course moves journalists from web-based AI chat interfaces to terminal CLI tools: Claude Code, Gemini CLI, Codex CLI, and Aider.
+This is the sequel to Prompt Engineering 101 for Journalists. It moves journalists from web-based AI chat interfaces to terminal CLI tools: Claude Code, Gemini CLI, and Codex CLI. Each module extends a concept from the 101 course: web prompting → CLI, typing context every time → writing it once in a file, one-off prompts → reusable skills, no-code automation → scripted pipelines, understanding AI → building with agents and RAG.
 
 ## Structure
 
 ```
-mooc/
 ├── Introduction Module/     # Welcome, syllabus, requirements, getting help
-├── Module 1/                # Escaping the chat window (CLI basics)
-├── Module 2/                # Voice-controlled AI
-├── Module 3/                # Custom skills for Claude Code
-├── Module 4/                # CLI workflows for newsrooms
-├── Module 5/                # Agents and RAG
+├── Module 1/                # Escaping the chat window (programmatic AI control)
+├── Module 2/                # Prompting with files and project context
+├── Module 3/                # Custom skills (domain expertise → reusable tools, hooks)
+├── Module 4/                # CLI workflows (Unix philosophy, cost-conscious pipelines)
+├── Module 5/                # Agents and RAG (grounded knowledge, source attribution)
 ├── Final Project/           # Guidelines, proposal template, examples
 ├── Resources/
 │   ├── examples/            # Sample files for exercises
 │   ├── scripts/             # Starter shell scripts
 │   ├── skills/              # Example Claude skills
-│   └── mcp-configs/         # MCP configuration examples
-└── [Original .docx templates]
+│   ├── mcp-configs/         # MCP configuration examples
+│   └── mollick-reading-list.md  # Curated Ethan Mollick articles by theme (referenced from Module 1 Optional Resources)
+├── docs/                    # Course website (GitHub Pages)
+└── [Original .docx templates from Knight Center]
 ```
+
+## Key course repositories
+
+- **Journalism skills:** https://github.com/jamditis/claude-skills-journalism (36 skills, 13 hooks)
+- **AI tools for newsrooms:** https://github.com/jamditis/tools
+- **Scrapefruit CLI:** https://github.com/jamditis/scrapefruit-cli
+
+## Course philosophy
+
+This course is grounded in Ethan Mollick's framework for understanding AI (see "A guide to which AI to use in the agentic era," One Useful Thing, Feb 2026):
+
+- **Models** — the underlying AI intelligence (Claude Opus 4.6, GPT-5.2, Gemini 3 Pro)
+- **Apps** — the interfaces users interact with (ChatGPT.com, Claude.ai, Gemini.google.com)
+- **Harnesses** — systems that give models tools, file access, and the ability to take multi-step autonomous action
+
+This course moves students from apps to harnesses. CLI tools (Claude Code, Gemini CLI, Codex CLI) are harnesses. Context files, skills, hooks, pipelines, and MCP are all harness-layer techniques.
+
+The philosophical shift the course teaches: from prompting (conversational, one-off) to managing (task delegation, oversight, course-correction). As Mollick puts it: "You aren't prompting, you are managing."
+
+When writing course content, frame CLI tools as harnesses, not just "different interfaces." The student already knows how to use apps. This course teaches them to delegate work.
 
 ## Module content pattern
 
@@ -53,13 +74,97 @@ Each module contains 8 markdown documents:
 - **Claude Code:** `npm install -g @anthropic-ai/claude-code`
 - **Gemini CLI:** `npm install -g @google/gemini-cli` (free tier: 1,000 req/day)
 - **Codex CLI:** `npm install -g @openai/codex`
-- **Aider:** `pip install aider-chat`
-- **Voice:** Gemini Flash API, Windows Speech, Whisper
+- **Context files:** CLAUDE.md, GEMINI.md, AGENTS.md
 
 ## Notes
 
 - Content is markdown, ready for conversion to .docx or LMS upload
 - Original Knight Center .docx templates preserved for reference
+- All content uses LLM-first framing: exercises describe a workflow to hand to an LLM, not step-by-step technical instructions students follow manually
+- Aider has been removed from all content — tools are Claude Code, Gemini CLI, and Codex CLI only
+
+## Exercise design rules
+
+This section governs how all exercise steps must be written. These rules apply to the `docs/module-*/index.html` files and any future exercise content.
+
+### Core principle: students launch Claude, then delegate everything
+
+Students open a terminal, type `claude`, and press Enter. They are now inside an interactive session. From that point, they do not type terminal commands — they paste natural-language prompts and Claude does the work.
+
+The student's job is to **specify what they want clearly enough that Claude can execute it**. That is the skill the course teaches.
+
+### Code block visual vocabulary
+
+Every code block in an exercise has a label and a text color. There are exactly three types:
+
+| Label | Text color class | When to use |
+|-------|-----------------|-------------|
+| `terminal` | `text-acid` | Real shell commands the student types in the terminal |
+| `claude code` | `text-gray-300` | Prompts the student pastes inside an active Claude Code interactive session |
+| `claude.ai` | `text-gray-300` | Prompts for the Claude.ai web interface (Module 1 comparison only) |
+
+### The only allowed terminal commands
+
+A `terminal` / `text-acid` block should contain **only** these commands:
+
+- `claude` — bare, no arguments, to launch an interactive session
+- `cd ~/folder-name` — only when a directory change is necessary for CLAUDE.md to load correctly (Module 2 specifically)
+- `npm install -g @anthropic-ai/claude-code` — first-time install
+- The Gemini CLI install command — first-time install
+
+**Nothing else belongs in a terminal block.** File creation, folder setup, git operations, script writing, JSON editing — all of that is done by Claude inside the session, not by the student in the terminal.
+
+### The forbidden pattern: `claude "..."` one-shots
+
+Never write:
+
+```
+claude "Read this file and summarize it"
+```
+
+This is a non-interactive one-shot invocation. Students running it never enter a session, can't see Claude's reasoning, and can't course-correct. It also misrepresents how Claude Code is meant to be used.
+
+Always use the bare `claude` launch + a `claude code` prompt block instead.
+
+### What "LLM-first" means in practice
+
+When writing an exercise step, ask: "Is the student doing this, or is Claude doing this?" If Claude should be doing it, the step is a `claude code` prompt, not a terminal command. Examples:
+
+- Creating a folder → `claude code` prompt asking Claude to create it
+- Writing a config file → `claude code` prompt asking Claude to write it (with correct auto-detected values)
+- Running a script → `claude code` prompt asking Claude to build and run it
+- Verifying a result → `claude code` prompt asking Claude to confirm it worked
+
+Steps where the student does something in the terminal: launch Claude (`claude`), change directory before relaunching when strictly necessary.
+
+### Official Claude Code file types
+
+Only these are official Claude Code patterns:
+
+- **CLAUDE.md** — project context file, read automatically at session start
+- **`.claude/commands/`** — custom slash commands (filename = command name, e.g. `source-check.md` → `/source-check`)
+
+**LESSON.md and RULE.md are not official Claude Code file types.** They were personal conventions. Do not reference them in course content.
+
+## Current state (as of Feb 2026)
+
+All 5 modules + Introduction module have complete 8-document sets. Readings are populated across all modules with required articles added and Mollick synthesis document created.
+
+### Readings pool — key sources added
+- **Ethan Mollick** (One Useful Thing): ~15 articles synthesized in `Resources/mollick-reading-list.md`; two pieces assigned as required readings (intro + module 1)
+- **Generative AI in the Newsroom** (generative-ai-newsroom.com): Nick Hagar (coding agents, beat reporting), Clare Spencer (multilingual newsrooms), Joe Amditis (vibe coding), Jessy de Cooker (quote extraction)
+- **Joe Amditis** (925 Struggle Street Substack): agent architecture piece assigned to modules 2 and 5
+- **Author diversity**: Clare Spencer, Jessy de Cooker included; agent research targeted Vicki Boykis, Hilke Schellmann, Meredith Broussard, Rachel Thomas, Joy Buolamwini, Rumman Chowdhury
+
+### Completed work (as of Feb 2026)
+
+- **Optional resources readings**: Willison → Module 3; Vincent + Doctorow → Module 5
+- **URL verification**: 7 dead links fixed or removed across all modules; 403s from generative-ai-newsroom.com and Axios flagged as bot-blocking (likely live)
+- **Exercise solution keys**: written for all 5 modules (model answer + grader rubric, one file per module)
+- **Syllabus sync**: both files now identical canonical version
+- **Exercise rewrites**: all 5 module exercises rewritten to follow the LLM-first rules documented above — no more `claude "..."` one-shots, no more heredoc patterns, no more manual terminal commands beyond `claude` and `cd`
+- **LESSON.md/RULE.md removed**: Module 3 skill types card corrected; these are not official Claude Code file types
+- **CSS word wrap**: `pre code` blocks now wrap globally across the course site (`docs/assets/css/amditis.css`)
 
 # AI Writing Guidelines: Avoiding Slop Phrases
 Use this file as a reference when reviewing AI-generated content. These patterns indicate lazy, filler writing that should be edited or avoided.

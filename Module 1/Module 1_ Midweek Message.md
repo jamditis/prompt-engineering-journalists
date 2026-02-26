@@ -18,4 +18,4 @@ Your discussion posts are due by Friday. I've read some good observations about 
 
 Keep going. The terminal will feel more natural by the end of the week.
 
-[Instructor name]
+Joe Amditis

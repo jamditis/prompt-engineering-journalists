@@ -37,7 +37,7 @@ You need a terminal application to run commands.
 - **Windows:** Windows Terminal (install from Microsoft Store) or PowerShell
 - **Linux:** Your default terminal emulator
 
-Windows users: Git Bash is helpful for following Mac/Linux commands. Install Git for Windows from https://git-scm.com/downloads.
+Windows users: Git Bash (included with the Git installer — see below) is helpful for following Mac/Linux commands.
 
 ### Text editor
 
@@ -45,12 +45,24 @@ You'll edit configuration files and write skills. VS Code works well and is free
 
 Any text editor will work. Avoid word processors like Microsoft Word.
 
-### Git (optional)
+### Git
 
-Git helps with version control for your skills and configurations. Not required, but useful.
+Git is required for this course. You'll use it to track your projects and to clone skills and tools from GitHub starting in Module 2. Your CLI tool handles the Git commands for you, but Git needs to be installed on your system.
 
+**To check if Git is installed:**
+```
+git --version
+```
+
+If you see a version number (e.g., `git version 2.43.0`), you're set.
+
+**To install Git:**
 - Download from https://git-scm.com/downloads
-- Or use a package manager
+- Or use a package manager:
+  - Mac: `brew install git` (requires Homebrew)
+  - Windows: `winget install Git.Git`
+
+Windows users: the Git installer includes Git Bash, which is helpful for following Mac/Linux commands.
 
 ---
 
@@ -73,7 +85,7 @@ Claude Code is the main tool for Modules 3-5. If you're unsure which tool to use
 **Cost:** Free tier includes 1,000 requests per day
 
 **Setup:**
-1. Install: `npm install -g @anthropic-ai/claude-code` (note: instructions at https://github.com/google-gemini/gemini-cli)
+1. Install: `npm install -g @google/gemini-cli` (see https://github.com/google-gemini/gemini-cli for full setup)
 2. Sign in with your Google account
 
 Good choice if you want to start without spending money.
@@ -87,16 +99,6 @@ Good choice if you want to start without spending money.
 2. Authenticate with your OpenAI account
 
 Works well if you already have ChatGPT Plus.
-
-### Option 4: Aider
-
-**Cost:** Pay per use (requires API key from Anthropic, OpenAI, or other provider)
-
-**Setup:**
-1. Install: `pip install aider-chat` (requires Python)
-2. Configure with your preferred API key
-
-Flexible option that works with multiple providers.
 
 ---
 
@@ -121,9 +123,10 @@ Complete these steps before the course begins:
 
 1. **Verify your operating system** meets the requirements above
 2. **Install Node.js** and confirm it works by running `node --version`
-3. **Open your terminal application** and make sure you can navigate folders
-4. **Choose an AI tool** and set up your API access or subscription
-5. **Install a text editor** if you don't have one
+3. **Install Git** and confirm it works by running `git --version`
+4. **Open your terminal application** and make sure you can navigate folders
+5. **Choose an AI tool** and set up your API access or subscription
+6. **Install a text editor** if you don't have one
 
 If you get stuck on any step, post in the "Technical help" forum. Include:
 - Your operating system and version
@@ -136,11 +139,10 @@ Don't wait until Module 1 to troubleshoot. Installation issues are easier to sol
 
 ## Hardware recommendations
 
-Any computer from the last 5-6 years should work. For voice transcription (Module 2):
+Any computer from the last 5-6 years should work.
 
-- **Microphone:** Built-in laptop microphones work but external mics produce better results
-- **GPU (optional):** Local transcription with Whisper/Parakeet runs faster with a GPU, but cloud options work without one
-- **Internet connection:** Required for all cloud-based tools; stable connection recommended for voice features
+- **Storage:** You'll create project directories with journalism documents and context files. No special storage requirements beyond normal use.
+- **Internet connection:** Required for all cloud-based AI tools. A stable connection is recommended for interactive CLI sessions.
 
 ---
 
@@ -152,4 +154,4 @@ If you need accommodations for any course activities, contact the instructor. We
 - Alternative formats for video content
 - Modified participation requirements
 
-Voice input and terminal tools can be accessibility features themselves. Let us know if you'd like to explore these options.
+Terminal tools and text-based workflows can be accessibility features themselves. Let us know if you'd like to explore these options.

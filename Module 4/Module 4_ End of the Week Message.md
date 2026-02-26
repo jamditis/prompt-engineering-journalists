@@ -22,4 +22,4 @@ The skills from this week (and Week 3) feed directly into the final project, whe
 
 See you in Week 5.
 
-[Instructor name]
+Joe Amditis

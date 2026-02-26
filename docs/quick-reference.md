@@ -78,38 +78,6 @@ A cheat sheet for AI coding tools covered in this course.
 
 ---
 
-### Aider
-
-| Action | Command |
-|--------|---------|
-| Start with Claude | `aider --model claude-sonnet-4-20250514` |
-| Start with GPT-4 | `aider --model gpt-4o` |
-| Add files to context | `aider file1.py file2.py` |
-| Watch mode | `aider --watch` |
-
-**Common flags:**
-
-| Flag | Purpose |
-|------|---------|
-| `--model MODEL` | Choose AI model |
-| `--edit-format diff` | Use diff format for edits |
-| `--no-auto-commits` | Disable auto git commits |
-| `--dark-mode` | Dark terminal theme |
-| `--yes` | Auto-confirm prompts |
-
-**In-session commands:**
-
-| Command | Purpose |
-|---------|---------|
-| `/add file.py` | Add file to context |
-| `/drop file.py` | Remove file from context |
-| `/undo` | Undo last change |
-| `/diff` | Show pending changes |
-| `/clear` | Clear chat history |
-| `/help` | Show all commands |
-
----
-
 ### OpenAI Codex CLI
 
 | Action | Command |
@@ -182,55 +150,107 @@ du -sh *
 
 ---
 
-## Voice transcription setup
+## Git basics
 
-### Using Whisper (local, free)
+You don't need to type Git commands yourself — your CLI tool handles them. But understanding the concepts helps you know what to ask for.
+
+### Key concepts
+
+| Concept | What it means |
+|---------|---------------|
+| **Repository (repo)** | A project folder tracked by Git. Has a hidden `.git` folder that stores the history. |
+| **Commit** | A saved snapshot of your project at a point in time, with a message describing what changed. |
+| **Clone** | Download a copy of a repository from GitHub to your computer. |
+| **Push** | Upload your local commits to GitHub. |
+| **Pull** | Download the latest changes from GitHub to your computer. |
+| **Stage** | Mark files to be included in the next commit. |
+
+### What to ask your CLI tool
+
+| What you want to do | What to ask |
+|----------------------|-------------|
+| Start tracking a project | "Initialize this directory as a Git repository" |
+| Save a snapshot | "Commit all changes with the message 'description of what changed'" |
+| Check what's changed | "What is the current Git status?" |
+| Download a project from GitHub | "Clone the repository at https://github.com/user/repo" |
+| Upload to GitHub | "Push this repository to GitHub" |
+| Get the latest version | "Pull the latest changes from the remote repository" |
+
+### Installing Git
+
+Git needs to be installed on your system even if your CLI tool runs the commands.
 
 ```bash
-# Install
-pip install openai-whisper
+# Check if installed
+git --version
 
-# Transcribe audio file
-whisper audio.mp3 --model base
+# Install (Mac)
+brew install git
 
-# Faster, less accurate
-whisper audio.mp3 --model tiny
-
-# More accurate, slower
-whisper audio.mp3 --model small
+# Install (Windows)
+winget install Git.Git
 ```
 
-### Using OpenAI API (cloud, paid)
+---
 
-```bash
-# Set API key
-export OPENAI_API_KEY="sk-..."
+## Project context file setup
 
-# Transcribe via API (in Python)
-python -c "
-import openai
-audio_file = open('audio.mp3', 'rb')
-transcript = openai.audio.transcriptions.create(
-  model='whisper-1',
-  file=audio_file
-)
-print(transcript.text)
-"
+### Claude Code — CLAUDE.md
+
+Create a `CLAUDE.md` file in your project directory:
+
+```markdown
+# Project context
+
+## Beat
+I cover Greenfield city government for the Daily News.
+
+## Style
+- AP style
+- No Oxford comma
+- "The city" on second reference
+
+## Source standards
+- Attribute all claims to named sources
+- Flag unverified claims separately
 ```
 
-### Voice input for AI tools
+Claude Code reads this file automatically when you open a session in that directory. You can also have a user-level CLAUDE.md at `~/.claude/CLAUDE.md` for instructions that apply to all projects.
 
-**macOS built-in dictation:**
-1. System Settings > Keyboard > Dictation
-2. Enable dictation
-3. Press `Fn Fn` (or configured key) to start
-4. Speak your prompt, press `Fn` to stop
+### Gemini CLI — GEMINI.md
 
-**SuperWhisper (macOS app):**
-1. Download from superwhisper.com
-2. Assign global hotkey
-3. Speak, release hotkey
-4. Text appears at cursor
+Create a `GEMINI.md` file in your project directory with the same kind of instructions. Gemini CLI reads it on startup.
+
+```markdown
+# Project context
+
+## Beat
+I cover Greenfield city government for the Daily News.
+
+## Style
+- AP style, no Oxford comma
+```
+
+### OpenAI Codex — AGENTS.md
+
+Create an `AGENTS.md` file:
+
+```markdown
+# Project context
+
+## Instructions
+- Follow AP style
+- Attribute all claims to named sources
+```
+
+### Context file inheritance
+
+Claude Code looks for CLAUDE.md in the current directory and all parent directories. You can have:
+- A newsroom-wide file at the top level
+- A beat-specific file in a subdirectory
+- A personal file at `~/.claude/CLAUDE.md`
+
+All are merged, with more specific files taking precedence.
 
 ---
 
@@ -288,8 +308,8 @@ echo $GEMINI_API_KEY
 
 | Variable | Used by | Purpose |
 |----------|---------|---------|
-| `ANTHROPIC_API_KEY` | Claude Code, Aider | Claude API access |
-| `OPENAI_API_KEY` | Aider, Codex, Whisper API | OpenAI API access |
+| `ANTHROPIC_API_KEY` | Claude Code | Claude API access |
+| `OPENAI_API_KEY` | Codex CLI, Whisper API | OpenAI API access |
 | `GEMINI_API_KEY` | Gemini CLI | Google AI API access |
 | `EDITOR` | Many tools | Default text editor |
 | `SHELL` | System | Current shell (bash, zsh) |
@@ -347,5 +367,5 @@ grep --help
 # AI tool help
 claude --help
 gemini --help
-aider --help
+codex --help
 ```

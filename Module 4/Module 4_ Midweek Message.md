@@ -20,4 +20,4 @@ Discussion posts are due Friday. The thread on automating repetitive tasks has g
 
 The exercise takes longer than previous weeks. Budget at least 90 minutes. Getting stuck is part of the learning.
 
-[Instructor name]
+Joe Amditis

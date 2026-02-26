@@ -2,90 +2,77 @@
 
 ## Required readings
 
-Complete these readings before attempting the exercise.
+Complete these readings before starting the exercise. They don't require any programming knowledge — the goal is to understand what makes a good automation candidate in journalism, how to handle API keys safely, and what to do when automated workflows break.
 
 ---
 
-### 1. The Unix philosophy and why it matters for journalists
+### 1. Store config in the environment
 
-**"The Art of Unix Programming: Basics of the Unix Philosophy"** by Eric S. Raymond
-https://www.catb.org/~esr/writings/taoup/html/ch01s06.html
+**"The Twelve-Factor App: Config (Factor III)"**
+https://12factor.net/config
 
-Read sections 1.6.1 through 1.6.6. Focus on these principles:
-- Write programs that do one thing well
-- Write programs that work together
-- Write programs that handle text streams (the universal interface)
+One page. Required reading.
 
-These ideas from the 1970s explain why piping commands together works so well today.
+Your pipeline will use API keys. Those keys should never go in your code, your CLAUDE.md, or any file you commit to GitHub. This document explains why, and what to do instead: store secrets in environment variables, not in source files.
+
+The principle applies whether you write the code yourself or have Claude Code write it for you. When Claude writes your pipeline script, it will use this pattern automatically — but you need to understand it to verify the output and catch mistakes.
+
+**Time:** 5 minutes
+
+---
+
+### 2. Errors, rate limits, and what to do about them
+
+**Claude Code API errors reference** — Anthropic Documentation
+https://docs.anthropic.com/en/api/errors
+
+Read the overview and the section on rate limit errors. Your pipeline will hit errors — rate limits when processing many documents, authentication failures when API keys are wrong, and occasional model errors. This reference shows what each error code means and the standard patterns for handling them.
+
+The patterns here — exponential backoff, retry logic, graceful degradation — are what Claude Code will write when you ask it to "handle errors properly." Understanding them lets you check the implementation and ask better follow-up questions when something breaks.
 
 **Time:** 15 minutes
 
 ---
 
-### 2. Command-line basics for non-programmers
+### 3. Real pipeline results: beat monitoring and translation
 
-**"The Command Line Crash Course"** from Learn Code the Hard Way
-https://learncodethehardway.org/command-line-crash-course/
+**"Augmented beat reporting: where LLMs excel and where reporters still win"** — Nick Hagar, Generative AI in the Newsroom, October 28, 2025
+https://generative-ai-newsroom.com/augmented-beat-reporting-where-llms-excel-and-where-reporters-still-win-135decbe8675
 
-Complete lessons 1-8. You need to understand:
-- How to navigate directories (`cd`, `ls`, `pwd`)
-- How to view file contents (`cat`, `head`, `tail`)
-- How to redirect output to files (`>`, `>>`)
-- How the pipe operator works (`|`)
+**Time:** 10 minutes
 
-Skip the later lessons on programming for now.
+A working beat-monitoring pipeline built with n8n and Google Alerts RSS feeds, costing about $0.15/day to run. LLMs (including o3, GPT-4o, and GPT-5) hit an F1 score of 0.94 at extracting relevant use cases from articles, but only 31% exact alignment with human newsworthiness assessments. A one-week pilot surfaced three high-value leads the reporter hadn't found elsewhere.
 
-**Time:** 30 minutes
+This piece is useful for the exercise because it gives you real cost and accuracy numbers to reason with. The central lesson: LLMs are good first-pass filters, but the decision about what's actually worth pursuing stays with the journalist.
 
 ---
 
-### 3. Piping and text processing
+**"Inside the new multilingual newsrooms using GenAI for translation"** — Clare Spencer, Generative AI in the Newsroom, November 4, 2025
+https://generative-ai-newsroom.com/inside-the-new-multilingual-newsrooms-using-genai-for-translation-4c3b17269811
 
-**"Pipes and Filters"** from Software Carpentry
-https://swcarpentry.github.io/shell-novice/04-pipefilter.html
+**Time:** 10 minutes
 
-This lesson shows how to chain commands. Pay attention to:
-- How data flows from left to right through pipes
-- Using `wc`, `sort`, and `head` to process text
-- Building longer pipelines step by step
+Three newsroom translation pipelines: Chicago's La Voz (an AI fellow built a Sun-Times-to-Spanish pipeline; the team published a Pope profile same day in both languages, driving 5x their normal traffic), The Economist's Español TikTok channel (HeyGen video translation), and BBC News Polska (DeepL + human editor review). All three kept a linguistically fluent editor in the loop.
 
-**Time:** 20 minutes
+Pay attention to the workflow designs — specifically how each team structured the human review step. A pipeline without a review gate is faster; it's also the way errors reach readers.
 
 ---
 
-### 4. Working with APIs from the command line
+### Optional reading
 
-**"curl Tutorial"** by Daniel Stenberg (sections 1-4)
-https://curl.se/docs/tutorial.html
+**"How to evaluate an LLM pipeline"** — Simon Willison's Weblog
+https://simonwillison.net/tags/llms/
 
-Learn how to:
-- Make GET requests to APIs
-- Save output to files
-- Pass headers and authentication
-
-You'll use `curl` to fetch web content and API responses in your pipelines.
-
-**Time:** 15 minutes
+Simon Willison writes practical, non-hype coverage of working with LLMs in real projects. Browse his recent posts on pipelines, automation, and prompt engineering. His "what I've learned" posts are particularly relevant to Module 4.
 
 ---
 
-### 5. Processing JSON with jq
+## Reading notes
 
-**"jq Manual: Basic filters"**
-https://jqlang.github.io/jq/manual/#basic-filters
+As you read, think about:
 
-Read the sections on:
-- Identity (`.`)
-- Object identifier (`.field`)
-- Array indexing (`.[0]`)
-- Pipe operator within jq
+1. What recurring task in your own work is a good automation candidate: high volume, consistent structure, clear data source?
+2. Where do your API keys currently live? (Hint: if the answer is "in a text file somewhere," that's worth changing.)
+3. What would you do if your pipeline failed halfway through processing 50 documents?
 
-Understanding `jq` lets you extract specific fields from API responses before passing them to AI tools.
-
-**Time:** 15 minutes
-
----
-
-## Total reading time: ~1.5 hours
-
-Complete these readings before the video lectures. The exercise assumes you understand these concepts.
+Bring answers to the discussion forum.

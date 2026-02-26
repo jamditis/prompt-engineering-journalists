@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hooks as guardrails | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../module-3/" class="text-acid">[ 03 ]</a>
+                    <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../module-5/" class="text-gray-400 hover:text-ice transition-colors">[ 05 ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">CONCEPTS — MODULE 03</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">Hooks as guardrails</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Hooks are code that runs before or after Claude acts. They enforce constraints that prompts alone cannot.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What hooks are</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Hooks are scripts that intercept Claude's actions. Pre-hooks run before an action executes and can block it. Post-hooks run after and can validate, flag, or log the result.</p>
+                    <p class="text-gray-300 leading-relaxed">The hooks you'll install in Module 3 — the AP Style check, source attribution check, and AI slop detector — are all post-hooks. They run after Claude writes something and flag problems before you move the work forward.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">The limits of prompts</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">You can tell Claude "don't write unattributed statistics" in your CLAUDE.md, and it will usually comply. Usually. Prompts are instructions. Claude follows them well, but they're subject to context length, session drift, and the inherent unpredictability of a probabilistic model.</p>
+                    <p class="text-gray-300 leading-relaxed">A hook that scans every piece of Claude-generated text for unattributed statistics is more reliable: it's code. It runs the same way every time, regardless of what else is in the context. The hook doesn't drift.</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-6">
+                    <h3 class="font-display text-lg text-acid mb-3">A journalism scenario</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-3">Say you're running a pipeline that processes 200 press releases and extracts quotes. You could prompt Claude to "always flag quotes that seem to be paraphrases rather than direct quotes."</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">Or you could write a post-hook that scans output for quote marks and checks whether each attributed statement appears verbatim in the source document. The hook catches what the prompt misses — including the cases where Claude, deep in a long context, stops applying the instruction consistently.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Hooks work best for fixed rules</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Hooks are well-suited to things that should never happen: publishing without attribution, writing about named individuals without checking their title against your source sheet, generating output that contains your publication's banned words.</p>
+                    <p class="text-gray-300 leading-relaxed">The journalism skills library includes 13 hooks covering the most common of these. Understanding what hooks are — and what they're doing — helps you evaluate them critically and, eventually, write your own for newsroom-specific rules that no general library will cover.</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-4">
+                    <p class="text-xs font-sans text-gray-400"><span class="text-ice font-mono">SOURCE:</span> These patterns are drawn from the "Hooks for deterministic safety" lesson in <a href="https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns" class="text-ice hover:text-acid transition-colors">jamditis/stash</a>, which extracts and organizes techniques from <a href="https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw" class="text-ice hover:text-acid transition-colors">The Agentic Lab</a>'s advanced Claude Code guide.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">NEXT:</span> Head to <a href="../module-3/" class="text-ice hover:text-acid transition-colors">Module 3</a> to install the journalism skills library and see hooks in action.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="./" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">CONCEPTS</a>
+                        <a href="../module-3/" class="text-xs font-mono text-acid">MODULE 03</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

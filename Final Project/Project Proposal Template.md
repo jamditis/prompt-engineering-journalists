@@ -47,7 +47,7 @@ Use this template to submit your final project proposal. Your proposal helps ens
 **Primary AI tool:**
 - [ ] Claude Code
 - [ ] Gemini CLI
-- [ ] Aider
+- [ ] Codex CLI
 - [ ] Other: _______________
 
 **Additional technologies:**

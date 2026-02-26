@@ -1,33 +1,56 @@
-# Midweek message
+# Module 2: Prompting with files and project context
 
-## Module 2: Voice-controlled AI
+## Midweek message
 
-Hello everyone,
+We're halfway through Week 2. Here are some common questions and tips for the exercise.
 
-We're halfway through Week 2. By now you should have:
-
-- Watched the video lectures on transcription options
-- Started the readings on voice-to-text tools
-- Chosen which transcription method to try
+---
 
 ### Common questions so far
 
-**"The transcription keeps getting my words wrong."**
+**"How long should my CLAUDE.md be?"**
 
-This is normal, especially for names, numbers, and jargon. Speak clearly and at a moderate pace. You can also try adding custom vocabulary if your tool supports it. For journalism work, expect to make corrections. Voice input is about speed for the first draft, not perfection.
+Short enough that every line earns its place. If a context file runs past 50 lines, audit it before adding more. Bloated context files dilute the specific instructions that actually matter — every token the AI has to process before your first message is a token that isn't focused on your actual task.
 
-**"I don't have a GPU for local transcription."**
+Start with 10-20 lines of your most important beat knowledge and style rules. Then apply the deletion test: read each line and ask whether removing it would change the AI's output on the documents you actually work with. If the answer is no, cut the line.
 
-You don't need one. Windows Speech Recognition and macOS Dictation work without a GPU. Gemini Flash runs in the cloud. Only NVIDIA Parakeet and some Whisper configurations need a GPU.
+A good starting point: write five instructions you'd give a new reporter on their first day covering your beat. That's your context file. The "Hard-won lessons" section grows from there — one entry per real mistake, not one entry per thing you think might go wrong.
 
-**"Voice input feels awkward."**
+**"What if I use Gemini CLI instead of Claude Code?"**
 
-It takes practice. Most people feel strange dictating at first, especially in shared workspaces. Try it at home first. After a few sessions, it becomes more natural.
+The exercise focuses on CLAUDE.md because it's the most documented format. But the concept transfers directly. If you're using Gemini CLI, create a `GEMINI.md` file with the same content. If you're using Codex, use `AGENTS.md`. The structure and thinking are identical — only the filename changes.
 
-### This week's focus
+**"How do I know if my context file is working?"**
 
-If you haven't started the hands-on exercise yet, now is the time. The exercise asks you to dictate a story outline to Claude Code. Give yourself at least 30 minutes to work through it.
+The exercise has you process the same documents with and without a context file. That comparison is the proof. If your context file says "always identify unnamed sources and flag them for follow-up," you should see the AI flagging sources in the with-context run that it ignored in the without-context run.
 
-The discussion forums are active. Take a look at what your classmates are sharing about their voice input experiences.
+If you're not seeing differences, your context file might be too generic. Go back to the deletion test: are your instructions specific enough to change the AI's behavior on *these particular documents*?
 
-See you in the forums.
+**"Can I have context files in subdirectories?"**
+
+Yes. Claude Code looks for CLAUDE.md in the current directory and all parent directories. You can have a project-level context file and a more specific one in a subdirectory. The tool merges them. This is useful if you have a newsroom-wide context file and want to add beat-specific instructions for individual projects.
+
+**"I've never used Git before — do I need to learn all of it?"**
+
+No. You need to understand the concepts, not memorize commands. Know what a repository is (a project folder with version tracking), what a commit is (a saved snapshot), and what cloning means (downloading a project from GitHub). Your CLI tool handles the actual Git commands — you just need to know what to ask for. In Module 3, you'll clone a skills repo from GitHub, and the exercise will walk you through it.
+
+---
+
+### Exercise reminder
+
+If you haven't started the hands-on exercise yet, now is the time. The key steps:
+
+1. Create a project directory with the provided sample documents
+2. Initialize a Git repository (use your CLI tool — it handles the commands)
+3. Process the documents without any context file
+4. Write your CLAUDE.md
+5. Process the same documents again with the context file active
+6. Compare and write up the differences
+
+Start early if you can. Writing a good context file takes a few iterations — your first draft probably won't be your final version, and that's fine.
+
+---
+
+If you have questions, post in the discussion forum. Other students are working through the same issues.
+
+Joe Amditis

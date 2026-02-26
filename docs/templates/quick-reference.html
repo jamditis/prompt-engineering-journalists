@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick reference | Advanced prompt engineering for journalists</title>
+    <meta name="description" content="Common commands and prompt patterns for Claude Code, Gemini CLI, and Codex CLI.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+</head>
+<body class="bg-void text-chrome font-sans min-h-screen">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="border-b border-white/10 bg-panel/80 backdrop-blur-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="../index.html" class="font-display text-sm text-gray-300 hover:text-acid transition-colors">
+                    &larr; Back to course
+                </a>
+                <nav aria-label="Page navigation" class="hidden md:flex items-center gap-6">
+                    <a href="../module-1/" class="text-xs font-mono text-gray-300 hover:text-ice transition-colors">M1</a>
+                    <a href="../module-2/" class="text-xs font-mono text-gray-300 hover:text-ice transition-colors">M2</a>
+                    <a href="../module-3/" class="text-xs font-mono text-gray-300 hover:text-ice transition-colors">M3</a>
+                    <a href="../module-4/" class="text-xs font-mono text-gray-300 hover:text-ice transition-colors">M4</a>
+                    <a href="../module-5/" class="text-xs font-mono text-gray-300 hover:text-ice transition-colors">M5</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main id="main" class="min-h-screen">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+
+            <!-- Section header -->
+            <div class="mb-12">
+                <div class="text-xs font-mono text-acid mb-2">Quick reference</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-chrome mb-4">Quick reference</h1>
+                <p class="text-gray-300 font-sans text-sm max-w-2xl">
+                    Common commands and prompt patterns for Claude Code, Gemini CLI, and Codex CLI.
+                </p>
+            </div>
+
+            <!-- Installation -->
+            <section class="mb-12">
+                <div class="flex items-center gap-3 mb-6">
+                    <i data-lucide="download" class="w-5 h-5 text-acid"></i>
+                    <h2 class="font-display text-2xl font-bold text-chrome">Installation</h2>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="text-xs font-mono text-acid mb-3">CLAUDE CODE</div>
+                        <code class="text-sm text-ice font-mono block mb-2">npm install -g @anthropic-ai/claude-code</code>
+                        <p class="text-xs text-gray-400 font-sans">Verify: <span class="text-gray-300 font-mono">claude --version</span></p>
+                    </div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="text-xs font-mono text-acid mb-3">GEMINI CLI</div>
+                        <code class="text-sm text-ice font-mono block mb-2">npm install -g @google/gemini-cli</code>
+                        <p class="text-xs text-gray-400 font-sans">Verify: <span class="text-gray-300 font-mono">gemini --version</span></p>
+                    </div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="text-xs font-mono text-acid mb-3">CODEX CLI</div>
+                        <code class="text-sm text-ice font-mono block mb-2">npm install -g @openai/codex</code>
+                        <p class="text-xs text-gray-400 font-sans">Verify: <span class="text-gray-300 font-mono">codex --version</span></p>
+                    </div>
+                </div>
+
+                <div class="border border-ice/30 bg-iceDim p-4 mt-4">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="info" class="w-4 h-4 text-ice flex-shrink-0 mt-0.5"></i>
+                        <p class="text-xs text-gray-300 font-sans">
+                            Requires <span class="text-ice">Node.js 20+</span> and <span class="text-ice">Git</span>. Check with <span class="text-gray-300 font-mono">node --version</span> and <span class="text-gray-300 font-mono">git --version</span>.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Context files -->
+            <section class="mb-12">
+                <div class="flex items-center gap-3 mb-6">
+                    <i data-lucide="file-text" class="w-5 h-5 text-acid"></i>
+                    <h2 class="font-display text-2xl font-bold text-chrome">Context files</h2>
+                </div>
+
+                <div class="overflow-x-auto border border-white/10">
+                    <table class="w-full text-sm font-sans">
+                        <thead>
+                            <tr class="bg-surface border-b border-white/10">
+                                <th class="text-left text-acid px-4 py-3 text-xs font-mono">TOOL</th>
+                                <th class="text-left text-acid px-4 py-3 text-xs font-mono">FILE</th>
+                                <th class="text-left text-acid px-4 py-3 text-xs font-mono">PURPOSE</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-300">
+                            <tr class="border-b border-white/5">
+                                <td class="px-4 py-3">Claude Code</td>
+                                <td class="px-4 py-3 text-ice font-mono">CLAUDE.md</td>
+                                <td class="px-4 py-3">Project instructions, style rules, beat context</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="px-4 py-3">Gemini CLI</td>
+                                <td class="px-4 py-3 text-ice font-mono">GEMINI.md</td>
+                                <td class="px-4 py-3">Project instructions for Gemini</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3">Codex CLI</td>
+                                <td class="px-4 py-3 text-ice font-mono">AGENTS.md</td>
+                                <td class="px-4 py-3">Project instructions for Codex</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="text-xs text-gray-400 font-sans mt-3">Place these files in your project root. Claude Code merges context from parent directories automatically.</p>
+            </section>
+
+            <!-- Claude Code slash commands -->
+            <section class="mb-12">
+                <div class="flex items-center gap-3 mb-6">
+                    <i data-lucide="terminal" class="w-5 h-5 text-acid"></i>
+                    <h2 class="font-display text-2xl font-bold text-chrome">Claude Code slash commands</h2>
+                </div>
+
+                <div class="overflow-x-auto border border-white/10">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="bg-surface border-b border-white/10">
+                                <th class="text-left text-acid px-4 py-3 text-xs font-mono">COMMAND</th>
+                                <th class="text-left text-acid px-4 py-3 text-xs font-mono">PURPOSE</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-300">
+                            <tr class="border-b border-white/5">
+                                <td class="px-4 py-3 text-ice font-mono">/help</td>
+                                <td class="px-4 py-3 font-sans">Show all available commands</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="px-4 py-3 text-ice font-mono">/plan</td>
+                                <td class="px-4 py-3 font-sans">Enter planning mode (review approach before execution)</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="px-4 py-3 text-ice font-mono">/clear</td>
+                                <td class="px-4 py-3 font-sans">Clear conversation history</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="px-4 py-3 text-ice font-mono">/compact</td>
+                                <td class="px-4 py-3 font-sans">Compress context to free up token space</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="px-4 py-3 text-ice font-mono">/model</td>
+                                <td class="px-4 py-3 font-sans">Change model mid-session</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="px-4 py-3 text-ice font-mono">/cost</td>
+                                <td class="px-4 py-3 font-sans">Show token usage and cost</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="px-4 py-3 text-ice font-mono">/config</td>
+                                <td class="px-4 py-3 font-sans">View or edit settings</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 text-ice font-mono">/doctor</td>
+                                <td class="px-4 py-3 font-sans">Check installation health</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- CLI flags -->
+            <section class="mb-12">
+                <div class="flex items-center gap-3 mb-6">
+                    <i data-lucide="settings" class="w-5 h-5 text-acid"></i>
+                    <h2 class="font-display text-2xl font-bold text-chrome">Claude Code flags</h2>
+                </div>
+
+                <div class="overflow-x-auto border border-white/10">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="bg-surface border-b border-white/10">
+                                <th class="text-left text-acid px-4 py-3 text-xs font-mono">FLAG</th>
+                                <th class="text-left text-acid px-4 py-3 text-xs font-mono">PURPOSE</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-300">
+                            <tr class="border-b border-white/5">
+                                <td class="px-4 py-3 text-ice font-mono">--model MODEL</td>
+                                <td class="px-4 py-3 font-sans">Specify model (e.g. claude-sonnet-4-20250514)</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="px-4 py-3 text-ice font-mono">--continue</td>
+                                <td class="px-4 py-3 font-sans">Continue last session</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="px-4 py-3 text-ice font-mono">--resume</td>
+                                <td class="px-4 py-3 font-sans">Resume a specific session</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="px-4 py-3 text-ice font-mono">--print</td>
+                                <td class="px-4 py-3 font-sans">Non-interactive mode (single prompt, then exit)</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="px-4 py-3 text-ice font-mono">--output-format json</td>
+                                <td class="px-4 py-3 font-sans">Get JSON output (useful in pipelines)</td>
+                            </tr>
+                            <tr class="border-b border-white/5">
+                                <td class="px-4 py-3 text-ice font-mono">--max-turns N</td>
+                                <td class="px-4 py-3 font-sans">Limit conversation turns</td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 text-ice font-mono">--verbose</td>
+                                <td class="px-4 py-3 font-sans">Show debug info</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Prompt patterns -->
+            <section class="mb-12">
+                <div class="flex items-center gap-3 mb-6">
+                    <i data-lucide="message-square" class="w-5 h-5 text-acid"></i>
+                    <h2 class="font-display text-2xl font-bold text-chrome">Prompt patterns</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="text-xs font-mono text-acid mb-3">PLAN FIRST</div>
+                        <p class="text-sm text-gray-300 font-sans mb-3">Always use <span class="text-ice font-mono">/plan</span> before describing a task. Review the plan before letting the tool execute.</p>
+                        <p class="text-xs text-gray-400 font-sans">Catches misunderstandings before code is written.</p>
+                    </div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="text-xs font-mono text-acid mb-3">TEST ON KNOWN</div>
+                        <p class="text-sm text-gray-300 font-sans mb-3">Test automation on material you've already read and verified. Don't start with fresh documents.</p>
+                        <p class="text-xs text-gray-400 font-sans">Lets you spot pipeline problems vs. hard-to-process content.</p>
+                    </div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="text-xs font-mono text-acid mb-3">DELETION TEST</div>
+                        <p class="text-sm text-gray-300 font-sans mb-3">Read each line of your context file: "If I removed this, would AI behave differently?" If not, delete it.</p>
+                        <p class="text-xs text-gray-400 font-sans">Remove generic instructions like "be accurate" that don't change behavior.</p>
+                    </div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="text-xs font-mono text-acid mb-3">DELEGATE GIT</div>
+                        <p class="text-sm text-gray-300 font-sans mb-3">Ask the CLI tool to handle Git: "Initialize a repo," "commit my changes," "show status." No need to memorize commands.</p>
+                        <p class="text-xs text-gray-400 font-sans">Tell the tool what you want, not how to do it.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pipeline patterns -->
+            <section class="mb-12">
+                <div class="flex items-center gap-3 mb-6">
+                    <i data-lucide="workflow" class="w-5 h-5 text-acid"></i>
+                    <h2 class="font-display text-2xl font-bold text-chrome">Pipeline patterns</h2>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-6">
+                    <div class="text-xs font-mono text-acid mb-4">PIPE INPUT</div>
+                    <div class="space-y-3 font-mono text-sm">
+                        <div class="flex items-start gap-3">
+                            <span class="text-gray-400 flex-shrink-0">$</span>
+                            <code class="text-ice">cat article.txt | gemini "summarize this"</code>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-gray-400 flex-shrink-0">$</span>
+                            <code class="text-ice">claude --print "Read press-release.md and extract quotes"</code>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-gray-400 flex-shrink-0">$</span>
+                            <code class="text-ice">claude --print --output-format json "List sources in article.md"</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills -->
+            <section class="mb-12">
+                <div class="flex items-center gap-3 mb-6">
+                    <i data-lucide="zap" class="w-5 h-5 text-acid"></i>
+                    <h2 class="font-display text-2xl font-bold text-chrome">Skills</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="text-xs font-mono text-ice mb-3">INSTALL FROM GITHUB</div>
+                        <div class="font-sans text-sm text-gray-300 space-y-2">
+                            <p>Inside Claude Code:</p>
+                            <code class="text-ice block font-mono">/install-github-plugin https://github.com/USER/REPO.git</code>
+                        </div>
+                    </div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="text-xs font-mono text-ice mb-3">SKILL LOCATION</div>
+                        <div class="font-sans text-sm text-gray-300 space-y-2">
+                            <p>Skills are stored at:</p>
+                            <code class="text-ice block font-mono">~/.claude/commands/[skill-name]/SKILL.md</code>
+                            <p>Invoke with <span class="text-ice font-mono">/skill-name</span> in Claude Code.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bottom note -->
+            <div class="mt-12 border-t border-white/10 pt-8">
+                <p class="text-xs font-sans text-gray-400 text-center">
+                    For full details, see the course modules. This page covers the most-used commands and patterns.
+                </p>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 bg-panel">
+        <div class="max-w-6xl mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-xs font-mono text-gray-400">
+                    Advanced prompt engineering for journalists
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="../index.html" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                    <a href="./" class="text-xs font-mono text-gray-300 hover:text-ice transition-colors">TEMPLATES</a>
+                    <a href="https://github.com/jamditis/prompt-engineering-journalists" class="text-xs font-mono text-gray-300 hover:text-ice transition-colors">GITHUB</a>
+                </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                <p class="text-xs font-sans text-gray-400">
+                    &copy; 2026 Knight Center for Journalism in the Americas
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Initialize Lucide icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

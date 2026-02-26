@@ -22,4 +22,4 @@ Skills are the bridge between knowing how to prompt and building tools your coll
 
 See you in Week 4.
 
-[Instructor name]
+Joe Amditis

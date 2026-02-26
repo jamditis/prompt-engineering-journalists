@@ -33,3 +33,4 @@ build/
 # Windows artifacts
 desktop.ini
 nul
+Resources/favorites_*.html

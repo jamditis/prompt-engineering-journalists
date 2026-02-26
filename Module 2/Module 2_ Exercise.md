@@ -1,130 +1,209 @@
-# Exercise: Set up voice input and dictate a story outline to Claude Code
+# Exercise: Set up a beat project and process journalism documents
 
-## Module 2: Voice-controlled AI
+## Module 2: Prompting with files and project context
 
-This hands-on exercise walks you through setting up voice input on your computer and using it to interact with Claude Code. By the end, you will have dictated a story outline using only your voice.
+This exercise walks you through creating a project directory, initializing it as a Git repository, processing journalism documents with a CLI tool, writing a context file, and comparing the results. By the end, you'll have a version-controlled beat project with a working CLAUDE.md file and a clear understanding of how project context changes AI output.
 
----
-
-## Part 1: Choose your transcription tool
-
-Pick one of the following options based on your operating system and preferences.
-
-### Option A: Windows voice typing (easiest, Windows only)
-
-1. Open any text field (Notepad, a browser, etc.)
-2. Press **Win+H** to activate voice typing
-3. Speak and watch your words appear
-4. Press Win+H again to stop
-
-No setup required. Works immediately.
-
-### Option B: macOS dictation (easiest, Mac only)
-
-1. Go to **System Settings > Keyboard > Dictation**
-2. Turn on Dictation
-3. Choose your preferred shortcut (default: press Control key twice)
-4. Open any text field and use the shortcut to start dictating
-
-### Option C: Gemini Flash API (free, any platform)
-
-1. Go to https://aistudio.google.com/
-2. Sign in with a Google account
-3. Click "Get API key" and create a key
-4. Save the key somewhere secure
-5. Use a tool that supports Gemini for transcription (e.g., AudioBash, or build your own with the API)
-
-This option requires more setup but works on any platform and offers high accuracy.
-
-### Option D: Local Whisper (offline, any platform)
-
-1. Install Python 3.8 or later
-2. Run: `pip install openai-whisper`
-3. Run: `whisper audio.wav --model base`
-4. Whisper will transcribe the audio file locally
-
-This option keeps all audio on your machine. Useful for sensitive content.
+**Time estimate:** 60-90 minutes
 
 ---
 
-## Part 2: Test your setup
+## Part 1: Set up your project directory
 
-Before using voice with Claude Code, practice with a simple test.
+Create a directory for a fictional city hall beat. You'll populate it with sample journalism documents provided in the course resources.
 
-1. Open a text editor or note-taking app
-2. Activate voice input using the method you chose
-3. Dictate the following sentence:
+### Step 1: Create the directory
 
-   "The city council voted 5 to 2 to approve the new budget."
+```bash
+mkdir city-hall-beat
+cd city-hall-beat
+```
 
-4. Check the transcription for accuracy
-5. Try again with a more complex sentence:
+### Step 2: Copy the sample documents
 
-   "According to the mayor, the $4.2 million allocation will fund three new programs."
+Download or copy the following files from `Resources/examples/beat-project/` into your new directory:
 
-Note any errors. Numbers, names, and technical terms often need correction.
+- `press-release-park-closure.md` — A city press release about closing a park
+- `council-minutes-excerpt.md` — Meeting minutes with budget discussion
+- `interview-notes-martinez.md` — Raw interview notes with a council member
+- `tip-email.md` — A reader email tip about a related story
+
+You should now have a directory with four journalism documents and no context file.
 
 ---
 
-## Part 3: Dictate a story outline to Claude Code
+## Part 2: Initialize a Git repository
 
-Now use voice input to interact with Claude Code.
+Turn your project directory into a Git repository. This tracks your files and lets you share the project later.
 
-### Step 1: Open Claude Code
+You don't need to memorize Git commands. Your CLI tool can handle Git for you — you just need to know what to ask for and what's happening when it does.
 
-Open your terminal and start Claude Code:
+### Step 1: Open your CLI tool and ask it to initialize a repo
+
+Start a session in your `city-hall-beat` directory:
 
 ```
 claude
 ```
 
-### Step 2: Plan your story
+(Or `gemini`, or whichever tool you're using.)
 
-Think of a simple local news story you could write. Examples:
-- A city council meeting about a new park
-- A school board decision on bus routes
-- A local business opening or closing
+Then ask:
 
-### Step 3: Dictate your request
+```
+Initialize this directory as a Git repository and commit all the files with the message "Add sample journalism documents for city hall beat"
+```
 
-Activate voice input and speak your request to Claude Code. For example:
+The tool will run the necessary Git commands for you. Watch what it does — you'll see it initialize the repo, stage the files, and create a commit.
 
-"Help me outline a news story. The story is about a city council meeting where they voted to close a community pool due to budget cuts. The vote was 4 to 3. The mayor supported keeping the pool open but was outvoted. Give me a five point outline for an 800 word article."
+### Step 2: Understand what happened
 
-Pause briefly after speaking, then review what was transcribed.
+Ask your CLI tool:
 
-### Step 4: Submit and review
+```
+What is the current Git status of this project?
+```
 
-Press Enter to submit your dictated prompt. Review Claude Code's response.
+It should tell you that all files are tracked and committed. Here's what happened behind the scenes:
 
-### Step 5: Iterate with voice
+- **git init** created a hidden `.git` folder that tracks your project's history
+- **git add** staged your files (told Git "include these in the next snapshot")
+- **git commit** saved a snapshot of your project at this point in time
 
-Continue the conversation using voice. Try:
+You don't need to run these commands yourself. But understanding what they mean helps you talk to the tool and know what to ask for.
 
-"Add a section about community reaction."
+### Step 3: Why this matters
 
-or
-
-"What questions should I ask the mayor in an interview?"
+Later in this exercise, you'll create a CLAUDE.md file. When you do, it becomes a new file that Git isn't tracking yet. You can ask the tool to commit it — and Git will record that change as a separate snapshot. This is how version control works: you make changes, then save snapshots with messages describing what you did.
 
 ---
 
-## Part 4: Reflection
+## Part 3: Process documents WITHOUT context
 
-After completing the exercise, answer these questions (you can type or dictate your answers):
+Open your CLI tool in the `city-hall-beat` directory and run the following prompts. Save or screenshot each response.
 
-1. How accurate was the transcription?
-2. What types of words or phrases caused errors?
-3. Was speaking faster or slower than typing for this task?
-4. In what situations would you use voice input in your actual work?
+**Prompt 1 — Summarize the press release:**
+
+```
+claude "Read press-release-park-closure.md and write a 3-sentence summary suitable for a news brief"
+```
+
+(If using Gemini CLI: `gemini "Read press-release-park-closure.md and write a 3-sentence summary suitable for a news brief"`)
+
+**Prompt 2 — Extract claims from the council minutes:**
+
+```
+claude "Read council-minutes-excerpt.md. List every factual claim made by a council member, and note which claims are attributed to a named source vs. unattributed"
+```
+
+**Prompt 3 — Identify follow-up questions from the interview:**
+
+```
+claude "Read interview-notes-martinez.md. What follow-up questions should I ask based on what Martinez said? Flag any claims that need independent verification"
+```
+
+**Prompt 4 — Assess the tip:**
+
+```
+claude "Read tip-email.md. Evaluate this tip: is it actionable? What would you need to verify before pursuing it?"
+```
+
+Save these four responses. You'll compare them to the with-context versions later.
+
+---
+
+## Part 4: Write your CLAUDE.md
+
+Now create a context file. In your `city-hall-beat` directory, create a file called `CLAUDE.md` with instructions for covering this beat.
+
+If you want help structuring your CLAUDE.md, ask your CLI tool to plan the file before writing it — describe your beat and ask for a proposed outline, then review and adjust the structure before it fills in the details. This is a good habit to build: plan mode first, especially when asking the LLM to create something you'll be living with for a while.
+
+Use the sample at `Resources/examples/beat-project/sample-claude-md.md` as a reference, but write your own. Your file should include:
+
+**Required sections:**
+
+1. **Beat description** — What you cover, key entities (city name, officials, agencies)
+2. **Style rules** — AP style? Oxford comma? How to refer to the city on second reference?
+3. **Source standards** — How to handle attribution, what to flag as unverified
+4. **Terminology** — Any beat-specific terms the AI might get wrong or confuse
+5. **Things to avoid** — Phrases, framing, or patterns you don't want in the output
+6. **Hard-won lessons** — Leave this empty for now. As you use the file and the AI makes mistakes you have to correct, add an entry here: a name for the mistake, one sentence on what happened, and the rule that prevents it. This section grows over time.
+
+**Apply the deletion test:** Before saving, read each line and ask: would this instruction change the AI's output for *these specific documents*? If not, cut it.
+
+**Then commit it.** This is important. Once you've written your CLAUDE.md, ask your CLI tool to commit it:
+
+```
+Commit my CLAUDE.md to the project repository with the message "Add beat context file"
+```
+
+This is not busywork. Your CLAUDE.md is infrastructure, and infrastructure gets versioned. From this point on, every time you change your context file — adding a new source, updating terminology, adding a style rule — commit that change. You're building a record of how your AI environment evolved alongside your beat coverage.
+
+---
+
+## Part 5: Process documents WITH context
+
+Run the exact same four prompts from Part 3 again. Don't change anything about the prompts — the only difference is that CLAUDE.md now exists in the directory.
+
+```
+claude "Read press-release-park-closure.md and write a 3-sentence summary suitable for a news brief"
+```
+
+```
+claude "Read council-minutes-excerpt.md. List every factual claim made by a council member, and note which claims are attributed to a named source vs. unattributed"
+```
+
+```
+claude "Read interview-notes-martinez.md. What follow-up questions should I ask based on what Martinez said? Flag any claims that need independent verification"
+```
+
+```
+claude "Read tip-email.md. Evaluate this tip: is it actionable? What would you need to verify before pursuing it?"
+```
+
+Save these four responses alongside the Part 3 responses.
+
+---
+
+## Part 6: Try a second tool's context file (optional)
+
+If you have access to a second CLI tool, try this:
+
+1. Copy the content of your CLAUDE.md into a `GEMINI.md` file (for Gemini CLI) or `AGENTS.md` file (for Codex)
+2. Run one of the four prompts using the second tool
+3. Note any differences in how the tool interprets the same context
+
+This step is optional but helps you understand how context files work across tools.
+
+---
+
+## Part 7: Push to GitHub (optional)
+
+If you have a GitHub account, you can push your project to a remote repository. This isn't required, but it means your beat project — including your CLAUDE.md — will be available from any computer.
+
+1. Go to https://github.com/new and create a new repository (name it `city-hall-beat`, leave it empty — no README)
+2. In your CLI tool, ask:
+
+```
+Push this Git repository to GitHub at https://github.com/YOUR-USERNAME/city-hall-beat.git
+```
+
+The tool will connect your local repo to GitHub and push your files.
+
+3. Refresh the GitHub page. You should see your files — including your CLAUDE.md.
+
+If you're not comfortable with this step, skip it. You'll use `git clone` (downloading a repo from GitHub) in Module 3, and that works whether or not you've pushed your own repos.
 
 ---
 
 ## Submission
 
-Post a short summary (3-5 sentences) in the discussion forum describing:
-- Which transcription method you used
-- One thing that worked well
-- One challenge you encountered
+Write a 300-500 word reflection covering:
 
-No need to share your actual story outline unless you want to.
+1. **What changed** between the without-context and with-context responses? Be specific — quote or paraphrase examples.
+2. **What worked** in your context file? Which instructions had the most visible effect?
+3. **What didn't work** or had no noticeable effect? What would you change?
+4. **The deletion test in practice** — Did you cut anything from your first draft? What and why?
+5. **Context vs. prompt** — Looking at what you wrote in your CLAUDE.md, what's in there that you would have typed into a prompt before? What does it mean to have that in a committed file instead?
+
+Submit your reflection along with your CLAUDE.md file (copy-paste the contents or attach the file).
