@@ -12,7 +12,7 @@ What the course will be about, what they will learn and its application to the i
 
 A brief introduction of yourself
 
-Mention that it is free of cost
+Mention the course pricing and how to enroll
 
 Who can enroll
 
