@@ -29,3 +29,7 @@ build/
 # Local config
 *.local.js
 *.local.json
+
+# Windows artifacts
+desktop.ini
+nul
