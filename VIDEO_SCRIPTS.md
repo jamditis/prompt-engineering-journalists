@@ -48,7 +48,7 @@ Each module maps to a stage of an LLM-assisted journalism project. This arc shou
 Open with a concrete scenario: "You have a city council meeting transcript. You need every action item, every vote, and every named official in a formatted table — right now, before deadline. You describe that to an AI assistant running on your laptop. It reads the transcript and hands you the table. No browser, no upload, no copy-pasting. That's what this course teaches."
 
 **0:15-0:45 — What this course is**
-"I'm Joe Amditis from the Center for Cooperative Media at Montclair State University, and this is Advanced Prompt Engineering for Journalists — a free five-week course from the Knight Center at UT Austin. You already know how to use AI. This course teaches you to work with AI as a collaborator on real journalism projects: from the initial idea, through a GitHub repository, to something you can share with your whole newsroom."
+"I'm Joe Amditis from the Center for Cooperative Media at Montclair State University, and this is Advanced Prompt Engineering for Journalists — a five-week course from the Knight Center at UT Austin. You already know how to use AI. This course teaches you to work with AI as a collaborator on real journalism projects: from the initial idea, through a GitHub repository, to something you can share with your whole newsroom."
 
 **0:45-1:15 — What you'll walk away with**
 Five concrete skills:
@@ -59,7 +59,7 @@ Five concrete skills:
 - Connect AI to your own document archives with proper source attribution
 
 **1:15-1:30 — Who it's for / CTA**
-"If you've taken Prompt Engineering 101 or know how to write a good AI prompt — and if you want to go from typing prompts in a browser to actually delegating journalism work to an AI — this is your course. It's free. Sign up at JournalismCourses.org."
+"If you've taken Prompt Engineering 101 or know how to write a good AI prompt — and if you want to go from typing prompts in a browser to actually delegating journalism work to an AI — this is your course. Sign up at JournalismCourses.org."
 
 ---
 
