@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonus: Git &amp; GitHub | Advanced prompt engineering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* SVG animation keyframes */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes drawLine {
+            from { stroke-dashoffset: 200; }
+            to { stroke-dashoffset: 0; }
+        }
+        @keyframes pulse-dot {
+            0%, 100% { r: 6; opacity: 1; }
+            50% { r: 9; opacity: 0.7; }
+        }
+        @keyframes slideRight {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .svg-animate-in { animation: fadeInUp 0.5s ease-out both; }
+        .svg-draw-line { stroke-dasharray: 200; animation: drawLine 1s ease-out both; }
+        .svg-pulse { animation: pulse-dot 2s ease-in-out infinite; }
+        .svg-slide { animation: slideRight 0.6s ease-out both; }
+
+        /* Stagger delays for sequential animations */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 1.0s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .svg-animate-in, .svg-draw-line, .svg-pulse, .svg-slide {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <!-- Header with nav -->
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../module-5/" class="text-gray-400 hover:text-ice transition-colors">[ 05 ]</a>
+                    <a href="../bonus-git-github/" class="text-acid">[ GIT ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Module header -->
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">BONUS MODULE</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">GIT &amp; GITHUB FOR JOURNALISTS</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Understand version control well enough to tell Claude Code what you need — and when you need it.</p>
+            </div>
+        </section>
+
+        <!-- Content sections -->
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
+
+            <!-- Learning objectives -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-ice">Learning objectives</h2>
+                </div>
+                <div class="border border-ice/30 bg-iceDim p-6">
+                    <ul class="space-y-2 text-sm font-sans text-gray-300">
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand what Git tracks and why: commits, branches, and the three areas where your files live</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Know when to ask Claude Code to commit, branch, merge, push, or pull — and why each action matters</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Set up a GitHub repository for a journalism project using Claude Code</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Collaborate on a shared project by understanding pull requests, merge conflicts, and remote repositories</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Before you start -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">Before you start</h2>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-gray-300 text-sm leading-relaxed">You've been building things with Claude Code — scripts, project folders, processed documents. But every project reaches a point where you need to track what changed, go back to something that worked, or share your work with someone else. Git is how you do all three.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">You don't need to memorize Git commands. Claude Code knows them. Your job is understanding the concepts well enough to know <strong class="text-chrome">what to ask for</strong> and <strong class="text-chrome">when to ask for it</strong>. This module gives you that understanding.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">The visual explainers below are inspired by <a href="https://youtu.be/Ala6PHlYjmw" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"Git Will Finally Make Sense After This"</a> by LearnThatStack — a video that explains Git through visuals and metaphors rather than command syntax. We take the same approach here.</p>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- CONCEPT 1: What is Git? -->
+            <!-- ============================================ -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">Key concepts</h2>
+                </div>
+                <div class="space-y-6">
+
+                    <!-- What is Git? -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">What is Git?</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Git is a version control system. It keeps a complete history of every change made to every file in a project. Think of it as an unlimited undo button that works across your entire project — not just one file, but every file in the folder, and not just the last change, but every change you've ever recorded.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-6">GitHub is a website that hosts Git projects online. Git runs on your computer. GitHub stores a copy in the cloud so you can back up your work, share it with colleagues, or publish it publicly.</p>
+
+                        <!-- SVG: Save vs Commit comparison -->
+                        <div class="border border-white/10 bg-void/50 p-4 rounded">
+                            <p class="text-xs text-gray-400 font-mono mb-3">SAVING vs. COMMITTING</p>
+                            <svg viewBox="0 0 600 200" class="w-full" role="img" aria-label="Diagram comparing saving a file (overwrites the previous version) versus committing with Git (adds a new snapshot to the timeline while keeping all previous snapshots)">
+                                <!-- Save side -->
+                                <text x="150" y="24" text-anchor="middle" class="svg-animate-in" fill="#94a3b8" font-family="Inter, sans-serif" font-size="11" font-weight="600">SAVING A FILE</text>
+
+                                <!-- Old file (crossed out) -->
+                                <rect x="60" y="40" width="80" height="50" rx="4" fill="#1e293b" stroke="#475569" stroke-width="1.5" class="svg-animate-in delay-1"/>
+                                <text x="100" y="62" text-anchor="middle" fill="#64748b" font-family="JetBrains Mono, monospace" font-size="9">story_v1</text>
+                                <text x="100" y="78" text-anchor="middle" fill="#64748b" font-family="Inter, sans-serif" font-size="8">gone forever</text>
+                                <line x1="60" y1="40" x2="140" y2="90" stroke="#f87171" stroke-width="1.5" class="svg-draw-line delay-2"/>
+                                <line x1="140" y1="40" x2="60" y2="90" stroke="#f87171" stroke-width="1.5" class="svg-draw-line delay-2"/>
+
+                                <!-- Arrow -->
+                                <line x1="155" y1="65" x2="185" y2="65" stroke="#475569" stroke-width="1.5" class="svg-draw-line delay-2"/>
+                                <polygon points="185,60 195,65 185,70" fill="#475569" class="svg-animate-in delay-3"/>
+
+                                <!-- New file -->
+                                <rect x="200" y="40" width="80" height="50" rx="4" fill="#1e293b" stroke="#a3e635" stroke-width="1.5" class="svg-animate-in delay-3"/>
+                                <text x="240" y="62" text-anchor="middle" fill="#a3e635" font-family="JetBrains Mono, monospace" font-size="9">story_v2</text>
+                                <text x="240" y="78" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="8">current version</text>
+
+                                <text x="150" y="115" text-anchor="middle" fill="#f87171" font-family="Inter, sans-serif" font-size="10">The old version is overwritten.</text>
+                                <text x="150" y="130" text-anchor="middle" fill="#f87171" font-family="Inter, sans-serif" font-size="10">You can't go back.</text>
+
+                                <!-- Divider -->
+                                <line x1="300" y1="20" x2="300" y2="180" stroke="#334155" stroke-width="1" stroke-dasharray="4,4"/>
+
+                                <!-- Commit side -->
+                                <text x="450" y="24" text-anchor="middle" class="svg-animate-in" fill="#94a3b8" font-family="Inter, sans-serif" font-size="11" font-weight="600">COMMITTING WITH GIT</text>
+
+                                <!-- Commit 1 -->
+                                <circle cx="360" cy="65" r="6" fill="#67e8f9" class="svg-animate-in delay-1"/>
+                                <text x="360" y="90" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="8">v1</text>
+
+                                <!-- Line to commit 2 -->
+                                <line x1="370" y1="65" x2="430" y2="65" stroke="#67e8f9" stroke-width="1.5" class="svg-draw-line delay-2"/>
+
+                                <!-- Commit 2 -->
+                                <circle cx="440" cy="65" r="6" fill="#67e8f9" class="svg-animate-in delay-2"/>
+                                <text x="440" y="90" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="8">v2</text>
+
+                                <!-- Line to commit 3 -->
+                                <line x1="450" y1="65" x2="510" y2="65" stroke="#67e8f9" stroke-width="1.5" class="svg-draw-line delay-3"/>
+
+                                <!-- Commit 3 (current) -->
+                                <circle cx="520" cy="65" r="6" fill="#a3e635" class="svg-pulse delay-3"/>
+                                <text x="520" y="90" text-anchor="middle" fill="#a3e635" font-family="JetBrains Mono, monospace" font-size="8">v3</text>
+                                <text x="520" y="104" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="7">current</text>
+
+                                <text x="450" y="130" text-anchor="middle" fill="#a3e635" font-family="Inter, sans-serif" font-size="10">Every version is kept.</text>
+                                <text x="450" y="145" text-anchor="middle" fill="#a3e635" font-family="Inter, sans-serif" font-size="10">You can always go back.</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- ============================================ -->
+                    <!-- CONCEPT 2: The Three Areas -->
+                    <!-- ============================================ -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">The three areas: where your files live</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Git organizes your project into three areas. Understanding these is the key to knowing when to ask Claude Code for what.</p>
+
+                        <!-- SVG: Three Areas -->
+                        <div class="border border-white/10 bg-void/50 p-4 rounded mb-4">
+                            <p class="text-xs text-gray-400 font-mono mb-3">THE THREE AREAS OF A GIT PROJECT</p>
+                            <svg viewBox="0 0 600 280" class="w-full" role="img" aria-label="Diagram showing the three areas of Git: Working Directory where you edit files, Staging Area where you prepare changes, and Repository where committed snapshots are permanently stored. Arrows show files moving from working directory to staging area to repository.">
+                                <!-- Working Directory -->
+                                <rect x="20" y="40" width="160" height="140" rx="6" fill="none" stroke="#f87171" stroke-width="2" class="svg-animate-in"/>
+                                <text x="100" y="30" text-anchor="middle" fill="#f87171" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600" class="svg-animate-in">WORKING DIRECTORY</text>
+
+                                <rect x="35" y="60" width="130" height="24" rx="3" fill="#1e293b" stroke="#475569" stroke-width="1" class="svg-animate-in delay-1"/>
+                                <text x="100" y="76" text-anchor="middle" fill="#f87171" font-family="JetBrains Mono, monospace" font-size="9" class="svg-animate-in delay-1">story.md ✏️</text>
+
+                                <rect x="35" y="92" width="130" height="24" rx="3" fill="#1e293b" stroke="#475569" stroke-width="1" class="svg-animate-in delay-1"/>
+                                <text x="100" y="108" text-anchor="middle" fill="#f87171" font-family="JetBrains Mono, monospace" font-size="9" class="svg-animate-in delay-1">data.csv ✏️</text>
+
+                                <rect x="35" y="124" width="130" height="24" rx="3" fill="#1e293b" stroke="#475569" stroke-width="1" class="svg-animate-in delay-1"/>
+                                <text x="100" y="140" text-anchor="middle" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="9" class="svg-animate-in delay-1">notes.txt</text>
+
+                                <text x="100" y="175" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="9" class="svg-animate-in delay-2">Where you edit.</text>
+                                <text x="100" y="188" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="9" class="svg-animate-in delay-2">Changes aren't tracked yet.</text>
+
+                                <!-- Arrow 1 -->
+                                <line x1="190" y1="100" x2="216" y2="100" stroke="#f87171" stroke-width="1.5" class="svg-draw-line delay-2"/>
+                                <polygon points="216,95 226,100 216,105" fill="#f87171" class="svg-animate-in delay-3"/>
+                                <text x="208" y="85" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="8" class="svg-animate-in delay-3">stage</text>
+
+                                <!-- Staging Area -->
+                                <rect x="230" y="40" width="140" height="140" rx="6" fill="none" stroke="#67e8f9" stroke-width="2" class="svg-animate-in delay-1"/>
+                                <text x="300" y="30" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600" class="svg-animate-in delay-1">STAGING AREA</text>
+
+                                <rect x="245" y="60" width="110" height="24" rx="3" fill="#1e293b" stroke="#475569" stroke-width="1" class="svg-animate-in delay-2"/>
+                                <text x="300" y="76" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="9" class="svg-animate-in delay-2">story.md ✓</text>
+
+                                <rect x="245" y="92" width="110" height="24" rx="3" fill="#1e293b" stroke="#475569" stroke-width="1" class="svg-animate-in delay-2"/>
+                                <text x="300" y="108" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="9" class="svg-animate-in delay-2">data.csv ✓</text>
+
+                                <text x="300" y="155" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="9" class="svg-animate-in delay-3">Your drafting table.</text>
+                                <text x="300" y="168" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="9" class="svg-animate-in delay-3">Prepared for the next commit.</text>
+
+                                <!-- Arrow 2 -->
+                                <line x1="380" y1="100" x2="406" y2="100" stroke="#67e8f9" stroke-width="1.5" class="svg-draw-line delay-3"/>
+                                <polygon points="406,95 416,100 406,105" fill="#67e8f9" class="svg-animate-in delay-4"/>
+                                <text x="398" y="85" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="8" class="svg-animate-in delay-4">commit</text>
+
+                                <!-- Repository -->
+                                <rect x="420" y="40" width="160" height="140" rx="6" fill="none" stroke="#a3e635" stroke-width="2" class="svg-animate-in delay-2"/>
+                                <text x="500" y="30" text-anchor="middle" fill="#a3e635" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600" class="svg-animate-in delay-2">REPOSITORY</text>
+
+                                <!-- Commit nodes -->
+                                <circle cx="455" cy="80" r="5" fill="#a3e635" class="svg-animate-in delay-3"/>
+                                <text x="455" y="100" text-anchor="middle" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="7">c1</text>
+
+                                <line x1="462" y1="80" x2="488" y2="80" stroke="#a3e635" stroke-width="1" class="svg-draw-line delay-4"/>
+                                <circle cx="495" cy="80" r="5" fill="#a3e635" class="svg-animate-in delay-4"/>
+                                <text x="495" y="100" text-anchor="middle" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="7">c2</text>
+
+                                <line x1="502" y1="80" x2="528" y2="80" stroke="#a3e635" stroke-width="1" class="svg-draw-line delay-5"/>
+                                <circle cx="535" cy="80" r="6" fill="#a3e635" class="svg-pulse delay-5"/>
+                                <text x="535" y="100" text-anchor="middle" fill="#a3e635" font-family="JetBrains Mono, monospace" font-size="7">c3</text>
+
+                                <text x="500" y="145" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="9" class="svg-animate-in delay-4">Permanent history.</text>
+                                <text x="500" y="158" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="9" class="svg-animate-in delay-4">Every snapshot is kept forever.</text>
+
+                                <!-- Bottom summary -->
+                                <rect x="20" y="210" width="560" height="55" rx="4" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+                                <text x="300" y="232" text-anchor="middle" fill="#e2e8f0" font-family="Inter, sans-serif" font-size="10">
+                                    <tspan font-weight="600">When to ask Claude Code:</tspan>
+                                </text>
+                                <text x="300" y="250" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="10">"Stage my changes" → moves edited files to the staging area  ·  "Commit" → creates a permanent snapshot</text>
+                            </svg>
+                        </div>
+
+                        <div class="space-y-3 text-sm text-gray-300 leading-relaxed">
+                            <p><span class="text-signal font-mono text-xs">WORKING DIRECTORY</span> — The folder on your computer where you (and Claude Code) edit files. Changes here are not yet tracked by Git. If you delete something, it's gone — unless it was previously committed.</p>
+                            <p><span class="text-ice font-mono text-xs">STAGING AREA</span> — A preparation zone. When you tell Claude Code to stage changes, you're selecting which edits should be included in the next commit. Think of it as laying out pages on a table before binding them into a book. You don't have to stage everything — you can commit only the files that belong together logically.</p>
+                            <p><span class="text-acid font-mono text-xs">REPOSITORY</span> — The permanent record. Once changes are committed, they're stored in the repository's history. You can always go back to any previous commit. The repository lives inside a hidden <code class="text-acid bg-surface px-1">.git</code> folder in your project.</p>
+                        </div>
+                    </div>
+
+                    <!-- ============================================ -->
+                    <!-- CONCEPT 3: Commits -->
+                    <!-- ============================================ -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Commits: snapshots, not saves</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">A commit is a snapshot of your entire project at one moment in time. Every commit has three things: a unique ID (a long string of letters and numbers), a message you write describing what changed, and a pointer to the previous commit. Together, they form a timeline.</p>
+
+                        <!-- SVG: Commit Timeline -->
+                        <div class="border border-white/10 bg-void/50 p-4 rounded mb-4">
+                            <p class="text-xs text-gray-400 font-mono mb-3">A PROJECT'S COMMIT TIMELINE</p>
+                            <svg viewBox="0 0 600 160" class="w-full" role="img" aria-label="Timeline showing four commits in a project: initial setup, add vote data, write analysis script, fix column name bug. Each commit points to the next with an arrow, and each has a message and unique ID.">
+                                <!-- Timeline line -->
+                                <line x1="50" y1="60" x2="550" y2="60" stroke="#334155" stroke-width="2" class="svg-draw-line"/>
+
+                                <!-- Commit 1 -->
+                                <circle cx="80" cy="60" r="8" fill="#67e8f9" class="svg-animate-in delay-1"/>
+                                <text x="80" y="45" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="7" class="svg-animate-in delay-1">a3f2c1</text>
+                                <text x="80" y="85" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="8" class="svg-animate-in delay-1">Initial setup</text>
+
+                                <!-- Commit 2 -->
+                                <circle cx="220" cy="60" r="8" fill="#67e8f9" class="svg-animate-in delay-2"/>
+                                <text x="220" y="45" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="7" class="svg-animate-in delay-2">b7e4d2</text>
+                                <text x="220" y="85" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="8" class="svg-animate-in delay-2">Add vote data</text>
+
+                                <!-- Commit 3 -->
+                                <circle cx="370" cy="60" r="8" fill="#67e8f9" class="svg-animate-in delay-3"/>
+                                <text x="370" y="45" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="7" class="svg-animate-in delay-3">c9a1f5</text>
+                                <text x="370" y="85" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="8" class="svg-animate-in delay-3">Write analysis script</text>
+
+                                <!-- Commit 4 (current) -->
+                                <circle cx="510" cy="60" r="8" fill="#a3e635" class="svg-pulse delay-4"/>
+                                <text x="510" y="45" text-anchor="middle" fill="#a3e635" font-family="JetBrains Mono, monospace" font-size="7" class="svg-animate-in delay-4">d2f8e3</text>
+                                <text x="510" y="85" text-anchor="middle" fill="#a3e635" font-family="Inter, sans-serif" font-size="8" class="svg-animate-in delay-4">Fix column name bug</text>
+
+                                <!-- HEAD pointer -->
+                                <text x="510" y="105" text-anchor="middle" fill="#a3e635" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" class="svg-animate-in delay-5">HEAD</text>
+                                <line x1="510" y1="96" x2="510" y2="70" stroke="#a3e635" stroke-width="1" stroke-dasharray="3,2" class="svg-draw-line delay-5"/>
+
+                                <!-- Bottom tip -->
+                                <rect x="80" y="120" width="440" height="30" rx="4" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+                                <text x="300" y="140" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="10">HEAD = where you are now. Ask Claude Code to "go back to" any earlier commit by its message or ID.</text>
+                            </svg>
+                        </div>
+
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3"><strong class="text-chrome">When to commit:</strong> After you reach a meaningful checkpoint. The analysis script works. The data file is cleaned. The bug is fixed. Don't commit after every keystroke — commit after each logical unit of work.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed"><strong class="text-chrome">What to say in the message:</strong> Describe what changed and why. "Add council vote data for January through March" is useful. "Update files" is not. Good commit messages are your future self's breadcrumbs.</p>
+                    </div>
+
+                    <!-- ============================================ -->
+                    <!-- CONCEPT 4: Branches -->
+                    <!-- ============================================ -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Branches: parallel timelines</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">A branch is a separate line of development. The default branch is called <code class="text-acid bg-surface px-1">main</code>. When you create a new branch, you're saying: "I want to try something, but I don't want to touch the working version until I'm sure it works."</p>
+
+                        <!-- SVG: Branching Diagram -->
+                        <div class="border border-white/10 bg-void/50 p-4 rounded mb-4">
+                            <p class="text-xs text-gray-400 font-mono mb-3">BRANCHING AND MERGING</p>
+                            <svg viewBox="0 0 600 220" class="w-full" role="img" aria-label="Diagram showing a main branch with commits, a feature branch splitting off to try an experiment, and then merging back into main when the experiment succeeds.">
+                                <!-- Main branch line -->
+                                <line x1="40" y1="80" x2="560" y2="80" stroke="#a3e635" stroke-width="2" class="svg-draw-line"/>
+                                <text x="30" y="84" text-anchor="end" fill="#a3e635" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" class="svg-animate-in">main</text>
+
+                                <!-- Main commits -->
+                                <circle cx="80" cy="80" r="7" fill="#a3e635" class="svg-animate-in delay-1"/>
+                                <circle cx="180" cy="80" r="7" fill="#a3e635" class="svg-animate-in delay-2"/>
+                                <circle cx="280" cy="80" r="7" fill="#a3e635" class="svg-animate-in delay-3"/>
+
+                                <!-- Branch splits off -->
+                                <line x1="280" y1="80" x2="320" y2="150" stroke="#67e8f9" stroke-width="2" class="svg-draw-line delay-3"/>
+                                <line x1="320" y1="150" x2="440" y2="150" stroke="#67e8f9" stroke-width="2" class="svg-draw-line delay-3"/>
+                                <text x="310" y="175" text-anchor="start" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" class="svg-animate-in delay-3">experiment</text>
+
+                                <!-- Branch commits -->
+                                <circle cx="350" cy="150" r="7" fill="#67e8f9" class="svg-animate-in delay-3"/>
+                                <text x="350" y="140" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="7">try new chart</text>
+                                <circle cx="420" cy="150" r="7" fill="#67e8f9" class="svg-animate-in delay-4"/>
+                                <text x="420" y="140" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="7">fix chart colors</text>
+
+                                <!-- Main continues -->
+                                <circle cx="380" cy="80" r="7" fill="#a3e635" class="svg-animate-in delay-4"/>
+                                <text x="380" y="70" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="7">update README</text>
+
+                                <!-- Merge back -->
+                                <line x1="440" y1="150" x2="480" y2="80" stroke="#67e8f9" stroke-width="2" class="svg-draw-line delay-4"/>
+
+                                <!-- Merge commit -->
+                                <circle cx="480" cy="80" r="9" fill="#a3e635" stroke="#67e8f9" stroke-width="2" class="svg-animate-in delay-5"/>
+                                <text x="480" y="70" text-anchor="middle" fill="#e2e8f0" font-family="Inter, sans-serif" font-size="7" font-weight="600">merge!</text>
+
+                                <!-- Post-merge commit -->
+                                <circle cx="540" cy="80" r="7" fill="#a3e635" class="svg-pulse delay-5"/>
+
+                                <!-- Annotations -->
+                                <rect x="20" y="195" width="260" height="22" rx="3" fill="#1e293b" stroke="#67e8f9" stroke-width="1"/>
+                                <text x="150" y="210" text-anchor="middle" fill="#67e8f9" font-family="Inter, sans-serif" font-size="9">Branch = safe space to experiment</text>
+
+                                <rect x="310" y="195" width="260" height="22" rx="3" fill="#1e293b" stroke="#a3e635" stroke-width="1"/>
+                                <text x="440" y="210" text-anchor="middle" fill="#a3e635" font-family="Inter, sans-serif" font-size="9">Merge = bring the experiment home</text>
+                            </svg>
+                        </div>
+
+                        <div class="space-y-3 text-sm text-gray-300 leading-relaxed">
+                            <p><strong class="text-chrome">When to branch:</strong> Before trying anything risky. Refactoring a working script. Testing a new analysis approach. Experimenting with a different data format. Tell Claude Code: "Create a new branch called [name] before making these changes."</p>
+                            <p><strong class="text-chrome">When to merge:</strong> When the experiment works. Tell Claude Code: "Merge the [name] branch back into main." If the experiment failed, tell Claude Code to delete the branch — main stays untouched.</p>
+                            <p><strong class="text-chrome">A branch is not a copy.</strong> This is a common misconception. A branch is a lightweight pointer — Git doesn't duplicate your files. It just tracks a separate line of changes. That's why branches are fast to create and cheap to keep.</p>
+                        </div>
+                    </div>
+
+                    <!-- ============================================ -->
+                    <!-- CONCEPT 5: Remote Repos & GitHub -->
+                    <!-- ============================================ -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Remote repositories: Git + GitHub</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">So far, everything has happened on your computer. A <strong>remote repository</strong> is a copy of your project stored somewhere else — usually on GitHub. This gives you backup, collaboration, and publishing.</p>
+
+                        <!-- SVG: Local vs Remote -->
+                        <div class="border border-white/10 bg-void/50 p-4 rounded mb-4">
+                            <p class="text-xs text-gray-400 font-mono mb-3">YOUR COMPUTER ↔ GITHUB</p>
+                            <svg viewBox="0 0 600 200" class="w-full" role="img" aria-label="Diagram showing a local repository on your computer connected to a remote repository on GitHub via push (sending changes up) and pull (getting changes down).">
+                                <!-- Local box -->
+                                <rect x="30" y="30" width="200" height="130" rx="8" fill="none" stroke="#a3e635" stroke-width="2" class="svg-animate-in"/>
+                                <text x="130" y="55" text-anchor="middle" fill="#a3e635" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">YOUR COMPUTER</text>
+
+                                <circle cx="80" cy="100" r="5" fill="#a3e635" class="svg-animate-in delay-1"/>
+                                <line x1="88" y1="100" x2="112" y2="100" stroke="#a3e635" stroke-width="1"/>
+                                <circle cx="120" cy="100" r="5" fill="#a3e635" class="svg-animate-in delay-1"/>
+                                <line x1="128" y1="100" x2="152" y2="100" stroke="#a3e635" stroke-width="1"/>
+                                <circle cx="160" cy="100" r="6" fill="#a3e635" class="svg-pulse delay-2"/>
+
+                                <text x="130" y="135" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="9">local repository</text>
+
+                                <!-- Remote box -->
+                                <rect x="370" y="30" width="200" height="130" rx="8" fill="none" stroke="#67e8f9" stroke-width="2" class="svg-animate-in delay-1"/>
+                                <text x="470" y="55" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600">GITHUB</text>
+
+                                <circle cx="420" cy="100" r="5" fill="#67e8f9" class="svg-animate-in delay-2"/>
+                                <line x1="428" y1="100" x2="452" y2="100" stroke="#67e8f9" stroke-width="1"/>
+                                <circle cx="460" cy="100" r="5" fill="#67e8f9" class="svg-animate-in delay-2"/>
+                                <line x1="468" y1="100" x2="492" y2="100" stroke="#67e8f9" stroke-width="1"/>
+                                <circle cx="500" cy="100" r="6" fill="#67e8f9" class="svg-pulse delay-3"/>
+
+                                <text x="470" y="135" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="9">remote repository</text>
+
+                                <!-- Push arrow (top) -->
+                                <line x1="240" y1="75" x2="358" y2="75" stroke="#a3e635" stroke-width="1.5" class="svg-draw-line delay-2"/>
+                                <polygon points="358,70 368,75 358,80" fill="#a3e635" class="svg-animate-in delay-3"/>
+                                <text x="300" y="68" text-anchor="middle" fill="#a3e635" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" class="svg-animate-in delay-3">push</text>
+
+                                <!-- Pull arrow (bottom) -->
+                                <line x1="360" y1="120" x2="242" y2="120" stroke="#67e8f9" stroke-width="1.5" class="svg-draw-line delay-3"/>
+                                <polygon points="242,115 232,120 242,125" fill="#67e8f9" class="svg-animate-in delay-4"/>
+                                <text x="300" y="138" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" class="svg-animate-in delay-4">pull</text>
+
+                                <!-- Bottom tip -->
+                                <text x="300" y="185" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="10">Push = send your commits to GitHub  ·  Pull = get your colleague's commits from GitHub</text>
+                            </svg>
+                        </div>
+
+                        <div class="space-y-3 text-sm text-gray-300 leading-relaxed">
+                            <p><strong class="text-chrome">Push:</strong> Sends your local commits to GitHub. Tell Claude Code: "Push my changes to GitHub." Do this when you want to back up, share, or publish your work.</p>
+                            <p><strong class="text-chrome">Pull:</strong> Gets new commits from GitHub that you don't have locally. Tell Claude Code: "Pull the latest changes from GitHub." Do this at the start of a work session if someone else might have made changes, or if you're switching between computers.</p>
+                            <p><strong class="text-chrome">Clone:</strong> Downloads an entire repository from GitHub to your computer for the first time. Tell Claude Code: "Clone this repository" and give it the URL. This is how you get someone else's project — or your own project on a new computer.</p>
+                        </div>
+                    </div>
+
+                    <!-- ============================================ -->
+                    <!-- CONCEPT 6: Pull Requests & Collaboration -->
+                    <!-- ============================================ -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Pull requests: the editorial review of code</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">A pull request (PR) is a proposal to merge one branch into another. It's GitHub's system for review. You do your work on a branch, push that branch to GitHub, and then open a pull request that says: "Here's what I changed. Review it before it goes into main."</p>
+
+                        <!-- SVG: Pull Request Flow -->
+                        <div class="border border-white/10 bg-void/50 p-4 rounded mb-4">
+                            <p class="text-xs text-gray-400 font-mono mb-3">PULL REQUEST WORKFLOW</p>
+                            <svg viewBox="0 0 600 170" class="w-full" role="img" aria-label="Flow diagram showing the pull request process: create a branch, make changes and commit, push the branch to GitHub, open a pull request for review, reviewer approves or requests changes, and finally the branch is merged into main.">
+                                <!-- Step boxes -->
+                                <rect x="10" y="20" width="85" height="50" rx="4" fill="#1e293b" stroke="#a3e635" stroke-width="1.5" class="svg-animate-in"/>
+                                <text x="52" y="42" text-anchor="middle" fill="#a3e635" font-family="Inter, sans-serif" font-size="8" font-weight="600">Create</text>
+                                <text x="52" y="55" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="7">branch</text>
+
+                                <line x1="100" y1="45" x2="115" y2="45" stroke="#475569" stroke-width="1.5" class="svg-draw-line delay-1"/>
+                                <polygon points="115,41 122,45 115,49" fill="#475569"/>
+
+                                <rect x="125" y="20" width="85" height="50" rx="4" fill="#1e293b" stroke="#67e8f9" stroke-width="1.5" class="svg-animate-in delay-1"/>
+                                <text x="167" y="42" text-anchor="middle" fill="#67e8f9" font-family="Inter, sans-serif" font-size="8" font-weight="600">Make</text>
+                                <text x="167" y="55" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="7">changes + commit</text>
+
+                                <line x1="215" y1="45" x2="230" y2="45" stroke="#475569" stroke-width="1.5" class="svg-draw-line delay-2"/>
+                                <polygon points="230,41 237,45 230,49" fill="#475569"/>
+
+                                <rect x="240" y="20" width="85" height="50" rx="4" fill="#1e293b" stroke="#67e8f9" stroke-width="1.5" class="svg-animate-in delay-2"/>
+                                <text x="282" y="42" text-anchor="middle" fill="#67e8f9" font-family="Inter, sans-serif" font-size="8" font-weight="600">Push</text>
+                                <text x="282" y="55" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="7">branch to GitHub</text>
+
+                                <line x1="330" y1="45" x2="345" y2="45" stroke="#475569" stroke-width="1.5" class="svg-draw-line delay-3"/>
+                                <polygon points="345,41 352,45 345,49" fill="#475569"/>
+
+                                <rect x="355" y="20" width="85" height="50" rx="4" fill="#1e293b" stroke="#f87171" stroke-width="1.5" class="svg-animate-in delay-3"/>
+                                <text x="397" y="42" text-anchor="middle" fill="#f87171" font-family="Inter, sans-serif" font-size="8" font-weight="600">Open PR</text>
+                                <text x="397" y="55" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="7">request review</text>
+
+                                <line x1="445" y1="45" x2="460" y2="45" stroke="#475569" stroke-width="1.5" class="svg-draw-line delay-4"/>
+                                <polygon points="460,41 467,45 460,49" fill="#475569"/>
+
+                                <rect x="470" y="20" width="110" height="50" rx="4" fill="#1e293b" stroke="#a3e635" stroke-width="1.5" class="svg-animate-in delay-4"/>
+                                <text x="525" y="42" text-anchor="middle" fill="#a3e635" font-family="Inter, sans-serif" font-size="8" font-weight="600">Review + Merge</text>
+                                <text x="525" y="55" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="7">into main</text>
+
+                                <!-- Journalism analogy box -->
+                                <rect x="10" y="90" width="570" height="65" rx="4" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+                                <text x="30" y="110" fill="#a3e635" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">JOURNALISM ANALOGY</text>
+                                <text x="30" y="128" fill="#94a3b8" font-family="Inter, sans-serif" font-size="9">A pull request is like submitting a draft for editorial review. You did the work on your</text>
+                                <text x="30" y="143" fill="#94a3b8" font-family="Inter, sans-serif" font-size="9">own branch (your desk), and now you're asking the editor (your colleague) to read it,</text>
+                            </svg>
+                        </div>
+
+                        <p class="text-gray-300 text-sm leading-relaxed">Pull requests are where collaboration happens on GitHub. They show exactly what changed, let reviewers leave comments, and create a record of who approved what. In a newsroom context, they're how you get a second pair of eyes on an analysis before it goes live.</p>
+                    </div>
+
+                    <!-- ============================================ -->
+                    <!-- CONCEPT 7: Merge Conflicts -->
+                    <!-- ============================================ -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Merge conflicts: when two edits collide</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">A merge conflict happens when two branches change the same lines of the same file. Git doesn't know which version to keep, so it asks you to decide.</p>
+
+                        <!-- SVG: Merge Conflict -->
+                        <div class="border border-white/10 bg-void/50 p-4 rounded mb-4">
+                            <p class="text-xs text-gray-400 font-mono mb-3">WHEN A MERGE CONFLICT HAPPENS</p>
+                            <svg viewBox="0 0 600 220" class="w-full" role="img" aria-label="Diagram showing two branches editing the same line of a file: main changes line 5 to say 'budget: 2.3 million' while a feature branch changes line 5 to say 'budget: 2.5 million (revised)'. Git marks the conflict and you decide which version to keep.">
+                                <!-- Main branch -->
+                                <rect x="30" y="20" width="230" height="70" rx="4" fill="#1e293b" stroke="#a3e635" stroke-width="1.5" class="svg-animate-in"/>
+                                <text x="145" y="40" text-anchor="middle" fill="#a3e635" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">main branch</text>
+                                <text x="145" y="60" text-anchor="middle" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="9">line 5: budget = $2.3M</text>
+                                <text x="145" y="78" text-anchor="middle" fill="#64748b" font-family="Inter, sans-serif" font-size="8">(original figure)</text>
+
+                                <!-- Feature branch -->
+                                <rect x="340" y="20" width="230" height="70" rx="4" fill="#1e293b" stroke="#67e8f9" stroke-width="1.5" class="svg-animate-in delay-1"/>
+                                <text x="455" y="40" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600">update-numbers branch</text>
+                                <text x="455" y="60" text-anchor="middle" fill="#94a3b8" font-family="JetBrains Mono, monospace" font-size="9">line 5: budget = $2.5M</text>
+                                <text x="455" y="78" text-anchor="middle" fill="#64748b" font-family="Inter, sans-serif" font-size="8">(revised figure)</text>
+
+                                <!-- Arrows down to conflict -->
+                                <line x1="145" y1="95" x2="260" y2="130" stroke="#a3e635" stroke-width="1.5" class="svg-draw-line delay-2"/>
+                                <line x1="455" y1="95" x2="340" y2="130" stroke="#67e8f9" stroke-width="1.5" class="svg-draw-line delay-2"/>
+
+                                <!-- Conflict marker -->
+                                <rect x="200" y="120" width="200" height="40" rx="4" fill="#1e293b" stroke="#f87171" stroke-width="2" class="svg-animate-in delay-3"/>
+                                <text x="300" y="138" text-anchor="middle" fill="#f87171" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600" class="svg-animate-in delay-3">⚠ CONFLICT</text>
+                                <text x="300" y="153" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="8" class="svg-animate-in delay-3">Same line, different changes</text>
+
+                                <!-- Resolution arrow -->
+                                <line x1="300" y1="165" x2="300" y2="180" stroke="#a3e635" stroke-width="1.5" class="svg-draw-line delay-4"/>
+                                <polygon points="295,180 300,190 305,180" fill="#a3e635" class="svg-animate-in delay-4"/>
+
+                                <!-- Resolution box -->
+                                <rect x="120" y="192" width="360" height="24" rx="3" fill="#1e293b" stroke="#a3e635" stroke-width="1"/>
+                                <text x="300" y="208" text-anchor="middle" fill="#a3e635" font-family="Inter, sans-serif" font-size="9" class="svg-animate-in delay-5">Ask Claude Code: "Show me the conflict and help me choose the right version."</text>
+                            </svg>
+                        </div>
+
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3">Conflicts are not errors — they're a normal part of collaboration. They mean two people were productive on the same file. When a conflict happens, Claude Code can show you exactly which lines conflict and help you decide which version to keep, or combine them.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed"><strong class="text-chrome">What to tell Claude Code:</strong> "There's a merge conflict. Show me what both sides changed and help me resolve it." Claude Code will display the conflicting sections side by side and ask you which version to keep.</p>
+                    </div>
+
+                    <!-- ============================================ -->
+                    <!-- CONCEPT 8: The Git Vocabulary Cheat Sheet -->
+                    <!-- ============================================ -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">What to ask Claude Code: a quick reference</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">You don't need to know the commands. You need to know what to ask for. Here's when to say what:</p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="bg-void/50 border border-white/10 p-4 rounded">
+                                <p class="text-acid font-mono text-xs mb-2">STARTING A PROJECT</p>
+                                <p class="text-gray-300 text-sm">"Initialize a Git repository in this folder and make the first commit."</p>
+                            </div>
+                            <div class="bg-void/50 border border-white/10 p-4 rounded">
+                                <p class="text-acid font-mono text-xs mb-2">SAVING A CHECKPOINT</p>
+                                <p class="text-gray-300 text-sm">"Commit my changes with a message describing what I just did."</p>
+                            </div>
+                            <div class="bg-void/50 border border-white/10 p-4 rounded">
+                                <p class="text-acid font-mono text-xs mb-2">TRYING SOMETHING RISKY</p>
+                                <p class="text-gray-300 text-sm">"Create a new branch called [name] before making these changes."</p>
+                            </div>
+                            <div class="bg-void/50 border border-white/10 p-4 rounded">
+                                <p class="text-acid font-mono text-xs mb-2">THE EXPERIMENT WORKED</p>
+                                <p class="text-gray-300 text-sm">"Merge the [name] branch back into main."</p>
+                            </div>
+                            <div class="bg-void/50 border border-white/10 p-4 rounded">
+                                <p class="text-acid font-mono text-xs mb-2">BACKING UP / SHARING</p>
+                                <p class="text-gray-300 text-sm">"Push my changes to GitHub."</p>
+                            </div>
+                            <div class="bg-void/50 border border-white/10 p-4 rounded">
+                                <p class="text-acid font-mono text-xs mb-2">GETTING TEAM UPDATES</p>
+                                <p class="text-gray-300 text-sm">"Pull the latest changes from GitHub."</p>
+                            </div>
+                            <div class="bg-void/50 border border-white/10 p-4 rounded">
+                                <p class="text-acid font-mono text-xs mb-2">SOMETHING BROKE</p>
+                                <p class="text-gray-300 text-sm">"Show me the history and go back to the last commit where [thing] worked."</p>
+                            </div>
+                            <div class="bg-void/50 border border-white/10 p-4 rounded">
+                                <p class="text-acid font-mono text-xs mb-2">GETTING A PROJECT</p>
+                                <p class="text-gray-300 text-sm">"Clone this repository: [paste GitHub URL]."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- EXERCISE -->
+            <!-- ============================================ -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-acid">EXERCISE</h2>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6 mb-8">
+                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Use Claude Code to set up a version-controlled journalism project, make commits at meaningful checkpoints, experiment on a branch, and push the project to GitHub.</span></p>
+                </div>
+
+                <!-- Step 1 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">01</span>
+                        Launch Claude Code
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">Open your terminal and start an interactive session:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
+                        Create a project and initialize Git
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">Ask Claude Code to set up a journalism project with version control from the start:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a new folder called "city-hall-tracker" with these files:
+
+1. A CLAUDE.md that describes this as a project tracking city council votes, with instructions to format output as markdown and include source attribution.
+2. A README.md explaining the project's purpose.
+3. A votes.csv with five rows of sample city council vote data: date, council member name, issue, and vote (yes/no).
+
+Initialize a Git repository and make the first commit with the message "Initial project setup with context file, README, and sample data."</code></pre>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-2">Watch what Claude Code does. It creates the files, initializes Git, stages everything, and commits — all from one prompt.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
+                        Add data and commit the change
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">Now ask Claude Code to modify the project and record the change:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Add five more rows of city council vote data to votes.csv. Use different issues than the first five — things like park funding, zoning changes, and library hours.
+
+Then commit this change with a message describing what you added.</code></pre>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">04</span>
+                        Explore the project history
+                    </h3>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Show me the full Git history of this project. For each commit, tell me what changed in plain English.</code></pre>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-2">This is where version control starts to feel real. You can see every checkpoint in your project's life.</p>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">05</span>
+                        Branch, experiment, merge
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">Try branching — the concept that lets you experiment without risk:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a new branch called "add-analysis" and switch to it. Then write a Python script called analyze_votes.py that reads votes.csv and prints a summary: total votes, yes vs. no breakdown, and which council member voted "no" the most.
+
+Commit the script to this branch.</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Now merge it back:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Switch back to the main branch and merge the add-analysis branch into it. Confirm the merge worked by showing me the Git log.</code></pre>
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
+                        Push to GitHub
+                    </h3>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a new private repository on GitHub called "city-hall-tracker" and push this entire project to it. If GitHub CLI isn't set up yet, walk me through the setup.</code></pre>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-2">Claude Code will handle the GitHub CLI authentication if needed. Your project is now backed up and shareable.</p>
+                </div>
+            </section>
+
+            <!-- Checkpoint questions -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-signal">Checkpoint</h2>
+                </div>
+                <div class="border border-signal/30 bg-signalDim p-6">
+                    <p class="text-sm font-sans text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
+                    <ul class="space-y-2 text-sm font-sans text-gray-300">
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What's the difference between saving a file and committing in Git?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Name the three areas where files live in a Git project.</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> When should you create a branch?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What does "push to GitHub" mean, and when would you do it?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What is a pull request, and why does it matter for collaboration?</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Resources -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">Resources</h2>
+                </div>
+                <div class="border border-white/10 bg-panel p-6">
+                    <ul class="space-y-3 text-sm font-sans">
+                        <li><a href="https://youtu.be/Ala6PHlYjmw" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[VIDEO]</a> <span class="text-gray-300">Git Will Finally Make Sense After This — LearnThatStack visual walkthrough</span></li>
+                        <li><a href="https://learngitbranching.js.org/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[INTERACTIVE]</a> <span class="text-gray-300">Learn Git Branching — Visual, interactive playground for branches and merges</span></li>
+                        <li><a href="https://docs.github.com/en/get-started/quickstart" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">GitHub quickstart — Official guide to repositories, commits, and pull requests</span></li>
+                        <li><a href="https://rogerdudler.github.io/git-guide/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-300">git - the simple guide — Single-page reference with no deep jargon</span></li>
+                        <li><a href="https://skills.github.com/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[COURSE]</a> <span class="text-gray-300">GitHub Skills — Free interactive courses on pull requests, conflicts, and GitHub Pages</span></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Troubleshooting -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">Troubleshooting</h2>
+                </div>
+                <div class="border border-white/10 bg-panel divide-y divide-white/5">
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">"fatal: not a git repository"</h4>
+                        <p class="text-gray-400 text-sm">You're in a folder that doesn't have Git initialized. Ask Claude Code: "Initialize a Git repository in this folder." Or navigate to the correct project folder first.</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">Claude Code says "nothing to commit"</h4>
+                        <p class="text-gray-400 text-sm">All your changes are already committed, or you haven't made any changes since the last commit. This is fine — it means your project is up to date.</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">"failed to push" or authentication errors with GitHub</h4>
+                        <p class="text-gray-400 text-sm">GitHub CLI may not be authenticated. Ask Claude Code: "Check if GitHub CLI is installed and authenticated. If not, walk me through the setup." The <code class="text-acid bg-surface px-1">gh auth login</code> flow opens a browser window similar to Gemini CLI's authentication.</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">"merge conflict" during merge</h4>
+                        <p class="text-gray-400 text-sm">This means two branches changed the same lines. It's normal. Ask Claude Code: "Show me the conflict and help me resolve it." Claude Code will display both versions and help you pick the right one.</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">"your branch is behind" when pushing</h4>
+                        <p class="text-gray-400 text-sm">Someone else (or you on another computer) pushed changes you don't have locally. Ask Claude Code: "Pull the latest changes from GitHub first, then push my changes."</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Prev/Next navigation -->
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between">
+                <a href="../" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">Home</a>
+                <a href="../module-1/" class="text-acid hover:text-white text-sm font-mono transition-colors">Module 01</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>lucide.createIcons();</script>
+    <script src="../assets/js/copy-code.js"></script>
+</body>
+</html>
