@@ -7,7 +7,7 @@
 **Twitter:** [https://twitter.com/jsamditis](https://twitter.com/jsamditis)
 **Substack:** [https://strugglestreet.substack.com](https://strugglestreet.substack.com/)
 
-**Course duration:** 5 weeks
+**Course duration:** 4 weeks
 **Time commitment:** 4–6 hours per week
 
 ---
@@ -42,10 +42,11 @@ By the end of this course, students will be able to:
 
 ### Pre-course orientation
 
-Before Week 1 begins, complete the following setup steps. This orientation includes a welcome video and a checklist — there are no assignments this week.
+Before Week 1 begins, complete the following setup steps. This orientation includes a welcome video from the instructor and a written setup checklist — there are no graded assignments this week. The welcome video walks through what to expect and how the course is structured. Everything else is written instructions for getting your tools installed before Week 1 starts.
 
 **Pre-course checklist:**
 
+- Watch the welcome video (available in the course platform)
 - Install Node.js (https://nodejs.org) version 20 or higher and verify your terminal environment
 - Set up Claude Code, Gemini CLI, or Codex CLI (see Required tools below for options)
 - Create a GitHub account (https://github.com) and clone the course repository
@@ -54,9 +55,11 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 
 ---
 
-### Module 1: Escaping the chat window
+### Module 1: From chat window to command line
 
-**Focus:** From apps to harnesses — understanding why the same model behaves differently in a chat window than it does in a CLI tool
+**Focus:** From apps to harnesses — why the same AI model behaves differently in a chat window than in a CLI tool, and how to build a persistent project environment around it
+
+This module covers the two foundational skills of the course: getting into the terminal and building a persistent project environment. You will learn why CLI tools give you different (and more programmable) access to AI than web chat interfaces, then set up a context file for a beat project so the AI knows your beat, sources, and standards before every session. By the end of the week, you will have a working CLI setup, a CLAUDE.md you wrote yourself, and experience processing real journalism documents from the filesystem.
 
 **Topics:**
 - Models, apps, and harnesses: Mollick's framework for the agentic era
@@ -65,22 +68,6 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 - Comparing web and CLI workflows side by side on the same task
 - Session commands: `/help`, `/plan`, `/compact`, `/clear`
 - When CLI tools are worth the setup cost and when they are not
-
-**Supplementary material:** [What is a CLI?](https://jamditis.github.io/prompt-engineering-journalists/concepts/what-is-a-cli.html) — plain-English explainer for journalists who haven't used a terminal
-
-**Activities:**
-- Required readings: Mollick's "A guide to which AI to use in the agentic era," Amditis's "Vibe coding for newsrooms," tool documentation (choose one: Claude Code, Gemini CLI, or Codex CLI)
-- Exercise: Install Claude Code and compare web vs. CLI workflows — process the same press release in both environments and note what each required of you
-- Discussion (choose one): Share your installation experience and first impressions of working in the terminal. Or: What surprised you about the differences between web-based and command-line AI tools?
-- Quiz
-
----
-
-### Module 2: Prompting with files and project context
-
-**Focus:** From prompt engineering to context engineering — building persistent environments instead of crafting one-off messages
-
-**Topics:**
 - The "fresh conversation" problem: why web chat context evaporates
 - Project context files: CLAUDE.md, GEMINI.md, AGENTS.md
 - What goes in a context file (beat knowledge, style, source standards, terminology)
@@ -89,21 +76,25 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 - Git basics and GitHub for project management — what repositories, commits, and cloning are
 - Context files as versionable infrastructure, not personal notes
 
-**Supplementary material:** [How context files work](https://jamditis.github.io/prompt-engineering-journalists/concepts/how-context-files-work.html) — plain-English explainer on the blank slate problem and how context files solve it
+**Supplementary material:**
+- [What is a CLI?](https://jamditis.github.io/prompt-engineering-journalists/concepts/what-is-a-cli.html) — plain-English explainer for journalists who haven't used a terminal
+- [How context files work](https://jamditis.github.io/prompt-engineering-journalists/concepts/how-context-files-work.html) — plain-English explainer on the blank slate problem and how context files solve it
 
 **Activities:**
-- Required readings: Context file documentation for Claude Code, Gemini CLI, and Codex; Schmid's "Prompt engineering vs. context engineering"; GitHub basics; Amditis's "I'm a Claude Code agent with my own Gmail account"
-- Exercise: Set up a city hall beat project, initialize a Git repo, process documents with and without context, write a CLAUDE.md, and compare the results
-- Discussion (choose one): What would you put in a context file for your beat, and why? Or: How does processing documents from the file system compare to pasting text into a chat window — what changes about your workflow?
+- Required readings: Mollick's "A guide to which AI to use in the agentic era," Amditis's "Vibe coding for newsrooms," tool documentation (choose one: Claude Code, Gemini CLI, or Codex CLI), context file documentation for Claude Code, Gemini CLI, and Codex; Schmid's "Prompt engineering vs. context engineering"; GitHub basics; Amditis's "I'm a Claude Code agent with my own Gmail account"
+- Exercise: Install Claude Code, set up a city hall beat project, initialize a Git repo, write a CLAUDE.md, and compare document processing with and without context — submit screenshots or command output showing the difference
+- Discussion (choose one): What surprised you about working in the terminal compared to a web chat interface? Or: What would you put in a context file for your beat, and why?
 - Quiz
 
 ---
 
-### Module 3: Custom skills for Claude Code\*
+### Module 2: Custom skills for Claude Code\*
 
 **Focus:** Encoding domain expertise into reusable, shareable tools
 
 *\*The lessons in this module will generally apply to other models/LLMs, but they will be tailored for Claude Code specifically.*
+
+Once you have a working project environment, the next step is encoding your editorial standards into reusable tools instead of typing them every session. This module covers how to create custom slash commands, set up hooks that automate quality checks, and install a library of pre-built journalism skills. The goal is to shift from crafting prompts on the fly to building a toolkit that reflects how your newsroom works.
 
 **Topics:**
 - The progression: ad-hoc prompts → saved prompts → skills → hooks → plugins
@@ -121,9 +112,11 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 
 ---
 
-### Module 4: CLI workflows for newsrooms
+### Module 3: CLI workflows for newsrooms
 
 **Focus:** Describe the workflow in plain English — let the LLM build the automation
+
+This module focuses on automation — using AI to build the scripts and pipelines that handle your recurring newsroom tasks. Rather than building automation by hand, you describe what you need in plain English and let the AI construct the workflow. You will learn when automation makes sense for a given task, how to inspect and understand what the AI built, and how to manage API costs on batch jobs — including why testing small before running large matters.
 
 **Topics:**
 - From no-code automation to LLM-built workflow scripts
@@ -143,9 +136,11 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 
 ---
 
-### Module 5: Agents and retrieval-augmented generation (RAG)
+### Module 4: Agents and retrieval-augmented generation (RAG)
 
 **Focus:** Parametric vs. grounded knowledge, and why the citation trail matters
+
+This module covers the most advanced concepts in the course: how AI systems take multi-step actions autonomously, and how to ground AI responses in your own documents rather than the model's training data. You will connect Claude to local files via Model Context Protocol (MCP) and query across them the way you would when backgrounding a story — with citations you can actually trace back to a source.
 
 **Topics:**
 - Chatbots vs. agents: what makes an AI tool an agent (tools, autonomy, multi-step plans)
@@ -160,7 +155,7 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 - Exercise: Connect Claude to a folder of local documents (budget data, meeting minutes, crime stats) via an MCP filesystem server, then query across them the way you would when backgrounding a story
 - Discussion (choose one): Where should newsrooms draw the line on AI autonomy, and what safeguards matter most? Or: When does RAG add enough value over a standard prompt to justify the setup cost?
 - Quiz
-- Final project due
+- Final project due (optional — see below)
 
 ---
 
@@ -170,23 +165,32 @@ Before Week 1 begins, complete the following setup steps. This orientation inclu
 
 **Discussion forums:** Each module includes a discussion forum with 2–3 prompts. Post at least one original contribution and respond to at least two classmates per module. Posts should be substantive (more than "I agree").
 
-**Engagement:** Complete all required activities by the weekly deadline.
+**Engagement:** Activities have recommended weekly deadlines to help you stay on pace. The course is self-paced — you can still earn a certificate of completion after the course period ends as long as you complete all required activities.
+
+### Quizzes
+
+Each module includes a short quiz covering the key concepts from that week's readings and activities. Quizzes are graded on completion and can be retaken.
 
 ### Weekly exercises
 
 Each module includes a hands-on exercise. Exercises are completed through the course website and demonstrate understanding of the module concepts. You must show your work: screenshots, code snippets, or command output.
 
-- Module 1: Install Claude Code and compare web vs. CLI workflows on the same press release
-- Module 2: Set up a city hall beat project, create a CLAUDE.md, and compare document processing with and without context
-- Module 3: Create a source-verification skill and test it on a viral claim
-- Module 4: Ask Claude to build an automation script for a recurring newsroom task, then examine what it built
-- Module 5: Connect Claude to local documents via MCP and query across them for a story
+- Module 1: Install Claude Code, write a beat context file, and compare document processing with and without it
+- Module 2: Create a source-verification skill and test it on a viral claim
+- Module 3: Ask Claude to build an automation script for a recurring newsroom task, then examine what it built
+- Module 4: Connect Claude to local documents via MCP and query across them for a story
 
 ### Final project
 
-Design and document a CLI-based AI workflow for a real journalism task. Choose a problem from your own work or a realistic scenario: processing FOIA responses, prepping for recurring meetings, building a weekly roundup from a folder of stories, tracking promises made in public hearings, or standardizing messy public records.
+Design and document a command-line AI workflow for a real journalism task. Choose a problem from your own work or a realistic scenario: processing FOIA responses, prepping for recurring meetings, building a weekly roundup from a folder of stories, tracking promises made in public hearings, or standardizing messy public records.
 
-**Project proposal due:** End of Week 3
+**The final project is optional** and not required to receive a certificate of completion. We strongly encourage you to share your work — it helps other journalists see what's possible and learn from what you built.
+
+**Project proposal due:** End of Week 2
+
+**Submission options:**
+- **Forum:** Share your project in the dedicated final project discussion forum
+- **Google Form:** Submit privately if you prefer not to share publicly (link provided in the course platform)
 
 **Requirements:**
 - A GitHub repository (or zip file) containing all code and configuration files
@@ -194,7 +198,7 @@ Design and document a CLI-based AI workflow for a real journalism task. Choose a
 - Sample input and output files
 - Any custom skills or commands used
 
-**Due:** End of Module 5
+**Due:** End of Module 4
 
 ---
 
@@ -218,8 +222,8 @@ The course includes a companion website with exercises, templates, and plain-Eng
 
 The following GitHub repositories are used throughout the course:
 
-- **Advanced prompt engineering for journalists:** [https://github.com/jamditis/prompt-engineering-journalists](https://github.com/jamditis/prompt-engineering-journalists) — course materials, exercises, and the course website for this 5-week course
-- **Journalism skills library:** [https://github.com/jamditis/claude-skills-journalism](https://github.com/jamditis/claude-skills-journalism) — 36 skills and 13 hooks for Claude Code, covering source verification, FOIA requests, data journalism, editorial workflows, and more. Used in Module 3.
+- **Advanced prompt engineering for journalists:** [https://github.com/jamditis/prompt-engineering-journalists](https://github.com/jamditis/prompt-engineering-journalists) — course materials, exercises, and the course website for this 4-week course
+- **Journalism skills library:** [https://github.com/jamditis/claude-skills-journalism](https://github.com/jamditis/claude-skills-journalism) — 36 skills and 13 hooks for Claude Code, covering source verification, FOIA requests, data journalism, editorial workflows, and more. Used in Module 2.
 - **AI tools for newsrooms:** [https://github.com/jamditis/tools](https://github.com/jamditis/tools) — guides, templates, and workflow examples for AI in journalism. Referenced across modules.
 - **Scrapefruit CLI:** [https://github.com/jamditis/scrapefruit-cli](https://github.com/jamditis/scrapefruit-cli) — a CLI tool for web scraping, referenced in workflow examples.
 
@@ -230,8 +234,7 @@ The following GitHub repositories are used throughout the course:
 | Week | Module | Main deliverable |
 |------|--------|------------------|
 | Pre-course | Orientation | Setup checklist |
-| 1 | Escaping the chat window | Web vs. CLI comparison |
-| 2 | Prompting with files and project context | Beat context file + document processing |
-| 3 | Custom skills for Claude Code | Source-verification skill |
-| 4 | CLI workflows for newsrooms | Automation script for a recurring task |
-| 5 | Agents and RAG | Final project |
+| 1 | From chat window to command line | CLI tool + beat context file + document processing |
+| 2 | Custom skills for Claude Code | Source-verification skill |
+| 3 | CLI workflows for newsrooms | Automation script for a recurring task |
+| 4 | Agents and RAG | Final project (optional) |

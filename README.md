@@ -1,6 +1,6 @@
 # Advanced prompt engineering for journalists
 
-A 5-week MOOC by [Joe Amditis](https://github.com/jamditis) for the [Knight Center for Journalism](https://journalismcourses.org/) at UT Austin.
+A 4-week MOOC by [Joe Amditis](https://github.com/jamditis) for the [Knight Center for Journalism](https://journalismcourses.org/) at UT Austin.
 
 **Prerequisite:** [Prompt Engineering 101 for Journalists](https://journalismcourses.org/product/prompt-engineering-101-for-journalists/) or equivalent experience with ChatGPT/Claude.
 
@@ -18,11 +18,10 @@ This course moves you from web-based AI chat interfaces to terminal CLI tools. B
 
 | Week | Topic | What you'll build |
 |------|-------|-------------------|
-| 1 | [Escaping the chat window](docs/module-1/) | Compare web vs CLI workflows |
-| 2 | [Prompting with files and project context](docs/module-2/) | Write a CLAUDE.md and process documents |
-| 3 | [Custom skills for Claude Code](docs/module-3/) | Install and use journalism skills |
-| 4 | [CLI workflows](docs/module-4/) | Article → summary → newsletter pipeline |
-| 5 | [Agents and RAG](docs/module-5/) | Connect Claude to a knowledge base |
+| 1 | [From chat window to command line](docs/module-1/) | CLI tool + beat context file |
+| 2 | [Custom skills for Claude Code](docs/module-3/) | Source-verification skill |
+| 3 | [CLI workflows for newsrooms](docs/module-4/) | Automation script for a recurring task |
+| 4 | [Agents and RAG](docs/module-5/) | Connect Claude to a knowledge base |
 
 ## Quick start
 
