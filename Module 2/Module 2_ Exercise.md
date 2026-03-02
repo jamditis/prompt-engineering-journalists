@@ -1,209 +1,323 @@
-# Exercise: Set up a beat project and process journalism documents
+# Module 3: Custom skills for Claude Code
 
-## Module 2: Prompting with files and project context
+## Exercise: Installing and using journalism skills
 
-This exercise walks you through creating a project directory, initializing it as a Git repository, processing journalism documents with a CLI tool, writing a context file, and comparing the results. By the end, you'll have a version-controlled beat project with a working CLAUDE.md file and a clear understanding of how project context changes AI output.
+**Time required:** 45-60 minutes
+**Prerequisites:** Claude Code installed, GitHub account
 
-**Time estimate:** 60-90 minutes
+In this exercise, you'll install two journalism skills and use one to verify a viral claim.
 
 ---
 
-## Part 1: Set up your project directory
+## Part 1: Install the journalism skills (20 minutes)
 
-Create a directory for a fictional city hall beat. You'll populate it with sample journalism documents provided in the course resources.
+The instructor's journalism skills repository is available as a Claude Code plugin. This is the recommended installation method — it keeps skills up to date and installs everything (36 skills and 13 hooks) in one step. A manual fallback is included below if the plugin method doesn't work for your setup.
 
-### Step 1: Create the directory
+### Option A: Install as a plugin (recommended)
+
+#### Step 1: Add the plugin
+
+Open Claude Code in your terminal:
 
 ```bash
-mkdir city-hall-beat
-cd city-hall-beat
-```
-
-### Step 2: Copy the sample documents
-
-Download or copy the following files from `Resources/examples/beat-project/` into your new directory:
-
-- `press-release-park-closure.md` — A city press release about closing a park
-- `council-minutes-excerpt.md` — Meeting minutes with budget discussion
-- `interview-notes-martinez.md` — Raw interview notes with a council member
-- `tip-email.md` — A reader email tip about a related story
-
-You should now have a directory with four journalism documents and no context file.
-
----
-
-## Part 2: Initialize a Git repository
-
-Turn your project directory into a Git repository. This tracks your files and lets you share the project later.
-
-You don't need to memorize Git commands. Your CLI tool can handle Git for you — you just need to know what to ask for and what's happening when it does.
-
-### Step 1: Open your CLI tool and ask it to initialize a repo
-
-Start a session in your `city-hall-beat` directory:
-
-```
 claude
 ```
 
-(Or `gemini`, or whichever tool you're using.)
-
-Then ask:
+Then run the following slash command to install the skills repository as a plugin:
 
 ```
-Initialize this directory as a Git repository and commit all the files with the message "Add sample journalism documents for city hall beat"
+/install-github-plugin https://github.com/jamditis/claude-skills-journalism.git
 ```
 
-The tool will run the necessary Git commands for you. Watch what it does — you'll see it initialize the repo, stage the files, and create a commit.
+Claude Code will clone the repository and register its skills automatically. You'll be prompted to confirm the installation.
 
-### Step 2: Understand what happened
+#### Step 2: Verify installation
 
-Ask your CLI tool:
+After installation, type:
 
 ```
-What is the current Git status of this project?
+/source-verification
 ```
 
-It should tell you that all files are tracked and committed. Here's what happened behind the scenes:
+You should see Claude acknowledge the skill and be ready to apply it.
 
-- **git init** created a hidden `.git` folder that tracks your project's history
-- **git add** staged your files (told Git "include these in the next snapshot")
-- **git commit** saved a snapshot of your project at this point in time
+#### Step 3: Review a skill's structure
 
-You don't need to run these commands yourself. But understanding what they mean helps you talk to the tool and know what to ask for.
+Before using the skill, take a minute to understand what you installed. Find the plugin directory (Claude Code will tell you where it cloned the repo) and open the `source-verification/SKILL.md` file in your editor. Note:
+- The YAML frontmatter at the top (name, description)
+- The step-by-step instructions for the SIFT method
+- Any examples or templates included
 
-### Step 3: Why this matters
+This is what Claude reads when you invoke `/source-verification`. A skill is just a markdown file with structured instructions — there's no magic here, just well-organized prompts.
 
-Later in this exercise, you'll create a CLAUDE.md file. When you do, it becomes a new file that Git isn't tracking yet. You can ask the tool to commit it — and Git will record that change as a separate snapshot. This is how version control works: you make changes, then save snapshots with messages describing what you did.
+#### Step 4: Look at a hook file
+
+Now open one of the hook files in the same repository. Find the hooks directory and open any `.md` file in it. Notice:
+- How it describes what triggers the hook and what it checks
+- Whether it's a notify hook (flags and continues) or a stop hook (pauses for confirmation)
+- How the instructions differ from a skill — a hook doesn't wait for you to invoke it
+
+Ask Claude Code: "What would have to happen for this hook to fire?" This helps you understand when it runs without having to test it against real output.
+
+You now understand what you installed: a set of skills you invoke on demand, and a set of hooks that run automatically. The skills library is the same structure underneath — markdown files with instructions.
+
+### Option B: Manual installation (fallback)
+
+If the plugin method doesn't work, you can install skills manually by cloning the repo and copying files.
+
+#### Step 1: Clone the skills repository
+
+Open your terminal and clone the instructor's skills repository:
+
+```bash
+git clone https://github.com/jamditis/claude-skills-journalism.git
+cd claude-skills-journalism
+```
+
+#### Step 2: Review the skill structure
+
+Look at the source-verification skill:
+
+```bash
+ls source-verification/
+```
+
+You should see:
+- `SKILL.md` — The main instruction file
+- `examples/` — Sample verification scenarios (if present)
+
+Open `SKILL.md` in your editor and review the YAML frontmatter, the SIFT method instructions, and any included examples.
+
+#### Step 3: Copy skills to your commands directory
+
+```bash
+# Create the commands directory if it doesn't exist
+mkdir -p ~/.claude/commands
+
+# Copy the source-verification skill
+cp -r source-verification ~/.claude/commands/
+
+# Copy the foia-requests skill
+cp -r foia-requests ~/.claude/commands/
+```
+
+#### Step 4: Verify installation
+
+Start Claude Code and check that the skills are available:
+
+```bash
+claude
+```
+
+Then type:
+```
+/source-verification
+```
+
+You should see Claude acknowledge the skill and be ready to apply it.
 
 ---
 
-## Part 3: Process documents WITHOUT context
+## Part 2: Use source-verification on a viral claim (25 minutes)
 
-Open your CLI tool in the `city-hall-beat` directory and run the following prompts. Save or screenshot each response.
+### The scenario
 
-**Prompt 1 — Summarize the press release:**
+A post is circulating on social media with this claim:
 
-```
-claude "Read press-release-park-closure.md and write a 3-sentence summary suitable for a news brief"
-```
+> "A new study from Harvard Medical School found that drinking coffee before 8am increases cortisol levels by 400%, leading to long-term adrenal fatigue. Doctors are now recommending waiting until 10am for your first cup."
 
-(If using Gemini CLI: `gemini "Read press-release-park-closure.md and write a 3-sentence summary suitable for a news brief"`)
+This claim has been shared thousands of times. Your editor asks you to verify it before the newsroom amplifies or debunks it.
 
-**Prompt 2 — Extract claims from the council minutes:**
+### Step 5: Apply the source-verification skill
 
-```
-claude "Read council-minutes-excerpt.md. List every factual claim made by a council member, and note which claims are attributed to a named source vs. unattributed"
-```
-
-**Prompt 3 — Identify follow-up questions from the interview:**
+In Claude Code, invoke the skill and provide the claim:
 
 ```
-claude "Read interview-notes-martinez.md. What follow-up questions should I ask based on what Martinez said? Flag any claims that need independent verification"
+/source-verification
+
+Claim to verify: "A new study from Harvard Medical School found that drinking coffee before 8am increases cortisol levels by 400%, leading to long-term adrenal fatigue. Doctors are now recommending waiting until 10am for your first cup."
 ```
 
-**Prompt 4 — Assess the tip:**
+### Step 6: Follow the SIFT process
 
-```
-claude "Read tip-email.md. Evaluate this tip: is it actionable? What would you need to verify before pursuing it?"
-```
+Claude will guide you through each step:
 
-Save these four responses. You'll compare them to the with-context versions later.
+**Stop:** Before researching, note your initial assumptions. Do you want this to be true or false? What would make you share it without checking?
+
+**Investigate the source:** Where did this claim originate? Is there an actual Harvard study? Can you find the original research paper?
+
+**Find better coverage:** Search for news coverage of this claim. Have fact-checkers addressed it? What do medical journalists say?
+
+**Trace claims:** Follow the claim back. The "400%" figure is specific—where does it come from? What about "adrenal fatigue"—is this a recognized medical condition?
+
+### Step 7: Document your findings
+
+As you work through the verification, Claude will help you document:
+- What evidence supports or contradicts the claim
+- Which parts of the claim are accurate, misleading, or false
+- What the original source actually said (if it exists)
+- A summary suitable for editorial decision-making
 
 ---
 
-## Part 4: Write your CLAUDE.md
+## Part 3: Create error and success logging commands (15 minutes)
 
-Now create a context file. In your `city-hall-beat` directory, create a file called `CLAUDE.md` with instructions for covering this beat.
+One of the most consistent lessons from experienced CLI practitioners: when an AI tool fails, the failure is most useful if you capture it immediately. Corrections that stay in your head evaporate. Corrections that get written down become rules.
 
-If you want help structuring your CLAUDE.md, ask your CLI tool to plan the file before writing it — describe your beat and ask for a proposed outline, then review and adjust the structure before it fills in the details. This is a good habit to build: plan mode first, especially when asking the LLM to create something you'll be living with for a while.
+In this part, you'll create two personal commands that formalize this practice: `/log_error` for failures and `/log_success` for wins.
 
-Use the sample at `Resources/examples/beat-project/sample-claude-md.md` as a reference, but write your own. Your file should include:
+### Step 1: Create the log directory
 
-**Required sections:**
-
-1. **Beat description** — What you cover, key entities (city name, officials, agencies)
-2. **Style rules** — AP style? Oxford comma? How to refer to the city on second reference?
-3. **Source standards** — How to handle attribution, what to flag as unverified
-4. **Terminology** — Any beat-specific terms the AI might get wrong or confuse
-5. **Things to avoid** — Phrases, framing, or patterns you don't want in the output
-6. **Hard-won lessons** — Leave this empty for now. As you use the file and the AI makes mistakes you have to correct, add an entry here: a name for the mistake, one sentence on what happened, and the rule that prevents it. This section grows over time.
-
-**Apply the deletion test:** Before saving, read each line and ask: would this instruction change the AI's output for *these specific documents*? If not, cut it.
-
-**Then commit it.** This is important. Once you've written your CLAUDE.md, ask your CLI tool to commit it:
+Ask your CLI tool to set up a log directory in your home folder:
 
 ```
-Commit my CLAUDE.md to the project repository with the message "Add beat context file"
+Create a directory at ~/.claude/logs/ to store my AI error and success logs
 ```
 
-This is not busywork. Your CLAUDE.md is infrastructure, and infrastructure gets versioned. From this point on, every time you change your context file — adding a new source, updating terminology, adding a style rule — commit that change. You're building a record of how your AI environment evolved alongside your beat coverage.
+### Step 2: Create the /log_error command
+
+```
+Create a personal command called log_error that I can invoke whenever Claude does something wrong. When I invoke it, the command should:
+
+1. Ask me what I was trying to do (the exact prompt or task)
+2. Ask me what category of failure it was — options: hallucination (invented something), instruction ignored, context lost (forgot earlier info), wrong approach, incomplete
+3. Ask what Claude did instead of what I wanted
+4. Ask what I think caused the failure
+5. Write a structured log entry to ~/.claude/logs/errors.md with: date, category, my prompt (verbatim), expected behavior, actual behavior, root cause hypothesis
+
+Save the command to ~/.claude/commands/log_error.md
+```
+
+### Step 3: Create the /log_success command
+
+```
+Create a personal command called log_success that I can invoke when a prompt works well. When I invoke it, the command should:
+
+1. Ask me what I was trying to do
+2. Ask me what made the response unusually good
+3. Ask whether this prompt could be templated into a reusable skill
+4. Write a structured entry to ~/.claude/logs/successes.md with: date, what I asked for, what worked, whether to template
+
+Save the command to ~/.claude/commands/log_success.md
+```
+
+### Step 4: Test both commands
+
+Invoke `/log_error` and document something that went wrong in this exercise — even something minor, like a prompt that needed a second attempt. Then invoke `/log_success` and document something that went well.
+
+Check that the entries were written to the correct files in `~/.claude/logs/`.
+
+### The habit
+
+These commands are only useful if you use them consistently. The trigger: whenever you have to re-ask a question or correct a response, pause and run `/log_error` first. When something works better than expected, run `/log_success`. Over a few weeks, the log becomes a record of what your AI environment actually does — and what instructions prevent the failures from repeating.
 
 ---
 
-## Part 5: Process documents WITH context
+## Part 4: Write your own skill (15 minutes)
 
-Run the exact same four prompts from Part 3 again. Don't change anything about the prompts — the only difference is that CLAUDE.md now exists in the directory.
+The best way to understand skills is to write one. In this part, you'll create a simple skill for a task you do regularly.
+
+### Choose a task
+
+Pick one thing you do repeatedly that involves a consistent process — not a one-off question, but something with steps you follow every time.
+
+Good candidates:
+- Reviewing a specific type of document (press releases, budget reports, public records)
+- Drafting a recurring story format (meeting recap, weekly data brief, response to an official statement)
+- Checking a specific category of claim (health statistics, crime data, government budget numbers)
+
+Not good candidates:
+- "Summarize text" — too generic, no beat-specific knowledge
+- "Be thorough" — not a process, not checkable
+
+### Plan the skill before writing it
+
+Before asking Claude Code to write your skill file, use plan mode. In Claude Code, type `/plan` and then describe what you want:
 
 ```
-claude "Read press-release-park-closure.md and write a 3-sentence summary suitable for a news brief"
+/plan
+
+I want to create a custom skill called [your-skill-name]. Here's what it should do:
+[describe the task and the steps in plain English]
+
+Plan out the structure of this skill file — what sections it will have, what steps it will include, what instructions you'd put in each section. Don't write the file yet.
 ```
 
-```
-claude "Read council-minutes-excerpt.md. List every factual claim made by a council member, and note which claims are attributed to a named source vs. unattributed"
-```
+Claude will show you what it plans to build: the structure, the sections, the steps, the framing. Review this before it writes anything. Ask yourself:
+- Are the steps in the right order for how you actually work?
+- Is anything missing that you'd always do in this task?
+- Is there anything in the plan that doesn't belong in a skill file (too generic, not beat-specific)?
+
+Redirect it here if needed. Once the plan reflects what you actually want, tell it to proceed and write the file.
+
+### Write the skill file
 
 ```
-claude "Read interview-notes-martinez.md. What follow-up questions should I ask based on what Martinez said? Flag any claims that need independent verification"
+Go ahead and write the SKILL.md file based on that plan.
 ```
 
+Review what Claude writes. Apply the deletion test: read each instruction and ask whether removing it would change Claude's behavior. Cut anything that wouldn't.
+
+### Save and test it
+
+Ask Claude Code to save the file to your skills directory and invoke it on a real piece of content from your beat — a press release, a document, a claim.
+
+**Test on material you already know.** Don't use a fresh document you haven't read. Use something you've already worked through — a press release you already fact-checked, a council vote you already looked up, a claim you already verified. Compare what the skill finds against what you found yourself. If it misses something you caught, that tells you what instruction to add. If it flags something that wasn't a problem, that tells you what to cut or refine.
+
+This is how you calibrate a skill before trusting it on live work. You wouldn't rely on a new source until you'd verified something you could already check. The same logic applies here.
+
+### The commit
+
+Once you're satisfied with the skill, commit it to your beat project repository:
+
 ```
-claude "Read tip-email.md. Evaluate this tip: is it actionable? What would you need to verify before pursuing it?"
+Commit this skill file to my beat project with a message describing what it does
 ```
 
-Save these four responses alongside the Part 3 responses.
+Your first custom skill is now versioned alongside your project context.
 
 ---
 
-## Part 6: Try a second tool's context file (optional)
+## Part 4: Reflection and submission (10 minutes)
 
-If you have access to a second CLI tool, try this:
+### What to submit
 
-1. Copy the content of your CLAUDE.md into a `GEMINI.md` file (for Gemini CLI) or `AGENTS.md` file (for Codex)
-2. Run one of the four prompts using the second tool
-3. Note any differences in how the tool interprets the same context
+1. **Screenshot or transcript** of your source-verification session showing the SIFT process
 
-This step is optional but helps you understand how context files work across tools.
+2. **Written summary** (200-300 words) answering:
+   - What did you find about the coffee/cortisol claim?
+   - How did the skill structure your verification process?
+   - What would you have done differently without the skill?
+   - Did the skill miss anything you would have checked?
 
----
-
-## Part 7: Push to GitHub (optional)
-
-If you have a GitHub account, you can push your project to a remote repository. This isn't required, but it means your beat project — including your CLAUDE.md — will be available from any computer.
-
-1. Go to https://github.com/new and create a new repository (name it `city-hall-beat`, leave it empty — no README)
-2. In your CLI tool, ask:
-
-```
-Push this Git repository to GitHub at https://github.com/YOUR-USERNAME/city-hall-beat.git
-```
-
-The tool will connect your local repo to GitHub and push your files.
-
-3. Refresh the GitHub page. You should see your files — including your CLAUDE.md.
-
-If you're not comfortable with this step, skip it. You'll use `git clone` (downloading a repo from GitHub) in Module 3, and that works whether or not you've pushed your own repos.
+3. **Your custom skill file** — paste the contents of your SKILL.md. Include a one-sentence explanation of the task it encodes and what you cut during the deletion test.
 
 ---
 
-## Submission
+## Troubleshooting
 
-Write a 300-500 word reflection covering:
+**First step for any error:** Paste the exact error message into your Claude Code session and ask what it means. The tool has context about what you installed and can usually diagnose the problem directly. Don't paraphrase the error — paste it.
 
-1. **What changed** between the without-context and with-context responses? Be specific — quote or paraphrase examples.
-2. **What worked** in your context file? Which instructions had the most visible effect?
-3. **What didn't work** or had no noticeable effect? What would you change?
-4. **The deletion test in practice** — Did you cut anything from your first draft? What and why?
-5. **Context vs. prompt** — Looking at what you wrote in your CLAUDE.md, what's in there that you would have typed into a prompt before? What does it mean to have that in a committed file instead?
+**Skills not loading?**
+- Check that the files are in `~/.claude/commands/`
+- Ensure the directory name matches the skill name
+- Restart Claude Code after adding new skills
+- Ask Claude Code: "Why isn't my [skill-name] skill showing up?"
 
-Submit your reflection along with your CLAUDE.md file (copy-paste the contents or attach the file).
+**Claude not following the skill instructions?**
+- Re-invoke the skill with `/source-verification`
+- Check that `SKILL.md` has valid YAML frontmatter
+- Ask Claude Code to open the skill file and confirm it can read it
+
+**Still stuck after trying the above?**
+Post in the "Technical help" forum with the exact error message and what you've already tried.
+
+---
+
+## Grading criteria
+
+- **Skill installation:** Skills correctly installed and functional (15%)
+- **SIFT application:** All four SIFT steps documented with evidence (35%)
+- **Finding accuracy:** Correct assessment of the claim's veracity (20%)
+- **Custom skill:** Submitted skill file encodes a real beat-specific task and passes the deletion test (20%)
+- **Reflection quality:** Thoughtful analysis of the skill's usefulness (10%)

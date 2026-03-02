@@ -1,95 +1,104 @@
-# Module 4: CLI workflows for newsrooms
+# Module 5: Agents and RAG
 
 ## Quiz
 
-5 multiple choice questions.
+Complete this quiz after finishing the readings and hands-on exercise. You have **two attempts**; the higher score counts.
 
 ---
 
 ### Question 1
 
-What does the pipe operator (`|`) do in a command-line pipeline?
+What distinguishes an AI agent from a standard chatbot?
 
-A) Saves the output of a command to a file
+A) Agents use larger language models with more parameters
 
-B) Runs two commands at the same time
+B) Agents can use tools, make decisions, and complete multi-step tasks without continuous human input
 
-C) Takes the output of one command and sends it as input to the next command
+C) Agents are always connected to the internet
 
-D) Connects to a remote server
+D) Agents can only work with text, not images or video
 
-**Correct answer:** C
+**Correct answer:** B
 
-**Explanation:** The pipe operator is the foundation of the Unix philosophy — small tools that do one thing, connected together. The output of `curl` becomes the input to `readability`, which becomes the input to `claude`, all without creating temp files. This is what makes CLI workflows so composable.
+**Explanation:** The defining characteristic of an agent is its ability to take actions (use tools), make decisions about what to do next, and work through multi-step tasks. A standard chatbot responds to individual prompts; an agent pursues goals across multiple steps.
 
 ---
 
 ### Question 2
 
-You have a file called `articles.json` containing an array of article objects. Each object has a `headline` field. Which `jq` command extracts all the headlines?
+In a RAG (retrieval-augmented generation) system, what happens before the language model generates a response?
 
-A) `jq 'headline' articles.json`
+A) The model is fine-tuned on new data
 
-B) `jq '.[].headline' articles.json`
+B) The system retrieves relevant documents from a knowledge base and includes them in the prompt
 
-C) `jq '.headline[]' articles.json`
+C) The model searches the internet for current information
 
-D) `jq 'get headline' articles.json`
+D) The system waits for human approval
 
 **Correct answer:** B
 
-**Explanation:** `.[]]` iterates over all elements in the array; `.headline` selects the `headline` field from each object. `jq` is a lightweight command-line tool for transforming JSON — it pairs naturally with APIs and AI outputs that return structured data.
+**Explanation:** RAG follows a retrieve-then-generate pattern. When a user asks a question, the system first searches a knowledge base for relevant documents, then includes those documents in the context sent to the language model. The model generates a response grounded in the retrieved content.
 
 ---
 
 ### Question 3
 
-What is the purpose of a cron job?
+What problem does the Model Context Protocol (MCP) solve?
 
-A) To download files from the internet
+A) It encrypts all communications between AI systems
 
-B) To schedule commands to run automatically at specified times
+B) It provides a standard way to connect AI models to external data sources and tools
 
-C) To convert text between different formats
+C) It prevents AI models from generating false information
 
-D) To test if a website is online
+D) It translates between different programming languages
 
 **Correct answer:** B
 
-**Explanation:** Cron is the Unix scheduler. You specify time patterns (e.g., "run at 6am every weekday") and it executes your script automatically. This turns a one-off pipeline into an ongoing workflow — for example, a script that checks a government data source every morning and emails you if anything changed.
+**Explanation:** MCP is Anthropic's open standard for connecting AI models to external data sources (like databases, file systems, or APIs) and tools (like web browsers or code executors). Before MCP, each integration required custom code; MCP provides a common protocol.
 
 ---
 
 ### Question 4
 
-In the pipeline `curl -s https://example.com/article | readability | claude "Summarize this"`, what happens if the `curl` command fails?
+Why does RAG reduce hallucination compared to standard prompting?
 
-A) The pipeline retries automatically
+A) RAG models are trained on more data
 
-B) An empty string is passed to the next command
+B) RAG systems are slower, giving the model more time to think
 
-C) The entire pipeline pauses and waits
+C) RAG grounds the model's responses in retrieved source documents rather than relying on parametric memory
 
-D) Claude receives the error message and summarizes it
+D) RAG systems only work with verified facts
 
-**Correct answer:** B
+**Correct answer:** C
 
-**Explanation:** By default, a pipeline continues even if a stage fails. The failed stage produces no output, so subsequent commands receive empty input. This is why the module covers `set -e` (exit on error) and exit code checking — silent failures are hard to debug, and a pipeline that "succeeds" with empty input can produce misleading results.
+**Explanation:** Standard language models rely on "parametric knowledge"—information encoded in their weights during training. This can be outdated, incomplete, or wrong. RAG supplements this with "non-parametric knowledge"—documents retrieved at query time. The model can cite these sources, and errors can be traced to their origin.
 
 ---
 
 ### Question 5
 
-Why might a journalist choose to run an AI model locally with Ollama instead of using a cloud API?
+A journalist builds an agent pipeline that works in three stages: a first subagent searches her archive for relevant articles, a second subagent extracts key facts from what the first found, and a third subagent drafts a briefing document from those facts. In stage one, the first subagent misidentifies an article's year, reporting a 2019 event as 2021. What is the most likely outcome?
 
-A) Local models are always more accurate than cloud models
+A) The later subagents will catch and correct the error because they have access to the original documents
 
-B) Local models are free and unlimited, while cloud APIs charge per request
+B) The error will likely compound — the second subagent analyzes incorrect facts, and the third subagent drafts a briefing based on them, making the final document wrong in ways that aren't obvious
 
-C) Sensitive data never leaves the journalist's computer
+C) The pipeline will automatically halt when it detects inconsistent information
 
-D) Local models can process images, while cloud APIs cannot
+D) Only the briefing document will be affected; the archive search results are stored separately
 
-**Correct answer:** C
+**Correct answer:** B
 
-**Explanation:** Local models are useful when working with confidential sources, unpublished documents, or any material that shouldn't leave the reporter's machine. The tradeoff is capability — local models are generally less capable than frontier cloud models — but for sensitive reporting, keeping data local can be worth it.
+**Explanation:** When subagents pass outputs to each other, errors in early stages become inputs to later stages. The second subagent has no way to know the year was wrong — it works with what it received. The third subagent has no way to know either. The final document is wrong, the error is harder to trace than a single-session mistake, and there's no automatic detection. This is why verification at each handoff matters: check intermediate outputs before passing them to the next stage, the same way you'd verify a source's claims before citing them in a story.
+
+---
+
+## Quiz scoring
+
+- 5 correct: Excellent
+- 4 correct: Good
+- 3 correct: Review the readings before proceeding
+- 2 or fewer: Schedule office hours with the instructor

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Module 3: Custom skills for Claude Code | Advanced prompt engineering</title>
+    <title>Module 3: CLI workflows | Advanced prompt engineering</title>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../assets/js/config.js"></script>
@@ -27,7 +27,6 @@
                     <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
                     <a href="../module-3/" class="text-acid">[ 03 ]</a>
                     <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
-                    <a href="../module-5/" class="text-gray-400 hover:text-ice transition-colors">[ 05 ]</a>
                     <a href="../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
                 </nav>
             </div>
@@ -37,8 +36,8 @@
         <section class="py-12 px-6 border-b border-white/10">
             <div class="max-w-5xl mx-auto">
                 <div class="text-xs text-acid font-mono mb-4">MODULE 03</div>
-                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">CUSTOM SKILLS</h1>
-                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Extend Claude Code with reusable skills that encode domain expertise, workflows, and best practices for journalism.</p>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">CLI WORKFLOWS</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Chain commands together, pipe data between tools, and automate repetitive tasks with shell scripts.</p>
             </div>
         </section>
 
@@ -52,10 +51,10 @@
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand what Claude Code skills are and how they work</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Install skills from public repositories and personal collections</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Use skills to apply specialized knowledge to journalism tasks</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Evaluate the quality and trustworthiness of third-party skills</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand Unix pipes and how to chain commands</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Use Claude Code in non-interactive mode for scripting</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Build shell scripts that automate multi-step workflows</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Create a practical content pipeline for journalism work</li>
                     </ul>
                 </div>
             </section>
@@ -66,18 +65,10 @@
                     <h2 class="font-display text-xl text-chrome">Before you start</h2>
                 </div>
                 <div class="space-y-4">
-                    <p class="text-gray-300 text-sm leading-relaxed">Module 3 introduces three ideas that work together: skills encode your expertise as reusable tools, commands run reliable workflows deterministically, and hooks enforce standards automatically. The concepts below explain each one before you build your own.</p>
-                    <div class="space-y-2">
-                        <a href="../concepts/skills-vs-commands.html" class="inline-flex items-center gap-2 text-ice text-sm hover:text-acid transition-colors block">
-                            Read: skills vs. commands — when to use each →
-                        </a>
-                        <a href="../concepts/hooks-as-guardrails.html" class="inline-flex items-center gap-2 text-ice text-sm hover:text-acid transition-colors block">
-                            Read: hooks as guardrails — enforcing standards automatically →
-                        </a>
-                        <a href="../concepts/error-logging.html" class="inline-flex items-center gap-2 text-ice text-sm hover:text-acid transition-colors block">
-                            Read: error logging — turning corrections into lasting improvements →
-                        </a>
-                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed">This module is about building automated pipelines — scripts that run a sequence of AI tasks without you manually intervening. To use them well, it helps to understand what's actually happening inside an AI session: how context is stored, why order matters, and what "caching" means for how quickly your pipeline runs.</p>
+                    <a href="../concepts/how-ai-session-memory-works.html" class="inline-flex items-center gap-2 text-ice text-sm hover:text-acid transition-colors">
+                        Read the full explanation: how AI session memory works →
+                    </a>
                 </div>
             </section>
 
@@ -88,32 +79,43 @@
                 </div>
                 <div class="space-y-4">
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">What are skills?</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">Skills are markdown files containing instructions, prompts, and context that Claude Code loads on demand. When you invoke a skill (e.g., <code class="text-acid bg-surface px-1">/source-verification</code>), Claude reads the skill file and applies that knowledge to your conversation. Skills let you encode expertise once and reuse it across projects.</p>
+                        <h3 class="font-display text-lg text-acid mb-3">Pipes and redirection</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">The pipe character (<code class="text-acid bg-surface px-1">|</code>) sends the output of one command as input to another. This lets you build processing chains:</p>
+                        <div class="border border-white/10 bg-surface overflow-hidden mb-4">
+                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cat article.txt | wc -w    <span class="text-gray-400"># Count words in article</span>
+ls *.txt | wc -l           <span class="text-gray-400"># Count text files</span></code></pre>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed">Redirection (<code class="text-acid bg-surface px-1">></code> and <code class="text-acid bg-surface px-1">>></code>) sends output to files instead of the screen. <code class="text-acid bg-surface px-1">></code> overwrites, <code class="text-acid bg-surface px-1">>></code> appends.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Skill types</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">A Claude Code skill is a markdown file stored in <code class="text-acid bg-surface px-1">~/.claude/commands/</code>. The filename becomes the slash command. Save a file called <code class="text-acid bg-surface px-1">source-verification.md</code> and Claude Code creates a <code class="text-acid bg-surface px-1">/source-verification</code> command automatically.</p>
-                        <ul class="space-y-2 text-sm font-sans text-gray-300">
-                            <li class="flex items-start gap-3"><span class="text-acid">></span> A skill file contains a name, a description (so Claude knows when to use it), and the full instructions. When you invoke it with a slash command, Claude loads the file's content into the current session.</li>
-                            <li class="flex items-start gap-3"><span class="text-acid">></span> Skills work alongside your CLAUDE.md — the context file sets persistent project rules, while skills are invoked on demand for specific tasks.</li>
-                        </ul>
+                        <h3 class="font-display text-lg text-acid mb-3">Non-interactive mode</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Claude Code can run as a single command without entering the interactive REPL. This is essential for scripting:</p>
+                        <div class="border border-white/10 bg-surface overflow-hidden">
+                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300"><span class="text-gray-400"># Interactive (starts a session)</span>
+<span class="text-acid">claude</span>
+
+<span class="text-gray-400"># Non-interactive (runs once and exits)</span>
+<span class="text-acid">claude -p "Summarize this article" < article.txt</span></code></pre>
+                        </div>
+                        <p class="text-gray-400 text-xs mt-2">The <code class="text-acid bg-surface px-1">-p</code> flag specifies the prompt. Input can come from a file or piped from another command.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Where skills live</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Skills can be stored in several locations:</p>
-                        <ul class="space-y-2 text-sm font-sans text-gray-300">
-                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Global:</strong> <code class="text-acid bg-surface px-1">~/.claude/commands/</code> - Available in all projects</li>
-                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Project:</strong> <code class="text-acid bg-surface px-1">.claude/commands/</code> - Available only in that project</li>
-                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Remote:</strong> GitHub repositories that you clone or reference</li>
-                        </ul>
+                        <h3 class="font-display text-lg text-acid mb-3">Shell scripts</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">A shell script is a text file containing commands that run in sequence. Scripts let you save and reuse workflows. On macOS and Linux, scripts typically start with <code class="text-acid bg-surface px-1">#!/bin/bash</code> and need execute permission (<code class="text-acid bg-surface px-1">chmod +x script.sh</code>).</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Skill trust and safety</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">Skills are just text files with instructions - they can't run arbitrary code. However, they can influence Claude's behavior, so review skills before installing them. Prefer skills from trusted sources, check what instructions they contain, and be cautious of skills that ask Claude to access external services or sensitive data.</p>
+                        <h3 class="font-display text-lg text-acid mb-3">Variables and loops</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Shell scripts can use variables and loops to process multiple files:</p>
+                        <div class="border border-white/10 bg-surface overflow-hidden">
+                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">for file in *.txt; do
+  echo "Processing $file"
+  claude -p "Summarize" < "$file" > "${file%.txt}-summary.txt"
+done</code></pre>
+                        </div>
+                        <p class="text-gray-400 text-xs mt-2">This loop processes every <code class="text-acid bg-surface px-1">.txt</code> file and creates a summary for each.</p>
                     </div>
                 </div>
             </section>
@@ -125,7 +127,7 @@
                 </div>
 
                 <div class="border border-acid/30 bg-acidDim p-6 mb-8">
-                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Create a journalism verification skill and use it to check a claim from a viral social media post.</span></p>
+                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Ask Claude to build a newsletter pipeline that uses <code class="font-mono">claude -p</code> to process articles automatically — then explore what it built and why it works.</span></p>
                 </div>
 
                 <!-- Step 1 -->
@@ -134,7 +136,7 @@
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">01</span>
                         Open Claude Code
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Open your terminal and launch Claude Code:</p>
+                    <p class="text-gray-300 text-sm mb-4">Open your terminal and launch a session:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -150,9 +152,9 @@
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
-                        Ask Claude to create the skill
+                        Ask Claude to build the pipeline
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Inside the session, paste this prompt:</p>
+                    <p class="text-gray-300 text-sm mb-4">Paste this prompt inside the session:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -160,28 +162,22 @@
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a global Claude Code skill for source verification. Save it to ~/.claude/commands/source-verification.md. The skill should help a journalist verify claims from social media by: identifying the specific claim, tracing it to a primary source, checking for multiple independent sources, evaluating source credibility, looking for counter-evidence, checking dates for recirculation, and flagging red flags (no attribution, emotional language, missing location/date details). Format responses with a verification status (VERIFIED / UNVERIFIED / FALSE / PARTIALLY TRUE / UNABLE TO VERIFY) and a confidence level, plus recommended next steps for the journalist.</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a newsletter pipeline in ~/newsletter-pipeline. I need:
+
+1. Two realistic sample news articles as .txt files (fictional local news stories)
+2. A shell script called process-newsletter.sh that uses "claude -p" (non-interactive mode) to process each .txt file: summarize it in 2-3 sentences, then format that summary as a simple HTML snippet with an h3 headline and paragraph. Save outputs to an output/ folder.
+3. Make the script executable, run it on one article, and show me the output.</code></pre>
                     </div>
-                    <p class="text-gray-400 text-xs mt-2">Claude creates the directory if it doesn't exist and saves the skill file. You can ask to see what it wrote, or suggest edits to the skill content before saving.</p>
+                    <p class="text-gray-400 text-xs mt-2">Watch what Claude does: it creates the folder structure, writes the sample articles, writes the script, and runs it. You delegated the whole thing.</p>
                 </div>
 
                 <!-- Step 3 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
-                        Verify the skill is available
+                        Ask Claude to explain what it built
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Exit the session (press Ctrl+C twice) and relaunch to pick up the new skill:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
-                    </div>
-                    <p class="text-gray-300 text-sm mb-4">Inside the new session, check available commands:</p>
+                    <p class="text-gray-300 text-sm mb-4">In the same session, ask Claude to explain the key concept:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -189,40 +185,28 @@
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">/help</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Walk me through the script line by line. Explain what "claude -p" does and how it's different from the interactive session we're using right now. What would happen if I added a third article to the folder and ran the script again?</code></pre>
                     </div>
-                    <p class="text-gray-400 text-xs mt-2">You should see <code class="text-acid bg-surface px-1">source-verification</code> listed among available commands.</p>
+                    <p class="text-gray-400 text-xs mt-2">This is the key concept of the module: <code class="text-acid bg-surface px-1">claude -p</code> is non-interactive mode — it runs once and exits, making it scriptable. Your interactive session is the opposite: persistent, conversational, context-aware.</p>
                 </div>
 
                 <!-- Step 4 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">04</span>
-                        Test the skill with a viral claim
+                        Process all articles
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Invoke the skill, then paste a claim to verify:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                    <p class="text-gray-300 text-sm mb-4">Ask Claude to run the pipeline on both articles and show you the results:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">/source-verification
-
-A viral tweet claims that a major US city just banned all plastic bags, effective immediately, with $500 fines for violations. The tweet has 50,000 retweets. Help me verify this before I report on it.</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Run the pipeline on all the articles and show me each HTML output. Then tell me: what would need to change in the script if I wanted to use Gemini CLI instead of Claude?</code></pre>
                     </div>
-                    <p class="text-gray-300 text-sm">Notice how Claude structures its response according to the skill's format — verification status, confidence level, red flags, and recommended next steps. That structure came from the skill file, not from this individual prompt.</p>
-                </div>
-
-                <!-- Step 5 -->
-                <div class="mb-8">
-                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
-                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">05</span>
-                        Try a real claim
-                    </h3>
-                    <p class="text-gray-300 text-sm mb-4">Use the skill on something you've actually seen circulating. Notice what it flags and what it recommends. If the response format isn't quite right for your work, ask Claude to edit the skill file and refine it.</p>
-                    <p class="text-gray-300 text-sm">Skills aren't static — they're files you own and can update any time.</p>
+                    <p class="text-gray-300 text-sm mt-4">The script Claude wrote is yours — save it, modify it, run it on real articles whenever you need. That's what "reusable workflow" means.</p>
                 </div>
             </section>
 
@@ -234,10 +218,10 @@ A viral tweet claims that a major US city just banned all plastic bags, effectiv
                 <div class="border border-signal/30 bg-signalDim p-6">
                     <p class="text-sm font-sans text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What does the filename of a skill file determine, and where does the file need to be saved?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Where should you put a skill that you want available in all projects?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Why should you review third-party skills before installing them?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What command invokes a skill named "source-verification"?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What is <code class="text-acid bg-surface px-1">claude -p</code> and when would you use it instead of an interactive session?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What is the difference between the interactive mode you used in this exercise and the scripted mode the pipeline uses?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What kinds of journalism workflows are well-suited to an automated pipeline like this one?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Why does the script save outputs to files rather than just printing them to the terminal?</li>
                     </ul>
                 </div>
             </section>
@@ -249,10 +233,10 @@ A viral tweet claims that a major US city just banned all plastic bags, effectiv
                 </div>
                 <div class="border border-white/10 bg-panel p-6">
                     <ul class="space-y-3 text-sm font-sans">
-                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Claude Code documentation - Official guide to skills and commands</span></li>
-                        <li><a href="https://www.poynter.org/ifcn/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[ORG]</a> <span class="text-gray-300">International Fact-Checking Network - Standards and resources for verification</span></li>
-                        <li><a href="https://firstdraftnews.org/articles/verifying-online-information-the-absolute-essentials/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-300">First Draft: verifying online information — the essentials</span></li>
-                        <li><a href="https://www.bellingcat.com/resources/2024/09/24/bellingcat-online-investigations-toolkit/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-300">Bellingcat online investigations toolkit — open-source investigation techniques</span></li>
+                        <li><a href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Bash Reference Manual - Complete bash documentation</span></li>
+                        <li><a href="https://missing.csail.mit.edu/2020/shell-tools/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[COURSE]</a> <span class="text-gray-300">The Missing Semester: Shell Tools - MIT's guide to shell scripting</span></li>
+                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-300">Claude Code documentation - Non-interactive mode reference</span></li>
+                        <li><a href="https://explainshell.com/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[TOOL]</a> <span class="text-gray-300">ExplainShell - Paste any shell command to see what each part does</span></li>
                     </ul>
                 </div>
             </section>
@@ -264,20 +248,20 @@ A viral tweet claims that a major US city just banned all plastic bags, effectiv
                 </div>
                 <div class="border border-white/10 bg-panel divide-y divide-white/5">
                     <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">Skill doesn't appear in /help</h4>
-                        <p class="text-gray-400 text-sm">Make sure the file is in the correct directory (<code class="text-acid bg-surface px-1">~/.claude/commands/</code>) and has the <code class="text-acid bg-surface px-1">.md</code> extension. The filename becomes the command name.</p>
+                        <h4 class="font-mono text-sm text-signal mb-2">"Permission denied" when running the script</h4>
+                        <p class="text-gray-400 text-sm">You need to make the script executable: <code class="text-acid bg-surface px-1">chmod +x newsletter-pipeline.sh</code></p>
                     </div>
                     <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">Skill doesn't seem to affect Claude's responses</h4>
-                        <p class="text-gray-400 text-sm">Remember to invoke the skill with the slash command (e.g., <code class="text-acid bg-surface px-1">/source-verification</code>) before asking your question. The skill context is loaded when you invoke it.</p>
+                        <h4 class="font-mono text-sm text-signal mb-2">"command not found: claude"</h4>
+                        <p class="text-gray-400 text-sm">Claude Code isn't in your PATH. If you used the native installer (<code class="text-acid bg-surface px-1">curl -fsSL https://claude.ai/install.sh | sh</code>), restart your terminal. See <a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">code.claude.com/docs</a> for troubleshooting steps.</p>
                     </div>
                     <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">"Permission denied" when creating files</h4>
-                        <p class="text-gray-400 text-sm">Make sure the <code class="text-acid bg-surface px-1">~/.claude/commands/</code> directory exists and you have write permission. Run <code class="text-acid bg-surface px-1">mkdir -p ~/.claude/commands</code> to create it.</p>
+                        <h4 class="font-mono text-sm text-signal mb-2">Script produces empty output</h4>
+                        <p class="text-gray-400 text-sm">Check that the input file exists and isn't empty. Add <code class="text-acid bg-surface px-1">set -e</code> at the top of your script to stop on errors, making problems easier to diagnose.</p>
                     </div>
                     <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">Skill is too generic or not helpful</h4>
-                        <p class="text-gray-400 text-sm">Skills work best when they're specific. Edit the skill file to add more detailed instructions, examples, or checklists relevant to your work.</p>
+                        <h4 class="font-mono text-sm text-signal mb-2">Special characters in filenames cause errors</h4>
+                        <p class="text-gray-400 text-sm">Always quote variable references in scripts: use <code class="text-acid bg-surface px-1">"$file"</code> not <code class="text-acid bg-surface px-1">$file</code>. This handles spaces and special characters correctly.</p>
                     </div>
                 </div>
             </section>

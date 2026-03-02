@@ -1,110 +1,78 @@
-# Module 3: Custom skills for Claude Code
+# Module 4: CLI workflows for newsrooms
 
 ## Required readings
 
-Complete these readings before starting the exercise.
+Complete these readings before starting the exercise. They don't require any programming knowledge — the goal is to understand what makes a good automation candidate in journalism, how to handle API keys safely, and what to do when automated workflows break.
 
 ---
 
-### Reading 1: Claude Code custom commands documentation
+### 1. Store config in the environment
 
-**Source:** Anthropic Documentation
-**URL:** https://docs.anthropic.com/en/docs/claude-code/tutorials#custom-slash-commands
+**"The Twelve-Factor App: Config (Factor III)"**
+https://12factor.net/config
+
+One page. Required reading.
+
+Your pipeline will use API keys. Those keys should never go in your code, your CLAUDE.md, or any file you commit to GitHub. This document explains why, and what to do instead: store secrets in environment variables, not in source files.
+
+The principle applies whether you write the code yourself or have Claude Code write it for you. When Claude writes your pipeline script, it will use this pattern automatically — but you need to understand it to verify the output and catch mistakes.
+
+**Time:** 5 minutes
+
+---
+
+### 2. Errors, rate limits, and what to do about them
+
+**Claude Code API errors reference** — Anthropic Documentation
+https://docs.anthropic.com/en/api/errors
+
+Read the overview and the section on rate limit errors. Your pipeline will hit errors — rate limits when processing many documents, authentication failures when API keys are wrong, and occasional model errors. This reference shows what each error code means and the standard patterns for handling them.
+
+The patterns here — exponential backoff, retry logic, graceful degradation — are what Claude Code will write when you ask it to "handle errors properly." Understanding them lets you check the implementation and ask better follow-up questions when something breaks.
+
 **Time:** 15 minutes
 
-This documentation explains how Claude Code loads and executes custom commands. Pay attention to:
-
-- The difference between project commands (in `.claude/commands/`) and personal commands (in `~/.claude/commands/`)
-- How YAML frontmatter defines command metadata
-- The file naming convention: `skill-name.md` or `skill-name/SKILL.md`
-
-**Key concepts to note:**
-- Commands are invoked with `/command-name`
-- The markdown content becomes Claude's instructions
-- Commands can include examples, templates, and step-by-step procedures
-
 ---
 
-### Reading 2: Journalism skills repository overview
+### 3. Real pipeline results: beat monitoring and translation
 
-**Source:** Instructor's GitHub repository
-**URL:** https://github.com/jamditis/claude-skills-journalism
-**Time:** 20 minutes
+**"Augmented beat reporting: where LLMs excel and where reporters still win"** — Nick Hagar, Generative AI in the Newsroom, October 28, 2025
+https://generative-ai-newsroom.com/augmented-beat-reporting-where-llms-excel-and-where-reporters-still-win-135decbe8675
 
-Review the README and browse the skill directories. The repository contains 36 skills, 13 hooks, and a plugin organized into categories:
-
-**Journalism and media skills (11 skills):**
-- `source-verification/` — SIFT method for checking claims
-- `foia-requests/` — Drafting public records requests with 50-state reference
-- `data-journalism/` — Data analysis and visualization workflows
-- `fact-check-workflow/` — Claim extraction, evidence gathering, rating scales
-- `interview-prep/` — Pre-interview research and question frameworks
-- `interview-transcription/` — Recording workflows and quote management
-- `story-pitch/` — Pitch templates for daily news, features, investigations
-- `editorial-workflow/` — Story assignment tracking and deadline management
-- `crisis-communications/` — Breaking news protocol and rapid verification
-- `social-media-intelligence/` — Multi-platform monitoring and account analysis
-- `web-scraping/` — Content extraction for research
-
-**Writing and quality skills:**
-- `newsroom-style/` — AP Style enforcement and attribution rules
-- `ai-writing-detox/` — Detecting and removing AI-generated filler language
-- `newsletter-publishing/` — Email newsletter creation and management
-
-**Hooks (13 automated checks):**
-- `ap-style-check` — Flags AP Style violations after edits
-- `ai-slop-detector` — Scans for banned AI filler words and phrases
-- `source-attribution-check` — Flags unattributed quotes and statistics
-- And 10 more covering accessibility, data methodology, legal review, and pre-publish checklists
-
-**Focus on these files:**
-- Each skill's `SKILL.md` — Note the YAML frontmatter and instruction style
-- The `hooks/` directory — See how automated checks work
-- The skill descriptions — These tell Claude when to activate each skill
-
----
-
-### Reading 3: Model Context Protocol (MCP) basics
-
-**Source:** Anthropic Documentation
-**URL:** https://modelcontextprotocol.io/introduction
 **Time:** 10 minutes
 
-MCP is a standard for connecting AI models to external tools and data sources. While skills are simpler (just instruction files), MCP servers provide live connections to databases, APIs, and file systems.
+A working beat-monitoring pipeline built with n8n and Google Alerts RSS feeds, costing about $0.15/day to run. LLMs (including o3, GPT-4o, and GPT-5) hit an F1 score of 0.94 at extracting relevant use cases from articles, but only 31% exact alignment with human newsworthiness assessments. A one-week pilot surfaced three high-value leads the reporter hadn't found elsewhere.
 
-Read the introduction to understand:
-- What MCP is and why it exists
-- The difference between skills (static instructions) and MCP servers (live connections)
-- When you might need MCP vs. when a skill is enough
-
-For this module, we focus on skills. MCP becomes relevant when you need Claude Code to query databases or access live APIs during a task.
+This piece is useful for the exercise because it gives you real cost and accuracy numbers to reason with. The central lesson: LLMs are good first-pass filters, but the decision about what's actually worth pursuing stays with the journalist.
 
 ---
 
-### Reading 4: Custom skills in investigative practice
+**"Inside the new multilingual newsrooms using GenAI for translation"** — Clare Spencer, Generative AI in the Newsroom, November 4, 2025
+https://generative-ai-newsroom.com/inside-the-new-multilingual-newsrooms-using-genai-for-translation-4c3b17269811
 
-**"Coding agents for investigative journalism"** — Nick Hagar, Generative AI in the Newsroom, January 27, 2026
-https://generative-ai-newsroom.com/coding-agents-for-investigative-journalism-8b65bc30f9ea
+**Time:** 10 minutes
 
-**Time:** 15 minutes
+Three newsroom translation pipelines: Chicago's La Voz (an AI fellow built a Sun-Times-to-Spanish pipeline; the team published a Pope profile same day in both languages, driving 5x their normal traffic), The Economist's Español TikTok channel (HeyGen video translation), and BBC News Polska (DeepL + human editor review). All three kept a linguistically fluent editor in the loop.
 
-A case study using Claude Code to replicate a MuckRock/WHRO investigation into Virginia police decertifications. The key finding: without custom skills, the agent made silent errors in data analysis. With three skills — Python Runner, Structured Data Preprocessing, and Structured Data Analysis — it replicated the original investigation's findings accurately.
+Pay attention to the workflow designs — specifically how each team structured the human review step. A pipeline without a review gate is faster; it's also the way errors reach readers.
 
-This is the clearest demonstration of why skills matter. The same model, the same task, dramatically different results. Note that the article explicitly references the journalism skills repository from Reading 2 of this module.
+---
 
-Pay attention to:
-- How each skill constrains the agent's behavior for a specific task
-- The difference between silent errors (no skills) and caught errors (with skills)
-- How skills encode domain expertise in plain language, not code
+### Optional reading
+
+**"How to evaluate an LLM pipeline"** — Simon Willison's Weblog
+https://simonwillison.net/tags/llms/
+
+Simon Willison writes practical, non-hype coverage of working with LLMs in real projects. Browse his recent posts on pipelines, automation, and prompt engineering. His "what I've learned" posts are particularly relevant to Module 4.
 
 ---
 
 ## Reading notes
 
-As you read, consider:
+As you read, think about:
 
-1. What journalism tasks do you repeat weekly that could become skills?
-2. Which existing skills in the repository would help your current work?
-3. What's missing from the journalism skills collection that your newsroom needs?
+1. What recurring task in your own work is a good automation candidate: high volume, consistent structure, clear data source?
+2. Where do your API keys currently live? (Hint: if the answer is "in a text file somewhere," that's worth changing.)
+3. What would you do if your pipeline failed halfway through processing 50 documents?
 
-Bring these observations to the discussion forum.
+Bring answers to the discussion forum.

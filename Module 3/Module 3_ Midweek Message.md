@@ -1,21 +1,23 @@
-# Module 3: Custom skills for Claude Code
+# Module 4: CLI workflows for newsrooms
 
 ## Midweek message
 
 Hello everyone,
 
-By mid-week, you should have cloned the skills repository and installed the source-verification and foia-requests skills to your `~/.claude/commands/` directory.
+By now you should have completed the readings and made progress on the article-to-newsletter pipeline exercise. If you've successfully fetched an article with curl and extracted its content with readability, you're on track.
 
-Common issues I'm seeing:
+Common sticking points this week:
 
-**Skills not loading.** Make sure you copied the entire folder, not just the SKILL.md file. The folder name should match the skill name (e.g., `source-verification/SKILL.md`, not `source-verification.md` floating loose). After copying, restart Claude Code.
+**Tool installation.** jq and readability-cli cause the most trouble. On Mac, `brew install jq` usually works. For readability, make sure npm is installed first (`node --version` to check), then `npm install -g @peerless/readability-cli`. Windows users: WSL makes this much easier than native Windows.
 
-**"Claude isn't following the skill instructions."** Skills work best when you invoke them explicitly at the start of a task. Type `/source-verification` first, then provide the claim. If you just describe what you want, Claude may not load the skill's methodology.
+**API key setup.** Store your Anthropic key in a file, not in the script itself. The exercise shows how: `~/.config/newsletter-pipeline/anthropic_key`. Check permissions with `ls -la` to confirm only you can read it.
 
-**The coffee claim exercise.** Don't rush to Google the answer. The point is to use the SIFT method the skill provides. Document each step: your initial assumptions, what you found about the source, what other coverage exists, and where the specific claims originated. Your submission should show the process, not just the conclusion.
+**Empty output from readability.** Some websites block scrapers or use heavy JavaScript rendering. If your test URL returns nothing, try a different news site. The Verge, Ars Technica, and most newspaper sites work well.
 
-Discussion posts are due Friday. The "what skills does your newsroom need" thread has useful ideas. If you haven't posted yet, think about tasks you do weekly that follow a consistent pattern.
+**Pipes not working.** Each step needs to succeed before the pipe passes data to the next step. Run each command separately first. Once each works alone, chain them together.
 
-The goal this week is to shift from one-off prompts to reusable workflows. Once you've verified one claim using the skill, you'll see how much easier it is than explaining SIFT from scratch every time.
+Discussion posts are due Friday. The thread on automating repetitive tasks has good ideas about what to build. If you haven't posted yet, think about what you do every morning or for every story.
+
+The exercise takes longer than previous weeks. Budget at least 90 minutes. Getting stuck is part of the learning.
 
 Joe Amditis

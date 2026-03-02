@@ -15,11 +15,10 @@ This is the sequel to Prompt Engineering 101 for Journalists. It moves journalis
 
 ```
 ├── Introduction Module/     # Welcome, syllabus, requirements, getting help
-├── Module 1/                # Escaping the chat window (programmatic AI control)
-├── Module 2/                # Prompting with files and project context
-├── Module 3/                # Custom skills (domain expertise → reusable tools, hooks)
-├── Module 4/                # CLI workflows (Unix philosophy, cost-conscious pipelines)
-├── Module 5/                # Agents and RAG (grounded knowledge, source attribution)
+├── Module 1/                # From chat window to command line (CLI setup + project context)
+├── Module 2/                # Custom skills (domain expertise → reusable tools, hooks)
+├── Module 3/                # CLI workflows (Unix philosophy, cost-conscious pipelines)
+├── Module 4/                # Agents and RAG (grounded knowledge, source attribution)
 ├── Final Project/           # Guidelines, proposal template, examples
 ├── Resources/
 │   ├── examples/            # Sample files for exercises

@@ -1,134 +1,84 @@
-# Module 3: Custom skills for Claude Code
+# Module 4: CLI workflows for newsrooms
 
 ## Orientation message
 
-Welcome to Week 3! This week, you'll learn to extend Claude Code with skills designed for journalism work.
+Hello, and welcome to Module 4.
 
-In the 101 course, you learned to write good prompts. You got better at explaining context, setting expectations, and getting useful results. But every time you started a new session, you started from scratch. This week, you learn to save those prompts as permanent, reusable tools. The key insight: write it once, use it forever.
+In the 101 course, you learned to automate tasks with no-code tools like Zapier and Make. Those tools work well for straightforward workflows: trigger an event, move some data, send a notification. But if you've ever hit the wall where your Zap can't handle a weird edge case, or where you need to process 500 documents and the no-code tool charges per operation, you've felt the limits of that approach.
 
----
+CLI LLMs are the next level. They give you more control, more flexibility, and the ability to handle the messy, unpredictable data that journalism actually produces. This week, you'll describe workflows in plain English and have your CLI LLM translate them into working scripts. You won't write shell code — you'll describe what you want to automate, Claude Code will write the implementation, and you'll test and refine the result. By the end, you'll have a working pipeline that fetches content, processes it with AI, and outputs formatted results.
 
-## Why skills matter
+### Describe the workflow, let the LLM build it
 
-Most people start by typing the same instructions over and over. You explain the SIFT method to Claude. Then you explain it again the next day. Then you explain it to a colleague's Claude session. Skills break that cycle.
+The key shift in Module 4: instead of asking Claude Code to help you with one document, you describe an entire workflow — a sequence of steps from input to output — and it builds the script that automates it.
 
-A skill is an instruction file that encodes your domain expertise into something Claude Code can follow on command. The source-verification skill, for example, contains the SIFT method, your newsroom's standards for attribution, and the checks an experienced reporter would run before publishing. You write it once. From then on, you type `/source-verification` and the method is applied automatically.
+"Fetch this URL, strip out the ads, summarize it in three bullets, save it as a markdown file with today's date in the filename" — that's a workflow description. Claude Code turns it into a reusable script. You review the script, test it on a few real examples, and refine it until the output is what you want. Then you can run it on 50 documents, schedule it to run automatically, or share it with a colleague.
 
-This matters because the Reuters Institute's 2025 survey found that 84% of UK journalists have never used AI for fact-checking or verification. That's not because AI can't help — it's because doing it well requires encoding specific methods and standards that are different for every beat and every newsroom. A generic chat prompt doesn't know the SIFT method or your source standards. A skill does.
+The Reuters Institute's 2025 survey found that transcription is the single most common daily AI task among UK journalists (22% daily). Translation, summarization, and data extraction follow. But 87% have never used AI for data cleaning, and 80% have never used it for data extraction like OCR or scraping. These are all pipeline-shaped problems: file in, process, file out. Once you can describe the workflow and have your CLI tool build the script, the barrier drops. You're not learning to code — you're describing what "clean this data" or "transcribe and summarize these recordings" means for your beat, and the tool handles the implementation.
 
-Think of skills as the journalism equivalent of style guides or reporting checklists — except the AI follows them every time without reminders.
+The right way to build a pipeline: separate stages, each with a clear input and output. Fetch. Clean. Analyze. Format. When something breaks, you know which stage failed — and you paste the error back into your session to get a diagnosis. Because each stage is independent, you can fix one without touching the others.
 
-The maturity path looks like this:
+### Plan before you build
 
-**Ad-hoc prompts** → You type instructions each time. Works, but slow and inconsistent.
+Before you ask your CLI LLM to build anything — a script, a pipeline, a configuration file — ask it to plan first. See the approach before any file is written or any command is run.
 
-**Saved prompts** → You copy-paste from a document. Better, but still manual.
+Most CLI tools have a built-in mode for this:
 
-**Skills** → Claude Code loads instructions automatically when you invoke a slash command. Consistent and shareable across your team.
+- **Claude Code:** Type `/plan` before describing your task. Claude enters plan mode: it explores the request, thinks through the approach, and presents a plan for your review. Nothing is executed until you approve.
+- **Gemini CLI:** There's no single `/plan` command, but you get the same result by being explicit: "Before doing anything, plan this out step by step and wait for my approval before taking any action."
+- **Codex CLI:** Ask it to plan explicitly: "Plan this out step by step and wait for my approval before writing any code." You can also start with `codex --approval-mode suggest`, which shows proposed changes before applying them.
 
-**Hooks** → Automated checks that run in the background. No invocation needed.
+The underlying habit is the same regardless of tool: **describe what you want, review what it plans to do, then authorize it to proceed.**
 
-**Plugins** → Packaged skill libraries you can install from GitHub with a single command. A plugin can contain any combination of skills, hooks, and commands — all registered at once on installation.
+This matters more as tasks get larger. For a one-sentence summary, it doesn't matter much if the LLM gets it wrong on the first try — you just try again. For a pipeline that makes real API calls, writes files, and costs money to run, you want to see the approach before it starts. A misunderstood requirement caught at the planning stage costs you 30 seconds. The same misunderstanding caught after a failed 50-document batch run costs you time and money.
 
-**Concrete example: Superpowers (obra/superpowers)**
+Think of it the same way you'd think about editing: you'd review a reporter's outline before they spend three days writing the story. Plan mode is the outline stage for LLM-built automation. It's also how you catch scope creep — an LLM given a loosely described task will sometimes build something bigger than you asked for. Reviewing the plan tells you that before it happens.
 
-Superpowers is a third-party plugin that completely rewires how a coding agent approaches a project. Instead of jumping into writing code, it fires a brainstorming skill first — asking clarifying questions, building a spec you review, then generating a step-by-step implementation plan. Other skills enforce test-driven development, review completed tasks, and manage the handoff when a branch is ready to merge. All of this fires automatically. You don't invoke each skill individually — the plugin handles when each one runs.
+The plan step is also where you refine your description. You might describe a workflow and see the LLM propose a more complex approach than you need, or a simpler one that misses a step. That's a better moment to course-correct than after it's built.
 
-Superpowers isn't journalism-specific, but it illustrates what's possible at the plugin level: a complete, opinionated workflow installed in a single command, where someone else has done the hard work of deciding what the agent should do at each stage. The journalism skills plugin you'll install this week works on the same model, just built for newsroom workflows instead of software development.
+### Principles for building real pipelines
 
-This week covers skills and hooks. By Module 5, you'll see how these fit into larger agent workflows.
+These aren't abstract best practices. They come from building and running actual data pipelines in newsrooms.
 
----
+**Test small before running big.** Real API calls cost money. Before you process 500 documents through a paid API, test on 5. Better yet, validate your inputs with a free local model (like Ollama) before sending anything to a paid service. The principle: use cheap tools to catch problems before running expensive operations.
 
-## Hooks: your automated editor
+**Design for failure.** Long operations fail. Networks drop, APIs rate-limit, your laptop goes to sleep. Build pipelines that save their progress to disk — a simple log of which files have been processed — so they can restart from where they left off instead of starting over from scratch.
 
-Hooks are a special type of skill that runs automatically — you don't invoke them. They fire at specific points in your workflow without any input from you.
+**Respect rate limits.** APIs have rate limits for a reason. Building pauses into your scripts (`sleep 2` between API calls) isn't a workaround — it's responsible engineering that keeps your API access alive. A script that blasts 1,000 requests in ten seconds will get you throttled or banned. A script that spaces them out will finish the job reliably.
 
-There are two kinds, and the distinction matters.
+### Learning objectives
 
-**Notify hooks** run in the background and flag issues without stopping your work. Think of them as an automated second reader: the work continues, but problems get marked for your review. A notify hook might flag an unattributed quote, highlight AI-generated filler language, or note that a specific claim hasn't been verified. You review the flags. You decide what to fix.
+By the end of this module, you will be able to:
 
-**Stop hooks** pause execution and ask for confirmation before proceeding. These exist for one-way doors — actions that are difficult or impossible to undo. Before Claude Code deletes a batch of files, pushes code to a repository, or sends output somewhere external, a stop hook can pause and say: "This is about to do X. Do you want to proceed?" You say yes or no.
+1. **Describe a multi-step journalism workflow** and have your CLI LLM translate it into a working, reusable script — without writing code yourself.
 
-The distinction matters because not all mistakes are equal. A flagged style violation is recoverable. A bulk delete or an accidental publish often isn't. Stop hooks create a deliberate checkpoint before the point of no return.
+2. **Test AI-built scripts** on a small number of real examples before running them on full workloads, and understand why this step prevents wasted API costs and bad output.
 
-The journalism parallel is direct: editorial workflows don't just catch errors, they build in deliberate pause points before irreversible actions. A stop hook is the automated version of "does a human need to see this before it goes out?"
+3. **Diagnose pipeline failures** by pasting errors back into your CLI session and iterating on fixes — the core debugging loop you'll use throughout this course and beyond.
 
-Practically: for output review, use notify hooks. For any action that writes to external systems, deletes files, or publishes anything, consider a stop hook. The rule is the same one newsrooms already know — the higher the stakes of a mistake, the more friction you want in the process.
+4. **Apply security practices** — API keys in environment variables, scripts reviewed before deployment, sensitive documents handled appropriately.
 
-**Concrete example: the one-way-door-check hook**
+5. **Apply cost-conscious practices** — test on small samples, add rate limiting, build in checkpointing so long jobs can resume instead of restart.
 
-The journalism skills repository includes a hook called `one-way-door-check`. It intercepts every attempt by Claude Code to create a new file and checks whether that file represents a decision that's hard to reverse — a database schema, an infrastructure config, an API contract, a CI/CD pipeline. If it detects one of these patterns, it blocks the write and requires Claude to present you with at least two alternatives and explain what the decision commits you to before you proceed. Files that are easy to change later — UI components, documentation, utility functions — pass through silently.
+### This week's activities
 
-You don't have to remember to invoke it. It fires automatically on every new file creation. The hook script is readable — open it and you can see exactly what it checks and why. That transparency is intentional: you should understand what's running in the background on your behalf.
+- **Videos:** Watch the two video lectures on CLI basics and building pipelines
+- **Readings:** Complete the required readings on shell fundamentals and automation patterns
+- **Exercise:** Build a working "clip article → summarize → format" pipeline
+- **Discussion:** Share your newsroom automation ideas in the forum
+- **Quiz:** Complete the 5-question quiz on CLI concepts
 
-The instructor's journalism skills repository includes 13 hooks that check for common editorial problems. You'll install them alongside the skills this week.
+### A note on getting stuck
 
----
+This week involves more moving parts than previous modules, and you will hit errors. That's expected. When you do:
 
-## Skills vs. commands: the reliability question
+1. **Paste the error into your CLI tool and ask what it means.** Don't paraphrase — paste the exact error message. Your tool already knows the code it built for you, so it can read the error in context and usually identify the problem immediately. "Here's what I got when I ran it — what went wrong and how do I fix it?" is often all you need to type. This is one of the most useful things about working with a CLI LLM: your debugging collaborator is already there, already has context, and can read error messages directly.
 
-Skills and commands look similar on the surface — both are files that shape Claude's behavior, both are invoked with a slash — but they work differently in ways that matter.
+2. **If it's an installation or setup issue**, check that you've installed the required tools listed in the exercise.
 
-A **skill** contains domain knowledge Claude consults and applies using its judgment. When you invoke `/source-verification`, Claude reads the SKILL.md and decides how to apply the SIFT method to your specific situation. This is the right tool when the task requires judgment: evaluating a specific claim, analyzing a particular document, drafting a story with context-specific nuances.
+3. **If your CLI tool can't resolve it**, post in the "Technical help" forum with the exact error message and a description of what you tried.
 
-A **command** is a deterministic trigger. When you invoke it, the defined workflow runs exactly as written — the same steps, the same sequence, every time. No interpretation. This is the right tool when consistency matters more than flexibility: a pre-publication checklist that should always run the same checks, a batch process that should always follow the same pipeline, a report format that should always use the same structure.
+Please complete all activities before the end of the week.
 
-The journalism analogy: a skill is a style guide. A command is a mandatory pre-publication checklist. The style guide is reference material — reporters consult it when they think something needs checking, and they apply it with judgment. The checklist is a fixed sequence — it runs in the same order before every story, no skips, no interpretation. Both are valuable. They solve different problems.
-
-The rule of thumb: when something needs to happen reliably and the same way every time, build a command. When something needs judgment and contextual interpretation, write a skill. The mistake is treating everything as a skill when some workflows need the determinism of a command.
-
-## Capture failures while they're fresh
-
-Fixing a mistake is not the same as learning from it. The correction that stays only in your head disappears when the session ends.
-
-When an AI tool fails — generates a hallucinated quote, ignores a clear instruction, selects the wrong approach for a task — that failure has two forms. The immediate form: you correct it and move on. The lasting form: you captured the exact prompt that triggered it, what category of failure it was, and what rule should prevent it next time.
-
-Most people take only the first form. The correction disappears into the session history. The next session makes the same mistake.
-
-The practice: when something goes wrong, stop and capture it in a structured log entry before the session context evaporates. What exactly did you ask for? What category of failure was it — hallucination, instruction ignored, context lost, incomplete execution? What's your hypothesis for why it happened? What rule in your CLAUDE.md would prevent it next time?
-
-The flip side: when something works unusually well — a prompt that produced exactly what you needed, a phrasing that landed cleanly — log that too. What made it effective? Can it be templated into a skill?
-
-Over time, this log becomes more valuable than the individual corrections. It's the difference between fixing a source error once and developing a better source-evaluation practice.
-
-In the exercise this week, you'll create `/log_error` and `/log_success` commands to formalize this habit.
-
----
-
-## From context files to skills
-
-Last week you wrote a CLAUDE.md file to give the AI persistent context about your beat. That file changed how the AI responds to *every* prompt in your project. This week, you'll build on that with skills and hooks — reusable tools that you trigger on demand for specific tasks.
-
-If CLAUDE.md is the AI reading your newsroom's style guide before starting work, a skill is the AI following a specific reporting checklist when you tell it to.
-
-Before trusting a new skill on live work, test it on material you've already covered — a press release you fact-checked last month, a council vote you looked up yourself. Compare what the skill catches against what you found. If it misses something you caught, that's an instruction to add. If it flags something that wasn't a problem, that's an instruction to cut. This is the same instinct reporters bring to new sources: verify something you can already check before relying on it for something you can't.
-
----
-
-## Learning objectives
-
-By the end of this week, you will be able to:
-
-1. **Explain what skills and hooks are** — Understand the structure of a SKILL.md file, how Claude Code loads instructions from it, and the difference between notify hooks (flag issues, keep going) and stop hooks (pause before irreversible actions).
-
-2. **Install a skills plugin from GitHub** — Use Claude Code's plugin system to add the journalism skills repository to your environment.
-
-3. **Use journalism skills in your workflow** — Apply the source-verification skill to check claims and explore how hooks run automatically in the background.
-
-4. **Write a simple custom skill** — Encode a task you do repeatedly into a SKILL.md file, test it, and apply the deletion test to its instructions.
-
-5. **Recognize the progression from prompts to skills** — Understand when a task you keep repeating should become a reusable skill, and when project-level context belongs in CLAUDE.md instead.
-
----
-
-## This week's work
-
-- **Readings:** Claude Code documentation on custom commands, plus an overview of the instructor's journalism skills repository
-- **Exercise:** Install journalism skills (as a plugin or manually) and use source-verification to fact-check a viral social media claim
-- **Discussion:** Share your experience customizing AI tools and discuss what skills would help your newsroom
-- **Quiz:** 5 questions on skill structure, installation, and usage
-
----
-
-Let's get started.
+Best,
+Joe Amditis

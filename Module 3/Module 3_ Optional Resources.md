@@ -1,149 +1,181 @@
-# Module 3: Custom skills for Claude Code
+# Module 4: CLI workflows for newsrooms
 
 ## Optional resources
 
-These materials provide additional context. Review them if you want to go deeper or explore related topics.
+These materials go deeper into topics from this week. Use them if you want to expand your skills after completing the required work.
 
 ---
 
-### Writing better skill instructions
+## Instructor tools and templates
 
-**"Prompt engineering guide" — Anthropic Documentation**
-https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview
+### AI tools and guides for newsrooms
+**jamditis/tools** by Joe Amditis
+https://github.com/jamditis/tools
 
-The same principles that make prompts effective also apply to skill files. This guide covers structuring instructions, providing examples, and avoiding ambiguity. Useful if you plan to write your own skills.
+The instructor's repository of AI tools and guides built for newsrooms. Includes terminal setup guides, workflow templates, and working examples of the kinds of pipelines covered in this module. A good starting point if you want to see how the concepts from this week look in practice.
 
----
+### scrapefruit-cli
+**jamditis/scrapefruit-cli** by Joe Amditis
+https://github.com/jamditis/scrapefruit-cli
 
-### The SIFT method for source verification
-
-**"SIFT (The Four Moves)" — Mike Caulfield**
-https://hapgood.us/2019/06/19/sift-the-four-moves/
-
-The source-verification skill is based on this method. Read the original to understand the reasoning behind Stop, Investigate the source, Find better coverage, and Trace claims. The skill encodes these steps, but understanding why they work helps you apply them in edge cases.
+A CLI tool for archiving complete web pages — HTML, assets, and metadata. Useful for preserving source material before it changes or disappears. Pairs well with the pipelines from this week's exercise: archive first, then process.
 
 ---
 
-### FOIA request writing
+## Shell scripting tutorials
 
-**"FOIA Frequently Asked Questions" — Reporters Committee for Freedom of the Press**
-https://www.rcfp.org/resources/foia-basics/
+### Bash scripting for beginners
+**"Bash Scripting Tutorial"** by Ryan Chadwick
+https://ryanstutorials.net/bash-scripting-tutorial/
 
-Background on the Freedom of Information Act and how to write effective requests. The foia-requests skill helps draft requests, but knowing the legal framework helps you refine them for specific agencies.
+A full tutorial covering variables, conditionals, loops, and functions. Good reference for when you want to add logic to your pipelines.
 
----
+### Shell script best practices
+**"Shell Style Guide"** by Google
+https://google.github.io/styleguide/shellguide.html
 
-### AI hallucinations in practice
-
-**"AI Hallucination Cases database"** — Damien Charlotin (via Simon Willison)
-https://simonwillison.net/2025/May/25/ai-hallucination-cases/
-
-A database of documented cases where lawyers were caught submitting AI-generated hallucinations in legal proceedings — verified instances where courts confirmed the fabricated content. As of May 2025: 116 cases across 12 countries, with 20 in that single month alone. The legal profession has had years of public warnings. It hasn't mattered. The pattern is directly relevant to journalism: professional settings with high stakes and time pressure create conditions where people use AI shortcuts and skip verification. The database is the read; the acceleration is the argument.
+How to write maintainable scripts. Useful if you're building tools your team will share.
 
 ---
 
-**"Hallucinations in code are the least dangerous form of LLM mistakes"** — Simon Willison
-https://simonwillison.net/2025/Mar/2/hallucinations-in-code/
+## Scheduling and automation
 
-The counterintuitive argument: when an LLM hallucinates a method that doesn't exist, you find out immediately when you run the code. Code errors are self-revealing. What's actually dangerous is hallucinated prose — fabricated quotes, invented facts, plausible-sounding information that requires subject expertise to catch. For journalists, this reframes where to focus skepticism: the pipeline ran without errors, but did it produce accurate content?
+### Cron job basics
+**"Cron Jobs for Beginners"** by Hostinger
+https://www.hostinger.com/tutorials/cron-job
 
----
+How to schedule scripts to run automatically. Includes the cron syntax reference.
 
-### MCP servers for newsrooms
+### Crontab.guru
+https://crontab.guru/
 
-**"MCP Quickstart" — Anthropic Documentation**
-https://modelcontextprotocol.io/quickstart
+Interactive tool for building and testing cron schedules. Bookmark this.
 
-If you want Claude Code to connect to live data sources (databases, APIs, document management systems), MCP is the path. This quickstart shows how to set up a basic server. More advanced than skills, but worth exploring if your newsroom has custom data infrastructure.
+### macOS-specific: launchd
+**"A launchd Tutorial"** by Alvin Alexander
+https://alvinalexander.com/mac-os-x/mac-osx-startup-crontab-launchd-jobs/
 
----
-
-### Example: Data journalism skill in action
-
-**"Analyzing campaign finance data with Claude Code" — [Course supplementary video]**
-
-A 12-minute walkthrough showing the data-journalism skill applied to FEC filings. Demonstrates how skills can include data cleaning steps, chart generation, and story angle identification.
+On macOS, `launchd` is the native scheduler. This tutorial covers the basics.
 
 ---
 
-### Skills in practice
+## How AI session memory works
 
-**"Claude skills are awesome, maybe a bigger deal than MCP"** — Simon Willison
-https://simonwillison.net/2025/Oct/16/claude-skills/
+*Source: ["Lessons from Building Claude Code: Prompt Caching Is Everything"](https://twitter.com/trq212/status/2024574133011673516) by @trq212 — a thread from someone at Anthropic on how Claude Code manages prompt caching internally. The four rules below are the practical takeaways translated for journalism workflows.*
 
-Willison's take on why skills represent something qualitatively different from other Claude customization features. He argues that the ability to package domain expertise into reusable, shareable instructions is more practically significant for most users than the more technically complex MCP system. Good context for understanding why this week's work matters.
+Understanding how AI sessions manage memory helps you build better workflows and avoid unexpected costs.
 
----
+The short version: **put stable context first, put the current task last.** That order matches how the tool's memory works. Whatever you write at the top of your CLAUDE.md or session instructions is what the AI caches most reliably. The specific assignment you're working on right now goes at the bottom.
 
-**"OpenAI are quietly adopting skills"** — Simon Willison
-https://simonwillison.net/2025/Dec/12/openai-skills/
+Think of it like a briefing file. Your beat background, your newsroom's attribution standards, the names of recurring sources — that's stable. Today's document, the current question, the date — that's dynamic. A briefing works better when you lead with the stable background and end with the specific ask. AI sessions work the same way.
 
-A few months after Willison declared skills a bigger deal than MCP, OpenAI added skills support to both ChatGPT and Codex CLI. The same folder-based, markdown-file approach now works across Claude Code, Codex CLI, and ChatGPT. Relevant context for this week: the skills you write here aren't Claude-specific — the concept is converging across platforms.
+### Four practical rules
 
----
+**Stable context first, current task last.** Structure your CLAUDE.md with the most durable content at the top — who you are, your newsroom, your beat, your standards — and the most session-specific context at the bottom. The same applies to individual prompts: lead with background context before the specific ask. If the first thing in your project context is a date or a story-specific detail, you're working against how the session handles memory.
 
-### Advanced patterns: commands, hooks, and error logging
+**Don't switch models mid-investigation.** A session's memory is tied to the specific AI model you're using. If you've spent two hours working through a complex project with one model and then switch to a different model — even to ask something quick and save money — the new model starts from scratch. It has no memory of your briefing. You end up spending more, not less. For complex, context-heavy work, stick with one model per session. Start a separate session for unrelated quick tasks.
 
-The three resources below are drawn from *Advanced Claude Code Patterns That Move the Needle*, a guide based on 2,000+ hours of building with LLMs. They extend directly from this module's core topics — skills, hooks, and workflow automation. Read any or all, in order.
+**Plan your session setup before you start.** When you connect the AI to external data sources — files, databases, MCP servers — that connection becomes part of the session's active context. Adding or removing connections mid-session resets the AI's understanding of your workspace. Know which files and data sources you'll need, connect them at the beginning, and leave the configuration alone while you work.
 
-*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw). Extracted and organized in [jamditis/stash](https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns).*
+**Add new context as notes, don't rewrite your briefing.** If something changes mid-session — a source calls back, a new document arrives — add it as a message in the conversation rather than rewriting your CLAUDE.md. Rewriting your context file mid-session resets everything that came before. The session loses its accumulated context and has to reload.
 
----
+The pattern is the same one reporters use in their notes: you don't rewrite the top of your story file every time you get new information. You add to the bottom.
 
-**"Commands as lightweight local apps"** — The Agentic Lab via jamditis/stash
-https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/02-commands-as-apps.md
+### Why this matters for the pipelines you're building
 
-*Reading time: 10 minutes*
+When scripts spawn AI sessions to process documents, how you structure the initial context affects efficiency and cost. A pipeline that starts each session with a stable briefing is more efficient than one that reconstructs context each run.
 
-The clearest explanation of what makes slash commands different from skills. A skill contains domain knowledge that Claude consults probabilistically — whether it activates and how closely it follows the instructions varies. A `/command` is a deterministic trigger: when you invoke it, the workflow runs as defined, every time.
-
-The framing here — "Claude as a Service" — is useful for newsrooms. Each `/command` is a micro-application with a defined interface, specific workflow, and consistent output. The piece includes a worked example of a multi-phase command that launches parallel subagents, assembles assets, and writes output — showing what's possible when you stop thinking of commands as chat shortcuts and start treating them as automation tools.
-
-For Module 3's exercise, the relevant distinction is: the source-verification skill you installed is knowledge-based and invocable; if you wanted that workflow to run automatically on every article before publication, you'd wrap it in a command.
+When writing a pipeline prompt, ask yourself: which parts of this will be the same every time I run it, and which parts change? Put the stable parts first.
 
 ---
 
-**"Hooks for deterministic safety"** — The Agentic Lab via jamditis/stash
-https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/03-hooks-for-safety.md
+## AI CLI tools
 
-*Reading time: 12 minutes*
+### Claude Code documentation
+https://code.claude.com/docs
 
-This extends what Module 3's required readings cover about hooks. Where the journalism skills library uses hooks as editorial quality checks (flagging AP Style violations, source attribution gaps, AI filler language), this piece covers hooks as safety guardrails — programmatic blocks that run before or after any CLI action.
+Official documentation for Claude Code. Covers installation, CLAUDE.md files, custom slash commands, hooks, MCP, sub-agents, and CLI reference. The canonical starting point for anything the tool can do.
 
-The practical setup described — hooks combined with `--dangerously-skip-permissions` — removes constant permission prompts while maintaining hard blocks on specific patterns (recursive deletes, force pushes to protected branches). The approach illustrates a general principle for any automated journalism workflow: the right place to enforce constraints is in code that cannot be bypassed, not in prompts that might be ignored.
+### Ollama (local AI)
+https://ollama.ai/
 
-The bash examples translate directly. If you're building pipelines that touch source documents, the pattern of "allow by default, block specific patterns explicitly" is worth understanding before those pipelines touch anything you can't recover.
+Run AI models locally on your machine. Useful for validating inputs before sending them to paid APIs, or when you don't want to send content to external services.
 
----
+### LLM CLI by Simon Willison
+https://llm.datasette.io/
 
-**"The error logging system"** — The Agentic Lab via jamditis/stash
-https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/01-error-logging-system.md
-
-*Reading time: 10 minutes*
-
-The Module 3 exercise asks you to add a "Hard-won lessons" section to your skill file — one entry per correction you have to make. This piece makes the case for why that section is the most important part of your CLAUDE.md over time, and shows how to build a structured system for capturing it.
-
-The core pattern is two slash commands — `/log_error` and `/log_success` — that fork the current conversation, interview you about what went wrong or right, and write a structured entry to a log file. Failure categories covered: hallucination, instruction ignored, context lost, wrong tool selection, incomplete execution. Each entry captures the exact triggering prompt, expected vs. actual behavior, and a hypothesis for the root cause.
-
-For journalists, the practical payoff is a record of what your AI environment gets wrong — and a log of what prompts reliably produce good results. Both are more valuable than they appear now and become more valuable as your beat project accumulates history.
+A command-line tool that works with multiple AI providers. Good for building pipelines that switch between models.
 
 ---
 
-### Building your own skills
+## Web fundamentals
 
-**"Custom slash commands" — Claude Code documentation**
-https://docs.anthropic.com/en/docs/claude-code/tutorials#custom-slash-commands
+### How the web works
+**"How Does the Web Work?"** — The Odin Project
+https://www.theodinproject.com/lessons/foundations-how-does-the-web-work
 
-When you're ready to create skills for your newsroom, start here. The tutorial covers file structure, YAML frontmatter, and best practices for instruction writing.
+Covers what actually happens when you type a URL: DNS resolution, HTTP requests, servers, responses, and status codes. Understanding this makes the pipeline work in this module more legible — when your script fetches a URL, this explains what it's doing at the network level and why some requests fail (403, 404, 429).
+
+### Browser developer tools
+**"Inspecting HTML and CSS"** — The Odin Project
+https://www.theodinproject.com/lessons/foundations-inspecting-html-and-css
+
+How to use browser developer tools to inspect page structure and find the HTML elements that contain the content you want to extract. Useful before building scraping pipelines: if you know what element wraps the article text, you can tell the AI tool exactly what to target rather than guessing.
 
 ---
 
-## Community resources
+## Web scraping tools
 
-**Claude Code Discord community**
-A place to share skills, ask questions, and see what other users are building. Search for journalism-related discussions or share your own skill ideas.
+### yt-dlp documentation
+https://github.com/yt-dlp/yt-dlp#readme
 
-**Nieman Lab and journalism AI coverage**
-https://www.niemanlab.org/
+Download videos and metadata from YouTube, TikTok, and hundreds of other sites. The `--dump-json` flag outputs metadata you can pipe to other tools.
 
-Ongoing coverage of AI tools in newsrooms. Useful for staying current on how other journalists are using these tools.
+### Readability CLI
+https://gitlab.com/gardenappl/readability-cli
+
+Extracts the main article text from web pages. Removes navigation, ads, and sidebars.
+
+### Trafilatura
+https://trafilatura.readthedocs.io/
+
+Python tool for web scraping that outputs clean text or markdown. Works from the command line.
+
+---
+
+## Verification and accountability
+
+### Proving your pipeline worked
+**"Code proven to work"** — Simon Willison
+https://simonwillison.net/2025/Dec/18/code-proven-to-work/
+
+Willison's argument: submitting code (or, for journalists, publishing pipeline outputs) without personally verifying it shifts the verification burden onto the reader. "A computer can never be held accountable." The piece is written for developers, but the principle maps directly to automated newsroom pipelines — you are responsible for checking that what your script produced is actually correct, not just that the script ran without errors. Required reading mindset for anyone automating content production.
+
+---
+
+## Text processing
+
+### GNU Coreutils manual
+https://www.gnu.org/software/coreutils/manual/
+
+Reference for standard Unix tools: `cut`, `sort`, `uniq`, `tr`, `wc`, and more.
+
+### sed and awk one-liners
+**"Sed One-Liners Explained"** by Peteris Krumins
+https://catonmat.net/sed-one-liners-explained-part-one
+
+Quick patterns for text manipulation. Useful when you need to clean up text before sending it to AI.
+
+---
+
+## Books
+
+### "Data Science at the Command Line" by Jeroen Janssens
+https://jeroenjanssens.com/dsatcl/
+
+Free online book. Covers building data pipelines with Unix tools. Written for analysts, not programmers.
+
+### "The Linux Command Line" by William Shotts
+https://linuxcommand.org/tlcl.php
+
+Free PDF. A thorough introduction to working in the terminal.

@@ -1,30 +1,25 @@
-# Module 2: Prompting with files and project context
+# Module 3: Custom skills for Claude Code
 
 ## End of the week message
 
-You made it through Week 2.
+Week 3 is complete.
 
-This week you learned the feature that justifies switching from web chat to CLI tools: persistent project context. Instead of re-explaining your beat, your style, and your standards in every conversation, you write them once in a file and the tool follows them automatically.
+This week you learned how skills extend Claude Code's capabilities. Instead of explaining your methodology each time, you encode it once in a SKILL.md file and invoke it with a slash command.
 
 **What you learned:**
-- How context files work across tools (CLAUDE.md, GEMINI.md, AGENTS.md) and why they matter
-- The deletion test for deciding what belongs in a context file
-- How to process journalism documents directly from the filesystem
-- The difference context makes — same documents, different results
-- What Git repositories and commits are, and why your context files belong in version-controlled projects
+- How skill files are structured and where they're stored
+- How to install skills from a GitHub repository
+- How to apply the source-verification skill to fact-check a claim
+- When reusable skills save time versus when direct prompts work better
 
-**Exercise reminder:** Your comparison writeup and CLAUDE.md file are due Sunday at 11:59pm. Submit your before/after comparison (300-500 words) along with the context file you wrote.
+**Exercise reminder:** Your source-verification submission is due Sunday at 11:59pm. Include your SIFT process documentation, your findings on the coffee/cortisol claim, and one suggestion for improving the skill.
 
-**Next week:** Module 3 takes what you learned this week and makes it permanent. You wrote a CLAUDE.md file to give the AI project-level context. Next week, you'll learn to write *skills* — reusable slash commands that encode your journalism expertise into tools you can invoke on demand. You'll also clone a journalism skills library from GitHub — this is where the Git concepts from this week pay off. If writing a context file felt useful, skills are the next step: instead of the AI passively reading your instructions, you actively trigger specific workflows with commands like `/source-verification` or `/foia-request`.
+**Next week:** Module 4 covers CLI workflows. You'll learn to chain tools together using pipes, build shell scripts that automate content processing, and schedule tasks to run automatically. We'll build a pipeline that fetches articles, summarizes them with AI, and formats them for newsletters.
 
-The progression makes sense once you see it: first you used the tools (Module 1), then you taught the tools about your work (Module 2), and next you'll build custom tools on top of them (Module 3).
+The discussion this week surfaced good ideas for newsroom-specific skills: beat-specific interview question generators, style guide checkers, and social media post formatters. Consider building one of these for your final project.
 
-**Checklist:**
-- [ ] Completed the hands-on exercise (before/after comparison)
-- [ ] Posted in at least one discussion forum
-- [ ] Responded to at least two classmates
-- [ ] Completed the quiz
+Skills are the bridge between knowing how to prompt and building tools your colleagues can use. The verification skill you used this week could be shared with your entire team tomorrow.
 
-See you in Week 3.
+See you in Week 4.
 
 Joe Amditis

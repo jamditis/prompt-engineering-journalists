@@ -1,25 +1,25 @@
-# Module 3: Custom skills for Claude Code
+# Module 4: CLI workflows for newsrooms
 
 ## End of the week message
 
-Week 3 is complete.
+You finished the toughest technical week of the course.
 
-This week you learned how skills extend Claude Code's capabilities. Instead of explaining your methodology each time, you encode it once in a SKILL.md file and invoke it with a slash command.
+This week you built a working pipeline: fetch article, extract content, summarize with AI, format for output. That's the pattern behind most automation in newsrooms. Once you can chain these steps, you can adapt them to almost any repetitive task.
 
 **What you learned:**
-- How skill files are structured and where they're stored
-- How to install skills from a GitHub repository
-- How to apply the source-verification skill to fact-check a claim
-- When reusable skills save time versus when direct prompts work better
+- How to use pipes to connect command-line tools
+- How to call the Claude API directly from bash
+- How to wrap a workflow in a reusable shell script
+- How to schedule automated tasks with cron
 
-**Exercise reminder:** Your source-verification submission is due Sunday at 11:59pm. Include your SIFT process documentation, your findings on the coffee/cortisol claim, and one suggestion for improving the skill.
+**Exercise reminder:** Your pipeline submission is due Sunday at 11:59pm. Post a screenshot of your working script, one newsletter item it generated, and one idea for adapting the pipeline to your newsroom.
 
-**Next week:** Module 4 covers CLI workflows. You'll learn to chain tools together using pipes, build shell scripts that automate content processing, and schedule tasks to run automatically. We'll build a pipeline that fetches articles, summarizes them with AI, and formats them for newsletters.
+**Next week:** Module 5 covers agents and RAG. You'll learn how AI systems that can take actions and access external knowledge bases are changing newsroom workflows. We'll look at real implementations (The Washington Post's Haystacker, The New York Times's Echo) and you'll configure Claude Code to query a local knowledge base using MCP.
 
-The discussion this week surfaced good ideas for newsroom-specific skills: beat-specific interview question generators, style guide checkers, and social media post formatters. Consider building one of these for your final project.
+If you struggled this week, that's expected. Shell scripting and API calls are unfamiliar territory for most journalists. The important thing is you saw the pattern: input, process, output. Everything else is debugging.
 
-Skills are the bridge between knowing how to prompt and building tools your colleagues can use. The verification skill you used this week could be shared with your entire team tomorrow.
+The skills from this week (and Week 3) feed directly into the final project, where you'll build a tool for your own newsroom.
 
-See you in Week 4.
+See you in Week 5.
 
 Joe Amditis

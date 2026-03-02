@@ -1,25 +1,25 @@
-# Module 4: CLI workflows for newsrooms
+# Module 5: Agents and RAG
 
 ## End of the week message
 
-You finished the toughest technical week of the course.
+You've completed the final module.
 
-This week you built a working pipeline: fetch article, extract content, summarize with AI, format for output. That's the pattern behind most automation in newsrooms. Once you can chain these steps, you can adapt them to almost any repetitive task.
+This week you learned how agents and RAG are changing what's possible in newsrooms. AI systems that can access knowledge bases and take multi-step actions are already at work in organizations like the Post and the Times. You now have hands-on experience configuring the same technology.
 
 **What you learned:**
-- How to use pipes to connect command-line tools
-- How to call the Claude API directly from bash
-- How to wrap a workflow in a reusable shell script
-- How to schedule automated tasks with cron
+- What distinguishes agents from standard chatbots
+- How RAG grounds AI responses in source documents
+- The tradeoffs between AI autonomy and editorial control
+- How to configure MCP to connect Claude Code to a local knowledge base
 
-**Exercise reminder:** Your pipeline submission is due Sunday at 11:59pm. Post a screenshot of your working script, one newsletter item it generated, and one idea for adapting the pipeline to your newsroom.
+**Exercise reminder:** Your MCP submission (screenshot plus five reflection questions) is due Sunday at 11:59pm.
 
-**Next week:** Module 5 covers agents and RAG. You'll learn how AI systems that can take actions and access external knowledge bases are changing newsroom workflows. We'll look at real implementations (The Washington Post's Haystacker, The New York Times's Echo) and you'll configure Claude Code to query a local knowledge base using MCP.
+**What's next:** The final project applies everything from this course. You'll build a working tool for your newsroom: a skill, a pipeline, or a RAG-enabled assistant. Details are in the Final Project module.
 
-If you struggled this week, that's expected. Shell scripting and API calls are unfamiliar territory for most journalists. The important thing is you saw the pattern: input, process, output. Everything else is debugging.
+The discussions this week raised hard questions about AI in journalism: autonomy, bias, infrastructure costs, and who gets left behind. There are no clean answers. What matters is that you're thinking about these questions now, while the technology is still taking shape.
 
-The skills from this week (and Week 3) feed directly into the final project, where you'll build a tool for your own newsroom.
+Over five weeks you moved from browser-based prompting to building automated pipelines and configuring AI systems that query your own documents. That's a real skill set. Use it.
 
-See you in Week 5.
+Thank you for your work this term.
 
 Joe Amditis

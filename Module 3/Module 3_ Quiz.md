@@ -1,103 +1,95 @@
-# Module 3: Custom skills for Claude Code
+# Module 4: CLI workflows for newsrooms
 
-## Quiz: Custom skills structure and usage
+## Quiz
 
-5 questions. Select the best answer for each.
+5 multiple choice questions.
 
 ---
 
 ### Question 1
 
-Where should you place a skill file so it's available across all your Claude Code projects?
+What does the pipe operator (`|`) do in a command-line pipeline?
 
-A) In the `.claude/commands/` directory of your current project
+A) Saves the output of a command to a file
 
-B) In the `~/.claude/commands/` directory (your home folder)
+B) Runs two commands at the same time
 
-C) In the root of the GitHub repository
+C) Takes the output of one command and sends it as input to the next command
 
-D) In the `/usr/local/claude/skills/` directory
+D) Connects to a remote server
 
-**Correct answer:** B
+**Correct answer:** C
 
-**Explanation:** Skills placed in `~/.claude/commands/` are personal commands available in all projects. Skills in `.claude/commands/` within a project are only available in that project. The distinction matters when sharing skills with a team — project-level skills travel with the repo; personal skills stay on your machine.
+**Explanation:** The pipe operator is the foundation of the Unix philosophy — small tools that do one thing, connected together. The output of `curl` becomes the input to `readability`, which becomes the input to `claude`, all without creating temp files. This is what makes CLI workflows so composable.
 
 ---
 
 ### Question 2
 
-What is the correct file structure for a skill with supporting templates?
+You have a file called `articles.json` containing an array of article objects. Each object has a `headline` field. Which `jq` command extracts all the headlines?
 
-A) `skill-name.md` containing all templates inline
+A) `jq 'headline' articles.json`
 
-B) `skill-name/SKILL.md` with optional `templates/` and `examples/` subdirectories
+B) `jq '.[].headline' articles.json`
 
-C) `SKILL-skill-name.md` in the commands root
+C) `jq '.headline[]' articles.json`
 
-D) `skills/skill-name/main.md` with `assets/` folder
+D) `jq 'get headline' articles.json`
 
 **Correct answer:** B
 
-**Explanation:** Skills can be either a single `skill-name.md` file or a directory `skill-name/` containing `SKILL.md` plus optional subdirectories for templates, examples, and scripts. Use the directory structure when your skill needs supporting files — for example, a FOIA skill might include letter templates.
+**Explanation:** `.[]]` iterates over all elements in the array; `.headline` selects the `headline` field from each object. `jq` is a lightweight command-line tool for transforming JSON — it pairs naturally with APIs and AI outputs that return structured data.
 
 ---
 
 ### Question 3
 
-The source-verification skill uses the SIFT method. What does SIFT stand for?
+What is the purpose of a cron job?
 
-A) Search, Identify, Fact-check, Track
+A) To download files from the internet
 
-B) Stop, Investigate the source, Find better coverage, Trace claims
+B) To schedule commands to run automatically at specified times
 
-C) Source, Information, Fact, Truth
+C) To convert text between different formats
 
-D) Scan, Inspect, Filter, Test
+D) To test if a website is online
 
 **Correct answer:** B
 
-**Explanation:** SIFT is Mike Caulfield's lateral reading method: Stop before sharing, Investigate the source, Find better coverage, and Trace claims to their origin. Encoding it in a skill means the AI applies the full method — including the steps journalists might skip when pressed for time.
+**Explanation:** Cron is the Unix scheduler. You specify time patterns (e.g., "run at 6am every weekday") and it executes your script automatically. This turns a one-off pipeline into an ongoing workflow — for example, a script that checks a government data source every morning and emails you if anything changed.
 
 ---
 
 ### Question 4
 
-How do you invoke a skill named `foia-requests` in Claude Code?
+In the pipeline `curl -s https://example.com/article | readability | claude "Summarize this"`, what happens if the `curl` command fails?
 
-A) Run `claude skill foia-requests` in the terminal
+A) The pipeline retries automatically
 
-B) Type `/foia-requests` in the Claude Code conversation
+B) An empty string is passed to the next command
 
-C) Add `--skill=foia-requests` to your prompt
+C) The entire pipeline pauses and waits
 
-D) Import it with `use foia-requests` at the start of your session
+D) Claude receives the error message and summarizes it
 
 **Correct answer:** B
 
-**Explanation:** Skills are invoked as slash commands. Typing `/foia-requests` in Claude Code loads the skill's instructions and applies them to the conversation. This is the same pattern as built-in commands like `/help` and `/clear`.
+**Explanation:** By default, a pipeline continues even if a stage fails. The failed stage produces no output, so subsequent commands receive empty input. This is why the module covers `set -e` (exit on error) and exit code checking — silent failures are hard to debug, and a pipeline that "succeeds" with empty input can produce misleading results.
 
 ---
 
 ### Question 5
 
-A reporter runs a batch job every Monday that processes 50 press releases, extracts all factual claims, checks each against a source database, and formats the results into a verification report. She wants this to work identically every week. Should she build this as a skill or a command, and why?
+Why might a journalist choose to run an AI model locally with Ollama instead of using a cloud API?
 
-A) A skill, because skills are designed for repeatable tasks
+A) Local models are always more accurate than cloud models
 
-B) A command, because a command provides a deterministic trigger — the same workflow runs in the same order every time, regardless of how Claude interprets the situation
+B) Local models are free and unlimited, while cloud APIs charge per request
 
-C) Either would work equally well
+C) Sensitive data never leaves the journalist's computer
 
-D) A command, because commands run faster than skills
+D) Local models can process images, while cloud APIs cannot
 
-**Correct answer:** B
+**Correct answer:** C
 
-**Explanation:** Skills are knowledge files that Claude applies using its judgment. When a workflow needs to run the same way every time — same steps, same sequence, no variation — a command is the right tool. Commands are deterministic: you define the workflow, and it executes as written. Skills are probabilistic: Claude reads them and applies them contextually. For batch processes with fixed requirements, consistency matters more than flexibility.
-
----
-
-## Quiz scoring
-
-- 5 correct: Excellent. You understand skill structure and usage.
-- 4 correct: Good. Review the concept you missed.
-- 3 or fewer: Re-read the module materials before proceeding to the exercise.
+**Explanation:** Local models are useful when working with confidential sources, unpublished documents, or any material that shouldn't leave the reporter's machine. The tradeoff is capability — local models are generally less capable than frontier cloud models — but for sensitive reporting, keeping data local can be worth it.

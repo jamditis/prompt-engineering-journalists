@@ -1,121 +1,149 @@
-# Optional resources
+# Module 3: Custom skills for Claude Code
 
-## Module 2: Prompting with files and project context
+## Optional resources
 
-These materials go deeper into context files and file processing if you want to explore beyond the required readings.
-
----
-
-### Git fundamentals
-
-**"Git will finally make sense after this"** — LearnThatStack
-https://www.youtube.com/watch?v=Ala6PHlYjmw
-
-13-minute video explaining how Git works internally: commits as complete snapshots (not just diffs), branches as lightweight pointers, the three areas where code lives (working directory, staging area, repository), and when to use checkout vs reset vs revert vs rebase. Conceptual rather than command-by-command.
-
-The Module 2 exercise has you directing your CLI tool to create repos, stage files, and commit. Watching this first means you can verify what the tool actually did — not just trust that it worked.
+These materials provide additional context. Review them if you want to go deeper or explore related topics.
 
 ---
 
-**The Odin Project: Introduction to Git**
-https://www.theodinproject.com/lessons/foundations-introduction-to-git
+### Writing better skill instructions
 
-Text-based lesson on what Git is and why it exists. Covers the problems version control solves and how Git addresses them. Slower and more thorough than the video above — good if you want to read rather than watch.
+**"Prompt engineering guide" — Anthropic Documentation**
+https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview
 
----
-
-**The Odin Project: Commit Messages**
-https://www.theodinproject.com/lessons/foundations-commit-messages
-
-Short lesson on writing good commit messages: what to include, what to skip, and why the history of your commits matters when something breaks six months later. Directly applicable to the Module 2 exercise, where your CLI tool will be writing commit messages on your behalf.
+The same principles that make prompts effective also apply to skill files. This guide covers structuring instructions, providing examples, and avoiding ambiguity. Useful if you plan to write your own skills.
 
 ---
 
-### Advanced CLAUDE.md examples
+### The SIFT method for source verification
 
-**Claude Code best practices** by Anthropic
-https://docs.anthropic.com/en/docs/claude-code/best-practices
+**"SIFT (The Four Moves)" — Mike Caulfield**
+https://hapgood.us/2019/06/19/sift-the-four-moves/
 
-Anthropic's own guide to getting the most out of Claude Code, including tips on writing effective CLAUDE.md files and structuring projects for AI-assisted work.
-
----
-
-**"My CLAUDE.md"** by various developers (GitHub search)
-https://github.com/search?q=filename%3ACLAUDE.md&type=code
-
-Search GitHub for real CLAUDE.md files in public repositories. Seeing how other people structure their context files is one of the fastest ways to improve your own. Look for files from journalism or writing-focused projects.
+The source-verification skill is based on this method. Read the original to understand the reasoning behind Stop, Investigate the source, Find better coverage, and Trace claims. The skill encodes these steps, but understanding why they work helps you apply them in edge cases.
 
 ---
 
-### Context engineering in practice
+### FOIA request writing
 
-**"Prompt engineering is dead, long live context engineering"** by Swyx
-https://www.latent.space/p/context-engineering
+**"FOIA Frequently Asked Questions" — Reporters Committee for Freedom of the Press**
+https://www.rcfp.org/resources/foia-basics/
 
-An argument that the important skill isn't writing better prompts — it's giving the AI better context. Relevant framing for why CLAUDE.md files matter more than individual prompt tricks.
-
----
-
-**"System prompts are a hidden superpower"** by Simon Willison
-https://simonwillison.net/tags/systemprompts/
-
-Simon Willison's collected writing on system prompts, including analysis of how major AI products use them. Context files are a form of system prompt that you control.
+Background on the Freedom of Information Act and how to write effective requests. The foia-requests skill helps draft requests, but knowing the legal framework helps you refine them for specific agencies.
 
 ---
 
-**"My experience with Claude Code 2.0 and how to get better at using coding agents"** by Sankalp
-https://sankalp.bearblog.dev/my-experience-with-claude-code-20-and-how-to-get-better-at-using-coding-agents/
+### AI hallucinations in practice
 
-A practitioner's breakdown of what actually changes when you treat AI tools as agents rather than chat interfaces. Key argument: context engineering — managing what's in the AI's attention window — matters more than chasing model upgrades. Covers CLAUDE.md files, sub-agents, and hooks as ways to reduce cognitive overhead without losing control. Written from a developer perspective but the workflow principles apply directly to what this module teaches.
+**"AI Hallucination Cases database"** — Damien Charlotin (via Simon Willison)
+https://simonwillison.net/2025/May/25/ai-hallucination-cases/
+
+A database of documented cases where lawyers were caught submitting AI-generated hallucinations in legal proceedings — verified instances where courts confirmed the fabricated content. As of May 2025: 116 cases across 12 countries, with 20 in that single month alone. The legal profession has had years of public warnings. It hasn't mattered. The pattern is directly relevant to journalism: professional settings with high stakes and time pressure create conditions where people use AI shortcuts and skip verification. The database is the read; the acceleration is the argument.
 
 ---
 
-### Context rot and session hygiene
+**"Hallucinations in code are the least dangerous form of LLM mistakes"** — Simon Willison
+https://simonwillison.net/2025/Mar/2/hallucinations-in-code/
 
-**"Context hygiene"** — extracted from *Advanced Claude Code Patterns That Move the Needle* by The Agentic Lab
-https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/04-context-hygiene.md
+The counterintuitive argument: when an LLM hallucinates a method that doesn't exist, you find out immediately when you run the code. Code errors are self-revealing. What's actually dangerous is hallucinated prose — fabricated quotes, invented facts, plausible-sounding information that requires subject expertise to catch. For journalists, this reframes where to focus skepticism: the pipeline ran without errors, but did it produce accurate content?
+
+---
+
+### MCP servers for newsrooms
+
+**"MCP Quickstart" — Anthropic Documentation**
+https://modelcontextprotocol.io/quickstart
+
+If you want Claude Code to connect to live data sources (databases, APIs, document management systems), MCP is the path. This quickstart shows how to set up a basic server. More advanced than skills, but worth exploring if your newsroom has custom data infrastructure.
+
+---
+
+### Example: Data journalism skill in action
+
+**"Analyzing campaign finance data with Claude Code" — [Course supplementary video]**
+
+A 12-minute walkthrough showing the data-journalism skill applied to FEC filings. Demonstrates how skills can include data cleaning steps, chart generation, and story angle identification.
+
+---
+
+### Skills in practice
+
+**"Claude skills are awesome, maybe a bigger deal than MCP"** — Simon Willison
+https://simonwillison.net/2025/Oct/16/claude-skills/
+
+Willison's take on why skills represent something qualitatively different from other Claude customization features. He argues that the ability to package domain expertise into reusable, shareable instructions is more practically significant for most users than the more technically complex MCP system. Good context for understanding why this week's work matters.
+
+---
+
+**"OpenAI are quietly adopting skills"** — Simon Willison
+https://simonwillison.net/2025/Dec/12/openai-skills/
+
+A few months after Willison declared skills a bigger deal than MCP, OpenAI added skills support to both ChatGPT and Codex CLI. The same folder-based, markdown-file approach now works across Claude Code, Codex CLI, and ChatGPT. Relevant context for this week: the skills you write here aren't Claude-specific — the concept is converging across platforms.
+
+---
+
+### Advanced patterns: commands, hooks, and error logging
+
+The three resources below are drawn from *Advanced Claude Code Patterns That Move the Needle*, a guide based on 2,000+ hours of building with LLMs. They extend directly from this module's core topics — skills, hooks, and workflow automation. Read any or all, in order.
+
+*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw). Extracted and organized in [jamditis/stash](https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns).*
+
+---
+
+**"Commands as lightweight local apps"** — The Agentic Lab via jamditis/stash
+https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/02-commands-as-apps.md
 
 *Reading time: 10 minutes*
 
-Research suggests AI model performance can degrade significantly in longer sessions — not because the model gets worse, but because accumulated irrelevant context competes with what matters. This piece covers the practical consequences for anyone building journalist workflows: how to spot context bloat (CLAUDE.md files over 50 lines, Claude referencing outdated material, degraded output quality mid-session), and what to do about it.
+The clearest explanation of what makes slash commands different from skills. A skill contains domain knowledge that Claude consults probabilistically — whether it activates and how closely it follows the instructions varies. A `/command` is a deterministic trigger: when you invoke it, the workflow runs as defined, every time.
 
-The strategies covered — manual compaction control, `/clear` breakpoints, the custom `/handoff` command for clean session transitions, and the double-escape technique for restoring a clean conversation without losing your code — extend directly from the CLAUDE.md discipline introduced in this module's readings.
+The framing here — "Claude as a Service" — is useful for newsrooms. Each `/command` is a micro-application with a defined interface, specific workflow, and consistent output. The piece includes a worked example of a multi-phase command that launches parallel subagents, assembles assets, and writes output — showing what's possible when you stop thinking of commands as chat shortcuts and start treating them as automation tools.
 
-Also worth noting: the instruction about treating each CLAUDE.md instruction as "earning its place" is the same logic behind this module's deletion test. Context hygiene and the deletion test are the same principle applied at different scales — one to individual instructions, one to full sessions.
-
-*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw). Extracted and organized in [jamditis/stash](https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns).*
+For Module 3's exercise, the relevant distinction is: the source-verification skill you installed is knowledge-based and invocable; if you wanted that workflow to run automatically on every article before publication, you'd wrap it in a command.
 
 ---
 
-### Prompt engineering through conversation
+**"Hooks for deterministic safety"** — The Agentic Lab via jamditis/stash
+https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/03-hooks-for-safety.md
 
-**"Prompt engineering on steroids"** — extracted from *Advanced Claude Code Patterns That Move the Needle* by The Agentic Lab
-https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/07-prompt-engineering.md
+*Reading time: 12 minutes*
 
-*Reading time: 8 minutes*
+This extends what Module 3's required readings cover about hooks. Where the journalism skills library uses hooks as editorial quality checks (flagging AP Style violations, source attribution gaps, AI filler language), this piece covers hooks as safety guardrails — programmatic blocks that run before or after any CLI action.
 
-This piece makes two observations that apply directly to how you interact with CLI tools. First, the model interview approach: instead of writing a complete prompt upfront, you ask the tool to interview you about what you want. The tool asks clarifying questions, you answer, and it synthesizes a well-structured request from the dialogue. For journalists who know what story angle they want but find it hard to articulate as a prompt, this removes the bottleneck.
+The practical setup described — hooks combined with `--dangerously-skip-permissions` — removes constant permission prompts while maintaining hard blocks on specific patterns (recursive deletes, force pushes to protected branches). The approach illustrates a general principle for any automated journalism workflow: the right place to enforce constraints is in code that cannot be bypassed, not in prompts that might be ignored.
 
-Second, the observation that prompt engineering best practices are themselves repeatable and automatable — role assignment, XML structure, clarifying questions — can be templated and applied automatically to a rough description.
-
-Skip the voice dictation section if your setup doesn't support it. Focus on the model interview approach: it works with any CLI tool and requires no additional software.
-
-*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw). Extracted and organized in [jamditis/stash](https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns).*
+The bash examples translate directly. If you're building pipelines that touch source documents, the pattern of "allow by default, block specific patterns explicitly" is worth understanding before those pipelines touch anything you can't recover.
 
 ---
 
-### Newsroom configuration examples
+**"The error logging system"** — The Agentic Lab via jamditis/stash
+https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/01-error-logging-system.md
 
-**Journalism skills repository** by Joe Amditis
-https://github.com/jamditis/claude-skills-journalism
+*Reading time: 10 minutes*
 
-The instructor's skills repository includes example CLAUDE.md patterns designed for newsroom use. Look at the repository's own CLAUDE.md for an example of how a journalism-focused project structures its context file. This repository is covered in depth in Module 3.
+The Module 3 exercise asks you to add a "Hard-won lessons" section to your skill file — one entry per correction you have to make. This piece makes the case for why that section is the most important part of your CLAUDE.md over time, and shows how to build a structured system for capturing it.
+
+The core pattern is two slash commands — `/log_error` and `/log_success` — that fork the current conversation, interview you about what went wrong or right, and write a structured entry to a log file. Failure categories covered: hallucination, instruction ignored, context lost, wrong tool selection, incomplete execution. Each entry captures the exact triggering prompt, expected vs. actual behavior, and a hypothesis for the root cause.
+
+For journalists, the practical payoff is a record of what your AI environment gets wrong — and a log of what prompts reliably produce good results. Both are more valuable than they appear now and become more valuable as your beat project accumulates history.
 
 ---
 
-### Cross-tool comparison
+### Building your own skills
 
-**"How I use AI tools differently"** by Matt Webb
-https://interconnected.org/home/
+**"Custom slash commands" — Claude Code documentation**
+https://docs.anthropic.com/en/docs/claude-code/tutorials#custom-slash-commands
 
-Matt Webb writes about practical AI workflows from a design perspective. His posts on working with Claude Code and project-level configuration are relevant to understanding how non-engineers use context files.
+When you're ready to create skills for your newsroom, start here. The tutorial covers file structure, YAML frontmatter, and best practices for instruction writing.
+
+---
+
+## Community resources
+
+**Claude Code Discord community**
+A place to share skills, ask questions, and see what other users are building. Search for journalism-related discussions or share your own skill ideas.
+
+**Nieman Lab and journalism AI coverage**
+https://www.niemanlab.org/
+
+Ongoing coverage of AI tools in newsrooms. Useful for staying current on how other journalists are using these tools.

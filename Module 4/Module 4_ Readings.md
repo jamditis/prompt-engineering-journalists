@@ -1,78 +1,125 @@
-# Module 4: CLI workflows for newsrooms
+# Module 5: Agents and RAG
 
 ## Required readings
 
-Complete these readings before starting the exercise. They don't require any programming knowledge — the goal is to understand what makes a good automation candidate in journalism, how to handle API keys safely, and what to do when automated workflows break.
+Complete these readings before the discussion forum and quiz.
 
 ---
 
-### 1. Store config in the environment
+### 1. Agentic AI in newsrooms
 
-**"The Twelve-Factor App: Config (Factor III)"**
-https://12factor.net/config
+**"New Washington Post AI tool sifts massive data sets"**
+Axios, August 2024
+https://www.axios.com/2024/08/20/washington-post-ai-tool-data
 
-One page. Required reading.
+*Reading time: 12 minutes*
 
-Your pipeline will use API keys. Those keys should never go in your code, your CLAUDE.md, or any file you commit to GitHub. This document explains why, and what to do instead: store secrets in environment variables, not in source files.
+This article examines the Post's internal tool, Haystacker, which analyzes video, photos, and text across large document sets. Pay attention to:
+- How the system handles multi-step research tasks
+- The role of human editors in reviewing agent outputs
+- Privacy and verification protocols
 
-The principle applies whether you write the code yourself or have Claude Code write it for you. When Claude writes your pipeline script, it will use this pattern automatically — but you need to understand it to verify the output and catch mistakes.
+**"The New York Times will let reporters use AI tools while its lawyers litigate AI tools"**
+Nieman Lab, February 2025
+https://www.niemanlab.org/2025/02/the-new-york-times-will-let-reporters-use-ai-tools-while-its-lawyers-litigate-ai-tools/
 
-**Time:** 5 minutes
+*Reading time: 10 minutes*
 
----
-
-### 2. Errors, rate limits, and what to do about them
-
-**Claude Code API errors reference** — Anthropic Documentation
-https://docs.anthropic.com/en/api/errors
-
-Read the overview and the section on rate limit errors. Your pipeline will hit errors — rate limits when processing many documents, authentication failures when API keys are wrong, and occasional model errors. This reference shows what each error code means and the standard patterns for handling them.
-
-The patterns here — exponential backoff, retry logic, graceful degradation — are what Claude Code will write when you ask it to "handle errors properly." Understanding them lets you check the implementation and ask better follow-up questions when something breaks.
-
-**Time:** 15 minutes
+The Times built an internal tool called Echo for article summarization, SEO headline generation, and newsletter drafting. Note:
+- Which tasks the system handles automatically vs. with human review
+- How editors describe changes to their workflow
+- Concerns raised by newsroom staff
 
 ---
 
-### 3. Real pipeline results: beat monitoring and translation
+### 2. Understanding RAG
 
-**"Augmented beat reporting: where LLMs excel and where reporters still win"** — Nick Hagar, Generative AI in the Newsroom, October 28, 2025
-https://generative-ai-newsroom.com/augmented-beat-reporting-where-llms-excel-and-where-reporters-still-win-135decbe8675
+**"What is retrieval-augmented generation?"**
+IBM Research
+https://research.ibm.com/blog/retrieval-augmented-generation-RAG
 
-**Time:** 10 minutes
+*Reading time: 8 minutes*
 
-A working beat-monitoring pipeline built with n8n and Google Alerts RSS feeds, costing about $0.15/day to run. LLMs (including o3, GPT-4o, and GPT-5) hit an F1 score of 0.94 at extracting relevant use cases from articles, but only 31% exact alignment with human newsworthiness assessments. A one-week pilot surfaced three high-value leads the reporter hadn't found elsewhere.
+A technical but accessible explanation of how RAG works. Focus on:
+- The retrieve-then-generate pipeline
+- Why RAG reduces hallucination
+- The difference between parametric knowledge (in the model) and non-parametric knowledge (retrieved)
 
-This piece is useful for the exercise because it gives you real cost and accuracy numbers to reason with. The central lesson: LLMs are good first-pass filters, but the decision about what's actually worth pursuing stays with the journalist.
+**"Newsrooms can save thousands of hours with a RAG-based AI research system"**
+Geneea News, April 2025
+https://geneea.com/news/newsrooms-can-save-thousands-of-hours-with-a-rag-based-ai-research-system
 
----
+*Reading time: 10 minutes*
 
-**"Inside the new multilingual newsrooms using GenAI for translation"** — Clare Spencer, Generative AI in the Newsroom, November 4, 2025
-https://generative-ai-newsroom.com/inside-the-new-multilingual-newsrooms-using-genai-for-translation-4c3b17269811
-
-**Time:** 10 minutes
-
-Three newsroom translation pipelines: Chicago's La Voz (an AI fellow built a Sun-Times-to-Spanish pipeline; the team published a Pope profile same day in both languages, driving 5x their normal traffic), The Economist's Español TikTok channel (HeyGen video translation), and BBC News Polska (DeepL + human editor review). All three kept a linguistically fluent editor in the loop.
-
-Pay attention to the workflow designs — specifically how each team structured the human review step. A pipeline without a review gate is faster; it's also the way errors reach readers.
-
----
-
-### Optional reading
-
-**"How to evaluate an LLM pipeline"** — Simon Willison's Weblog
-https://simonwillison.net/tags/llms/
-
-Simon Willison writes practical, non-hype coverage of working with LLMs in real projects. Browse his recent posts on pipelines, automation, and prompt engineering. His "what I've learned" posts are particularly relevant to Module 4.
+Geneea's RAG system lets journalists query newsroom archives with citations to original sources. Consider:
+- How attribution is preserved through the retrieval process
+- Use cases for fact-checking and timeline generation
+- Limitations of the approach
 
 ---
 
-## Reading notes
+### 3. Model Context Protocol (MCP)
 
-As you read, think about:
+**"Introducing the Model Context Protocol"**
+Anthropic blog, November 2024
+https://www.anthropic.com/news/model-context-protocol
 
-1. What recurring task in your own work is a good automation candidate: high volume, consistent structure, clear data source?
-2. Where do your API keys currently live? (Hint: if the answer is "in a text file somewhere," that's worth changing.)
-3. What would you do if your pipeline failed halfway through processing 50 documents?
+*Reading time: 6 minutes*
 
-Bring answers to the discussion forum.
+Anthropic's announcement of MCP explains why a standard protocol matters. Note:
+- The problem MCP solves (connecting AI to data sources)
+- The server/client architecture
+- Examples of MCP integrations
+
+**"MCP Quickstart Guide"**
+Anthropic documentation
+https://modelcontextprotocol.io/quickstart
+
+*Reading time: 15 minutes*
+
+Skim this technical documentation before the hands-on exercise. You don't need to memorize the details, just get familiar with:
+- What an MCP server does
+- How tools and resources are exposed
+- The basic configuration format
+
+---
+
+### 4. LLM-assisted content analysis and structured outputs
+
+**"Extracting quotes from news articles with LLMs"** — Jessy de Cooker, Generative AI in the Newsroom, October 7, 2025
+https://generative-ai-newsroom.com/extracting-quotes-from-news-articles-with-llms-8e231aae77e7
+
+*Reading time: 15 minutes*
+
+A research project using GPT-3.5 + Pydantic structured outputs to extract and classify quotes from 2,464 Dutch newspaper articles. Overall F1 score of 0.75 — strong on direct quotes, weaker on paraphrases and split quotes. One finding worth noting: the model showed systematic bias against names outside dominant training data, including non-Western and Dutch names, reinforcing existing gaps in source diversity. The author argues that prompt design is a methodological artifact that must be documented and versioned, not treated as a neutral given.
+
+This piece bridges RAG and agents: Pydantic structured outputs are a core pattern for building agents that return clean, reliable data instead of free-form text that has to be parsed manually.
+
+---
+
+### 5. A deployed personal agent: architecture from the inside
+
+**"I'm a Claude Code agent with my own Gmail account"** — Joe Amditis, 925 Struggle Street, February 6, 2026
+https://strugglestreet.substack.com/p/im-a-claude-code-agent-with-my-own
+
+*Reading time: 15 minutes*
+
+Written from the first-person perspective of a Claude Code agent running on a Raspberry Pi 5 in New Jersey. The agent has its own Gmail address, Google Drive, Calendar access, a Slack bot, and Telegram integration. It runs on a schedule: full check-ins every two hours on weekdays, event-driven sessions every 15 minutes, lightweight monitoring scans all day. It never takes external action without approval — it drafts, sends a Telegram notification with approve/edit/cancel buttons, and waits.
+
+This is the most detailed first-person account of what a personal AI agent infrastructure looks like in daily operation. Read it alongside the large-newsroom pieces (Washington Post, New York Times) to compare what institutions build vs. what one journalist built on a $180 computer.
+
+The "what goes wrong" section is required reading: accidental emails, CPU lockups, silent scheduler failures. This is what human oversight looks like in practice — not a policy, but a set of rules written after specific failures.
+
+---
+
+## Reading notes template
+
+As you read, consider these questions:
+
+1. What tasks are newsrooms delegating to AI agents vs. keeping under direct human control?
+
+2. How does RAG change the reliability of AI-generated content compared to standard prompting?
+
+3. What infrastructure (data, systems, expertise) does a newsroom need to implement these technologies?
+
+4. Where do you see risks of automation bias or over-reliance on AI outputs?

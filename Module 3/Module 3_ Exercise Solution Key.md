@@ -1,242 +1,283 @@
-# Module 3: Custom skills for Claude Code — exercise solution key
+# Module 4: CLI workflows for newsrooms — exercise solution key
+
+---
 
 ## Model student submission
 
-### Part 1: Source verification results
+---
 
-**Claim under review:**
-> "A new study from Harvard Medical School found that drinking coffee before 8am increases cortisol levels by 400%, leading to long-term adrenal fatigue. Doctors are now recommending waiting until 10am for your first cup."
+**Discussion post — Exercise 4**
+
+This one clicked for me in a way I didn't expect. I've been hand-copying article summaries into our weekly newsletter for two years. Tuesday I described what I was doing out loud to Claude Code and it built a script that does it for me in about 15 seconds per article.
+
+Here's what I submitted.
 
 ---
 
-**Stop**
+### 1. Screenshot description / pipeline run
 
-Before searching, I noticed that I already had an opinion about this claim. I've seen content about "cortisol windows" before and vaguely thought it was plausible — something about not drinking coffee first thing in the morning. That prior exposure made me want to accept the claim without scrutiny. The specific details (Harvard, 400%, adrenal fatigue, the 10am recommendation) felt authoritative even before I looked anything up. That's the tell: the claim is structured to sound credible, not to be verifiable. Before I searched anything, I wrote down my assumption so I could check it against what I found.
+After creating the `newsletter-pipeline` folder and launching Claude Code, I entered plan mode with `/plan` and gave it this description:
 
----
+> "I want to build a pipeline that takes a news article URL as input, fetches the article, strips out the junk like ads and navigation, summarizes it in 2-3 sentences in a tone suitable for a newsletter, and saves the output to a markdown file with today's date in the filename. I want to be able to run this from the command line by passing in a URL. Plan this out — don't build anything yet."
 
-**Investigate the source**
+Claude presented a four-stage plan in the terminal: (1) use `curl` to fetch the raw HTML, (2) pipe it through `npx @mozilla/readability-cli` to strip navigation and ads, (3) call the Anthropic API via `curl` with the extracted text as the prompt, (4) write the formatted output to a dated `.md` file. It flagged the API key handling up front — read from `$ANTHROPIC_API_KEY`, never hardcoded. I told it to proceed.
 
-The claim names Harvard Medical School as the origin of a specific study. That's a concrete, checkable fact.
+It built `pipeline.sh` and walked me through what each section did when I asked. Setting the environment variable required adding `export ANTHROPIC_API_KEY="your-key-here"` to my `.zshrc` and running `source ~/.zshrc`. Once that was done, I ran:
 
-I searched PubMed for studies from Harvard Medical School on caffeine and cortisol. No study matching this description exists in the database. I also searched Google Scholar using the terms "Harvard cortisol coffee 400" and "Harvard Medical School caffeine adrenal fatigue." Nothing appeared. I searched the Harvard Medical School news and research archive directly at hms.harvard.edu — no announcement, no press release, no article.
-
-I searched Google News for coverage of this supposed study. A claim this specific from an institution this prominent would generate health journalism coverage. There was none. No outlet — not Reuters Health, not Stat News, not WebMD, not the Harvard Health Blog — had covered this study. That absence is informative. Major health studies from Harvard Medical School get covered. This one wasn't covered because it doesn't exist.
-
-**Finding:** The named source does not hold up. There is no Harvard Medical School study on this topic.
-
----
-
-**Find better coverage**
-
-I searched for fact-checks on the claim itself. I found:
-
-- The Cleveland Clinic's health library explicitly states that "adrenal fatigue" is not a recognized medical diagnosis. Their article notes that the term is used in wellness and functional medicine circles but is not accepted by endocrinologists or the major medical bodies that define diagnostic categories.
-- The Endocrine Society's position: adrenal insufficiency is a real and serious condition; "adrenal fatigue" as described in wellness content is not.
-- A 2002 study published in Psychosomatic Medicine (Lovallo et al.) found that caffeine does amplify cortisol response, particularly in people who don't habitually drink coffee. This is the kernel of real science. It does not support a 400% figure, and it was not from Harvard.
-- Andrew Huberman (Stanford neuroscientist) has recommended delaying morning coffee until after the natural cortisol peak (roughly 90-120 minutes after waking). This recommendation circulates widely in health content and is sometimes distorted in retelling. Huberman cites cortisol rhythms as the basis, not adrenal fatigue, and he is not Harvard.
-
-The "better coverage" check surfaced legitimate science, but none of it resembles the claim. The legitimate research is more modest and attributed to different sources.
-
-**Finding:** No credible journalism or scientific coverage of this specific claim exists. The underlying topic (cortisol and coffee timing) has a real evidence base, but it doesn't produce the numbers or conclusions in the claim.
-
----
-
-**Trace the claims**
-
-Three specific claims require tracing:
-
-1. **"A new study from Harvard Medical School"** — No such study exists in PubMed, in Harvard's own research communications, or in health journalism coverage. This attribution appears to be fabricated.
-
-2. **"400% increase in cortisol"** — This figure does not appear in the published literature on caffeine and cortisol. The Lovallo et al. research shows cortisol elevations from caffeine, but they are context-dependent and measured in percentage points, not multiples of baseline. A 400% cortisol increase would represent a cortisol level five times normal — a number that would indicate a serious medical emergency. No study in the literature produces or claims this figure.
-
-3. **"Adrenal fatigue"** — The American Medical Association does not recognize adrenal fatigue as a diagnosis. The Endocrine Society does not recognize it. The Cleveland Clinic explicitly describes it as a term used in alternative medicine that lacks scientific validation. It is not in the ICD-10 diagnostic codes. The concept appears in wellness content and functional medicine but has no standing in mainstream medical evidence.
-
-The traceable kernel: cortisol does peak in the morning for most people (the cortisol awakening response), and caffeine can interact with that peak. Some researchers suggest this as a reason to delay coffee intake. This advice exists, is contested, and is associated with Huberman and similar communicators — not Harvard.
-
-**Finding:** Each specific, verifiable element of the claim (Harvard study, 400%, adrenal fatigue) either does not exist in the literature or is not recognized by credentialing medical bodies. The claim takes a real topic, attaches a prestigious institution name, and invents specific numbers to make it feel scientific.
-
----
-
-### Part 2: Claim verdict
-
-The claim is false as stated. No Harvard Medical School study on coffee timing and cortisol exists. The 400% figure appears nowhere in the published research on caffeine and cortisol. "Adrenal fatigue" is not a recognized medical diagnosis — the Cleveland Clinic and the Endocrine Society have specifically addressed this. The underlying topic is real: cortisol does peak in the morning, caffeine does interact with cortisol, and some health communicators recommend delaying coffee intake based on this. But the specific claim misrepresents that evidence by inventing an institutional source, a dramatic statistic, and a discredited mechanism. This is a pattern common to wellness misinformation: a real observation is dressed in fabricated authority. The claim should not be amplified or treated as a news peg without a verified, independent source.
-
----
-
-### Part 3: Custom skill
-
-**Task:** Evaluating city government press releases before coverage
-
-**One-sentence explanation:** This skill encodes the process of reading a city press release the way an editor would — looking for what the release is trying to accomplish, what claims need verification, and whose perspective is missing — before deciding whether and how to cover the story.
-
-**What was cut during the deletion test:** An early draft included an instruction to "read the press release carefully and thoroughly." That instruction was cut because removing it changed nothing — Claude reads whatever is provided regardless. A step telling Claude to "consider the political context" was also cut; it was too vague to change behavior in any specific way. The remaining steps are kept because each one produces a distinct, checkable output.
-
----
-
-**Skill file:**
-
-```markdown
----
-name: press-release-evaluator
-description: Evaluate a city government press release before coverage. Identifies news value, claims requiring verification, missing stakeholders, and what the release is trying to accomplish.
-version: 1.0
-author: [student name]
-tags: [local government, press releases, source evaluation, beat reporting]
----
-
-# Press release evaluator
-
-Use this skill when you receive a city government press release and need to decide how to approach coverage. Work through each step in order. Be specific — quote the release text when flagging something.
-
-## Step 1: Identify what the release is announcing
-
-State in one sentence what the city says is happening. Then identify the release type:
-- Policy announcement (new rule, ordinance, program launch)
-- Personnel announcement (hire, firing, promotion, appointment)
-- Project update (construction, infrastructure, ongoing initiative)
-- Event or ceremonial (ribbon-cuttings, commemorations, awards)
-- Response or statement (reacting to news, addressing criticism)
-
-The release type tells you how much independent verification the story requires. A response statement requires more scrutiny than a ribbon-cutting.
-
-## Step 2: Identify what the release is trying to accomplish
-
-Every press release has a purpose beyond informing the public. State plainly what the city is trying to do with this release:
-- Claim credit for something
-- Get ahead of a negative story
-- Shift attention from something else
-- Announce a decision without inviting scrutiny
-- Build support for an upcoming vote or policy
-
-This doesn't make the release false. It tells you what framing to resist when writing.
-
-## Step 3: Flag claims that require verification
-
-List every factual claim in the release that can be independently checked. For each one, note:
-- What the claim is (quote the release)
-- What source would verify or contradict it
-- Whether the claim is checkable before deadline
-
-Examples of claims that always require verification:
-- Budget figures and percentages ("saved the city $2 million")
-- Comparative claims ("lowest crime rate in 20 years")
-- Timeline claims ("completed on schedule")
-- Causal claims ("the program reduced homelessness by 30%")
-
-Flag the claim even if you expect it to be accurate. Do not verify during this step — just identify what needs checking.
-
-## Step 4: Identify who is not in this release
-
-List the stakeholders, critics, or affected parties who are not quoted and not mentioned. For each one, note whether their absence is likely intentional and whether they should be contacted before publication.
-
-Ask:
-- Who would push back on this announcement?
-- Who is affected by this decision who isn't quoted?
-- Is there an opposing council faction, an affected neighborhood, a community organization, or a watchdog group?
-- Has this department or project been criticized before? By whom?
-
-A press release written without critics is not balanced coverage. This step identifies who to call.
-
-## Step 5: Assess news value
-
-Evaluate whether and how to cover this story:
-
-- **Cover as written (with attribution):** The announcement is genuinely newsworthy and the claims are verifiable. Report it as news with city as source.
-- **Cover with significant independent reporting:** The announcement is newsworthy but requires verification, additional sources, or context the release omits.
-- **Cover as a feature or follow-up angle:** The news peg is thin but the release surfaces a story worth telling differently.
-- **Hold:** The announcement isn't independently newsworthy. Monitor for developments.
-- **Do not cover:** The release is pure promotion with no public interest angle.
-
-State your recommendation and the reason for it in one sentence.
-
-## Output format
-
-Deliver findings as a structured memo:
-
-**What the release announces:** [one sentence]
-**What the release is trying to accomplish:** [one sentence]
-**Claims requiring verification:** [bulleted list with source suggestions]
-**Missing stakeholders:** [bulleted list with notes on whether to contact]
-**Coverage recommendation:** [one of the five options above, with reason]
+```
+./pipeline.sh "https://www.nj.com/middlesex/2026/02/south-brunswick-council-approves-12m-stormwater-plan.html"
 ```
 
+The terminal showed:
+
+```
+Fetching article...
+Extracting content...
+Summarizing with Claude...
+Saving to newsletter-2026-02-18.md
+Done.
+```
+
+The output file was sitting in the folder 14 seconds after I hit enter.
+
 ---
 
-### Reflection (200-300 words)
+### 2. Example newsletter item generated
 
-The SIFT skill changed how I entered the verification process, and the difference showed up at the first step. Before I searched anything, the skill prompted me to stop and document what I already believed. I thought the claim was probably true — I'd absorbed some version of the "don't drink coffee first thing" idea from somewhere and hadn't questioned it. Without the skill, I would have gone straight to Google to "confirm" it, which is a terrible way to fact-check something you're already inclined to believe. The stop step made that bias visible before it could shape my search.
+The test article was a South Brunswick, NJ city council story about a stormwater infrastructure vote. After one round of iteration (described below), the pipeline produced this:
 
-The "trace the claims" step was the most useful for this particular claim because the claim had three distinct elements that each needed separate treatment. Without that structure, I might have stopped after finding the cortisol research is real and called it "mostly true." The skill forced me to check each specific assertion — the Harvard attribution, the 400% figure, the adrenal fatigue diagnosis — individually. They all failed separately, which matters. A claim can have a real topic at its center and still be fabricated in every specific detail.
+---
 
-What the skill missed: it didn't tell me to check whether the claim had already been fact-checked by organizations like Snopes or Health Feedback. I found that angle on my own during the "find better coverage" step, but only because I already knew to look. A student without that background might not have thought to check fact-checking organizations directly. That's an instruction I'd add to the skill: after searching for news coverage, explicitly search [claim topic] + "fact check" or [claim topic] + site:snopes.com. The current skill assumes you know where to look.
+**South Brunswick approves $12M stormwater plan after years of basement flooding complaints**
+
+South Brunswick's town council voted 5-2 Tuesday to approve a $12 million stormwater infrastructure overhaul targeting six flood-prone neighborhoods on the borough's east side. The project, funded through a state infrastructure grant and a modest increase to the municipal stormwater fee, is expected to begin construction in spring 2027. Two council members dissented, citing concerns about the fee increase's impact on fixed-income residents.
+
+[Source](https://www.nj.com/middlesex/2026/02/south-brunswick-council-approves-12m-stormwater-plan.html)
+
+---
+
+That's a newsletter item I'd actually use without editing it.
+
+---
+
+### 3. Iteration: what changed
+
+**First output:**
+
+The initial summary read like a press release abstract:
+
+> "The South Brunswick Township Council approved Resolution 2026-87 authorizing expenditure of $12,000,000 for stormwater infrastructure improvements across six residential districts. The resolution passed with a 5-2 vote. Funding will be sourced from a New Jersey Infrastructure Bank grant and an increase to the existing stormwater utility fee."
+
+It was accurate. It was also dead on arrival for a newsletter — no context, no stakes, reads like it was written for a government agenda packet.
+
+**What I told Claude:**
+
+> "The summary reads like it was copied from a meeting agenda. I want newsletter style — lead with the most newsworthy fact, include what it means for residents, and write it in plain English. Rewrite the prompt section of the script to produce that instead."
+
+**What changed:**
+
+Claude rewrote the system prompt in the API call from a generic "summarize this article in 2-3 sentences" instruction to something more specific. The new version told the model to identify the single most important fact for a local audience, explain what it means for residents in plain terms, include any vote count or dollar figure if present, and keep the tone conversational rather than formal. It also added a line telling the model not to start with the organization's name.
+
+The difference was immediate. The second run produced the newsletter item above.
+
+---
 
 ---
 
 ## Grader notes
 
+---
+
 ### What strong work looks like
 
-Strong submissions treat each SIFT step as producing a distinct output, not as a label to attach to whatever they found. A student who writes "I investigated the source and found it was false" has not done the step — they've named it. Strong work shows the actual search process: what they searched, where they looked, what they found or didn't find. The absence of a result (no PubMed study, no news coverage) is itself evidence that should be documented.
+Strong submissions do three things that separate them from adequate ones:
 
-Strong work also separates the three distinct false claims rather than bundling them into a general "this is fake." Harvard attribution, 400% figure, and adrenal fatigue are three separate claims requiring three separate checks. Students who treat them as one claim are doing less rigorous work.
+1. **They pick a test article they actually read.** The exercise specifically tells students to test on familiar material. Strong students mention this — "I used an article I'd already read about the county budget vote" — and their iteration notes show they caught a real problem because they knew what the article actually said. Students who tested on a random URL often can't tell whether a bad summary reflects a prompt problem or a hard-to-summarize article.
 
-For the custom skill, strong work encodes a specific beat and a specific task. The skill should not work equally well for any journalism task — if you could replace "city press release" with "corporate press release" and the instructions would be identical, the skill is too generic. Beat specificity is the standard.
+2. **Their iteration is specific.** Weak submissions say "the first version wasn't great so I asked Claude to make it better." Strong submissions say what was wrong (too formal, missing context, started every summary with the organization name) and what they asked for to fix it. The specificity shows they're exercising editorial judgment, not just running the exercise.
+
+3. **Their newsletter item is publication-ready.** Strong submissions produce output that reads like something from a real newsletter — active verbs, local stakes, plain language. If the example item sounds like a government report, the student didn't iterate enough.
+
+---
 
 ### Rubric
 
-**Skill installation (15%)**
-- Full credit: Student confirms the skill is installed and functional; shows they read the SKILL.md file and can describe the YAML frontmatter and the SIFT structure; shows they read a hook file and can describe when it would fire.
-- Partial credit: Skill installed but student only describes surface features without demonstrating they understood the structure.
-- No credit: No evidence of installation or the installation failed and the student didn't attempt troubleshooting.
+| Element | Full credit | Partial credit | No credit |
+|---|---|---|---|
+| **Screenshot / pipeline run description** (33%) | Clear description of what command was run, what stages appeared in the terminal, and confirmation the output file was created. API key handling mentioned. | Command is shown but terminal output or file creation isn't described. | Screenshot is missing or description is too vague to assess whether the pipeline actually ran. |
+| **Newsletter item** (33%) | Reads like actual newsletter copy — leads with newsworthy fact, explains stakes, plain language, plausible as published. | Accurate but reads like an abstract or press release. Some editing would be needed before use. | Clearly unedited first-draft AI output, or not about an actual article. |
+| **Iteration description** (33%) | Describes both what the first output looked like and specifically what they said to their CLI tool to fix it. Shows cause and effect. | Describes the problem with the first output but is vague about what the fix was, or vice versa. | Says only "I iterated" with no specifics. |
 
-**SIFT application (35%)**
-- Full credit: All four steps documented with specific observations. Each step produces evidence, not just a label. Stop step captures a named prior assumption. Investigate step shows actual search attempts. Find better coverage step names specific sources consulted. Trace step evaluates each major claim independently.
-- Partial credit: All four steps present but some are thin — a step names an action without showing what was found, or the trace step bundles claims rather than separating them.
-- No credit: Fewer than four steps documented, or the documentation is so vague that it's unclear what the student actually did.
+---
 
-**Finding accuracy (20%)**
-- Full credit: Student correctly identifies the claim as false; correctly identifies that no Harvard study exists; correctly flags "adrenal fatigue" as a non-recognized diagnosis; correctly questions or rejects the 400% figure; finds at least one legitimate source on cortisol and caffeine timing; accurately describes what the real science says.
-- Partial credit: Student reaches the correct verdict (false) but mischaracterizes the underlying science, misses one of the three specific false claims, or doesn't find a legitimate source.
-- No credit: Student reaches the wrong verdict, or reaches the right verdict for unsupported reasons.
+### Sample pipeline script (for grader reference)
 
-**Custom skill (20%)**
-- Full credit: Skill encodes a specific, recurring task on the student's beat; YAML frontmatter is present and correctly formatted; steps are ordered as they would actually be performed; deletion test was applied and the student can name something they cut; skill is specific enough that it would behave differently on different types of documents.
-- Partial credit: Skill is present but too generic to demonstrate beat knowledge; deletion test not mentioned; steps are in an arbitrary order that doesn't reflect real workflow.
-- No credit: No skill submitted, or the submitted file is not a skill (a prompt, a template, a list of questions without structure).
+This is the kind of script a CLI LLM would realistically produce for this exercise. Not every student's script will look like this — the LLM might use a Node.js wrapper, might use `wget` instead of `curl`, might call a different readability tool — but the core structure should be similar: URL as argument, readability extraction, API call reading key from environment, output to dated file, basic error handling, rate limit sleep.
 
-**Reflection quality (10%)**
-- Full credit: Student is specific about how the skill changed their process, not just that it "helped"; identifies at least one concrete gap in the skill based on something they noticed during the exercise; 200-300 words; no vague claims about the tool being "useful" without describing how.
-- Partial credit: Reflection is present but generic — could have been written without doing the exercise.
-- No credit: Reflection absent or fewer than 100 words with no specific observations.
+```bash
+#!/bin/bash
+# pipeline.sh — article-to-newsletter pipeline
+# Usage: ./pipeline.sh "https://example.com/article"
+# Requires: ANTHROPIC_API_KEY environment variable, npx, curl, jq
 
-### The correct fact-check answer (for graders)
+set -e  # exit on error
 
-The claim is false. All three specific, verifiable elements are either fabricated or scientifically discredited:
+# ── check for required argument ──────────────────────────────────────────────
+if [ -z "$1" ]; then
+  echo "Error: no URL provided."
+  echo "Usage: ./pipeline.sh \"https://example.com/article\""
+  exit 1
+fi
 
-**Harvard Medical School study:** No such study exists. A PubMed search and a review of Harvard's own research communications finds nothing. No health journalism outlet covered this study. The institutional attribution is fabricated.
+URL="$1"
 
-**400% cortisol increase:** This figure does not appear in the research literature on caffeine and cortisol. The legitimate research (Lovallo et al., 2002, Psychosomatic Medicine; and related studies) shows that caffeine can amplify cortisol responses, particularly in non-habitual coffee drinkers, but does not produce numbers remotely resembling a 400% increase. A cortisol increase of that magnitude would constitute a medical emergency. The figure is invented.
+# ── check for API key ─────────────────────────────────────────────────────────
+if [ -z "$ANTHROPIC_API_KEY" ]; then
+  echo "Error: ANTHROPIC_API_KEY is not set."
+  echo "Add this to your ~/.zshrc or ~/.bashrc:"
+  echo "  export ANTHROPIC_API_KEY=\"your-key-here\""
+  echo "Then run: source ~/.zshrc"
+  exit 1
+fi
 
-**"Adrenal fatigue":** Not recognized as a diagnosis by the American Medical Association, the Endocrine Society, or the ICD-10 diagnostic codes. The Cleveland Clinic, Mayo Clinic, and Endocrine Society have each specifically addressed the term and distinguished it from adrenal insufficiency, which is a real and serious condition. "Adrenal fatigue" circulates in wellness and functional medicine content but has no standing in evidence-based medicine.
+# ── set up output file ────────────────────────────────────────────────────────
+DATE=$(date +%Y-%m-%d)
+OUTPUT_FILE="newsletter-${DATE}.md"
 
-**The kernel of truth:** Cortisol does follow a natural morning peak (the cortisol awakening response). Caffeine does interact with cortisol. Some researchers and health communicators — Andrew Huberman is the most prominent — recommend delaying coffee intake until the cortisol peak subsides. This is contested advice, not settled science, and it is attributed to Huberman and to basic chronobiology research, not to Harvard.
+echo "Fetching article: $URL"
 
-The claim is a textbook example of wellness misinformation architecture: a real phenomenon (cortisol rhythms, caffeine interaction) dressed in fabricated authority (Harvard study, dramatic statistic, clinical-sounding diagnosis).
+# ── stage 1: fetch and extract article content ────────────────────────────────
+# readability-cli strips ads, navigation, and boilerplate from the page
+CONTENT=$(npx @mozilla/readability-cli "$URL" 2>/dev/null | \
+  python3 -c "import sys, json; data=json.load(sys.stdin); print(data.get('textContent', ''))" \
+  2>/dev/null)
+
+if [ -z "$CONTENT" ]; then
+  echo "Error: could not extract content from $URL"
+  echo "The site may be blocking automated requests, or the URL may be invalid."
+  exit 1
+fi
+
+echo "Content extracted (${#CONTENT} characters)"
+echo "Summarizing with Claude..."
+
+# ── stage 2: summarize via Anthropic API ──────────────────────────────────────
+# Truncate content to avoid hitting token limits (first 4000 chars is usually enough)
+TRUNCATED="${CONTENT:0:4000}"
+
+SUMMARY=$(curl -s https://api.anthropic.com/v1/messages \
+  --header "x-api-key: $ANTHROPIC_API_KEY" \
+  --header "anthropic-version: 2023-06-01" \
+  --header "content-type: application/json" \
+  --data "{
+    \"model\": \"claude-3-5-haiku-20241022\",
+    \"max_tokens\": 256,
+    \"system\": \"You write newsletter summaries for a local news publication. Your readers are local residents, not government insiders. Lead with the single most newsworthy fact. Explain what the story means for residents in plain English. If there is a vote count, dollar figure, or timeline, include it. Keep the tone conversational, not formal. Do not start the summary with the name of an organization or government body. Write 2-3 sentences only.\",
+    \"messages\": [{
+      \"role\": \"user\",
+      \"content\": \"Summarize this article for our newsletter:\\n\\n$TRUNCATED\"
+    }]
+  }" | python3 -c "import sys, json; data=json.load(sys.stdin); print(data['content'][0]['text'])" \
+  2>/dev/null)
+
+if [ -z "$SUMMARY" ]; then
+  echo "Error: API call returned empty response. Check your API key and try again."
+  exit 1
+fi
+
+# ── stage 3: format and save output ──────────────────────────────────────────
+{
+  echo "## Newsletter item — $DATE"
+  echo ""
+  echo "$SUMMARY"
+  echo ""
+  echo "[Source]($URL)"
+  echo ""
+  echo "---"
+  echo ""
+} >> "$OUTPUT_FILE"
+
+echo "Saved to $OUTPUT_FILE"
+echo ""
+echo "--- Preview ---"
+cat "$OUTPUT_FILE"
+
+# ── rate limiting pause (for batch use) ───────────────────────────────────────
+# 2-second sleep prevents hitting API rate limits when called in a loop
+sleep 2
+```
+
+And the companion batch script:
+
+```bash
+#!/bin/bash
+# process-batch.sh — run pipeline on every URL in urls.txt
+# Usage: ./process-batch.sh
+# Reads from: urls.txt (one URL per line)
+# Output: newsletter-draft-YYYY-MM-DD.md (all items collected)
+
+set -e
+
+INPUT_FILE="urls.txt"
+DATE=$(date +%Y-%m-%d)
+BATCH_OUTPUT="newsletter-draft-${DATE}.md"
+
+if [ ! -f "$INPUT_FILE" ]; then
+  echo "Error: $INPUT_FILE not found."
+  echo "Create a file called urls.txt with one article URL per line."
+  exit 1
+fi
+
+# count non-empty lines
+TOTAL=$(grep -c '[^[:space:]]' "$INPUT_FILE" || true)
+CURRENT=0
+
+echo "Processing $TOTAL URLs from $INPUT_FILE"
+echo "Output will be saved to $BATCH_OUTPUT"
+echo ""
+
+while IFS= read -r URL || [ -n "$URL" ]; do
+  # skip blank lines and comment lines
+  [[ -z "$URL" || "$URL" == \#* ]] && continue
+
+  CURRENT=$((CURRENT + 1))
+  echo "[$CURRENT/$TOTAL] $URL"
+
+  # run single-article pipeline; append its output to batch file
+  ./pipeline.sh "$URL" >> "$BATCH_OUTPUT" 2>&1 || {
+    echo "  Warning: pipeline failed for this URL, continuing..."
+    echo "## [FAILED] $URL" >> "$BATCH_OUTPUT"
+    echo "" >> "$BATCH_OUTPUT"
+    echo "---" >> "$BATCH_OUTPUT"
+    echo "" >> "$BATCH_OUTPUT"
+  }
+
+  # rate limiting — 2 seconds between requests
+  if [ "$CURRENT" -lt "$TOTAL" ]; then
+    sleep 2
+  fi
+
+done < "$INPUT_FILE"
+
+echo ""
+echo "Batch complete. $CURRENT items processed."
+echo "Draft saved to $BATCH_OUTPUT"
+```
+
+---
 
 ### Common issues to watch for
 
-**Stopping at "I couldn't find the study"**
-Students often confirm that they couldn't find the Harvard study and treat that as the end of the investigation. The stronger work goes further: explains what a search of PubMed and Harvard's own communications actually looked like, notes the absence of journalism coverage as additional evidence, and then traces the other two claims (400% figure, adrenal fatigue) separately.
+**The student didn't use plan mode.** The exercise explicitly requires it — students should describe the workflow and review the plan before approving it. If a submission says nothing about reviewing a plan, or says they just asked Claude to "build the pipeline," they skipped a required step. Ask them to redo Part 1 and describe what the plan review looked like.
 
-**Treating "adrenal fatigue" as a real diagnosis**
-Some students will accept "adrenal fatigue" as medical terminology and focus their skepticism only on the Harvard attribution and the 400% figure. Graders should check whether the student identified that the diagnostic category itself is not medically recognized — this is an important finding and the skill's trace step should surface it.
+**The API key is in the screenshot.** This happens. If a student shares a screenshot showing `ANTHROPIC_API_KEY=sk-ant-...` in the terminal or in the script, let them know gently that they should rotate the key immediately (console.anthropic.com → API Keys → revoke). Don't dock points — it's a learning moment — but flag it clearly.
 
-**Confusing Huberman with Harvard**
-Students may find Huberman's content about cortisol and coffee timing and conclude that the claim is "mostly accurate" because there is a prominent researcher saying something similar. This is a conflation that should be marked down. Huberman is at Stanford, not Harvard; his recommendation is contested, not consensus; and he does not claim cortisol increases of 400% or invoke adrenal fatigue. The similarity is superficial.
+**The newsletter item reads like an abstract.** This is the most common signal that the student ran the pipeline once and stopped. The first output from a generic summarization prompt almost always sounds like an abstract. If the submitted newsletter item sounds like it was written for an academic paper or a government agenda, the student either didn't iterate or didn't meaningfully direct the iteration. Partial credit; encourage them to go back and describe what editorial changes they want.
 
-**Custom skill is a checklist, not a process**
-The most common problem with student-written skills is that they produce a list of questions rather than a structured process. A checklist ("Did you verify the budget numbers? Did you contact the opposing side?") is not a skill. A skill describes steps in order, specifies what each step produces, and gives Claude enough context about the beat to make judgments the student would make. If the submitted skill could be handed to a general-purpose AI and produce the same result without any journalism knowledge, it failed the beat-specificity standard.
+**The iteration description is vague.** "I asked it to make the summary better" doesn't show editorial judgment. The point of the iteration step is that students apply their journalism instincts — they recognize something reads wrong and they describe why, specifically. "Too formal" is a start; "leads with the resolution number instead of the impact on residents" is better. Prompt vague submissions to add specifics.
 
-**Reflection describes what the skill does, not what it changed**
-Students sometimes write reflections that describe the SIFT steps rather than reflecting on their own experience of the exercise. Strong reflections are in the first person and specific: what the student would have done differently, what assumption the stop step surfaced, what the skill missed that the student caught. If the reflection could have been written before doing the exercise, it's not a real reflection.
+**The script hardcodes the API key.** If the student shares their script and the key is a literal string rather than `$ANTHROPIC_API_KEY` or equivalent, flag it for security and for the exercise requirement — Part 1 explicitly covers API key handling. Ask them to rewrite that section and rotate the key.
+
+**Content extraction failed silently.** Some students will have output files that look fine but are actually just the LLM making up a summary because the extraction step returned empty content. This is hard to catch without seeing the actual article, but a tell is a summary that's generic enough to apply to any story ("the city council voted on a budget measure"). If the newsletter item feels suspiciously non-specific, ask the student what article they ran it on and whether they can verify the summary against the original.
+
+**No mention of rate limiting.** Part 3 is a required step, not optional. If the submission covers the single-article pipeline but doesn't mention adding rate limiting before batch processing, that's incomplete. The sleep between API calls is described explicitly in the exercise — students should be able to say where it ended up in their script.

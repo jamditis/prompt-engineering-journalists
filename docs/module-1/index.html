@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Module 1: Escaping the chat window | Advanced prompt engineering</title>
+    <title>Module 1: From chat window to command line | Advanced prompt engineering</title>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../assets/js/config.js"></script>
@@ -27,7 +27,6 @@
                     <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
                     <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
                     <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
-                    <a href="../module-5/" class="text-gray-400 hover:text-ice transition-colors">[ 05 ]</a>
                     <a href="../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
                 </nav>
             </div>
@@ -37,8 +36,8 @@
         <section class="py-12 px-6 border-b border-white/10">
             <div class="max-w-5xl mx-auto">
                 <div class="text-xs text-acid font-mono mb-4">MODULE 01</div>
-                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">ESCAPE THE CHAT WINDOW</h1>
-                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Move beyond browser-based AI to command-line tools that integrate with your existing workflow.</p>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">FROM CHAT WINDOW TO COMMAND LINE</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Move from browser-based AI to terminal tools, then build a persistent beat environment with a CLAUDE.md context file — so every session starts with the AI already knowing your work.</p>
             </div>
         </section>
 
@@ -52,10 +51,14 @@
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Install Node.js and essential CLI tools on your computer</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Install Claude Code and run your first interactive session</li>
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Understand the differences between web interfaces and terminal-based AI</li>
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Run the same prompt in both environments and compare results</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand the difference between using AI in a browser and using it in an interactive terminal session</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Explain what project context files are and how they differ across tools (CLAUDE.md, GEMINI.md, AGENTS.md)</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Write a context file with beat-specific instructions, style preferences, and source standards</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Use the deletion test to decide what belongs in a context file and what doesn't</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Process journalism documents with and without context, and compare the results</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Initialize a Git repo and commit your context file as versioned project infrastructure</li>
                     </ul>
                 </div>
             </section>
@@ -66,11 +69,16 @@
                     <h2 class="font-display text-xl text-chrome">Before you start</h2>
                 </div>
                 <div class="space-y-4">
-                    <p class="text-gray-300 text-sm leading-relaxed">You've used AI through a browser — typed a prompt, read the response, copied it somewhere. That works, but it puts the clipboard between you and the tool. Every file you want to analyze has to be copied in by hand. Every response has to be copied back out.</p>
-                    <p class="text-gray-300 text-sm leading-relaxed">This module moves you into a terminal, where AI tools can read files directly from your computer, write results back to disk, and be chained together into automated workflows. The model you're using is the same. The interface changes what you can do with it.</p>
-                    <a href="../concepts/what-is-a-cli.html" class="inline-flex items-center gap-2 text-ice text-sm hover:text-acid transition-colors">
-                        Read the full explanation: what is a CLI? →
-                    </a>
+                    <p class="text-gray-300 text-sm leading-relaxed">You've used AI through a browser — typed a prompt, read the response, copied it somewhere. That works, but it puts the clipboard between you and the tool. Every file you want to analyze has to be copied in by hand. Every response has to be copied back out. CLI tools let AI read files directly from your computer, write results back to disk, and be chained into automated workflows. The model is the same. The interface changes what you can do with it.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">The second half of this module solves a different problem: every time you open a new chat, the AI starts blank. It doesn't know your beat, your publication's style, or what you were working on last session. A context file — <code class="text-acid bg-surface px-1">CLAUDE.md</code> for Claude Code — is where you put that background once, so you never have to retype it.</p>
+                    <div class="space-y-2">
+                        <a href="../concepts/what-is-a-cli.html" class="inline-flex items-center gap-2 text-ice text-sm hover:text-acid transition-colors block">
+                            Read: what is a CLI? — plain-English explainer for journalists who haven't used a terminal →
+                        </a>
+                        <a href="../concepts/how-context-files-work.html" class="inline-flex items-center gap-2 text-ice text-sm hover:text-acid transition-colors block">
+                            Read: how context files work — the blank-slate problem and how CLAUDE.md solves it →
+                        </a>
+                    </div>
                 </div>
             </section>
 
@@ -80,6 +88,7 @@
                     <h2 class="font-display text-xl text-chrome">Key concepts</h2>
                 </div>
                 <div class="space-y-4">
+
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Why leave the browser?</h3>
                         <p class="text-gray-300 text-sm leading-relaxed">Web-based AI tools like ChatGPT and Claude.ai are convenient, but they force you to copy and paste content back and forth. CLI tools let AI read and write files directly, chain multiple operations together, and integrate with version control. For journalists handling large documents or repetitive tasks, this saves hours.</p>
@@ -108,13 +117,33 @@
                         <p class="text-gray-300 text-sm leading-relaxed mb-4">Once you type <code class="text-acid bg-surface px-1">claude</code> and press Enter, you're inside an interactive session. The terminal becomes a conversation interface — paste prompts the same way you would in a browser. A few commands you'll use often:</p>
                         <ul class="space-y-2 text-sm font-sans text-gray-300 mb-4">
                             <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/help</code> <span class="ml-1">— list available commands and installed skills</span></li>
-                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/plan</code> <span class="ml-1">— ask Claude to think through an approach before acting (useful for complex multi-step tasks)</span></li>
+                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/plan</code> <span class="ml-1">— ask Claude to think through an approach before acting</span></li>
                             <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/compact</code> <span class="ml-1">— compress conversation history when a long session starts to slow down</span></li>
                             <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/clear</code> <span class="ml-1">— start fresh without leaving the session</span></li>
                             <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">Ctrl+C</code> <span class="ml-1">— interrupt whatever Claude is doing; press twice to exit</span></li>
                         </ul>
                         <p class="text-gray-300 text-sm leading-relaxed">To continue a previous session after a break, run <code class="text-acid bg-surface px-1">claude --resume</code> from the same directory.</p>
                     </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">What goes in a context file</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">A context file contains the things that make your project different from every other project — not things that are true of all journalism. Good content: your beat entities, beat-specific terminology, style preferences that differ from defaults, source attribution standards you want enforced, phrases to avoid. Bad content: "be helpful," "write clearly," "verify facts" — generic instructions the tool already tries to follow.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Think of it as a briefing document for a new reporter joining your beat. Not the journalism 101 stuff — the specific things about <em>your</em> coverage area and <em>your</em> newsroom's conventions.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">The deletion test</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Before saving a line to your context file, ask: if I delete this, would the AI's output change for someone who already knows my beat?</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">An experienced city hall reporter doesn't need to be told "verify facts before publishing." But they might need to know "the city uses 'resolution' for binding votes and 'ordinance' for legislation — don't confuse these." The first is generic. The second is beat-specific context that changes the output.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">If deleting a line changes nothing for a knowledgeable reporter, cut the line.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Context files should be versioned</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Your CLAUDE.md is infrastructure. Not a note to yourself — infrastructure. It gets committed to Git, versioned alongside your project files, and shared with colleagues when you share the project. When you push a project to GitHub, your context file goes with it. When a colleague clones the repo, your accumulated beat knowledge is already there.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">This module introduces Git basics — what a repository is, what a commit does, what cloning means — because context files, skills, and workflow scripts are all shared through GitHub repos. You don't need to memorize Git commands; your CLI tool can run them for you. But you need to know what you're asking for and why.</p>
+                    </div>
+
                 </div>
             </section>
 
@@ -124,7 +153,9 @@
                     <h2 class="font-display text-xl text-acid">EXERCISE</h2>
                 </div>
 
+                <!-- Part 1 banner -->
                 <div class="border border-acid/30 bg-acidDim p-6 mb-8">
+                    <p class="text-xs font-mono text-acid font-bold mb-2">PART 1 — CLI SETUP AND COMPARISON</p>
                     <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Run the same task in a browser interface and in Claude Code, then compare what each one required of you.</span></p>
                 </div>
 
@@ -165,7 +196,7 @@ npm --version</code></pre>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">curl -fsSL https://claude.ai/install.sh | sh</code></pre>
                     </div>
-                    <p class="text-gray-300 text-sm mb-4">Then type <code class="text-acid bg-surface px-1">claude</code> to launch it. The first time, you'll go through a one-time setup — granting permissions and logging in with your Anthropic account. After that, typing <code class="text-acid bg-surface px-1">claude</code> opens a session immediately, no setup required each time.</p>
+                    <p class="text-gray-300 text-sm mb-4">Then type <code class="text-acid bg-surface px-1">claude</code> to launch it. The first time, you'll go through a one-time setup — granting permissions and logging in with your Anthropic account. After that, typing <code class="text-acid bg-surface px-1">claude</code> opens a session immediately.</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
@@ -233,6 +264,166 @@ Then read the file and summarize it in one sentence. Save the summary to summary
                         <li class="flex items-start gap-3"><span class="text-acid">></span> What happened to the output in each case — where did it go?</li>
                     </ul>
                 </div>
+
+                <!-- Part 2 banner -->
+                <div class="border border-acid/30 bg-acidDim p-6 mb-8 mt-12">
+                    <p class="text-xs font-mono text-acid font-bold mb-2">PART 2 — PROJECT CONTEXT</p>
+                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Set up a beat project directory, initialize a Git repo, process journalism documents with and without a context file, and compare the results.</span></p>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
+                        Set up your project folder
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">Open your terminal and launch Claude Code from your home directory:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Ask Claude to create the project folder with sample documents:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a project folder called city-hall-beat in my home directory. Add four sample journalism documents with realistic fictional content: a press release about a park closure, city council meeting minutes (a 1-2 page excerpt), notes from an interview with a local official named Martinez, and a reader tip email about a potential story. Use descriptive filenames and tell me what you created.</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Once Claude confirms, exit the session (press Ctrl+C twice). Then step into the folder:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cd ~/city-hall-beat
+claude</code></pre>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-2">This step matters: Claude Code reads context files from wherever you launch it. Later, when you add a CLAUDE.md to this folder, Claude picks it up automatically — but only if you're inside the folder when you start.</p>
+                </div>
+
+                <!-- Step 7 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">07</span>
+                        Initialize a Git repository
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">Open your CLI tool and ask it to initialize a Git repo and commit your files:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Initialize this directory as a Git repository and commit all files with the message "Add sample journalism documents for city hall beat"</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm">Watch what the tool does: it runs <code class="text-acid bg-surface px-1">git init</code>, <code class="text-acid bg-surface px-1">git add</code>, and <code class="text-acid bg-surface px-1">git commit</code>. You don't need to memorize the commands — but note what each one does.</p>
+                </div>
+
+                <!-- Step 8 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">08</span>
+                        Process documents without context
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">You're already inside a session from Step 6. Paste these four prompts one at a time. There is no CLAUDE.md yet — Claude has no knowledge of your beat or preferences.</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-3">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read the press release file and write a 3-sentence summary suitable for a news brief</code></pre>
+                    </div>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-3">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read the council meeting minutes. List every factual claim made by a council member, and note which are attributed to a named source vs. unattributed</code></pre>
+                    </div>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-3">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read the interview notes. What follow-up questions should I ask? Flag any claims that need independent verification</code></pre>
+                    </div>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-3">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read the tip email. Is this tip actionable? What would you need to verify before pursuing it?</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm">Note the responses — you'll compare them to the with-context versions in Step 10.</p>
+                </div>
+
+                <!-- Step 9 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">09</span>
+                        Write your CLAUDE.md
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">In your <code class="text-acid bg-surface px-1">city-hall-beat</code> directory, create a file called <code class="text-acid bg-surface px-1">CLAUDE.md</code>. Use <code class="text-acid bg-surface px-1">Resources/examples/beat-project/sample-claude-md.md</code> as a reference, but write your own.</p>
+                    <p class="text-gray-300 text-sm mb-4">Required sections:</p>
+                    <ul class="space-y-2 text-sm font-sans text-gray-300 mb-4 ml-4">
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> <strong class="text-chrome">Beat description</strong> — what you cover, key entities (city name, current officials, agencies)</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> <strong class="text-chrome">Style rules</strong> — AP style, Oxford comma, how to refer to the city on second reference</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> <strong class="text-chrome">Source standards</strong> — how to handle attribution, what to flag as unverified</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> <strong class="text-chrome">Terminology</strong> — beat-specific terms the AI might confuse</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> <strong class="text-chrome">Things to avoid</strong> — phrases or patterns you don't want in the output</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">—</span> <strong class="text-chrome">Hard-won lessons</strong> — leave this section empty for now. Add entries as you correct the AI over time.</li>
+                    </ul>
+                    <p class="text-gray-300 text-sm mb-4">Apply the deletion test before saving: read each line and ask whether it would change the AI's output for a knowledgeable reporter. If not, cut it.</p>
+                    <p class="text-gray-300 text-sm mb-4">Then commit it — your context file is infrastructure, not a draft:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Commit my CLAUDE.md to the project repository with the message "Add beat context file"</code></pre>
+                    </div>
+                </div>
+
+                <!-- Step 10 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">10</span>
+                        Process the same documents with context
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">Exit the current session (Ctrl+C twice) and relaunch from the same directory. This starts a fresh session that picks up your new CLAUDE.md:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Run the exact same four prompts from Step 8. Don't change anything — the only difference is that CLAUDE.md now exists and Claude read it before you typed a word.</p>
+                    <p class="text-gray-300 text-sm">Compare the responses side by side. Look for specific differences: terminology, attribution handling, style choices, what Claude flagged as needing verification.</p>
+                </div>
             </section>
 
             <!-- Checkpoint questions -->
@@ -244,9 +435,11 @@ Then read the file and summarize it in one sentence. Save the summary to summary
                     <p class="text-sm font-sans text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What command shows your installed Node.js version?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What is npm and what does it do?</li>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> Why might a journalist prefer CLI tools over web interfaces for batch processing?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What happens if you try to run Claude Code without authenticating first?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What is the deletion test, and how do you apply it to a line in your CLAUDE.md?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What filename does Gemini CLI use for its context file? What about Codex?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What does a Git commit do? Why should your CLAUDE.md be committed?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What changed in the AI's output once CLAUDE.md was present? Give one specific example.</li>
                     </ul>
                 </div>
             </section>
@@ -258,9 +451,11 @@ Then read the file and summarize it in one sentence. Save the summary to summary
                 </div>
                 <div class="border border-white/10 bg-panel p-6">
                     <ul class="space-y-3 text-sm font-sans">
-                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Claude Code documentation - Official setup guide and command reference</span></li>
+                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Claude Code documentation - Official setup guide, command reference, and CLAUDE.md documentation</span></li>
+                        <li><a href="https://docs.anthropic.com/en/docs/claude-code/memory" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Claude Code memory and CLAUDE.md — official documentation</span></li>
+                        <li><a href="https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/configuration.md" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Gemini CLI configuration and GEMINI.md — official documentation</span></li>
                         <li><a href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-300">Introduction to Node.js - Background on the runtime</span></li>
-                        <li><a href="https://www.codecademy.com/article/command-line-commands" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-300">Common command line commands - Terminal basics reference</span></li>
+                        <li><a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[READ]</a> <span class="text-gray-300">What is Git? — Pro Git book, chapter 1</span></li>
                         <li><a href="https://missing.csail.mit.edu/2020/course-shell/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[COURSE]</a> <span class="text-gray-300">The Missing Semester: The Shell - MIT's free course on command-line fundamentals</span></li>
                     </ul>
                 </div>
@@ -285,8 +480,20 @@ Then read the file and summarize it in one sentence. Save the summary to summary
                         <p class="text-gray-400 text-sm">Your authentication may have expired or your API key may be invalid. Run <code class="text-acid bg-surface px-1">claude</code> again to re-authenticate, or check your Anthropic account for API access issues.</p>
                     </div>
                     <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">The file isn't found</h4>
-                        <p class="text-gray-400 text-sm">Make sure you're in the same directory as the file. Use <code class="text-acid bg-surface px-1">ls</code> (macOS/Linux) or <code class="text-acid bg-surface px-1">dir</code> (Windows) to see files in the current folder. Use <code class="text-acid bg-surface px-1">cd</code> to change directories.</p>
+                        <h4 class="font-mono text-sm text-signal mb-2">CLAUDE.md doesn't seem to be working</h4>
+                        <p class="text-gray-400 text-sm">Make sure the file is named exactly <code class="text-acid bg-surface px-1">CLAUDE.md</code> (all caps) and is in the same directory where you're running the CLI tool. Run <code class="text-acid bg-surface px-1">ls</code> to confirm.</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">The AI is ignoring a rule in my context file</h4>
+                        <p class="text-gray-400 text-sm">Check whether the rule is specific enough to affect output. Vague instructions ("write clearly") rarely change behavior. Specific ones ("refer to the agency as 'the Department' on second reference") do. If the rule is specific and still ignored, try moving it higher in the file.</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">Git says "not a git repository"</h4>
+                        <p class="text-gray-400 text-sm">You need to run <code class="text-acid bg-surface px-1">git init</code> (or ask the CLI tool to do it) in your project directory before using Git commands. Check that you're in the right folder with <code class="text-acid bg-surface px-1">pwd</code>.</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">The AI can't find my document file</h4>
+                        <p class="text-gray-400 text-sm">File names are case-sensitive on macOS and Linux. Make sure the name in your prompt matches the actual filename exactly. Use <code class="text-acid bg-surface px-1">ls</code> to list files in the current directory.</p>
                     </div>
                 </div>
             </section>

@@ -1,43 +1,77 @@
-# Discussion forums
+# Module 3: Custom skills for Claude Code
 
-## Module 2: Prompting with files and project context
+## Discussion forum prompts
 
----
-
-### Discussion question 1: What would you put in a context file for your beat?
-
-Think about your current beat or area of coverage. If you were writing a CLAUDE.md file to configure an AI tool for your daily work, what would you include?
-
-Share 3-5 specific instructions you would add. For each one, explain why it matters — what would go wrong if the AI didn't have that instruction?
-
-Apply the deletion test: would a reporter who already covers your beat need these instructions, or are they things only an outsider would need to be told?
+Participate in at least one discussion thread. Respond to at least two classmates.
 
 ---
 
-### Discussion question 2: Compare your results with and without context
+### Discussion 1: What skills does your newsroom need?
 
-In the exercise, you processed the same documents twice: once without a context file and once with it.
+After reviewing the journalism skills repository, think about your daily work.
 
-What changed? Pick one specific example where the with-context response was noticeably different from the without-context response. Describe the difference and explain which instruction in your context file caused it.
+**Prompt:**
+What recurring tasks in your newsroom could become skills? Describe one specific workflow you repeat often—something that takes multiple steps and follows a consistent pattern. Explain what the skill would do and how it would save time.
 
-If you didn't see much difference, explain why you think that happened. Was the context file too generic? Were the prompts already specific enough that context didn't matter?
+**Examples to get you thinking:**
+- Writing social media posts for different platforms from the same article
+- Checking if sources have appeared in previous coverage
+- Formatting data from specific government agencies
+- Generating interview question lists for particular beat areas
+
+**Response requirements:**
+- Describe the task in enough detail that someone could start writing the skill
+- Estimate how often you do this task (daily, weekly, monthly)
+- Note any edge cases or variations the skill would need to handle
 
 ---
 
-### Discussion question 3a: Keeping your CLAUDE.md honest
+### Discussion 2: Customization vs. flexibility trade-offs
 
-Practitioners who use CLI tools heavily report a consistent pattern: context files start lean and useful, then grow as the project develops, then get bloated enough to start hurting rather than helping.
+Skills encode specific methods and workflows. This is useful when you want consistency, but it means decisions are made in advance.
 
-What's your approach to keeping a context file sharp over time? Do you have a regular review process, or do you wait until you notice something going wrong? What would signal to you that a context file has become a liability instead of an asset?
+**Prompt:**
+The source-verification skill uses the SIFT method. But what if you prefer a different verification approach? Or what if the skill's assumptions don't fit a particular story?
 
-If you've used a style guide or reporting checklists in your work before, how does the maintenance challenge compare?
+Discuss the trade-off between customized tools and flexible prompting. When is it better to have a skill that makes decisions for you? When is it better to work without a skill and give instructions each time?
+
+**Consider:**
+- Training and onboarding new staff
+- Consistency across team members
+- Unusual or edge-case situations
+- Speed vs. control
 
 ---
 
-### Discussion question 3: How could shared context files help a newsroom?
+### Discussion 2b: When the AI gets it wrong — do you capture it?
 
-Context files are just text files. They can be shared, version-controlled with Git, and maintained by a team.
+When an AI tool fails you — generates a wrong quote, ignores an instruction, takes the wrong approach — what do you do with that failure?
 
-Imagine your newsroom created a shared CLAUDE.md that every reporter used. What would go in it? Who would maintain it? How would you handle disagreements about style or standards?
+Most people correct the output and move on. The failure lives in the session, then disappears when the session ends. The next session can make the same mistake because nothing was written down.
 
-What are the risks of a shared context file? Could it introduce bias or constrain reporters in unhelpful ways?
+Practitioners who work with these tools daily describe a different habit: capture the failure while it's fresh. The exact prompt that triggered it, what category of error it was, what the AI did instead, what you think caused it. That log feeds back into the CLAUDE.md as a rule that prevents the mistake next time.
+
+**Prompt:** Do you have any existing system — in your reporting work or elsewhere — for capturing failures and turning them into process improvements? What would it look like to apply that same discipline to AI workflows? What would you need to log, and how often would you review it?
+
+---
+
+### Discussion 3: Sharing skills across newsrooms
+
+Skills are just markdown files. They can be shared on GitHub, emailed to colleagues, or published openly.
+
+**Prompt:**
+What are the benefits and risks of sharing newsroom-specific skills publicly? Should skills that encode editorial workflows be kept private, or is there value in open-sourcing them for the journalism community?
+
+**Consider:**
+- Competitive advantage vs. collective benefit
+- Security concerns (do skills reveal sensitive processes?)
+- Maintaining and updating shared skills
+- Building on each other's work
+
+---
+
+## Participation guidelines
+
+- **Be specific.** General observations are less useful than concrete examples from your work.
+- **Engage with classmates.** Don't just post your own response—respond to others with questions or alternative perspectives.
+- **Keep it practical.** Focus on what would actually help in a newsroom setting.

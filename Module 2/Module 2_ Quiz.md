@@ -1,95 +1,103 @@
-# Quiz
+# Module 3: Custom skills for Claude Code
 
-## Module 2: Prompting with files and project context
+## Quiz: Custom skills structure and usage
 
-5 multiple choice questions.
+5 questions. Select the best answer for each.
 
 ---
 
 ### Question 1
 
-What is the primary purpose of a CLAUDE.md file?
+Where should you place a skill file so it's available across all your Claude Code projects?
 
-A) To store the AI's responses for future reference
+A) In the `.claude/commands/` directory of your current project
 
-B) To provide persistent project-level instructions that Claude Code reads automatically
+B) In the `~/.claude/commands/` directory (your home folder)
 
-C) To log errors and debugging information
+C) In the root of the GitHub repository
 
-D) To replace the need for writing prompts
+D) In the `/usr/local/claude/skills/` directory
 
 **Correct answer:** B
 
-**Explanation:** CLAUDE.md is a context file that Claude Code reads automatically when you open a session in that directory. It persists your instructions across every conversation in the project — beat-specific terminology, source standards, style rules — so you don't have to repeat them.
+**Explanation:** Skills placed in `~/.claude/commands/` are personal commands available in all projects. Skills in `.claude/commands/` within a project are only available in that project. The distinction matters when sharing skills with a team — project-level skills travel with the repo; personal skills stay on your machine.
 
 ---
 
 ### Question 2
 
-You're writing a context file for your city hall beat. Which of the following instructions best passes the "deletion test"?
+What is the correct file structure for a skill with supporting templates?
 
-A) "Write accurate journalism"
+A) `skill-name.md` containing all templates inline
 
-B) "The city calls its annual budget process the 'appropriations cycle' — use this term, not 'budget season'"
+B) `skill-name/SKILL.md` with optional `templates/` and `examples/` subdirectories
 
-C) "Be helpful and thorough"
+C) `SKILL-skill-name.md` in the commands root
 
-D) "Follow AP style" (without any specific AP rules listed)
+D) `skills/skill-name/main.md` with `assets/` folder
 
 **Correct answer:** B
 
-**Explanation:** The deletion test asks: if you removed this line, would the AI behave differently? Option B would change the AI's output — it would use generic language instead of the city's specific term. Options A, C, and D are generic enough that the AI would behave the same way without them.
+**Explanation:** Skills can be either a single `skill-name.md` file or a directory `skill-name/` containing `SKILL.md` plus optional subdirectories for templates, examples, and scripts. Use the directory structure when your skill needs supporting files — for example, a FOIA skill might include letter templates.
 
 ---
 
 ### Question 3
 
-How does a context file change the AI's behavior?
+The source-verification skill uses the SIFT method. What does SIFT stand for?
 
-A) It replaces the AI's training data with your instructions
+A) Search, Identify, Fact-check, Track
 
-B) It adds your instructions to every conversation in that project directory, so the AI applies them without being asked
+B) Stop, Investigate the source, Find better coverage, Trace claims
 
-C) It prevents the AI from generating responses that contradict your instructions under any circumstances
+C) Source, Information, Fact, Truth
 
-D) It speeds up the AI's response time by reducing the context it needs to process
+D) Scan, Inspect, Filter, Test
 
 **Correct answer:** B
 
-**Explanation:** A context file is prepended to every conversation as additional context — it doesn't modify the model or override its core behavior. The AI can still make mistakes, but it starts each session already knowing your project's rules and terminology.
+**Explanation:** SIFT is Mike Caulfield's lateral reading method: Stop before sharing, Investigate the source, Find better coverage, and Trace claims to their origin. Encoding it in a skill means the AI applies the full method — including the steps journalists might skip when pressed for time.
 
 ---
 
 ### Question 4
 
-What is the equivalent of CLAUDE.md in other CLI tools?
+How do you invoke a skill named `foia-requests` in Claude Code?
 
-A) Gemini CLI uses GEMINI.md; Codex uses AGENTS.md
+A) Run `claude skill foia-requests` in the terminal
 
-B) All tools use the same CLAUDE.md filename
+B) Type `/foia-requests` in the Claude Code conversation
 
-C) Gemini CLI uses config.json; Codex uses settings.yaml
+C) Add `--skill=foia-requests` to your prompt
 
-D) Other tools don't support project context files
+D) Import it with `use foia-requests` at the start of your session
 
-**Correct answer:** A
+**Correct answer:** B
 
-**Explanation:** Each CLI tool has its own context file convention. Claude Code uses CLAUDE.md, Gemini CLI uses GEMINI.md, and OpenAI Codex CLI uses AGENTS.md. The concept is the same across all of them — a project file the tool reads on startup that provides persistent context for every session.
+**Explanation:** Skills are invoked as slash commands. Typing `/foia-requests` in Claude Code loads the skill's instructions and applies them to the conversation. This is the same pattern as built-in commands like `/help` and `/clear`.
 
 ---
 
 ### Question 5
 
-A journalist has been building a beat project for six weeks. Her CLAUDE.md has grown to 80 lines and includes instructions from early drafts she's since changed, notes she made to herself, and generic reminders like "always verify facts." She notices responses feel less focused than they were in week one. What's the most likely cause?
+A reporter runs a batch job every Monday that processes 50 press releases, extracts all factual claims, checks each against a source database, and formats the results into a verification report. She wants this to work identically every week. Should she build this as a skill or a command, and why?
 
-A) The AI model has been downgraded since she started the project
+A) A skill, because skills are designed for repeatable tasks
 
-B) Her CLAUDE.md has grown so long that generic and outdated instructions are diluting the specific ones that matter
+B) A command, because a command provides a deterministic trigger — the same workflow runs in the same order every time, regardless of how Claude interprets the situation
 
-C) She needs to restart Claude Code to clear the cache
+C) Either would work equally well
 
-D) Context files stop working after 30 days and need to be rewritten from scratch
+D) A command, because commands run faster than skills
 
 **Correct answer:** B
 
-**Explanation:** Context files work by prepending their content to every conversation. When a context file grows bloated — with generic instructions that don't change the AI's behavior, or outdated rules that conflict with current ones — those tokens compete with the instructions that actually matter. Applying the deletion test to an existing CLAUDE.md is as important as applying it when writing it. If a line wouldn't change the AI's output for someone who knows your beat, cut it.
+**Explanation:** Skills are knowledge files that Claude applies using its judgment. When a workflow needs to run the same way every time — same steps, same sequence, no variation — a command is the right tool. Commands are deterministic: you define the workflow, and it executes as written. Skills are probabilistic: Claude reads them and applies them contextually. For batch processes with fixed requirements, consistency matters more than flexibility.
+
+---
+
+## Quiz scoring
+
+- 5 correct: Excellent. You understand skill structure and usage.
+- 4 correct: Good. Review the concept you missed.
+- 3 or fewer: Re-read the module materials before proceeding to the exercise.

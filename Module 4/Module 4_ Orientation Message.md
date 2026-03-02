@@ -1,84 +1,135 @@
-# Module 4: CLI workflows for newsrooms
+# Module 5: Agents and RAG
 
 ## Orientation message
 
-Hello, and welcome to Module 4.
+Welcome to Week 5. This module covers two concepts that are changing how newsrooms work with AI: agents and retrieval-augmented generation (RAG).
 
-In the 101 course, you learned to automate tasks with no-code tools like Zapier and Make. Those tools work well for straightforward workflows: trigger an event, move some data, send a notification. But if you've ever hit the wall where your Zap can't handle a weird edge case, or where you need to process 500 documents and the no-code tool charges per operation, you've felt the limits of that approach.
+Until now, we've focused on prompting AI models directly. But the most powerful applications in journalism connect AI to external data sources and give it the ability to take actions on your behalf.
 
-CLI LLMs are the next level. They give you more control, more flexibility, and the ability to handle the messy, unpredictable data that journalism actually produces. This week, you'll describe workflows in plain English and have your CLI LLM translate them into working scripts. You won't write shell code — you'll describe what you want to automate, Claude Code will write the implementation, and you'll test and refine the result. By the end, you'll have a working pipeline that fetches content, processes it with AI, and outputs formatted results.
+This week, you'll learn how major news organizations are using these technologies right now, and you'll set up your own system to query a local knowledge base.
 
-### Describe the workflow, let the LLM build it
+---
 
-The key shift in Module 4: instead of asking Claude Code to help you with one document, you describe an entire workflow — a sequence of steps from input to output — and it builds the script that automates it.
+## Why RAG matters for journalists
 
-"Fetch this URL, strip out the ads, summarize it in three bullets, save it as a markdown file with today's date in the filename" — that's a workflow description. Claude Code turns it into a reusable script. You review the script, test it on a few real examples, and refine it until the output is what you want. Then you can run it on 50 documents, schedule it to run automatically, or share it with a colleague.
+Every large language model carries two types of knowledge. **Parametric knowledge** is what the model learned during training -- the patterns, facts, and associations baked into its weights. **Grounded knowledge** comes from documents you provide at query time -- your archives, your source materials, your reporting notes.
 
-The Reuters Institute's 2025 survey found that transcription is the single most common daily AI task among UK journalists (22% daily). Translation, summarization, and data extraction follow. But 87% have never used AI for data cleaning, and 80% have never used it for data extraction like OCR or scraping. These are all pipeline-shaped problems: file in, process, file out. Once you can describe the workflow and have your CLI tool build the script, the barrier drops. You're not learning to code — you're describing what "clean this data" or "transcribe and summarize these recordings" means for your beat, and the tool handles the implementation.
+This distinction matters because parametric knowledge can be wrong or outdated, and you have no way to check where it came from. Grounded knowledge has a citation trail. For journalists, the citation trail is everything.
 
-The right way to build a pipeline: separate stages, each with a clear input and output. Fetch. Clean. Analyze. Format. When something breaks, you know which stage failed — and you paste the error back into your session to get a diagnosis. Because each stage is independent, you can fix one without touching the others.
+RAG is the technique that adds grounded knowledge to an AI's responses. Instead of relying on what the model "remembers," RAG retrieves relevant documents from a knowledge base and includes them in context before the model generates an answer. The result: you can trace an AI-generated response back to the specific document, paragraph, and source it drew from.
 
-### Plan before you build
+This is what makes RAG safe for newsrooms in ways that plain prompting is not. One of the biggest risks with AI in journalism is losing track of where information came from. RAG, done right, preserves attribution through the entire pipeline -- from retrieval to generation to the final output a reporter reads. The journalism rule is the same one you already follow: if you can't cite it, don't publish it. Grounded knowledge is citable. Parametric knowledge is not.
 
-Before you ask your CLI LLM to build anything — a script, a pipeline, a configuration file — ask it to plan first. See the approach before any file is written or any command is run.
+The Reuters Institute's 2025 survey helps explain why RAG matters now: 77% of UK journalists have never used AI for trend detection, 80% have never used it for media monitoring, and 81% have never used it for document analysis. In each case, the gap isn't that AI can't help — it's that without grounded knowledge, the results aren't trustworthy enough for journalism. A generic prompt asking "what are the trends in my beat area?" pulls from training data you can't verify. The same question pointed at your own archive of council minutes, budget documents, and court filings produces answers you can trace to specific sources. RAG is what closes that gap.
 
-Most CLI tools have a built-in mode for this:
+---
 
-- **Claude Code:** Type `/plan` before describing your task. Claude enters plan mode: it explores the request, thinks through the approach, and presents a plan for your review. Nothing is executed until you approve.
-- **Gemini CLI:** There's no single `/plan` command, but you get the same result by being explicit: "Before doing anything, plan this out step by step and wait for my approval before taking any action."
-- **Codex CLI:** Ask it to plan explicitly: "Plan this out step by step and wait for my approval before writing any code." You can also start with `codex --approval-mode suggest`, which shows proposed changes before applying them.
+## Agents: tools with autonomy
 
-The underlying habit is the same regardless of tool: **describe what you want, review what it plans to do, then authorize it to proceed.**
+AI agents go beyond question-and-answer. An agent can use tools, make decisions, and complete multi-step tasks: searching databases, calling APIs, reading files, and synthesizing results. The Washington Post's Haystacker helps investigative reporters sift through massive datasets. The New York Times's Echo assists with content production workflows.
 
-This matters more as tasks get larger. For a one-sentence summary, it doesn't matter much if the LLM gets it wrong on the first try — you just try again. For a pipeline that makes real API calls, writes files, and costs money to run, you want to see the approach before it starts. A misunderstood requirement caught at the planning stage costs you 30 seconds. The same misunderstanding caught after a failed 50-document batch run costs you time and money.
+But here's the line that can't move: **editorial judgment stays with the journalist.** Agents can research, summarize, and draft. They cannot decide what's newsworthy, evaluate source credibility, or make ethical calls about what to publish. The tools covered in this module -- MCP, knowledge bases, retrieval pipelines -- are designed to augment reporting, not replace it. Both Haystacker and Echo keep humans in the review loop. That's by design.
 
-Think of it the same way you'd think about editing: you'd review a reporter's outline before they spend three days writing the story. Plan mode is the outline stage for LLM-built automation. It's also how you catch scope creep — an LLM given a loosely described task will sometimes build something bigger than you asked for. Reviewing the plan tells you that before it happens.
+---
 
-The plan step is also where you refine your description. You might describe a workflow and see the LLM propose a more complex approach than you need, or a simpler one that misses a step. That's a better moment to course-correct than after it's built.
+## MCP: connecting AI to your data
 
-### Principles for building real pipelines
+MCP (Model Context Protocol) is the bridge between Claude Code and external data sources -- file systems, databases, APIs. Think of it as giving the AI a library card instead of making it guess from memory.
 
-These aren't abstract best practices. They come from building and running actual data pipelines in newsrooms.
+In this week's exercise, you'll configure an MCP server to connect Claude Code to a folder of markdown files. This is a small-scale version of the same pattern that powers newsroom-scale RAG systems: AI reads your documents, retrieves what's relevant, and generates answers grounded in your sources.
 
-**Test small before running big.** Real API calls cost money. Before you process 500 documents through a paid API, test on 5. Better yet, validate your inputs with a free local model (like Ollama) before sending anything to a paid service. The principle: use cheap tools to catch problems before running expensive operations.
+The configuration file you write is infrastructure. Commit it to version control alongside your CLAUDE.md and skills. Anyone who clones your project gets the same data connections.
 
-**Design for failure.** Long operations fail. Networks drop, APIs rate-limit, your laptop goes to sleep. Build pipelines that save their progress to disk — a simple log of which files have been processed — so they can restart from where they left off instead of starting over from scratch.
+**Every tool you connect costs context.** Each MCP server you configure consumes tokens in your session before you've asked anything — the server's schema, its available tools, its connection overhead. This is a real cost, not a theoretical one. Before connecting a data source, ask whether the capability it adds justifies what it takes from your context budget. A database connection you rarely need still consumes context on every session where you don't use it. A lean, purposeful set of integrations consistently outperforms a crowded one.
 
-**Respect rate limits.** APIs have rate limits for a reason. Building pauses into your scripts (`sleep 2` between API calls) isn't a workaround — it's responsible engineering that keeps your API access alive. A script that blasts 1,000 requests in ten seconds will get you throttled or banned. A script that spaces them out will finish the job reliably.
+## When Claude delegates: the subagent problem
 
-### Learning objectives
+For complex multi-step tasks, Claude sometimes delegates parts of the work to separate sub-sessions — subagents — that each handle a focused piece and return results. This happens automatically. You often won't know it's happening.
+
+Two things are worth knowing about this before you build pipelines in this module.
+
+First, model selection. By default, Claude spawns lighter, cheaper models for subagents, regardless of what's being delegated. For a journalism research task — synthesizing sources, evaluating evidence, identifying patterns — a lighter model produces worse results than the main session would. You can override this default. Add `Always use the most capable available model for research subagents` to your CLAUDE.md to override the default for delegated work.
+
+Second, and more important for journalism: errors compound across handoffs. When one subagent's output becomes the next subagent's input, a fabricated statistic in step one becomes an assumed fact in the analysis at step two. By step three, it's a headline candidate. The failure is harder to trace than a single-session error because you never saw the intermediate steps.
+
+The mitigation is the same principle that applies to any multi-source story: verify at every handoff. Don't pass a subagent's output to the next stage without checking it. Treat intermediate results the way you'd treat information from a source you haven't yet independently confirmed. "The AI said so" is not a source. "The document says so" is.
+
+---
+
+## From the field
+
+Your instructor built a working example of this pipeline: the [Jay Rosen Digital Archive](https://github.com/jamditis/rosen-scraper), a collection of 765+ records from journalist Jay Rosen's career. The project applies entity extraction and RAG to primary source materials, using the Gemini API and Google Sheets to turn raw documents into a searchable knowledge base. This kind of archive-to-knowledge-base pipeline is exactly what Module 5 prepares you to build.
+
+---
+
+## Learning objectives
 
 By the end of this module, you will be able to:
 
-1. **Describe a multi-step journalism workflow** and have your CLI LLM translate it into a working, reusable script — without writing code yourself.
+1. **Explain the difference between parametric and grounded knowledge** and why grounded, source-attributed AI responses are safer for journalism than responses drawn from training data alone.
 
-2. **Test AI-built scripts** on a small number of real examples before running them on full workloads, and understand why this step prevents wasted API costs and bad output.
+2. **Describe how RAG works** and how it preserves source attribution through the retrieval-to-generation pipeline.
 
-3. **Diagnose pipeline failures** by pasting errors back into your CLI session and iterating on fixes — the core debugging loop you'll use throughout this course and beyond.
+3. **Evaluate the tradeoffs** between AI autonomy and editorial control, identifying where human oversight is required in agent-based workflows.
 
-4. **Apply security practices** — API keys in environment variables, scripts reviewed before deployment, sensitive documents handled appropriately.
+4. **Configure a basic MCP server** to connect an AI assistant to a local knowledge base, demonstrating the practical mechanics of RAG.
 
-5. **Apply cost-conscious practices** — test on small samples, add rate limiting, build in checkpointing so long jobs can resume instead of restart.
+---
 
-### This week's activities
+## This week's activities
 
-- **Videos:** Watch the two video lectures on CLI basics and building pipelines
-- **Readings:** Complete the required readings on shell fundamentals and automation patterns
-- **Exercise:** Build a working "clip article → summarize → format" pipeline
-- **Discussion:** Share your newsroom automation ideas in the forum
-- **Quiz:** Complete the 5-question quiz on CLI concepts
+| Activity | Time estimate |
+|----------|---------------|
+| Required readings | 60 minutes |
+| Optional resources | 30-45 minutes |
+| Discussion forum participation | 45 minutes |
+| Hands-on exercise: MCP setup | 90 minutes |
+| Quiz | 15 minutes |
 
-### A note on getting stuck
+---
 
-This week involves more moving parts than previous modules, and you will hit errors. That's expected. When you do:
+## Key terms
 
-1. **Paste the error into your CLI tool and ask what it means.** Don't paraphrase — paste the exact error message. Your tool already knows the code it built for you, so it can read the error in context and usually identify the problem immediately. "Here's what I got when I ran it — what went wrong and how do I fix it?" is often all you need to type. This is one of the most useful things about working with a CLI LLM: your debugging collaborator is already there, already has context, and can read error messages directly.
+**Agent**: An AI system that can use tools, make decisions, and complete tasks across multiple steps without continuous human input.
 
-2. **If it's an installation or setup issue**, check that you've installed the required tools listed in the exercise.
+**RAG (Retrieval-Augmented Generation)**: A technique that retrieves relevant documents from a knowledge base and includes them in the AI's context before generating a response.
 
-3. **If your CLI tool can't resolve it**, post in the "Technical help" forum with the exact error message and a description of what you tried.
+**Parametric knowledge**: What an LLM learned during training -- patterns and associations stored in the model's weights. Can be outdated or wrong, and has no citation trail.
 
-Please complete all activities before the end of the week.
+**Grounded knowledge**: Information provided to the model at query time from external documents. Traceable to specific sources.
 
-Best,
-Joe Amditis
+**MCP (Model Context Protocol)**: Anthropic's open standard for connecting AI models to external data sources and tools.
+
+**Knowledge base**: A structured collection of documents, data, or information that an AI system can search and reference.
+
+**Grounding**: The practice of connecting AI responses to specific source documents, reducing hallucination and enabling attribution.
+
+**Human-in-the-loop**: A design pattern where automated systems require human review and approval before outputs are finalized or published.
+
+---
+
+## Your project is infrastructure
+
+Across five weeks, you've built:
+
+- A **CLAUDE.md** that encodes your beat context and newsroom standards
+- **Skills** that encode your verification methods and editorial processes
+- **Hooks** that enforce those standards automatically
+- A **pipeline** that fetches, cleans, and analyzes content at scale
+- An **MCP configuration** that connects it all to your source materials
+
+All of it lives in version control. All of it is portable. Clone the repo on a new machine and the same context, tools, and data sources come with it. Hand it to a colleague and they inherit your methods.
+
+This is context engineering at scale. You started in Module 1 with one-off prompts and a chat window. You're ending Module 5 with a versioned environment any journalist on your team can clone and extend.
+
+---
+
+## What's ahead
+
+The readings introduce you to real newsroom implementations: The Washington Post's Haystacker for investigative research and The New York Times's Echo for content production. You'll also read about the Model Context Protocol and how RAG systems work.
+
+The discussion forum asks you to think critically about where AI should and shouldn't operate autonomously in journalism.
+
+The hands-on exercise walks you through setting up Claude Code with MCP to query markdown files, giving you direct experience with the technology.
+
+Let's get started.
