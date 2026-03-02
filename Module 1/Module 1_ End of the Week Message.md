@@ -1,4 +1,4 @@
-# Module 1: Escaping the chat window
+# Module 1: From chat window to command line
 
 ## End of the week message
 
