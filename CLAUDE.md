@@ -155,25 +155,36 @@ Only these are official Claude Code patterns:
 
 **LESSON.md and RULE.md are not official Claude Code file types.** They were personal conventions. Do not reference them in course content.
 
-## Current state (as of Feb 2026)
+## Current state (as of Mar 2026)
 
-All 5 modules + Introduction module have complete 8-document sets. Readings are populated across all modules with required articles added and Mollick synthesis document created.
+All 4 modules + Introduction module have complete 8-document sets. Readings are populated across all modules with required articles added and Mollick synthesis document created.
+
+**Course is now 4 weeks** (merged old Modules 1+2 into Module 1). Old Module 1 LMS files live in `Module 1/Module 1_*.md`; old Module 2 LMS files live in `Module 1/Module 2_*.md` (labeled "Project context" in review tool). Modules 3→2, 4→3, 5→4.
+
+### Deployment
+
+- **Live site**: https://mooc.amditis.tech (Cloudflare Pages)
+- **Deploy script**: `./deploy.sh "message"` — uses `pass-get claude/api/cloudflare-full` + wrangler
+- **Project name**: `prompt-engineering-journalists` on Cloudflare Pages
+- **No GitHub Actions**: account-wide suspension; GitHub Pages broken. Wrangler direct upload is the deploy path.
 
 ### Readings pool — key sources added
 - **Ethan Mollick** (One Useful Thing): ~15 articles synthesized in `Resources/mollick-reading-list.md`; two pieces assigned as required readings (intro + module 1)
 - **Generative AI in the Newsroom** (generative-ai-newsroom.com): Nick Hagar (coding agents, beat reporting), Clare Spencer (multilingual newsrooms), Joe Amditis (vibe coding), Jessy de Cooker (quote extraction)
-- **Joe Amditis** (925 Struggle Street Substack): agent architecture piece assigned to modules 2 and 5
+- **Joe Amditis** (925 Struggle Street Substack): agent architecture piece assigned to modules 2 and 4
 - **Author diversity**: Clare Spencer, Jessy de Cooker included; agent research targeted Vicki Boykis, Hilke Schellmann, Meredith Broussard, Rachel Thomas, Joy Buolamwini, Rumman Chowdhury
 
-### Completed work (as of Feb 2026)
+### Completed work (as of Mar 2026)
 
-- **Optional resources readings**: Willison → Module 3; Vincent + Doctorow → Module 5
+- **4-module restructure**: old Modules 1+2 merged into Module 1; 3→2, 4→3, 5→4; docs/index.html, README.md, CLAUDE.md, review.html all updated
+- **Optional resources readings**: Willison → Module 2; Vincent + Doctorow → Module 4
 - **URL verification**: 7 dead links fixed or removed across all modules; 403s from generative-ai-newsroom.com and Axios flagged as bot-blocking (likely live)
-- **Exercise solution keys**: written for all 5 modules (model answer + grader rubric, one file per module)
+- **Exercise solution keys**: written for all 4 modules (model answer + grader rubric, one file per module)
 - **Syllabus sync**: both files now identical canonical version
-- **Exercise rewrites**: all 5 module exercises rewritten to follow the LLM-first rules documented above — no more `claude "..."` one-shots, no more heredoc patterns, no more manual terminal commands beyond `claude` and `cd`
-- **LESSON.md/RULE.md removed**: Module 3 skill types card corrected; these are not official Claude Code file types
+- **Exercise rewrites**: all 4 module exercises rewritten to follow the LLM-first rules documented above — no more `claude "..."` one-shots, no more heredoc patterns, no more manual terminal commands beyond `claude` and `cd`
+- **LESSON.md/RULE.md removed**: Module 2 skill types card corrected; these are not official Claude Code file types
 - **CSS word wrap**: `pre code` blocks now wrap globally across the course site (`docs/assets/css/amditis.css`)
+- **Review tool**: `docs/review.html` — Module 1 shows as two groups ("From chat window to command line" + "Project context supplement") to distinguish the merged content
 
 # AI Writing Guidelines: Avoiding Slop Phrases
 Use this file as a reference when reviewing AI-generated content. These patterns indicate lazy, filler writing that should be edited or avoided.
