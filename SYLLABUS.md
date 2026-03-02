@@ -214,18 +214,17 @@ You will need access to the following (detailed in Course Requirements):
 
 ## Course website
 
-The course includes a companion website with exercises, templates, and plain-English concept explainers:
+The primary course is hosted on the Knight Center platform at [journalismcourses.org](https://journalismcourses.org). The GitHub repository and companion website below are maintained for reference and posterity — they are not required for participation and are not the primary access point for the course.
 
-[https://jamditis.github.io/prompt-engineering-journalists/](https://jamditis.github.io/prompt-engineering-journalists/)
+Companion website (supplementary reference): [https://mooc.amditis.tech](https://mooc.amditis.tech)
 
 ## Course repositories
 
-The following GitHub repositories are used throughout the course:
+The following GitHub repositories are maintained as supplementary reference material. Students should access course content through the Knight Center platform.
 
-- **Advanced prompt engineering for journalists:** [https://github.com/jamditis/prompt-engineering-journalists](https://github.com/jamditis/prompt-engineering-journalists) — course materials, exercises, and the course website for this 4-week course
+- **Advanced prompt engineering for journalists:** [https://github.com/jamditis/prompt-engineering-journalists](https://github.com/jamditis/prompt-engineering-journalists) — course materials, exercises, and the companion website (maintained for reference)
 - **Journalism skills library:** [https://github.com/jamditis/claude-skills-journalism](https://github.com/jamditis/claude-skills-journalism) — 36 skills and 13 hooks for Claude Code, covering source verification, FOIA requests, data journalism, editorial workflows, and more. Used in Module 2.
 - **AI tools for newsrooms:** [https://github.com/jamditis/tools](https://github.com/jamditis/tools) — guides, templates, and workflow examples for AI in journalism. Referenced across modules.
-- **Scrapefruit CLI:** [https://github.com/jamditis/scrapefruit-cli](https://github.com/jamditis/scrapefruit-cli) — a CLI tool for web scraping, referenced in workflow examples.
 
 ---
 
