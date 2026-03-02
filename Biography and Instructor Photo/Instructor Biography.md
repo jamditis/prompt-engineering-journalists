@@ -2,7 +2,7 @@
 
 ## Joe Amditis
 
-Joe Amditis is the associate director of operations at the Center for Cooperative Media at Montclair State University, where he has worked since 2015. His work focuses on newsroom technology, AI tools, and practical strategies for helping journalists and media organizations work more efficiently.
+Joe Amditis is the associate director of operations at the Center for Cooperative Media at Montclair State University, where he has worked since 2014. His work focuses on newsroom technology, AI tools, and practical strategies for helping journalists and media organizations work more efficiently.
 
 Amditis teaches and writes about the intersection of artificial intelligence and journalism. He has led workshops on prompt engineering and AI workflows for news organizations across the country, and publishes the Struggle Street newsletter (strugglestreet.substack.com) on AI in journalism practice.
 

@@ -22,7 +22,7 @@ There's a related shift in how you think about what you're doing. You may have h
 
 ### About your instructor
 
-I'm Joe Amditis. I've worked at the Center for Cooperative Media since 2015, where I focus on newsroom technology, AI tools, and helping journalists work more efficiently. I write about AI and journalism at my Substack, and I've led workshops on prompt engineering for news organizations across the country.
+I'm Joe Amditis. I've worked at the Center for Cooperative Media since 2014, where I focus on newsroom technology, AI tools, and helping journalists work more efficiently. I write about AI and journalism at my Substack, and I've led workshops on prompt engineering for news organizations across the country.
 
 I use the tools we'll cover every day. Claude Code is part of my regular workflow for data analysis, document processing, and building internal tools. This isn't theoretical. It's practical knowledge from daily use.
 
