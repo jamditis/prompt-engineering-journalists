@@ -1,5 +1,5 @@
 # Robots.txt for Advanced Prompt Engineering for Journalists
-# https://jamditis.github.io/prompt-engineering-journalists/
+# https://mooc.amditis.tech/
 
 User-agent: *
 Allow: /
@@ -23,4 +23,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://jamditis.github.io/prompt-engineering-journalists/sitemap.xml
+Sitemap: https://mooc.amditis.tech/sitemap.xml

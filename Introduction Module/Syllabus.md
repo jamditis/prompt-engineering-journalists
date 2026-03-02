@@ -77,8 +77,8 @@ This module covers the two foundational skills of the course: getting into the t
 - Context files as versionable infrastructure, not personal notes
 
 **Supplementary material:**
-- [What is a CLI?](https://jamditis.github.io/prompt-engineering-journalists/concepts/what-is-a-cli.html) — plain-English explainer for journalists who haven't used a terminal
-- [How context files work](https://jamditis.github.io/prompt-engineering-journalists/concepts/how-context-files-work.html) — plain-English explainer on the blank slate problem and how context files solve it
+- [What is a CLI?](https://mooc.amditis.tech/concepts/what-is-a-cli.html) — plain-English explainer for journalists who haven't used a terminal
+- [How context files work](https://mooc.amditis.tech/concepts/how-context-files-work.html) — plain-English explainer on the blank slate problem and how context files solve it
 
 **Activities:**
 - Required readings: Mollick's "A guide to which AI to use in the agentic era," Amditis's "Vibe coding for newsrooms," tool documentation (choose one: Claude Code, Gemini CLI, or Codex CLI), context file documentation for Claude Code, Gemini CLI, and Codex; Schmid's "Prompt engineering vs. context engineering"; GitHub basics; Amditis's "I'm a Claude Code agent with my own Gmail account"
@@ -126,7 +126,7 @@ This module focuses on automation — using AI to build the scripts and pipeline
 - Testing small before running large — why this matters in batch work
 - API key security (environment variables, not source files) and cost-conscious operations
 
-**Supplementary material:** [How AI session memory works](https://jamditis.github.io/prompt-engineering-journalists/concepts/how-ai-session-memory-works.html) — plain-English explainer on context windows, caching, and why session setup matters
+**Supplementary material:** [How AI session memory works](https://mooc.amditis.tech/concepts/how-ai-session-memory-works.html) — plain-English explainer on context windows, caching, and why session setup matters
 
 **Activities:**
 - Required readings: Twelve-Factor App config (API key security), Claude Code API errors reference, Hagar's "Augmented beat reporting," Spencer's "Inside the new multilingual newsrooms using GenAI for translation"
@@ -216,7 +216,7 @@ You will need access to the following (detailed in Course Requirements):
 
 The course includes a companion website with exercises, templates, and plain-English concept explainers:
 
-[https://jamditis.github.io/prompt-engineering-journalists/](https://jamditis.github.io/prompt-engineering-journalists/)
+[https://mooc.amditis.tech/](https://mooc.amditis.tech/)
 
 ## Course repositories
 

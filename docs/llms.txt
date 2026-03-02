@@ -8,7 +8,7 @@
 - Institution: Knight Center for Journalism in the Americas, UT Austin
 - Format: Online MOOC, 5 weeks (paid)
 - Prerequisite: Prompt Engineering 101 for Journalists (or equivalent)
-- URL: https://jamditis.github.io/prompt-engineering-journalists/
+- URL: https://mooc.amditis.tech/
 
 ## Modules
 
