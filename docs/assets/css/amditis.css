@@ -11,6 +11,11 @@
     color: #111827;
 }
 
+/* Sticky header offset for anchor links */
+html {
+    scroll-padding-top: 5rem;
+}
+
 /* Base prose typography */
 p, li {
     line-height: 1.65;
@@ -133,6 +138,21 @@ select:focus-visible,
     border-top: 1px solid #334155;
 }
 
+/* Bullet list items — block + hanging indent.
+   Grid and flex both break when <li> contains mixed inline elements (<a>, <code>,
+   <strong>) because each becomes a separate grid/flex item. Block layout lets all
+   inline content flow and wrap naturally. */
+.bullet-item {
+    display: block;
+    padding-left: 1.75rem;
+}
+
+.bullet-item > span:first-child {
+    display: inline;
+    margin-left: -1.75rem;
+    margin-right: 0.5rem;
+}
+
 /* Code block word wrap */
 pre code {
     white-space: pre-wrap;
@@ -244,4 +264,44 @@ pre:hover > .copy-btn,
 .copy-btn.copied {
     color: #a3e635;
     border-color: #a3e635;
+}
+
+/* Mobile navigation for inner pages (modules, concepts, templates, syllabus)
+   Homepage has its own mobile menu via JS; these pages just need nav visible. */
+@media (max-width: 767px) {
+    /* Taller scroll offset for two-row mobile header (logo + wrapped nav) */
+    html {
+        scroll-padding-top: 7rem;
+    }
+
+    /* Let header content wrap so nav drops below the logo */
+    header .max-w-5xl {
+        flex-wrap: wrap;
+    }
+
+    /* Override Tailwind's 'hidden' to show nav on mobile */
+    header nav[aria-label="Module navigation"],
+    header nav[aria-label="Page navigation"] {
+        display: flex !important;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        width: 100%;
+        padding-top: 0.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Touch-friendly tap targets (44px minimum) */
+    header nav[aria-label="Module navigation"] a,
+    header nav[aria-label="Page navigation"] a {
+        padding: 0.375rem 0.125rem;
+    }
+
+    /* Tighten bullet indent on mobile */
+    .bullet-item {
+        padding-left: 1.25rem;
+    }
+
+    .bullet-item > span:first-child {
+        margin-left: -1.25rem;
+    }
 }
