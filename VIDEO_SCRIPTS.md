@@ -7,7 +7,7 @@
 
 | # | Video | Module | Format | Target length |
 |---|-------|--------|--------|---------------|
-| 1 | Promo video | — | Talking head | 1-2 min |
+| 1 | Promo video | — | Talking head | 60-90 sec |
 | 2 | Welcome video | Intro | Talking head | 2-3 min |
 | 3 | What CLI LLMs are and why they matter | Module 1 | Talking head + slides | ~6 min |
 | 4 | Getting started with Claude Code | Module 1 | Screen recording | ~6 min |
@@ -37,27 +37,29 @@ Each module maps to a stage of an LLM-assisted journalism project. This arc shou
 
 ## Video 1: Promo video
 
-**Format:** Talking head
-**Length:** 1-2 minutes
+**Format:** Talking head (no slides)
+**Length:** 60-90 seconds (~190 words)
 **Purpose:** Marketing — get journalists curious enough to enroll
 
 ### Outline
 
-**0:00-0:15 — Hook**
-Open with a concrete scenario: "You have a city council meeting transcript. You need every action item, every vote, and every named official in a formatted table — right now, before deadline. You describe that to an AI assistant running on your laptop. It reads the transcript and hands you the table. No browser, no upload, no copy-pasting. That's what this course teaches."
+**0:00-0:15 — Pain point hook**
+Open with the frustration the audience already feels: starting from scratch every ChatGPT session. Pasting, explaining, formatting — then doing it all again next week.
 
-**0:15-0:45 — What this course is**
-"I'm Joe Amditis from the Center for Cooperative Media at Montclair State University, and this is Advanced Prompt Engineering for Journalists — a four-week course from the Knight Center at UT Austin. You already know how to use AI. This course teaches you to use it as a collaborator on real journalism projects."
+**0:15-0:25 — Intro**
+Joe Amditis, Center for Cooperative Media, Montclair State. Advanced Prompt Engineering for Journalists, four weeks, Knight Center.
 
-**0:45-1:15 — What you'll walk away with**
-Four concrete skills:
-- Have conversations with AI that can read your files and take action on your computer, with persistent context files that give it your beat knowledge before every session
-- Build reusable journalism tools — skills and hooks — that encode your editorial workflows into shareable commands
-- Describe automation tasks in plain English and have the AI build them for you
-- Connect AI to your own document archives with proper source attribution
+**0:25-0:50 — The shift**
+AI moves off the browser, onto your machine. Reads files directly. One file gives it your beat, sources, and standards — loads every session. No more re-explaining.
 
-**1:15-1:30 — Who it's for / CTA**
-"If you've taken Prompt Engineering 101 or know how to write a good AI prompt — and if you want to go from typing prompts in a browser to actually delegating journalism work to an AI — this is your course. Sign up at JournalismCourses.org."
+**0:50-1:05 — What you build**
+Three outcomes, no jargon:
+- Reusable commands that encode your newsroom's workflows
+- Automation you describe in plain English and the AI builds
+- Connections to your own documents with citable sources
+
+**1:05-1:15 — Who it's for / CTA**
+"You don't need to code. You need to describe what you want — and you already do that for a living." One-sentence qualifier + JournalismCourses.org.
 
 ---
 

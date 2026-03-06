@@ -1,6 +1,6 @@
 # Introductory readings
 
-## Before you begin: two things to read
+## Before you begin: three things to read
 
 Complete these before Module 1 starts. They aren't about tools or techniques — they're about understanding where AI in journalism is right now and why the shift from chat interfaces to programmatic tools matters. Everything else in this course will make more sense with this context.
 
@@ -21,17 +21,15 @@ This is the conceptual foundation for everything that follows.
 
 ---
 
-### 2. Journalism, media, and technology trends and predictions
+### 2. Vibe coding for newsrooms: why being a good project manager matters more than being a savvy coder
 
-**Author:** Nic Newman, Reuters Institute for the Study of Journalism
-**Source:** Reuters Institute for the Study of Journalism, University of Oxford
-**URL:** https://reutersinstitute.politics.ox.ac.uk/journalism-media-and-technology-trends-and-predictions-2025
-*(Instructor: this URL is for the 2025 edition — verify and update each year.)*
-**Time:** 30 minutes (read sections on AI; you don't need to read the full report)
+**Author:** Joe Amditis, Generative AI in the Newsroom, Computational Journalism Lab, Northwestern University
+**URL:** https://generative-ai-newsroom.com/vibe-coding-for-newsrooms-6848b17dac99
+**Time:** 10 minutes
 
-The Reuters Institute surveys hundreds of news industry leaders each year on where media is heading. The AI sections document how newsrooms are actually using AI tools right now — what's working, what isn't, and what they're prioritizing. Read this alongside Mollick's framework to understand the gap between where most newsrooms are (apps) and where advanced practitioners are going (harnesses and automation).
+The course instructor describes building newsroom tools with Claude Code and Gemini CLI without a formal coding background. The central argument: the skills that matter for this work aren't technical — they're project management. Clear requirements, direct feedback, organized documentation. These are skills journalists already have.
 
-Focus on the sections covering AI in content production, workflow automation, and editorial oversight. Skip the sections on subscriptions, advertising, and revenue models unless they interest you.
+Read this alongside Mollick's framework. Mollick explains *what* harnesses are; this piece shows what it looks like to actually use one — and why the ability to describe what you want clearly matters more than knowing how to write code.
 
 ---
 

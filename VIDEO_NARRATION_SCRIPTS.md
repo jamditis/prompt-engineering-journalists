@@ -9,7 +9,7 @@ These are camera-ready narration scripts. The promo and welcome videos target 1-
 
 | # | Video | Module | Format | Target length |
 |---|-------|--------|--------|---------------|
-| 1 | Promo video | — | Talking head | 1-2 min |
+| 1 | Promo video | — | Talking head | 60-90 sec |
 | 2 | Welcome video | Intro | Talking head | 2-3 min |
 | **3** | **What CLI LLMs are and why they matter** | **Module 1** | **Talking head + slides** | **~20 min** |
 | **4** | **Getting started with Claude Code** | **Module 1** | **Screen recording** | **~20 min** |
@@ -27,32 +27,26 @@ These are camera-ready narration scripts. The promo and welcome videos target 1-
 ## Video 1: Promo video
 
 **Format:** Talking head
-**Length:** 1-2 minutes
+**Length:** 60-90 seconds (~190 words)
 **Module:** —
 
 ---
 
 [TALKING HEAD]
 
-You have a city council meeting transcript. You need every action item, every vote, and every named official in a formatted table — before deadline. You describe that to an AI assistant running on your laptop. It reads the transcript and hands you the table. No browser, no upload, no copy-pasting. That's what this course teaches.
+Every time you open ChatGPT, you start from scratch. You paste in the document, explain what you cover, describe the output format — and next week you do all of it again. From scratch.
 
-I'm Joe Amditis from the Center for Cooperative Media at Montclair State University, and this is Advanced Prompt Engineering for Journalists — a four-week course from the Knight Center at UT Austin. You already know how to use AI. This course teaches you to use it as a collaborator on real journalism projects.
+This course fixes that.
 
-[SLIDE: four things you'll walk away with]
+I'm Joe Amditis from the Center for Cooperative Media at Montclair State. This is Advanced Prompt Engineering for Journalists — four weeks, from the Knight Center.
 
-Four things you'll walk away with.
+Here's the shift. You move AI off the browser and onto your machine. It reads your files directly — no uploading, no pasting, no copy-paste dance. You write one file that tells it your beat, your sources, your standards. That file loads automatically, every session. No more re-explaining yourself.
 
-First: conversations with AI that can read your files and take action on your computer — not in a browser tab, on your machine. And a persistent context file that gives the AI your beat knowledge, your style, and your sources before every session. You write it once. It loads automatically.
+From there you build real tools. Reusable commands that encode your newsroom's workflows. Automation you describe in plain English and the AI builds for you. Connections to your own documents — where the AI can search across them and cite its sources.
 
-Second: reusable journalism tools — skills and hooks — that encode your editorial workflows into commands you can share with colleagues.
+You don't need to code. The AI handles that. You need to describe what you want — and you already do that for a living.
 
-Third: the ability to describe an automation task in plain English and have the AI build it for you.
-
-Fourth: connecting AI to your own document archives with proper source attribution — and understanding where those connections break down.
-
-[TALKING HEAD]
-
-If you've taken Prompt Engineering 101 or you know how to write a good AI prompt — and you want to go from typing in a browser to delegating real journalism work — this is your course. Sign up at JournalismCourses.org.
+If you use AI and want to go from chatting with it to delegating real work, this is the course. Sign up at JournalismCourses.org.
 
 ---
 
