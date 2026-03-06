@@ -1,9 +1,9 @@
-# Full video narration scripts — modules 1 and 2
+# Full video narration scripts — all modules
 
 **Course:** Advanced prompt engineering for journalists
 **Instructor:** Joe Amditis, Center for Cooperative Media, Montclair State University
 
-These are camera-ready narration scripts. The promo and welcome videos target 1-2 and 2-3 minutes respectively. Instructional videos (3-8) target ~6 minutes (~900 words at 150 wpm). Stage directions are in [BRACKETS].
+These are camera-ready narration scripts. The promo and welcome videos target 1-2 and 2-3 minutes respectively. Instructional videos (3-12) target ~20 minutes (~3,000 words at 150 wpm). Stage directions are in [BRACKETS].
 
 ## Updated video map (4-module structure)
 
@@ -11,16 +11,16 @@ These are camera-ready narration scripts. The promo and welcome videos target 1-
 |---|-------|--------|--------|---------------|
 | 1 | Promo video | — | Talking head | 1-2 min |
 | 2 | Welcome video | Intro | Talking head | 2-3 min |
-| **3** | **What CLI LLMs are and why they matter** | **Module 1** | **Talking head + slides** | **~6 min** |
-| **4** | **Getting started with Claude Code** | **Module 1** | **Screen recording** | **~6 min** |
-| **5** | **The context file problem** | **Module 1** | **Talking head + slides** | **~6 min** |
-| **6** | **Setting up your beat project** | **Module 1** | **Screen recording** | **~6 min** |
-| **7** | **From prompts to skills** | **Module 2** | **Talking head + slides** | **~6 min** |
-| **8** | **Installing and using journalism skills** | **Module 2** | **Screen recording** | **~6 min** |
-| 9 | Describing workflows and having AI build them | Module 3 | Talking head + slides | ~6 min |
-| 10 | Ask Claude Code to build you a pipeline | Module 3 | Screen recording | ~6 min |
-| 11 | Why AI makes things up (and how to fix it) | Module 4 | Talking head + slides | ~6 min |
-| 12 | Connecting Claude to a knowledge base | Module 4 | Screen recording | ~6 min |
+| **3** | **What CLI LLMs are and why they matter** | **Module 1** | **Talking head + slides** | **~20 min** |
+| **4** | **Getting started with Claude Code** | **Module 1** | **Screen recording** | **~20 min** |
+| **5** | **The context file problem** | **Module 1** | **Talking head + slides** | **~20 min** |
+| **6** | **Setting up your beat project** | **Module 1** | **Screen recording** | **~20 min** |
+| **7** | **From prompts to skills** | **Module 2** | **Talking head + slides** | **~20 min** |
+| **8** | **Installing and using journalism skills** | **Module 2** | **Screen recording** | **~20 min** |
+| **9** | **Describing workflows and having AI build them** | **Module 3** | **Talking head + slides** | **~20 min** |
+| **10** | **Ask Claude Code to build you a pipeline** | **Module 3** | **Screen recording** | **~20 min** |
+| **11** | **Why AI makes things up (and how to fix it)** | **Module 4** | **Talking head + slides** | **~20 min** |
+| **12** | **Connecting Claude to a knowledge base** | **Module 4** | **Screen recording** | **~20 min** |
 
 ---
 
@@ -92,7 +92,7 @@ Here's what to do right now. Read the Course Requirements document. Check that y
 
 ---
 
-## Video 3: What CLI LLMs are and why they matter
+## Video 3: What CLI LLMs are and why they matter — ~20 minutes
 
 **Format:** Talking head + slides
 **Length:** ~20 minutes
@@ -220,7 +220,7 @@ Read Mollick's guide in the required readings first. It gives you the conceptual
 
 ---
 
-## Video 4: Getting started with Claude Code
+## Video 4: Getting started with Claude Code — ~20 minutes
 
 **Format:** Screen recording with voiceover
 **Length:** ~20 minutes
@@ -396,7 +396,7 @@ But there's a second half to this module. You've seen what Claude Code can do wi
 
 ---
 
-## Video 5: The context file problem
+## Video 5: The context file problem — ~20 minutes
 
 **Format:** Talking head + slides
 **Length:** ~20 minutes
@@ -526,7 +526,7 @@ In the demo, you'll see this in action: we'll plan a project, write a CLAUDE.md,
 
 ---
 
-## Video 6: Setting up your beat project
+## Video 6: Setting up your beat project — ~20 minutes
 
 **Format:** Screen recording with voiceover
 **Length:** ~20 minutes
@@ -676,7 +676,7 @@ That's the full Module 1 setup. You have a CLI tool, a context file that shapes 
 
 ---
 
-## Video 7: From prompts to skills
+## Video 7: From prompts to skills — ~20 minutes
 
 **Format:** Talking head + slides
 **Length:** ~20 minutes
@@ -802,7 +802,7 @@ In the demo, I'll install the journalism skills library, run source-verification
 
 ---
 
-## Video 8: Installing and using journalism skills
+## Video 8: Installing and using journalism skills — ~20 minutes
 
 **Format:** Screen recording with voiceover
 **Length:** ~20 minutes
@@ -968,7 +968,787 @@ See you in Module 3, where we take these skills and build full automation workfl
 
 ---
 
-## Production notes (updated for 4-module structure)
+
+## Video 9: Describing workflows and having AI build them — ~20 minutes
+
+**Format:** Talking head + slides
+**Module:** 3 — CLI workflows for newsrooms
+
+---
+
+[TALKING HEAD]
+
+You have a skill that works on one document. You type `/meeting-minutes`, paste a transcript, and get a structured summary. That works. But now you want it to work on every transcript in a folder. You want it to run while you're at lunch. You want it to check for new documents, process them, and save the results — without you sitting at the keyboard.
+
+That's a workflow. And this module is about how to build one.
+
+The jump from "I can do this once" to "this runs on its own" is where most people stall out. If you're a programmer, you write a script. If you're not — and most journalists aren't — you hit a wall. You know what you want to happen. You just can't make the computer do it automatically.
+
+CLI tools remove that wall. You describe the sequence in natural language. Claude translates it into a script. You review the script, test it, and decide whether to run it. The AI writes the code. You manage the process. Same pattern as the rest of this course — you describe, it builds, you verify.
+
+[SLIDE: what automation means with a CLI LLM]
+
+Let me be specific about what "automation" means here, because the word can mean different things to different people.
+
+In this course, automation means: a script that runs a sequence of steps in order. Each step has a clear input and a clear output. The script handles the mechanical work — reading files, calling APIs, formatting results, saving output. You handle the judgment work — deciding what to build, reviewing the results, catching problems the script can't see.
+
+You are not handing control to the AI and walking away. You are delegating a defined task, checking the result, and deciding what happens next. That's the managing-not-prompting distinction from Module 1, applied to multi-step work.
+
+Here's what the process looks like. You open Claude Code. You describe what you want: "I need a script that reads every PDF in this folder, extracts the text, summarizes each one in three bullet points, and saves the summaries as markdown files." Claude asks clarifying questions — what model should it use for summarization? Should it skip files that have already been processed? Do you want the summaries in one file or one per document? You answer those questions. Claude writes the script. You read through it. You test it on a small batch. If it works, you scale up. If it breaks, you paste the error back in and Claude fixes it.
+
+At no point did you write code. You described a workflow. The AI translated it into something executable. Your skill was knowing what to ask for and evaluating whether the result was correct. Those are editorial skills, not engineering skills.
+
+[SLIDE: plan mode — /plan command]
+
+Before Claude writes anything, you want to see the plan. This is the same Plan Mode you've been using since Module 1, but it matters more here because workflows have multiple stages, and a mistake in the plan means wasted time in the build.
+
+You type `/plan` and describe what you want. Claude presents an outline: here are the stages, here's what each one does, here's where the data flows. You review that outline the same way an editor reviews a story pitch. Are the stages right? Is anything missing? Is the order logical?
+
+Think of it as seeing the outline before the reporter writes the story. You wouldn't let a reporter spend three hours on a draft without knowing the angle. Don't let Claude spend three minutes building a script without knowing the architecture.
+
+Plan Mode catches problems that are expensive to fix later. If you need the script to handle paywalled articles but you don't mention that in the plan, Claude will build something that chokes on the first paywall it hits. If you need API keys handled securely but that's not in the plan, Claude might hardcode them into the script. The five minutes you spend reviewing the plan save you thirty minutes of debugging.
+
+[SLIDE: multi-stage processing diagram]
+
+The best way to think about a workflow is as a chain of stages. Each stage has one job.
+
+Stage one: get the data. Read files from a folder, fetch URLs, pull records from a database. Stage two: clean the data. Strip HTML, remove ads, normalize formatting. Stage three: process the data. Summarize, extract, classify, translate. Stage four: save the results. Write to a file, update a spreadsheet, send a notification.
+
+Each stage has a clear input and a clear output. The output of stage one becomes the input of stage two. If something fails at stage three, you know it's a processing problem — the data made it through fetching and cleaning. You don't have to debug the whole pipeline. You debug one stage.
+
+This is the Unix philosophy applied to AI workflows: each piece does one thing. When you chain them together, you get something powerful. When something breaks, you know where to look.
+
+And here's the practical benefit for debugging: when a stage fails, the error message tells you which stage failed and why. You paste that error back into Claude. Claude reads it in context — it already knows the full script — and explains what went wrong. You didn't have to describe the error. You just pasted it. That's the debugging loop from Module 1, applied to multi-step work.
+
+[SLIDE: test before you scale]
+
+This is the rule I want tattooed on the inside of your eyelids: test on five before you run on five thousand.
+
+Every workflow should be tested on a small batch first. Five documents. Ten URLs. A handful of records. You run the small batch, check the output manually, and confirm the results are correct. Only then do you scale up.
+
+Why does this matter? Three reasons.
+
+First: API calls cost money. If your workflow calls Claude's API to summarize each document, and you have 10,000 documents, and the script has a bug that produces garbage output — you just paid for 10,000 API calls that produced nothing useful. If you'd tested on five documents first, you'd have caught the bug for a fraction of a cent instead of several dollars.
+
+Second: time. A workflow that processes 10,000 documents might take hours. If it fails at document 8,000, you've wasted most of a workday. If you'd tested on five first, you'd have caught the problem in seconds.
+
+Third: data quality. The first few results tell you whether the output is actually what you wanted. Maybe the summaries are too long. Maybe the extraction is missing a field. Maybe the formatting is wrong. You want to catch that before you've generated 10,000 bad outputs.
+
+The pattern is simple: small test, verify output, scale up. Every time.
+
+[SLIDE: cost awareness — fractions of a cent, multiplied]
+
+Speaking of cost — let's be honest about the numbers. A single API call to summarize a document costs fractions of a cent. That's cheap. But fractions of a cent multiplied by thousands of documents adds up.
+
+Nick Hagar, who builds AI tools for journalism research, runs a beat-monitoring pipeline that classifies news articles for relevance to a specific topic. His cost: about 15 cents a day. That's cheap enough that a newsroom wouldn't think twice about it. But he got to 15 cents a day by making deliberate choices about which model to use, how much text to send per call, and how to batch the work efficiently. If he'd used the most expensive model with the maximum context window for every article, that 15 cents could be five dollars — still not ruinous, but 33 times more expensive for the same result.
+
+The lesson: cost awareness isn't about being cheap. It's about not wasting money on work that doesn't need the most expensive tool. Use the smaller, cheaper model for classification and extraction. Save the larger model for tasks that require real judgment. This is the same editorial instinct you already have — you don't assign your senior investigative reporter to rewrite press releases.
+
+[SLIDE: security — API keys and environment variables]
+
+Security. I'll keep this short because the principle is simple, but ignoring it is dangerous.
+
+API keys should never appear in your scripts. Not in the code, not in comments, not in configuration files that get committed to GitHub. If your API key ends up in a public GitHub repository — and this happens more often than you'd think — anyone can use it. They run up charges on your account. They access services under your name.
+
+The fix: environment variables. Instead of writing your API key directly in the script, you store it in an environment variable on your machine. The script reads the variable at runtime. The key never appears in the code.
+
+When Claude builds a script for you, ask it: "Are there any hardcoded secrets in this script?" Better yet, ask Claude to audit its own code for security issues. It will check for hardcoded API keys, unencrypted credentials, and any unexpected data transmission — places where the script might send your data somewhere you didn't intend.
+
+This takes 30 seconds and prevents the kind of mistake that costs you real money and real embarrassment.
+
+[SLIDE: the debugging loop]
+
+Let me expand on the debugging loop, because you'll use it constantly when building workflows.
+
+Something breaks. You see an error message in the terminal. Here's what you do: select the error message, copy it, paste it directly into Claude Code. That's it. You don't need to explain what the error means. You don't need to diagnose it yourself. Claude has the full context — it knows what script it wrote, what the script was trying to do, and what went wrong. You paste the error. Claude reads it. Claude explains the problem and proposes a fix. You approve the fix. You test again.
+
+This loop — see the error, paste the error, get the fix, test again — is how you debug everything in this course. And it works because the AI has context. It's not seeing the error in isolation. It's seeing the error alongside the code it wrote, the plan it followed, and the conversation you've been having about what this workflow is supposed to do. That's a huge advantage over searching Stack Overflow, where you're reading solutions written for someone else's code.
+
+When the fix doesn't work — and sometimes it won't — you paste the new error. Claude adjusts. You test again. The loop continues until the workflow runs clean. That's not a sign of failure. That's how iterative development works. Professional developers do the same thing. The difference is they read the error messages themselves. You have an AI that reads them for you.
+
+[SLIDE: real-world case studies]
+
+Let me ground this in real journalism work.
+
+Nick Hagar built a beat-monitoring pipeline that scans news articles and classifies them as relevant or irrelevant to a reporter's beat. He published the results: 0.94 F1 score on relevance classification — meaning the AI correctly identified relevant articles 94% of the time. That's good. But here's the catch: when he compared the AI's picks to what human editors considered "newsworthy," the alignment dropped to 31%. The AI was good at saying "this article is about education" but bad at saying "this article is worth covering."
+
+That gap — between relevance and newsworthiness — is the gap where editorial judgment lives. The pipeline handles the mechanical filtering. The reporter handles the editorial decision. Neither one replaces the other.
+
+Clare Spencer has documented multilingual newsroom workflows — at La Voz, The Economist, and the BBC. These are pipelines that take articles written in one language, translate them, and adapt them for a different audience. The technical part — the translation — is fast and cheap. But every pipeline includes a human review step where a bilingual editor checks the translation for tone, cultural context, and accuracy. The automation handles volume. The editor handles quality.
+
+The pattern is the same in both cases. Automate the mechanical work. Keep human review in the loop. Don't trust any step you haven't verified.
+
+[SLIDE: error handling — exponential backoff]
+
+When your workflow calls an external API — a summarization model, a web scraper, a translation service — things will fail. The API might be overloaded. The network might drop. The service might rate-limit you for making too many requests too fast.
+
+Naive error handling crashes the whole workflow when one request fails. Good error handling retries with a delay. The standard pattern is exponential backoff: wait one second after the first failure, two seconds after the second, four after the third. This gives the service time to recover without hammering it with repeated requests.
+
+You don't need to know how to implement this. You describe it: "If an API call fails, retry up to three times with exponential backoff." Claude writes the implementation. But you do need to know to ask for it, because Claude won't always add it by default.
+
+The other half of error handling is graceful degradation. If one document out of a hundred can't be processed — it's corrupted, it's behind a paywall, it's in an unexpected format — the workflow should skip it, log a warning, and keep going. Don't let one bad file kill a hundred-file batch.
+
+[SLIDE: when automation is worth the setup cost]
+
+Not everything should be automated. A workflow has a setup cost — the time to describe it, build it, test it, debug it. If you do a task once, the setup cost exceeds the time you'd spend doing it manually. If you do it every day, the setup cost pays for itself in a week.
+
+Here's my rule of thumb: if you've done the task three times and you'll do it again, it's worth automating. If it's a one-off, just type the prompt. Don't build a pipeline to process one document.
+
+There's a second dimension: how much does correctness matter? If you're reformatting data for internal use, a small error rate is acceptable — you'll catch mistakes when you look at the data. If you're generating content that goes directly to readers, the error rate needs to be near zero, and that means more testing, more validation steps, and more human review checkpoints. The setup cost goes up, but so does the value.
+
+Think about the tasks in your newsweek. Which ones happen repeatedly, follow the same pattern, and consume time that could go to reporting? Those are your automation candidates. Press release processing. Meeting minutes extraction. Data standardization. Source monitoring. Newsletter assembly. These are all workflows — defined sequences of steps with clear inputs and outputs — and they're all good fits for the approach we're covering this week.
+
+[SLIDE: batch processing pattern]
+
+Let me crystallize the batch processing pattern, because you'll use it for almost every workflow.
+
+Step one: build the workflow and test it on a single item. One document, one URL, one record. Confirm the output is correct.
+
+Step two: test on a small batch. Five items. Check every output. Look for edge cases — documents that are shorter than expected, URLs that redirect, records with missing fields.
+
+Step three: run the full batch. Monitor the first few results as they come in. If something looks wrong, stop the batch, debug, and restart.
+
+Step four: spot-check the output. Even after the full batch completes, look at a random sample. Automation doesn't mean you stop checking. It means you check a sample instead of checking everything.
+
+This pattern applies whether you're processing five documents or five thousand. The only thing that changes is the size of the batch at each step.
+
+[SLIDE: arc check — from prototype to workflow]
+
+Here's where we are in the course arc. In Module 1, you set up a project and a context file. In Module 2, you built reusable skills. Now, in Module 3, your prototype becomes a workflow. Before it runs on real data, you test it and check it. Before it runs at scale, you verify on a small batch. Before you commit it to your project, you audit it for security.
+
+The progression: context gave the AI your beat knowledge. Skills gave it your editorial expertise. Workflows give it a defined sequence of steps to execute without you sitting at the keyboard. Each layer adds capability while keeping you in control.
+
+In the demo, I'm going to describe a journalism workflow in plain English, have Claude Code build it, and then intentionally break it — because seeing how to fix things is more useful than seeing things work on the first try. See you there.
+
+---
+
+## Video 10: Ask Claude Code to build you a pipeline — ~20 minutes
+
+**Format:** Screen recording with voiceover
+**Module:** 3 — CLI workflows for newsrooms
+
+---
+
+[SCREEN: Terminal, cursor blinking]
+
+Today I'm going to describe a journalism workflow in plain English and have Claude Code build it. Then we're going to test it — and something is going to go wrong. That's the point. The debugging matters more than the building.
+
+Here's the scenario. I'm a beat reporter and I want a pipeline that takes news article URLs, fetches the content, strips out the ads and navigation, summarizes each article in three bullet points, and saves the result as a markdown file. Think of it as an article-to-newsletter pipeline — I feed it URLs from my beat, and I get clean summaries I can scan or forward to my editor.
+
+Let me open the project.
+
+[SCREEN: Navigating to the greenfield-beat directory, typing `claude`]
+
+I'm in my greenfield-beat directory — the same project from Modules 1 and 2. The CLAUDE.md is here with the beat context. Claude Code is running. Let's start with the plan.
+
+[SCREEN: Claude Code session]
+
+I type `/plan` and then describe the workflow:
+
+"I want a Python script that does the following. It takes a list of URLs — news article links. For each URL, it fetches the page content, strips out ads and navigation to get the article text, summarizes the article in three bullet points using an LLM API call, and saves the summary as a markdown file in an output directory. The filename should be based on the article title. Plan this for me — show me the stages, what each one does, and how the data flows between them. Don't write the script yet."
+
+[SCREEN: Claude presenting the plan]
+
+Look at what Claude proposed. Four stages, just like I described. Stage one: fetch — use the `requests` library to download the page HTML. Stage two: clean — use `BeautifulSoup` to extract the article text and strip navigation, ads, and boilerplate. Stage three: summarize — send the cleaned text to Claude's API and get back three bullet points. Stage four: save — write the summary to a markdown file in the output directory.
+
+It also noted some details I didn't mention. It's proposing to use the `newspaper3k` library for article extraction instead of raw BeautifulSoup — that's a smarter choice because `newspaper3k` is specifically designed for extracting article content from news pages. It's suggesting the output filename use a slugified version of the article title. And it's asking me a question: "Should I use the Anthropic API directly, or would you prefer to call Claude via a subprocess?"
+
+Good question. I type: "Use the Anthropic API with the key read from an environment variable called ANTHROPIC_API_KEY. Never hardcode the key."
+
+[SCREEN: Claude acknowledging, updated plan]
+
+The plan looks right. The stages are clear. The API key is handled correctly. I type: "Looks good. Build it."
+
+[SCREEN: Claude writing the script — several seconds of activity]
+
+Watch it work. It's creating a file called `article_pipeline.py`. It's writing the import statements, the fetch function, the clean function, the summarize function, the save function, and a main function that ties them together. It's also creating a `requirements.txt` with the dependencies.
+
+Claude is explaining as it goes: "The fetch stage uses requests with a timeout and a user-agent header so news sites don't block the request. The clean stage uses newspaper3k's Article class to extract the title and text. The summarize stage sends the text to Claude with a system prompt asking for exactly three bullet points. The save stage writes a markdown file with the title as a header and the bullets below."
+
+[SCREEN: Script visible in the session]
+
+Done. Let me glance at the script. I'm not going to read every line — that's not the point. I'm tracing the stages. Fetch: there's a function that takes a URL and returns HTML. Clean: there's a function that takes HTML and returns the article title and text. Summarize: there's a function that takes text and returns three bullet points. Save: there's a function that takes a title and bullets and writes a markdown file.
+
+The stages match the plan. The API key is read from the environment variable — I can see `os.environ.get('ANTHROPIC_API_KEY')` in the summarize function. Good. No hardcoded secrets.
+
+Now let's test it.
+
+[SCREEN: Claude Code session]
+
+I type: "Install the dependencies and then run the pipeline on these 5 URLs." And I paste five news article URLs from recent local news stories.
+
+[SCREEN: Claude installing requirements, then running the script]
+
+Dependencies installed. The script is running. First URL — processing. The output file appears in the `output/` directory. Let me check it.
+
+[SCREEN: Opening the first output file]
+
+There's the title as a header, three bullet points summarizing the article. The bullets are concise, factual, and they capture the main points. That's what I wanted.
+
+Second URL — processing. Output looks good.
+
+Third URL — and it fails.
+
+[SCREEN: Error message visible in the terminal]
+
+There it is. A rate limit error. `RateLimitError: 429 Too Many Requests`. The API is telling us we're sending requests too fast.
+
+This is why you test before running a full batch. If I'd run this on 200 URLs, the first two would have worked and the next 198 would have failed. That's 198 wasted API calls — well, actually zero wasted calls since they were rejected, but 198 wasted attempts and a broken pipeline.
+
+Let me fix it. And here's the key technique: I'm not going to describe the error. I'm going to paste it.
+
+[SCREEN: Pasting the full error traceback into Claude Code]
+
+I select the error message, paste it into the session, and type: "This happened on the third URL. Fix it."
+
+[SCREEN: Claude reading the error and explaining]
+
+Watch Claude's response. It identifies the problem: no delay between API calls. The script fires requests back-to-back, and the API rate-limits us after the second one. Claude proposes the fix: add a one-second delay between each URL's summarize step, and add retry logic with exponential backoff — if a request fails, wait one second and try again, then two seconds, then four.
+
+I type: "Do it."
+
+[SCREEN: Claude modifying the script]
+
+It's editing the script. I can see the changes: a `time.sleep(1)` between iterations, and a retry wrapper around the API call with exponential backoff. Three retries maximum.
+
+Let me test again. I type: "Run the pipeline again on the same 5 URLs. Delete the existing output files first."
+
+[SCREEN: Script running, all 5 URLs processing]
+
+First URL — done. One-second pause. Second URL — done. One-second pause. Third URL — the one that failed before — done. Fourth. Fifth. All five processed. No errors. The fix worked.
+
+Let me check the output files.
+
+[SCREEN: Browsing the output directory, opening a file]
+
+Five markdown files. Each one has a title, three bullet points. Let me read through the third one — the one that failed on the first run. The summary looks correct. The content matches the article.
+
+Good. But we're not done testing.
+
+[SCREEN: Claude Code session]
+
+I'm going to test another failure scenario — one that isn't a code error. I type: "Run the pipeline on this URL." And I paste a URL I know is behind a paywall.
+
+[SCREEN: Script running on the paywalled article]
+
+It processes without crashing. No error. Let me look at the output file.
+
+[SCREEN: Opening the output file]
+
+The summary says: "Subscribe to continue reading. This article requires a premium membership. Sign up today for full access to our journalism."
+
+That's not a summary of the article. That's a summary of the paywall message. The script did exactly what I told it to do — it fetched the page, extracted the text, and summarized it. But the text it extracted was the paywall notice, not the article.
+
+This is a data quality problem, not a code error. The script ran correctly. The input was bad. And this is an important distinction: not every failure shows up as an error message. Some failures look like success — the script completes, the output exists, but the content is wrong. This is why you check the output, not just whether the script ran.
+
+Let me fix this. I type: "Add a validation step after the clean stage. If the extracted article text is under 200 characters, skip that URL and log a warning that says 'Content too short — possible paywall or empty page.' Don't generate a summary for it."
+
+[SCREEN: Claude modifying the script]
+
+Claude adds the validation. After extraction, it checks the character count. If it's under 200, it prints a warning and moves to the next URL. No API call wasted on garbage input.
+
+Let me test the paywall URL again.
+
+[SCREEN: Running the script]
+
+There it is: "WARNING: Content too short (127 chars) — possible paywall or empty page. Skipping." No output file generated. No API call made. That's the correct behavior.
+
+[SCREEN: Claude Code session]
+
+Now let me do a security review. This is a step you should build into every workflow before you share it or run it on real data. I type: "Audit this script for security issues. Check for hardcoded secrets, unnecessary data transmission, and any place where user data might be sent somewhere unexpected."
+
+[SCREEN: Claude reviewing the code]
+
+Claude scans the script and reports back. "No hardcoded API keys — the key is read from the environment variable. The script sends article text to the Anthropic API for summarization — this is expected and necessary for the workflow. No other outbound data transmission. The output is written to local files only. No logging of the API key. One suggestion: add error handling around the environment variable read so the script fails clearly if the key isn't set, rather than failing with a confusing None error during the API call."
+
+That last point is worth doing. If someone clones this project and tries to run the pipeline without setting up their API key, the current script would fail deep inside the summarize function with an opaque error about None not being a valid authentication token. That's confusing. A clear message at startup — "ANTHROPIC_API_KEY not set, exiting" — tells them exactly what to do.
+
+I type: "Make that change."
+
+[SCREEN: Claude adding the check]
+
+Done. The script now checks for the API key at startup and exits with a clear message if it's missing. That's the kind of small fix that separates a script you built for yourself from a tool a colleague can pick up and use.
+
+[SCREEN: Claude Code session]
+
+Time for the full test. I type: "Run the pipeline on these 10 URLs." And I paste ten article links — a mix of local news, state government coverage, and one more URL I suspect might be paywalled.
+
+[SCREEN: Script running through 10 URLs]
+
+Watch it go. Each URL processes with a one-second delay. URL four triggers the paywall warning — skipped. The rest process normally. Nine output files generated. One skipped with a logged warning.
+
+Let me spot-check the results. I'll open three of them at random.
+
+[SCREEN: Opening output files]
+
+First one — clean summary, three bullets, captures the main points. Second — same, looks accurate. Third — good. The summaries are consistent in format and length. The pipeline is working.
+
+[SCREEN: Claude Code session]
+
+Now I want to show you something that comes up constantly in real work: modifying an existing pipeline. The workflow runs, but now you want it to do something slightly different. This is where the conversational nature of CLI tools pays off — you don't rebuild from scratch. You describe the change.
+
+I type: "I want to add a field to the output. For each article, extract the publication date from the page metadata — look for meta tags like `article:published_time`, `datePublished`, or `og:published_time`. Add it below the title in the markdown output, formatted as 'Published: YYYY-MM-DD'. If no date is found, write 'Published: unknown'. Update the pipeline."
+
+[SCREEN: Claude modifying the script]
+
+Watch what happens. Claude doesn't rewrite the whole script. It adds a date extraction function that checks the HTML meta tags in the order I specified. It modifies the save function to include the date line. It updates the clean stage to return the date alongside the title and text.
+
+The changes are surgical. The fetch stage is untouched. The summarize stage is untouched. The retry logic is untouched. Claude only modified the stages that needed to change. That's the benefit of the multi-stage architecture — changes are localized. If I'd built this as one monolithic function instead of four separate stages, every modification would risk breaking something unrelated. The staged design makes the pipeline easy to extend.
+
+This is also a pattern you'll use constantly: once a pipeline works, you modify it by describing the change in a sentence or two. You don't rebuild. You iterate. The AI understands the existing code and applies targeted edits. Over time, your pipeline gets better — more fields, better validation, smarter error handling — and each improvement is just another natural-language request.
+
+Let me test the updated pipeline on a few URLs.
+
+[SCREEN: Running the script on 3 URLs]
+
+All three process. Let me check the output.
+
+[SCREEN: Opening an output file]
+
+There it is: the title, then "Published: 2026-02-28", then the three bullet points. The date was extracted from the meta tags. Let me check another one.
+
+[SCREEN: Opening a second output file]
+
+"Published: 2026-03-01." Good. And I happen to know one of these test articles doesn't have clean metadata — let me find it.
+
+[SCREEN: Opening a third output file]
+
+"Published: unknown." The script handled the missing date correctly without crashing. That's the graceful degradation pattern in action — when the data isn't there, log what happened and keep going.
+
+[SCREEN: Claude Code session]
+
+Let me commit everything to Git. I type: "Commit the pipeline script, the requirements file, and the test output files to Git with the message 'Add article-to-newsletter pipeline with retry logic, paywall detection, and date extraction.'"
+
+[SCREEN: Git commit happening]
+
+Done. The pipeline is version-controlled. If I make changes next week, I can see what I changed. If a colleague clones the repo, they get the pipeline. If I break something, I can roll back.
+
+Let me push it to GitHub too. I type: "Push to GitHub."
+
+[SCREEN: Git push]
+
+The project is on GitHub. The pipeline, the test outputs, the context file, the skills from Module 2 — all in one repository. Anyone who clones it gets the full toolkit. And because it's version-controlled, the commit history tells the story: here's when the pipeline was created, here's when retry logic was added, here's when paywall detection went in, here's when date extraction was added. If something breaks next month, you can trace back through the history and find when the problem was introduced.
+
+[SCREEN: Terminal visible, voiceover]
+
+Let me recap what just happened, because we covered a lot of ground.
+
+I described a workflow in plain English. Claude planned it, I reviewed the plan, and Claude built it. We tested on a small batch and hit a rate limit error. I pasted the error — didn't describe it, pasted it — and Claude fixed it by adding delays and retry logic. We tested again and found a data quality issue: the pipeline summarized a paywall message instead of an article. We added a content-length check to catch that. We ran a security audit. We tested at full scale. We added a new feature — date extraction — by describing the change in natural language. And we committed the whole thing to version control.
+
+That's the workflow for building any automation in this course. Describe, plan, build, test, break, fix, test again, secure, commit. The AI handles the code. You handle the decisions.
+
+Notice what I didn't do at any point: I didn't write Python. I didn't debug by reading stack traces and tracing through code. I didn't look up library documentation. I described what I wanted, pasted errors when things broke, and approved fixes when they looked right. The technical skill was Claude's. The editorial skill — knowing what to build, what to test, and what to check — was mine.
+
+One more thing. That paywall failure is the most important moment in this demo. The rate limit error was obvious — the script crashed and told us what went wrong. The paywall failure was silent. The script succeeded. The output existed. But the content was wrong. The lesson: you can't just check whether the script ran. You have to check what it produced. Automation without verification is just fast mistakes. Build the verification into your process — spot-check outputs, add validation steps, and never assume that a clean run means correct results.
+
+[SCREEN: voiceover, project directory visible]
+
+Your project now has a context file from Module 1, custom skills from Module 2, and a tested, debugged, version-controlled workflow from Module 3. Each layer built on the last. The context file tells the AI what your beat is about. The skills give it reusable editorial instructions. The workflow chains those capabilities into a pipeline that runs on multiple documents without you sitting at the keyboard. And at every stage, you stayed in control — reviewing plans, checking outputs, approving fixes.
+
+In Module 4, we're going to connect this project to external data sources — your own document archives, databases, APIs — and tackle the problem that makes all of that hard: getting the AI to cite its sources accurately and admit when it doesn't know something. See you there.
+
+---
+
+
+## Video 11: Why AI makes things up (and how to fix it) — ~20 minutes
+
+**Format:** Talking head + slides
+**Module:** 4 — Agents, tools, and data access
+
+---
+
+[TALKING HEAD]
+
+AI makes things up. You know this. The term is hallucination — the model produces text that sounds confident and specific but has no basis in fact. A name that doesn't exist. A citation to a paper that was never published. A statistic that's close to the real number but off by enough to be wrong.
+
+You've probably seen this yourself. You paste a document into Claude or ChatGPT and ask a question, and somewhere in the response there's a detail that doesn't come from the document at all. The model filled it in. It generated something plausible instead of something true.
+
+For most uses of AI, this is annoying. For journalism, it's disqualifying. A hallucinated fact in a published story is a correction, a retraction, or a lawsuit. There's no middle ground. So if you're going to use AI in your reporting workflow — and you should, because the efficiency gains are real — you need to understand exactly why hallucination happens and what the fix looks like.
+
+The explanation is straightforward. And it leads directly to the tools you'll use in this module.
+
+[SLIDE: two types of knowledge — parametric vs. grounded]
+
+Here's the core distinction. AI models have two ways of knowing things, and they're not equally reliable.
+
+The first is **parametric knowledge**. This is everything the model absorbed during training. Billions of documents, web pages, books, articles — compressed into the model's parameters. When you ask Claude who won the 2020 presidential election, it's drawing on parametric knowledge. That information was in the training data.
+
+Parametric knowledge has three problems. First, it's frozen at a cutoff date. The model doesn't know what happened after its training data ends. If a city council voted on something last Tuesday, the model has no idea. Second, even within its training window, it's sometimes wrong. The training data contains errors, contradictions, and outdated information. The model absorbed all of it. Third — and this is the one that matters most for journalism — parametric knowledge is not citable. You can't trace it back to a specific source. "The model's training data" is not an attribution.
+
+The second type is **grounded knowledge**. This is information retrieved from actual documents at the time you ask the question. The model didn't memorize it during training — it's reading it right now, from a specific file, and it can tell you which file it came from. Grounded knowledge has a source. It has a citation. It traces back to an origin you can verify.
+
+That distinction — parametric versus grounded — is the entire foundation of this module.
+
+[SLIDE: RAG pipeline — retrieve, then generate]
+
+The technique for replacing parametric knowledge with grounded knowledge is called RAG — retrieval-augmented generation. The name describes exactly what it does. You augment the generation step with a retrieval step.
+
+Here's how it works. You ask a question. Before the model generates a response, the system searches a knowledge base — a collection of documents you've provided. It finds the documents most relevant to your question. Those documents get passed to the model along with your question. The model then generates its response based on those retrieved documents, not its training data.
+
+The result is different in a specific way: the response cites its sources. Not "according to my training data" — but "according to council-minutes-2026-02-12.md, paragraph 4." You can open that file and check. The attribution survives the AI step.
+
+For a journalist, that's the difference between a tool you can use and a tool you can't.
+
+[SLIDE: attribution chain — question to source to output]
+
+Let me make this concrete with a reporting scenario.
+
+You're covering a city budget dispute. You have 40 documents: council minutes, press releases, budget memos, interview transcripts. You ask your AI assistant: "What was the original cost estimate for the Riverside Park renovation, and how has it changed?"
+
+Without RAG — without grounded knowledge — the model draws on whatever it absorbed during training. Maybe it saw a news article about a park renovation in some city. Maybe it saw budget figures from a different municipality. It generates a plausible-sounding answer with specific numbers that may or may not be real. You have no way to verify where those numbers came from without doing the research yourself, which defeats the purpose.
+
+With RAG, the model searches your 40 documents. It finds the relevant council minutes and the budget memo. It pulls the actual figures from those documents. It tells you: "The original estimate was $2.1 million according to the March budget memo. The revised estimate of $3.4 million appears in the June council minutes, with the increase attributed to soil remediation costs." You can open both files and check.
+
+"Claude said this" is not attributable. "Claude synthesized this from council-minutes-2026-02-12.md, paragraph 4" is. That's the standard. If you can't trace an AI-generated claim back to a source document, it doesn't belong in your reporting.
+
+[SLIDE: newsroom examples — Washington Post, New York Times, Geneea]
+
+Newsrooms are already building this way. Let me walk through three examples at different scales.
+
+The Washington Post built an internal tool called **Haystacker**. It analyzes video, photos, and text across large document sets — the kind of multi-step research that would take a team of reporters days to do manually. Haystacker can process thousands of pages of court filings or government documents and surface patterns, connections, and anomalies. Think about what that means for an investigative team sitting on a document dump from a FOIA request: instead of dividing pages among reporters and hoping nobody misses the one paragraph that matters, the tool can surface every potentially relevant passage across the entire set. But — and this is the part that matters — human editors review every output before anything goes to publication. The tool does the searching. The journalists do the verification and the editorial judgment.
+
+The New York Times built **Echo**, an internal tool for article summarization, SEO headline generation, and newsletter drafting. Some of Echo's tasks are more automated than others. Summarization and headline suggestions run with lighter oversight — the output is a starting point that editors refine. Newsletter drafting gets heavier review. The Times drew a line: tasks where a wrong output is easy to catch and low-stakes get more automation. Tasks where a wrong output could mislead readers get more human review. That's a thoughtful way to draw the line, and it maps to a principle you can apply in your own work.
+
+**Geneea**, a Czech AI company, built a RAG system specifically for newsrooms. Journalists query their own archives — years of published articles — and get answers with citations to the original stories. Need to reconstruct the timeline of a political scandal from three years of coverage? Ask the system. It returns the timeline with links to each source article. The citations aren't decorative — they're the point. The system is useful because you can verify every claim it makes against the original reporting.
+
+Three different scales, three different implementations, same principle: the AI retrieves from real documents and the humans verify the output.
+
+[SLIDE: autonomy spectrum — read-only, supervised action, autonomous]
+
+This brings us to a broader question: how much autonomy should an AI tool have?
+
+There's a spectrum. On one end: **read-only**. The AI researches and summarizes, but it takes no action. You read the output and decide what to do with it. On the other end: **autonomous**. The AI acts on its own — sends emails, publishes content, updates databases — and you review the log afterward.
+
+In the middle: **supervised action**. The AI proposes actions — drafts an email, suggests a story lead, flags a discrepancy in a dataset — and you approve, modify, or reject each one before it happens.
+
+For journalism, supervised action is the right level. Not because there's a regulation that says so, but because you are still the journalist. The AI is a research collaborator, not a reporter. It doesn't have sources. It doesn't have editorial judgment. It doesn't understand the political context of why a council member's vote matters. You do.
+
+Human-in-the-loop is not optional. Not as a disclaimer, not as a compliance checkbox — but because every fact that goes into a published story needs a human who decided it belonged there.
+
+[SLIDE: agents vs. chatbots — tools, autonomy, multi-step plans]
+
+You've been hearing the word "agent" more and more. Let me define it precisely, because it gets used loosely.
+
+A chatbot takes your input and produces output. One turn at a time. You ask, it answers. That's what you've been doing in browser-based AI interfaces.
+
+An **agent** is different in three specific ways. First, it has **tools** — access to files, databases, APIs, web searches, or other software. It can take actions beyond generating text. Second, it has **autonomy** — it can decide which tools to use and in what order, without you specifying every step. Third, it executes **multi-step plans** — it breaks a complex task into subtasks and works through them sequentially, adjusting its approach based on the results of each step.
+
+Claude Code, the tool you've been using all course, is an agent. When you say "read all the PDFs in this folder and find every mention of Greenfield Construction," Claude Code decides how to approach that — which files to read first, how to search them, how to organize the results. It uses tools (file reading, text search) and follows a multi-step plan. You didn't specify the steps. You specified the goal.
+
+In non-interactive mode — `claude -p` with a prompt passed directly — the agent runs without back-and-forth. It takes the prompt, executes the plan, and returns the result. That's how scheduled automation works: you describe the task, the agent handles the execution. You saw this pattern in Module 3 when we built a pipeline that could run on a schedule. The difference in Module 4 is that the agent has access to external data — not just the files in your project folder, but a structured knowledge base it can search and cite.
+
+[SLIDE: MCP architecture — server, client, protocol]
+
+So how do you connect an agent to your data? That's where MCP comes in.
+
+**Model Context Protocol** is an open standard created by Anthropic for connecting AI models to external data sources and tools. Think of it as a bridge between Claude and the things Claude needs to access — your files, a database, an API, a spreadsheet.
+
+An MCP server is a small program that exposes a data source in a standardized way. There are MCP servers for file systems, databases, Google Drive, Slack, GitHub — dozens of them. When you configure Claude Code to use an MCP server, Claude gains the ability to search, read, and interact with that data source as if it were a native tool.
+
+In today's demo, you'll see this in action: a folder of journalism documents becomes a queryable knowledge base. Claude searches it, retrieves relevant content, and cites specific files in its answers. That's RAG, implemented through MCP.
+
+The configuration is a JSON file — and you don't have to write it yourself. You describe what you want to connect, and Claude handles the setup. That's the pattern for this whole course.
+
+[SLIDE: De Cooker's quote extraction research]
+
+Before we move to the demo, I want to highlight one piece of research that connects several ideas from this module.
+
+Jessy de Cooker, writing for Generative AI in the Newsroom, built a system to extract and classify quotes from newspaper articles using GPT-3.5 and Pydantic structured outputs. She tested it on 2,464 Dutch newspaper articles and measured the results against human annotation. The overall F1 score — a standard measure of accuracy — was 0.75. Strong on direct quotes, weaker on paraphrases and split quotes.
+
+Two findings matter here. First, the model showed systematic bias against non-Western names and Dutch names outside the dominant training data. Names that appeared less frequently in the training corpus were more likely to be missed or misattributed. That's a parametric knowledge problem — the model's training data has gaps, and those gaps create blind spots in the output. If you're using AI to process source material, you need to know that some sources are less visible to the model than others.
+
+Second — and this connects to everything we've covered about context files and skills — de Cooker argues that prompt design is a methodological artifact. The specific wording of the prompt changes the results. Different prompts produce different extraction patterns. That means the prompt isn't neutral. It's a research instrument, and like any research instrument, it needs to be documented, versioned, and shared. That's exactly what CLAUDE.md files and skills do. They make the prompt visible, repeatable, and auditable.
+
+[SLIDE: Joe's agent infrastructure — Raspberry Pi, Gmail, Slack, Telegram]
+
+I want to tell you about something I built, because it illustrates both the potential and the problems of agent infrastructure.
+
+I have a Claude Code agent running on a Raspberry Pi — a $180 computer sitting on a shelf in my home office. It has its own Gmail account, Google Drive, and Calendar access. It connects to Slack and Telegram. It runs on a schedule: full check-ins every two hours on weekdays, lighter monitoring scans every 15 minutes.
+
+The agent reads my email, checks for new meeting transcripts, monitors Slack channels for mentions, and drafts responses. It never sends anything without my approval. It drafts an email, sends me a Telegram notification with approve, edit, and cancel buttons, and waits. I tap a button on my phone. That's the human-in-the-loop.
+
+I wrote about this in detail on my Substack — that article is in your readings for this module — and the "what goes wrong" section is the most important part. Because things go wrong.
+
+Early on, a test accidentally sent an email to a real contact. The approval system wasn't fully wired up yet, and a button tap during testing triggered a send. That's a one-way door — you can't unsend an email. The fix: a confirmation step that shows the full recipient list before sending. Written after the failure, not before.
+
+The CPU locked up during a heavy processing job — the Raspberry Pi ran out of memory and the whole system froze. The fix: resource limits on agent sessions, with automatic shutdown if memory usage crosses a threshold.
+
+The scheduler silently failed for three days. No errors in the logs — it just stopped running. A cron job wasn't loading the right environment variables after a system update. I didn't notice because there were no error notifications — the absence of activity is hard to detect. The fix: a heartbeat check that sends an alert if the scheduler hasn't run in the expected window.
+
+Each of those failures produced a rule. The rules are written into the system's configuration files — the same kind of context files you've been building all course. What oversight looks like in practice isn't a policy document. It's a set of rules written after specific things went wrong.
+
+[SLIDE: where data connections break]
+
+Let me be direct about what's hard. Setting up an MCP connection or a RAG pipeline is not the difficult part. Making it work reliably over time is.
+
+Permissions change. An API token expires and your pipeline silently returns empty results instead of throwing an error. A database schema gets updated and the fields your queries depend on no longer exist. A file path changes because someone reorganized a shared drive. The MCP server you configured yesterday can't connect today because a firewall rule changed overnight.
+
+These aren't exotic failure modes. They're Tuesday. Making data connections work reliably is harder than setting them up in the first place. And the failure pattern is almost always the same: something silently stops working, and you don't notice until you look at the output and realize it's wrong or empty.
+
+The defense is the same one we've used all course: test frequently, check outputs, and don't trust a pipeline that hasn't been verified recently. The debug cycle you learned in Module 3 — see the error, paste the error, get the fix — applies here too. Most MCP problems are config problems. Wrong paths, expired tokens, typos in JSON. Claude can diagnose them if you show it the error.
+
+[SLIDE: arc check — live and shareable]
+
+You're at the final stage of the course arc. In Module 1, you set up the project and put it on GitHub. In Module 2, you built skills — reusable tools that encode your editorial expertise. In Module 3, you built workflows and learned to test and debug them. Now, in Module 4, you connect your project to real data and make it a complete, shareable system.
+
+The arc check for this stage: your project is live — connected to documents, producing grounded, citable output — and shareable. Someone can clone your repository and inherit the same setup: the context file, the skills, the workflows, the data connections.
+
+[TALKING HEAD]
+
+In the demo, you'll see all of this in practice. I'm going to connect Claude to a local archive of journalism documents using MCP, query those documents with source citations, show you what happens when the knowledge base doesn't have the answer, debug a common configuration error, and then commit the finished project and push it to GitHub.
+
+This is the last demo of the course. And at the end, I'm going to close out the four modules and tell you what comes next. See you there.
+
+---
+
+## Video 12: Connecting Claude to a knowledge base — ~20 minutes
+
+**Format:** Screen recording with voiceover
+**Module:** 4 — Agents, tools, and data access
+
+---
+
+[SCREEN: Terminal, cursor blinking]
+
+Today I'm connecting Claude to a local archive of journalism documents using MCP. At the end of this video, we're publishing the finished project to GitHub. This is the last demo of the course — the capstone. Everything you've built over four weeks comes together here.
+
+Let me open the project.
+
+[SCREEN: Typing `cd ~/Documents/greenfield-beat && claude`]
+
+I navigate to the beat project directory — the same project we've been building since Module 1. I type `claude` and press Enter.
+
+This project already has a CLAUDE.md with beat context and style rules. It has skills from Module 2 — source verification, meeting minutes extraction. It has the article-to-newsletter pipeline from Module 3. Now we're adding the last piece: a connection to a document archive that Claude can search and cite.
+
+[SCREEN: Claude Code session open]
+
+First, I need to set up MCP. I'm going to describe what I want and let Claude handle the configuration.
+
+I type: "I want to connect Claude to a local folder called beat-archive as a knowledge base. Set up an MCP server that lets me query those documents. Walk me through what you're doing."
+
+[SCREEN: Claude explaining and configuring MCP]
+
+Watch what Claude does here. It's explaining what MCP is — a protocol for connecting AI to data sources. It's going to create or update a configuration file that tells Claude Code where to find the MCP server and what it can access.
+
+Claude is writing the config now. It's setting up a filesystem MCP server pointed at the `beat-archive` directory inside our project. The configuration goes into `.claude.json` — that's the file Claude Code reads at startup to know which MCP connections are available.
+
+Let me look at what it wrote. There's the server definition — the type, the path to the archive directory, the permissions. This is JSON, and it's readable. You could open this file and understand what it's doing. But you didn't have to write it. You described the goal and Claude produced the configuration.
+
+Now I need to restart Claude Code to load the new MCP connection. I'll exit and re-launch.
+
+[SCREEN: Exiting session, typing `claude` again]
+
+Back in. Let me verify the connection is active. I type: `/mcp`
+
+[SCREEN: MCP status showing the filesystem server]
+
+There it is. The filesystem server is connected, pointed at the beat-archive directory. Claude now has access to those files as a queryable knowledge base.
+
+But the archive is empty. Let's fix that.
+
+[SCREEN: Claude Code session]
+
+I type: "Organize the example documents we've been using throughout the course — the press releases, council minutes, and interview notes — into the beat-archive folder. Create a clean directory structure."
+
+[SCREEN: Claude moving and organizing files]
+
+Claude is creating subdirectories inside beat-archive: `press-releases`, `council-minutes`, `interviews`. It's copying the documents we've used in previous demos — the park closure press release, the council minutes excerpt, the budget memo, the interview transcripts. These are the same files from Modules 1 through 3, now organized as a searchable archive.
+
+Let me show you what the folder looks like.
+
+[SCREEN: Directory listing of beat-archive]
+
+There it is. Six documents across three categories. This is a small archive — in a real newsroom, you'd have hundreds or thousands of documents. You might have five years of council minutes, a decade of budget reports, a folder of interview transcripts that grows every week. The principle is the same at any scale — the more documents in the archive, the more useful the queries become, because the model has more material to search and cross-reference. Let's start querying.
+
+[SCREEN: Claude Code session]
+
+First question. I type: "What did the city council decide about Riverside Park?"
+
+[SCREEN: Claude searching the archive and responding]
+
+Watch the response. Claude searched the archive, found the relevant council minutes, and pulled the specific decision. Look at the citation: it names the file — `council-minutes/council-minutes-excerpt.md` — and references the specific section where the vote is recorded. The park renovation was approved 5-2, with Davis and Ramirez dissenting.
+
+That's not parametric knowledge. Claude didn't pull this from its training data. It read a specific document in your archive and cited it. If you wanted to verify this, you'd open that file and check. The attribution chain is intact.
+
+Second question. I type: "Are there any mentions of contractor billing in these documents?"
+
+[SCREEN: Claude searching and responding]
+
+This one is more interesting because it has to search across multiple documents. Claude found references in the council minutes — a discussion about cost overruns on the park project — and in the budget memo, which itemizes contractor payments. It cites both files, with the relevant sections noted.
+
+Notice what it didn't do: it didn't invent a contractor billing scandal that isn't in the documents. It reported what it found. The response is grounded in the actual files.
+
+Third question. I type: "Write a background paragraph on the park closure situation, citing your sources."
+
+[SCREEN: Claude generating a sourced paragraph]
+
+This is where the value becomes clear for daily reporting. Claude wrote a paragraph that synthesizes information from three documents: the press release announcing the closure, the council minutes recording the vote, and the budget memo showing the cost estimates. Each claim in the paragraph has a citation. The cost figure comes from the budget memo. The vote count comes from the council minutes. The closure timeline comes from the press release.
+
+If this paragraph appeared in a story, every fact in it traces back to a source document. That's the standard.
+
+Now let me push it further. I type: "Cross-reference the budget figures mentioned in the press release with the council minutes. Do the numbers match?"
+
+[SCREEN: Claude cross-referencing documents]
+
+This is a multi-step analysis. Claude is reading both documents, pulling the dollar figures from each, and comparing them. The press release says the renovation will cost $2.1 million. The council minutes reference a revised estimate of $3.4 million due to soil remediation. The press release was issued before the cost revision — it's using outdated figures.
+
+That's a discrepancy that a reporter should know about. The press release went out to the public with one number; the council approved a different, higher number. Was the press release written before the revision? Did someone in the mayor's office use the old figure deliberately? Those are editorial questions — Claude can't answer them. But it surfaced the discrepancy, which is the hard part. Finding the mismatch across two documents buried in a stack of files. That's what the archive connection gives you.
+
+And Claude found it by reading two documents and comparing the numbers. Not from training data — from your archive.
+
+[SCREEN: Claude Code session]
+
+Now I want to show you something equally important: what happens when the archive doesn't have the answer.
+
+I type: "What's the mayor's position on the new highway project?"
+
+[SCREEN: Claude responding that it doesn't have relevant documents]
+
+Look at the response. Claude searched the archive and didn't find any documents about a highway project. Instead of making something up — instead of generating a plausible-sounding answer from its training data — it told me it doesn't have the evidence.
+
+This is the correct behavior. This is what you want. An AI tool that says "I don't have documents about that" is more useful than one that fabricates an answer. The absence of evidence is information. It tells you the archive doesn't cover this topic, which means you need to find the source material yourself before reporting on it.
+
+If this were a chatbot without grounded knowledge, you might get a paragraph about highway projects that sounds specific but has no basis in any real document. That's worse than no answer at all, because it looks like it could be real.
+
+[SCREEN: Claude Code session]
+
+Now let me show you what happens when the MCP configuration breaks, because it will break. This is the most common class of problems you'll hit.
+
+I'm going to simulate a config error. I'll ask Claude to read the MCP config file and I'll change the archive path to something that doesn't exist.
+
+I type: "Open the .claude.json file and show me the MCP configuration."
+
+[SCREEN: Config file visible]
+
+There's the config. The archive path is `./beat-archive`. I'm going to change it to `./beat-archives` — plural, a typo. A one-character difference.
+
+I type: "Change the beat-archive path in the MCP config to beat-archives — I want to test what happens with a wrong path."
+
+[SCREEN: Claude updating the config]
+
+Done. Now I'll restart Claude Code and try a query.
+
+[SCREEN: Exiting and relaunching Claude]
+
+I type: "What did the city council decide about Riverside Park?"
+
+[SCREEN: Error or empty response]
+
+There it is. The MCP server either threw an error or returned nothing. The path doesn't exist, so there's nothing to search. In some cases you'd see an explicit error message. In others — and this is the more dangerous case — you'd get silence. No results, no error. Just an empty response that looks like the archive has no relevant documents, when the real problem is that the archive isn't connected at all.
+
+This is what I meant in the lecture about silent failures. The system doesn't always tell you something's wrong. Sometimes it just gives you nothing and you have to figure out why.
+
+Let me fix it. I paste the error back — or describe the symptom — to Claude.
+
+I type: "The MCP filesystem server isn't returning any results. I just changed the path in .claude.json. Can you check the config and fix it?"
+
+[SCREEN: Claude diagnosing and fixing the typo]
+
+Claude opened the config, found the typo — `beat-archives` instead of `beat-archive` — and fixed it. One character. That's all it took to break the entire knowledge base connection.
+
+Most MCP problems are config problems: wrong paths, missing permissions, typos in JSON. If you remember one thing from this debugging section, make it this: when your MCP connection stops working, check the config file first. Nine times out of ten, that's where the problem is. The debug cycle is the same one you've used all course. See the problem. Show it to Claude. Get the fix.
+
+Let me restart one more time and verify.
+
+[SCREEN: Relaunching, running /mcp, asking a test query]
+
+Connection is back. The test query returns results with citations. We're good.
+
+[SCREEN: Claude Code session]
+
+Now let me compare grounded versus ungrounded answers side by side, so you can see the difference clearly.
+
+I type: "Without using the MCP knowledge base, just from your general knowledge, what do you know about the Riverside Park renovation in Greenfield?"
+
+[SCREEN: Claude's ungrounded response]
+
+Look at this. Without the archive, Claude either says it doesn't have specific information about this — which is honest — or it generates a generic response about park renovations that sounds plausible but isn't about this specific project. There are no citations. No file names. No specific dates or dollar figures from real documents.
+
+Now I ask the same thing with the archive connected.
+
+I type: "Now use the beat-archive to answer: what do you know about the Riverside Park renovation?"
+
+[SCREEN: Claude's grounded response with citations]
+
+Same question. With MCP, the response has specific figures from the budget memo, vote counts from the council minutes, timeline details from the press release. Every claim has a citation.
+
+That's the difference between parametric and grounded knowledge, made visible. Same model, same question. The archive is what makes it citable. And if you take the archive away — if you disconnect the MCP server — the model goes back to generating from training data. The grounding isn't permanent. It depends on the connection being active and the documents being accessible. That's why the config matters, and that's why you test it.
+
+[SCREEN: Claude Code session]
+
+Let's write a README for this project. It's going to be the documentation that someone sees when they find the repo on GitHub.
+
+I type: "Write a README for this project. Explain what it does, what's in the repository, how to set it up including the MCP configuration, how to use it, and what its limitations are. Be specific about the limitations — what the system can't do, what kinds of questions it won't answer well, where human judgment is still required."
+
+[SCREEN: Claude writing the README]
+
+Let me scroll through what it wrote. There's a project description — a beat reporting toolkit for covering Greenfield city government. A list of what's in the repo: CLAUDE.md for project context, skills for meeting minutes and source verification, the newsletter pipeline from Module 3, the MCP configuration for the document archive.
+
+Setup instructions: clone the repo, install Claude Code, restart to load MCP. Usage examples: sample queries with expected output. And the limitations section — this is the important part. The system only knows what's in the archive. It can't verify claims against external sources. It can't assess whether a source is credible, only whether a document contains a particular claim. Budget figures may be outdated if newer documents haven't been added. Human review is required before any output is used in published reporting.
+
+That limitations section is doing real work. It tells the next person who uses this project exactly where the boundaries are.
+
+[SCREEN: Claude Code session]
+
+Time to commit and push. I type: "Commit everything — the MCP configuration, the beat-archive folder, the README, and any other changes — with the message 'Add document archive with MCP, README, and course capstone.' Then push to GitHub."
+
+[SCREEN: Claude running git add, commit, push]
+
+Done. Let me open the repository in a browser.
+
+[SCREEN: GitHub repository page]
+
+There it is. Look at what's in this repo.
+
+CLAUDE.md — the context file you wrote in Module 1. Every beat-specific rule, every style preference, every workflow instruction. Claude reads this at the start of every session.
+
+The `.claude/commands/` directory — your skills from Module 2. Meeting minutes extraction, source verification. Reusable tools that encode your editorial expertise as slash commands.
+
+The pipeline script from Module 3 — the article-to-newsletter workflow you built, tested, broke, fixed, and committed.
+
+The `.claude.json` config — the MCP connection to your document archive. The bridge between Claude and your source material.
+
+The `beat-archive/` folder — the actual documents. Press releases, council minutes, interview transcripts. The knowledge base that grounds Claude's answers in real sources.
+
+And the README — documentation that tells anyone who finds this repo what it does and how to use it.
+
+Every decision about how Claude works on this project is committed here. Clone this repository on a new machine and the same context comes with it. The same skills load. The same MCP connection configures itself. The same editorial rules apply. Hand the link to a colleague and they inherit the same environment you built.
+
+That's context engineering at full scale. That's what you've spent four weeks building.
+
+[SCREEN: GitHub repo, then transition to voiceover]
+
+Your final project asks you to build something like this for a real journalism use case. It can be a pipeline, a skill library, a RAG setup, or some combination. The requirements are: it solves a real problem on your beat, it has a CLAUDE.md, it's documented, and it's on GitHub. The rest is your design. The exercise description has the full details and the rubric.
+
+[VOICEOVER, screen fades to course title card]
+
+Let me close out the course.
+
+Four weeks ago, you were using AI through a browser. You'd type a message, get a response, type another message. Each session started from zero. You couldn't hand the AI a folder of documents. You couldn't save a workflow and reuse it. You couldn't share what you'd built with a colleague.
+
+Here's what you built.
+
+In Module 1, you moved from the browser to the terminal. You installed Claude Code, set up a project, and wrote a context file that gives the AI your beat knowledge at the start of every session. You learned the difference between apps and harnesses — and you started working at the harness layer.
+
+In Module 2, you turned your best prompts into skills — reusable tools that run with a slash command instead of being retyped from memory. You installed a journalism skills library and built a custom skill for your own beat. The prompts became infrastructure.
+
+In Module 3, you described a multi-step workflow in plain English and had Claude build it. You tested it, watched it fail, diagnosed the failure, and fixed it. You learned the core loop: describe, build, test, break, fix, commit. And you learned to check the security of what you build before running it on real data.
+
+In Module 4 — today — you connected Claude to a document archive and saw the difference between parametric and grounded knowledge. You asked questions and got answers with citations to specific files. You saw the system refuse to answer when it didn't have the evidence. And you pushed the finished project to GitHub, where anyone can clone it and inherit the same setup.
+
+That's the arc: from typing into a chat window to building a documented, tested, shareable AI workflow that's grounded in your own source material.
+
+The tools will change. Claude Code will get updates. New CLI tools will appear. MCP will evolve. Models will get more capable. The specific software you used in this course will look different in a year.
+
+The way of working won't change. Writing clear context. Building reusable tools. Testing before deploying. Grounding AI output in real sources. Keeping a human in the loop. Documenting what you build so others can use it. Those are durable skills. They're the same skills you use in journalism — clear communication, organized documentation, skepticism of unverified claims, and showing your work.
+
+You came in knowing how to use AI through a browser. You're leaving knowing how to work with AI as a collaborator — with your files, on your terms, in a form you can share.
+
+Good luck with the final project. I'll see you in the discussion forums.
+
+---
+
+## Production notes (updated for all modules)
 
 ### The running project
 The greenfield-beat project threads through all demo videos. It starts as an empty folder in Video 4 and grows into a full project by Video 12.
@@ -993,6 +1773,29 @@ Module 1 has more videos than other modules because it covers the merged content
 - Annotated skill file structure (Video 7)
 - Hook flow diagram: notify vs. stop (Video 7)
 - Skills by category overview (Video 7)
+- What automation means with a CLI LLM (Video 9)
+- Plan mode flow diagram (Video 9)
+- Multi-stage processing chain: fetch → clean → process → save (Video 9)
+- Test-before-you-scale checklist (Video 9)
+- Cost awareness: fractions of a cent, multiplied by volume (Video 9)
+- Security: API keys as environment variables (Video 9)
+- Debugging loop: see → paste → fix → test (Video 9)
+- Real-world case studies: Hagar (beat monitoring), Spencer (multilingual pipelines) (Video 9)
+- Error handling: exponential backoff diagram (Video 9)
+- When automation is worth it: frequency vs. setup cost (Video 9)
+- Batch processing pattern: one → five → full (Video 9)
+- Arc check: context → skills → workflows (Video 9)
+- Two types of knowledge: parametric vs. grounded (Video 11)
+- RAG pipeline: retrieve → generate (Video 11)
+- Attribution chain: question → source → output (Video 11)
+- Newsroom examples: Washington Post Haystacker, NYT Echo, Geneea (Video 11)
+- Autonomy spectrum: read-only → supervised → autonomous (Video 11)
+- Agents vs. chatbots: tools, autonomy, multi-step plans (Video 11)
+- MCP architecture: server, client, protocol (Video 11)
+- De Cooker's quote extraction research summary (Video 11)
+- Joe's agent infrastructure: Raspberry Pi, Gmail, Slack, Telegram (Video 11)
+- Where data connections break (Video 11)
+- Arc check: live and shareable (Video 11)
 
 ### Files needed before recording
 - `Resources/examples/beat-project/park-closure.md` — sample press release
@@ -1000,3 +1803,9 @@ Module 1 has more videos than other modules because it covers the merged content
 - A real or realistic Facebook claim for the source-verification demo
 - A clean terminal with increased font size (24pt minimum)
 - The greenfield-beat project pre-scaffolded for Videos 6 and 8 (or build live)
+- 10 news article URLs for Video 10 (mix of accessible and paywalled)
+- A paywalled article URL confirmed to return < 200 chars of content (Video 10)
+- ANTHROPIC_API_KEY set in the environment (Video 10)
+- `article_pipeline.py` pre-built for fallback if live coding takes too long (Video 10)
+- beat-archive folder with 6+ documents across 3 categories for Video 12
+- A `.claude.json` MCP config pre-built for fallback if live setup takes too long (Video 12)
