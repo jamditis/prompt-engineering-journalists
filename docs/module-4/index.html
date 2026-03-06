@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Module 4: Agents and RAG | Advanced prompt engineering</title>
+    <title>Module 4: Agents, tools, and data access | Advanced prompt engineering</title>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../assets/js/config.js"></script>
@@ -28,6 +28,7 @@
                     <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
                     <a href="../module-4/" class="text-acid">[ 04 ]</a>
                     <a href="../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
                 </nav>
             </div>
         </header>
@@ -36,8 +37,8 @@
         <section class="py-12 px-6 border-b border-white/10">
             <div class="max-w-5xl mx-auto">
                 <div class="text-xs text-acid font-mono mb-4">MODULE 04</div>
-                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">AGENTS AND RAG</h1>
-                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Understand AI agents, retrieval-augmented generation, and how to connect Claude to external data sources.</p>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">AGENTS, TOOLS, AND DATA ACCESS</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">How AI tools take multi-step action, connect to data sources, and where they break down.</p>
             </div>
         </section>
 
@@ -52,9 +53,10 @@
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Distinguish between chatbots and AI agents</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand retrieval-augmented generation (RAG) and why it matters</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Learn the basics of Model Context Protocol (MCP)</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Configure Claude Code with an MCP server to access local files</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Use <code class="text-acid bg-surface px-1">claude -p</code> for non-interactive mode, enabling scripted and autonomous workflows</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand agent delegation and multi-step autonomous workflows</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Connect Claude to external data sources using MCP (filesystem, databases, web, APIs)</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Diagnose common data connection failures: permissions, auth, schema mismatches, and silent errors</li>
                     </ul>
                 </div>
             </section>
@@ -65,7 +67,7 @@
                     <h2 class="font-display text-xl text-chrome">Before you start</h2>
                 </div>
                 <div class="space-y-4">
-                    <p class="text-gray-300 text-sm leading-relaxed">Agents and RAG introduce a new failure mode: errors that compound across pipeline stages. When Claude delegates work to subagents, mistakes in early steps become assumed facts in later ones. The concept below explains how this works and what to do about it.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">Agents and data access introduce a new failure mode: errors that compound across pipeline stages. When Claude delegates work to subagents or pulls data from external sources, mistakes in early steps become assumed facts in later ones. The concept below explains how this works and what to do about it.</p>
                     <a href="../concepts/working-with-subagents.html" class="inline-flex items-center gap-2 text-ice text-sm hover:text-acid transition-colors">
                         Read: working with subagents — compounding errors and verification →
                     </a>
@@ -82,29 +84,32 @@
                         <h3 class="font-display text-lg text-acid mb-3">Chatbots vs. agents</h3>
                         <div class="text-gray-300 text-sm leading-relaxed space-y-3">
                             <p><span class="text-ice">Chatbot:</span> Responds to prompts using only its training data. Can't take actions, access external information, or modify files. Like talking to someone who can only answer from memory.</p>
-                            <p><span class="text-acid">Agent:</span> Can use tools, access data sources, and take actions. Breaks complex tasks into steps, decides what tools to use, and executes multi-step plans. Claude Code is an agent - it can read files, run commands, and make changes to your projects.</p>
+                            <p><span class="text-acid">Agent:</span> Can use tools, access data sources, and take actions. Breaks complex tasks into steps, decides what tools to use, and executes multi-step plans. Claude Code is an agent -- it can read files, run commands, and make changes to your projects.</p>
                         </div>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Retrieval-augmented generation (RAG)</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">RAG combines a language model with external data retrieval. Instead of relying only on training data, the model can search relevant documents and include that information in its response. This reduces hallucinations and lets the model work with current, domain-specific information it was never trained on.</p>
+                        <h3 class="font-display text-lg text-acid mb-3">Non-interactive mode: <code class="text-acid">claude -p</code></h3>
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
+                            <p>Running <code class="text-acid bg-surface px-1">claude -p "your prompt here"</code> sends a single prompt without entering an interactive session. Claude processes the prompt, prints the result to stdout, and exits. This is what makes scripted pipelines and autonomous workflows possible.</p>
+                            <p>Practical uses: a shell script that runs <code class="text-acid bg-surface px-1">claude -p</code> on every file in a folder, a cron job that checks data daily, or piping output from one command into another. Once you can call Claude from a script, you can build workflows that run without you.</p>
+                        </div>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">How RAG works</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">A typical RAG pipeline:</p>
-                        <ol class="space-y-2 text-sm font-sans text-gray-300">
-                            <li class="flex items-start gap-3"><span class="text-acid">1.</span> <strong class="text-chrome">Query:</strong> User asks a question</li>
-                            <li class="flex items-start gap-3"><span class="text-acid">2.</span> <strong class="text-chrome">Retrieve:</strong> System searches a document collection for relevant passages</li>
-                            <li class="flex items-start gap-3"><span class="text-acid">3.</span> <strong class="text-chrome">Augment:</strong> Retrieved passages are added to the prompt as context</li>
-                            <li class="flex items-start gap-3"><span class="text-acid">4.</span> <strong class="text-chrome">Generate:</strong> The model generates a response using both the question and retrieved context</li>
-                        </ol>
+                        <h3 class="font-display text-lg text-acid mb-3">Agent delegation and multi-step workflows</h3>
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
+                            <p>Agents don't just answer questions -- they break work into steps and execute each one. Claude Code can read a file, decide what needs to change, make the edit, run a test, and fix problems it finds along the way. Each step informs the next.</p>
+                            <p>This also means agents can delegate. Claude Code can spawn subagents to handle parts of a larger task in parallel. The risk: errors in early steps become assumed facts in later ones. The skill is knowing how to verify intermediate results, not just the final output.</p>
+                        </div>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Model Context Protocol (MCP)</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">MCP is an open standard for connecting AI models to external tools and data sources. An MCP server provides capabilities (like file access, database queries, or web searches) that Claude can use. Think of MCP servers as plugins that extend what Claude can do.</p>
+                        <h3 class="font-display text-lg text-acid mb-3">Connecting AI to data sources with MCP</h3>
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
+                            <p>Language models only know what's in their training data. To work with your files, your databases, or live information from the web, the model needs a connection layer. Model Context Protocol (MCP) is an open standard for this -- it lets you plug data sources into Claude the same way you'd add plugins to a browser.</p>
+                            <p>This is sometimes called retrieval-augmented generation (RAG): the model retrieves relevant information from an external source and uses it to generate a grounded response instead of relying on memory alone. MCP is how you set up that retrieval in practice.</p>
+                        </div>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
@@ -118,6 +123,20 @@
                             <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Custom:</strong> Any tool or API you want Claude to access</li>
                         </ul>
                     </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Where data connections break down</h3>
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
+                            <p>Setting up an MCP server is straightforward. Debugging it when things go wrong takes practice. Common failures:</p>
+                            <ul class="space-y-2 text-sm font-sans text-gray-300 mt-2">
+                                <li class="flex items-start gap-3"><span class="text-signal">></span> <strong class="text-chrome">Permissions:</strong> The server can't read the files you pointed it at, or the database user lacks access to the table you need</li>
+                                <li class="flex items-start gap-3"><span class="text-signal">></span> <strong class="text-chrome">Auth failures:</strong> API keys expired, tokens revoked, OAuth scopes too narrow -- the connection looks configured but returns nothing useful</li>
+                                <li class="flex items-start gap-3"><span class="text-signal">></span> <strong class="text-chrome">Schema mismatches:</strong> The data source changed its column names, field types, or API response format since you set things up</li>
+                                <li class="flex items-start gap-3"><span class="text-signal">></span> <strong class="text-chrome">Silent failures:</strong> The server starts, Claude tries to use it, but gets empty results or malformed data -- and keeps going without flagging the problem</li>
+                            </ul>
+                            <p class="mt-3">The pattern for journalists: when Claude gives you an answer based on external data, check the source. Ask it to show you the raw data it retrieved. If it can't, the connection may be broken and the answer may be fabricated from training data instead.</p>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -128,7 +147,7 @@
                 </div>
 
                 <div class="border border-acid/30 bg-acidDim p-6 mb-8">
-                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Set up an MCP server that gives Claude controlled access to a document folder, enabling RAG-style workflows.</span></p>
+                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Set up an MCP server that gives Claude controlled access to a data source, then query it to ground Claude's responses in real documents instead of training data.</span></p>
                 </div>
 
                 <!-- Step 1 -->
@@ -151,7 +170,7 @@
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
                         Create a research documents folder
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Open your terminal, launch Claude Code, and ask it to set up the folder:</p>
+                    <p class="text-gray-300 text-sm mb-4">Open your terminal, launch Claude Code, and ask it to set up the folder. Choose one of the scenarios below (or make up your own):</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -161,6 +180,37 @@
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
                     </div>
+                    <p class="text-gray-300 text-sm mb-2"><strong class="text-chrome">Option A: local government documents</strong></p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a folder called research-docs in my home directory with three realistic sample documents I can use to test data queries: a city budget summary for fiscal year 2024 with department-level breakdowns, school board meeting minutes from January 2024, and quarterly crime statistics for Q4 2024. Use believable fictional numbers and names throughout.</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-2"><strong class="text-chrome">Option B: scraped web data</strong></p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a folder called research-docs in my home directory with three realistic sample files simulating scraped web content: a local news site's recent coverage of a zoning dispute (5 articles as separate text files), a city council member's public social media posts from the last month, and an archived community forum thread about a proposed development. Use believable fictional names and details.</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-2"><strong class="text-chrome">Option C: folder of news articles</strong></p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a folder called research-docs in my home directory with six realistic sample news articles about a fictional county's opioid crisis response, spanning 2023-2024. Include a mix of hard news, a feature profile, an editorial, and a data-driven piece. Each should be a separate text file with a byline, date, and publication name. Use believable fictional details throughout.</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-2"><strong class="text-chrome">Option D: public API dataset</strong></p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -168,7 +218,7 @@
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a folder called research-docs in my home directory with three realistic sample documents I can use to test RAG queries: a city budget summary for fiscal year 2024 with department-level breakdowns, school board meeting minutes from January 2024, and quarterly crime statistics for Q4 2024. Use believable fictional numbers and names throughout.</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a folder called research-docs in my home directory with realistic sample data files simulating public API output: a JSON file of 311 service requests for a city (50+ entries with categories, dates, locations, and resolution status), a CSV of restaurant health inspection scores, and a JSON file of building permit applications from the last quarter. Use believable fictional data throughout.</code></pre>
                     </div>
                 </div>
 
@@ -246,7 +296,7 @@
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
                         Query your documents
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Now test RAG-style queries against your document collection:</p>
+                    <p class="text-gray-300 text-sm mb-4">Now query your document collection. The key difference from a normal chat: Claude is pulling answers from your files, not from memory. Try these (adapt to whichever data option you chose):</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-2">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -254,7 +304,7 @@
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Based on my research documents, what was the total city budget for 2024 and what percentage went to education?</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Using only the files in my research-docs folder, summarize the key facts. For each fact, tell me which file it came from and quote the relevant passage.</code></pre>
                     </div>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-2">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
@@ -263,7 +313,7 @@
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Search my documents for any mentions of school start times. What's the current status of that discussion?</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Search my research documents for any names or organizations that appear in more than one file. What connections can you identify?</code></pre>
                     </div>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
@@ -272,7 +322,7 @@
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Compare the crime statistics to the budget allocations for public safety. Is there any correlation worth investigating?</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Look at my research documents and identify gaps -- what questions would a reporter still need answered? What data is missing that would make the story stronger?</code></pre>
                     </div>
                 </div>
 
@@ -282,7 +332,7 @@
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">07</span>
                         Build a research workflow
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Use your document collection to draft a story:</p>
+                    <p class="text-gray-300 text-sm mb-4">Use your document collection to draft a story. This prompt asks Claude to act as a research assistant -- grounding its work in your files, not its training data:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -290,7 +340,7 @@
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">I'm writing a story about how the city is allocating resources to address public safety. Using my research documents, help me outline the key facts I should include and identify any gaps where I need more information.</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Using only my research documents, help me outline a story. For each point in the outline, cite the specific file and passage it came from. Flag any claims that would need independent verification. Identify gaps where I'd need additional sources or data.</code></pre>
                     </div>
                 </div>
             </section>
@@ -304,9 +354,10 @@
                     <p class="text-sm font-sans text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What is the main difference between a chatbot and an AI agent?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What problem does RAG solve that pure language models can't?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What does MCP stand for and what does it enable?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Why might you want to limit which folders an MCP server can access?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> When would you use <code class="text-acid bg-surface px-1">claude -p</code> instead of an interactive session?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What does MCP stand for and what problem does it solve for journalists working with local data?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Name two ways an MCP data connection can fail silently, and how you'd catch the problem.</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Why is it important to ask Claude to cite which file a fact came from when using external data?</li>
                     </ul>
                 </div>
             </section>

@@ -28,6 +28,7 @@
                     <a href="../module-3/" class="text-acid">[ 03 ]</a>
                     <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
                     <a href="../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
                 </nav>
             </div>
         </header>
@@ -37,7 +38,7 @@
             <div class="max-w-5xl mx-auto">
                 <div class="text-xs text-acid font-mono mb-4">MODULE 03</div>
                 <h1 class="font-display text-4xl md:text-5xl font-bold text-white">CLI WORKFLOWS</h1>
-                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Chain commands together, pipe data between tools, and automate repetitive tasks with shell scripts.</p>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Chain commands together, pipe data between tools, and have Claude build reusable workflow scripts for your reporting.</p>
             </div>
         </section>
 
@@ -52,9 +53,9 @@
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Understand Unix pipes and how to chain commands</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Use Claude Code in non-interactive mode for scripting</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Build shell scripts that automate multi-step workflows</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Create a practical content pipeline for journalism work</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Have Claude build shell scripts that automate multi-step workflows</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Handle API keys safely (environment variables, not source code)</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Test small before running large: verify each pipeline stage before scaling up</li>
                     </ul>
                 </div>
             </section>
@@ -89,16 +90,22 @@ ls *.txt | wc -l           <span class="text-gray-400"># Count text files</span>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Non-interactive mode</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Claude Code can run as a single command without entering the interactive REPL. This is essential for scripting:</p>
-                        <div class="border border-white/10 bg-surface overflow-hidden">
-                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300"><span class="text-gray-400"># Interactive (starts a session)</span>
-<span class="text-acid">claude</span>
+                        <h3 class="font-display text-lg text-acid mb-3">API key security</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">When Claude builds scripts that call external APIs, those scripts often need API keys. Never put keys directly in your source code. Use environment variables instead:</p>
+                        <div class="border border-white/10 bg-surface overflow-hidden mb-4">
+                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300"><span class="text-gray-400"># Bad: key hardcoded in a script (anyone who sees the file has your key)</span>
+<span class="text-signal">API_KEY="sk-abc123..."</span>
 
-<span class="text-gray-400"># Non-interactive (runs once and exits)</span>
-<span class="text-acid">claude -p "Summarize this article" < article.txt</span></code></pre>
+<span class="text-gray-400"># Good: key stored in an environment variable</span>
+<span class="text-acid">export API_KEY="sk-abc123..."</span>   <span class="text-gray-400"># set once in your terminal</span>
+<span class="text-acid">echo "$API_KEY"</span>                  <span class="text-gray-400"># scripts read it from the environment</span></code></pre>
                         </div>
-                        <p class="text-gray-400 text-xs mt-2">The <code class="text-acid bg-surface px-1">-p</code> flag specifies the prompt. Input can come from a file or piped from another command.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">If you ask Claude to build a script that uses an API, tell it to read keys from environment variables. And never commit a file containing a real key to git.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Test small before running large</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">When building a pipeline that processes multiple files or makes many API calls, always run it on one or two items first. Check the output. If it looks wrong, fix the prompt or script before scaling up. This saves time and avoids burning through rate limits or producing a folder full of garbage.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
@@ -112,10 +119,10 @@ ls *.txt | wc -l           <span class="text-gray-400"># Count text files</span>
                         <div class="border border-white/10 bg-surface overflow-hidden">
                             <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">for file in *.txt; do
   echo "Processing $file"
-  claude -p "Summarize" < "$file" > "${file%.txt}-summary.txt"
+  cat "$file" | wc -w > "${file%.txt}-wordcount.txt"
 done</code></pre>
                         </div>
-                        <p class="text-gray-400 text-xs mt-2">This loop processes every <code class="text-acid bg-surface px-1">.txt</code> file and creates a summary for each.</p>
+                        <p class="text-gray-400 text-xs mt-2">This loop processes every <code class="text-acid bg-surface px-1">.txt</code> file. The pattern works the same way for any command — including AI tools in your pipeline scripts.</p>
                     </div>
                 </div>
             </section>
@@ -127,7 +134,26 @@ done</code></pre>
                 </div>
 
                 <div class="border border-acid/30 bg-acidDim p-6 mb-8">
-                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Ask Claude to build a newsletter pipeline that uses <code class="font-mono">claude -p</code> to process articles automatically — then explore what it built and why it works.</span></p>
+                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Ask Claude to build a multi-stage workflow script for a real journalism task — then explore what it built and why it works.</span></p>
+                </div>
+
+                <!-- Scenario options -->
+                <div class="mb-8">
+                    <p class="text-gray-300 text-sm mb-4">Choose one of these scenarios (or adapt one to fit your work):</p>
+                    <div class="space-y-3">
+                        <div class="border border-white/10 bg-panel p-4">
+                            <p class="text-sm"><span class="text-acid font-mono font-bold">A.</span> <span class="text-gray-300"><strong class="text-chrome">City council agenda to reporter prep sheet.</strong> Feed a meeting agenda into a pipeline that extracts each item, summarizes the background, flags items with budget implications, and outputs a prep document a reporter can bring to the meeting.</span></p>
+                        </div>
+                        <div class="border border-white/10 bg-panel p-4">
+                            <p class="text-sm"><span class="text-acid font-mono font-bold">B.</span> <span class="text-gray-300"><strong class="text-chrome">Web scraping pipeline.</strong> Pull data from a public source (a government page, a court docket index, an open data portal), clean it into structured format, and output a summary of what changed since the last run.</span></p>
+                        </div>
+                        <div class="border border-white/10 bg-panel p-4">
+                            <p class="text-sm"><span class="text-acid font-mono font-bold">C.</span> <span class="text-gray-300"><strong class="text-chrome">Batch document processing.</strong> Process a folder of PDFs or text files (transcripts, press releases, public records) — extract key facts from each, then produce a combined summary with source references.</span></p>
+                        </div>
+                        <div class="border border-white/10 bg-panel p-4">
+                            <p class="text-sm"><span class="text-acid font-mono font-bold">D.</span> <span class="text-gray-300"><strong class="text-chrome">Weekly content roundup generator.</strong> Given a folder of articles or story links, generate a newsletter-style roundup: headline, 2-3 sentence summary, and a categorization tag for each piece.</span></p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Step 1 -->
@@ -154,7 +180,7 @@ done</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
                         Ask Claude to build the pipeline
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Paste this prompt inside the session:</p>
+                    <p class="text-gray-300 text-sm mb-4">Describe your chosen scenario inside the session. Here's an example for option D (weekly roundup), but adapt it to whichever scenario you picked:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -162,13 +188,13 @@ done</code></pre>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a newsletter pipeline in ~/newsletter-pipeline. I need:
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a content pipeline in ~/content-pipeline. I need:
 
-1. Two realistic sample news articles as .txt files (fictional local news stories)
-2. A shell script called process-newsletter.sh that uses "claude -p" (non-interactive mode) to process each .txt file: summarize it in 2-3 sentences, then format that summary as a simple HTML snippet with an h3 headline and paragraph. Save outputs to an output/ folder.
-3. Make the script executable, run it on one article, and show me the output.</code></pre>
+1. Three realistic sample input files (fictional local news articles as .txt files)
+2. A shell script called run-pipeline.sh that processes each input file through multiple stages: first summarize it in 2-3 sentences, then add a category tag, then format the result as an HTML snippet. Save each stage's output so I can inspect intermediate results. Final outputs go in an output/ folder.
+3. Make the script executable, run it on ONE file first, and show me the output before processing the rest.</code></pre>
                     </div>
-                    <p class="text-gray-400 text-xs mt-2">Watch what Claude does: it creates the folder structure, writes the sample articles, writes the script, and runs it. You delegated the whole thing.</p>
+                    <p class="text-gray-400 text-xs mt-2">Watch what Claude does: it creates the folder structure, writes sample inputs, writes the script, and runs a single test. You delegated the whole thing — and you tested small before running large.</p>
                 </div>
 
                 <!-- Step 3 -->
@@ -177,7 +203,7 @@ done</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
                         Ask Claude to explain what it built
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">In the same session, ask Claude to explain the key concept:</p>
+                    <p class="text-gray-300 text-sm mb-4">In the same session, ask Claude to walk you through the script:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -185,18 +211,18 @@ done</code></pre>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Walk me through the script line by line. Explain what "claude -p" does and how it's different from the interactive session we're using right now. What would happen if I added a third article to the folder and ran the script again?</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Walk me through the script line by line. Explain each stage of the pipeline: what goes in, what comes out, and how the stages connect. If this script used an API key, where should it store it — and where should it never store it?</code></pre>
                     </div>
-                    <p class="text-gray-400 text-xs mt-2">This is the key concept of the module: <code class="text-acid bg-surface px-1">claude -p</code> is non-interactive mode — it runs once and exits, making it scriptable. Your interactive session is the opposite: persistent, conversational, context-aware.</p>
+                    <p class="text-gray-400 text-xs mt-2">This is the key concept of the module: a multi-stage pipeline breaks a big task into smaller steps (fetch, clean, analyze, format), each producing output that feeds the next. Claude built it; your job is to understand the structure well enough to modify or extend it.</p>
                 </div>
 
                 <!-- Step 4 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">04</span>
-                        Process all articles
+                        Run the full pipeline
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Ask Claude to run the pipeline on both articles and show you the results:</p>
+                    <p class="text-gray-300 text-sm mb-4">Now that you've verified the output on one file, ask Claude to process all inputs and show you the results:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -204,9 +230,9 @@ done</code></pre>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Run the pipeline on all the articles and show me each HTML output. Then tell me: what would need to change in the script if I wanted to use Gemini CLI instead of Claude?</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Run the pipeline on all the input files and show me each final output. Then tell me: what would need to change in the script if I wanted to use Gemini CLI instead of Claude? And what would I need to do if this script required an API key to call an external service?</code></pre>
                     </div>
-                    <p class="text-gray-300 text-sm mt-4">The script Claude wrote is yours — save it, modify it, run it on real articles whenever you need. That's what "reusable workflow" means.</p>
+                    <p class="text-gray-300 text-sm mt-4">The script Claude wrote is yours — save it, modify it, run it on real data whenever you need. That's what "reusable workflow" means.</p>
                 </div>
             </section>
 
@@ -218,10 +244,10 @@ done</code></pre>
                 <div class="border border-signal/30 bg-signalDim p-6">
                     <p class="text-sm font-sans text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What is <code class="text-acid bg-surface px-1">claude -p</code> and when would you use it instead of an interactive session?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What is the difference between the interactive mode you used in this exercise and the scripted mode the pipeline uses?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What are the stages in the pipeline you built, and how does output from one stage feed into the next?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Why should you run a pipeline on one file first before processing an entire folder?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Where should API keys go — and where should they never go?</li>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What kinds of journalism workflows are well-suited to an automated pipeline like this one?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Why does the script save outputs to files rather than just printing them to the terminal?</li>
                     </ul>
                 </div>
             </section>
@@ -249,7 +275,7 @@ done</code></pre>
                 <div class="border border-white/10 bg-panel divide-y divide-white/5">
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">"Permission denied" when running the script</h4>
-                        <p class="text-gray-400 text-sm">You need to make the script executable: <code class="text-acid bg-surface px-1">chmod +x newsletter-pipeline.sh</code></p>
+                        <p class="text-gray-400 text-sm">You need to make the script executable: <code class="text-acid bg-surface px-1">chmod +x run-pipeline.sh</code></p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">"command not found: claude"</h4>

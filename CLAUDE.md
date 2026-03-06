@@ -1,15 +1,5 @@
 # CLAUDE.md
 
-
-## GitHub Actions suspended (account-wide)
-
-GitHub Actions are disabled on the entire `jamditis` GitHub account until further notice. This means:
-- **No CI/CD pipelines will run** — builds, tests, deploys all fail silently
-- **GitHub Pages deploys won't work** — even "legacy" static deploys that used Actions under the hood
-- **No automated workflows** — PR checks, scheduled jobs, release automation are all dead
-
-**For any project that previously deployed via GitHub Actions or GitHub Pages, you must use an alternative** (manual deploy, Cloudflare Pages, Firebase Hosting, direct FTP, etc.). Do not create or rely on `.github/workflows/` files.
-
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Overview
@@ -166,6 +156,7 @@ All 4 modules + Introduction module have complete 8-document sets. Readings are 
 - **Live site**: https://mooc.amditis.tech (Cloudflare Pages)
 - **Deploy script**: `./deploy.sh "message"` — uses `pass-get claude/api/cloudflare-full` + wrangler
 - **Project name**: `prompt-engineering-journalists` on Cloudflare Pages
+- **Account ID**: `3d4b1d36109e30866bb7516502224b2c` (jamditis@gmail.com) — hardcoded in deploy.sh via `CLOUDFLARE_ACCOUNT_ID` because the API token lacks `Account:Memberships:Read` permission. Without it, wrangler fails with code 9106 trying to auto-resolve the account.
 - **No GitHub Actions**: account-wide suspension; GitHub Pages broken. Wrangler direct upload is the deploy path.
 
 ### Readings pool — key sources added
@@ -185,6 +176,13 @@ All 4 modules + Introduction module have complete 8-document sets. Readings are 
 - **LESSON.md/RULE.md removed**: Module 2 skill types card corrected; these are not official Claude Code file types
 - **CSS word wrap**: `pre code` blocks now wrap globally across the course site (`docs/assets/css/amditis.css`)
 - **Review tool**: `docs/review.html` — Module 1 shows as two groups ("From chat window to command line" + "Project context supplement") to distinguish the merged content
+- **Google Doc syllabus sync**: syllabus page HTML updated to match the final Google Doc version; hyperlinks added to all readings; stale URLs fixed
+- **Stale module-5 references removed**: 13 HTML files + sitemap.xml cleaned of links to deleted module-5
+- **Mobile responsiveness** (`docs/assets/css/amditis.css`):
+  - Inner-page nav visible on mobile via CSS override targeting `aria-label` attributes (homepage has its own JS menu)
+  - `.bullet-item` grid→block fix for mobile: CSS Grid treats inline elements (`<a>`, `<code>`, `<strong>`) as separate grid items, breaking layout on narrow screens. Switched to `display: block` + hanging indent on mobile.
+  - `scroll-padding-top`: 5rem desktop, 7rem mobile — anchor links clear the sticky header
+  - `review.html`: modal width clamped with `min(680px, 92vw)`, sidebar stacks on mobile
 
 # AI Writing Guidelines: Avoiding Slop Phrases
 Use this file as a reference when reviewing AI-generated content. These patterns indicate lazy, filler writing that should be edited or avoided.

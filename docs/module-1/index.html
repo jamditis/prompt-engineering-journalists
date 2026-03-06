@@ -28,6 +28,7 @@
                     <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
                     <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
                     <a href="../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
                 </nav>
             </div>
         </header>
@@ -69,7 +70,7 @@
                     <h2 class="font-display text-xl text-chrome">Before you start</h2>
                 </div>
                 <div class="space-y-4">
-                    <p class="text-gray-300 text-sm leading-relaxed">You've used AI through a browser — typed a prompt, read the response, copied it somewhere. That works, but it puts the clipboard between you and the tool. Every file you want to analyze has to be copied in by hand. Every response has to be copied back out. CLI tools let AI read files directly from your computer, write results back to disk, and be chained into automated workflows. The model is the same. The interface changes what you can do with it.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">You've used AI through a browser — typed a prompt, read the response, copied it somewhere. That works for quick questions, but a chat box can't run a scraper overnight, process a 500MB dataset, or write files to your hard drive. CLI tools give the AI access to a real machine with real compute power. You can leave a task running while you do other work, process documents too large to paste into a text field, and access local files directly — no uploading, no downloading, no clipboard. The model is the same. The difference is what it can reach.</p>
                     <p class="text-gray-300 text-sm leading-relaxed">The second half of this module solves a different problem: every time you open a new chat, the AI starts blank. It doesn't know your beat, your publication's style, or what you were working on last session. A context file — <code class="text-acid bg-surface px-1">CLAUDE.md</code> for Claude Code — is where you put that background once, so you never have to retype it.</p>
                     <div class="space-y-2">
                         <a href="../concepts/what-is-a-cli.html" class="inline-flex items-center gap-2 text-ice text-sm hover:text-acid transition-colors block">
@@ -91,7 +92,7 @@
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Why leave the browser?</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">Web-based AI tools like ChatGPT and Claude.ai are convenient, but they force you to copy and paste content back and forth. CLI tools let AI read and write files directly, chain multiple operations together, and integrate with version control. For journalists handling large documents or repetitive tasks, this saves hours.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Web-based AI tools like ChatGPT and Claude.ai are convenient, but they run in a sandbox — you can't leave a scraper running, process a dataset that won't fit in a text box, or write output directly to your project folder. CLI tools give the AI access to your actual machine: your filesystem, your network, your compute power. It can read and write files, chain operations together, run long tasks in the background, and integrate with version control. CLI tools give you a real machine, not a sandbox.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
@@ -108,21 +109,17 @@
                         <h3 class="font-display text-lg text-acid mb-3">The terminal vs. web interface trade-off</h3>
                         <div class="text-gray-300 text-sm leading-relaxed space-y-2">
                             <p><span class="text-ice">Web interface advantages:</span> No setup required, visual formatting, easy to share conversations.</p>
-                            <p><span class="text-acid">CLI advantages:</span> Direct file access, automation, piping between tools, no copy-paste friction, works offline (for local models).</p>
+                            <p><span class="text-acid">CLI advantages:</span> Direct file access, real compute power (run scrapers, process large datasets), automation, piping between tools, no copy-paste friction, works offline (for local models).</p>
                         </div>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Working inside a session</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Once you type <code class="text-acid bg-surface px-1">claude</code> and press Enter, you're inside an interactive session. The terminal becomes a conversation interface — paste prompts the same way you would in a browser. A few commands you'll use often:</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Once you type <code class="text-acid bg-surface px-1">claude</code> and press Enter, you're inside an interactive session. The terminal becomes a conversation interface — paste prompts the same way you would in a browser.</p>
                         <ul class="space-y-2 text-sm font-sans text-gray-300 mb-4">
-                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/help</code> <span class="ml-1">— list available commands and installed skills</span></li>
-                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/plan</code> <span class="ml-1">— ask Claude to think through an approach before acting</span></li>
-                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/compact</code> <span class="ml-1">— compress conversation history when a long session starts to slow down</span></li>
-                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/clear</code> <span class="ml-1">— start fresh without leaving the session</span></li>
                             <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">Ctrl+C</code> <span class="ml-1">— interrupt whatever Claude is doing; press twice to exit</span></li>
                         </ul>
-                        <p class="text-gray-300 text-sm leading-relaxed">To continue a previous session after a break, run <code class="text-acid bg-surface px-1">claude --resume</code> from the same directory.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">To continue a previous session after a break, run <code class="text-acid bg-surface px-1">claude --resume</code> from the same directory. Session commands like <code class="text-acid bg-surface px-1">/help</code>, <code class="text-acid bg-surface px-1">/plan</code>, <code class="text-acid bg-surface px-1">/compact</code>, and <code class="text-acid bg-surface px-1">/clear</code> are covered in Module 2.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
@@ -271,6 +268,16 @@ Then read the file and summarize it in one sentence. Save the summary to summary
                     <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Set up a beat project directory, initialize a Git repo, process journalism documents with and without a context file, and compare the results.</span></p>
                 </div>
 
+                <!-- Scenario options -->
+                <div class="border border-white/10 bg-panel p-6 mb-8">
+                    <p class="text-sm font-sans text-gray-300 mb-4">Pick whichever scenario is closest to your work. The steps below use "city hall beat" as the example, but adapt the folder name, sample documents, and context file to match your choice:</p>
+                    <ul class="space-y-2 text-sm font-sans text-gray-300">
+                        <li class="flex items-start gap-3"><span class="text-acid font-bold">A.</span> <strong class="text-chrome">City hall / municipal beat</strong> — press releases, council minutes, interview notes, reader tips. Good if you cover local government.</li>
+                        <li class="flex items-start gap-3"><span class="text-acid font-bold">B.</span> <strong class="text-chrome">Data tracking project</strong> — public spending records, census tables, grant databases, FOIA responses. Good if you work with datasets or public records.</li>
+                        <li class="flex items-start gap-3"><span class="text-acid font-bold">C.</span> <strong class="text-chrome">Content processing workspace</strong> — story drafts, source transcripts, editorial calendars, style guides. Good if you're building newsroom tools or managing production workflows.</li>
+                    </ul>
+                </div>
+
                 <!-- Step 6 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
@@ -287,7 +294,7 @@ Then read the file and summarize it in one sentence. Save the summary to summary
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
                     </div>
-                    <p class="text-gray-300 text-sm mb-4">Ask Claude to create the project folder with sample documents:</p>
+                    <p class="text-gray-300 text-sm mb-4">Ask Claude to create the project folder with sample documents. Here's the city hall version — adapt for your scenario:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
@@ -449,15 +456,23 @@ claude</code></pre>
                 <div class="border-b border-white/10 pb-4 mb-6">
                     <h2 class="font-display text-xl text-chrome">Resources</h2>
                 </div>
-                <div class="border border-white/10 bg-panel p-6">
-                    <ul class="space-y-3 text-sm font-sans">
-                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Claude Code documentation - Official setup guide, command reference, and CLAUDE.md documentation</span></li>
-                        <li><a href="https://docs.anthropic.com/en/docs/claude-code/memory" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Claude Code memory and CLAUDE.md — official documentation</span></li>
-                        <li><a href="https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/configuration.md" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Gemini CLI configuration and GEMINI.md — official documentation</span></li>
-                        <li><a href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-300">Introduction to Node.js - Background on the runtime</span></li>
-                        <li><a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[READ]</a> <span class="text-gray-300">What is Git? — Pro Git book, chapter 1</span></li>
-                        <li><a href="https://missing.csail.mit.edu/2020/course-shell/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[COURSE]</a> <span class="text-gray-300">The Missing Semester: The Shell - MIT's free course on command-line fundamentals</span></li>
-                    </ul>
+                <div class="border border-white/10 bg-panel p-6 space-y-6">
+                    <div>
+                        <p class="text-xs font-mono text-acid font-bold mb-3">Read before the exercise</p>
+                        <ul class="space-y-3 text-sm font-sans">
+                            <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Claude Code documentation — official setup guide, command reference, and CLAUDE.md documentation</span></li>
+                            <li><a href="https://docs.anthropic.com/en/docs/claude-code/memory" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Claude Code memory and CLAUDE.md — official documentation</span></li>
+                            <li><a href="https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/configuration.md" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Gemini CLI configuration and GEMINI.md — official documentation</span></li>
+                            <li><a href="https://nodejs.org/en/learn/getting-started/introduction-to-nodejs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-300">Introduction to Node.js — background on the runtime</span></li>
+                        </ul>
+                    </div>
+                    <div class="border-t border-white/10 pt-6">
+                        <p class="text-xs font-mono text-acid font-bold mb-3">Read after the exercise</p>
+                        <ul class="space-y-3 text-sm font-sans">
+                            <li><a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[READ]</a> <span class="text-gray-300">What is Git? — Pro Git book, chapter 1</span></li>
+                            <li><a href="https://missing.csail.mit.edu/2020/course-shell/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[COURSE]</a> <span class="text-gray-300">The Missing Semester: The Shell — MIT's free course on command-line fundamentals</span></li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 

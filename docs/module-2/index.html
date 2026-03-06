@@ -28,6 +28,7 @@
                     <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
                     <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
                     <a href="../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
                 </nav>
             </div>
         </header>
@@ -114,6 +115,23 @@
                         <h3 class="font-display text-lg text-acid mb-3">Skill trust and safety</h3>
                         <p class="text-gray-300 text-sm leading-relaxed">Skills are just text files with instructions - they can't run arbitrary code. However, they can influence Claude's behavior, so review skills before installing them. Prefer skills from trusted sources, check what instructions they contain, and be cautious of skills that ask Claude to access external services or sensitive data.</p>
                     </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Session commands</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Module 1 introduced the commands you use inside a Claude Code session. Here's a quick reference for the ones you'll use most this week:</p>
+                        <ul class="space-y-2 text-sm font-sans text-gray-300">
+                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/help</code> <span class="ml-1">— list available commands and installed skills (use this to confirm your new skill shows up)</span></li>
+                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/plan</code> <span class="ml-1">— ask Claude to think through an approach before acting (useful before writing a skill file)</span></li>
+                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/compact</code> <span class="ml-1">— compress conversation history when a long session slows down</span></li>
+                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/clear</code> <span class="ml-1">— start fresh without leaving the session</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">When CLI tools are worth the setup cost</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Not every task justifies leaving the browser. CLI tools pay off when you have repeatable work — the same kind of document, the same verification steps, the same data format — and the upfront cost of writing a skill or context file is recovered across many uses. If you're doing a one-off task you'll never repeat, the web interface is fine.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">The question to ask: "Will I do this same thing next week?" If yes, the time you spend writing a skill now saves time every future run. If no, a browser prompt is faster. Skills, context files, and hooks are investments — they only pay off with repetition.</p>
+                    </div>
                 </div>
             </section>
 
@@ -124,7 +142,13 @@
                 </div>
 
                 <div class="border border-acid/30 bg-acidDim p-6 mb-8">
-                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Create a journalism verification skill and use it to check a claim from a viral social media post.</span></p>
+                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Create a custom journalism skill, invoke it with a slash command, and test it on a real example from your work. Choose one of the following (or propose your own):</span></p>
+                    <ul class="mt-3 space-y-2 text-sm font-sans text-gray-300">
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Source verification</strong> — a skill that walks through claim verification: tracing to primary sources, checking for independent confirmation, evaluating credibility, flagging red flags. Test it on a viral social media post.</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Data cleaning</strong> — a skill that standardizes messy data: fixing inconsistent date formats, normalizing names and addresses, flagging duplicate or missing entries. Test it on a real CSV or spreadsheet from your beat.</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Content formatting</strong> — a skill that converts raw notes or documents into a publication-ready format: applying your outlet's style, structuring sections, generating a headline and summary. Test it on a draft or set of meeting notes.</li>
+                    </ul>
+                    <p class="text-xs font-sans text-gray-400 mt-3">The steps below use source verification as the example. If you pick a different skill, adapt the prompts to match your choice — the process is the same.</p>
                 </div>
 
                 <!-- Step 1 -->
@@ -252,6 +276,7 @@ A viral tweet claims that a major US city just banned all plastic bags, effectiv
                         <li><a href="https://www.poynter.org/ifcn/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[ORG]</a> <span class="text-gray-300">International Fact-Checking Network - Standards and resources for verification</span></li>
                         <li><a href="https://firstdraftnews.org/articles/verifying-online-information-the-absolute-essentials/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-300">First Draft: verifying online information — the essentials</span></li>
                         <li><a href="https://www.bellingcat.com/resources/2024/09/24/bellingcat-online-investigations-toolkit/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-300">Bellingcat online investigations toolkit — open-source investigation techniques</span></li>
+                        <li><a href="https://github.com/jamditis/claude-skills-journalism" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[OPTIONAL]</a> <span class="text-gray-300">Journalism skills library (36 skills, 13 hooks) — a collection of pre-built Claude Code skills covering source verification, FOIA requests, data journalism, and editorial workflows. Browse it for ideas or install individual skills to supplement the one you build in this module. Not required — the focus this week is on creating your own skill from scratch.</span></li>
                     </ul>
                 </div>
             </section>
