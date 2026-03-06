@@ -6,7 +6,23 @@ Complete these readings before starting the exercise.
 
 ---
 
-### Reading 1: Claude Code custom commands documentation
+### Reading 1: The complete guide to building skills for Claude
+
+**Source:** Anthropic
+**URL:** https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf
+**Time:** 20 minutes
+
+Anthropic's official guide to the skill system — what skills are, how Claude loads them, and how to write effective ones. This is the reference document for the exercise you'll complete this week. Pay attention to:
+
+- The anatomy of a skill file (frontmatter, description, instructions)
+- How Claude decides when to activate a skill based on its description
+- Best practices for writing skill instructions that produce consistent results
+
+Read this before the other readings. It provides the foundation for everything else in this module.
+
+---
+
+### Reading 2: Claude Code custom commands documentation
 
 **Source:** Anthropic Documentation
 **URL:** https://docs.anthropic.com/en/docs/claude-code/tutorials#custom-slash-commands
@@ -25,7 +41,7 @@ This documentation explains how Claude Code loads and executes custom commands. 
 
 ---
 
-### Reading 2: Journalism skills repository overview
+### Reading 3: Journalism skills repository overview
 
 **Source:** Instructor's GitHub repository
 **URL:** https://github.com/jamditis/claude-skills-journalism
@@ -64,7 +80,7 @@ Review the README and browse the skill directories. The repository contains 36 s
 
 ---
 
-### Reading 3: Model Context Protocol (MCP) basics
+### Reading 4: Model Context Protocol (MCP) basics
 
 **Source:** Anthropic Documentation
 **URL:** https://modelcontextprotocol.io/introduction
@@ -81,7 +97,7 @@ For this module, we focus on skills. MCP becomes relevant when you need Claude C
 
 ---
 
-### Reading 4: Custom skills in investigative practice
+### Reading 5: Custom skills in investigative practice
 
 **"Coding agents for investigative journalism"** — Nick Hagar, Generative AI in the Newsroom, January 27, 2026
 https://generative-ai-newsroom.com/coding-agents-for-investigative-journalism-8b65bc30f9ea
