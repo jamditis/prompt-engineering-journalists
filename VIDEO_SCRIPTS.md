@@ -11,14 +11,14 @@
 | 2 | Welcome video | Intro | Talking head | 2-3 min |
 | 3 | What CLI LLMs are and why they matter | Module 1 | Talking head + slides | ~6 min |
 | 4 | Getting started with Claude Code | Module 1 | Screen recording | ~6 min |
-| 5 | The context file problem | Module 2 | Talking head + slides | ~6 min |
-| 6 | Setting up your beat project | Module 2 | Screen recording | ~6 min |
-| 7 | From prompts to skills | Module 3 | Talking head + slides | ~6 min |
-| 8 | Installing and using journalism skills | Module 3 | Screen recording | ~6 min |
-| 9 | Describing workflows and having AI build them | Module 4 | Talking head + slides | ~6 min |
-| 10 | Ask Claude Code to build you a pipeline | Module 4 | Screen recording | ~6 min |
-| 11 | Why AI makes things up (and how to fix it) | Module 5 | Talking head + slides | ~6 min |
-| 12 | Connecting Claude to a knowledge base | Module 5 | Screen recording | ~6 min |
+| 5 | The context file problem | Module 1 | Talking head + slides | ~6 min |
+| 6 | Setting up your beat project | Module 1 | Screen recording | ~6 min |
+| 7 | From prompts to skills | Module 2 | Talking head + slides | ~6 min |
+| 8 | Installing and using journalism skills | Module 2 | Screen recording | ~6 min |
+| 9 | Describing workflows and having AI build them | Module 3 | Talking head + slides | ~6 min |
+| 10 | Ask Claude Code to build you a pipeline | Module 3 | Screen recording | ~6 min |
+| 11 | Why AI makes things up (and how to fix it) | Module 4 | Talking head + slides | ~6 min |
+| 12 | Connecting Claude to a knowledge base | Module 4 | Screen recording | ~6 min |
 
 ---
 
@@ -28,11 +28,10 @@ Each module maps to a stage of an LLM-assisted journalism project. This arc shou
 
 | Stage | Module | What happens |
 |-------|--------|--------------|
-| **Idea** | Module 1 | Install CLI LLM tools; understand what's now possible |
-| **GitHub** | Module 2 | Set up the project, write the context file, get it into version control |
-| **Prototype** | Module 3 | Build your first reusable tool — a skill or workflow |
-| **Testing + security** | Module 4 | Automate, test on real data, handle API keys safely |
-| **Live + shareable** | Module 5 | Connect to live data via MCP; publish the project on GitHub |
+| **CLI + context** | Module 1 | Install CLI tools, write context files, process documents, set up GitHub |
+| **Skills** | Module 2 | Build reusable tools — skills and hooks that encode editorial expertise |
+| **Workflows** | Module 3 | Describe automation in plain English; AI builds, you test and debug |
+| **Agents + data** | Module 4 | Connect to live data via MCP; publish the project on GitHub |
 
 ---
 
@@ -48,13 +47,12 @@ Each module maps to a stage of an LLM-assisted journalism project. This arc shou
 Open with a concrete scenario: "You have a city council meeting transcript. You need every action item, every vote, and every named official in a formatted table — right now, before deadline. You describe that to an AI assistant running on your laptop. It reads the transcript and hands you the table. No browser, no upload, no copy-pasting. That's what this course teaches."
 
 **0:15-0:45 — What this course is**
-"I'm Joe Amditis from the Center for Cooperative Media at Montclair State University, and this is Advanced Prompt Engineering for Journalists — a five-week course from the Knight Center at UT Austin. You already know how to use AI. This course teaches you to work with AI as a collaborator on real journalism projects: from the initial idea, through a GitHub repository, to something you can share with your whole newsroom."
+"I'm Joe Amditis from the Center for Cooperative Media at Montclair State University, and this is Advanced Prompt Engineering for Journalists — a four-week course from the Knight Center at UT Austin. You already know how to use AI. This course teaches you to use it as a collaborator on real journalism projects."
 
 **0:45-1:15 — What you'll walk away with**
-Five concrete skills:
-- Have conversations with AI that can read your files and take action on your computer
-- Give your AI persistent knowledge of your beat, your sources, and your style
-- Build reusable journalism tools that encode your editorial workflows
+Four concrete skills:
+- Have conversations with AI that can read your files and take action on your computer, with persistent context files that give it your beat knowledge before every session
+- Build reusable journalism tools — skills and hooks — that encode your editorial workflows into shareable commands
 - Describe automation tasks in plain English and have the AI build them for you
 - Connect AI to your own document archives with proper source attribution
 
@@ -72,10 +70,10 @@ Five concrete skills:
 ### Outline
 
 **0:00-0:20 — Greeting**
-"Welcome. I'm Joe Amditis. Over the next five weeks, you're going to build something real — a journalism tool or workflow powered by AI, documented on GitHub, and ready to share with colleagues. Each module is one stage of that project."
+"Welcome. I'm Joe Amditis. Over the next four weeks, you're going to build something real — a journalism tool or workflow powered by AI, documented on GitHub, and ready to share with colleagues. Each module is one stage of that project."
 
-**0:20-1:00 — The project arc [SLIDE: idea → GitHub → prototype → testing + security → live + shareable]**
-Introduce the arc. "Week one: you get your tools set up and you understand what's now possible. Week two: you scaffold a real project and get it into version control. Week three: you build your first prototype — a reusable skill that encodes something you do repeatedly. Week four: you automate it, test it on real data, and handle it securely. Week five: you connect it to live data and publish it."
+**0:20-1:00 — The project arc [SLIDE: CLI + context → skills → workflows → agents + data]**
+Introduce the arc. "Week one: you install a CLI tool, write a context file for your beat, and process real documents from the command line — with a working project on GitHub by the end of the week. Week two: you build reusable skills that encode your editorial expertise into shareable tools. Week three: you describe a workflow in plain English and the AI builds the automation. Week four: you connect the AI to your own data sources, handle the parts that break, and publish the finished project."
 
 **1:00-1:30 — The key shift: apps to harnesses**
 Brief Mollick framing: "You've been using AI apps — ChatGPT.com, Claude.ai — where you type in a browser and get a response. This course moves you to harnesses — tools where the same AI can read your files, run operations on your computer, and complete multi-step tasks. Same AI brain. Completely different capability. You stop prompting and start delegating."
@@ -120,7 +118,7 @@ Two scenarios:
 The second scenario requires no technical knowledge — only the ability to describe what you want.
 
 **3:30-4:30 — The tools and which to start with [SLIDE: tool comparison table]**
-Claude Code, Gemini CLI, Codex. Gemini CLI is free (1,000 requests/day) — good starting point if you don't have a paid subscription yet. Claude Code is the primary tool for Modules 3-5 because it has the most developed skills/hooks ecosystem. You only need one tool installed to complete Module 1.
+Claude Code, Gemini CLI, Codex. Gemini CLI is free (1,000 requests/day) — good starting point if you don't have a paid subscription yet. Claude Code is the primary tool for Modules 2-4 because it has the most developed skills/hooks ecosystem. You only need one tool installed to complete Module 1.
 
 **4:30-5:30 — The project arc [SLIDE: arc diagram again]**
 "This module is the 'idea' stage. You're going to pick a real journalism problem you want to solve — something you do repeatedly that takes more time than it should. By the end of this week, you'll have installed a CLI LLM tool and had your first conversation with it about that problem. By the end of the course, you'll have a working solution on GitHub."
@@ -179,11 +177,11 @@ Use Claude Code when: you're working on a project with files, you want to save o
 **5:30-6:00 — Exercise preview**
 "One more thing before the exercise: when something breaks — and it will — don't close the session and start over. Paste the error message directly into Claude Code and ask what it means. The tool has the context to help you. That's the debugging loop you'll use throughout this course.
 
-The exercise this week asks you to install a tool, have your first conversation with it about a real journalism problem, and compare that experience to using a browser-based tool. Post your observations in the forum. See you in Module 2."
+The exercise this week asks you to install a tool, have your first conversation with it about a real journalism problem, and compare that experience to using a browser-based tool. Post your observations in the forum."
 
 ---
 
-## Module 2, Video 1: The context file problem
+## Module 1, Video 3: The context file problem
 
 **Format:** Talking head + slides
 **Length:** ~6 minutes
@@ -210,14 +208,14 @@ Three categories:
 Global (~/.claude/CLAUDE.md), project-level (in the project directory), subdirectory-level. Claude Code reads all of them, most specific taking precedence. A newsroom-wide file for shared standards, a beat-specific file for your particular coverage area.
 
 **4:30-5:30 — GitHub: version control via your LLM [SLIDE: GitHub concepts — why journalists use it]**
-"Your context file lives in a project folder. That folder should be a Git repository. Not because you need to learn Git commands — your CLI LLM handles those for you — but because: you can track what changed in your context file and when, you can clone skills and tools from GitHub in Module 3, and you can share your project with colleagues at the end of the course. You describe what you want: 'put this project on GitHub.' Claude does the rest."
+"Your context file lives in a project folder. That folder should be a Git repository. Not because you need to learn Git commands — your CLI LLM handles those for you — but because: you can track what changed in your context file and when, you can clone skills and tools from GitHub in Module 2, and you can share your project with colleagues at the end of the course. You describe what you want: 'put this project on GitHub.' Claude does the rest."
 
 **5:30-6:00 — What's next**
 "The arc check: you have your idea from Module 1. This week you build the GitHub scaffold — the project folder, the context file, and version control. See you in the demo."
 
 ---
 
-## Module 2, Video 2: Setting up your beat project
+## Module 1, Video 4: Setting up your beat project
 
 **Format:** Screen recording with voiceover
 **Length:** ~6 minutes
@@ -254,14 +252,14 @@ Watch Claude handle the GitHub setup — creating the remote repo, adding the re
 
 **4:30-5:30 — Verify on GitHub [SCREEN: GitHub in browser]**
 Open github.com, show the repository exists, show the CLAUDE.md and project files are there.
-"This is the second stage of the arc: your idea is now a GitHub project. In Module 3, you're going to clone a library of journalism skills from GitHub — and that cloning will go into a project just like this one."
+"This is the second part of Module 1: your idea is now a GitHub project. In Module 2, you're going to clone a library of journalism skills from GitHub — and that cloning will go into a project just like this one."
 
 **5:30-6:00 — What's next**
-"Module 3 is where this project gets its first real tool. See you there."
+"Module 2 is where this project gets its first real tool. See you there."
 
 ---
 
-## Module 3, Video 1: From prompts to skills
+## Module 2, Video 1: From prompts to skills
 
 **Format:** Talking head + slides
 **Length:** ~6 minutes
@@ -297,14 +295,14 @@ And at the upper end of what's possible: Superpowers (obra/superpowers on GitHub
 36 skills, 13 hooks. Source verification, FOIA requests, data journalism, editorial workflows. Installing it is one request to Claude Code — it clones the repository to your skills directory and registers everything. The skills appear as slash commands. You don't install them one by one.
 
 **4:30-5:30 — Arc check: you're building the prototype**
-"In Module 2, you set up the project and got it on GitHub. This week you add your first real tool to it. By the end of Module 3, your project will have a working skill you created yourself — something that encodes a workflow you actually use. That's the prototype stage."
+"In Module 1, you set up the project and got it on GitHub. This week you add your first real tool to it. By the end of Module 2, your project will have a working skill you created yourself — something that encodes a workflow you actually use. That's the prototype stage."
 
 **5:30-6:00 — What's next**
 "In the demo, I'll install the journalism skills library and use the source-verification skill on a real claim. Then I'll show you how to create your own skill — which is the exercise this week."
 
 ---
 
-## Module 3, Video 2: Installing and using journalism skills
+## Module 2, Video 2: Installing and using journalism skills
 
 **Format:** Screen recording with voiceover
 **Length:** ~6 minutes
@@ -345,11 +343,11 @@ Watch Claude draft the SKILL.md. Invoke it on a sample transcript.
 "Plan first, then build. You reviewed the approach before any file was written. Same principle applies every time you're asking Claude to build something you'll actually use."
 
 **5:30-6:00 — Arc check + what's next**
-"Your project now has a working prototype. In Module 4, you'll automate it — build a workflow that runs this on new transcripts automatically. See you there."
+"Your project now has a working prototype. In Module 3, you'll automate it — build a workflow that runs this on new transcripts automatically. See you there."
 
 ---
 
-## Module 4, Video 1: Describing workflows and having AI build them
+## Module 3, Video 1: Describing workflows and having AI build them
 
 **Format:** Talking head + slides
 **Length:** ~6 minutes
@@ -389,7 +387,7 @@ Three rules, explained in plain terms:
 
 ---
 
-## Module 4, Video 2: Ask Claude Code to build you a pipeline
+## Module 3, Video 2: Ask Claude Code to build you a pipeline
 
 **Format:** Screen recording with voiceover
 **Length:** ~6 minutes
@@ -458,11 +456,11 @@ Watch Claude run the git add/commit. Note: the commit message documents the fix,
 "Version control isn't just backup. That commit message is a record of what broke and how you fixed it."
 
 **5:30-6:00 — Arc check + what's next**
-"Your project has a tested, debugged, secured, version-controlled workflow. You hit a real problem, diagnosed it with Claude, and fixed it. That process — describe the problem, get a diagnosis, implement the fix, test again — is the core loop of building anything with a CLI LLM. Next week you connect it to live data and make it shareable. See you in Module 5."
+"Your project has a tested, debugged, secured, version-controlled workflow. You hit a real problem, diagnosed it with Claude, and fixed it. That process — describe the problem, get a diagnosis, implement the fix, test again — is the core loop of building anything with a CLI LLM. Next week you connect it to live data and make it shareable. See you in Module 4."
 
 ---
 
-## Module 5, Video 1: Why AI makes things up (and how to fix it)
+## Module 4, Video 1: Why AI makes things up (and how to fix it)
 
 **Format:** Talking head + slides
 **Length:** ~6 minutes
@@ -495,7 +493,7 @@ Model Context Protocol: Anthropic's open standard for connecting AI models to ex
 
 ---
 
-## Module 5, Video 2: Connecting Claude to a knowledge base
+## Module 4, Video 2: Connecting Claude to a knowledge base
 
 **Format:** Screen recording with voiceover
 **Length:** ~6 minutes
@@ -535,7 +533,7 @@ Compare to asking the same question without MCP: Claude's answer is generic or f
 Type: "Write a README for this project that explains what it does, how to set it up, and how to use it. Then commit everything and push to GitHub."
 Watch Claude write the README, commit, push.
 Open the GitHub repo in a browser. Show the finished project: CLAUDE.md, skills, pipeline script, MCP config, README.
-"Look at what's in this repo: CLAUDE.md, skills, hooks, pipeline script, MCP config. Every decision about how Claude works on this project is committed here. Clone this on a new machine and the same context comes with it. Give the link to a colleague and they inherit the same environment. That's context engineering at full scale — and that's what you've spent five weeks building."
+"Look at what's in this repo: CLAUDE.md, skills, hooks, pipeline script, MCP config. Every decision about how Claude works on this project is committed here. Clone this on a new machine and the same context comes with it. Give the link to a colleague and they inherit the same environment. That's context engineering at full scale — and that's what you've spent four weeks building."
 
 **5:00-5:30 — Final project framing**
 "Your final project asks you to build something like this for a real journalism use case. It can be a pipeline, a skill library, a RAG setup, or some combination. The requirements are: it solves a real problem, it has a CLAUDE.md, and it's documented on GitHub. The rest is your design."
@@ -556,16 +554,16 @@ Open the GitHub repo in a browser. Show the finished project: CLAUDE.md, skills,
 ### Screen recording videos
 - Use a clean desktop with no personal files visible
 - Increase terminal and Claude Code font size before recording (24pt minimum)
-- Use the beat project scaffolded in Module 2 as the running context through Modules 3-5
+- Use the beat project scaffolded in Module 1 as the running context through Modules 2-4
 - Record at 1080p minimum
 - The "greenfield-beat" project is the through-line — use consistent file names across all demo videos
 
 ### Files to prepare before recording
 - `Resources/examples/beat-project/` files — press releases, council minutes, interview notes
-- A real news article URL for the pipeline demo (Module 4)
-- A viral claim or questionable press release for the source-verification demo (Module 3)
-- A populated `~/beat-archive/` that is the same as or extends the beat project files (Module 5)
+- A real news article URL for the pipeline demo (Module 3)
+- A viral claim or questionable press release for the source-verification demo (Module 2)
+- A populated `~/beat-archive/` that is the same as or extends the beat project files (Module 4)
 - A clean GitHub account or test account to show the push-to-GitHub steps without exposing personal repos
 
 ### The running project
-The demo videos should use the same project throughout — starting as an empty folder in Module 1, growing into a full project by Module 5. This makes the arc concrete and visible. Students see one project evolve across five weeks, not five disconnected demos.
+The demo videos should use the same project throughout — starting as an empty folder in Module 1, growing into a full project by Module 4. This makes the arc concrete and visible. Students see one project evolve across four weeks, not four disconnected demos.

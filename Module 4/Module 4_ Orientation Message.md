@@ -1,4 +1,4 @@
-# Module 5: Agents and RAG
+# Module 4: Agents and RAG
 
 ## Orientation message
 
@@ -58,7 +58,7 @@ The mitigation is the same principle that applies to any multi-source story: ver
 
 ## From the field
 
-Your instructor built a working example of this pipeline: the [Jay Rosen Digital Archive](https://github.com/jamditis/rosen-scraper), a collection of 765+ records from journalist Jay Rosen's career. The project applies entity extraction and RAG to primary source materials, using the Gemini API and Google Sheets to turn raw documents into a searchable knowledge base. This kind of archive-to-knowledge-base pipeline is exactly what Module 5 prepares you to build.
+Your instructor built a working example of this pipeline: the [Jay Rosen Digital Archive](https://github.com/jamditis/rosen-scraper), a collection of 765+ records from journalist Jay Rosen's career. The project applies entity extraction and RAG to primary source materials, using the Gemini API and Google Sheets to turn raw documents into a searchable knowledge base. This kind of archive-to-knowledge-base pipeline is exactly what Module 4 prepares you to build.
 
 ---
 
@@ -110,7 +110,7 @@ By the end of this module, you will be able to:
 
 ## Your project is infrastructure
 
-Across five weeks, you've built:
+Across four weeks, you've built:
 
 - A **CLAUDE.md** that encodes your beat context and newsroom standards
 - **Skills** that encode your verification methods and editorial processes
@@ -120,7 +120,7 @@ Across five weeks, you've built:
 
 All of it lives in version control. All of it is portable. Clone the repo on a new machine and the same context, tools, and data sources come with it. Hand it to a colleague and they inherit your methods.
 
-This is context engineering at scale. You started in Module 1 with one-off prompts and a chat window. You're ending Module 5 with a versioned environment any journalist on your team can clone and extend.
+This is context engineering at scale. You started in Module 1 with one-off prompts and a chat window. You're ending Module 4 with a versioned environment any journalist on your team can clone and extend.
 
 ---
 

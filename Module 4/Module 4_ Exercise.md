@@ -1,4 +1,4 @@
-# Module 5: Agents and RAG
+# Module 4: Agents and RAG
 
 ## Hands-on exercise: Configure Claude Code with MCP to query a local knowledge base
 
@@ -382,4 +382,4 @@ Submit a screenshot showing:
 
 Also submit your answers to the five reflection questions (Part 5).
 
-**Due:** End of Module 5
+**Due:** End of Module 4

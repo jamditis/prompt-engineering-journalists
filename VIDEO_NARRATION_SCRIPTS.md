@@ -3,7 +3,7 @@
 **Course:** Advanced prompt engineering for journalists
 **Instructor:** Joe Amditis, Center for Cooperative Media, Montclair State University
 
-These are camera-ready narration scripts for the first 6 instructional videos (modules 1 and 2). Each script targets ~6 minutes (~900 words at 150 wpm). Stage directions are in [BRACKETS].
+These are camera-ready narration scripts. The promo and welcome videos target 1-2 and 2-3 minutes respectively. Instructional videos (3-8) target ~6 minutes (~900 words at 150 wpm). Stage directions are in [BRACKETS].
 
 ## Updated video map (4-module structure)
 
@@ -21,6 +21,74 @@ These are camera-ready narration scripts for the first 6 instructional videos (m
 | 10 | Ask Claude Code to build you a pipeline | Module 3 | Screen recording | ~6 min |
 | 11 | Why AI makes things up (and how to fix it) | Module 4 | Talking head + slides | ~6 min |
 | 12 | Connecting Claude to a knowledge base | Module 4 | Screen recording | ~6 min |
+
+---
+
+## Video 1: Promo video
+
+**Format:** Talking head
+**Length:** 1-2 minutes
+**Module:** —
+
+---
+
+[TALKING HEAD]
+
+You have a city council meeting transcript. You need every action item, every vote, and every named official in a formatted table — before deadline. You describe that to an AI assistant running on your laptop. It reads the transcript and hands you the table. No browser, no upload, no copy-pasting. That's what this course teaches.
+
+I'm Joe Amditis from the Center for Cooperative Media at Montclair State University, and this is Advanced Prompt Engineering for Journalists — a four-week course from the Knight Center at UT Austin. You already know how to use AI. This course teaches you to use it as a collaborator on real journalism projects.
+
+[SLIDE: four things you'll walk away with]
+
+Four things you'll walk away with.
+
+First: conversations with AI that can read your files and take action on your computer — not in a browser tab, on your machine. And a persistent context file that gives the AI your beat knowledge, your style, and your sources before every session. You write it once. It loads automatically.
+
+Second: reusable journalism tools — skills and hooks — that encode your editorial workflows into commands you can share with colleagues.
+
+Third: the ability to describe an automation task in plain English and have the AI build it for you.
+
+Fourth: connecting AI to your own document archives with proper source attribution — and understanding where those connections break down.
+
+[TALKING HEAD]
+
+If you've taken Prompt Engineering 101 or you know how to write a good AI prompt — and you want to go from typing in a browser to delegating real journalism work — this is your course. Sign up at JournalismCourses.org.
+
+---
+
+## Video 2: Welcome video
+
+**Format:** Talking head
+**Length:** 2-3 minutes
+**Module:** Intro
+
+---
+
+[TALKING HEAD]
+
+Welcome. I'm Joe Amditis. Over the next four weeks, you're going to build something real — a journalism tool or workflow powered by AI, documented on GitHub, and ready to share with colleagues. Each module is one stage of that project.
+
+[SLIDE: four-stage arc — CLI + context → skills → workflows → agents + data]
+
+Here's the arc. Week one: you install a CLI tool, write a context file for your beat, and process real documents — press releases, transcripts, datasets — from the command line. By the end of the week, you'll have a working project on GitHub with a context file that shapes how the AI reads your documents.
+
+Week two: you build reusable skills that encode your editorial expertise into shareable tools — slash commands and hooks that turn your best prompts into something consistent and repeatable.
+
+Week three: you describe a recurring workflow in plain English and the AI builds the automation. You'll test it, debug it, and learn the loop you'll use every time something breaks.
+
+Week four: you connect the AI to your own data sources via MCP, handle the parts that break — permissions, auth, schema mismatches — and publish the finished project on GitHub.
+
+Each week builds on the last. By the end, everything you've made is in one repository — context file, skills, workflow scripts, data connections — and anyone who clones it inherits the same setup.
+
+[TALKING HEAD]
+
+The key shift: you've been using AI apps — ChatGPT.com, Claude.ai — where you type in a browser and get a response. This course moves you to harnesses — tools where the same AI can read your files, run scripts, and complete multi-step tasks on your machine. Same AI. Different capability. You stop prompting and start managing.
+
+You don't need to know programming. You don't need to memorize terminal commands. The AI handles the technical work. What you need is the ability to describe what you want clearly — and you already know how to do that.
+
+Three things that will help you succeed. One: do the exercises. Reading about this isn't the same as doing it — the gap between understanding a concept and being able to use it is the exercise. Two: post in the forums. Your classmates are solving the same problems, and the best debugging happens in public. Three: start Module 1's installation early. Don't troubleshoot your setup under deadline pressure.
+
+Here's what to do right now. Read the Course Requirements document. Check that your computer meets the specs. Then read the syllabus. See you in Module 1.
 
 ---
 
@@ -471,6 +539,8 @@ The greenfield-beat project threads through all demo videos. It starts as an emp
 Module 1 has more videos than other modules because it covers the merged content (CLI intro + context files). Videos 3 and 5 are talking head/conceptual. Videos 4 and 6 are screen recordings showing the same project being built incrementally. Consider recording 4 and 6 back-to-back since they use the same project.
 
 ### Slides to prepare
+- Four takeaways list (Video 1)
+- Four-stage arc diagram: CLI + context → skills → workflows → agents + data (Video 2)
 - Models / apps / harnesses diagram (Video 3)
 - Claude Code screenshot with terminal prompt (Video 3)
 - Side-by-side before/after workflow comparison (Video 3)

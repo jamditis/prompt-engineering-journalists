@@ -131,9 +131,9 @@ Why does this matter for this course?
 
 First, your CLAUDE.md is infrastructure. Not a note to yourself. Not a draft that lives on your desktop. Infrastructure. It gets committed to Git, versioned alongside your project files, and deployed with everything else. When you push your project to GitHub, your CLAUDE.md goes with it. When a colleague clones your repo, your context comes with it. When you pull the project on a new machine, your accumulated beat knowledge is already there. Treat it accordingly: write it carefully, commit it consistently, and update it when things change.
 
-Second, the tools themselves live on GitHub. Claude Code, Gemini CLI, Codex — their documentation, source code, and plugins are all hosted in GitHub repositories. In Module 3, you'll install journalism skills by cloning a repo from GitHub. Understanding what a repo is and how `git clone` works removes a barrier before you get there.
+Second, the tools themselves live on GitHub. Claude Code, Gemini CLI, Codex — their documentation, source code, and plugins are all hosted in GitHub repositories. In Module 2, you'll install journalism skills by cloning a repo from GitHub. Understanding what a repo is and how `git clone` works removes a barrier before you get there.
 
-Third, GitHub is how journalists share reusable tools. The skills library you'll use in Module 3, the workflow scripts in Module 4, the MCP configurations in Module 5 — they're all shared through GitHub repos. Knowing the basics means you can find, download, and use tools other journalists have built.
+Third, GitHub is how journalists share reusable tools. The skills library you'll use in Module 2, the workflow scripts in Module 3, the MCP configurations in Module 4 — they're all shared through GitHub repos. Knowing the basics means you can find, download, and use tools other journalists have built.
 
 You don't need to become a Git expert. You don't even need to memorize Git commands — your CLI tool can run them for you. What you need is an understanding of the concepts: what a repository is, what a commit does, what cloning means, and why version control matters. When you ask Claude Code to "initialize a Git repo and commit these files," it handles the details. But you need to know *what you're asking for* and *why*. The exercise this week walks you through it.
 

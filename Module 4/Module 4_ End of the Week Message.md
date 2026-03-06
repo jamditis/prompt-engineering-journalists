@@ -1,4 +1,4 @@
-# Module 5: Agents and RAG
+# Module 4: Agents and RAG
 
 ## End of the week message
 
@@ -18,7 +18,7 @@ This week you learned how agents and RAG are changing what's possible in newsroo
 
 The discussions this week raised hard questions about AI in journalism: autonomy, bias, infrastructure costs, and who gets left behind. There are no clean answers. What matters is that you're thinking about these questions now, while the technology is still taking shape.
 
-Over five weeks you moved from browser-based prompting to building automated pipelines and configuring AI systems that query your own documents. That's a real skill set. Use it.
+Over four weeks you moved from browser-based prompting to building automated pipelines and configuring AI systems that query your own documents. That's a real skill set. Use it.
 
 Thank you for your work this term.
 

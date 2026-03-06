@@ -12,11 +12,10 @@
 
 ## Modules
 
-- Module 1: Escaping the chat window — Programmatic AI control via terminal CLI tools
-- Module 2: Prompting with files — Project context files (CLAUDE.md, GEMINI.md, AGENTS.md)
-- Module 3: Custom skills — Turning domain expertise into reusable AI tools and hooks
-- Module 4: CLI workflows — Unix philosophy, cost-conscious pipelines, batch processing
-- Module 5: Agents and RAG — Grounded knowledge, source attribution, autonomous workflows
+- Module 1: From chat window to command line — CLI tools, project context files (CLAUDE.md, GEMINI.md, AGENTS.md), Git and GitHub
+- Module 2: Custom skills — Turning domain expertise into reusable AI tools and hooks
+- Module 3: CLI workflows — Automation, cost-conscious pipelines, batch processing
+- Module 4: Agents, tools, and data access — MCP, grounded knowledge, source attribution
 
 ## Tools covered
 

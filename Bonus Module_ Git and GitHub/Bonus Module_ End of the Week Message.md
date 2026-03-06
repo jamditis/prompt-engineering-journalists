@@ -16,7 +16,7 @@ This week you learned how Git tracks changes, what commits and branches are, and
 
 **Exercise reminder:** Your writeup about setting up a Git-tracked journalism project with Claude Code is due Sunday at 11:59pm. Submit your 300-500 word reflection covering your experience initializing a repo, making commits, and pushing to GitHub.
 
-**Where this goes next:** Every remaining module in this course assumes you can ask Claude Code to commit your work and push it to GitHub. Module 2's context files, Module 3's skills, Module 4's pipelines, Module 5's agents — all of these are projects that benefit from version control. You now have the vocabulary to manage that.
+**Where this goes next:** Every remaining module in this course assumes you can ask Claude Code to commit your work and push it to GitHub. Module 1's context files, Module 2's skills, Module 3's pipelines, Module 4's agents — all of these are projects that benefit from version control. You now have the vocabulary to manage that.
 
 If Git still feels abstract, that's normal. It clicks the first time you need to go back to a working version after something breaks. That moment is coming, and when it arrives, you'll know exactly what to ask Claude Code to do.
 

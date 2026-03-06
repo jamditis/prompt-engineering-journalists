@@ -1,4 +1,4 @@
-# Module 5: Agents and RAG
+# Module 4: Agents and RAG
 
 ## Optional resources
 
@@ -126,14 +126,14 @@ Applies Diane Vaughan's "normalization of deviance" concept — originally used 
 **"How to stop AI's 'lethal trifecta'"** — Simon Willison
 https://simonwillison.net/2025/Sep/26/how-to-stop-ais-lethal-trifecta/
 
-A practical breakdown of the lethal trifecta framework and what you can actually do about it. The three components are: private data access + untrusted content exposure + external network communication. The recommended defense: eliminate exfiltration vectors entirely, rather than trying to make the AI perfect. In security terms, 99% reliability is still a failing grade. Relevant to the Module 5 exercise, where you're giving Claude access to your documents — understanding what risks that creates and how to mitigate them is part of doing it responsibly.
+A practical breakdown of the lethal trifecta framework and what you can actually do about it. The three components are: private data access + untrusted content exposure + external network communication. The recommended defense: eliminate exfiltration vectors entirely, rather than trying to make the AI perfect. In security terms, 99% reliability is still a failing grade. Relevant to the Module 4 exercise, where you're giving Claude access to your documents — understanding what risks that creates and how to mitigate them is part of doing it responsibly.
 
 ---
 
 **"Living dangerously with Claude"** — Simon Willison
 https://simonwillison.net/2025/Oct/22/living-dangerously-with-claude/
 
-What happens when you give Claude Code full permissions and let it run without confirmation prompts. Willison completed three research projects in 48 hours — and clearly explains why this is a security risk when agents touch external content. His framework: the "lethal trifecta" of private data access + untrusted content exposure + external network access is what creates actual danger. His recommendation: use YOLO mode in sandboxed environments only. Useful for understanding what the Module 5 exercise is actually doing when it grants Claude file access.
+What happens when you give Claude Code full permissions and let it run without confirmation prompts. Willison completed three research projects in 48 hours — and clearly explains why this is a security risk when agents touch external content. His framework: the "lethal trifecta" of private data access + untrusted content exposure + external network access is what creates actual danger. His recommendation: use YOLO mode in sandboxed environments only. Useful for understanding what the Module 4 exercise is actually doing when it grants Claude file access.
 
 ---
 
@@ -165,7 +165,7 @@ Every MCP server you connect adds tokens to your session context — before you'
 
 For newsrooms building on MCP: the question worth asking before adding any integration is not "can we connect this?" but "is the capability this adds worth the context cost every session?" A database connection that's only occasionally useful still consumes tokens on sessions where you don't need it.
 
-The Module 5 exercise has you connecting the filesystem MCP server to a knowledge base. This piece helps you think clearly about what to connect going forward — and when a simpler approach (a skill file, a context document) achieves the same result without the integration overhead.
+The Module 4 exercise has you connecting the filesystem MCP server to a knowledge base. This piece helps you think clearly about what to connect going forward — and when a simpler approach (a skill file, a context document) achieves the same result without the integration overhead.
 
 *Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw). Extracted and organized in [jamditis/stash](https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns).*
 

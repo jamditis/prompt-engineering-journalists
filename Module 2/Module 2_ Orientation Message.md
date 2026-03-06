@@ -36,7 +36,7 @@ Superpowers is a third-party plugin that completely rewires how a coding agent a
 
 Superpowers isn't journalism-specific, but it illustrates what's possible at the plugin level: a complete, opinionated workflow installed in a single command, where someone else has done the hard work of deciding what the agent should do at each stage. The journalism skills plugin you'll install this week works on the same model, just built for newsroom workflows instead of software development.
 
-This week covers skills and hooks. By Module 5, you'll see how these fit into larger agent workflows.
+This week covers skills and hooks. By Module 4, you'll see how these fit into larger agent workflows.
 
 ---
 

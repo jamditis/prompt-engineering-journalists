@@ -53,4 +53,4 @@ This piece shows what the harness layer actually looks like in practice. You'll 
 
 The 101 course taught you to use AI through chat interfaces — that's the app layer. Pay attention to moments in both readings where the authors describe limitations of that approach: context that evaporates, tasks that require copy-pasting, workflows that can't be automated. Those limitations are what Module 1 addresses.
 
-By the end of Module 5, you'll be working at the harness layer. These readings explain why that matters.
+By the end of Module 4, you'll be working at the harness layer. These readings explain why that matters.

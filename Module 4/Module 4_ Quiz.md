@@ -1,4 +1,4 @@
-# Module 5: Agents and RAG
+# Module 4: Agents and RAG
 
 ## Quiz
 
