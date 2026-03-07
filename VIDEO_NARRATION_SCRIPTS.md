@@ -178,6 +178,12 @@ This is accessible. It's a subscription and a terminal window. It's not a thousa
 
 [SLIDE: what you don't need]
 
+[RECAP — after tools comparison]
+
+Three tools, same idea. Claude Code if you want the best results and have $20/month. Gemini CLI if you want free. Codex if you already pay for ChatGPT Plus. Pick one and move on — you can always switch later.
+
+[SLIDE: what you don't need]
+
 Let me address something head-on, because I've heard it from every journalist I've talked to about this: "Do I need to learn to code?"
 
 No. You don't need to learn to code. You don't need to memorize terminal commands. You don't need to understand programming languages. You don't even need to understand what a "script" is in a technical sense — we'll cover that when it matters, and when we do, the AI writes the scripts, not you.
@@ -185,6 +191,10 @@ No. You don't need to learn to code. You don't need to memorize terminal command
 What you need is the ability to describe what you want clearly enough that the AI can execute it. And that's a skill you already have. It's the same skill you use when you assign a story to a junior reporter: you give them the angle, the key sources, the format you want, and the deadline. If you leave something out, the result isn't what you wanted. If you're specific, it is.
 
 Managing an AI assistant works the same way. The skills that matter aren't technical. They're editorial: clear requirements, direct feedback, organized documentation. You've been practicing those your entire career.
+
+[RECAP — after "do I need to code"]
+
+No coding. No terminal commands to memorize. You describe outcomes, the AI handles the steps. The skills that matter are editorial: clear requirements, direct feedback, organized documentation.
 
 [SLIDE: debugging loop]
 
@@ -211,6 +221,10 @@ Here's the arc of the course. Four modules, each building on the last.
 By the end, everything you've built is in one repository — context file, skills, workflow scripts, data connections. Clone it on a new machine and the full environment comes with it. Give the link to a colleague and they inherit your setup. That's the payoff of building at the harness layer instead of typing one-off prompts in a browser.
 
 Read Mollick's guide in the required readings first. It gives you the conceptual map for everything we'll do. In the next video, I'll open Claude Code on screen and walk you through your first conversation with it — so you can see what this looks like before you try it yourself.
+
+[RECAP — end of video, consolidating all concepts]
+
+So here's the map. AI has three layers: models, apps, and harnesses. You've been using apps. This course moves you to harnesses — where the AI works with your files and takes multi-step action. Three tools do this: Claude Code, Gemini CLI, Codex CLI. You don't need to code. You describe outcomes, the AI handles execution. When something breaks — and it will — paste the error back and let the AI diagnose it. Four modules, each building on the last, ending with a shareable project on GitHub.
 
 ---
 
@@ -296,6 +310,10 @@ That's the comparison. Same AI brain, same quality of response. The difference i
 
 [SCREEN: Claude Code terminal]
 
+[RECAP — after chaining demo]
+
+So far: launch with one word, ask in plain English, it reads files without uploading, saves output as real files, and remembers what it just did within a session. That's the basic loop.
+
 Let me show you one more thing before we move to the planning workflow: what happens when you give it multiple files.
 
 I type: "I have three press releases in my documents folder: park-closure.md, water-main-repair.md, and council-reorganization.md. Read all three and create a summary table with columns for: topic, key decision, vote count, and status. Save it as weekly-roundup.md."
@@ -334,6 +352,10 @@ Now it's working. But here's the key thing: I saw the approach before it started
 
 And there it is. A quarterly report, structured by topic, with cross-references and a patterns section. Built from 30 documents with one planning conversation.
 
+[RECAP — after Plan Mode]
+
+Plan Mode: ask the AI to plan before it builds. Review the plan. Adjust it. Then approve. You keep oversight, and if something breaks, you know which step failed because the plan is documented.
+
 [SCREEN: Claude Code terminal]
 
 Now let me show you the debugging loop, because this is the most practical thing I'll teach you today.
@@ -355,6 +377,10 @@ It explains: the file wasn't found at the expected path, here are the files that
 This loop — see error, paste error, get fix — applies to everything. Terminal errors, Python tracebacks, API failures, formatting problems. Don't paraphrase the error. Don't try to interpret it. Paste it directly and ask. The AI wrote the code or ran the command that failed. It has the context to help.
 
 You'll use this pattern more than any other pattern in the course. Errors are information, not failures. Your collaborator can read them.
+
+[RECAP — after debugging loop]
+
+Errors are information. Paste them back. The AI has context from the same conversation to diagnose the problem. That's the loop: see error, paste error, get fix. You'll use it more than any other pattern.
 
 [SCREEN: Claude Code terminal]
 
@@ -438,6 +464,10 @@ Next time you open Claude Code, it reads the CLAUDE.md — including the handoff
 
 Short sessions. Handoff notes. That's the pattern. You'll use it throughout this course and it'll prevent most of the frustration people hit with these tools.
 
+[RECAP — after short-sessions pattern]
+
+Short sessions. Specific tasks. Handoff notes before closing. The context file carries the state between sessions so the AI picks up where you left off. That's the workflow.
+
 [SLIDE: annotated CLAUDE.md example]
 
 So what goes in a context file? Let me break it down into three categories, with examples from real journalism work.
@@ -456,6 +486,10 @@ Some of these overlap with what the AI already knows about AP style. But the dev
 
 This category is where you encode editorial judgment. The AI is doing the mechanical work — but you're setting the editorial guardrails.
 
+[RECAP — after three categories]
+
+Three categories. Beat knowledge tells the AI what your coverage area looks like. Style rules keep the output matching your publication. Workflow instructions encode your editorial judgment about what the AI should and shouldn't do on its own.
+
 [SLIDE: three examples with pass/fail markers]
 
 Here's how you test whether something belongs in your context file. I call it the deletion test. Simple rule: if you removed this line, would the AI behave any differently?
@@ -471,6 +505,10 @@ Here's how you test whether something belongs in your context file. I call it th
 "Source verification: when summarizing a claim from a press release, note whether the claim cites a specific data source. If it doesn't, flag it as unverified." Delete it and Claude passes along claims without flagging. That passes.
 
 Every line in your context file should survive this test. If removing it wouldn't change the AI's behavior, the line isn't doing work. Take it out. A shorter, tighter context file is better than a long one full of generic instructions — because every line takes up space in the context window, and you want that space used for things that matter.
+
+[RECAP — after deletion test]
+
+The deletion test: if removing a line wouldn't change the AI's behavior, it doesn't belong. Apply it to every line in your context file. Generic instructions like "be helpful" fail. Beat-specific rules like "use appropriations cycle, not budget season" pass.
 
 [SLIDE: what NOT to put in a context file]
 
@@ -576,6 +614,10 @@ Let me scroll through and check a few things. The appropriations cycle rule is t
 
 Every line passes the deletion test. If I removed "the city uses 'appropriations cycle' not 'budget season,'" Claude would use the wrong term. If I removed the vote count instruction, Claude would give vague summaries. Each line changes behavior.
 
+[RECAP — after CLAUDE.md written]
+
+Beat knowledge, style rules, workflow instructions. Every line passes the deletion test. This file loads automatically at the start of every session in this folder. That's the foundation of the project.
+
 Now, this is a starting point — not a finished product. The context file grows with the project. As you work, you'll notice things: Claude abbreviates the city manager's title differently than you'd like, or it doesn't flag a certain kind of claim. Each of those is a line to add. The best context files are written incrementally over weeks, not all at once.
 
 Let me add something right now. I type: "Add one more rule to the CLAUDE.md: when processing city council minutes, always create a separate section for items that were tabled or deferred — these tend to come back at future meetings and I want to track them."
@@ -615,6 +657,10 @@ I type: "Summarize park-closure.md."
 Look at that. "Appropriations cycle" instead of "budget." The 5-2 vote count is there. Council members Davis and Ramirez voted against — they're named. The press release's claim about cost savings is flagged as "unverified — no specific figures cited in the release."
 
 Same document. Same AI. The only difference is the context file. That's what a few lines of plain text instructions do. The generic summary would have required me to manually fix every detail. The contextualized summary is publish-ready for my beat.
+
+[RECAP — after with/without comparison]
+
+Same document, same AI, same question. The only variable was the context file. Generic output versus beat-ready output. That's the difference a few lines of plain text make.
 
 [SCREEN: Claude Code session in project folder]
 
@@ -659,6 +705,10 @@ There it is. The greenfield-beat repository. CLAUDE.md is there — if I click o
 Now here's the payoff. If I give this URL to a colleague — another reporter picking up my beat, or someone in the newsroom who wants to use the same workflow — they clone the repository. One command: `git clone` followed by the URL. They now have the project folder on their machine, complete with the CLAUDE.md. They open Claude Code in that folder and it loads the context file automatically. They inherit every rule, every piece of beat knowledge, every workflow instruction I wrote.
 
 That's institutional knowledge, not personal notes. The context file travels with the project, through version control, to anyone who needs it.
+
+[RECAP — after GitHub push]
+
+One prompt, six Git operations. The project is on GitHub — context file, documents, structure. Clone the link and the full environment comes with it. That's how context files scale from personal notes to shared infrastructure.
 
 [SCREEN: voiceover, terminal visible]
 
@@ -720,6 +770,10 @@ Skills let you keep specialized instructions out of the background and bring the
 
 This is what I mean by "token-efficient context management" — you get precise, relevant instructions at the moment you need them, and nothing cluttering the window when you don't.
 
+[RECAP — after skill anatomy]
+
+A skill is a markdown file in `.claude/commands/`. The filename is the command. You invoke it with a slash. It loads instructions only when called, keeping your context window clean the rest of the time.
+
 [SLIDE: skill examples for journalism]
 
 What kinds of skills make sense for journalism? Here are some examples.
@@ -758,6 +812,10 @@ You never invoke this hook. It fires automatically, every time. And the hook scr
 
 Newsrooms already work this way. You have editorial review before publication. You have sign-off requirements before legal settlements. You have approval chains before public statements. A stop hook is the automated version of "does someone need to see this before it goes out?"
 
+[RECAP — after hooks]
+
+Two types of hooks. Notify hooks flag problems without stopping work — like an automated second reader. Stop hooks block one-way-door decisions until you approve. Both fire automatically. You never invoke them.
+
 [SLIDE: plugin concept]
 
 At the top of the maturity path: plugins. A plugin is a package of skills and hooks that someone has assembled and shared on GitHub. You install the whole package with one command. All the skills show up as slash commands. All the hooks start running automatically.
@@ -792,7 +850,9 @@ The threshold: if you've done it three times and you'll do it again, it's probab
 
 In Module 1, you set up the project and got context files working. This week you add reusable tools. By the end of Module 2, your project will have a custom skill you built yourself, a library of journalism-specific tools, and hooks running in the background checking your work. Module 3, you'll describe a full workflow and have the AI build the automation.
 
-In the demo, I'll install the journalism skills library, run source-verification on a real claim, and walk through creating a custom skill step by step. See you there.
+[RECAP — closing]
+
+The progression: ad-hoc prompts, saved prompts, skills, hooks, plugins. Skills are markdown files that load with a slash command. Hooks fire automatically — notify hooks flag problems, stop hooks block one-way doors. Plugins bundle both into installable packages. In the demo, I'll install the journalism skills library, run source-verification on a real claim, and build a custom skill step by step. See you there.
 
 ---
 
@@ -884,6 +944,10 @@ The overtime budget did increase — but by 180%, not 340%. The newsletter appea
 
 That's the kind of nuance you need for accurate reporting. Not "the claim is wrong" but "the claim uses a misleading comparison methodology, and here's the actual number."
 
+[RECAP — after source verification demos]
+
+Two claims checked. One inflated a number. The other used a misleading comparison. Both times, the skill followed the same steps, gave structured verdicts, and flagged what it couldn't verify. Same method, consistent results, 30 seconds each. That's what a skill buys you.
+
 [SCREEN: Claude Code session]
 
 Now let's build a custom skill. This is the part that connects to your exercise — because the exercise asks you to create a skill of your own.
@@ -941,6 +1005,10 @@ Let me iterate on this. The output is good, but I want to refine one thing. I ty
 [SCREEN: Claude updating the skill file]
 
 It opened the skill file, found the votes processing section, and added the rule about agenda item numbers. The skill file is now better than it was five minutes ago. That's how skills improve — you use them, notice what's missing, and update the file.
+
+[RECAP — after custom skill build + iteration]
+
+Plan the skill, build it, test on real material, iterate. The whole file is plain English markdown. The iteration is a sentence: "add agenda item numbers." The file updates. Skills get better the more you use them.
 
 [SCREEN: Claude Code session]
 
@@ -1050,6 +1118,10 @@ When Claude builds a script for you, ask it: "Are there any hardcoded secrets in
 
 This takes 30 seconds and prevents the kind of mistake that costs you real money and real embarrassment.
 
+[RECAP — after testing, cost, and security]
+
+Three rules so far. Stage your pipeline so failures are localized. Test on a small batch before scaling up. Keep API keys out of your code — use environment variables and audit for secrets.
+
 [SLIDE: the debugging loop]
 
 Let me expand on the debugging loop, because you'll use it constantly when building workflows.
@@ -1071,6 +1143,10 @@ That gap — between relevance and newsworthiness — is the gap where editorial
 Clare Spencer has documented multilingual newsroom workflows — at La Voz, The Economist, and the BBC. These are pipelines that take articles written in one language, translate them, and adapt them for a different audience. The technical part — the translation — is fast and cheap. But every pipeline includes a human review step where a bilingual editor checks the translation for tone, cultural context, and accuracy. The automation handles volume. The editor handles quality.
 
 The pattern is the same in both cases. Automate the mechanical work. Keep human review in the loop. Don't trust any step you haven't verified.
+
+[RECAP — after case studies]
+
+Two newsrooms, same principle: automate the volume, keep human judgment in the loop. Relevance classification is 94% accurate, but newsworthiness is a 31% match — the AI filters, the reporter decides what matters. Translation pipelines are fast, but a bilingual editor catches what the model misses.
 
 [SLIDE: error handling — exponential backoff]
 
@@ -1112,7 +1188,9 @@ Here's where we are in the course arc. In Module 1, you set up a project and a c
 
 The progression: context gave the AI your beat knowledge. Skills gave it your editorial expertise. Workflows give it a defined sequence of steps to execute without you sitting at the keyboard. Each layer adds capability while keeping you in control.
 
-In the demo, I'm going to describe a journalism workflow in plain English, have Claude Code build it, and then intentionally break it — because seeing how to fix things is more useful than seeing things work on the first try. See you there.
+[RECAP — closing]
+
+Automation means staged pipelines: each step has one job, failures are localized. Test on five before five thousand. Keep secrets out of your code. When something breaks, paste the error — the AI has context to diagnose it. Automate the volume, keep human judgment in the loop. In the demo, I'm going to describe a workflow in plain English, have Claude Code build it, and intentionally break it — because seeing how to fix things is more useful than seeing things work. See you there.
 
 ---
 
@@ -1219,6 +1297,10 @@ Five markdown files. Each one has a title, three bullet points. Let me read thro
 
 Good. But we're not done testing.
 
+[RECAP — after rate-limit fix]
+
+That's the first loop: build, test, break, paste the error, fix, test again. The pipeline works on five URLs now. But we're not done — the next failure is going to be sneakier.
+
 [SCREEN: Claude Code session]
 
 I'm going to test another failure scenario — one that isn't a code error. I type: "Run the pipeline on this URL." And I paste a URL I know is behind a paywall.
@@ -1262,6 +1344,10 @@ I type: "Make that change."
 [SCREEN: Claude adding the check]
 
 Done. The script now checks for the API key at startup and exits with a clear message if it's missing. That's the kind of small fix that separates a script you built for yourself from a tool a colleague can pick up and use.
+
+[RECAP — after paywall fix and security audit]
+
+Two types of failure, two different fixes. The rate limit was loud — the script crashed. The paywall was silent — the script succeeded but the content was wrong. The validation step catches the silent one. And the security audit catches leaked credentials before they become a problem.
 
 [SCREEN: Claude Code session]
 
@@ -1395,6 +1481,10 @@ With RAG, the model searches your 40 documents. It finds the relevant council mi
 
 "Claude said this" is not attributable. "Claude synthesized this from council-minutes-2026-02-12.md, paragraph 4" is. That's the standard. If you can't trace an AI-generated claim back to a source document, it doesn't belong in your reporting.
 
+[RECAP — after parametric vs. grounded + RAG]
+
+Parametric knowledge: memorized during training, frozen at a cutoff, uncitable. Grounded knowledge: retrieved from documents at query time, current, traceable to a source file. RAG is the technique that gets you from one to the other — retrieve first, then generate. That distinction drives everything in this module.
+
 [SLIDE: newsroom examples — Washington Post, New York Times, Geneea]
 
 Newsrooms are already building this way. Let me walk through three examples at different scales.
@@ -1406,6 +1496,10 @@ The New York Times built **Echo**, an internal tool for article summarization, S
 **Geneea**, a Czech AI company, built a RAG system specifically for newsrooms. Journalists query their own archives — years of published articles — and get answers with citations to the original stories. Need to reconstruct the timeline of a political scandal from three years of coverage? Ask the system. It returns the timeline with links to each source article. The citations aren't decorative — they're the point. The system is useful because you can verify every claim it makes against the original reporting.
 
 Three different scales, three different implementations, same principle: the AI retrieves from real documents and the humans verify the output.
+
+[RECAP — after newsroom examples]
+
+Three newsrooms, three tools, same pattern: the AI retrieves from real documents, humans verify the output. Washington Post uses it for FOIA document dumps, the Times for summaries and headlines, Geneea for archive search with citations. The citations aren't decorative — they're the point.
 
 [SLIDE: autonomy spectrum — read-only, supervised action, autonomous]
 
@@ -1453,6 +1547,10 @@ Two findings matter here. First, the model showed systematic bias against non-We
 
 Second — and this connects to everything we've covered about context files and skills — de Cooker argues that prompt design is a methodological artifact. The specific wording of the prompt changes the results. Different prompts produce different extraction patterns. That means the prompt isn't neutral. It's a research instrument, and like any research instrument, it needs to be documented, versioned, and shared. That's exactly what CLAUDE.md files and skills do. They make the prompt visible, repeatable, and auditable.
 
+[RECAP — after agents, MCP, and grounded knowledge]
+
+So here's where we are. Parametric knowledge is what the model learned during training — broad but not verifiable. Grounded knowledge comes from real documents you connect via RAG and MCP. Agents are models plus tools — they can read files, run code, search archives. And de Cooker's research shows why this matters: the prompt itself shapes the output, so making prompts visible and versioned — which is what context files and skills do — is a methodological requirement, not a convenience.
+
 [SLIDE: Joe's agent infrastructure — Raspberry Pi, Gmail, Slack, Telegram]
 
 I want to tell you about something I built, because it illustrates both the potential and the problems of agent infrastructure.
@@ -1470,6 +1568,10 @@ The CPU locked up during a heavy processing job — the Raspberry Pi ran out of 
 The scheduler silently failed for three days. No errors in the logs — it just stopped running. A cron job wasn't loading the right environment variables after a system update. I didn't notice because there were no error notifications — the absence of activity is hard to detect. The fix: a heartbeat check that sends an alert if the scheduler hasn't run in the expected window.
 
 Each of those failures produced a rule. The rules are written into the system's configuration files — the same kind of context files you've been building all course. What oversight looks like in practice isn't a policy document. It's a set of rules written after specific things went wrong.
+
+[RECAP — after personal agent story]
+
+The pattern from that agent story is the same pattern we've seen all course: build it, run it, watch it fail, write a rule so it doesn't fail the same way again. The accidental email became an approval step. The memory crash became a resource limit. The silent scheduler failure became a heartbeat check. Every failure produced a rule, and those rules live in context files — the same kind of files you've been writing since week one.
 
 [SLIDE: where data connections break]
 
@@ -1590,6 +1692,10 @@ That's a discrepancy that a reporter should know about. The press release went o
 
 And Claude found it by reading two documents and comparing the numbers. Not from training data — from your archive.
 
+[RECAP — after cross-reference query]
+
+That's four queries so far, each one building on the last. A simple factual lookup — what happened with Riverside Park. A cross-document search for contractor billing. A sourced background paragraph. And a cross-reference that caught a dollar-figure discrepancy between the press release and the council minutes. Every answer cited specific files. That's the difference grounded knowledge makes.
+
 [SCREEN: Claude Code session]
 
 Now I want to show you something equally important: what happens when the archive doesn't have the answer.
@@ -1603,6 +1709,10 @@ Look at the response. Claude searched the archive and didn't find any documents 
 This is the correct behavior. This is what you want. An AI tool that says "I don't have documents about that" is more useful than one that fabricates an answer. The absence of evidence is information. It tells you the archive doesn't cover this topic, which means you need to find the source material yourself before reporting on it.
 
 If this were a chatbot without grounded knowledge, you might get a paragraph about highway projects that sounds specific but has no basis in any real document. That's worse than no answer at all, because it looks like it could be real.
+
+[RECAP — after "I don't know" test]
+
+Two things to hold onto. First: when the archive has the answer, you get citations — specific files, specific sections, verifiable claims. Second: when the archive doesn't have the answer, a grounded system tells you so instead of making something up. Both behaviors matter. The citations let you verify. The refusal to guess keeps you from publishing something that sounds right but isn't.
 
 [SCREEN: Claude Code session]
 
@@ -1647,6 +1757,10 @@ Let me restart one more time and verify.
 [SCREEN: Relaunching, running /mcp, asking a test query]
 
 Connection is back. The test query returns results with citations. We're good.
+
+[RECAP — after config debugging]
+
+That's the debug cycle for MCP: something stops working, you check the config file, you find the typo or the wrong path, you fix it, you restart, you test. Same loop you learned in Module 3 — see the error, show it to Claude, get the fix. Most MCP problems are config problems, and most config problems are one-character typos.
 
 [SCREEN: Claude Code session]
 
