@@ -182,6 +182,8 @@ All 4 modules + Introduction module have complete 8-document sets. Readings are 
   - `.bullet-item` grid→block fix for mobile: CSS Grid treats inline elements (`<a>`, `<code>`, `<strong>`) as separate grid items, breaking layout on narrow screens. Switched to `display: block` + hanging indent on mobile.
   - `scroll-padding-top`: 5rem desktop, 7rem mobile — anchor links clear the sticky header
   - `review.html`: modal width clamped with `min(680px, 92vw)`, sidebar stacks on mobile
+- **NICAR 2026 skills repo**: added Aaron Kessler's `amkessler/nicar2026_skills_in_codex_claude` as optional resource in Module 2 (site + starter kit + syllabus Google Doc)
+- **Starter kit references**: added `jamditis/mooc-starter-kit` to syllabus Google Doc (pre-course checklist, course repositories section) and Introductory Materials Google Doc
 
 # AI Writing Guidelines: Avoiding Slop Phrases
 Use this file as a reference when reviewing AI-generated content. These patterns indicate lazy, filler writing that should be edited or avoided.
