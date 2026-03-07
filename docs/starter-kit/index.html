@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starter kit | Advanced prompt engineering for journalists</title>
+    <meta name="description" content="Fork the starter repo, clone it, and use it as your workspace for all four modules of the Advanced Prompt Engineering for Journalists course.">
+    <link rel="canonical" href="https://mooc.amditis.tech/starter-kit/" />
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mooc.amditis.tech/starter-kit/" />
+    <meta property="og:title" content="Starter kit | Advanced prompt engineering for journalists" />
+    <meta property="og:description" content="Fork the starter repo and use it as your workspace for the entire course. Includes sample documents, skill templates, starter scripts, and MCP config examples." />
+    <meta property="og:site_name" content="Knight Center for Journalism" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Starter kit | Advanced prompt engineering for journalists" />
+    <meta name="twitter:description" content="Fork the starter repo and use it as your workspace for the entire course." />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <!-- Header with nav -->
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Page header -->
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">COURSE WORKSPACE</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">Starter kit</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-3xl">Fork this repo, clone your fork, and use it as your workspace for all four modules. By the end of the course, it will be a working AI-assisted journalism toolkit.</p>
+            </div>
+        </section>
+
+        <!-- Content -->
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
+
+            <!-- Fork button / CTA -->
+            <section>
+                <div class="border border-acid/30 bg-acidDim p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+                    <div>
+                        <p class="font-mono text-acid text-sm font-bold mb-2">github.com/jamditis/mooc-starter-kit</p>
+                        <p class="text-gray-300 text-sm">Click <strong class="text-chrome">Fork</strong> on GitHub to create your own copy, then clone it to your machine.</p>
+                    </div>
+                    <a href="https://github.com/jamditis/mooc-starter-kit/fork" target="_blank" rel="noopener" class="shrink-0 inline-flex items-center gap-2 px-6 py-3 bg-acid text-void font-mono font-bold text-sm hover:bg-acid/90 transition-all rounded">
+                        Fork on GitHub
+                    </a>
+                </div>
+            </section>
+
+            <!-- Setup steps -->
+            <section id="setup">
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-ice">Setup</h2>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Step 1 -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="flex items-baseline gap-3 mb-3">
+                            <span class="font-mono text-acid font-bold text-sm">1.</span>
+                            <span class="font-display text-chrome font-bold">Fork the repo</span>
+                        </div>
+                        <p class="text-gray-300 text-sm">Go to <a href="https://github.com/jamditis/mooc-starter-kit" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">github.com/jamditis/mooc-starter-kit</a> and click <strong class="text-chrome">Fork</strong> (top right). This creates your own copy on GitHub that you can push to.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="flex items-baseline gap-3 mb-3">
+                            <span class="font-mono text-acid font-bold text-sm">2.</span>
+                            <span class="font-display text-chrome font-bold">Clone your fork</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-3">Open a terminal and run:</p>
+                        <div class="bg-surface border border-white/10 p-4 font-mono text-sm rounded overflow-x-auto">
+                            <pre class="m-0"><code><span class="text-gray-400">$</span> <span class="text-chrome">git clone https://github.com/YOUR-USERNAME/mooc-starter-kit.git</span>
+<span class="text-gray-400">$</span> <span class="text-chrome">cd mooc-starter-kit</span></code></pre>
+                        </div>
+                        <p class="text-gray-400 text-xs mt-3">Replace <code class="text-acid bg-surface px-1">YOUR-USERNAME</code> with your GitHub username.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="flex items-baseline gap-3 mb-3">
+                            <span class="font-mono text-acid font-bold text-sm">3.</span>
+                            <span class="font-display text-chrome font-bold">Launch Claude Code</span>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-3">From inside the project folder, start a session:</p>
+                        <div class="bg-surface border border-white/10 p-4 font-mono text-sm rounded overflow-x-auto">
+                            <pre class="m-0"><code><span class="text-gray-400">$</span> <span class="text-acid">claude</span></code></pre>
+                        </div>
+                        <p class="text-gray-400 text-xs mt-3">Claude reads the <code class="text-acid bg-surface px-1">CLAUDE.md</code> file automatically when you launch from this directory.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What's inside -->
+            <section id="contents">
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-ice">What's inside</h2>
+                </div>
+
+                <div class="border border-white/10 bg-panel divide-y divide-white/5">
+                    <div class="p-5">
+                        <div class="flex items-baseline gap-3 mb-1">
+                            <code class="font-mono text-acid text-sm">CLAUDE.md</code>
+                            <span class="text-xs font-mono text-gray-400">Module 1</span>
+                        </div>
+                        <p class="text-gray-300 text-sm">Starter context file with placeholder sections. You'll customize it with your beat description, style rules, source standards, and terminology. Claude reads it at the start of every session.</p>
+                    </div>
+
+                    <div class="p-5">
+                        <div class="flex items-baseline gap-3 mb-1">
+                            <code class="font-mono text-acid text-sm">sample-docs/</code>
+                            <span class="text-xs font-mono text-gray-400">Module 1</span>
+                        </div>
+                        <p class="text-gray-300 text-sm">Seven sample journalism documents: a press release, council minutes excerpt, interview notes, reader tip, news article, transcript, and a viral claim. Used in the Module 1 exercise to practice processing documents with and without context.</p>
+                    </div>
+
+                    <div class="p-5">
+                        <div class="flex items-baseline gap-3 mb-1">
+                            <code class="font-mono text-acid text-sm">skills/</code>
+                            <span class="text-xs font-mono text-gray-400">Module 2</span>
+                        </div>
+                        <p class="text-gray-300 text-sm">Two skill templates. <code class="text-acid bg-surface px-1">my-first-skill.md</code> is a minimal template you can copy and customize. <code class="text-acid bg-surface px-1">newsroom-style.md</code> is a complete AP style skill with examples. You'll build your own custom skill in the Module 2 exercise.</p>
+                    </div>
+
+                    <div class="p-5">
+                        <div class="flex items-baseline gap-3 mb-1">
+                            <code class="font-mono text-acid text-sm">scripts/</code>
+                            <span class="text-xs font-mono text-gray-400">Module 3</span>
+                        </div>
+                        <p class="text-gray-300 text-sm">Two starter shell scripts. <code class="text-acid bg-surface px-1">summarize-article.sh</code> processes a single file. <code class="text-acid bg-surface px-1">batch-process.sh</code> processes a folder of files. You'll build your own pipeline in the Module 3 exercise.</p>
+                    </div>
+
+                    <div class="p-5">
+                        <div class="flex items-baseline gap-3 mb-1">
+                            <code class="font-mono text-acid text-sm">mcp-configs/</code>
+                            <span class="text-xs font-mono text-gray-400">Module 4</span>
+                        </div>
+                        <p class="text-gray-300 text-sm">An example MCP configuration file and a README explaining how it works. You'll use this as a reference when connecting Claude to your document archive in Module 4.</p>
+                    </div>
+
+                    <div class="p-5">
+                        <div class="flex items-baseline gap-3 mb-1">
+                            <code class="font-mono text-acid text-sm">beat-archive/</code>
+                            <span class="text-xs font-mono text-gray-400">Module 4</span>
+                        </div>
+                        <p class="text-gray-300 text-sm">Empty folder where you'll add documents for the Module 4 RAG exercise. Once configured with MCP, Claude can search these documents and cite them in its answers.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Module map -->
+            <section id="modules">
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-ice">Which module uses what</h2>
+                </div>
+
+                <div class="border border-white/10 bg-panel overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-white/10">
+                                <th class="text-left p-4 font-mono text-acid font-bold text-xs">Module</th>
+                                <th class="text-left p-4 font-mono text-acid font-bold text-xs">Week</th>
+                                <th class="text-left p-4 font-mono text-acid font-bold text-xs">Files you'll work with</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5">
+                            <tr>
+                                <td class="p-4 text-chrome font-bold"><a href="../module-1/" class="hover:text-acid transition-colors">1 — From chat window to command line</a></td>
+                                <td class="p-4 text-gray-400">1</td>
+                                <td class="p-4 text-gray-300"><code class="text-acid bg-surface px-1">CLAUDE.md</code>, <code class="text-acid bg-surface px-1">sample-docs/</code></td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-chrome font-bold"><a href="../module-2/" class="hover:text-acid transition-colors">2 — Custom skills</a></td>
+                                <td class="p-4 text-gray-400">2</td>
+                                <td class="p-4 text-gray-300"><code class="text-acid bg-surface px-1">skills/</code>, plus new skills you create</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-chrome font-bold"><a href="../module-3/" class="hover:text-acid transition-colors">3 — CLI workflows</a></td>
+                                <td class="p-4 text-gray-400">3</td>
+                                <td class="p-4 text-gray-300"><code class="text-acid bg-surface px-1">scripts/</code>, plus pipelines you build</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 text-chrome font-bold"><a href="../module-4/" class="hover:text-acid transition-colors">4 — Agents, tools, and data access</a></td>
+                                <td class="p-4 text-gray-400">4</td>
+                                <td class="p-4 text-gray-300"><code class="text-acid bg-surface px-1">mcp-configs/</code>, <code class="text-acid bg-surface px-1">beat-archive/</code>, final project</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Prerequisites -->
+            <section id="prerequisites">
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-ice">What you need first</h2>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-6 space-y-4">
+                    <div class="space-y-3 text-sm text-gray-300">
+                        <div class="bullet-item"><span class="text-ice shrink-0">></span> A computer with terminal access (Mac, Windows, or Linux)</div>
+                        <div class="bullet-item"><span class="text-ice shrink-0">></span> <a href="https://nodejs.org" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Node.js</a> version 20 or higher</div>
+                        <div class="bullet-item"><span class="text-ice shrink-0">></span> A <a href="https://github.com" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">GitHub account</a> (free)</div>
+                        <div class="bullet-item"><span class="text-ice shrink-0">></span> At least one AI CLI tool installed:</div>
+                    </div>
+                    <div class="border-t border-white/10 pt-4 grid sm:grid-cols-3 gap-4 text-sm">
+                        <div>
+                            <p class="font-mono text-acid font-bold mb-1">Gemini CLI</p>
+                            <p class="text-gray-400">Free with Google account</p>
+                        </div>
+                        <div>
+                            <p class="font-mono text-acid font-bold mb-1">Claude Code</p>
+                            <p class="text-gray-400">Claude Max ($20/mo) or API key</p>
+                        </div>
+                        <div>
+                            <p class="font-mono text-acid font-bold mb-1">Codex CLI</p>
+                            <p class="text-gray-400">OpenAI API key</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Related repos -->
+            <section id="related">
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-ice">Related repositories</h2>
+                </div>
+
+                <div class="border border-white/10 bg-panel divide-y divide-white/5">
+                    <div class="p-5">
+                        <a href="https://github.com/jamditis/claude-skills-journalism" target="_blank" rel="noopener" class="font-mono text-acid text-sm hover:text-ice transition-colors">jamditis/claude-skills-journalism</a>
+                        <p class="text-gray-300 text-sm mt-1">36 pre-built Claude Code skills for journalism — source verification, FOIA requests, data journalism, editorial workflows. Browse for ideas or install individual skills to use alongside the ones you build in this course.</p>
+                    </div>
+                    <div class="p-5">
+                        <a href="https://github.com/jamditis/tools" target="_blank" rel="noopener" class="font-mono text-acid text-sm hover:text-ice transition-colors">jamditis/tools</a>
+                        <p class="text-gray-300 text-sm mt-1">A curated collection of AI tools and resources for journalists and newsrooms.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Prev/Next navigation -->
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between">
+                <a href="../" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">Home</a>
+                <a href="../module-1/" class="text-acid hover:text-white text-sm font-mono transition-colors">Module 01</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
