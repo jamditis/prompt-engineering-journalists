@@ -153,11 +153,10 @@ All 4 modules + Introduction module have complete 8-document sets. Readings are 
 
 ### Deployment
 
-- **Live site**: https://mooc.amditis.tech (Cloudflare Pages)
-- **Deploy script**: `./deploy.sh "message"` — uses `pass-get claude/api/cloudflare-full` + wrangler
-- **Project name**: `prompt-engineering-journalists` on Cloudflare Pages
-- **Account ID**: `3d4b1d36109e30866bb7516502224b2c` (jamditis@gmail.com) — hardcoded in deploy.sh via `CLOUDFLARE_ACCOUNT_ID` because the API token lacks `Account:Memberships:Read` permission. Without it, wrangler fails with code 9106 trying to auto-resolve the account.
-- **No GitHub Actions**: account-wide suspension; GitHub Pages broken. Wrangler direct upload is the deploy path.
+- **Live site**: https://mooc.amditis.tech (GitHub Pages via Cloudflare proxy)
+- **Deploy**: Push to `main` — GitHub Actions workflow (`.github/workflows/pages.yml`) deploys `docs/` automatically
+- **Custom domain**: `CNAME` file in `docs/` + Cloudflare DNS CNAME `mooc` → `jamditis.github.io` (proxied)
+- **Fallback**: `./deploy.sh "message"` still works for Cloudflare Pages direct upload if needed
 
 ### Readings pool — key sources added
 - **Ethan Mollick** (One Useful Thing): ~15 articles synthesized in `Resources/mollick-reading-list.md`; two pieces assigned as required readings (intro + module 1)
