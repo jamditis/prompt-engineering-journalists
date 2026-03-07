@@ -312,9 +312,13 @@ Then read the file and summarize it in one sentence. Save the summary to summary
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
-                        Set up your project folder
+                        Fork and clone the starter kit
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Open your terminal and launch Claude Code from your home directory:</p>
+                    <p class="text-gray-300 text-sm mb-4">Go to the course starter repo and click <strong class="text-chrome">Fork</strong> (top right). This creates your own copy on GitHub that you can push to freely.</p>
+                    <div class="border border-ice/20 bg-iceDim p-4 mb-4">
+                        <a href="https://github.com/jamditis/mooc-starter-kit" target="_blank" rel="noopener" class="font-mono text-sm text-ice hover:text-acid transition-colors">github.com/jamditis/mooc-starter-kit</a>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Once you've forked it, clone your fork and step into the folder:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
@@ -322,39 +326,21 @@ Then read the file and summarize it in one sentence. Save the summary to summary
                             <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
-                    </div>
-                    <p class="text-gray-300 text-sm mb-4">Ask Claude to create the project folder with sample documents. Here's the city hall version — adapt for your scenario:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a project folder called city-hall-beat in my home directory. Add four sample journalism documents with realistic fictional content: a press release about a park closure, city council meeting minutes (a 1-2 page excerpt), notes from an interview with a local official named Martinez, and a reader tip email about a potential story. Use descriptive filenames and tell me what you created.</code></pre>
-                    </div>
-                    <p class="text-gray-300 text-sm mb-4">Once Claude confirms, exit the session (press Ctrl+C twice). Then step into the folder:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cd ~/city-hall-beat
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">git clone https://github.com/YOUR-USERNAME/mooc-starter-kit.git
+cd mooc-starter-kit
 claude</code></pre>
                     </div>
-                    <p class="text-gray-400 text-xs mt-2">This step matters: Claude Code reads context files from wherever you launch it. Later, when you add a CLAUDE.md to this folder, Claude picks it up automatically — but only if you're inside the folder when you start.</p>
+                    <p class="text-gray-300 text-sm mb-4">Replace <code class="text-acid bg-surface px-1">YOUR-USERNAME</code> with your GitHub username. The repo already contains sample journalism documents in <code class="text-acid bg-surface px-1">sample-docs/</code>, skill templates, starter scripts, and a <code class="text-acid bg-surface px-1">CLAUDE.md</code> with placeholder sections you'll customize.</p>
+                    <p class="text-gray-400 text-xs mt-2">This step matters: Claude Code reads context files from wherever you launch it. When you launch <code class="text-acid bg-surface px-1">claude</code> inside this folder, it reads the CLAUDE.md automatically.</p>
                 </div>
 
                 <!-- Step 7 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">07</span>
-                        Initialize a Git repository
+                        Explore what's in the repo
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Open your CLI tool and ask it to initialize a Git repo and commit your files:</p>
+                    <p class="text-gray-300 text-sm mb-4">You're inside a Claude session. Ask it to show you what you're working with:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
@@ -362,9 +348,9 @@ claude</code></pre>
                             <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Initialize this directory as a Git repository and commit all files with the message "Add sample journalism documents for city hall beat"</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">List all the files in this project and give me a one-sentence description of what each one contains</code></pre>
                     </div>
-                    <p class="text-gray-300 text-sm">Watch what the tool does: it runs <code class="text-acid bg-surface px-1">git init</code>, <code class="text-acid bg-surface px-1">git add</code>, and <code class="text-acid bg-surface px-1">git commit</code>. You don't need to memorize the commands — but note what each one does.</p>
+                    <p class="text-gray-300 text-sm">The repo is already a Git repository (you cloned it from GitHub). Claude can read every file in it. Notice that it found the <code class="text-acid bg-surface px-1">CLAUDE.md</code> and the sample documents in <code class="text-acid bg-surface px-1">sample-docs/</code> — those are the files you'll work with in the next steps.</p>
                 </div>
 
                 <!-- Step 8 -->
@@ -373,7 +359,7 @@ claude</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">08</span>
                         Process documents without context
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">You're already inside a session from Step 6. Paste these four prompts one at a time. There is no CLAUDE.md yet — Claude has no knowledge of your beat or preferences.</p>
+                    <p class="text-gray-300 text-sm mb-4">You're already inside a session from Step 6. The repo has a CLAUDE.md, but it's still the starter template with placeholders — Claude has no real knowledge of your beat yet. Paste these four prompts one at a time:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-3">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
@@ -381,7 +367,7 @@ claude</code></pre>
                             <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read the press release file and write a 3-sentence summary suitable for a news brief</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read sample-docs/press-release-park-closure.md and write a 3-sentence summary suitable for a news brief</code></pre>
                     </div>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-3">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
@@ -390,7 +376,7 @@ claude</code></pre>
                             <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read the council meeting minutes. List every factual claim made by a council member, and note which are attributed to a named source vs. unattributed</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read sample-docs/council-minutes-excerpt.md. List every factual claim made by a council member, and note which are attributed to a named source vs. unattributed</code></pre>
                     </div>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-3">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
@@ -399,7 +385,7 @@ claude</code></pre>
                             <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read the interview notes. What follow-up questions should I ask? Flag any claims that need independent verification</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read sample-docs/interview-notes-martinez.md. What follow-up questions should I ask? Flag any claims that need independent verification</code></pre>
                     </div>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-3">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
@@ -408,7 +394,7 @@ claude</code></pre>
                             <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read the tip email. Is this tip actionable? What would you need to verify before pursuing it?</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read sample-docs/tip-email.md. Is this tip actionable? What would you need to verify before pursuing it?</code></pre>
                     </div>
                     <p class="text-gray-300 text-sm">Note the responses — you'll compare them to the with-context versions in Step 10.</p>
                 </div>
@@ -419,7 +405,16 @@ claude</code></pre>
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">09</span>
                         Write your CLAUDE.md
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">In your <code class="text-acid bg-surface px-1">city-hall-beat</code> directory, create a file called <code class="text-acid bg-surface px-1">CLAUDE.md</code>. Use <code class="text-acid bg-surface px-1">Resources/examples/beat-project/sample-claude-md.md</code> as a reference, but write your own.</p>
+                    <p class="text-gray-300 text-sm mb-4">Your repo already has a <code class="text-acid bg-surface px-1">CLAUDE.md</code> with placeholder sections. Open it and replace the placeholders with your own beat information. You can do this by asking Claude:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read my CLAUDE.md and show me the placeholder sections I need to fill in. Then help me customize it for a city hall beat covering Greenfield city government.</code></pre>
+                    </div>
                     <p class="text-gray-300 text-sm mb-4">Required sections:</p>
                     <ul class="space-y-2 text-sm font-sans text-gray-300 mb-4 ml-4">
                         <li class="flex items-start gap-3"><span class="text-acid">—</span> <strong class="text-chrome">Beat description</strong> — what you cover, key entities (city name, current officials, agencies)</li>
@@ -438,7 +433,7 @@ claude</code></pre>
                             <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Commit my CLAUDE.md to the project repository with the message "Add beat context file"</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Commit my updated CLAUDE.md with the message "Customize context file for city hall beat"</code></pre>
                     </div>
                 </div>
 
