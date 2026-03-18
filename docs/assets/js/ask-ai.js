@@ -1,0 +1,307 @@
+/* ask-ai.js -- self-contained "Ask an AI about this" dropdown */
+(function () {
+    'use strict';
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var title = (document.querySelector('h1') || {}).textContent || document.title;
+        var url = window.location.href;
+        var hostname = window.location.hostname;
+
+        var prompt = 'I\'m reading about "' + title.trim() + '" on ' + hostname + '.\n\n' +
+            'URL: ' + url + '\n\n' +
+            'Can you explain the key concepts and help me apply them?';
+
+        var encodedPrompt = encodeURIComponent(prompt);
+
+        // -- Determine injection point --
+        var headers = document.querySelectorAll('header');
+        var lastHeader = headers.length ? headers[headers.length - 1] : null;
+        var insertAfter = lastHeader;
+
+        if (lastHeader) {
+            var nextEl = lastHeader.nextElementSibling;
+            if (nextEl && nextEl.tagName === 'SECTION' && nextEl.querySelector('h1')) {
+                insertAfter = nextEl;
+            }
+        }
+
+        if (!insertAfter) return;
+
+        // -- Build the component --
+        var wrapper = document.createElement('div');
+        wrapper.style.cssText = 'max-width:64rem;margin:0 auto;padding:0.75rem 1.5rem 0;position:relative;z-index:40;';
+
+        var container = document.createElement('div');
+        container.style.cssText = 'position:relative;display:inline-block;';
+
+        // Trigger button
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-haspopup', 'true');
+        btn.setAttribute('aria-label', 'Ask an AI about this page');
+        btn.style.cssText = 'background:#334155;color:#a3e635;border:1px solid #475569;border-radius:0.5rem;' +
+            'padding:0.5rem 1rem;font-family:Inter,sans-serif;font-size:0.8125rem;font-weight:500;' +
+            'cursor:pointer;display:inline-flex;align-items:center;gap:0.5rem;line-height:1;' +
+            'transition:background 0.15s,border-color 0.15s;';
+
+        // Build trigger button content with DOM methods
+        var triggerSvg = createSvg('M12 2 L14 8 L20 10 L14 12 L12 18 L10 12 L4 10 L10 8 Z', '#a3e635');
+        var btnText = document.createTextNode('Ask an AI about this ');
+        var chevronSvg = createChevronSvg('#a3e635');
+
+        btn.appendChild(triggerSvg);
+        btn.appendChild(btnText);
+        btn.appendChild(chevronSvg);
+
+        btn.addEventListener('mouseenter', function () { btn.style.background = '#3b4c63'; btn.style.borderColor = '#52667a'; });
+        btn.addEventListener('mouseleave', function () { btn.style.background = '#334155'; btn.style.borderColor = '#475569'; });
+
+        // Dropdown panel
+        var dropdown = document.createElement('div');
+        dropdown.setAttribute('role', 'menu');
+        dropdown.style.cssText = 'display:none;position:absolute;top:calc(100% + 0.375rem);left:0;' +
+            'background:#1e293b;color:#f1f5f9;border:1px solid #334155;border-radius:0.75rem;' +
+            'box-shadow:0 10px 25px rgba(0,0,0,0.3);min-width:14rem;padding:0.375rem 0;' +
+            'font-family:Inter,sans-serif;z-index:41;';
+
+        // Menu items config
+        var items = [
+            {
+                label: 'Ask Claude',
+                href: 'https://claude.ai/new?q=' + encodedPrompt,
+                iconPath: 'M12 2 L14 8 L20 10 L14 12 L12 18 L10 12 L4 10 L10 8 Z',
+                iconType: 'path'
+            },
+            {
+                label: 'Ask ChatGPT',
+                href: 'https://chatgpt.com/?q=' + encodedPrompt,
+                iconPath: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z',
+                iconType: 'path'
+            },
+            {
+                label: 'Ask Gemini',
+                href: 'https://gemini.google.com/app?q=' + encodedPrompt,
+                iconType: 'diamond'
+            },
+            {
+                label: 'Download as markdown',
+                action: 'download',
+                iconType: 'download'
+            }
+        ];
+
+        items.forEach(function (item) {
+            var menuItem = document.createElement('a');
+            menuItem.setAttribute('role', 'menuitem');
+            menuItem.style.cssText = 'display:flex;align-items:center;gap:0.625rem;padding:0.5rem 1rem;' +
+                'text-decoration:none;color:#f1f5f9;font-size:0.8125rem;cursor:pointer;transition:background 0.12s;';
+
+            menuItem.addEventListener('mouseenter', function () { menuItem.style.background = '#334155'; });
+            menuItem.addEventListener('mouseleave', function () { menuItem.style.background = 'transparent'; });
+
+            if (item.href) {
+                menuItem.href = item.href;
+                menuItem.target = '_blank';
+                menuItem.rel = 'noopener noreferrer';
+            }
+
+            if (item.action === 'download') {
+                menuItem.href = '#';
+                menuItem.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    closeDropdown();
+                    downloadMarkdown(title.trim(), url);
+                });
+            }
+
+            // Build icon with DOM methods
+            var icon;
+            if (item.iconType === 'diamond') {
+                icon = createDiamondSvg('#67e8f9');
+            } else if (item.iconType === 'download') {
+                icon = createDownloadSvg('#67e8f9');
+            } else {
+                icon = createSvg(item.iconPath, '#67e8f9');
+            }
+
+            menuItem.appendChild(icon);
+            menuItem.appendChild(document.createTextNode(item.label));
+            dropdown.appendChild(menuItem);
+        });
+
+        // -- Toggle logic --
+        var isOpen = false;
+
+        function openDropdown() {
+            isOpen = true;
+            dropdown.style.display = 'block';
+            btn.setAttribute('aria-expanded', 'true');
+
+            // Prevent overflow on small screens
+            requestAnimationFrame(function () {
+                var rect = dropdown.getBoundingClientRect();
+                if (rect.right > window.innerWidth - 8) {
+                    dropdown.style.left = 'auto';
+                    dropdown.style.right = '0';
+                }
+            });
+        }
+
+        function closeDropdown() {
+            isOpen = false;
+            dropdown.style.display = 'none';
+            btn.setAttribute('aria-expanded', 'false');
+            dropdown.style.left = '0';
+            dropdown.style.right = 'auto';
+        }
+
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (isOpen) { closeDropdown(); } else { openDropdown(); }
+        });
+
+        document.addEventListener('click', function (e) {
+            if (isOpen && !container.contains(e.target)) { closeDropdown(); }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && isOpen) { closeDropdown(); btn.focus(); }
+        });
+
+        // -- Assemble --
+        container.appendChild(btn);
+        container.appendChild(dropdown);
+        wrapper.appendChild(container);
+
+        insertAfter.parentNode.insertBefore(wrapper, insertAfter.nextSibling);
+    });
+
+    // -- SVG helper: single path icon --
+    function createSvg(pathD, color) {
+        var NS = 'http://www.w3.org/2000/svg';
+        var svg = document.createElementNS(NS, 'svg');
+        svg.setAttribute('width', '16');
+        svg.setAttribute('height', '16');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('stroke', color);
+        svg.setAttribute('stroke-width', '2');
+        svg.setAttribute('stroke-linecap', 'round');
+        svg.setAttribute('stroke-linejoin', 'round');
+        var path = document.createElementNS(NS, 'path');
+        path.setAttribute('d', pathD);
+        svg.appendChild(path);
+        return svg;
+    }
+
+    // -- SVG helper: chevron down --
+    function createChevronSvg(color) {
+        var NS = 'http://www.w3.org/2000/svg';
+        var svg = document.createElementNS(NS, 'svg');
+        svg.setAttribute('width', '14');
+        svg.setAttribute('height', '14');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('stroke', color);
+        svg.setAttribute('stroke-width', '2');
+        svg.setAttribute('stroke-linecap', 'round');
+        svg.setAttribute('stroke-linejoin', 'round');
+        var polyline = document.createElementNS(NS, 'polyline');
+        polyline.setAttribute('points', '6 9 12 15 18 9');
+        svg.appendChild(polyline);
+        return svg;
+    }
+
+    // -- SVG helper: diamond (rotated rect) --
+    function createDiamondSvg(color) {
+        var NS = 'http://www.w3.org/2000/svg';
+        var svg = document.createElementNS(NS, 'svg');
+        svg.setAttribute('width', '16');
+        svg.setAttribute('height', '16');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('stroke', color);
+        svg.setAttribute('stroke-width', '2');
+        svg.setAttribute('stroke-linecap', 'round');
+        svg.setAttribute('stroke-linejoin', 'round');
+        var rect = document.createElementNS(NS, 'rect');
+        rect.setAttribute('x', '6');
+        rect.setAttribute('y', '2');
+        rect.setAttribute('width', '12');
+        rect.setAttribute('height', '20');
+        rect.setAttribute('rx', '2');
+        rect.setAttribute('transform', 'rotate(45 12 12)');
+        svg.appendChild(rect);
+        return svg;
+    }
+
+    // -- SVG helper: download arrow --
+    function createDownloadSvg(color) {
+        var NS = 'http://www.w3.org/2000/svg';
+        var svg = document.createElementNS(NS, 'svg');
+        svg.setAttribute('width', '16');
+        svg.setAttribute('height', '16');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('stroke', color);
+        svg.setAttribute('stroke-width', '2');
+        svg.setAttribute('stroke-linecap', 'round');
+        svg.setAttribute('stroke-linejoin', 'round');
+        var path = document.createElementNS(NS, 'path');
+        path.setAttribute('d', 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4');
+        svg.appendChild(path);
+        var polyline = document.createElementNS(NS, 'polyline');
+        polyline.setAttribute('points', '7 10 12 15 17 10');
+        svg.appendChild(polyline);
+        var line = document.createElementNS(NS, 'line');
+        line.setAttribute('x1', '12');
+        line.setAttribute('y1', '15');
+        line.setAttribute('x2', '12');
+        line.setAttribute('y2', '3');
+        svg.appendChild(line);
+        return svg;
+    }
+
+    // -- Download as markdown --
+    function downloadMarkdown(title, url) {
+        var mainEl = document.querySelector('main');
+        var sourceHtml = mainEl ? mainEl.cloneNode(true) : document.body.cloneNode(true);
+
+        // Slug from URL path
+        var slug = window.location.pathname.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'page';
+
+        function doConvert(el, title, url, slug) {
+            var td = new TurndownService({ headingStyle: 'atx', codeBlockStyle: 'fenced' });
+            var md = '# ' + title + '\n\nSource: ' + url + '\n\n' + td.turndown(el);
+
+            triggerDownload(md, slug);
+        }
+
+        function triggerDownload(content, slug) {
+            var blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
+            var a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = slug + '.md';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
+        }
+
+        if (typeof TurndownService !== 'undefined') {
+            doConvert(sourceHtml, title, url, slug);
+        } else {
+            var script = document.createElement('script');
+            script.src = 'https://unpkg.com/turndown/dist/turndown.js';
+            script.onload = function () { doConvert(sourceHtml, title, url, slug); };
+            script.onerror = function () {
+                // Fallback: plain text extraction
+                var text = (mainEl || document.body).textContent || '';
+                var md = '# ' + title + '\n\nSource: ' + url + '\n\n' + text.trim();
+                triggerDownload(md, slug);
+            };
+            document.head.appendChild(script);
+        }
+    }
+})();
