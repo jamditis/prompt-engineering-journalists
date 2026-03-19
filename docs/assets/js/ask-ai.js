@@ -52,10 +52,10 @@
         btn.title = 'Ask an AI about this page';
         btn.style.cssText = 'background:#334155;color:#a3e635;border:none;border-radius:50%;' +
             'width:2rem;height:2rem;padding:0;cursor:pointer;display:inline-flex;align-items:center;' +
-            'justify-content:center;transition:opacity 0.15s,transform 0.15s;flex-shrink:0;';
+            'justify-content:center;transition:opacity 0.15s,transform 0.15s;flex-shrink:0;align-self:center;';
 
-        // Sparkle icon (static SVG constant — no user input)
-        btn.appendChild(createSvg('M12 2 L14 8 L20 10 L14 12 L12 18 L10 12 L4 10 L10 8 Z', '#a3e635'));
+        // Chat bubble icon — clearly communicates "ask a question"
+        btn.appendChild(createSvg('M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z', '#a3e635'));
 
         btn.addEventListener('mouseenter', function () { btn.style.opacity = '0.85'; btn.style.transform = 'scale(1.1)'; });
         btn.addEventListener('mouseleave', function () { btn.style.opacity = '1'; btn.style.transform = 'scale(1)'; });
