@@ -11,7 +11,7 @@
         var meta = document.querySelector('meta[name="description"]');
         if (meta && meta.content) contextParts.push(meta.content.trim());
 
-        var headings = document.querySelectorAll('main h2, main h3');
+        var headings = mainEl.querySelectorAll('h2, h3');
         if (headings.length) {
             var outline = [];
             for (var i = 0; i < headings.length && i < 10; i++) {
@@ -21,14 +21,14 @@
             if (outline.length) contextParts.push('Sections covered:\n' + outline.join('\n'));
         }
 
-        var firstP = document.querySelector('main p');
+        var firstP = mainEl.querySelector('p');
         if (firstP && firstP.textContent.trim()) {
             var pText = firstP.textContent.trim();
             if (pText.length > 400) pText = pText.substring(0, 400) + '...';
             contextParts.push('Intro: ' + pText);
         }
 
-        var prompt = 'I\'m learning about "' + title + '."';
+        var prompt = 'I\'m learning about "' + title + '".';
         if (contextParts.length) prompt += '\n\nHere\'s what the page covers:\n\n' + contextParts.join('\n\n');
         prompt += '\n\nCan you explain the key concepts and help me understand how to apply them?';
 
@@ -39,9 +39,14 @@
         if (!mainEl) return;
 
         // -- Build the component --
+        // If <main> has its own max-width (subpages), just add vertical spacing.
+        // If <main> is unstyled (landing page), provide layout constraints.
+        var mainHasWidth = mainEl.classList.contains('max-w-5xl') || mainEl.classList.contains('max-w-6xl');
         var wrapper = document.createElement('div');
         wrapper.setAttribute('data-ask-ai', 'true');
-        wrapper.style.cssText = 'padding:0.75rem 0 0;position:relative;z-index:40;';
+        wrapper.style.cssText = mainHasWidth
+            ? 'padding:0.75rem 0 0;position:relative;z-index:40;'
+            : 'max-width:64rem;margin:0 auto;padding:0.75rem 1.5rem 0;position:relative;z-index:40;';
 
         var container = document.createElement('div');
         container.style.cssText = 'position:relative;display:inline-block;';
@@ -188,7 +193,13 @@
         container.appendChild(dropdown);
         wrapper.appendChild(container);
 
-        mainEl.insertBefore(wrapper, mainEl.firstChild);
+        // Insert after a direct-child <header> if present, otherwise first child
+        var inMainHeader = mainEl.querySelector(':scope > header');
+        if (inMainHeader) {
+            inMainHeader.parentNode.insertBefore(wrapper, inMainHeader.nextSibling);
+        } else {
+            mainEl.insertBefore(wrapper, mainEl.firstChild);
+        }
     });
 
     // -- SVG helper: single path icon --
