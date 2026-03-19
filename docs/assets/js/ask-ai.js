@@ -3,33 +3,50 @@
     'use strict';
 
     document.addEventListener('DOMContentLoaded', function () {
-        var title = (document.querySelector('h1') || {}).textContent || document.title;
+        var title = ((document.querySelector('h1') || {}).textContent || document.title).trim();
         var url = window.location.href;
-        var hostname = window.location.hostname;
 
-        var prompt = 'I\'m reading about "' + title.trim() + '" on ' + hostname + '.\n\n' +
-            'URL: ' + url + '\n\n' +
-            'Can you explain the key concepts and help me apply them?';
+        // Build context from page content
+        var contextParts = [];
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta && meta.content) contextParts.push(meta.content.trim());
+
+        var headings = mainEl.querySelectorAll('h2, h3');
+        if (headings.length) {
+            var outline = [];
+            for (var i = 0; i < headings.length && i < 10; i++) {
+                var hText = headings[i].textContent.trim();
+                if (hText) outline.push('- ' + hText);
+            }
+            if (outline.length) contextParts.push('Sections covered:\n' + outline.join('\n'));
+        }
+
+        var firstP = mainEl.querySelector('p');
+        if (firstP && firstP.textContent.trim()) {
+            var pText = firstP.textContent.trim();
+            if (pText.length > 400) pText = pText.substring(0, 400) + '...';
+            contextParts.push('Intro: ' + pText);
+        }
+
+        var prompt = 'I\'m learning about "' + title + '".';
+        if (contextParts.length) prompt += '\n\nHere\'s what the page covers:\n\n' + contextParts.join('\n\n');
+        prompt += '\n\nCan you explain the key concepts and help me understand how to apply them?';
 
         var encodedPrompt = encodeURIComponent(prompt);
 
-        // -- Determine injection point --
-        var headers = document.querySelectorAll('header');
-        var lastHeader = headers.length ? headers[headers.length - 1] : null;
-        var insertAfter = lastHeader;
-
-        if (lastHeader) {
-            var nextEl = lastHeader.nextElementSibling;
-            if (nextEl && nextEl.tagName === 'SECTION' && nextEl.querySelector('h1')) {
-                insertAfter = nextEl;
-            }
-        }
-
-        if (!insertAfter) return;
+        // -- Determine injection point: first child of <main> --
+        var mainEl = document.querySelector('main');
+        if (!mainEl) return;
 
         // -- Build the component --
+        // If <main> has its own max-width (subpages), just add vertical spacing.
+        // If <main> is unstyled (landing page), provide layout constraints.
+        var mainHasWidth = mainEl.classList.contains('max-w-5xl') || mainEl.classList.contains('max-w-6xl');
         var wrapper = document.createElement('div');
-        wrapper.style.cssText = 'max-width:64rem;margin:0 auto;padding:0.75rem 1.5rem 0;position:relative;z-index:40;';
+        wrapper.setAttribute('data-ask-ai', 'true');
+        wrapper.style.cssText = mainHasWidth
+            ? 'padding:0.75rem 0 0;position:relative;z-index:40;'
+            : 'max-width:64rem;margin:0 auto;padding:0.75rem 1.5rem 0;position:relative;z-index:40;';
 
         var container = document.createElement('div');
         container.style.cssText = 'position:relative;display:inline-block;';
@@ -176,7 +193,13 @@
         container.appendChild(dropdown);
         wrapper.appendChild(container);
 
-        insertAfter.parentNode.insertBefore(wrapper, insertAfter.nextSibling);
+        // Insert after a direct-child <header> if present, otherwise first child
+        var inMainHeader = mainEl.querySelector(':scope > header');
+        if (inMainHeader) {
+            inMainHeader.parentNode.insertBefore(wrapper, inMainHeader.nextSibling);
+        } else {
+            mainEl.insertBefore(wrapper, mainEl.firstChild);
+        }
     });
 
     // -- SVG helper: single path icon --
@@ -267,8 +290,11 @@
 
     // -- Download as markdown --
     function downloadMarkdown(title, url) {
-        var mainEl = document.querySelector('main');
-        var sourceHtml = mainEl ? mainEl.cloneNode(true) : document.body.cloneNode(true);
+        var source = document.querySelector('main') || document.body;
+        var sourceHtml = source.cloneNode(true);
+        // Remove the ask-ai widget from the clone so it doesn't appear in the download
+        var widget = sourceHtml.querySelector('[data-ask-ai]');
+        if (widget) widget.remove();
 
         // Slug from URL path
         var slug = window.location.pathname.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'page';
@@ -298,8 +324,8 @@
             script.src = 'https://unpkg.com/turndown@7.2.0/dist/turndown.js';
             script.onload = function () { doConvert(sourceHtml, title, url, slug); };
             script.onerror = function () {
-                // Fallback: plain text extraction
-                var text = (mainEl || document.body).textContent || '';
+                // Fallback: plain text extraction (uses pre-cloned sourceHtml without widget)
+                var text = sourceHtml.textContent || '';
                 var md = '# ' + title + '\n\nSource: ' + url + '\n\n' + text.trim();
                 triggerDownload(md, slug);
             };
