@@ -38,7 +38,6 @@
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.setAttribute('aria-expanded', 'false');
-        btn.setAttribute('aria-haspopup', 'true');
         btn.setAttribute('aria-label', 'Ask an AI about this page');
         btn.style.cssText = 'background:#334155;color:#a3e635;border:1px solid #475569;border-radius:0.5rem;' +
             'padding:0.5rem 1rem;font-family:Inter,sans-serif;font-size:0.8125rem;font-weight:500;' +
@@ -59,7 +58,6 @@
 
         // Dropdown panel
         var dropdown = document.createElement('div');
-        dropdown.setAttribute('role', 'menu');
         dropdown.style.cssText = 'display:none;position:absolute;top:calc(100% + 0.375rem);left:0;' +
             'background:#1e293b;color:#f1f5f9;border:1px solid #334155;border-radius:0.75rem;' +
             'box-shadow:0 10px 25px rgba(0,0,0,0.3);min-width:14rem;padding:0.375rem 0;' +
@@ -92,28 +90,32 @@
         ];
 
         items.forEach(function (item) {
-            var menuItem = document.createElement('a');
-            menuItem.setAttribute('role', 'menuitem');
-            menuItem.style.cssText = 'display:flex;align-items:center;gap:0.625rem;padding:0.5rem 1rem;' +
-                'text-decoration:none;color:#f1f5f9;font-size:0.8125rem;cursor:pointer;transition:background 0.12s;';
-
-            menuItem.addEventListener('mouseenter', function () { menuItem.style.background = '#334155'; });
-            menuItem.addEventListener('mouseleave', function () { menuItem.style.background = 'transparent'; });
-
-            if (item.href) {
-                menuItem.href = item.href;
-                menuItem.target = '_blank';
-                menuItem.rel = 'noopener noreferrer';
-            }
+            var menuItem;
+            var baseStyle = 'display:flex;align-items:center;gap:0.625rem;padding:0.5rem 1rem;' +
+                'color:#f1f5f9;font-size:0.8125rem;cursor:pointer;transition:background 0.12s;';
 
             if (item.action === 'download') {
-                menuItem.href = '#';
-                menuItem.addEventListener('click', function (e) {
-                    e.preventDefault();
+                menuItem = document.createElement('button');
+                menuItem.type = 'button';
+                menuItem.style.cssText = baseStyle +
+                    'background:transparent;border:none;width:100%;font-family:inherit;text-align:left;';
+                menuItem.addEventListener('click', function () {
                     closeDropdown();
                     downloadMarkdown(title.trim(), url);
                 });
+            } else {
+                menuItem = document.createElement('a');
+                menuItem.style.cssText = baseStyle + 'text-decoration:none;';
+                menuItem.href = item.href;
+                menuItem.target = '_blank';
+                menuItem.rel = 'noopener noreferrer';
+                menuItem.addEventListener('click', function () {
+                    closeDropdown();
+                });
             }
+
+            menuItem.addEventListener('mouseenter', function () { menuItem.style.background = '#334155'; });
+            menuItem.addEventListener('mouseleave', function () { menuItem.style.background = 'transparent'; });
 
             // Build icon with DOM methods
             var icon;
@@ -293,7 +295,7 @@
             doConvert(sourceHtml, title, url, slug);
         } else {
             var script = document.createElement('script');
-            script.src = 'https://unpkg.com/turndown/dist/turndown.js';
+            script.src = 'https://unpkg.com/turndown@7.2.0/dist/turndown.js';
             script.onload = function () { doConvert(sourceHtml, title, url, slug); };
             script.onerror = function () {
                 // Fallback: plain text extraction
