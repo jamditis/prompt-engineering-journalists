@@ -49,26 +49,20 @@
         btn.type = 'button';
         btn.setAttribute('aria-expanded', 'false');
         btn.setAttribute('aria-label', 'Ask an AI about this page');
-        btn.style.cssText = 'background:#334155;color:#a3e635;border:1px solid #475569;border-radius:0.5rem;' +
-            'padding:0.5rem 1rem;font-family:Inter,sans-serif;font-size:0.8125rem;font-weight:500;' +
-            'cursor:pointer;display:inline-flex;align-items:center;gap:0.5rem;line-height:1;' +
-            'transition:background 0.15s,border-color 0.15s;';
+        btn.title = 'Ask an AI about this page';
+        btn.style.cssText = 'background:#334155;color:#a3e635;border:none;border-radius:50%;' +
+            'width:2rem;height:2rem;padding:0;cursor:pointer;display:inline-flex;align-items:center;' +
+            'justify-content:center;transition:opacity 0.15s,transform 0.15s;flex-shrink:0;';
 
-        // Build trigger button content with DOM methods
-        var triggerSvg = createSvg('M12 2 L14 8 L20 10 L14 12 L12 18 L10 12 L4 10 L10 8 Z', '#a3e635');
-        var btnText = document.createTextNode('Ask an AI about this ');
-        var chevronSvg = createChevronSvg('#a3e635');
+        // Sparkle icon (static SVG constant — no user input)
+        btn.appendChild(createSvg('M12 2 L14 8 L20 10 L14 12 L12 18 L10 12 L4 10 L10 8 Z', '#a3e635'));
 
-        btn.appendChild(triggerSvg);
-        btn.appendChild(btnText);
-        btn.appendChild(chevronSvg);
-
-        btn.addEventListener('mouseenter', function () { btn.style.background = '#3b4c63'; btn.style.borderColor = '#52667a'; });
-        btn.addEventListener('mouseleave', function () { btn.style.background = '#334155'; btn.style.borderColor = '#475569'; });
+        btn.addEventListener('mouseenter', function () { btn.style.opacity = '0.85'; btn.style.transform = 'scale(1.1)'; });
+        btn.addEventListener('mouseleave', function () { btn.style.opacity = '1'; btn.style.transform = 'scale(1)'; });
 
         // Dropdown panel
         var dropdown = document.createElement('div');
-        dropdown.style.cssText = 'display:none;position:absolute;top:calc(100% + 0.375rem);left:0;' +
+        dropdown.style.cssText = 'display:none;position:absolute;top:calc(100% + 0.375rem);right:0;' +
             'background:#1e293b;color:#f1f5f9;border:1px solid #334155;border-radius:0.75rem;' +
             'box-shadow:0 10px 25px rgba(0,0,0,0.3);min-width:14rem;padding:0.375rem 0;' +
             'font-family:Inter,sans-serif;z-index:41;';
@@ -185,17 +179,16 @@
         container.appendChild(btn);
         container.appendChild(dropdown);
 
-        // Inject inline into an existing layout row. Priority:
-        // 1. The header/nav bar's inner flex row (consistent across all pages)
-        var target = null;
-        var header = document.querySelector('header');
-        if (header) {
-            target = header.querySelector('[class*="flex"][class*="items-center"], [class*="flex"][class*="justify-between"]');
-        }
-        if (target) {
-            target.appendChild(container);
+        // Inject into the header nav alongside existing nav links
+        var headerNav = document.querySelector('header nav');
+        if (headerNav) {
+            headerNav.appendChild(container);
         } else {
-            mainEl.insertBefore(container, mainEl.firstChild);
+            var header = document.querySelector('header');
+            if (header) {
+                var headerFlex = header.querySelector('[class*="flex"][class*="items-center"]');
+                if (headerFlex) headerFlex.appendChild(container);
+            }
         }
     });
 
