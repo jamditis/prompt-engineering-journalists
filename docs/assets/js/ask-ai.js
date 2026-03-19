@@ -1,205 +1,30 @@
-/* ask-ai.js -- self-contained "Ask an AI about this" dropdown */
+/* ask-ai.js — "Ask an AI about this" dropdown for mooc.amditis.tech
+ * Self-contained vanilla JS. No external CSS dependencies.
+ * Injected as a text-style nav link in the header nav bar.
+ */
 (function () {
     'use strict';
 
-    document.addEventListener('DOMContentLoaded', function () {
-        var title = ((document.querySelector('h1') || {}).textContent || document.title).trim();
-        var url = window.location.href;
+    // -- Theme (dark mooc palette) --
+    var COLORS = {
+        triggerColor: '#9ca3af',    // gray-400 — matches nav link default
+        triggerHover: '#a3e635',     // acid — matches nav link hover
+        panelBg: '#1e293b',
+        panelText: '#f1f5f9',
+        panelBorder: '#334155',
+        panelShadow: '0 10px 25px rgba(0,0,0,0.3)',
+        itemHover: '#334155',
+        iconColor: '#67e8f9',
+    };
 
-        // Build context from page content
-        var contextParts = [];
-        var meta = document.querySelector('meta[name="description"]');
-        if (meta && meta.content) contextParts.push(meta.content.trim());
+    // -- SVG helpers --
 
-        var headings = mainEl.querySelectorAll('h2, h3');
-        if (headings.length) {
-            var outline = [];
-            for (var i = 0; i < headings.length && i < 10; i++) {
-                var hText = headings[i].textContent.trim();
-                if (hText) outline.push('- ' + hText);
-            }
-            if (outline.length) contextParts.push('Sections covered:\n' + outline.join('\n'));
-        }
-
-        var firstP = mainEl.querySelector('p');
-        if (firstP && firstP.textContent.trim()) {
-            var pText = firstP.textContent.trim();
-            if (pText.length > 400) pText = pText.substring(0, 400) + '...';
-            contextParts.push('Intro: ' + pText);
-        }
-
-        var prompt = 'I\'m learning about "' + title + '".';
-        if (contextParts.length) prompt += '\n\nHere\'s what the page covers:\n\n' + contextParts.join('\n\n');
-        prompt += '\n\nCan you explain the key concepts and help me understand how to apply them?';
-
-        var encodedPrompt = encodeURIComponent(prompt);
-
-        // -- Determine injection point: first child of <main> --
-        var mainEl = document.querySelector('main');
-        if (!mainEl) return;
-
-        // -- Build the component --
-        // No wrapper div — container is injected directly into an existing layout row
-        var container = document.createElement('div');
-        container.setAttribute('data-ask-ai', 'true');
-        container.style.cssText = 'position:relative;display:inline-block;';
-
-        // Trigger button
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.setAttribute('aria-expanded', 'false');
-        btn.setAttribute('aria-label', 'Ask an AI about this page');
-        btn.title = 'Ask an AI about this page';
-        btn.style.cssText = 'background:#334155;color:#a3e635;border:none;border-radius:50%;' +
-            'width:2rem;height:2rem;padding:0;cursor:pointer;display:inline-flex;align-items:center;' +
-            'justify-content:center;transition:opacity 0.15s,transform 0.15s;flex-shrink:0;align-self:center;';
-
-        // Chat bubble icon — clearly communicates "ask a question"
-        btn.appendChild(createSvg('M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z', '#a3e635'));
-
-        btn.addEventListener('mouseenter', function () { btn.style.opacity = '0.85'; btn.style.transform = 'scale(1.1)'; });
-        btn.addEventListener('mouseleave', function () { btn.style.opacity = '1'; btn.style.transform = 'scale(1)'; });
-
-        // Dropdown panel
-        var dropdown = document.createElement('div');
-        dropdown.style.cssText = 'display:none;position:absolute;top:calc(100% + 0.375rem);right:0;' +
-            'background:#1e293b;color:#f1f5f9;border:1px solid #334155;border-radius:0.75rem;' +
-            'box-shadow:0 10px 25px rgba(0,0,0,0.3);min-width:14rem;padding:0.375rem 0;' +
-            'font-family:Inter,sans-serif;z-index:41;';
-
-        // Menu items config
-        var items = [
-            {
-                label: 'Ask Claude',
-                href: 'https://claude.ai/new?q=' + encodedPrompt,
-                iconPath: 'M12 2 L14 8 L20 10 L14 12 L12 18 L10 12 L4 10 L10 8 Z',
-                iconType: 'path'
-            },
-            {
-                label: 'Ask ChatGPT',
-                href: 'https://chatgpt.com/?q=' + encodedPrompt,
-                iconPath: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z',
-                iconType: 'path'
-            },
-            {
-                label: 'Ask Gemini',
-                href: 'https://gemini.google.com/app?q=' + encodedPrompt,
-                iconType: 'diamond'
-            },
-            {
-                label: 'Download as markdown',
-                action: 'download',
-                iconType: 'download'
-            }
-        ];
-
-        items.forEach(function (item) {
-            var menuItem;
-            var baseStyle = 'display:flex;align-items:center;gap:0.625rem;padding:0.5rem 1rem;' +
-                'color:#f1f5f9;font-size:0.8125rem;cursor:pointer;transition:background 0.12s;';
-
-            if (item.action === 'download') {
-                menuItem = document.createElement('button');
-                menuItem.type = 'button';
-                menuItem.style.cssText = baseStyle +
-                    'background:transparent;border:none;width:100%;font-family:inherit;text-align:left;';
-                menuItem.addEventListener('click', function () {
-                    closeDropdown();
-                    downloadMarkdown(title.trim(), url);
-                });
-            } else {
-                menuItem = document.createElement('a');
-                menuItem.style.cssText = baseStyle + 'text-decoration:none;';
-                menuItem.href = item.href;
-                menuItem.target = '_blank';
-                menuItem.rel = 'noopener noreferrer';
-                menuItem.addEventListener('click', function () {
-                    closeDropdown();
-                });
-            }
-
-            menuItem.addEventListener('mouseenter', function () { menuItem.style.background = '#334155'; });
-            menuItem.addEventListener('mouseleave', function () { menuItem.style.background = 'transparent'; });
-
-            // Build icon with DOM methods
-            var icon;
-            if (item.iconType === 'diamond') {
-                icon = createDiamondSvg('#67e8f9');
-            } else if (item.iconType === 'download') {
-                icon = createDownloadSvg('#67e8f9');
-            } else {
-                icon = createSvg(item.iconPath, '#67e8f9');
-            }
-
-            menuItem.appendChild(icon);
-            menuItem.appendChild(document.createTextNode(item.label));
-            dropdown.appendChild(menuItem);
-        });
-
-        // -- Toggle logic --
-        var isOpen = false;
-
-        function openDropdown() {
-            isOpen = true;
-            dropdown.style.display = 'block';
-            btn.setAttribute('aria-expanded', 'true');
-
-            // Prevent overflow on small screens
-            requestAnimationFrame(function () {
-                var rect = dropdown.getBoundingClientRect();
-                if (rect.right > window.innerWidth - 8) {
-                    dropdown.style.left = 'auto';
-                    dropdown.style.right = '0';
-                }
-            });
-        }
-
-        function closeDropdown() {
-            isOpen = false;
-            dropdown.style.display = 'none';
-            btn.setAttribute('aria-expanded', 'false');
-            dropdown.style.left = '0';
-            dropdown.style.right = 'auto';
-        }
-
-        btn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            if (isOpen) { closeDropdown(); } else { openDropdown(); }
-        });
-
-        document.addEventListener('click', function (e) {
-            if (isOpen && !container.contains(e.target)) { closeDropdown(); }
-        });
-
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && isOpen) { closeDropdown(); btn.focus(); }
-        });
-
-        // -- Assemble --
-        container.appendChild(btn);
-        container.appendChild(dropdown);
-
-        // Inject into the right side of the header nav
-        var headerNav = document.querySelector('header nav:not(#mobile-menu)');
-        if (headerNav) {
-            headerNav.appendChild(container);
-        } else {
-            // Fallback: find the last flex child in the header (right side)
-            var header = document.querySelector('header');
-            if (header) {
-                var flexChildren = header.querySelectorAll('[class*="flex"][class*="justify-between"] > [class*="flex"]');
-                var target = flexChildren.length ? flexChildren[flexChildren.length - 1] : null;
-                if (target) target.appendChild(container);
-            }
-        }
-    });
-
-    // -- SVG helper: single path icon --
-    function createSvg(pathD, color) {
+    function makeSvg(pathD, color, w) {
         var NS = 'http://www.w3.org/2000/svg';
+        var s = String(w || 16);
         var svg = document.createElementNS(NS, 'svg');
-        svg.setAttribute('width', '16');
-        svg.setAttribute('height', '16');
+        svg.setAttribute('width', s);
+        svg.setAttribute('height', s);
         svg.setAttribute('viewBox', '0 0 24 24');
         svg.setAttribute('fill', 'none');
         svg.setAttribute('stroke', color);
@@ -212,26 +37,7 @@
         return svg;
     }
 
-    // -- SVG helper: chevron down --
-    function createChevronSvg(color) {
-        var NS = 'http://www.w3.org/2000/svg';
-        var svg = document.createElementNS(NS, 'svg');
-        svg.setAttribute('width', '14');
-        svg.setAttribute('height', '14');
-        svg.setAttribute('viewBox', '0 0 24 24');
-        svg.setAttribute('fill', 'none');
-        svg.setAttribute('stroke', color);
-        svg.setAttribute('stroke-width', '2');
-        svg.setAttribute('stroke-linecap', 'round');
-        svg.setAttribute('stroke-linejoin', 'round');
-        var polyline = document.createElementNS(NS, 'polyline');
-        polyline.setAttribute('points', '6 9 12 15 18 9');
-        svg.appendChild(polyline);
-        return svg;
-    }
-
-    // -- SVG helper: diamond (rotated rect) --
-    function createDiamondSvg(color) {
+    function makeDiamondSvg(color) {
         var NS = 'http://www.w3.org/2000/svg';
         var svg = document.createElementNS(NS, 'svg');
         svg.setAttribute('width', '16');
@@ -253,8 +59,7 @@
         return svg;
     }
 
-    // -- SVG helper: download arrow --
-    function createDownloadSvg(color) {
+    function makeDownloadSvg(color) {
         var NS = 'http://www.w3.org/2000/svg';
         var svg = document.createElementNS(NS, 'svg');
         svg.setAttribute('width', '16');
@@ -272,34 +77,67 @@
         polyline.setAttribute('points', '7 10 12 15 17 10');
         svg.appendChild(polyline);
         var line = document.createElementNS(NS, 'line');
-        line.setAttribute('x1', '12');
-        line.setAttribute('y1', '15');
-        line.setAttribute('x2', '12');
-        line.setAttribute('y2', '3');
+        line.setAttribute('x1', '12'); line.setAttribute('y1', '15');
+        line.setAttribute('x2', '12'); line.setAttribute('y2', '3');
         svg.appendChild(line);
         return svg;
     }
 
-    // -- Download as markdown --
-    function downloadMarkdown(title, url) {
-        var source = document.querySelector('main') || document.body;
-        var sourceHtml = source.cloneNode(true);
-        // Remove the ask-ai widget from the clone so it doesn't appear in the download
-        var widget = sourceHtml.querySelector('[data-ask-ai]');
-        if (widget) widget.remove();
+    // -- Helpers --
 
-        // Slug from URL path
-        var slug = window.location.pathname.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'page';
+    function getTitle() {
+        return ((document.querySelector('h1') || {}).textContent || document.title).trim();
+    }
 
-        function doConvert(el, title, url, slug) {
-            var td = new TurndownService({ headingStyle: 'atx', codeBlockStyle: 'fenced' });
-            var md = '# ' + title + '\n\nSource: ' + url + '\n\n' + td.turndown(el);
+    function getPageContext() {
+        var root = document.querySelector('main') || document.body;
+        var parts = [];
 
-            triggerDownload(md, slug);
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta && meta.content) parts.push(meta.content.trim());
+
+        var headings = root.querySelectorAll('h2, h3');
+        if (headings.length) {
+            var outline = [];
+            for (var i = 0; i < headings.length && i < 10; i++) {
+                var t = headings[i].textContent.trim();
+                if (t) outline.push('- ' + t);
+            }
+            if (outline.length) parts.push('Sections covered:\n' + outline.join('\n'));
         }
 
-        function triggerDownload(content, slug) {
-            var blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
+        var firstP = root.querySelector('p');
+        if (firstP && firstP.textContent.trim()) {
+            var pText = firstP.textContent.trim();
+            if (pText.length > 400) pText = pText.substring(0, 400) + '...';
+            parts.push('Intro: ' + pText);
+        }
+
+        return parts.join('\n\n');
+    }
+
+    function buildPrompt() {
+        var title = getTitle();
+        var context = getPageContext();
+        var prompt = 'I\'m learning about "' + title + '".';
+        if (context) prompt += '\n\nHere\'s what the page covers:\n\n' + context;
+        prompt += '\n\nCan you explain the key concepts and help me understand how to apply them?';
+        return prompt;
+    }
+
+    // -- Markdown download --
+
+    function downloadMarkdown() {
+        var title = getTitle();
+        var url = window.location.href;
+        var source = document.querySelector('main') || document.body;
+        var clone = source.cloneNode(true);
+        var widget = clone.querySelector('[data-ask-ai]');
+        if (widget) widget.remove();
+        var slug = window.location.pathname.replace(/^\/|\/$/g, '').replace(/\//g, '-') || 'page';
+
+        function save(md) {
+            var blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
             var a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
             a.download = slug + '.md';
@@ -310,18 +148,148 @@
         }
 
         if (typeof TurndownService !== 'undefined') {
-            doConvert(sourceHtml, title, url, slug);
+            var td = new TurndownService({ headingStyle: 'atx', codeBlockStyle: 'fenced' });
+            save('# ' + title + '\n\nSource: ' + url + '\n\n' + td.turndown(clone));
         } else {
             var script = document.createElement('script');
             script.src = 'https://unpkg.com/turndown@7.2.0/dist/turndown.js';
-            script.onload = function () { doConvert(sourceHtml, title, url, slug); };
+            script.onload = function () {
+                var td = new TurndownService({ headingStyle: 'atx', codeBlockStyle: 'fenced' });
+                save('# ' + title + '\n\nSource: ' + url + '\n\n' + td.turndown(clone));
+            };
             script.onerror = function () {
-                // Fallback: plain text extraction (uses pre-cloned sourceHtml without widget)
-                var text = sourceHtml.textContent || '';
-                var md = '# ' + title + '\n\nSource: ' + url + '\n\n' + text.trim();
-                triggerDownload(md, slug);
+                save('# ' + title + '\n\nSource: ' + url + '\n\n' + (clone.textContent || '').trim());
             };
             document.head.appendChild(script);
         }
+    }
+
+    // -- Build and inject --
+
+    function init() {
+        var prompt = buildPrompt();
+        var encoded = encodeURIComponent(prompt);
+
+        // Container positions the dropdown
+        var container = document.createElement('div');
+        container.setAttribute('data-ask-ai', 'true');
+        container.style.position = 'relative';
+
+        // Trigger — styled as a nav text link with a small icon
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-haspopup', 'dialog');
+        btn.title = 'Ask an AI about this page';
+
+        var icon = makeSvg('M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z', 'currentColor', 12);
+        icon.setAttribute('aria-hidden', 'true');
+        icon.setAttribute('focusable', 'false');
+        btn.appendChild(icon);
+
+        var label = document.createElement('span');
+        label.textContent = 'ASK AI';
+        btn.appendChild(label);
+
+        btn.style.cssText = 'display:inline-flex;align-items:center;gap:0.25rem;' +
+            'background:none;border:none;padding:0;cursor:pointer;' +
+            'font:inherit;letter-spacing:inherit;text-transform:inherit;' +
+            'color:' + COLORS.triggerColor + ';transition:color 0.15s;white-space:nowrap;';
+
+        btn.addEventListener('mouseenter', function () { btn.style.color = COLORS.triggerHover; });
+        btn.addEventListener('mouseleave', function () { btn.style.color = COLORS.triggerColor; });
+        btn.addEventListener('focus', function () { btn.style.color = COLORS.triggerHover; });
+        btn.addEventListener('blur', function () { btn.style.color = COLORS.triggerColor; });
+
+        // Dropdown panel
+        var panel = document.createElement('div');
+        panel.style.cssText = 'display:none;position:absolute;top:calc(100% + 0.375rem);right:0;' +
+            'background:' + COLORS.panelBg + ';color:' + COLORS.panelText + ';' +
+            'border:1px solid ' + COLORS.panelBorder + ';border-radius:0.75rem;' +
+            'box-shadow:' + COLORS.panelShadow + ';min-width:14rem;padding:0.375rem 0;' +
+            'font-family:Inter,sans-serif;z-index:60;';
+
+        // Menu items
+        var items = [
+            { label: 'Ask Claude', href: 'https://claude.ai/new?q=' + encoded, iconFn: function () { return makeSvg('M12 2 L14 8 L20 10 L14 12 L12 18 L10 12 L4 10 L10 8 Z', COLORS.iconColor); } },
+            { label: 'Ask ChatGPT', href: 'https://chatgpt.com/?q=' + encoded, iconFn: function () { return makeSvg('M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z', COLORS.iconColor); } },
+            { label: 'Ask Gemini (copies prompt)', iconFn: function () { return makeDiamondSvg(COLORS.iconColor); }, action: function () {
+                navigator.clipboard.writeText(prompt).then(function () {
+                    window.open('https://gemini.google.com/app', '_blank', 'noopener,noreferrer');
+                });
+            }},
+            { label: 'Download as markdown', iconFn: function () { return makeDownloadSvg(COLORS.iconColor); }, action: downloadMarkdown },
+        ];
+
+        var itemCss = 'display:flex;align-items:center;gap:0.625rem;padding:0.5rem 1rem;' +
+            'color:' + COLORS.panelText + ';font-size:0.8125rem;cursor:pointer;' +
+            'transition:background 0.12s;text-decoration:none;';
+
+        items.forEach(function (item) {
+            var el;
+            if (item.href) {
+                el = document.createElement('a');
+                el.href = item.href;
+                el.target = '_blank';
+                el.rel = 'noopener noreferrer';
+                el.style.cssText = itemCss;
+                el.addEventListener('click', function () { closeDropdown(); });
+            } else {
+                el = document.createElement('button');
+                el.type = 'button';
+                el.style.cssText = itemCss + 'background:transparent;border:none;width:100%;font-family:inherit;text-align:left;';
+                el.addEventListener('click', function () { closeDropdown(); item.action(); });
+            }
+            el.appendChild(item.iconFn());
+            el.appendChild(document.createTextNode(item.label));
+            el.addEventListener('mouseenter', function () { el.style.background = COLORS.itemHover; });
+            el.addEventListener('mouseleave', function () { el.style.background = 'transparent'; });
+            panel.appendChild(el);
+        });
+
+        // Toggle logic
+        var isOpen = false;
+        function openDropdown() {
+            isOpen = true;
+            panel.style.display = 'block';
+            btn.setAttribute('aria-expanded', 'true');
+        }
+        function closeDropdown() {
+            isOpen = false;
+            panel.style.display = 'none';
+            btn.setAttribute('aria-expanded', 'false');
+        }
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (isOpen) { closeDropdown(); } else { openDropdown(); }
+        });
+        document.addEventListener('click', function (e) {
+            if (isOpen && !container.contains(e.target)) closeDropdown();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && isOpen) { closeDropdown(); btn.focus(); }
+        });
+
+        container.appendChild(btn);
+        container.appendChild(panel);
+
+        // Inject into the desktop header nav (not mobile menu)
+        var headerNav = document.querySelector('header nav:not(#mobile-menu)');
+        if (headerNav) {
+            headerNav.appendChild(container);
+            // Derive trigger color from sibling link
+            var sibling = headerNav.querySelector('a');
+            if (sibling) {
+                var c = window.getComputedStyle(sibling).color;
+                btn.style.color = c;
+                COLORS.triggerColor = c;
+            }
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
     }
 })();
