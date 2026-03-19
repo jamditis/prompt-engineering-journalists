@@ -39,16 +39,9 @@
         if (!mainEl) return;
 
         // -- Build the component --
-        // If <main> has its own max-width (subpages), just add vertical spacing.
-        // If <main> is unstyled (landing page), provide layout constraints.
-        var mainHasWidth = mainEl.classList.contains('max-w-5xl') || mainEl.classList.contains('max-w-6xl');
-        var wrapper = document.createElement('div');
-        wrapper.setAttribute('data-ask-ai', 'true');
-        wrapper.style.cssText = mainHasWidth
-            ? 'padding:0.75rem 0 0;position:relative;z-index:40;'
-            : 'max-width:64rem;margin:0 auto;padding:0.75rem 1.5rem 0;position:relative;z-index:40;';
-
+        // No wrapper div — container is injected directly into an existing layout row
         var container = document.createElement('div');
+        container.setAttribute('data-ask-ai', 'true');
         container.style.cssText = 'position:relative;display:inline-block;';
 
         // Trigger button
@@ -191,14 +184,18 @@
         // -- Assemble --
         container.appendChild(btn);
         container.appendChild(dropdown);
-        wrapper.appendChild(container);
 
-        // Insert after a direct-child <header> if present, otherwise first child
-        var inMainHeader = mainEl.querySelector(':scope > header');
-        if (inMainHeader) {
-            inMainHeader.parentNode.insertBefore(wrapper, inMainHeader.nextSibling);
+        // Inject inline into an existing layout row. Priority:
+        // 1. The header/nav bar's inner flex row (consistent across all pages)
+        var target = null;
+        var header = document.querySelector('header');
+        if (header) {
+            target = header.querySelector('[class*="flex"][class*="items-center"], [class*="flex"][class*="justify-between"]');
+        }
+        if (target) {
+            target.appendChild(container);
         } else {
-            mainEl.insertBefore(wrapper, mainEl.firstChild);
+            mainEl.insertBefore(container, mainEl.firstChild);
         }
     });
 
