@@ -127,6 +127,21 @@
 
     // -- Markdown download --
 
+    var turndownPromise = null;
+
+    function loadTurndown() {
+        if (turndownPromise) return turndownPromise;
+        turndownPromise = new Promise(function (resolve, reject) {
+            if (typeof TurndownService !== 'undefined') { resolve(); return; }
+            var script = document.createElement('script');
+            script.src = 'https://unpkg.com/turndown@7.2.0/dist/turndown.js';
+            script.onload = resolve;
+            script.onerror = function () { turndownPromise = null; reject(); };
+            document.head.appendChild(script);
+        });
+        return turndownPromise;
+    }
+
     function downloadMarkdown() {
         var title = getTitle();
         var url = window.location.href;
@@ -147,21 +162,12 @@
             URL.revokeObjectURL(a.href);
         }
 
-        if (typeof TurndownService !== 'undefined') {
+        loadTurndown().then(function () {
             var td = new TurndownService({ headingStyle: 'atx', codeBlockStyle: 'fenced' });
             save('# ' + title + '\n\nSource: ' + url + '\n\n' + td.turndown(clone));
-        } else {
-            var script = document.createElement('script');
-            script.src = 'https://unpkg.com/turndown@7.2.0/dist/turndown.js';
-            script.onload = function () {
-                var td = new TurndownService({ headingStyle: 'atx', codeBlockStyle: 'fenced' });
-                save('# ' + title + '\n\nSource: ' + url + '\n\n' + td.turndown(clone));
-            };
-            script.onerror = function () {
-                save('# ' + title + '\n\nSource: ' + url + '\n\n' + (clone.textContent || '').trim());
-            };
-            document.head.appendChild(script);
-        }
+        }).catch(function () {
+            save('# ' + title + '\n\nSource: ' + url + '\n\n' + (clone.textContent || '').trim());
+        });
     }
 
     // -- Build and inject --
@@ -179,7 +185,7 @@
         var btn = document.createElement('button');
         btn.type = 'button';
         btn.setAttribute('aria-expanded', 'false');
-        btn.setAttribute('aria-haspopup', 'dialog');
+        btn.setAttribute('aria-haspopup', 'menu');
         btn.title = 'Ask an AI about this page';
 
         var icon = makeSvg('M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z', 'currentColor', 12);
@@ -214,9 +220,12 @@
             { label: 'Ask Claude', href: 'https://claude.ai/new?q=' + encoded, iconFn: function () { return makeSvg('M12 2 L14 8 L20 10 L14 12 L12 18 L10 12 L4 10 L10 8 Z', COLORS.iconColor); } },
             { label: 'Ask ChatGPT', href: 'https://chatgpt.com/?q=' + encoded, iconFn: function () { return makeSvg('M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z', COLORS.iconColor); } },
             { label: 'Ask Gemini (copies prompt)', iconFn: function () { return makeDiamondSvg(COLORS.iconColor); }, action: function () {
-                navigator.clipboard.writeText(prompt).then(function () {
-                    window.open('https://gemini.google.com/app', '_blank', 'noopener,noreferrer');
-                });
+                var geminiUrl = 'https://gemini.google.com/app';
+                var w = window.open(geminiUrl, '_blank', 'noopener,noreferrer');
+                if (!w) window.location.href = geminiUrl;
+                if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+                    navigator.clipboard.writeText(prompt).catch(function () {});
+                }
             }},
             { label: 'Download as markdown', iconFn: function () { return makeDownloadSvg(COLORS.iconColor); }, action: downloadMarkdown },
         ];
@@ -244,6 +253,8 @@
             el.appendChild(document.createTextNode(item.label));
             el.addEventListener('mouseenter', function () { el.style.background = COLORS.itemHover; });
             el.addEventListener('mouseleave', function () { el.style.background = 'transparent'; });
+            el.addEventListener('focus', function () { el.style.background = COLORS.itemHover; });
+            el.addEventListener('blur', function () { el.style.background = 'transparent'; });
             panel.appendChild(el);
         });
 
