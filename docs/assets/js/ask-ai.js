@@ -13,19 +13,9 @@
 
         var encodedPrompt = encodeURIComponent(prompt);
 
-        // -- Determine injection point --
-        var headers = document.querySelectorAll('header');
-        var lastHeader = headers.length ? headers[headers.length - 1] : null;
-        var insertAfter = lastHeader;
-
-        if (lastHeader) {
-            var nextEl = lastHeader.nextElementSibling;
-            if (nextEl && nextEl.tagName === 'SECTION' && nextEl.querySelector('h1')) {
-                insertAfter = nextEl;
-            }
-        }
-
-        if (!insertAfter) return;
+        // -- Determine injection point: first child of <main> --
+        var mainEl = document.querySelector('main');
+        if (!mainEl) return;
 
         // -- Build the component --
         var wrapper = document.createElement('div');
@@ -176,7 +166,7 @@
         container.appendChild(dropdown);
         wrapper.appendChild(container);
 
-        insertAfter.parentNode.insertBefore(wrapper, insertAfter.nextSibling);
+        mainEl.insertBefore(wrapper, mainEl.firstChild);
     });
 
     // -- SVG helper: single path icon --
