@@ -5,11 +5,8 @@
     document.addEventListener('DOMContentLoaded', function () {
         var title = (document.querySelector('h1') || {}).textContent || document.title;
         var url = window.location.href;
-        var hostname = window.location.hostname;
 
-        var prompt = 'I\'m reading about "' + title.trim() + '" on ' + hostname + '.\n\n' +
-            'URL: ' + url + '\n\n' +
-            'Can you explain the key concepts and help me apply them?';
+        var prompt = 'I\'m learning about "' + title.trim() + '" — can you explain the key concepts and help me understand how to apply them?';
 
         var encodedPrompt = encodeURIComponent(prompt);
 
