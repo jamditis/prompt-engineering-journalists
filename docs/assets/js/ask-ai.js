@@ -179,15 +179,17 @@
         container.appendChild(btn);
         container.appendChild(dropdown);
 
-        // Inject into the header nav alongside existing nav links
-        var headerNav = document.querySelector('header nav');
+        // Inject into the right side of the header nav
+        var headerNav = document.querySelector('header nav:not(#mobile-menu)');
         if (headerNav) {
             headerNav.appendChild(container);
         } else {
+            // Fallback: find the last flex child in the header (right side)
             var header = document.querySelector('header');
             if (header) {
-                var headerFlex = header.querySelector('[class*="flex"][class*="items-center"]');
-                if (headerFlex) headerFlex.appendChild(container);
+                var flexChildren = header.querySelectorAll('[class*="flex"][class*="justify-between"] > [class*="flex"]');
+                var target = flexChildren.length ? flexChildren[flexChildren.length - 1] : null;
+                if (target) target.appendChild(container);
             }
         }
     });
