@@ -29,16 +29,19 @@ What would need to change for CLI tools to become practical for daily journalism
 
 ---
 
-### Discussion 3: Use cases you want to explore
+### Discussion 3: What would you put in your CLAUDE.md?
 
 **Prompt:**
 
-Based on the readings and your own experience, propose one journalism task you want to automate or improve using command-line AI tools.
+In the video and exercise, you created a CLAUDE.md file for your project. Now think about what actually belongs in one.
 
-Be specific:
-- What is the task?
-- How do you currently do it?
-- What would the ideal CLI workflow look like?
-- What obstacles might you encounter?
+Here are a few real examples from the instructor's own projects:
 
-This will help shape topics for later modules, so think about what would be most useful to you.
+- **A banned words list** — words like "comprehensive," "leveraging," and "seamlessly" are flagged for deletion or replacement. The file includes a quick test: "Can I delete this word without losing meaning? Delete it."
+- **Beat terminology** — one project specifies that the city's annual budget process is called the "appropriations cycle" and should never be called "budget season." Another defines the difference between two events with similar names so the AI does not confuse them.
+- **Style rules** — "Sentence case only, never Title Case." "AP style with no Oxford comma." "Spell out numbers under 10."
+- **Source standards** — "Attribute all claims to named sources. Flag unverified claims separately from verified ones."
+
+Share one or two things you added (or plan to add) to your CLAUDE.md for your beat. Why did you choose those? What behavior would change if you deleted them?
+
+Reply to at least one classmate's post with a suggestion for something they might add based on their beat.

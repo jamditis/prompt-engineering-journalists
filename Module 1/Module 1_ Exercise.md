@@ -117,6 +117,8 @@ Note the response. You will use it for comparison in Part 3.
 
 ## Part 3: Compare web vs CLI (15 minutes)
 
+In the video, you saw this comparison in action: the same research task run simultaneously in Claude on the web and Claude Code in the terminal. The web version finished faster but hit its tool use limit. Claude Code took longer but produced saved files, deeper research, and materials that persist after the session ends. Now you will try a simpler version on your own.
+
 ### Step 9: Run the same prompt in a web interface
 
 Go to the web version of your chosen AI:
@@ -196,6 +198,43 @@ You'll add to this file throughout the course. Module 2 will add it to version c
 
 ---
 
+## Part 5: Set up your project context (10 minutes)
+
+In the video, you saw how Claude Code reads a CLAUDE.md file every time it starts a session in a directory — and how that file shapes its behavior. Now you will create one for your own project folder.
+
+### Step 15: Initialize a CLAUDE.md
+
+If you are using Claude Code, type the following inside your active session:
+
+```
+/init
+```
+
+This tells Claude Code to explore your project folder and generate a CLAUDE.md file with documentation about what it finds. Review the output before accepting it.
+
+If you are using Gemini CLI or Codex CLI, ask the tool to create a context file instead:
+
+```
+Look at the files in this folder and create a GEMINI.md (or AGENTS.md) that describes what this project is and how you should work with it.
+```
+
+### Step 16: Customize your context file
+
+Open the generated file and add at least one customization. Some ideas:
+
+- Your name and what you cover ("I'm a reporter covering city government for the Daily News")
+- A style rule specific to your publication ("Use AP style, no Oxford comma")
+- A terminology note ("The city calls its annual budget process the 'appropriations cycle' — never call it budget season")
+- A behavioral instruction (in the video, I added "always call me Senator Joe" as a test — yours should be more useful)
+
+### Step 17: Test it
+
+Quit your session (`/q`) and start a new one in the same folder by typing `claude` (or your tool's launch command). Ask a question related to the context you added. Does it follow your instructions?
+
+If it does, your CLAUDE.md is working. You will build on this file throughout the rest of the course. In Module 2, you will learn more about what belongs in a context file and how to encode your editorial expertise into reusable skills.
+
+---
+
 ## Submission
 
 Submit a short writeup (300-500 words) covering:
@@ -203,6 +242,7 @@ Submit a short writeup (300-500 words) covering:
 1. Which tool you installed and any installation issues you encountered
 2. Your comparison of web vs CLI for the simple prompt
 3. Your comparison of web vs CLI for the file processing task
-4. One journalism task you now want to try with CLI tools
+4. Your CLAUDE.md setup — what you added and whether the tool followed your instructions
+5. One journalism task you now want to try with CLI tools
 
 There are no wrong answers here. The goal is to document your experience and identify where CLI tools might fit into your workflow.

@@ -64,13 +64,13 @@ D) Analyzing a dataset and producing summary statistics
 
 ### Question 5
 
-What does the `-g` flag mean when running `npm install -g [package]`?
+What does a CLAUDE.md file do in a project folder?
 
-A) Install the package for guest users only
-B) Install the package globally so it runs from any directory
-C) Install the package in debug mode
-D) Install the package with graphical interface support
+A) It stores your API key so you don't have to re-authenticate each session
+B) It gets read automatically at the start of every session, giving the AI persistent instructions about your project
+C) It logs all of your previous conversations for future reference
+D) It limits which commands the AI is allowed to run
 
 **Correct answer:** B
 
-**Explanation:** The `-g` flag tells npm to install the package globally rather than in the current project directory. Global installation makes the command available system-wide, which is necessary for CLI tools you want to run from anywhere.
+**Explanation:** A CLAUDE.md file is a context file that Claude Code reads every time you start a session in that directory. It tells the AI about your project, your style preferences, and how it should behave — so you do not have to re-explain the same things every session. You can generate one with the `/init` command or write it yourself. Gemini CLI uses GEMINI.md and Codex uses AGENTS.md for the same purpose.

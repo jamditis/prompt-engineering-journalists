@@ -6,37 +6,41 @@ Welcome to Module 1 of Advanced Prompt Engineering for Journalists.
 
 In the 101 course, you learned how to write effective prompts and get useful results from AI through web interfaces like ChatGPT and Claude.ai. You can now write clear instructions, provide context, and iterate on responses. That skill set carries forward into everything we do here.
 
-The difference is how you deliver those prompts.
+The difference is where and how you deliver those prompts.
 
-Web interfaces are interactive: you type, the AI responds, you type again. Terminal-based AI tools are programmable: you can script them, pipe data through them, chain them with other tools, and schedule them to run on their own. This is the real unlock. You already know how to prompt. Now you will learn to prompt at scale and with automation.
+This course is about escaping the browser. We are going to get out of the web chat interface and bring these tools onto your local machine, where they can interact with, edit, create — and in some cases delete — real files and folders. The tools you will use here are much more powerful than what you have been working with in a browser, and you can build more useful things when you can take advantage of your machine's processing power, run scripts and workflows, schedule recurring tasks, and let something run overnight without needing to babysit a browser tab.
 
-Before you install anything, read the first required reading — Ethan Mollick's guide to AI in 2026. He introduces a framework that will help you understand exactly what this course is about. AI systems have three layers: **models** (the underlying intelligence), **apps** (the interfaces like ChatGPT.com and Claude.ai), and **harnesses** (systems that give models tools, file access, and the ability to act). You have been using apps. This course teaches you to use harnesses. The same model — Claude Opus 4.6, for example — behaves very differently in a chat window than it does running inside Claude Code. The chat window lets it respond. The harness lets it act.
+**You need a paid account.** To do most of what we cover in this course, you need a paid subscription to one of the three major models: ChatGPT/Codex, Gemini/Gemini CLI, or Claude/Claude Code. The $20/month plan is fine. API-based billing also works, though it tends to be more expensive for the kind of sustained usage we will be doing. The only exception is Gemini CLI, which has a free tier that allows you to use the CLI agent at no cost.
 
-That distinction is why this course exists. And as Mollick puts it: you will stop prompting and start managing. This module is where that shift begins.
+**You do not need to use the terminal.** If you are on a company machine where IT controls your admin access, or if the terminal feels intimidating, there are other options. You can use your favorite IDE — VS Code, Cursor, Windsurf, AntiGravity — as long as it gives you access to a large language model. Any environment where you can interact with one of the three major models will work. That said, the video demonstrations in this course use PowerShell primarily, so the things I show and explain will be geared toward that modality.
+
+**Why we are escaping the browser.** Before you install anything, it helps to understand why the environment matters. Ethan Mollick's framework for thinking about AI has three layers: **models** (the underlying intelligence), **apps** (the interfaces like ChatGPT.com and Claude.ai), and **harnesses** (systems that give models tools, file access, and the ability to act). You have been using apps. This course teaches you to use harnesses. The same model — Claude Opus 4.6, for example — behaves differently in a chat window than it does running inside Claude Code. The chat window gives it a system prompt geared toward conversational responses. The harness gives it a different system prompt, different tools, and the ability to work with your file system. It is not just a smarter chat — it is a different kind of tool.
+
+In the video, I demonstrate this side by side: the same research task, run simultaneously in Claude on the web and Claude Code in the terminal. Claude on the web finishes faster but produces a surface-level report with citation links. Claude Code takes longer but saves structured files to your computer, extracts deeper information, and produces materials you can reference in future sessions. And when Claude on the web hits its tool use limit, everything lives only in that chat. With Claude Code, the files are already on your desktop.
 
 **The adoption gap is in back-office work.** A 2025 Reuters Institute survey of 949 UK journalists found that the tasks with the highest daily AI adoption are all information-processing tasks: transcription (22% daily), translation (15%), story research (12%), and summarization (11%). The tasks with the lowest adoption — audio/video generation, page layout, bias detection — are production tasks where AI output is less reliable and harder to verify. ([Source](https://reutersinstitute.politics.ox.ac.uk/ai-adoption-uk-journalists-and-their-newsrooms-surveying-applications-approaches-and-attitudes))
 
-The pattern maps directly to what CLI tools are good at. Batch transcription processing, document summarization, data extraction, translation — these are file-in, file-out tasks that benefit from automation and direct filesystem access. Web interfaces force you to upload and download one document at a time. CLI tools let you point at a folder and say "process everything in here." That difference defines the rest of this course.
+The pattern maps directly to what CLI tools are good at. Batch processing, document summarization, data extraction, translation — these are file-in, file-out tasks that benefit from automation and direct filesystem access. Web interfaces force you to upload and download one document at a time. CLI tools let you point at a folder and say "process everything in here."
 
-**Work where your files live.** In a web interface, you upload files one at a time, then download the results. In the terminal, the AI works directly on your file system. It can read entire directories, process batches of documents, and write results to files — no upload/download cycle. If you have 200 PDFs from a FOIA request, you do not need to drag them into a chat box one by one.
+**Your project environment starts with CLAUDE.md.** Once you have a CLI tool installed, you will set up a project folder and create a context file called CLAUDE.md (or GEMINI.md or AGENTS.md, depending on your tool). This file gets read automatically every time you start a new session in that directory. It tells the AI who you are, what you are working on, and how it should behave. In the video, I show the `/init` command, which lets Claude Code explore your project folder and generate a CLAUDE.md automatically. I also show how you can customize it — I added a silly instruction ("always call me Senator Joe") and it followed it immediately in the next session.
 
-**Show the tool what broke.** When something goes wrong in a web chat, debugging is a translation problem. You see an error, you try to describe it, and the AI tries to reconstruct enough context to help — usually from scratch, in a new session, without knowing what it built before. With a CLI tool, you skip the translation. Copy the error message exactly as it appears and paste it back into the same session. Ask: "What does this mean? How do I fix it?" The tool knows the code it just helped you write. It can read the error in that context and usually tell you exactly where the problem is.
+There are two levels of context files: a **global** one that lives at your user level (in a folder called `.claude`) and applies to every session on your machine, and **project-level** ones that live inside each project folder. The global file is where you put style preferences, your skill level, and general instructions. The project-level file is where you put things specific to that project — what it does, what mistakes to avoid, what terminology to use. You will update these files throughout the course.
 
-This works for terminal errors, Python tracebacks, API error responses, and browser developer console errors. It also works with screenshots — Claude Code is multimodal, so you can drag in a screenshot of a broken webpage, a chart that looks wrong, or a dev console error you don't recognize. "Why does this look like that?" is a 10-second question instead of a paragraph-long explanation.
+**GitHub is your Google Drive for code.** Before I learned GitHub, I was using Google Drive to store and sync my code. The result was a nightmare of version control mismatches, overwrites, and accidental deletions. GitHub solved all of that. Even if not every project strictly requires it, we will use GitHub throughout this course as the standard way to store, version, and share your work.
 
-Every script has bugs. Every pipeline breaks eventually. This feedback loop — see error, paste error, get fix — is one of the most practical benefits of working in the terminal with a CLI LLM, and you'll use it throughout this course.
-
-**The terminal is just a text interface.** If you have never used the command line, this might feel unfamiliar. But you already work in text every day — articles, notes, emails, messages. The terminal is the same thing: you type text, the computer responds with text. There are no buttons or menus, which means there is nothing to click by accident. What you type is what happens.
+**Resources.** I have put together reference materials at two sites: [mooc.amditis.tech](https://mooc.amditis.tech) (the course companion site) and [tools.amditis.tech](https://tools.amditis.tech) (guides to slash commands, `@` file tagging, and other ways to interact with Claude Code). Both will be updated throughout the course.
 
 By the end of this module, you will be able to:
 
 1. **Install and configure at least one command-line AI tool** (Claude Code, Gemini CLI, or Codex CLI)
 2. **Execute basic AI prompts from your terminal** instead of a web browser
-3. **Explain the practical differences** between browser-based and terminal-based AI workflows — specifically around file access, scripting, and automation
-4. **Identify three journalism tasks** that benefit from programmatic AI access over a chat window
+3. **Explain the practical differences** between browser-based and terminal-based AI workflows — specifically around file access, persistence, and depth of output
+4. **Create a CLAUDE.md context file** using the `/init` command and customize it for your beat
+5. **Identify journalism tasks** that benefit from programmatic AI access over a chat window
 
 ## What you will do this week
 
+- Watch the Module 1 video
 - Complete the required readings on CLI tool installation and use cases
 - Work through the hands-on exercise comparing web vs terminal workflows
 - Participate in the discussion forum
@@ -44,12 +48,13 @@ By the end of this module, you will be able to:
 
 ## Getting started
 
-Before anything else, make sure you have a terminal application on your computer:
+Before anything else, make sure you have a terminal application or IDE on your computer:
 
+- **Windows:** PowerShell (recommended — used in the video demonstrations), Windows Terminal, or Git Bash
 - **Mac:** Terminal (built-in) or iTerm2
-- **Windows:** Windows Terminal, PowerShell, or Git Bash
 - **Linux:** Your default terminal emulator
+- **IDE alternative:** VS Code, Cursor, Windsurf, or AntiGravity — if you cannot or prefer not to use the terminal directly
 
-If you have never used the terminal before, do not worry. The exercise walks you through each step, and you will have typed your first AI prompt from the command line before the week is over.
+If you have never used the terminal before, do not worry. The exercise walks you through each step. You can also explore the slash commands and configuration options by typing a forward slash inside Claude Code and using your arrow keys to browse — play around with it. One setting I recommend is **explanatory output mode** (accessible via `/usage`), which adds a brief insight at the end of each response explaining why the tool did what it did.
 
 Let's get started.

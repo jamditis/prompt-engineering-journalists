@@ -5,20 +5,20 @@
 
 ## Overview
 
-| # | Video | Module | Format | Target length |
-|---|-------|--------|--------|---------------|
-| 1 | Promo video | — | Talking head | 60-90 sec |
-| 2 | Welcome video | Intro | Talking head | 2-3 min |
-| 3 | What CLI LLMs are and why they matter | Module 1 | Talking head + slides | ~6 min |
-| 4 | Getting started with Claude Code | Module 1 | Screen recording | ~6 min |
-| 5 | The context file problem | Module 1 | Talking head + slides | ~6 min |
-| 6 | Setting up your beat project | Module 1 | Screen recording | ~6 min |
-| 7 | From prompts to skills | Module 2 | Talking head + slides | ~6 min |
-| 8 | Installing and using journalism skills | Module 2 | Screen recording | ~6 min |
-| 9 | Describing workflows and having AI build them | Module 3 | Talking head + slides | ~6 min |
-| 10 | Ask Claude Code to build you a pipeline | Module 3 | Screen recording | ~6 min |
-| 11 | Why AI makes things up (and how to fix it) | Module 4 | Talking head + slides | ~6 min |
-| 12 | Connecting Claude to a knowledge base | Module 4 | Screen recording | ~6 min |
+Each module has at most 2 recorded lectures, plus possible guest interviews. The original plan called for 4 shorter videos per module (~6 min each). In practice, the content works better as 1-2 longer videos (~15-20 min) that combine talking head and screen recording in a single flow.
+
+| # | Video | Module | Format | Length | Status |
+|---|-------|--------|--------|--------|--------|
+| 1 | Promo video | — | Talking head | 60-90 sec | Planned |
+| 2 | Welcome video | Intro | Talking head | 2-3 min | Planned |
+| A1 | Escaping the browser | Module 1 | Talking head + screen recording | ~20 min | Recorded |
+| A2 | (TBD — possible second video or guest) | Module 1 | — | — | Open |
+| B1 | From prompts to skills | Module 2 | Talking head + screen recording | ~15-20 min | Planned |
+| B2 | (TBD — possible second video or guest) | Module 2 | — | — | Open |
+| C1 | Describing workflows and having AI build them | Module 3 | Talking head + screen recording | ~15-20 min | Planned |
+| C2 | (TBD — possible second video or guest) | Module 3 | — | — | Open |
+| D1 | Agents, tools, and data access | Module 4 | Talking head + screen recording | ~15-20 min | Planned |
+| D2 | (TBD — possible second video or guest) | Module 4 | — | — | Open |
 
 ---
 
@@ -93,171 +93,85 @@ Brief Mollick framing: "You've been using AI apps — ChatGPT.com, Claude.ai —
 
 ---
 
-## Module 1, Video 1: What CLI LLMs are and why they matter
+## Module 1, Video A1: Escaping the browser (RECORDED)
 
-**Format:** Talking head + slides
-**Length:** ~6 minutes
-**Topic:** Apps vs. harnesses; what CLI LLMs look like; what they can do that browser tools can't; the project arc begins
+**Format:** Combined talking head + screen recording
+**Length:** ~20 minutes
+**File:** `MOOC-A1_eng.srt`
+**Topic:** Why we are leaving the browser; what CLI tools can do that web chat cannot; live Claude Code vs. Claude.ai comparison; CLAUDE.md setup via /init; global vs. project-level context files
 
-### Outline
+### What was covered
 
-**0:00-0:30 — Hook**
-"You've been talking to AI through a browser. You type, it responds, you type again. That works for a lot of things. But every session forgets the last one. You can't hand it a folder of documents. You can't say 'do this every morning.' You're always the one in the middle, carrying information back and forth. CLI LLMs remove that bottleneck."
+**0:00-2:00 — Introduction**
+- Who Joe is (associate director of operations, CCM, Montclair State)
+- Course premise: escaping the browser to bring AI onto your local machine
+- Self-taught framing — approaching from a non-expert perspective
+- Paid subscription requirement ($20/mo for ChatGPT, Gemini, or Claude)
+- IDE alternatives for those who cannot use the terminal (VS Code, Cursor, Windsurf, AntiGravity)
+- PowerShell as the primary tool for demonstrations
 
-**0:30-1:30 — Apps vs. harnesses [SLIDE: models / apps / harnesses diagram]**
-Mollick's three-layer model. Apps (ChatGPT.com, Claude.ai) are chat interfaces. Harnesses (Claude Code, Gemini CLI, Codex) give the same AI models tools, file access, and the ability to act. The same Claude Opus 4.6 that answers questions in a browser window will, inside Claude Code, read a directory of documents, write a script to process them, run that script, and show you the results — without you touching the files yourself.
+**2:00-4:00 — Resources and setup**
+- Course websites: mooc.amditis.tech and tools.amditis.tech
+- GitHub as "Google Drive for code" — personal experience with version control nightmares before GitHub
+- Three major models: ChatGPT/Codex, Gemini CLI, Claude Code
 
-**1:30-2:30 — What it actually looks like [SLIDE: Claude Code screenshot]**
-"Claude Code looks like a terminal, but you use it like a chat window. You type in plain English. It responds, asks questions, and takes action. The difference from Claude.ai is what it can do: it has access to your file system, it can run code, and it can complete multi-step tasks. It's not a smarter chat window — it's a different kind of tool."
+**4:00-5:30 — Why the environment matters**
+- Mollick's harness concept: models behave differently based on the environment they operate in
+- System prompts differ between web chat and CLI — web chat is geared toward conversational responses, CLI harness gives different tools and file access
+- Not a smarter chat window — a different kind of tool
 
-Show or describe: opening Claude Code, the prompt interface, a simple request in plain English.
+**5:30-7:00 — Opening Claude Code**
+- Creating a folder on the desktop, navigating with `cd`
+- Typing `claude` to launch — trust the folder prompt
+- Interface walkthrough: version info, model display, status line, slash commands
+- Saying hello — demonstrating natural language interaction
 
-**2:30-3:30 — What this means for journalism [SLIDE: side-by-side — before and after]**
-Two scenarios:
-- Before: download FOIA PDFs → upload one at a time to Claude.ai → copy output → paste somewhere else → repeat 200 times
-- After: open Claude Code, say "read all the PDFs in this folder and find every mention of [contractor name]," wait, read the results
+**7:00-13:00 — Live comparison: Claude Code vs. Claude.ai**
+- Same task: "Look on the internet and find everything you can about the Center for Cooperative Media and give me a report"
+- Both using Opus 4.6, sent simultaneously
+- Claude.ai: finishes faster, produces surface-level report with citation links, hits tool use limit
+- Claude Code: takes longer, asks for permissions (Firecrawl), creates folders and files, extracts deeper information, saves structured output to filesystem
+- Key difference: when session ends, Claude Code's files persist on desktop; Claude.ai's output lives only in the chat
+- Downloading annual reports from CCM website while Claude Code works (parallel work)
+- Claude.ai hits tool use limit — everything lost; Claude Code already finished with saved files
 
-The second scenario requires no technical knowledge — only the ability to describe what you want.
+**13:00-16:00 — File persistence and continued work**
+- Asking Claude Code to create detailed staff/project profiles as markdown files in a new folder
+- Files persist across sessions — future Claude Code sessions can reference them
+- Comparison to Claude.ai Projects feature (limited, less customizable)
 
-**3:30-4:30 — The tools and which to start with [SLIDE: tool comparison table]**
-Claude Code, Gemini CLI, Codex. Gemini CLI is free (1,000 requests/day) — good starting point if you don't have a paid subscription yet. Claude Code is the primary tool for Modules 2-4 because it has the most developed skills/hooks ecosystem. You only need one tool installed to complete Module 1.
+**16:00-18:00 — CLAUDE.md setup**
+- `/init` command to auto-generate a CLAUDE.md from project contents
+- "Senator Joe" demo — adding a custom instruction, restarting session, verifying it follows instructions
+- Global vs. project-level CLAUDE.md: global for style/preferences, project-level for project-specific context
+- Updating CLAUDE.md when the tool makes mistakes or misinterprets instructions
 
-**4:30-5:30 — The project arc [SLIDE: arc diagram again]**
-"This module is the 'idea' stage. You're going to pick a real journalism problem you want to solve — something you do repeatedly that takes more time than it should. By the end of this week, you'll have installed a CLI LLM tool and had your first conversation with it about that problem. By the end of the course, you'll have a working solution on GitHub."
+**18:00-20:00 — Configuration and wrap-up**
+- Slash commands: typing `/` to browse available commands
+- `@` symbol for tagging files and folders
+- `/usage` for configuration settings
+- Explanatory output mode recommendation
+- Call to action: set up your environment, play with settings, head to the discussion forums
 
-**5:30-6:00 — What's next**
-"Read Mollick's guide in the required readings first — it gives you the conceptual map for everything we'll do. Then work through the exercise. See you in the forums."
-
----
-
-## Module 1, Video 2: Getting started with Claude Code
-
-**Format:** Screen recording with voiceover
-**Length:** ~6 minutes
-**Topic:** What Claude Code looks like when you open it; talking to it in plain English; what changes compared to Claude.ai
-
-### Outline
-
-**0:00-0:30 — What this video is**
-"In this video, I'm going to open Claude Code and show you what it looks and feels like — how you talk to it, how it's similar to Claude.ai, and how it's different. The goal is not to teach you terminal commands. The goal is to show you that this is a conversation interface, and you already know how to have conversations."
-
-**0:30-1:30 — Opening Claude Code [SCREEN: Terminal with Claude Code launching]**
-Open the terminal. Run `claude`. Show the prompt — it looks like a text cursor waiting for input. "This is it. You type here, just like you type in a chat window. There's no send button — you press Enter."
-
-Type: "Hello. What can you do?" — show Claude's response. Point out: it describes its tools, its file access, its ability to run commands. "Notice it's telling you it can work with your files. That's the key difference from Claude.ai."
-
-**1:30-2:30 — The same task, two ways [SCREEN: Claude.ai and Claude Code side by side, or switch between them]**
-Pick a simple task: extract the 5 most important facts from a news article.
-
-In Claude.ai: paste the article text → get a response → you manually copy the output.
-
-In Claude Code: "There's a press release in my downloads folder called park-closure.md. Read it and give me the 5 most important facts." Claude finds the file, reads it, returns the facts. "I didn't paste anything. I didn't know the exact file path. I just described what I wanted."
-
-**2:30-3:30 — Ask it to do something with the output [SCREEN: Claude Code]**
-Build on the previous exchange: "Save those facts as a bulleted list in a new file called notes.md."
-Show Claude creating the file. Open it — the notes are there.
-"I described an outcome. Claude handled everything in between: finding the file, reading it, formatting the output, saving it."
-
-**3:30-4:30 — Comparing to Claude.ai: what's the same, what's different [SCREEN: side-by-side comparison or diagram]**
-Same:
-- You write in plain English
-- The AI responds conversationally
-- You can iterate, ask follow-ups, change your mind
-
-Different:
-- Claude Code can see and work with your local files
-- It can run operations on your computer (create files, run scripts)
-- Sessions can be resumed and extended — it has memory of what it just did
-- It's running on your machine, not in a browser tab
-
-**4:30-5:30 — When to use which [SCREEN: simple comparison slide or just voiceover]**
-Use Claude.ai when: you need a quick answer, you're on your phone, or you're having a pure conversation.
-Use Claude Code when: you're working on a project with files, you want to save outputs, or you want to build something you can run again.
-
-"As the course progresses, almost everything we build will be done through Claude Code. You'll describe what you want. Claude will do the work. You'll review, refine, and direct."
-
-**5:30-6:00 — Exercise preview**
-"One more thing before the exercise: when something breaks — and it will — don't close the session and start over. Paste the error message directly into Claude Code and ask what it means. The tool has the context to help you. That's the debugging loop you'll use throughout this course.
-
-The exercise this week asks you to install a tool, have your first conversation with it about a real journalism problem, and compare that experience to using a browser-based tool. Post your observations in the forum."
+### Topics from the original plan that were NOT covered in this video
+These may be addressed in a second Module 1 video, in written materials, or in later modules:
+- The "deletion test" for context file content (mentioned in midweek message instead)
+- Error debugging loop ("paste the error back in")
+- Git/GitHub hands-on demo (creating repos, committing, pushing)
+- Processing documents with vs. without context (formal comparison)
+- CLAUDE.md content categories breakdown (beat knowledge, style rules, workflow instructions)
+- Node.js installation walkthrough
+- Gemini CLI or Codex CLI setup demos
 
 ---
 
-## Module 1, Video 3: The context file problem
+## Module 1, Video A2: (open slot)
 
-**Format:** Talking head + slides
-**Length:** ~6 minutes
-**Topic:** Why AI forgets everything; what context files are; the deletion test; GitHub as version control
-
-### Outline
-
-**0:00-0:30 — Hook**
-"Every time you open a new session with Claude Code, it doesn't know who you are. It doesn't know your beat, your publication's style, or what the city council calls its budget process. You're starting from zero each time. Context files fix that."
-
-**0:30-1:30 — The fresh conversation problem [SLIDE: context window diagram]**
-AI context is ephemeral — it exists for a session and disappears. A CLAUDE.md file gets read automatically every time you open a session in that directory. It's not magic — it's instructions that live in a file instead of your head. Same concept for Gemini CLI (GEMINI.md) and Codex (AGENTS.md).
-
-**1:30-2:30 — What goes in a context file [SLIDE: annotated CLAUDE.md example]**
-Three categories:
-1. Beat knowledge — how local institutions are named, who the regular sources are, what jargon the city uses
-2. Style rules — AP deviations specific to your publication, formatting preferences
-3. Workflow instructions — what to flag for human review, how to attribute sources, what to never do
-
-**2:30-3:30 — The deletion test [SLIDE: three examples, pass/fail]**
-"The deletion test: if you removed this line, would the AI behave any differently? 'Be helpful' — delete it, nothing changes. 'The city refers to its annual budget process as the appropriations cycle — never call it budget season' — delete it, Claude uses the wrong term. That second line passes. That's what belongs in your context file."
-
-**3:30-4:30 — How context files scale [SLIDE: hierarchy diagram]**
-Global (~/.claude/CLAUDE.md), project-level (in the project directory), subdirectory-level. Claude Code reads all of them, most specific taking precedence. A newsroom-wide file for shared standards, a beat-specific file for your particular coverage area.
-
-**4:30-5:30 — GitHub: version control via your LLM [SLIDE: GitHub concepts — why journalists use it]**
-"Your context file lives in a project folder. That folder should be a Git repository. Not because you need to learn Git commands — your CLI LLM handles those for you — but because: you can track what changed in your context file and when, you can clone skills and tools from GitHub in Module 2, and you can share your project with colleagues at the end of the course. You describe what you want: 'put this project on GitHub.' Claude does the rest."
-
-**5:30-6:00 — What's next**
-"The arc check: you have your idea from Module 1. This week you build the GitHub scaffold — the project folder, the context file, and version control. See you in the demo."
-
----
-
-## Module 1, Video 4: Setting up your beat project
-
-**Format:** Screen recording with voiceover
-**Length:** ~6 minutes
-**Topic:** Asking Claude Code to scaffold a project, write a CLAUDE.md, process documents, and set up GitHub — all in plain English
-
-### Outline
-
-**0:00-0:30 — Setup**
-"Today I'm going to set up a beat project using Claude Code. I won't be typing directory commands or Git syntax — I'll be describing what I want and letting Claude handle the mechanics. This is how the whole course works."
-
-**0:30-1:30 — Ask Claude Code to create the project [SCREEN: Claude Code session]**
-Type: "I want to create a new project called greenfield-beat in my Documents folder. Set up the directory structure for a beat reporting project."
-Watch Claude create the folder, possibly suggest a structure, possibly ask clarifying questions.
-Point out: "I didn't type `mkdir`. I described a goal. Claude made it happen."
-
-**1:30-2:30 — Ask Claude Code to write the CLAUDE.md [SCREEN: Claude Code session]**
-Type: "I cover Greenfield city government for the Daily News. My main sources are the mayor's office, city council members, and the city manager. The city uses the term 'appropriations cycle' for its budget process. I follow AP style with no Oxford comma. Write a CLAUDE.md for this project."
-Watch Claude generate a draft. Review it together.
-"This is a starting point — you'll customize it for your actual beat. Notice it passes the deletion test: every line changes how Claude behaves."
-
-**2:30-3:30 — Process documents with and without context [SCREEN: Claude Code session]**
-Ask Claude to demonstrate the difference:
-- "Read press-release.md and summarize it. Ignore the CLAUDE.md for this first attempt." — generic summary
-- "Now read it again, applying the context in CLAUDE.md." — uses beat terminology, flags relevant details
-
-"Same document, same AI, different instructions. That's the context file working."
-
-**3:30-4:30 — Initialize Git and push to GitHub [SCREEN: Claude Code session]**
-Type: "Initialize this directory as a Git repository and make an initial commit."
-Watch Claude run git init, add files, commit.
-Then: "Create a repository on my GitHub account called greenfield-beat and push this."
-Watch Claude handle the GitHub setup — creating the remote repo, adding the remote, pushing.
-"I described what I wanted. Claude ran the commands. You now have a project on GitHub."
-
-**4:30-5:30 — Verify on GitHub [SCREEN: GitHub in browser]**
-Open github.com, show the repository exists, show the CLAUDE.md and project files are there.
-"This is the second part of Module 1: your idea is now a GitHub project. In Module 2, you're going to clone a library of journalism skills from GitHub — and that cloning will go into a project just like this one."
-
-**5:30-6:00 — What's next**
-"Module 2 is where this project gets its first real tool. See you there."
+**Status:** Not yet recorded. Possible topics for a second video or guest interview:
+- Git and GitHub walkthrough (creating a repo, committing via Claude Code)
+- Context file deep dive (what goes in, the deletion test, beat-specific examples)
+- Guest interview with a journalist using CLI tools
+- Deeper comparison: processing documents with and without CLAUDE.md
 
 ---
 
