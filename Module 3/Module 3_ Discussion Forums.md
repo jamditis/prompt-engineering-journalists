@@ -1,4 +1,4 @@
-# Module 4: CLI workflows for newsrooms
+# Module 3: CLI workflows for newsrooms
 
 ## Discussion forum prompts
 
@@ -38,15 +38,19 @@ Share your thinking and respond to one classmate whose approach differs from you
 
 ---
 
-## Discussion 3: Local vs. cloud AI for newsroom tools
+## Discussion 3: What would you schedule?
 
-This week we covered both cloud AI (Claude's API) and local AI (Ollama). Each has tradeoffs:
-
-- **Cloud AI:** More capable, no local hardware needed, but sends data to external servers
-- **Local AI:** Data stays on your machine, works offline, but requires setup and may be less capable
+In the video, you saw a real automation running on a cron schedule — checking for new content, processing it, and delivering results without anyone pressing a button.
 
 **Prompt:**
 
-For your newsroom's use case, which would you prefer? What factors influence your decision?
+If you could schedule one automated workflow to run daily (or weekly) for your beat or newsroom, what would it do? Describe:
 
-Consider: data sensitivity, internet reliability, cost, technical capacity, and specific use cases.
+- What would it check or fetch?
+- What processing would it do?
+- Where would the output go — email, Slack, a shared file?
+- How often would it run, and why?
+
+Think about the tasks you do manually right now that follow the same pattern every time. Those are your best candidates for scheduling.
+
+Reply to at least one classmate with a suggestion or refinement to their proposed workflow.

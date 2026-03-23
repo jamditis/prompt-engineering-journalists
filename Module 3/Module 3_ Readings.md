@@ -1,4 +1,4 @@
-# Module 4: CLI workflows for newsrooms
+# Module 3: CLI workflows for newsrooms
 
 ## Required readings
 
@@ -63,7 +63,7 @@ Pay attention to the workflow designs — specifically how each team structured 
 **"How to evaluate an LLM pipeline"** — Simon Willison's Weblog
 https://simonwillison.net/tags/llms/
 
-Simon Willison writes practical, non-hype coverage of working with LLMs in real projects. Browse his recent posts on pipelines, automation, and prompt engineering. His "what I've learned" posts are particularly relevant to Module 4.
+Simon Willison writes practical, non-hype coverage of working with LLMs in real projects. Browse his recent posts on pipelines, automation, and prompt engineering. His "what I've learned" posts are particularly relevant to Module 3.
 
 ---
 

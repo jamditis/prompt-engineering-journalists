@@ -1,4 +1,4 @@
-# Module 4: CLI workflows for newsrooms
+# Module 3: CLI workflows for newsrooms
 
 ## Exercise: Build an article-to-newsletter pipeline
 
@@ -85,7 +85,7 @@ Follow the instructions for setting the environment variable. You'll likely need
 
 ### Step 4: Pick an article you've actually read
 
-Before running the pipeline, pick a news article you've actually read recently — something where you know what it says. This is the same principle from Module 3: test new tools on material you can verify.
+Before running the pipeline, pick a news article you've actually read recently — something where you know what it says. This is the same principle from Module 2: test new tools on material you can verify.
 
 If you test on an article you've never read, you can't tell if a bad summary is a pipeline problem or just a hard-to-summarize article. Use something familiar first.
 

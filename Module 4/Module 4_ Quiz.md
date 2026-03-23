@@ -1,4 +1,4 @@
-# Module 4: Agents and RAG
+# Module 4: Agents, tools, and data access
 
 ## Quiz
 
@@ -26,19 +26,19 @@ D) Agents can only work with text, not images or video
 
 ### Question 2
 
-In a RAG (retrieval-augmented generation) system, what happens before the language model generates a response?
+What does running `claude -p "your prompt here"` do differently from launching an interactive Claude Code session?
 
-A) The model is fine-tuned on new data
+A) It uses a different, more powerful model
 
-B) The system retrieves relevant documents from a knowledge base and includes them in the prompt
+B) It sends a single prompt, prints the result to stdout, and exits — no interactive session, no back-and-forth
 
-C) The model searches the internet for current information
+C) It bypasses the CLAUDE.md context file
 
-D) The system waits for human approval
+D) It runs the prompt but requires manual approval before producing output
 
 **Correct answer:** B
 
-**Explanation:** RAG follows a retrieve-then-generate pattern. When a user asks a question, the system first searches a knowledge base for relevant documents, then includes those documents in the context sent to the language model. The model generates a response grounded in the retrieved content.
+**Explanation:** Non-interactive mode (`claude -p`) sends one prompt, gets a result, and exits. This makes it possible to use Claude in shell scripts, cron jobs, and automated pipelines — anywhere you need consistent, hands-off processing. An interactive session is better when you need to review intermediate steps or iterate on results.
 
 ---
 
@@ -62,19 +62,19 @@ D) It translates between different programming languages
 
 ### Question 4
 
-Why does RAG reduce hallucination compared to standard prompting?
+Why does connecting AI to your own documents (via MCP or a knowledge base) reduce hallucination compared to standard prompting?
 
-A) RAG models are trained on more data
+A) Connected data sources are always verified and accurate
 
-B) RAG systems are slower, giving the model more time to think
+B) The AI is slower when reading files, giving it more time to think
 
-C) RAG grounds the model's responses in retrieved source documents rather than relying on parametric memory
+C) The AI generates responses grounded in your source documents rather than relying on what it learned during training, which can be outdated or wrong
 
-D) RAG systems only work with verified facts
+D) MCP servers filter out false information automatically
 
 **Correct answer:** C
 
-**Explanation:** Standard language models rely on "parametric knowledge"—information encoded in their weights during training. This can be outdated, incomplete, or wrong. RAG supplements this with "non-parametric knowledge"—documents retrieved at query time. The model can cite these sources, and errors can be traced to their origin.
+**Explanation:** Without a data connection, AI relies on "parametric knowledge" — patterns learned during training that can be outdated, incomplete, or wrong, with no way to check the source. When connected to your documents, the AI can draw from material you've provided and cite specific files. This doesn't eliminate errors, but it creates a citation trail: you can check what the AI said against what the document actually says.
 
 ---
 

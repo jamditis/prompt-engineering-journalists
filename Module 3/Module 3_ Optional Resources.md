@@ -1,4 +1,4 @@
-# Module 4: CLI workflows for newsrooms
+# Module 3: CLI workflows for newsrooms
 
 ## Optional resources
 

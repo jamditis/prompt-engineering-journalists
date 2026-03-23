@@ -1,16 +1,18 @@
-# Module 4: CLI workflows for newsrooms
+# Module 3: CLI workflows for newsrooms
 
 ## Orientation message
 
-Hello, and welcome to Module 4.
+Hello, and welcome to Module 3.
 
 In the 101 course, you learned to automate tasks with no-code tools like Zapier and Make. Those tools work well for straightforward workflows: trigger an event, move some data, send a notification. But if you've ever hit the wall where your Zap can't handle a weird edge case, or where you need to process 500 documents and the no-code tool charges per operation, you've felt the limits of that approach.
 
 CLI LLMs are the next level. They give you more control, more flexibility, and the ability to handle the messy, unpredictable data that journalism actually produces. This week, you'll describe workflows in plain English and have your CLI LLM translate them into working scripts. You won't write shell code — you'll describe what you want to automate, Claude Code will write the implementation, and you'll test and refine the result. By the end, you'll have a working pipeline that fetches content, processes it with AI, and outputs formatted results.
 
+In this week's video, I'll show you a real automation workflow running on my own setup — a cron-based scheduler that checks for new content, processes it, and sends results on a recurring schedule. I'll also walk through Reroute NJ (reroutenj.org), a zero-build static site in 11 languages for the NJ Transit Portal North Bridge cutover, built entirely with CLI tools. It has page generation scripts, a translation pipeline, and scrapers that run on cron — committing and pushing changes automatically. That's what workflow automation looks like at scale when you apply the skills from Module 2 to a real community need.
+
 ### Describe the workflow, let the LLM build it
 
-The key shift in Module 4: instead of asking Claude Code to help you with one document, you describe an entire workflow — a sequence of steps from input to output — and it builds the script that automates it.
+The key shift in Module 3: instead of asking Claude Code to help you with one document, you describe an entire workflow — a sequence of steps from input to output — and it builds the script that automates it.
 
 "Fetch this URL, strip out the ads, summarize it in three bullets, save it as a markdown file with today's date in the filename" — that's a workflow description. Claude Code turns it into a reusable script. You review the script, test it on a few real examples, and refine it until the output is what you want. Then you can run it on 50 documents, schedule it to run automatically, or share it with a colleague.
 
@@ -62,8 +64,8 @@ By the end of this module, you will be able to:
 
 ### This week's activities
 
-- **Videos:** Watch the two video lectures on CLI basics and building pipelines
-- **Readings:** Complete the required readings on shell fundamentals and automation patterns
+- **Video:** Watch the video lecture on describing workflows in plain English and having AI build them — includes a live demo of a real scheduled automation workflow and a walkthrough of the Reroute NJ project
+- **Readings:** Complete the required readings on automation patterns and API security
 - **Exercise:** Build a working "clip article → summarize → format" pipeline
 - **Discussion:** Share your newsroom automation ideas in the forum
 - **Quiz:** Complete the 5-question quiz on CLI concepts

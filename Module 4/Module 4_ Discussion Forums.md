@@ -1,4 +1,4 @@
-# Module 4: Agents and RAG
+# Module 4: Agents, tools, and data access
 
 ## Discussion forum prompts
 
@@ -36,19 +36,20 @@ Think about this in terms of a real newsroom scenario: a pipeline that processes
 
 ---
 
-## Discussion 2: RAG and the problem of context
+## Discussion 2: Data connections and the problem of context
 
-RAG systems retrieve relevant documents to ground AI responses in source material. But "relevant" is a judgment call.
+When you connect AI to your data — whether through MCP, a knowledge base, or a document folder processed with `claude -p` — you're choosing what the AI can see. "Relevant" is a judgment call, and what you leave out shapes the output as much as what you include.
 
-**Question:** How should journalists think about what gets included in (and excluded from) a RAG knowledge base?
+**Question:** How should journalists think about what data to connect to AI tools, and what to leave out?
 
 Consider:
 - A knowledge base built from your newsroom's published articles excludes stories that were never written (gaps in coverage)
-- A knowledge base of public records may contain errors or outdated information
-- A knowledge base of interview transcripts captures what sources said, not necessarily what's true
+- A folder of public records may contain errors or outdated information
+- A collection of interview transcripts captures what sources said, not necessarily what's true
+- An MCP connection to a database gives the AI access to whatever the database contains — including stale or incomplete data
 
 In your response:
-1. Describe a specific scenario where the contents of a knowledge base could bias the AI's output
+1. Describe a specific scenario where the contents of a connected data source could bias the AI's output
 2. What safeguards would you put in place?
 3. How does this compare to the biases already present in traditional research methods?
 
@@ -56,7 +57,7 @@ In your response:
 
 ## Discussion 3: The infrastructure question
 
-Implementing agents and RAG requires technical infrastructure: servers, databases, APIs, and staff who can maintain them. Large organizations like the Post and Times can build custom tools. Smaller newsrooms cannot.
+Building agent-driven workflows and data connections requires technical infrastructure: servers, databases, APIs, and staff who can maintain them. Large organizations like the Post and Times can build custom tools. Smaller newsrooms cannot.
 
 **Question:** What does this mean for the future of local and independent journalism?
 

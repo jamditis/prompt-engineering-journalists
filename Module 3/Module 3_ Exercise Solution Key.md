@@ -1,4 +1,4 @@
-# Module 4: CLI workflows for newsrooms — exercise solution key
+# Module 3: CLI workflows for newsrooms — exercise solution key
 
 ---
 
@@ -6,7 +6,7 @@
 
 ---
 
-**Discussion post — Exercise 4**
+**Discussion post — Exercise 3**
 
 This one clicked for me in a way I didn't expect. I've been hand-copying article summaries into our weekly newsletter for two years. Tuesday I described what I was doing out loud to Claude Code and it built a script that does it for me in about 15 seconds per article.
 

@@ -1,4 +1,4 @@
-# Module 4: Agents and RAG — exercise solution key
+# Module 4: Agents, tools, and data access — exercise solution key
 
 ## Model student submission
 
@@ -152,7 +152,7 @@ The honest answer is that maintaining a knowledge base is ongoing editorial work
 
 ### What strong work looks like
 
-Strong submissions demonstrate that the student understood what RAG actually does — that Claude is reading from documents, not retrieving from training data — and can articulate why that distinction matters for journalism. The best reflection answers go beyond "it worked" to think about edge cases, failure modes, and the conditions under which this setup is and isn't trustworthy.
+Strong submissions demonstrate that the student understood what the MCP connection does — that Claude is reading from their documents, not retrieving from training data — and can articulate why that distinction matters for journalism. The best reflection answers go beyond "it worked" to think about edge cases, failure modes, and the conditions under which this setup is and isn't trustworthy.
 
 On the technical side, strong work shows correct file paths in the MCP configuration (no `YOUR_USERNAME` placeholder left in), a working verification screenshot, and query responses that cite specific filenames rather than generic statements like "according to my knowledge base."
 

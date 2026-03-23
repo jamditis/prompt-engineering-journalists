@@ -1,4 +1,4 @@
-# Module 4: Agents and RAG
+# Module 4: Agents, tools, and data access
 
 ## Hands-on exercise: Configure Claude Code with MCP to query a local knowledge base
 

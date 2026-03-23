@@ -1,25 +1,27 @@
-# Module 4: Agents and RAG
+# Module 4: Agents, tools, and data access
 
 ## End of the week message
 
 You've completed the final module.
 
-This week you learned how agents and RAG are changing what's possible in newsrooms. AI systems that can access knowledge bases and take multi-step actions are already at work in organizations like the Post and the Times. You now have hands-on experience configuring the same technology.
+This week you learned how to run Claude autonomously with `claude -p`, connect it to your data with MCP, and think critically about where AI agents should and shouldn't operate without human oversight.
 
 **What you learned:**
-- What distinguishes agents from standard chatbots
-- How RAG grounds AI responses in source documents
-- The tradeoffs between AI autonomy and editorial control
-- How to configure MCP to connect Claude Code to a local knowledge base
+- What distinguishes agents from chatbots — tools, autonomy, multi-step plans
+- How `claude -p` enables non-interactive mode for scripted and autonomous workflows
+- How MCP connects Claude Code to external data sources
+- Where these tools break: silent failures, rate limits, token limits, and the gap between what AI produces and what you can verify
 
-**Exercise reminder:** Your MCP submission (screenshot plus five reflection questions) is due Sunday at 11:59pm.
+**Exercise reminder:** Your MCP submission (screenshot plus reflection questions) is due Sunday at 11:59pm.
 
-**What's next:** The final project applies everything from this course. You'll build a working tool for your newsroom: a skill, a pipeline, or a RAG-enabled assistant. Details are in the Final Project module.
+**What's next:** The final project applies everything from this course. You'll build a working tool for your newsroom: a skill, a pipeline, or an agent-driven workflow. Details are in the Final Project module.
 
-The discussions this week raised hard questions about AI in journalism: autonomy, bias, infrastructure costs, and who gets left behind. There are no clean answers. What matters is that you're thinking about these questions now, while the technology is still taking shape.
+**The full arc.** In Module 1, you moved from a browser chat window to a terminal and learned to write project context that follows your work across sessions. In Module 2, you encoded your domain expertise as reusable skills and automated quality checks with hooks. In Module 3, you built workflows and pipelines — describing what you wanted and letting the AI build and run them. In Module 4, you gave the AI autonomy: non-interactive processing, data connections, and the judgment to know when those tools are trustworthy and when they aren't.
 
-Over four weeks you moved from browser-based prompting to building automated pipelines and configuring AI systems that query your own documents. That's a real skill set. Use it.
+The discussions this week raised hard questions about AI in journalism: autonomy, bias, infrastructure costs, and who gets left behind. There are no clean answers. What matters is that you're thinking about them now, while the technology is still taking shape.
 
-Thank you for your work this term.
+Over four weeks you moved from typing prompts in a browser to building a project that runs on your machine, uses custom skills, automates workflows, and connects to real data. Every piece lives in version control — clone it on a new machine and it works. Share it with a colleague and they inherit the context. That's the shift: from prompting to building.
+
+Good luck with the final project.
 
 Joe Amditis

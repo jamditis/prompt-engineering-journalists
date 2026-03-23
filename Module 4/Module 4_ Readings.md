@@ -1,4 +1,4 @@
-# Module 4: Agents and RAG
+# Module 4: Agents, tools, and data access
 
 ## Required readings
 
