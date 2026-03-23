@@ -39,12 +39,25 @@
             <div class="max-w-5xl mx-auto">
                 <div class="text-xs text-acid font-mono mb-4">MODULE 03</div>
                 <h1 class="font-display text-4xl md:text-5xl font-bold text-white">CLI WORKFLOWS</h1>
-                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Chain commands together, pipe data between tools, and have Claude build reusable workflow scripts for your reporting.</p>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Describe workflows in plain English, let your CLI LLM build the automation, and learn to test, debug, and refine pipelines for your reporting.</p>
             </div>
         </section>
 
         <!-- Content sections -->
         <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
+
+            <!-- Module 3 video -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-ice">Describing workflows, building pipelines</h2>
+                </div>
+                <div class="max-w-3xl">
+                    <div class="relative w-full rounded-lg overflow-hidden border border-white/10 bg-panel flex items-center justify-center" style="padding-bottom:56.25%">
+                        <p class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm font-mono">Video available in the course platform</p>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-3">In this video, Joe demonstrates a real cron-based scheduler that checks for new content, processes it, and sends results on a recurring schedule. He also walks through Reroute NJ (reroutenj.org), a zero-build static site in 11 languages built with CLI tools — including page generation scripts, a translation pipeline, and scrapers that commit and push changes automatically.</p>
+                </div>
+            </section>
 
             <!-- Learning objectives -->
             <section>
@@ -53,10 +66,11 @@
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand Unix pipes and how to chain commands</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Have Claude build shell scripts that automate multi-step workflows</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Handle API keys safely (environment variables, not source code)</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Test small before running large: verify each pipeline stage before scaling up</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Describe a multi-step journalism workflow in plain English and have your CLI LLM translate it into a working, reusable script</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Use plan mode (<code class="text-acid bg-surface px-1">/plan</code>) to review the approach before any code is written or any command is run</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Test AI-built scripts on a small number of real examples before running them on full workloads</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Diagnose pipeline failures by pasting errors back into your CLI session and iterating on fixes</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Apply security practices: API keys in environment variables, scripts reviewed before deployment</li>
                     </ul>
                 </div>
             </section>
@@ -81,18 +95,43 @@
                 </div>
                 <div class="space-y-4">
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Pipes and redirection</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">The pipe character (<code class="text-acid bg-surface px-1">|</code>) sends the output of one command as input to another. This lets you build processing chains:</p>
+                        <h3 class="font-display text-lg text-acid mb-3">Describe the workflow, let the LLM build it</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Instead of asking your CLI tool to help with one document, you describe an entire workflow — a sequence of steps from input to output — and it builds the script that automates it.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">"Fetch this URL, strip out the ads, summarize it in three bullets, save it as a markdown file with today's date in the filename." That's a workflow description. Your CLI tool turns it into a reusable script. You review it, test it on a few real examples, and refine it until the output is what you want.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Plan before you build</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Before asking your CLI tool to build anything, ask it to plan first. See the approach before any file is written or any command is run.</p>
                         <div class="border border-white/10 bg-surface overflow-hidden mb-4">
-                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cat article.txt | wc -w    <span class="text-gray-400"># Count words in article</span>
-ls *.txt | wc -l           <span class="text-gray-400"># Count text files</span></code></pre>
+                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300"><span class="text-gray-400"># Claude Code: enter plan mode</span>
+<span class="text-acid">/plan</span>
+
+<span class="text-gray-400"># Gemini CLI: be explicit</span>
+<span class="text-gray-300">"Before doing anything, plan this out step by step
+and wait for my approval before taking any action."</span></code></pre>
                         </div>
-                        <p class="text-gray-300 text-sm leading-relaxed">Redirection (<code class="text-acid bg-surface px-1">></code> and <code class="text-acid bg-surface px-1">>></code>) sends output to files instead of the screen. <code class="text-acid bg-surface px-1">></code> overwrites, <code class="text-acid bg-surface px-1">>></code> appends.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">A misunderstood requirement caught at the planning stage costs you 30 seconds. The same misunderstanding caught after a failed 50-document batch run costs you time and money.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Pipeline stages</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">The right way to build a pipeline: separate stages, each with a clear input and output. Fetch. Clean. Analyze. Format. When something breaks, you know which stage failed — and you can fix one without touching the others.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Test small before running large</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">Real API calls cost money. Before you process 500 documents through a paid API, test on 5. Better yet, validate your inputs with a free local model before sending anything to a paid service. Use cheap tools to catch problems before running expensive operations.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">The debugging loop</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">When something breaks, paste the exact error message into your CLI session and ask what it means. Don't paraphrase. Your tool already knows the code it built for you, so it can read the error in context and usually identify the problem immediately. This is one of the most useful things about working with a CLI LLM: your debugging collaborator is already there, already has context, and can read error messages directly.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">API key security</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">When Claude builds scripts that call external APIs, those scripts often need API keys. Never put keys directly in your source code. Use environment variables instead:</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">When your CLI tool builds scripts that call external APIs, those scripts often need API keys. Never put keys directly in your source code. Use environment variables instead:</p>
                         <div class="border border-white/10 bg-surface overflow-hidden mb-4">
                             <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300"><span class="text-gray-400"># Bad: key hardcoded in a script (anyone who sees the file has your key)</span>
 <span class="text-signal">API_KEY="sk-abc123..."</span>
@@ -101,29 +140,12 @@ ls *.txt | wc -l           <span class="text-gray-400"># Count text files</span>
 <span class="text-acid">export API_KEY="sk-abc123..."</span>   <span class="text-gray-400"># set once in your terminal</span>
 <span class="text-acid">echo "$API_KEY"</span>                  <span class="text-gray-400"># scripts read it from the environment</span></code></pre>
                         </div>
-                        <p class="text-gray-300 text-sm leading-relaxed">If you ask Claude to build a script that uses an API, tell it to read keys from environment variables. And never commit a file containing a real key to git.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">If you ask your CLI tool to build a script that uses an API, tell it to read keys from environment variables. And never commit a file containing a real key to git.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Test small before running large</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">When building a pipeline that processes multiple files or makes many API calls, always run it on one or two items first. Check the output. If it looks wrong, fix the prompt or script before scaling up. This saves time and avoids burning through rate limits or producing a folder full of garbage.</p>
-                    </div>
-
-                    <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Shell scripts</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">A shell script is a text file containing commands that run in sequence. Scripts let you save and reuse workflows. On macOS and Linux, scripts typically start with <code class="text-acid bg-surface px-1">#!/bin/bash</code> and need execute permission (<code class="text-acid bg-surface px-1">chmod +x script.sh</code>).</p>
-                    </div>
-
-                    <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Variables and loops</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Shell scripts can use variables and loops to process multiple files:</p>
-                        <div class="border border-white/10 bg-surface overflow-hidden">
-                            <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">for file in *.txt; do
-  echo "Processing $file"
-  cat "$file" | wc -w > "${file%.txt}-wordcount.txt"
-done</code></pre>
-                        </div>
-                        <p class="text-gray-400 text-xs mt-2">This loop processes every <code class="text-acid bg-surface px-1">.txt</code> file. The pattern works the same way for any command — including AI tools in your pipeline scripts.</p>
+                        <h3 class="font-display text-lg text-acid mb-3">Rate limits and checkpointing</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">APIs have rate limits for a reason. Building pauses into your scripts (<code class="text-acid bg-surface px-1">sleep 2</code> between API calls) keeps your API access alive. For long batch jobs, build in checkpointing — a log of which files have been processed — so the job can restart from where it left off instead of starting over.</p>
                     </div>
                 </div>
             </section>

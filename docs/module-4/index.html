@@ -53,11 +53,10 @@
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Distinguish between chatbots and AI agents</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Use <code class="text-acid bg-surface px-1">claude -p</code> for non-interactive mode, enabling scripted and autonomous workflows</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand agent delegation and multi-step autonomous workflows</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Connect Claude to external data sources using MCP (filesystem, databases, web, APIs)</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Diagnose common data connection failures: permissions, auth, schema mismatches, and silent errors</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Explain the difference between chatbots and agents -- what tools, autonomy, and multi-step planning look like in practice, and where human oversight is required</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Use <code class="text-acid bg-surface px-1">claude -p</code> for non-interactive mode, enabling scripted and autonomous workflows that process documents without manual intervention</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Configure a basic MCP server to connect Claude Code to a local knowledge base, giving the AI access to your source documents</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Evaluate the tradeoffs between AI autonomy and editorial control, identifying where grounded, source-attributed responses matter and where things break down</li>
                     </ul>
                 </div>
             </section>
@@ -72,6 +71,20 @@
                     <a href="../concepts/working-with-subagents.html" class="inline-flex items-center gap-2 text-ice text-sm hover:text-acid transition-colors">
                         Read: working with subagents — compounding errors and verification →
                     </a>
+                </div>
+            </section>
+
+            <!-- Module video -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-ice">Agents, tools, and data access</h2>
+                </div>
+                <div class="max-w-3xl">
+                    <!-- Video embed: replace the src below with the Google Drive file ID once recorded -->
+                    <div class="relative w-full rounded-lg overflow-hidden border border-white/10 bg-panel flex items-center justify-center" style="padding-bottom:56.25%">
+                        <p class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm font-mono">Video coming soon</p>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-3">In this video, Joe demonstrates <code class="text-acid bg-surface px-1">claude -p</code> processing a folder of documents autonomously, walks through MCP configuration, and does a deep dive into Reroute NJ -- a real-world project that applies concepts from all four modules.</p>
                 </div>
             </section>
 
@@ -110,6 +123,7 @@
                         <div class="text-gray-300 text-sm leading-relaxed space-y-3">
                             <p>Language models only know what's in their training data. To work with your files, your databases, or live information from the web, the model needs a connection layer. Model Context Protocol (MCP) is an open standard for this -- it lets you plug data sources into Claude the same way you'd add plugins to a browser.</p>
                             <p>This is sometimes called retrieval-augmented generation (RAG): the model retrieves relevant information from an external source and uses it to generate a grounded response instead of relying on memory alone. MCP is how you set up that retrieval in practice.</p>
+                            <p>Every tool you connect costs context. Each MCP server you configure consumes tokens in your session before you've asked anything -- the server's schema, its available tools, its connection overhead. Before connecting a data source, ask whether the capability it adds justifies what it takes from your context budget. A database connection you rarely need still consumes context on every session where you don't use it. A lean, purposeful set of integrations outperforms a crowded one.</p>
                         </div>
                     </div>
 
@@ -136,6 +150,27 @@
                                 <li class="flex items-start gap-3"><span class="text-signal">></span> <strong class="text-chrome">Silent failures:</strong> The server starts, Claude tries to use it, but gets empty results or malformed data -- and keeps going without flagging the problem</li>
                             </ul>
                             <p class="mt-3">The pattern for journalists: when Claude gives you an answer based on external data, check the source. Ask it to show you the raw data it retrieved. If it can't, the connection may be broken and the answer may be fabricated from training data instead.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- From the field -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">From the field</h2>
+                </div>
+                <div class="space-y-4">
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Reroute NJ</h3>
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
+                            <p><a href="https://reroutenj.org" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Reroute NJ</a> is a public transit guide built during a real infrastructure disruption in New Jersey -- 11 languages, zero build step, serving a real community. The project applies concepts from all four modules: a CLAUDE.md for project context (Module 1), reusable scripts for page generation and translation (Module 2), a cron-scheduled scraper that commits and pushes automatically (Module 3), and autonomous data connections to external sources like news sites and NJ Transit alerts (Module 4).</p>
+                        </div>
+                    </div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Jay Rosen digital archive</h3>
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
+                            <p>The <a href="https://github.com/jamditis/rosen-scraper" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Jay Rosen digital archive</a> is a collection of 765+ records from journalist Jay Rosen's career. The project applies entity extraction and grounded knowledge retrieval to primary source materials, turning raw documents into a searchable knowledge base.</p>
                         </div>
                     </div>
                 </div>
@@ -284,7 +319,7 @@
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">What MCP servers and tools do you have access to?</code></pre>
                     </div>
@@ -303,7 +338,7 @@
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Using only the files in my research-docs folder, summarize the key facts. For each fact, tell me which file it came from and quote the relevant passage.</code></pre>
                     </div>
@@ -312,7 +347,7 @@
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Search my research documents for any names or organizations that appear in more than one file. What connections can you identify?</code></pre>
                     </div>
@@ -321,7 +356,7 @@
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Look at my research documents and identify gaps -- what questions would a reporter still need answered? What data is missing that would make the story stronger?</code></pre>
                     </div>
@@ -339,7 +374,7 @@
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">prompt</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Using only my research documents, help me outline a story. For each point in the outline, cite the specific file and passage it came from. Flag any claims that would need independent verification. Identify gaps where I'd need additional sources or data.</code></pre>
                     </div>

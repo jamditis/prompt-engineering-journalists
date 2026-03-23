@@ -53,10 +53,11 @@
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand what Claude Code skills are and how they work</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Install skills from public repositories and personal collections</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Use skills to apply specialized knowledge to journalism tasks</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Evaluate the quality and trustworthiness of third-party skills</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Explain the prompt-to-skill progression — how a raw prompt becomes a saved prompt, then a custom slash command, and finally a hook</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Create a custom slash command by saving a reusable prompt as a file in <code class="text-acid bg-surface px-1">.claude/commands/</code></li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand the difference between notify hooks (flag issues, keep going) and stop hooks (pause before irreversible actions)</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Use session commands — <code class="text-acid bg-surface px-1">/help</code>, <code class="text-acid bg-surface px-1">/plan</code>, <code class="text-acid bg-surface px-1">/compact</code>, and <code class="text-acid bg-surface px-1">/clear</code> — to manage Claude Code sessions</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Install and use journalism skills from GitHub using the skills repository</li>
                     </ul>
                 </div>
             </section>
@@ -67,7 +68,7 @@
                     <h2 class="font-display text-xl text-chrome">Before you start</h2>
                 </div>
                 <div class="space-y-4">
-                    <p class="text-gray-300 text-sm leading-relaxed">Module 2 introduces three ideas that work together: skills encode your expertise as reusable tools, commands run reliable workflows deterministically, and hooks enforce standards automatically. The concepts below explain each one before you build your own.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">In Module 1, you learned to write good prompts and give Claude persistent context. But every time you started a new session, you typed the same instructions from scratch. This week, you learn to save those prompts as permanent, reusable tools. The key insight: write it once, use it forever. The concepts below explain skills, commands, hooks, and the progression from ad-hoc prompt to automated workflow.</p>
                     <div class="space-y-2">
                         <a href="../concepts/skills-vs-commands.html" class="inline-flex items-center gap-2 text-ice text-sm hover:text-acid transition-colors block">
                             Read: skills vs. commands — when to use each →
@@ -82,6 +83,19 @@
                 </div>
             </section>
 
+            <!-- Module 2 video -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-ice">Watch: the prompt-to-skill progression</h2>
+                </div>
+                <div class="max-w-3xl">
+                    <div class="border border-white/10 bg-panel p-6">
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3">This week's video walks through the full progression using meeting minutes extraction as a running example: ad-hoc prompt, saved prompt, custom slash command, and hook. It also covers the session commands you'll use regularly: <code class="text-acid bg-surface px-1">/help</code>, <code class="text-acid bg-surface px-1">/plan</code>, <code class="text-acid bg-surface px-1">/compact</code>, and <code class="text-acid bg-surface px-1">/clear</code>.</p>
+                        <p class="text-gray-400 text-xs">Video will be embedded here when available.</p>
+                    </div>
+                </div>
+            </section>
+
             <!-- Key concepts -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
@@ -89,17 +103,20 @@
                 </div>
                 <div class="space-y-4">
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">What are skills?</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">Skills are markdown files containing instructions, prompts, and context that Claude Code loads on demand. When you invoke a skill (e.g., <code class="text-acid bg-surface px-1">/source-verification</code>), Claude reads the skill file and applies that knowledge to your conversation. Skills let you encode expertise once and reuse it across projects.</p>
+                        <h3 class="font-display text-lg text-acid mb-3">The prompt-to-skill progression</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Most people start by typing the same instructions over and over. The video this week shows how a single task — extracting action items from meeting minutes — moves through four levels:</p>
+                        <ul class="space-y-2 text-sm font-sans text-gray-300">
+                            <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Ad-hoc prompt</strong> — You type instructions each time. Works, but slow and inconsistent.</li>
+                            <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Saved prompt</strong> — You save that prompt in a document so you can copy-paste it. Better, but still manual.</li>
+                            <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Custom slash command</strong> — You save the prompt as a file in <code class="text-acid bg-surface px-1">.claude/commands/</code>, and Claude Code loads it when you type the slash command. Consistent and shareable.</li>
+                            <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Hook</strong> — An automated check that runs in the background. No invocation needed — it fires on its own when certain conditions are met.</li>
+                        </ul>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Skill types</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">A Claude Code skill is a markdown file stored in <code class="text-acid bg-surface px-1">~/.claude/commands/</code>. The filename becomes the slash command. Save a file called <code class="text-acid bg-surface px-1">source-verification.md</code> and Claude Code creates a <code class="text-acid bg-surface px-1">/source-verification</code> command automatically.</p>
-                        <ul class="space-y-2 text-sm font-sans text-gray-300">
-                            <li class="flex items-start gap-3"><span class="text-acid">></span> A skill file contains a name, a description (so Claude knows when to use it), and the full instructions. When you invoke it with a slash command, Claude loads the file's content into the current session.</li>
-                            <li class="flex items-start gap-3"><span class="text-acid">></span> Skills work alongside your CLAUDE.md — the context file sets persistent project rules, while skills are invoked on demand for specific tasks.</li>
-                        </ul>
+                        <h3 class="font-display text-lg text-acid mb-3">Skills vs. commands</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Both are markdown files invoked with a slash, but they work differently. A <strong class="text-chrome">skill</strong> contains domain knowledge Claude consults and applies using judgment — the right tool when the task requires interpretation. A <strong class="text-chrome">command</strong> is a deterministic trigger — the same steps, the same sequence, every time. The journalism analogy: a skill is a style guide (reference material, applied with judgment). A command is a mandatory pre-publication checklist (fixed sequence, no skips).</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Both are stored as <code class="text-acid bg-surface px-1">.md</code> files in <code class="text-acid bg-surface px-1">.claude/commands/</code>. The filename becomes the slash command — save <code class="text-acid bg-surface px-1">source-verification.md</code> and Claude Code creates <code class="text-acid bg-surface px-1">/source-verification</code> automatically.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
@@ -113,8 +130,18 @@
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Hooks: notify vs. stop</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Hooks are skills that run automatically — you don't invoke them. They fire at specific points in your workflow without any input from you. There are two kinds, and the distinction matters:</p>
+                        <ul class="space-y-2 text-sm font-sans text-gray-300">
+                            <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Notify hooks</strong> run in the background and flag issues without stopping your work. Think of them as an automated second reader — problems get marked for your review, but the work continues. A notify hook might flag an unattributed quote or highlight filler language.</li>
+                            <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Stop hooks</strong> pause execution and ask for confirmation before proceeding. These exist for one-way doors — actions that are difficult or impossible to undo. Before Claude Code deletes files, pushes to a repository, or publishes something, a stop hook can pause and require your approval.</li>
+                        </ul>
+                        <p class="text-gray-300 text-sm leading-relaxed mt-4">The journalism parallel: editorial workflows don't just catch errors, they build in deliberate pause points before irreversible actions. A stop hook is the automated version of "does a human need to see this before it goes out?"</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Skill trust and safety</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed">Skills are just text files with instructions - they can't run arbitrary code. However, they can influence Claude's behavior, so review skills before installing them. Prefer skills from trusted sources, check what instructions they contain, and be cautious of skills that ask Claude to access external services or sensitive data.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Skills are just text files with instructions — they can't run arbitrary code. However, they can influence Claude's behavior, so review skills before installing them. Prefer skills from trusted sources, check what instructions they contain, and be cautious of skills that ask Claude to access external services or sensitive data.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
@@ -143,59 +170,39 @@
                 </div>
 
                 <div class="border border-acid/30 bg-acidDim p-6 mb-8">
-                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Create a custom journalism skill, invoke it with a slash command, and test it on a real example from your work. Choose one of the following (or propose your own):</span></p>
-                    <ul class="mt-3 space-y-2 text-sm font-sans text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Source verification</strong> — a skill that walks through claim verification: tracing to primary sources, checking for independent confirmation, evaluating credibility, flagging red flags. Test it on a viral social media post.</li>
-                        <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Data cleaning</strong> — a skill that standardizes messy data: fixing inconsistent date formats, normalizing names and addresses, flagging duplicate or missing entries. Test it on a real CSV or spreadsheet from your beat.</li>
-                        <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Content formatting</strong> — a skill that converts raw notes or documents into a publication-ready format: applying your outlet's style, structuring sections, generating a headline and summary. Test it on a draft or set of meeting notes.</li>
-                    </ul>
-                    <p class="text-xs font-sans text-gray-400 mt-3">The steps below use source verification as the example. If you pick a different skill, adapt the prompts to match your choice — the process is the same.</p>
+                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Build your own custom slash command for a task on your beat, install the journalism skills repository, and use source-verification to check a viral claim. The exercise follows the same progression shown in the video: ad-hoc prompt to saved command to tested tool.</span></p>
+                </div>
+
+                <!-- Part 1 header -->
+                <div class="border-b border-white/10 pb-3 mb-6">
+                    <h3 class="font-display text-lg text-ice">Part 1: Build your own custom slash command</h3>
+                    <p class="text-gray-400 text-xs mt-1">~20 minutes</p>
                 </div>
 
                 <!-- Step 1 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">01</span>
-                        Open Claude Code
+                        Choose a task
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Open your terminal and launch Claude Code:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
-                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Pick one thing you do repeatedly that involves a consistent process — not a one-off question, but something with steps you follow every time. The video used meeting minutes extraction. Your task should be similarly specific to your work.</p>
+                    <p class="text-gray-300 text-sm mb-2">Good candidates:</p>
+                    <ul class="space-y-1 text-sm font-sans text-gray-300 mb-4">
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> Reviewing a specific type of document (press releases, budget reports, public records)</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> Drafting a recurring story format (meeting recap, weekly data brief)</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> Checking a specific category of claim (health statistics, crime data, budget numbers)</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> Extracting structured information from a specific source format</li>
+                    </ul>
+                    <p class="text-gray-400 text-xs">Not good candidates: "Summarize text" (too generic) or "Be thorough" (not a process, not checkable).</p>
                 </div>
 
                 <!-- Step 2 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
-                        Ask Claude to create the skill
+                        Plan the skill before writing it
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Inside the session, paste this prompt:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a global Claude Code skill for source verification. Save it to ~/.claude/commands/source-verification.md. The skill should help a journalist verify claims from social media by: identifying the specific claim, tracing it to a primary source, checking for multiple independent sources, evaluating source credibility, looking for counter-evidence, checking dates for recirculation, and flagging red flags (no attribution, emotional language, missing location/date details). Format responses with a verification status (VERIFIED / UNVERIFIED / FALSE / PARTIALLY TRUE / UNABLE TO VERIFY) and a confidence level, plus recommended next steps for the journalist.</code></pre>
-                    </div>
-                    <p class="text-gray-400 text-xs mt-2">Claude creates the directory if it doesn't exist and saves the skill file. You can ask to see what it wrote, or suggest edits to the skill content before saving.</p>
-                </div>
-
-                <!-- Step 3 -->
-                <div class="mb-8">
-                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
-                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
-                        Verify the skill is available
-                    </h3>
-                    <p class="text-gray-300 text-sm mb-4">Exit the session (press Ctrl+C twice) and relaunch to pick up the new skill:</p>
+                    <p class="text-gray-300 text-sm mb-4">Open your terminal and launch Claude Code, then use plan mode to think through the structure before writing anything:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -205,7 +212,6 @@
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
                     </div>
-                    <p class="text-gray-300 text-sm mb-4">Inside the new session, check available commands:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -213,18 +219,98 @@
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">/help</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">/plan
+
+I want to create a custom slash command called [your-command-name]. Here's what it should do:
+[describe the task and the steps in plain English]
+
+Plan out the structure of this command file — what sections it will have, what steps it will include, what instructions you'd put in each section. Don't write the file yet.</code></pre>
                     </div>
-                    <p class="text-gray-400 text-xs mt-2">You should see <code class="text-acid bg-surface px-1">source-verification</code> listed among available commands.</p>
+                    <p class="text-gray-400 text-xs mt-2">Review the plan. Are the steps in the right order? Is anything missing? Is anything too generic? Redirect here if needed. Once the plan looks right, tell Claude to proceed.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
+                        Write and test the command
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">Tell Claude to write the file based on the plan:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Go ahead and write the command file based on that plan. Save it to .claude/commands/[your-command-name].md</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Review what Claude writes. Apply the deletion test: read each instruction and ask whether removing it would change Claude's behavior. Cut anything that wouldn't.</p>
+                    <p class="text-gray-300 text-sm"><strong class="text-chrome">Test on material you already know.</strong> Use a press release you already fact-checked, a council vote you already looked up, notes from a meeting you attended. Compare what the command produces against what you found yourself. If it misses something you caught, add that instruction. If it flags something that wasn't a problem, cut or refine it.</p>
                 </div>
 
                 <!-- Step 4 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">04</span>
-                        Test the skill with a viral claim
+                        Commit it
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Invoke the skill, then paste a claim to verify:</p>
+                    <p class="text-gray-300 text-sm mb-4">Once you're satisfied with the command, commit it to your beat project repository:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Commit this command file to my beat project with a message describing what it does</code></pre>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-2">Your first custom slash command is now versioned alongside your project context.</p>
+                </div>
+
+                <!-- Part 2 header -->
+                <div class="border-b border-white/10 pb-3 mb-6">
+                    <h3 class="font-display text-lg text-ice">Part 2: Install the journalism skills</h3>
+                    <p class="text-gray-400 text-xs mt-1">~15 minutes</p>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">05</span>
+                        Install the skills repository
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">The journalism skills repository (36 skills, 13 hooks) can be installed as a Claude Code plugin. In your Claude Code session:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">/install-github-plugin https://github.com/jamditis/claude-skills-journalism.git</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Verify the installation by typing <code class="text-acid bg-surface px-1">/source-verification</code> — you should see Claude acknowledge the skill.</p>
+                    <p class="text-gray-300 text-sm">Take a minute to look at a skill file and a hook file in the repository. Notice the structure: YAML frontmatter, step-by-step instructions, and whether a hook is notify (flags and continues) or stop (pauses for confirmation).</p>
+                </div>
+
+                <!-- Part 3 header -->
+                <div class="border-b border-white/10 pb-3 mb-6">
+                    <h3 class="font-display text-lg text-ice">Part 3: Use source-verification on a viral claim</h3>
+                    <p class="text-gray-400 text-xs mt-1">~20 minutes</p>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
+                        Verify a viral claim
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">A post is circulating on social media with this claim:</p>
+                    <div class="border border-white/10 bg-panel p-4 mb-4">
+                        <p class="text-gray-300 text-sm italic">"A new study from Harvard Medical School found that drinking coffee before 8am increases cortisol levels by 400%, leading to long-term adrenal fatigue. Doctors are now recommending waiting until 10am for your first cup."</p>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Invoke the skill and provide the claim:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -234,19 +320,18 @@
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">/source-verification
 
-A viral tweet claims that a major US city just banned all plastic bags, effective immediately, with $500 fines for violations. The tweet has 50,000 retweets. Help me verify this before I report on it.</code></pre>
+Claim to verify: "A new study from Harvard Medical School found that drinking coffee before 8am increases cortisol levels by 400%, leading to long-term adrenal fatigue. Doctors are now recommending waiting until 10am for your first cup."</code></pre>
                     </div>
-                    <p class="text-gray-300 text-sm">Notice how Claude structures its response according to the skill's format — verification status, confidence level, red flags, and recommended next steps. That structure came from the skill file, not from this individual prompt.</p>
+                    <p class="text-gray-300 text-sm">Follow the SIFT process Claude walks you through: Stop (note your assumptions), Investigate the source (is there an actual Harvard study?), Find better coverage (what do fact-checkers and medical journalists say?), and Trace claims (where does the "400%" figure come from? Is "adrenal fatigue" a recognized medical condition?).</p>
                 </div>
 
-                <!-- Step 5 -->
+                <!-- Step 7 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
-                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">05</span>
-                        Try a real claim
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">07</span>
+                        Document your findings
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Use the skill on something you've actually seen circulating. Notice what it flags and what it recommends. If the response format isn't quite right for your work, ask Claude to edit the skill file and refine it.</p>
-                    <p class="text-gray-300 text-sm">Skills aren't static — they're files you own and can update any time.</p>
+                    <p class="text-gray-300 text-sm">As you work through the verification, Claude will help you document what evidence supports or contradicts the claim, which parts are accurate vs. misleading vs. false, what the original source actually said (if it exists), and a summary suitable for editorial decision-making.</p>
                 </div>
             </section>
 
@@ -258,10 +343,10 @@ A viral tweet claims that a major US city just banned all plastic bags, effectiv
                 <div class="border border-signal/30 bg-signalDim p-6">
                     <p class="text-sm font-sans text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What does the filename of a skill file determine, and where does the file need to be saved?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Where should you put a skill that you want available in all projects?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Why should you review third-party skills before installing them?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What command invokes a skill named "source-verification"?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What are the four levels of the prompt-to-skill progression, and when is each one appropriate?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What is the difference between a notify hook and a stop hook?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What does the filename of a command file determine, and where does the file need to be saved?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What do <code class="text-acid bg-surface px-1">/plan</code> and <code class="text-acid bg-surface px-1">/compact</code> do inside a Claude Code session?</li>
                     </ul>
                 </div>
             </section>
