@@ -1,15 +1,81 @@
-# Module 3: Custom skills for Claude Code
+# Module 2: Custom skills for Claude Code
 
-## Exercise: Installing and using journalism skills
+## Exercise: Building a custom skill and using the journalism skills repository
 
 **Time required:** 45-60 minutes
 **Prerequisites:** Claude Code installed, GitHub account
 
-In this exercise, you'll install two journalism skills and use one to verify a viral claim.
+In this exercise, you'll build your own custom slash command (following the same progression shown in the video with meeting minutes extraction), install the journalism skills repository, and use source-verification to check a viral claim.
 
 ---
 
-## Part 1: Install the journalism skills (20 minutes)
+## Part 1: Build your own custom slash command (20 minutes)
+
+The video this week showed the full progression: raw prompt, saved prompt, custom slash command, hook. In this part, you'll follow that same path for a task on your own beat.
+
+### Choose a task
+
+Pick one thing you do repeatedly that involves a consistent process — not a one-off question, but something with steps you follow every time. The video used meeting minutes extraction. Your task should be similarly specific to your work.
+
+Good candidates:
+- Reviewing a specific type of document (press releases, budget reports, public records)
+- Drafting a recurring story format (meeting recap, weekly data brief, response to an official statement)
+- Checking a specific category of claim (health statistics, crime data, government budget numbers)
+- Extracting structured information from a specific source format
+
+Not good candidates:
+- "Summarize text" — too generic, no beat-specific knowledge
+- "Be thorough" — not a process, not checkable
+
+### Plan the skill before writing it
+
+Before asking Claude Code to write your skill file, use plan mode. In Claude Code, type `/plan` and then describe what you want:
+
+```
+/plan
+
+I want to create a custom slash command called [your-command-name]. Here's what it should do:
+[describe the task and the steps in plain English]
+
+Plan out the structure of this command file — what sections it will have, what steps it will include, what instructions you'd put in each section. Don't write the file yet.
+```
+
+Claude will show you what it plans to build: the structure, the sections, the steps, the framing. Review this before it writes anything. Ask yourself:
+- Are the steps in the right order for how you actually work?
+- Is anything missing that you'd always do in this task?
+- Is there anything in the plan that doesn't belong (too generic, not beat-specific)?
+
+Redirect it here if needed. Once the plan reflects what you actually want, tell it to proceed and write the file.
+
+### Write the command file
+
+```
+Go ahead and write the command file based on that plan. Save it to .claude/commands/[your-command-name].md
+```
+
+Review what Claude writes. Apply the deletion test: read each instruction and ask whether removing it would change Claude's behavior. Cut anything that wouldn't.
+
+### Test it
+
+Invoke your new command on a real piece of content from your beat — a press release, a document, a set of meeting notes.
+
+**Test on material you already know.** Don't use a fresh document you haven't read. Use something you've already worked through — a press release you already fact-checked, a council vote you already looked up, notes from a meeting you attended. Compare what the command produces against what you found yourself. If it misses something you caught, that tells you what instruction to add. If it flags something that wasn't a problem, that tells you what to cut or refine.
+
+This is how you calibrate a skill before trusting it on live work. You wouldn't rely on a new source until you'd verified something you could already check. The same logic applies here.
+
+### Commit it
+
+Once you're satisfied with the command, commit it to your beat project repository:
+
+```
+Commit this command file to my beat project with a message describing what it does
+```
+
+Your first custom slash command is now versioned alongside your project context.
+
+---
+
+## Part 2: Install the journalism skills (15 minutes)
 
 The instructor's journalism skills repository is available as a Claude Code plugin. This is the recommended installation method — it keeps skills up to date and installs everything (36 skills and 13 hooks) in one step. A manual fallback is included below if the plugin method doesn't work for your setup.
 
@@ -118,7 +184,7 @@ You should see Claude acknowledge the skill and be ready to apply it.
 
 ---
 
-## Part 2: Use source-verification on a viral claim (25 minutes)
+## Part 3: Use source-verification on a viral claim (20 minutes)
 
 ### The scenario
 
@@ -160,7 +226,7 @@ As you work through the verification, Claude will help you document:
 
 ---
 
-## Part 3: Create error and success logging commands (15 minutes)
+## Part 4: Create error and success logging commands (15 minutes)
 
 One of the most consistent lessons from experienced CLI practitioners: when an AI tool fails, the failure is most useful if you capture it immediately. Corrections that stay in your head evaporate. Corrections that get written down become rules.
 
@@ -213,84 +279,19 @@ These commands are only useful if you use them consistently. The trigger: whenev
 
 ---
 
-## Part 4: Write your own skill (15 minutes)
-
-The best way to understand skills is to write one. In this part, you'll create a simple skill for a task you do regularly.
-
-### Choose a task
-
-Pick one thing you do repeatedly that involves a consistent process — not a one-off question, but something with steps you follow every time.
-
-Good candidates:
-- Reviewing a specific type of document (press releases, budget reports, public records)
-- Drafting a recurring story format (meeting recap, weekly data brief, response to an official statement)
-- Checking a specific category of claim (health statistics, crime data, government budget numbers)
-
-Not good candidates:
-- "Summarize text" — too generic, no beat-specific knowledge
-- "Be thorough" — not a process, not checkable
-
-### Plan the skill before writing it
-
-Before asking Claude Code to write your skill file, use plan mode. In Claude Code, type `/plan` and then describe what you want:
-
-```
-/plan
-
-I want to create a custom skill called [your-skill-name]. Here's what it should do:
-[describe the task and the steps in plain English]
-
-Plan out the structure of this skill file — what sections it will have, what steps it will include, what instructions you'd put in each section. Don't write the file yet.
-```
-
-Claude will show you what it plans to build: the structure, the sections, the steps, the framing. Review this before it writes anything. Ask yourself:
-- Are the steps in the right order for how you actually work?
-- Is anything missing that you'd always do in this task?
-- Is there anything in the plan that doesn't belong in a skill file (too generic, not beat-specific)?
-
-Redirect it here if needed. Once the plan reflects what you actually want, tell it to proceed and write the file.
-
-### Write the skill file
-
-```
-Go ahead and write the SKILL.md file based on that plan.
-```
-
-Review what Claude writes. Apply the deletion test: read each instruction and ask whether removing it would change Claude's behavior. Cut anything that wouldn't.
-
-### Save and test it
-
-Ask Claude Code to save the file to your skills directory and invoke it on a real piece of content from your beat — a press release, a document, a claim.
-
-**Test on material you already know.** Don't use a fresh document you haven't read. Use something you've already worked through — a press release you already fact-checked, a council vote you already looked up, a claim you already verified. Compare what the skill finds against what you found yourself. If it misses something you caught, that tells you what instruction to add. If it flags something that wasn't a problem, that tells you what to cut or refine.
-
-This is how you calibrate a skill before trusting it on live work. You wouldn't rely on a new source until you'd verified something you could already check. The same logic applies here.
-
-### The commit
-
-Once you're satisfied with the skill, commit it to your beat project repository:
-
-```
-Commit this skill file to my beat project with a message describing what it does
-```
-
-Your first custom skill is now versioned alongside your project context.
-
----
-
-## Part 4: Reflection and submission (10 minutes)
+## Part 5: Reflection and submission (10 minutes)
 
 ### What to submit
 
-1. **Screenshot or transcript** of your source-verification session showing the SIFT process
+1. **Your custom slash command file** — paste the contents of your command file. Include a one-sentence explanation of the task it encodes and what you cut during the deletion test.
 
-2. **Written summary** (200-300 words) answering:
+2. **Screenshot or transcript** of your source-verification session showing the SIFT process
+
+3. **Written summary** (200-300 words) answering:
    - What did you find about the coffee/cortisol claim?
-   - How did the skill structure your verification process?
+   - How did building your own command (Part 1) change how you understood the source-verification skill (Part 3)?
    - What would you have done differently without the skill?
    - Did the skill miss anything you would have checked?
-
-3. **Your custom skill file** — paste the contents of your SKILL.md. Include a one-sentence explanation of the task it encodes and what you cut during the deletion test.
 
 ---
 
@@ -298,16 +299,22 @@ Your first custom skill is now versioned alongside your project context.
 
 **First step for any error:** Paste the exact error message into your Claude Code session and ask what it means. The tool has context about what you installed and can usually diagnose the problem directly. Don't paraphrase the error — paste it.
 
-**Skills not loading?**
+**Custom command not showing up?**
+- Check that the file is in `.claude/commands/` (project-level) or `~/.claude/commands/` (personal)
+- The filename is the command name — `extract-minutes.md` becomes `/extract-minutes`
+- No spaces or special characters in the filename
+- Restart Claude Code after adding new command files
+- Ask Claude Code: "Why isn't my [command-name] command showing up?"
+
+**Skills from the repository not loading?**
 - Check that the files are in `~/.claude/commands/`
 - Ensure the directory name matches the skill name
 - Restart Claude Code after adding new skills
-- Ask Claude Code: "Why isn't my [skill-name] skill showing up?"
 
-**Claude not following the skill instructions?**
-- Re-invoke the skill with `/source-verification`
-- Check that `SKILL.md` has valid YAML frontmatter
-- Ask Claude Code to open the skill file and confirm it can read it
+**Claude not following the command/skill instructions?**
+- Re-invoke the command explicitly with the slash
+- Check that the markdown file has valid YAML frontmatter
+- Ask Claude Code to open the file and confirm it can read it
 
 **Still stuck after trying the above?**
 Post in the "Technical help" forum with the exact error message and what you've already tried.
@@ -316,8 +323,8 @@ Post in the "Technical help" forum with the exact error message and what you've 
 
 ## Grading criteria
 
-- **Skill installation:** Skills correctly installed and functional (15%)
-- **SIFT application:** All four SIFT steps documented with evidence (35%)
+- **Custom slash command:** Submitted command file encodes a real beat-specific task, uses plan mode, and passes the deletion test (30%)
+- **SIFT application:** All four SIFT steps documented with evidence (25%)
 - **Finding accuracy:** Correct assessment of the claim's veracity (20%)
-- **Custom skill:** Submitted skill file encodes a real beat-specific task and passes the deletion test (20%)
-- **Reflection quality:** Thoughtful analysis of the skill's usefulness (10%)
+- **Skills installation:** Journalism skills repository installed and functional (10%)
+- **Reflection quality:** Thoughtful analysis comparing the custom command experience with the pre-built skill (15%)

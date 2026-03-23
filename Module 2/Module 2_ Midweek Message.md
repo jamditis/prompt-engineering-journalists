@@ -1,21 +1,23 @@
-# Module 3: Custom skills for Claude Code
+# Module 2: Custom skills for Claude Code
 
 ## Midweek message
 
 Hello everyone,
 
-By mid-week, you should have cloned the skills repository and installed the source-verification and foia-requests skills to your `~/.claude/commands/` directory.
+By mid-week, you should have watched the video demo (the meeting minutes skill progression) and started building your own custom slash command for the exercise.
 
-Common issues I'm seeing:
+Common issues I'm seeing when creating custom commands:
 
-**Skills not loading.** Make sure you copied the entire folder, not just the SKILL.md file. The folder name should match the skill name (e.g., `source-verification/SKILL.md`, not `source-verification.md` floating loose). After copying, restart Claude Code.
+**File location matters.** Your command file needs to go in `.claude/commands/` inside your project directory (for project-specific commands) or `~/.claude/commands/` in your home folder (for commands available everywhere). If the file isn't in the right place, the slash command won't show up. After adding a new command file, restart Claude Code.
 
-**"Claude isn't following the skill instructions."** Skills work best when you invoke them explicitly at the start of a task. Type `/source-verification` first, then provide the claim. If you just describe what you want, Claude may not load the skill's methodology.
+**File naming = command name.** The filename determines the slash command. A file named `extract-minutes.md` becomes `/extract-minutes`. Don't add spaces or special characters to the filename. Keep it lowercase with hyphens.
 
-**The coffee claim exercise.** Don't rush to Google the answer. The point is to use the SIFT method the skill provides. Document each step: your initial assumptions, what you found about the source, what other coverage exists, and where the specific claims originated. Your submission should show the process, not just the conclusion.
+**Folder structure.** If your command needs supporting files (templates, examples), use a folder: `extract-minutes/SKILL.md` with optional subdirectories. A single markdown file works for simple commands.
 
-Discussion posts are due Friday. The "what skills does your newsroom need" thread has useful ideas. If you haven't posted yet, think about tasks you do weekly that follow a consistent pattern.
+**"Claude isn't following my command instructions."** Make sure you invoke the command explicitly with the slash at the start of your task. Type `/your-command-name` first, then provide the input. If you just describe what you want without invoking the command, Claude won't load your custom instructions.
 
-The goal this week is to shift from one-off prompts to reusable workflows. Once you've verified one claim using the skill, you'll see how much easier it is than explaining SIFT from scratch every time.
+**The meeting minutes example from the video.** If you're building something similar, remember the key insight: your command should encode the specific format and standards for *your* meetings, not generic summarization. What makes it a skill is the beat-specific knowledge baked in.
+
+Discussion posts are due Friday. The "what skills does your newsroom need" thread has useful ideas. If you haven't posted yet, think about tasks you do weekly that follow a consistent pattern — those are your best candidates for custom commands.
 
 Joe Amditis

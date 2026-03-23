@@ -1,6 +1,6 @@
-# Module 3: Custom skills for Claude Code
+# Module 2: Custom skills for Claude Code
 
-## Quiz: Custom skills structure and usage
+## Quiz: Custom skills, slash commands, and session management
 
 5 questions. Select the best answer for each.
 
@@ -44,19 +44,19 @@ D) `skills/skill-name/main.md` with `assets/` folder
 
 ### Question 3
 
-The source-verification skill uses the SIFT method. What does SIFT stand for?
+You're deep into a Claude Code session and the conversation is getting long. Claude starts losing track of earlier context. Which session command compresses the conversation history to free up space?
 
-A) Search, Identify, Fact-check, Track
+A) `/clear` — clears the conversation and starts fresh
 
-B) Stop, Investigate the source, Find better coverage, Trace claims
+B) `/compact` — compresses the conversation history while preserving key context
 
-C) Source, Information, Fact, Truth
+C) `/plan` — enters plan mode to reorganize the session
 
-D) Scan, Inspect, Filter, Test
+D) `/help` — shows available commands and reloads context
 
 **Correct answer:** B
 
-**Explanation:** SIFT is Mike Caulfield's lateral reading method: Stop before sharing, Investigate the source, Find better coverage, and Trace claims to their origin. Encoding it in a skill means the AI applies the full method — including the steps journalists might skip when pressed for time.
+**Explanation:** `/compact` compresses your conversation history, keeping the important context while freeing up the context window. `/clear` wipes the conversation entirely — you lose everything. `/plan` enters plan mode for thinking through a problem before building. `/help` shows available commands. Knowing when to compact versus clear is a practical session management skill.
 
 ---
 

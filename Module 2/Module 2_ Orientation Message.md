@@ -1,8 +1,8 @@
-# Module 3: Custom skills for Claude Code
+# Module 2: Custom skills for Claude Code
 
 ## Orientation message
 
-Welcome to Week 3! This week, you'll learn to extend Claude Code with skills designed for journalism work.
+Welcome to Week 2! This week, you'll learn to extend Claude Code with custom skills designed for journalism work.
 
 In the 101 course, you learned to write good prompts. You got better at explaining context, setting expectations, and getting useful results. But every time you started a new session, you started from scratch. This week, you learn to save those prompts as permanent, reusable tools. The key insight: write it once, use it forever.
 
@@ -10,33 +10,27 @@ In the 101 course, you learned to write good prompts. You got better at explaini
 
 ## Why skills matter
 
-Most people start by typing the same instructions over and over. You explain the SIFT method to Claude. Then you explain it again the next day. Then you explain it to a colleague's Claude session. Skills break that cycle.
+Most people start by typing the same instructions over and over. You explain how to extract action items from meeting minutes to Claude. Then you explain it again the next day. Then you explain it to a colleague's Claude session. Skills break that cycle.
 
-A skill is an instruction file that encodes your domain expertise into something Claude Code can follow on command. The source-verification skill, for example, contains the SIFT method, your newsroom's standards for attribution, and the checks an experienced reporter would run before publishing. You write it once. From then on, you type `/source-verification` and the method is applied automatically.
+A skill is an instruction file that encodes your domain expertise into something Claude Code can follow on command. You write it once. From then on, you type a slash command and the method is applied automatically.
 
-This matters because the Reuters Institute's 2025 survey found that 84% of UK journalists have never used AI for fact-checking or verification. That's not because AI can't help — it's because doing it well requires encoding specific methods and standards that are different for every beat and every newsroom. A generic chat prompt doesn't know the SIFT method or your source standards. A skill does.
+This matters because encoding specific methods and standards is different for every beat and every newsroom. A generic chat prompt doesn't know your meeting format or your source standards. A skill does.
 
 Think of skills as the journalism equivalent of style guides or reporting checklists — except the AI follows them every time without reminders.
 
-The maturity path looks like this:
+**This week's video demo** walks through the full progression using meeting minutes extraction as a running example:
 
-**Ad-hoc prompts** → You type instructions each time. Works, but slow and inconsistent.
+**Ad-hoc prompt** → You type instructions each time. "Here are my meeting notes, pull out the action items." Works, but slow and inconsistent.
 
-**Saved prompts** → You copy-paste from a document. Better, but still manual.
+**Saved prompt** → You save that prompt in a document so you can copy-paste it next time. Better, but still manual.
 
-**Skills** → Claude Code loads instructions automatically when you invoke a slash command. Consistent and shareable across your team.
+**Custom slash command** → You save the prompt as a file in `.claude/commands/`, and Claude Code loads it automatically when you type the slash command. Consistent and shareable across your team.
 
-**Hooks** → Automated checks that run in the background. No invocation needed.
+**Hook** → An automated check that runs in the background. No invocation needed — it fires on its own when certain conditions are met.
 
-**Plugins** → Packaged skill libraries you can install from GitHub with a single command. A plugin can contain any combination of skills, hooks, and commands — all registered at once on installation.
+The video also covers session commands you'll use regularly: `/help` (see available commands), `/plan` (enter plan mode before building), `/compact` (compress your conversation when context gets long), and `/clear` (start fresh). These are built into Claude Code and work in every session.
 
-**Concrete example: Superpowers (obra/superpowers)**
-
-Superpowers is a third-party plugin that completely rewires how a coding agent approaches a project. Instead of jumping into writing code, it fires a brainstorming skill first — asking clarifying questions, building a spec you review, then generating a step-by-step implementation plan. Other skills enforce test-driven development, review completed tasks, and manage the handoff when a branch is ready to merge. All of this fires automatically. You don't invoke each skill individually — the plugin handles when each one runs.
-
-Superpowers isn't journalism-specific, but it illustrates what's possible at the plugin level: a complete, opinionated workflow installed in a single command, where someone else has done the hard work of deciding what the agent should do at each stage. The journalism skills plugin you'll install this week works on the same model, just built for newsroom workflows instead of software development.
-
-This week covers skills and hooks. By Module 4, you'll see how these fit into larger agent workflows.
+This week covers custom skills and hooks. By Module 3, you'll see how these fit into larger automated workflows.
 
 ---
 
@@ -98,9 +92,9 @@ In the exercise this week, you'll create `/log_error` and `/log_success` command
 
 ## From context files to skills
 
-Last week you wrote a CLAUDE.md file to give the AI persistent context about your beat. That file changed how the AI responds to *every* prompt in your project. This week, you'll build on that with skills and hooks — reusable tools that you trigger on demand for specific tasks.
+Last week you wrote a CLAUDE.md file to give the AI persistent context about your beat. That file changed how the AI responds to *every* prompt in your project. This week, you'll build on that with custom slash commands and hooks — reusable tools that you trigger on demand for specific tasks.
 
-If CLAUDE.md is the AI reading your newsroom's style guide before starting work, a skill is the AI following a specific reporting checklist when you tell it to.
+If CLAUDE.md is the AI reading your newsroom's style guide before starting work, a custom slash command is the AI following a specific reporting checklist when you tell it to. The video demo shows this progression clearly: the meeting minutes extraction prompt starts as something you type every time, then becomes a saved command that fires with a single slash.
 
 Before trusting a new skill on live work, test it on material you've already covered — a press release you fact-checked last month, a council vote you looked up yourself. Compare what the skill catches against what you found. If it misses something you caught, that's an instruction to add. If it flags something that wasn't a problem, that's an instruction to cut. This is the same instinct reporters bring to new sources: verify something you can already check before relying on it for something you can't.
 
@@ -110,24 +104,25 @@ Before trusting a new skill on live work, test it on material you've already cov
 
 By the end of this week, you will be able to:
 
-1. **Explain what skills and hooks are** — Understand the structure of a SKILL.md file, how Claude Code loads instructions from it, and the difference between notify hooks (flag issues, keep going) and stop hooks (pause before irreversible actions).
+1. **Explain the prompt-to-skill progression** — Understand how a raw prompt becomes a saved prompt, then a custom slash command, and finally a hook — and when each level is appropriate.
 
-2. **Install a skills plugin from GitHub** — Use Claude Code's plugin system to add the journalism skills repository to your environment.
+2. **Create a custom slash command** — Save a reusable prompt as a file in `.claude/commands/`, invoke it with a slash command, and test it on real material from your beat.
 
-3. **Use journalism skills in your workflow** — Apply the source-verification skill to check claims and explore how hooks run automatically in the background.
+3. **Understand hooks** — Know the difference between notify hooks (flag issues, keep going) and stop hooks (pause before irreversible actions), and when each type is useful.
 
-4. **Write a simple custom skill** — Encode a task you do repeatedly into a SKILL.md file, test it, and apply the deletion test to its instructions.
+4. **Use session commands** — Apply `/help`, `/plan`, `/compact`, and `/clear` to manage your Claude Code sessions.
 
-5. **Recognize the progression from prompts to skills** — Understand when a task you keep repeating should become a reusable skill, and when project-level context belongs in CLAUDE.md instead.
+5. **Install and use journalism skills from GitHub** — Add the journalism skills repository to your environment and apply skills like source-verification to your workflow.
 
 ---
 
 ## This week's work
 
+- **Video:** Watch the demo walking through the prompt-to-skill progression (meeting minutes extraction example) and session commands
 - **Readings:** Claude Code documentation on custom commands, plus an overview of the instructor's journalism skills repository
-- **Exercise:** Install journalism skills (as a plugin or manually) and use source-verification to fact-check a viral social media claim
+- **Exercise:** Build your own custom slash command skill for a task on your beat, and install the journalism skills repository
 - **Discussion:** Share your experience customizing AI tools and discuss what skills would help your newsroom
-- **Quiz:** 5 questions on skill structure, installation, and usage
+- **Quiz:** 5 questions on skill structure, slash commands, hooks, and session commands
 
 ---
 

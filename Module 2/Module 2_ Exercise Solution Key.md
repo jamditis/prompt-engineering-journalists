@@ -1,8 +1,14 @@
-# Module 3: Custom skills for Claude Code — exercise solution key
+# Module 2: Custom skills for Claude Code — exercise solution key
 
 ## Model student submission
 
-### Part 1: Source verification results
+### Part 1: Custom slash command
+
+The model command file appears later in this document under "Part 1 model: Custom slash command." Students build their own custom slash command first (Part 1), then install the journalism skills repository (Part 2), then use source-verification (Part 3). The press release evaluator below serves as the model for Part 1.
+
+---
+
+### Part 3: Source verification results
 
 **Claim under review:**
 > "A new study from Harvard Medical School found that drinking coffee before 8am increases cortisol levels by 400%, leading to long-term adrenal fatigue. Doctors are now recommending waiting until 10am for your first cup."
@@ -58,13 +64,13 @@ The traceable kernel: cortisol does peak in the morning for most people (the cor
 
 ---
 
-### Part 2: Claim verdict
+### Claim verdict
 
 The claim is false as stated. No Harvard Medical School study on coffee timing and cortisol exists. The 400% figure appears nowhere in the published research on caffeine and cortisol. "Adrenal fatigue" is not a recognized medical diagnosis — the Cleveland Clinic and the Endocrine Society have specifically addressed this. The underlying topic is real: cortisol does peak in the morning, caffeine does interact with cortisol, and some health communicators recommend delaying coffee intake based on this. But the specific claim misrepresents that evidence by inventing an institutional source, a dramatic statistic, and a discredited mechanism. This is a pattern common to wellness misinformation: a real observation is dressed in fabricated authority. The claim should not be amplified or treated as a news peg without a verified, independent source.
 
 ---
 
-### Part 3: Custom skill
+### Part 1 model: Custom slash command
 
 **Task:** Evaluating city government press releases before coverage
 
@@ -165,11 +171,13 @@ Deliver findings as a structured memo:
 
 ### Reflection (200-300 words)
 
-The SIFT skill changed how I entered the verification process, and the difference showed up at the first step. Before I searched anything, the skill prompted me to stop and document what I already believed. I thought the claim was probably true — I'd absorbed some version of the "don't drink coffee first thing" idea from somewhere and hadn't questioned it. Without the skill, I would have gone straight to Google to "confirm" it, which is a terrible way to fact-check something you're already inclined to believe. The stop step made that bias visible before it could shape my search.
+Building my own command first made me appreciate the source-verification skill differently. When I wrote the press release evaluator, I had to decide what steps to include, what order they go in, and how specific to make each instruction. The deletion test forced me to cut two instructions that sounded good but didn't change Claude's behavior. That experience — deciding what belongs in a command file and what doesn't — made me read the SIFT skill more critically. I could see the decisions someone else had made: why the "stop" step comes first, why each step produces a distinct output, why the instructions are specific enough to follow but flexible enough to apply to different claims.
 
-The "trace the claims" step was the most useful for this particular claim because the claim had three distinct elements that each needed separate treatment. Without that structure, I might have stopped after finding the cortisol research is real and called it "mostly true." The skill forced me to check each specific assertion — the Harvard attribution, the 400% figure, the adrenal fatigue diagnosis — individually. They all failed separately, which matters. A claim can have a real topic at its center and still be fabricated in every specific detail.
+The SIFT skill changed how I entered the verification process. Before I searched anything, it prompted me to stop and document what I already believed. I thought the claim was probably true — I'd absorbed some version of the "don't drink coffee first thing" idea and hadn't questioned it. Without the skill, I would have gone straight to Google to "confirm" it, which is a terrible way to fact-check something you're already inclined to believe.
 
-What the skill missed: it didn't tell me to check whether the claim had already been fact-checked by organizations like Snopes or Health Feedback. I found that angle on my own during the "find better coverage" step, but only because I already knew to look. A student without that background might not have thought to check fact-checking organizations directly. That's an instruction I'd add to the skill: after searching for news coverage, explicitly search [claim topic] + "fact check" or [claim topic] + site:snopes.com. The current skill assumes you know where to look.
+The "trace the claims" step was the most useful because the claim had three distinct elements that each needed separate treatment. Without that structure, I might have stopped after finding the cortisol research is real and called it "mostly true." The skill forced me to check each specific assertion — the Harvard attribution, the 400% figure, the adrenal fatigue diagnosis — individually. They all failed separately.
+
+What the skill missed: it didn't tell me to check whether the claim had already been fact-checked by organizations like Snopes or Health Feedback. That's an instruction I'd add — after searching for news coverage, explicitly search [claim topic] + "fact check." The current skill assumes you know where to look.
 
 ---
 
@@ -185,12 +193,12 @@ For the custom skill, strong work encodes a specific beat and a specific task. T
 
 ### Rubric
 
-**Skill installation (15%)**
-- Full credit: Student confirms the skill is installed and functional; shows they read the SKILL.md file and can describe the YAML frontmatter and the SIFT structure; shows they read a hook file and can describe when it would fire.
-- Partial credit: Skill installed but student only describes surface features without demonstrating they understood the structure.
-- No credit: No evidence of installation or the installation failed and the student didn't attempt troubleshooting.
+**Custom slash command (30%)**
+- Full credit: Command file encodes a specific, recurring task on the student's beat; used plan mode before writing; YAML frontmatter is present and correctly formatted; steps are ordered as they would actually be performed; deletion test was applied and the student can name something they cut; command is specific enough that it would behave differently on different types of documents.
+- Partial credit: Command is present but too generic to demonstrate beat knowledge; deletion test not mentioned; steps are in an arbitrary order that doesn't reflect real workflow; no evidence of plan mode use.
+- No credit: No command submitted, or the submitted file is not a structured command (a prompt, a template, a list of questions without structure).
 
-**SIFT application (35%)**
+**SIFT application (25%)**
 - Full credit: All four steps documented with specific observations. Each step produces evidence, not just a label. Stop step captures a named prior assumption. Investigate step shows actual search attempts. Find better coverage step names specific sources consulted. Trace step evaluates each major claim independently.
 - Partial credit: All four steps present but some are thin — a step names an action without showing what was found, or the trace step bundles claims rather than separating them.
 - No credit: Fewer than four steps documented, or the documentation is so vague that it's unclear what the student actually did.
@@ -200,14 +208,14 @@ For the custom skill, strong work encodes a specific beat and a specific task. T
 - Partial credit: Student reaches the correct verdict (false) but mischaracterizes the underlying science, misses one of the three specific false claims, or doesn't find a legitimate source.
 - No credit: Student reaches the wrong verdict, or reaches the right verdict for unsupported reasons.
 
-**Custom skill (20%)**
-- Full credit: Skill encodes a specific, recurring task on the student's beat; YAML frontmatter is present and correctly formatted; steps are ordered as they would actually be performed; deletion test was applied and the student can name something they cut; skill is specific enough that it would behave differently on different types of documents.
-- Partial credit: Skill is present but too generic to demonstrate beat knowledge; deletion test not mentioned; steps are in an arbitrary order that doesn't reflect real workflow.
-- No credit: No skill submitted, or the submitted file is not a skill (a prompt, a template, a list of questions without structure).
+**Skills installation (10%)**
+- Full credit: Student confirms the journalism skills repository is installed and functional; shows they read a skill file and can describe its structure; shows they read a hook file and can describe when it would fire.
+- Partial credit: Skills installed but student only describes surface features without demonstrating they understood the structure.
+- No credit: No evidence of installation or the installation failed and the student didn't attempt troubleshooting.
 
-**Reflection quality (10%)**
-- Full credit: Student is specific about how the skill changed their process, not just that it "helped"; identifies at least one concrete gap in the skill based on something they noticed during the exercise; 200-300 words; no vague claims about the tool being "useful" without describing how.
-- Partial credit: Reflection is present but generic — could have been written without doing the exercise.
+**Reflection quality (15%)**
+- Full credit: Student connects the experience of building their own command (Part 1) with using the pre-built source-verification skill (Part 3); identifies at least one concrete gap in the skill based on something they noticed; 200-300 words; specific about how the exercise changed their understanding.
+- Partial credit: Reflection is present but generic — could have been written without doing the exercise, or doesn't connect the two parts.
 - No credit: Reflection absent or fewer than 100 words with no specific observations.
 
 ### The correct fact-check answer (for graders)

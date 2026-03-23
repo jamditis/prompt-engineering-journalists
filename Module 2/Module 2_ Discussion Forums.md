@@ -1,4 +1,4 @@
-# Module 3: Custom skills for Claude Code
+# Module 2: Custom skills for Claude Code
 
 ## Discussion forum prompts
 
@@ -8,12 +8,13 @@ Participate in at least one discussion thread. Respond to at least two classmate
 
 ### Discussion 1: What skills does your newsroom need?
 
-After reviewing the journalism skills repository, think about your daily work.
+The video this week showed how meeting minutes extraction went from a raw prompt to a custom slash command. Think about your own daily work — what prompts do you find yourself typing repeatedly?
 
 **Prompt:**
-What recurring tasks in your newsroom could become skills? Describe one specific workflow you repeat often—something that takes multiple steps and follows a consistent pattern. Explain what the skill would do and how it would save time.
+What recurring tasks in your newsroom could become custom slash commands? Describe one specific workflow you repeat often — something that takes multiple steps and follows a consistent pattern. Explain what the command would do and how it would save time.
 
 **Examples to get you thinking:**
+- Extracting action items from meeting notes (like the video demo)
 - Writing social media posts for different platforms from the same article
 - Checking if sources have appeared in previous coverage
 - Formatting data from specific government agencies
