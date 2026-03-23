@@ -84,13 +84,12 @@
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Install Claude Code and run your first interactive session</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Understand the differences between web interfaces and terminal-based AI</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Run the same prompt in both environments and compare results</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Explain the practical differences between browser-based and terminal-based AI workflows</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Execute basic AI prompts from your terminal</li>
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Explain what project context files are and how they differ across tools (CLAUDE.md, GEMINI.md, AGENTS.md)</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Write a context file with beat-specific instructions, style preferences, and source standards</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Use the deletion test to decide what belongs in a context file and what doesn't</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Create a CLAUDE.md context file using the /init command and customize it for your beat</li>
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Process journalism documents with and without context, and compare the results</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Initialize a Git repo and commit your context file as versioned project infrastructure</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Identify journalism tasks that benefit from programmatic AI access</li>
                     </ul>
                 </div>
             </section>
@@ -285,6 +284,7 @@ Then read the file and summarize it in one sentence. Save the summary to summary
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">05</span>
                         Compare the experience
                     </h3>
+                    <p class="text-gray-300 text-sm mb-4">In the video, you saw this comparison in action — the same research task run in Claude on the web and Claude Code simultaneously. Claude on the web finished faster but hit its tool use limit. Claude Code saved files to the filesystem that persist after the session. Now try a simpler version yourself.</p>
                     <p class="text-gray-300 text-sm mb-4">Consider these questions:</p>
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
                         <li class="flex items-start gap-3"><span class="text-acid">></span> Which workflow required more steps from you?</li>
@@ -296,7 +296,80 @@ Then read the file and summarize it in one sentence. Save the summary to summary
                 <!-- Part 2 banner -->
                 <div class="border border-acid/30 bg-acidDim p-6 mb-8 mt-12">
                     <p class="text-xs font-mono text-acid font-bold mb-2">PART 2 — PROJECT CONTEXT</p>
-                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Set up a beat project directory, initialize a Git repo, process journalism documents with and without a context file, and compare the results.</span></p>
+                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Set up a CLAUDE.md context file using /init, customize it for your beat, and verify it works across sessions.</span></p>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
+                        Run /init to create your context file
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">Inside your Claude Code session, type the <code class="text-acid bg-surface px-1">/init</code> command. This walks you through creating a CLAUDE.md file with sensible defaults based on your project directory.</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">/init</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm">Claude will scan your project and generate a CLAUDE.md with sections for project overview, conventions, and key files. Review what it created before moving on.</p>
+                </div>
+
+                <!-- Step 7 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">07</span>
+                        Customize it for your beat
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">The /init output is a starting point. Now add the beat-specific context that makes it yours. Ask Claude to help:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read my CLAUDE.md and add these sections: my beat covers city hall in Greenfield — add the key entities (mayor, city council, departments), my style rules (AP style, Oxford comma, "the city" on second reference), terminology that's specific to my beat (resolution vs. ordinance), and a "things to avoid" section with phrases I don't want in output.</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm">Adapt the prompt above for your own beat. The goal is to add information that would change how Claude handles your documents — not generic journalism instructions it already follows.</p>
+                </div>
+
+                <!-- Step 8 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">08</span>
+                        Test it in a new session
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">Quit Claude Code with <code class="text-acid bg-surface px-1">/q</code>, then relaunch it from the same directory. This starts a fresh session that reads your updated CLAUDE.md on startup.</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Now ask it something that tests whether the context loaded:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">What do you know about my beat and my style preferences?</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm">If Claude can describe your beat, your style rules, and your terminology, the context file is working. If it can't, check that CLAUDE.md is in the directory where you launched the session.</p>
+                </div>
+
+                <!-- Part 3 banner -->
+                <div class="border border-acid/30 bg-acidDim p-6 mb-8 mt-12">
+                    <p class="text-xs font-mono text-acid font-bold mb-2">PART 3 — CONTEXT IN ACTION</p>
+                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Process journalism documents with and without your context file, and compare the results.</span></p>
                 </div>
 
                 <!-- Scenario options -->
@@ -309,10 +382,10 @@ Then read the file and summarize it in one sentence. Save the summary to summary
                     </ul>
                 </div>
 
-                <!-- Step 6 -->
+                <!-- Step 9 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
-                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">09</span>
                         Fork and clone the starter kit
                     </h3>
                     <p class="text-gray-300 text-sm mb-4">Go to the course starter repo and click <strong class="text-chrome">Fork</strong> (top right). This creates your own copy on GitHub that you can push to freely.</p>
@@ -335,10 +408,10 @@ claude</code></pre>
                     <p class="text-gray-400 text-xs mt-2">This step matters: Claude Code reads context files from wherever you launch it. When you launch <code class="text-acid bg-surface px-1">claude</code> inside this folder, it reads the CLAUDE.md automatically.</p>
                 </div>
 
-                <!-- Step 7 -->
+                <!-- Step 10 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
-                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">07</span>
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">10</span>
                         Explore what's in the repo
                     </h3>
                     <p class="text-gray-300 text-sm mb-4">You're inside a Claude session. Ask it to show you what you're working with:</p>
@@ -354,13 +427,13 @@ claude</code></pre>
                     <p class="text-gray-300 text-sm">The repo is already a Git repository (you cloned it from GitHub). Claude can read every file in it. Notice that it found the <code class="text-acid bg-surface px-1">CLAUDE.md</code> and the sample documents in <code class="text-acid bg-surface px-1">sample-docs/</code> — those are the files you'll work with in the next steps.</p>
                 </div>
 
-                <!-- Step 8 -->
+                <!-- Step 11 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
-                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">08</span>
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">11</span>
                         Process documents without context
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">You're already inside a session from Step 6. The repo has a CLAUDE.md, but it's still the starter template with placeholders — Claude has no real knowledge of your beat yet. Paste these four prompts one at a time:</p>
+                    <p class="text-gray-300 text-sm mb-4">You're already inside a session from Step 9. The repo has a CLAUDE.md, but it's still the starter template with placeholders — Claude has no real knowledge of your beat yet. Paste these four prompts one at a time:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-3">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
