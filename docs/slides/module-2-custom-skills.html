@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2: Custom skills | Advanced prompt engineering for journalists</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ── Reset + base ──────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --void:    #0f172a;
+            --panel:   #1e293b;
+            --surface: #334155;
+            --chrome:  #f1f5f9;
+            --acid:    #a3e635;
+            --acid-dim: rgba(163, 230, 53, 0.12);
+            --ice:     #67e8f9;
+            --ice-dim: rgba(103, 232, 249, 0.12);
+            --signal:  #f87171;
+            --signal-dim: rgba(248, 113, 113, 0.12);
+            --muted:   #94a3b8;
+            --slide-w: 13.33in;
+            --slide-h: 7.5in;
+        }
+
+        html { font-size: 16px; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0e1a;
+            color: var(--chrome);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Slide container ───────────────────────── */
+        .deck {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .slide {
+            width: var(--slide-w);
+            height: var(--slide-h);
+            background: var(--void);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            flex-shrink: 0;
+        }
+
+        /* Title and section-divider slides use flex */
+        .slide--title,
+        .slide--section,
+        .slide--exercise {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ── Slide parts ───────────────────────────── */
+        .slide-header {
+            padding: 1.5rem 2.5rem 0.75rem;
+        }
+
+        .slide-body {
+            padding: 0 2.5rem;
+            overflow: hidden;
+        }
+
+        .slide-footer {
+            padding: 0.75rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--muted);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* ── Typography ────────────────────────────── */
+        .font-display { font-family: 'Fraunces', serif; }
+        .font-mono    { font-family: 'JetBrains Mono', monospace; }
+
+        h1 { font-family: 'Fraunces', serif; font-weight: 700; }
+        h2 { font-family: 'Fraunces', serif; font-weight: 700; }
+        h3 { font-family: 'Inter', sans-serif; font-weight: 600; }
+
+        .text-acid   { color: var(--acid); }
+        .text-ice    { color: var(--ice); }
+        .text-signal { color: var(--signal); }
+        .text-muted  { color: var(--muted); }
+        .text-chrome { color: var(--chrome); }
+
+        /* ── Bullet lists ──────────────────────────── */
+        .bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .bullets li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 1.15rem;
+            line-height: 1.55;
+            color: #cbd5e1;
+        }
+
+        .bullets li::before {
+            content: ">";
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--acid);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 0.05em;
+        }
+
+        .bullets.ice li::before { color: var(--ice); }
+
+        /* ── Code blocks ───────────────────────────── */
+        code, .code {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .code-inline {
+            background: var(--surface);
+            color: var(--acid);
+            padding: 0.15em 0.45em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .code-block {
+            background: var(--panel);
+            border: 1px solid var(--surface);
+            border-radius: 6px;
+            padding: 1.25rem 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            overflow: hidden;
+        }
+
+        /* ── Two-column layout ─────────────────────── */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .col-card {
+            background: var(--panel);
+            border: 1px solid var(--surface);
+            border-radius: 8px;
+            padding: 1.75rem;
+        }
+
+        /* ── Tag / badge ───────────────────────────── */
+        .tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.6rem;
+            border-radius: 3px;
+        }
+
+        .tag--acid   { background: var(--acid-dim); color: var(--acid); }
+        .tag--ice    { background: var(--ice-dim);   color: var(--ice); }
+        .tag--signal { background: var(--signal-dim); color: var(--signal); }
+
+        /* ── Section divider ───────────────────────── */
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            color: var(--acid);
+            letter-spacing: 0.1em;
+        }
+
+        .section-title {
+            font-family: 'Fraunces', serif;
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: var(--chrome);
+            margin-top: 0.75rem;
+        }
+
+        /* ── Print ─────────────────────────────────── */
+        @media print {
+            body { background: white; }
+            .deck { gap: 0; padding: 0; }
+            .slide {
+                page-break-after: always;
+                border: none;
+                border-radius: 0;
+            }
+        }
+
+        /* ── Keyboard nav indicator ────────────────── */
+        .nav-hint {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+            background: var(--panel);
+            border: 1px solid var(--surface);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            z-index: 100;
+            opacity: 0.7;
+        }
+
+        @media print { .nav-hint { display: none; } }
+    </style>
+</head>
+<body>
+
+<div class="deck">
+
+<!-- ============================================================
+     SLIDE 1 — Title
+     ============================================================ -->
+<div class="slide slide--title" style="background: linear-gradient(160deg, var(--void) 0%, #131b2e 50%, var(--void) 100%);">
+    <div style="text-align: center; padding: 2rem;">
+        <div class="font-mono text-acid" style="font-size: 0.85rem; letter-spacing: 0.15em; margin-bottom: 1.5rem;">MODULE 02</div>
+        <h1 style="font-size: 4.5rem; line-height: 1.1; color: var(--chrome); margin-bottom: 1rem;">Custom skills</h1>
+        <div style="width: 80px; height: 3px; background: var(--acid); margin: 1.5rem auto;"></div>
+        <p style="font-size: 1.15rem; color: var(--muted); margin-top: 1.25rem;">Advanced prompt engineering for journalists</p>
+        <p style="font-size: 0.95rem; color: #64748b; margin-top: 0.5rem;">Joe Amditis &middot; Knight Center MOOC</p>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 2 — The problem
+     ============================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2 style="font-size: 1.75rem; color: var(--chrome);">The problem</h2>
+    </div>
+    <div class="slide-body" style="display: flex; flex-direction: column; justify-content: center;">
+        <div style="max-width: 85%;">
+            <p style="font-size: 1.35rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 1.75rem;">
+                You type the same instructions over and over.
+            </p>
+            <p style="font-size: 1.15rem; line-height: 1.7; color: var(--muted); margin-bottom: 1.5rem;">
+                You explain how to extract action items from meeting minutes. Then again the next day. Then to a colleague. Different phrasing each time, different results each time.
+            </p>
+            <div style="border-left: 3px solid var(--acid); padding-left: 1.25rem; margin-top: 1.5rem;">
+                <p style="font-size: 1.3rem; color: var(--acid); font-weight: 600;">
+                    Skills break that cycle. Write it once, use it forever.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>Module 2: Custom skills</span>
+        <span>2</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 3 — Section divider: prompt-to-skill progression
+     ============================================================ -->
+<div class="slide slide--section" style="background: linear-gradient(135deg, var(--void) 0%, #0c1525 100%);">
+    <div style="text-align: center;">
+        <div class="section-number">01</div>
+        <div class="section-title">The prompt-to-skill progression</div>
+        <div style="width: 60px; height: 2px; background: var(--acid); margin: 1.25rem auto 0;"></div>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 4 — DIAGRAM: 4-level staircase
+     ============================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2 style="font-size: 1.5rem; color: var(--chrome);">Four levels of reuse</h2>
+    </div>
+    <div class="slide-body" style="display: flex; align-items: center; justify-content: center;">
+        <svg viewBox="0 0 920 380" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-height: 100%;">
+            <defs>
+                <linearGradient id="acidGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#4d7c0f" stop-opacity="0.6"/>
+                    <stop offset="100%" stop-color="#a3e635" stop-opacity="0.9"/>
+                </linearGradient>
+                <linearGradient id="step1" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#1e293b"/>
+                    <stop offset="100%" stop-color="#2d3d52"/>
+                </linearGradient>
+                <linearGradient id="step2" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#243347"/>
+                    <stop offset="100%" stop-color="#2e4a5e"/>
+                </linearGradient>
+                <linearGradient id="step3" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#2a4230"/>
+                    <stop offset="100%" stop-color="#3d6b3a"/>
+                </linearGradient>
+                <linearGradient id="step4" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#3d5c1a"/>
+                    <stop offset="100%" stop-color="#5a8a1e"/>
+                </linearGradient>
+            </defs>
+
+            <!-- Arrow: ascending direction -->
+            <line x1="60" y1="345" x2="880" y2="55" stroke="var(--acid)" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.3"/>
+            <text x="870" y="42" font-family="'JetBrains Mono', monospace" font-size="9" fill="#a3e635" opacity="0.5" text-anchor="end">MORE AUTOMATION</text>
+
+            <!-- Step 1: Ad-hoc prompt -->
+            <rect x="40" y="280" width="195" height="80" rx="6" fill="url(#step1)" stroke="#334155" stroke-width="1"/>
+            <text x="138" y="303" font-family="'JetBrains Mono', monospace" font-size="10" fill="#94a3b8" text-anchor="middle" letter-spacing="0.05em">LEVEL 1</text>
+            <text x="138" y="322" font-family="'Fraunces', serif" font-size="15" fill="#f1f5f9" text-anchor="middle" font-weight="700">Ad-hoc prompt</text>
+            <text x="138" y="344" font-family="'Inter', sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Type instructions each time</text>
+
+            <!-- Step 2: Saved prompt -->
+            <rect x="265" y="210" width="195" height="80" rx="6" fill="url(#step2)" stroke="#334155" stroke-width="1"/>
+            <text x="363" y="233" font-family="'JetBrains Mono', monospace" font-size="10" fill="#67e8f9" text-anchor="middle" letter-spacing="0.05em">LEVEL 2</text>
+            <text x="363" y="252" font-family="'Fraunces', serif" font-size="15" fill="#f1f5f9" text-anchor="middle" font-weight="700">Saved prompt</text>
+            <text x="363" y="274" font-family="'Inter', sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">Copy-paste from a document</text>
+
+            <!-- Step 3: Slash command -->
+            <rect x="490" y="140" width="195" height="80" rx="6" fill="url(#step3)" stroke="#4d7c0f" stroke-width="1"/>
+            <text x="588" y="163" font-family="'JetBrains Mono', monospace" font-size="10" fill="#a3e635" text-anchor="middle" letter-spacing="0.05em">LEVEL 3</text>
+            <text x="588" y="182" font-family="'Fraunces', serif" font-size="15" fill="#f1f5f9" text-anchor="middle" font-weight="700">Slash command</text>
+            <text x="588" y="204" font-family="'Inter', sans-serif" font-size="10" fill="#a3e635" text-anchor="middle">/command-name invocation</text>
+
+            <!-- Step 4: Hook -->
+            <rect x="715" y="70" width="195" height="80" rx="6" fill="url(#step4)" stroke="#65a30d" stroke-width="1"/>
+            <text x="813" y="93" font-family="'JetBrains Mono', monospace" font-size="10" fill="#a3e635" text-anchor="middle" letter-spacing="0.05em">LEVEL 4</text>
+            <text x="813" y="112" font-family="'Fraunces', serif" font-size="15" fill="#f1f5f9" text-anchor="middle" font-weight="700">Hook</text>
+            <text x="813" y="134" font-family="'Inter', sans-serif" font-size="10" fill="#a3e635" text-anchor="middle">Fires automatically</text>
+
+            <!-- Connecting arrows -->
+            <path d="M235 310 L265 275" stroke="#475569" stroke-width="1.5" fill="none" marker-end="url(#arrowGray)"/>
+            <path d="M460 240 L490 205" stroke="#475569" stroke-width="1.5" fill="none" marker-end="url(#arrowGray)"/>
+            <path d="M685 170 L715 135" stroke="#65a30d" stroke-width="1.5" fill="none" marker-end="url(#arrowGreen)"/>
+
+            <defs>
+                <marker id="arrowGray" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                    <path d="M0,0 L8,3 L0,6" fill="#475569"/>
+                </marker>
+                <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+                    <path d="M0,0 L8,3 L0,6" fill="#65a30d"/>
+                </marker>
+            </defs>
+
+            <!-- Effort labels -->
+            <text x="60" y="375" font-family="'Inter', sans-serif" font-size="9" fill="#64748b">Manual effort: HIGH</text>
+            <text x="860" y="65" font-family="'Inter', sans-serif" font-size="9" fill="#65a30d" text-anchor="end">Manual effort: ZERO</text>
+        </svg>
+    </div>
+    <div class="slide-footer">
+        <span>Module 2: Custom skills</span>
+        <span>4</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 5 — Level 1: Ad-hoc prompt
+     ============================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span class="tag tag--ice">Level 1</span>
+            <h2 style="font-size: 1.5rem; color: var(--chrome);">Ad-hoc prompt</h2>
+        </div>
+    </div>
+    <div class="slide-body" style="display: flex; flex-direction: column; justify-content: center; gap: 1.75rem;">
+        <div class="code-block" style="font-size: 0.95rem;">
+            <span style="color: var(--muted);">You type:</span><br>
+            <span style="color: #cbd5e1;">"Here are my meeting notes, pull out the action items and who's responsible for each one."</span>
+        </div>
+        <ul class="bullets">
+            <li>You get results, but they vary each time</li>
+            <li>You forget steps or phrase things differently</li>
+            <li>Different wording produces different output</li>
+            <li>No way to share with colleagues</li>
+        </ul>
+    </div>
+    <div class="slide-footer">
+        <span>Module 2: Custom skills</span>
+        <span>5</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 6 — Level 2: Saved prompt
+     ============================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span class="tag tag--ice">Level 2</span>
+            <h2 style="font-size: 1.5rem; color: var(--chrome);">Saved prompt</h2>
+        </div>
+    </div>
+    <div class="slide-body" style="display: flex; flex-direction: column; justify-content: center; gap: 1.75rem;">
+        <p style="font-size: 1.15rem; line-height: 1.6; color: #cbd5e1;">
+            You write the perfect prompt once and save it in a document. Copy-paste when you need it.
+        </p>
+        <ul class="bullets">
+            <li>Consistent wording every time</li>
+            <li>Still requires manual copy-paste</li>
+            <li>You have to remember it exists</li>
+            <li>Lives outside your tool &mdash; Claude doesn't know about it</li>
+        </ul>
+        <div style="background: var(--panel); border: 1px solid var(--surface); border-radius: 6px; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
+            <span class="font-mono text-acid" style="font-size: 0.8rem;">STATUS:</span>
+            <span style="color: #cbd5e1; font-size: 0.95rem;">Better, but you're still the middleware.</span>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>Module 2: Custom skills</span>
+        <span>6</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 7 — Level 3: Custom slash command
+     ============================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span class="tag tag--acid">Level 3</span>
+            <h2 style="font-size: 1.5rem; color: var(--chrome);">Custom slash command</h2>
+        </div>
+    </div>
+    <div class="slide-body" style="display: flex; flex-direction: column; justify-content: center; gap: 1.5rem;">
+        <p style="font-size: 1.1rem; line-height: 1.6; color: #cbd5e1;">
+            Save the prompt as a markdown file in <code class="code-inline">.claude/commands/</code>. The filename becomes the command.
+        </p>
+        <div class="two-col" style="gap: 1.5rem;">
+            <div>
+                <div class="code-block">
+                    <div style="color: var(--muted); font-size: 0.75rem; margin-bottom: 0.5rem;">FILE</div>
+                    <span style="color: var(--ice);">.claude/commands/</span><span style="color: var(--acid);">source-check.md</span>
+                </div>
+            </div>
+            <div>
+                <div class="code-block">
+                    <div style="color: var(--muted); font-size: 0.75rem; margin-bottom: 0.5rem;">INVOKE</div>
+                    <span style="color: var(--acid);">/source-check</span>
+                </div>
+            </div>
+        </div>
+        <ul class="bullets" style="margin-top: 0.5rem;">
+            <li>Claude loads it automatically when you type the slash</li>
+            <li>Versioned in Git, shareable with your whole newsroom</li>
+            <li>Same result every time, no copy-paste</li>
+        </ul>
+    </div>
+    <div class="slide-footer">
+        <span>Module 2: Custom skills</span>
+        <span>7</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 8 — Level 4: Hook
+     ============================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span class="tag tag--acid">Level 4</span>
+            <h2 style="font-size: 1.5rem; color: var(--chrome);">Hook</h2>
+        </div>
+    </div>
+    <div class="slide-body" style="display: flex; flex-direction: column; justify-content: center; gap: 1.75rem;">
+        <p style="font-size: 1.2rem; line-height: 1.6; color: #cbd5e1;">
+            Runs in the background. You don't invoke it &mdash; it fires when certain conditions are met.
+        </p>
+        <div style="background: var(--panel); border-left: 3px solid var(--acid); padding: 1.25rem 1.5rem; border-radius: 0 6px 6px 0;">
+            <p style="font-size: 1.1rem; color: var(--acid); font-weight: 600; margin-bottom: 0.5rem;">Automated second reader</p>
+            <p style="font-size: 1rem; color: #cbd5e1;">Like having someone check your work on every file, every time, without being asked.</p>
+        </div>
+        <ul class="bullets">
+            <li>No manual invocation needed</li>
+            <li>Enforces standards you'd otherwise forget</li>
+            <li>The highest level of automation in this stack</li>
+        </ul>
+    </div>
+    <div class="slide-footer">
+        <span>Module 2: Custom skills</span>
+        <span>8</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 9 — Section divider: Skills vs commands
+     ============================================================ -->
+<div class="slide slide--section" style="background: linear-gradient(135deg, var(--void) 0%, #0c1525 100%);">
+    <div style="text-align: center;">
+        <div class="section-number">02</div>
+        <div class="section-title">Skills vs commands</div>
+        <div style="width: 60px; height: 2px; background: var(--ice); margin: 1.25rem auto 0;"></div>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 10 — Skills vs commands (two-column)
+     ============================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2 style="font-size: 1.5rem; color: var(--chrome);">Two kinds of saved knowledge</h2>
+    </div>
+    <div class="slide-body" style="display: flex; align-items: center;">
+        <div class="two-col" style="width: 100%;">
+            <div class="col-card" style="border-color: var(--ice); border-width: 1px;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
+                    <span class="tag tag--ice">Skill</span>
+                </div>
+                <p style="font-size: 1.05rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 1.25rem;">
+                    Contains domain knowledge. Claude applies it with judgment.
+                </p>
+                <div style="background: var(--void); border-radius: 4px; padding: 1rem; margin-bottom: 1rem;">
+                    <p style="font-size: 0.9rem; color: var(--muted);">Like a <span style="color: var(--ice);">style guide</span> &mdash; reference material, contextual interpretation.</p>
+                </div>
+                <ul class="bullets ice" style="font-size: 0.95rem;">
+                    <li style="font-size: 0.95rem;">Flexible, context-aware</li>
+                    <li style="font-size: 0.95rem;">Claude decides how to apply it</li>
+                </ul>
+            </div>
+            <div class="col-card" style="border-color: var(--acid); border-width: 1px;">
+                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
+                    <span class="tag tag--acid">Command</span>
+                </div>
+                <p style="font-size: 1.05rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 1.25rem;">
+                    Deterministic trigger. Same steps, same sequence, every time.
+                </p>
+                <div style="background: var(--void); border-radius: 4px; padding: 1rem; margin-bottom: 1rem;">
+                    <p style="font-size: 0.9rem; color: var(--muted);">Like a <span style="color: var(--acid);">pre-publication checklist</span> &mdash; fixed order, no skips.</p>
+                </div>
+                <ul class="bullets" style="font-size: 0.95rem;">
+                    <li style="font-size: 0.95rem;">Rigid, predictable</li>
+                    <li style="font-size: 0.95rem;">Same output given same input</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>Module 2: Custom skills</span>
+        <span>10</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 11 — DIAGRAM: Skill file anatomy
+     ============================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2 style="font-size: 1.5rem; color: var(--chrome);">Anatomy of a skill file</h2>
+    </div>
+    <div class="slide-body" style="display: flex; align-items: center; justify-content: center;">
+        <svg viewBox="0 0 900 370" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-height: 100%;">
+            <!-- File background -->
+            <rect x="160" y="10" width="480" height="355" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+
+            <!-- Title bar -->
+            <rect x="160" y="10" width="480" height="30" rx="8" fill="#334155"/>
+            <rect x="160" y="30" width="480" height="10" fill="#334155"/>
+            <text x="400" y="30" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8" text-anchor="middle">source-verification.md</text>
+
+            <!-- YAML frontmatter -->
+            <rect x="175" y="52" width="450" height="75" rx="4" fill="rgba(103, 232, 249, 0.06)" stroke="rgba(103, 232, 249, 0.2)" stroke-width="1" stroke-dasharray="4 2"/>
+            <text x="190" y="72" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">---</text>
+            <text x="190" y="92" font-family="'JetBrains Mono', monospace" font-size="11" fill="#67e8f9">name:</text>
+            <text x="250" y="92" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cbd5e1"> source-verification</text>
+            <text x="190" y="110" font-family="'JetBrains Mono', monospace" font-size="11" fill="#67e8f9">description:</text>
+            <text x="298" y="110" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cbd5e1"> Verify claims using SIFT</text>
+            <text x="190" y="125" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">---</text>
+
+            <!-- Heading -->
+            <text x="190" y="155" font-family="'JetBrains Mono', monospace" font-size="12" fill="#a3e635" font-weight="700"># Source verification skill</text>
+
+            <!-- When to use section -->
+            <text x="190" y="185" font-family="'JetBrains Mono', monospace" font-size="11" fill="#a3e635">## When to use</text>
+            <text x="190" y="205" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">[trigger conditions]</text>
+
+            <!-- Steps section -->
+            <rect x="175" y="222" width="450" height="125" rx="4" fill="rgba(163, 230, 53, 0.04)" stroke="rgba(163, 230, 53, 0.15)" stroke-width="1" stroke-dasharray="4 2"/>
+            <text x="190" y="242" font-family="'JetBrains Mono', monospace" font-size="11" fill="#a3e635">## Steps</text>
+            <text x="190" y="265" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cbd5e1">1. Stop -- note your assumptions</text>
+            <text x="190" y="285" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cbd5e1">2. Investigate the source</text>
+            <text x="190" y="305" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cbd5e1">3. Find better coverage</text>
+            <text x="190" y="325" font-family="'JetBrains Mono', monospace" font-size="11" fill="#cbd5e1">4. Trace claims upstream</text>
+
+            <!-- Annotation arrows + labels -->
+            <!-- Frontmatter label -->
+            <line x1="155" y1="88" x2="80" y2="62" stroke="#67e8f9" stroke-width="1" opacity="0.6"/>
+            <rect x="0" y="45" width="80" height="35" rx="4" fill="rgba(103, 232, 249, 0.1)" stroke="rgba(103, 232, 249, 0.3)" stroke-width="1"/>
+            <text x="40" y="58" font-family="'JetBrains Mono', monospace" font-size="9" fill="#67e8f9" text-anchor="middle">YAML</text>
+            <text x="40" y="72" font-family="'JetBrains Mono', monospace" font-size="9" fill="#67e8f9" text-anchor="middle">frontmatter</text>
+
+            <!-- Description label -->
+            <line x1="625" y1="105" x2="680" y2="82" stroke="#67e8f9" stroke-width="1" opacity="0.6"/>
+            <rect x="680" y="65" width="200" height="35" rx="4" fill="rgba(103, 232, 249, 0.1)" stroke="rgba(103, 232, 249, 0.3)" stroke-width="1"/>
+            <text x="780" y="78" font-family="'JetBrains Mono', monospace" font-size="9" fill="#67e8f9" text-anchor="middle">Tells Claude when</text>
+            <text x="780" y="92" font-family="'JetBrains Mono', monospace" font-size="9" fill="#67e8f9" text-anchor="middle">to activate this skill</text>
+
+            <!-- Instruction body label -->
+            <line x1="625" y1="280" x2="680" y2="270" stroke="#a3e635" stroke-width="1" opacity="0.6"/>
+            <rect x="680" y="253" width="200" height="35" rx="4" fill="rgba(163, 230, 53, 0.1)" stroke="rgba(163, 230, 53, 0.3)" stroke-width="1"/>
+            <text x="780" y="266" font-family="'JetBrains Mono', monospace" font-size="9" fill="#a3e635" text-anchor="middle">Instruction body</text>
+            <text x="780" y="280" font-family="'JetBrains Mono', monospace" font-size="9" fill="#a3e635" text-anchor="middle">Steps Claude follows</text>
+        </svg>
+    </div>
+    <div class="slide-footer">
+        <span>Module 2: Custom skills</span>
+        <span>11</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 12 — Where skills live
+     ============================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2 style="font-size: 1.5rem; color: var(--chrome);">Where skills live</h2>
+    </div>
+    <div class="slide-body" style="display: flex; flex-direction: column; justify-content: center; gap: 1.25rem;">
+        <!-- Global -->
+        <div style="background: var(--panel); border: 1px solid var(--surface); border-radius: 8px; padding: 1.25rem 1.5rem; display: flex; align-items: flex-start; gap: 1.25rem;">
+            <div style="flex-shrink: 0; width: 80px;">
+                <span class="tag tag--ice">Global</span>
+            </div>
+            <div>
+                <div class="code-inline" style="font-size: 0.9rem; margin-bottom: 0.5rem;">~/.claude/commands/</div>
+                <p style="font-size: 0.95rem; color: var(--muted);">Available in all projects on your machine. Personal toolkit.</p>
+            </div>
+        </div>
+        <!-- Project -->
+        <div style="background: var(--panel); border: 1px solid var(--surface); border-radius: 8px; padding: 1.25rem 1.5rem; display: flex; align-items: flex-start; gap: 1.25rem;">
+            <div style="flex-shrink: 0; width: 80px;">
+                <span class="tag tag--acid">Project</span>
+            </div>
+            <div>
+                <div class="code-inline" style="font-size: 0.9rem; margin-bottom: 0.5rem;">.claude/commands/</div>
+                <p style="font-size: 0.95rem; color: var(--muted);">Available only in that project directory. Checked into Git, shared with your team.</p>
+            </div>
+        </div>
+        <!-- Remote -->
+        <div style="background: var(--panel); border: 1px solid var(--surface); border-radius: 8px; padding: 1.25rem 1.5rem; display: flex; align-items: flex-start; gap: 1.25rem;">
+            <div style="flex-shrink: 0; width: 80px;">
+                <span class="tag" style="background: rgba(148, 163, 184, 0.12); color: #94a3b8;">Remote</span>
+            </div>
+            <div>
+                <p style="font-size: 0.95rem; color: #cbd5e1; margin-bottom: 0.35rem;">GitHub repos you clone or install as plugins</p>
+                <p style="font-size: 0.85rem; color: var(--muted);">Community skills you pull into your project &mdash; like the journalism skills repository (36 skills, 13 hooks).</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>Module 2: Custom skills</span>
+        <span>12</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 13 — Section divider: Hooks
+     ============================================================ -->
+<div class="slide slide--section" style="background: linear-gradient(135deg, var(--void) 0%, #0c1525 100%);">
+    <div style="text-align: center;">
+        <div class="section-number">03</div>
+        <div class="section-title">Hooks</div>
+        <div style="width: 60px; height: 2px; background: var(--signal); margin: 1.25rem auto 0;"></div>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 14 — DIAGRAM: Notify vs stop hooks flowchart
+     ============================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2 style="font-size: 1.5rem; color: var(--chrome);">Notify hooks vs stop hooks</h2>
+    </div>
+    <div class="slide-body" style="display: flex; align-items: center; justify-content: center;">
+        <svg viewBox="0 0 900 350" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-height: 100%;">
+            <!-- Start node -->
+            <rect x="340" y="10" width="220" height="42" rx="21" fill="#334155" stroke="#475569" stroke-width="1.5"/>
+            <text x="450" y="36" font-family="'Inter', sans-serif" font-size="13" fill="#f1f5f9" text-anchor="middle" font-weight="600">Claude takes an action</text>
+
+            <!-- Arrow down -->
+            <line x1="450" y1="52" x2="450" y2="78" stroke="#475569" stroke-width="1.5"/>
+            <polygon points="445,74 455,74 450,82" fill="#475569"/>
+
+            <!-- Diamond: Hook fires -->
+            <polygon points="450,82 530,120 450,158 370,120" fill="#1e293b" stroke="#a3e635" stroke-width="1.5"/>
+            <text x="450" y="116" font-family="'JetBrains Mono', monospace" font-size="11" fill="#a3e635" text-anchor="middle">Hook</text>
+            <text x="450" y="130" font-family="'JetBrains Mono', monospace" font-size="11" fill="#a3e635" text-anchor="middle">fires</text>
+
+            <!-- ─── NOTIFY PATH (left, ice) ─── -->
+            <line x1="370" y1="120" x2="200" y2="120" stroke="#67e8f9" stroke-width="1.5"/>
+            <polygon points="204,115 204,125 196,120" fill="#67e8f9"/>
+            <text x="290" y="112" font-family="'JetBrains Mono', monospace" font-size="9" fill="#67e8f9" text-anchor="middle">NOTIFY</text>
+
+            <!-- Flag the issue -->
+            <rect x="80" y="100" width="170" height="40" rx="6" fill="rgba(103, 232, 249, 0.08)" stroke="#67e8f9" stroke-width="1"/>
+            <text x="165" y="125" font-family="'Inter', sans-serif" font-size="12" fill="#67e8f9" text-anchor="middle">Flag the issue</text>
+
+            <!-- Arrow down -->
+            <line x1="165" y1="140" x2="165" y2="175" stroke="#67e8f9" stroke-width="1.5"/>
+            <polygon points="160,171 170,171 165,179" fill="#67e8f9"/>
+
+            <!-- Work continues -->
+            <rect x="80" y="179" width="170" height="40" rx="6" fill="rgba(103, 232, 249, 0.08)" stroke="#67e8f9" stroke-width="1"/>
+            <text x="165" y="204" font-family="'Inter', sans-serif" font-size="12" fill="#67e8f9" text-anchor="middle">Work continues</text>
+
+            <!-- Arrow down -->
+            <line x1="165" y1="219" x2="165" y2="255" stroke="#67e8f9" stroke-width="1.5"/>
+            <polygon points="160,251 170,251 165,259" fill="#67e8f9"/>
+
+            <!-- Review later -->
+            <rect x="80" y="259" width="170" height="40" rx="6" fill="rgba(103, 232, 249, 0.12)" stroke="#67e8f9" stroke-width="1.5"/>
+            <text x="165" y="284" font-family="'Inter', sans-serif" font-size="12" fill="#f1f5f9" text-anchor="middle" font-weight="600">You review flags later</text>
+
+            <!-- ─── STOP PATH (right, signal/red) ─── -->
+            <line x1="530" y1="120" x2="630" y2="120" stroke="#f87171" stroke-width="1.5"/>
+            <polygon points="626,115 626,125 634,120" fill="#f87171"/>
+            <text x="580" y="112" font-family="'JetBrains Mono', monospace" font-size="9" fill="#f87171" text-anchor="middle">STOP</text>
+
+            <!-- Pause execution -->
+            <rect x="635" y="100" width="190" height="40" rx="6" fill="rgba(248, 113, 113, 0.08)" stroke="#f87171" stroke-width="1"/>
+            <text x="730" y="125" font-family="'Inter', sans-serif" font-size="12" fill="#f87171" text-anchor="middle">Pause execution</text>
+
+            <!-- Arrow down -->
+            <line x1="730" y1="140" x2="730" y2="170" stroke="#f87171" stroke-width="1.5"/>
+            <polygon points="725,166 735,166 730,174" fill="#f87171"/>
+
+            <!-- Diamond: One-way door? -->
+            <polygon points="730,174 800,205 730,236 660,205" fill="#1e293b" stroke="#f87171" stroke-width="1.5"/>
+            <text x="730" y="201" font-family="'JetBrains Mono', monospace" font-size="10" fill="#f87171" text-anchor="middle">One-way</text>
+            <text x="730" y="214" font-family="'JetBrains Mono', monospace" font-size="10" fill="#f87171" text-anchor="middle">door?</text>
+
+            <!-- Arrow down -->
+            <line x1="730" y1="236" x2="730" y2="268" stroke="#f87171" stroke-width="1.5"/>
+            <polygon points="725,264 735,264 730,272" fill="#f87171"/>
+
+            <!-- Require confirmation -->
+            <rect x="635" y="272" width="190" height="40" rx="6" fill="rgba(248, 113, 113, 0.12)" stroke="#f87171" stroke-width="1.5"/>
+            <text x="730" y="297" font-family="'Inter', sans-serif" font-size="12" fill="#f1f5f9" text-anchor="middle" font-weight="600">You approve or reject</text>
+        </svg>
+    </div>
+    <div class="slide-footer">
+        <span>Module 2: Custom skills</span>
+        <span>14</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 15 — Notify hooks in practice
+     ============================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span class="tag tag--ice">Notify</span>
+            <h2 style="font-size: 1.5rem; color: var(--chrome);">Notify hooks in practice</h2>
+        </div>
+    </div>
+    <div class="slide-body" style="display: flex; flex-direction: column; justify-content: center; gap: 1.5rem;">
+        <div style="background: var(--panel); border-left: 3px solid var(--ice); padding: 1.25rem 1.5rem; border-radius: 0 6px 6px 0;">
+            <p style="font-size: 1.15rem; color: var(--ice); font-weight: 600; margin-bottom: 0.4rem;">Automated second reader</p>
+            <p style="font-size: 1rem; color: #cbd5e1;">Like a copy editor marking up your draft while you keep writing.</p>
+        </div>
+        <ul class="bullets ice">
+            <li>Flags unattributed quotes</li>
+            <li>Catches AI filler language and slop patterns</li>
+            <li>Checks for style guide violations</li>
+            <li>Work continues &mdash; you review the flags when you're ready</li>
+        </ul>
+        <div style="background: var(--void); border: 1px solid var(--surface); border-radius: 6px; padding: 0.85rem 1.25rem;">
+            <p style="font-size: 0.9rem; color: var(--muted);">
+                <span style="color: var(--ice); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">KEY IDEA:</span>
+                Non-blocking. Flags issues without stopping your work.
+            </p>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>Module 2: Custom skills</span>
+        <span>15</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 16 — Stop hooks in practice
+     ============================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <span class="tag tag--signal">Stop</span>
+            <h2 style="font-size: 1.5rem; color: var(--chrome);">Stop hooks in practice</h2>
+        </div>
+    </div>
+    <div class="slide-body" style="display: flex; flex-direction: column; justify-content: center; gap: 1.5rem;">
+        <div style="background: var(--panel); border-left: 3px solid var(--signal); padding: 1.25rem 1.5rem; border-radius: 0 6px 6px 0;">
+            <p style="font-size: 1.15rem; color: var(--signal); font-weight: 600; margin-bottom: 0.4rem;">One-way door guardian</p>
+            <p style="font-size: 1rem; color: #cbd5e1;">"This is about to do X &mdash; proceed?"</p>
+        </div>
+        <ul class="bullets">
+            <li>Pauses before deleting files</li>
+            <li>Requires approval before pushing code</li>
+            <li>Blocks publishing without human review</li>
+        </ul>
+        <div style="background: var(--void); border: 1px solid var(--surface); border-radius: 6px; padding: 0.85rem 1.25rem;">
+            <p style="font-size: 0.9rem; color: var(--muted);">
+                <span style="color: var(--signal); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">EDITORIAL RULE:</span>
+                Does a human need to see this before it goes out?
+            </p>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>Module 2: Custom skills</span>
+        <span>16</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 17 — Session commands reference
+     ============================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2 style="font-size: 1.5rem; color: var(--chrome);">Session commands reference</h2>
+    </div>
+    <div class="slide-body" style="display: flex; flex-direction: column; justify-content: center; gap: 1rem;">
+        <p style="font-size: 1rem; color: var(--muted); margin-bottom: 0.5rem;">Built-in commands available in every Claude Code session:</p>
+
+        <!-- /help -->
+        <div style="background: var(--panel); border: 1px solid var(--surface); border-radius: 8px; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1.5rem;">
+            <code style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; color: var(--acid); flex-shrink: 0; width: 110px;">/help</code>
+            <p style="font-size: 0.95rem; color: #cbd5e1;">List available commands and installed skills</p>
+        </div>
+
+        <!-- /plan -->
+        <div style="background: var(--panel); border: 1px solid var(--surface); border-radius: 8px; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1.5rem;">
+            <code style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; color: var(--acid); flex-shrink: 0; width: 110px;">/plan</code>
+            <p style="font-size: 0.95rem; color: #cbd5e1;">Think through an approach before acting &mdash; outline steps, identify risks</p>
+        </div>
+
+        <!-- /compact -->
+        <div style="background: var(--panel); border: 1px solid var(--surface); border-radius: 8px; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1.5rem;">
+            <code style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; color: var(--acid); flex-shrink: 0; width: 110px;">/compact</code>
+            <p style="font-size: 0.95rem; color: #cbd5e1;">Compress the conversation when context gets long</p>
+        </div>
+
+        <!-- /clear -->
+        <div style="background: var(--panel); border: 1px solid var(--surface); border-radius: 8px; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1.5rem;">
+            <code style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; color: var(--acid); flex-shrink: 0; width: 110px;">/clear</code>
+            <p style="font-size: 0.95rem; color: #cbd5e1;">Start fresh without leaving the session</p>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>Module 2: Custom skills</span>
+        <span>17</span>
+    </div>
+</div>
+
+<!-- ============================================================
+     SLIDE 18 — Exercise preview / Your turn
+     ============================================================ -->
+<div class="slide slide--exercise" style="background: linear-gradient(160deg, var(--void) 0%, #131b2e 50%, var(--void) 100%);">
+    <div style="text-align: center; padding: 2rem; max-width: 85%;">
+        <div class="font-mono text-acid" style="font-size: 0.85rem; letter-spacing: 0.15em; margin-bottom: 1.5rem;">YOUR TURN</div>
+        <h2 class="font-display" style="font-size: 3rem; color: var(--chrome); margin-bottom: 1.5rem;">Build your own skill</h2>
+        <div style="width: 60px; height: 2px; background: var(--acid); margin: 0 auto 2rem;"></div>
+
+        <div style="text-align: left; max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem;">
+            <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                <span class="font-mono text-acid" style="font-size: 0.85rem; flex-shrink: 0; margin-top: 0.15em;">01</span>
+                <p style="font-size: 1.05rem; color: #cbd5e1; line-height: 1.5;">
+                    Build a custom slash command for a task on your beat
+                </p>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                <span class="font-mono text-acid" style="font-size: 0.85rem; flex-shrink: 0; margin-top: 0.15em;">02</span>
+                <p style="font-size: 1.05rem; color: #cbd5e1; line-height: 1.5;">
+                    Install the journalism skills repository (36 skills, 13 hooks)
+                </p>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                <span class="font-mono text-acid" style="font-size: 0.85rem; flex-shrink: 0; margin-top: 0.15em;">03</span>
+                <p style="font-size: 1.05rem; color: #cbd5e1; line-height: 1.5;">
+                    Use <code class="code-inline">/source-verification</code> to check a viral claim
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div><!-- end .deck -->
+
+<!-- ── Keyboard navigation ─────────────────────── -->
+<div class="nav-hint">Arrow keys to navigate</div>
+
+<script>
+(function () {
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
+
+    function scrollTo(index) {
+        if (index < 0 || index >= slides.length) return;
+        current = index;
+        slides[current].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') {
+            e.preventDefault();
+            scrollTo(current + 1);
+        } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+            e.preventDefault();
+            scrollTo(current - 1);
+        } else if (e.key === 'Home') {
+            e.preventDefault();
+            scrollTo(0);
+        } else if (e.key === 'End') {
+            e.preventDefault();
+            scrollTo(slides.length - 1);
+        }
+    });
+
+    // Update current index on scroll
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                current = Array.from(slides).indexOf(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    slides.forEach(function (slide) { observer.observe(slide); });
+})();
+</script>
+
+</body>
+</html>

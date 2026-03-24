@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to the course | Advanced prompt engineering for journalists</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ── Reset ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* ── Tokens ── */
+        :root {
+            --void: #0f172a;
+            --panel: #1e293b;
+            --surface: #334155;
+            --chrome: #f1f5f9;
+            --muted: #94a3b8;
+            --acid: #a3e635;
+            --ice: #67e8f9;
+            --signal: #f87171;
+            --font-display: 'Fraunces', serif;
+            --font-body: 'Inter', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+            --slide-w: 13.33in;
+            --slide-h: 7.5in;
+        }
+
+        /* ── Page chrome ── */
+        html { background: #020617; }
+        body {
+            font-family: var(--font-body);
+            color: var(--chrome);
+            background: #020617;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem 1rem;
+        }
+
+        /* ── Slide frame ── */
+        .slide {
+            width: var(--slide-w);
+            height: var(--slide-h);
+            background: var(--void);
+            border: 1px solid var(--surface);
+            border-radius: 4px;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            overflow: hidden;
+            page-break-after: always;
+            flex-shrink: 0;
+        }
+        .slide.title-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ── Slide header ── */
+        .slide-header {
+            padding: 2rem 3rem 0;
+        }
+        .slide-header h2 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 2.4rem;
+            color: var(--chrome);
+            line-height: 1.2;
+        }
+        .slide-header .subtitle {
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-top: 0.3rem;
+        }
+
+        /* ── Slide body ── */
+        .slide-body {
+            padding: 1.5rem 3rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* ── Slide footer ── */
+        .slide-footer {
+            padding: 0.75rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--muted);
+            border-top: 1px solid var(--surface);
+        }
+
+        /* ── Typography ── */
+        h1 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1.15;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            padding: 0.55rem 0;
+            padding-left: 1.8rem;
+            position: relative;
+            font-size: 1.35rem;
+            line-height: 1.5;
+        }
+        ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 1.05rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--acid);
+        }
+        code {
+            font-family: var(--font-code);
+            background: var(--panel);
+            padding: 0.15em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        .accent { color: var(--acid); }
+        .accent-ice { color: var(--ice); }
+        .muted { color: var(--muted); }
+
+        /* ── Title slide ── */
+        .title-content {
+            text-align: center;
+            padding: 3rem;
+        }
+        .title-content h1 {
+            font-size: 3.2rem;
+            background: linear-gradient(135deg, var(--acid), var(--ice));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+        }
+        .title-content .org {
+            font-size: 1.3rem;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+        .title-content .instructor {
+            font-size: 1.15rem;
+            color: var(--ice);
+        }
+        .title-bar {
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--acid), var(--ice));
+            border-radius: 2px;
+            margin: 1.5rem auto;
+        }
+
+        /* ── Stat slide ── */
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 10rem;
+            font-weight: 700;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--acid), var(--ice));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-label {
+            font-size: 1.5rem;
+            color: var(--chrome);
+            margin-top: 0.5rem;
+            max-width: 36rem;
+        }
+        .stat-source {
+            font-size: 0.95rem;
+            color: var(--muted);
+            margin-top: 1rem;
+        }
+
+        /* ── Diagram helpers ── */
+        .diagram-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+        }
+
+        /* ── Two-column layout ── */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+        .col-card {
+            background: var(--panel);
+            border-radius: 12px;
+            padding: 2rem 2.2rem;
+            border: 1px solid var(--surface);
+        }
+        .col-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+        }
+        .col-card ul li {
+            font-size: 1.2rem;
+            padding: 0.4rem 0 0.4rem 1.6rem;
+        }
+        .col-card ul li::before {
+            top: 0.85rem;
+            width: 6px;
+            height: 6px;
+        }
+
+        /* ── Closing slide ── */
+        .closing-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem 2.5rem;
+        }
+        .closing-list li {
+            font-size: 1.25rem;
+        }
+
+        /* ── Print (PDF export) ── */
+        @media print {
+            body { padding: 0; gap: 0; background: white; }
+            .slide { border: none; border-radius: 0; }
+        }
+    </style>
+</head>
+<body>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SLIDE 1 — Title
+     ════════════════════════════════════════════════════════════════ -->
+<div class="slide title-slide" style="background: linear-gradient(135deg, var(--void) 0%, #162317 50%, var(--void) 100%);">
+    <div class="title-content">
+        <h1>Advanced prompt engineering<br>for journalists</h1>
+        <div class="title-bar"></div>
+        <p class="org">Knight Center for Journalism at UT Austin</p>
+        <p class="instructor">Joe Amditis &mdash; Center for Cooperative Media, Montclair State University</p>
+    </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SLIDE 2 — What this course is about
+     ════════════════════════════════════════════════════════════════ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>What this course is about</h2>
+    </div>
+    <div class="slide-body">
+        <ul>
+            <li>Moving from <span class="accent">web chat interfaces</span> to <span class="accent">CLI tools</span></li>
+            <li>From apps to <span class="accent-ice">harnesses</span></li>
+            <li>From prompting to <span class="accent-ice">managing</span></li>
+            <li>Not a coding course &mdash; a <strong>delegation</strong> course</li>
+            <li>You'll learn to give AI agents real tools, file access, and autonomy</li>
+        </ul>
+    </div>
+    <div class="slide-footer">
+        <span>Advanced prompt engineering for journalists</span>
+        <span>2</span>
+    </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SLIDE 3 — The prerequisite bridge
+     ════════════════════════════════════════════════════════════════ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>The prerequisite bridge</h2>
+        <div class="subtitle">You already know more than you think</div>
+    </div>
+    <div class="slide-body">
+        <ul>
+            <li>You already know prompting from the 101 course</li>
+            <li>You can write clear instructions, provide context, and iterate</li>
+            <li>Those skills carry forward &mdash; they are the foundation</li>
+            <li>The difference is <span class="accent">where</span> and <span class="accent">how</span> you deliver prompts</li>
+            <li>Same principles, new delivery mechanism</li>
+        </ul>
+    </div>
+    <div class="slide-footer">
+        <span>Advanced prompt engineering for journalists</span>
+        <span>3</span>
+    </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SLIDE 4 — Diagram: Models → Apps → Harnesses
+     ════════════════════════════════════════════════════════════════ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Models, apps, and harnesses</h2>
+        <div class="subtitle">Ethan Mollick's framework for understanding AI tools</div>
+    </div>
+    <div class="slide-body">
+        <div class="diagram-container">
+            <svg viewBox="0 0 800 380" width="760" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Inter', sans-serif;">
+                <!-- Layer: Harnesses (top) -->
+                <rect x="80" y="20" width="440" height="90" rx="12" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+                <text x="300" y="55" text-anchor="middle" fill="#a3e635" font-size="20" font-weight="700" font-family="Fraunces, serif">Harnesses</text>
+                <text x="300" y="82" text-anchor="middle" fill="#94a3b8" font-size="14">Claude Code, Gemini CLI, Codex CLI</text>
+                <text x="300" y="100" text-anchor="middle" fill="#94a3b8" font-size="12">Tools + file access + autonomy</text>
+
+                <!-- Layer: Apps (middle) -->
+                <rect x="80" y="140" width="440" height="90" rx="12" fill="#1e293b" stroke="#67e8f9" stroke-width="2"/>
+                <text x="300" y="175" text-anchor="middle" fill="#67e8f9" font-size="20" font-weight="700" font-family="Fraunces, serif">Apps</text>
+                <text x="300" y="202" text-anchor="middle" fill="#94a3b8" font-size="14">ChatGPT.com, Claude.ai, Gemini.google.com</text>
+                <text x="300" y="220" text-anchor="middle" fill="#94a3b8" font-size="12">The interfaces you already know</text>
+
+                <!-- Layer: Models (bottom) -->
+                <rect x="80" y="260" width="440" height="90" rx="12" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+                <text x="300" y="295" text-anchor="middle" fill="#f1f5f9" font-size="20" font-weight="700" font-family="Fraunces, serif">Models</text>
+                <text x="300" y="322" text-anchor="middle" fill="#94a3b8" font-size="14">Claude Opus, GPT, Gemini</text>
+                <text x="300" y="340" text-anchor="middle" fill="#94a3b8" font-size="12">The intelligence layer</text>
+
+                <!-- Connecting lines -->
+                <line x1="300" y1="110" x2="300" y2="140" stroke="#334155" stroke-width="2"/>
+                <line x1="300" y1="230" x2="300" y2="260" stroke="#334155" stroke-width="2"/>
+
+                <!-- "This course" arrow -->
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto" fill="#a3e635">
+                        <polygon points="0 0, 10 3.5, 0 7"/>
+                    </marker>
+                </defs>
+                <path d="M580,210 C620,210 640,120 640,65" stroke="#a3e635" stroke-width="2.5" fill="none" stroke-dasharray="6,4" marker-end="url(#arrowhead)"/>
+                <rect x="558" y="195" width="130" height="32" rx="6" fill="#a3e635" fill-opacity="0.12" stroke="#a3e635" stroke-width="1"/>
+                <text x="623" y="216" text-anchor="middle" fill="#a3e635" font-size="15" font-weight="600">This course</text>
+
+                <!-- Arrow start dot on Apps layer -->
+                <circle cx="520" cy="185" r="0" fill="#a3e635"/>
+            </svg>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>Advanced prompt engineering for journalists</span>
+        <span>4</span>
+    </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SLIDE 5 — Why harnesses matter
+     ════════════════════════════════════════════════════════════════ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Why harnesses matter</h2>
+        <div class="subtitle">Same model, different capabilities</div>
+    </div>
+    <div class="slide-body">
+        <div class="two-col">
+            <div class="col-card">
+                <h3 class="accent-ice">Chat window</h3>
+                <ul>
+                    <li>Conversational sandbox</li>
+                    <li>No file access</li>
+                    <li>Copy-paste workflow</li>
+                    <li>No persistence between sessions</li>
+                </ul>
+            </div>
+            <div class="col-card">
+                <h3 class="accent">CLI harness</h3>
+                <ul>
+                    <li>Real machine access</li>
+                    <li>File I/O and editing</li>
+                    <li>Automation and scripting</li>
+                    <li>Version control built in</li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 1.5rem; font-size: 1.15rem; color: var(--muted);">The model is the same &mdash; the difference is what it can <span class="accent">reach</span>.</p>
+    </div>
+    <div class="slide-footer">
+        <span>Advanced prompt engineering for journalists</span>
+        <span>5</span>
+    </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SLIDE 6 — Diagram: 4-week course roadmap
+     ════════════════════════════════════════════════════════════════ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Course roadmap</h2>
+        <div class="subtitle">Four weeks, building block by block</div>
+    </div>
+    <div class="slide-body">
+        <div class="diagram-container">
+            <svg viewBox="0 0 840 300" width="800" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Inter', sans-serif;">
+                <!-- Connecting line -->
+                <line x1="105" y1="100" x2="735" y2="100" stroke="#334155" stroke-width="3"/>
+
+                <!-- Week 1 -->
+                <circle cx="105" cy="100" r="22" fill="#1e293b" stroke="#a3e635" stroke-width="2.5"/>
+                <text x="105" y="106" text-anchor="middle" fill="#a3e635" font-size="16" font-weight="700">1</text>
+                <text x="105" y="145" text-anchor="middle" fill="#f1f5f9" font-size="15" font-weight="600">CLI setup</text>
+                <text x="105" y="168" text-anchor="middle" fill="#94a3b8" font-size="12.5">Install tools, write</text>
+                <text x="105" y="185" text-anchor="middle" fill="#94a3b8" font-size="12.5">your first CLAUDE.md</text>
+
+                <!-- Week 2 -->
+                <circle cx="315" cy="100" r="22" fill="#1e293b" stroke="#67e8f9" stroke-width="2.5"/>
+                <text x="315" y="106" text-anchor="middle" fill="#67e8f9" font-size="16" font-weight="700">2</text>
+                <text x="315" y="145" text-anchor="middle" fill="#f1f5f9" font-size="15" font-weight="600">Custom skills + hooks</text>
+                <text x="315" y="168" text-anchor="middle" fill="#94a3b8" font-size="12.5">Build reusable tools</text>
+                <text x="315" y="185" text-anchor="middle" fill="#94a3b8" font-size="12.5">and safety guardrails</text>
+
+                <!-- Week 3 -->
+                <circle cx="525" cy="100" r="22" fill="#1e293b" stroke="#a3e635" stroke-width="2.5"/>
+                <text x="525" y="106" text-anchor="middle" fill="#a3e635" font-size="16" font-weight="700">3</text>
+                <text x="525" y="145" text-anchor="middle" fill="#f1f5f9" font-size="15" font-weight="600">Automation pipelines</text>
+                <text x="525" y="168" text-anchor="middle" fill="#94a3b8" font-size="12.5">Chain tasks, schedule</text>
+                <text x="525" y="185" text-anchor="middle" fill="#94a3b8" font-size="12.5">workflows, manage cost</text>
+
+                <!-- Week 4 -->
+                <circle cx="735" cy="100" r="22" fill="#1e293b" stroke="#67e8f9" stroke-width="2.5"/>
+                <text x="735" y="106" text-anchor="middle" fill="#67e8f9" font-size="16" font-weight="700">4</text>
+                <text x="735" y="145" text-anchor="middle" fill="#f1f5f9" font-size="15" font-weight="600">APIs, MCP, and RAG</text>
+                <text x="735" y="168" text-anchor="middle" fill="#94a3b8" font-size="12.5">Connect external data,</text>
+                <text x="735" y="185" text-anchor="middle" fill="#94a3b8" font-size="12.5">ground outputs in sources</text>
+
+                <!-- Arrow at end -->
+                <defs>
+                    <marker id="arrow2" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto" fill="#a3e635">
+                        <polygon points="0 0, 10 3.5, 0 7"/>
+                    </marker>
+                </defs>
+                <line x1="757" y1="100" x2="800" y2="100" stroke="#a3e635" stroke-width="2.5" marker-end="url(#arrow2)"/>
+
+                <!-- Final project label -->
+                <rect x="690" y="215" width="130" height="36" rx="8" fill="#a3e635" fill-opacity="0.1" stroke="#a3e635" stroke-width="1.5"/>
+                <text x="755" y="238" text-anchor="middle" fill="#a3e635" font-size="14" font-weight="600">Final project</text>
+                <line x1="735" y1="122" x2="735" y2="215" stroke="#a3e635" stroke-width="1" stroke-dasharray="4,4"/>
+            </svg>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>Advanced prompt engineering for journalists</span>
+        <span>6</span>
+    </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SLIDE 7 — What you need
+     ════════════════════════════════════════════════════════════════ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>What you need</h2>
+    </div>
+    <div class="slide-body">
+        <ul>
+            <li><span class="accent">Paid subscription</span> ($20/mo) to Claude, ChatGPT, or Gemini</li>
+            <li><span class="accent-ice">Terminal or IDE</span> &mdash; PowerShell, VS Code, Terminal.app, etc.</li>
+            <li><span class="accent">GitHub account</span> (free)</li>
+            <li><span class="accent-ice">Node.js</span> installed on your computer (required for CLI tools)</li>
+            <li>No coding experience required</li>
+        </ul>
+    </div>
+    <div class="slide-footer">
+        <span>Advanced prompt engineering for journalists</span>
+        <span>7</span>
+    </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SLIDE 8 — Stat slide: 22%
+     ════════════════════════════════════════════════════════════════ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2 style="visibility: hidden;">Stat</h2>
+    </div>
+    <div class="slide-body" style="align-items: center; text-align: center;">
+        <div class="stat-number">22%</div>
+        <p class="stat-label">Daily AI adoption rate for transcription among UK journalists &mdash; the highest single-task adoption rate in the industry.</p>
+        <p class="stat-source">Reuters Institute, 2025 &mdash; The highest adoption is in back-office processing tasks, the kind of work CLI tools are built for.</p>
+    </div>
+    <div class="slide-footer">
+        <span>Advanced prompt engineering for journalists</span>
+        <span>8</span>
+    </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SLIDE 9 — Diagram: The key shift
+     ════════════════════════════════════════════════════════════════ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>The key shift</h2>
+    </div>
+    <div class="slide-body">
+        <div class="two-col" style="margin-bottom: 1rem;">
+            <div class="col-card" style="border-color: var(--surface);">
+                <h3 class="accent-ice">Prompting</h3>
+                <ul>
+                    <li>Chat window</li>
+                    <li>One-off interactions</li>
+                    <li>Copy-paste results</li>
+                    <li>No persistence</li>
+                </ul>
+            </div>
+            <div class="col-card" style="border-color: var(--acid);">
+                <h3 class="accent">Managing</h3>
+                <ul>
+                    <li>Delegate tasks</li>
+                    <li>Persistent context</li>
+                    <li>Reusable tools</li>
+                    <li>Version-controlled</li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align: center; font-size: 1.35rem; color: var(--chrome); margin-top: 0.75rem;">
+            <span style="color: var(--muted);">&ldquo;</span>You aren't prompting, you are managing.<span style="color: var(--muted);">&rdquo;</span>
+            <span style="color: var(--muted); font-size: 1rem; margin-left: 0.5rem;">&mdash; Ethan Mollick</span>
+        </p>
+    </div>
+    <div class="slide-footer">
+        <span>Advanced prompt engineering for journalists</span>
+        <span>9</span>
+    </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     SLIDE 10 — What you can do right now
+     ════════════════════════════════════════════════════════════════ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>What you can do right now</h2>
+    </div>
+    <div class="slide-body">
+        <div class="closing-list">
+            <ul>
+                <li>Install <span class="accent">Node.js</span> on your computer</li>
+                <li>Read the <span class="accent-ice">syllabus</span> and course overview</li>
+            </ul>
+            <ul>
+                <li>Check that you have <span class="accent">admin access</span> on your machine</li>
+                <li>Explore the <span class="accent-ice">readings</span> for week 1</li>
+            </ul>
+        </div>
+        <p style="text-align: center; font-size: 1.6rem; margin-top: 2.5rem; color: var(--chrome);">
+            When you're ready, I'll see you in <span class="accent">Module 1</span>.
+        </p>
+    </div>
+    <div class="slide-footer">
+        <span>Advanced prompt engineering for journalists</span>
+        <span>10</span>
+    </div>
+</div>
+
+
+</body>
+</html>

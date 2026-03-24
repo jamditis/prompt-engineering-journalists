@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLAUDE.md and context files | Advanced prompt engineering for journalists</title>
+    <meta name="description" content="Slide deck covering CLAUDE.md project context, the memory system, and extending with custom patterns. Module 1, Advanced Prompt Engineering for Journalists.">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mooc.amditis.tech/slides/module-1-context-files.html" />
+    <meta property="og:title" content="CLAUDE.md and context files | Advanced prompt engineering for journalists" />
+    <meta property="og:description" content="Slide deck covering project context files, memory systems, and custom patterns for AI coding tools." />
+    <meta property="og:site_name" content="Knight Center for Journalism" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="CLAUDE.md and context files" />
+    <meta name="twitter:description" content="Slide deck covering project context files, memory systems, and custom patterns for AI coding tools." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ── Reset ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* ── Design tokens ── */
+        :root {
+            --void: #0f172a;
+            --panel: #1e293b;
+            --surface: #334155;
+            --chrome: #f1f5f9;
+            --acid: #a3e635;
+            --acid-dim: rgba(163, 230, 53, 0.12);
+            --ice: #67e8f9;
+            --ice-dim: rgba(103, 232, 249, 0.12);
+            --signal: #f87171;
+            --signal-dim: rgba(248, 113, 113, 0.12);
+            --font-display: 'Fraunces', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --slide-w: 1280px;
+            --slide-h: 720px;
+        }
+
+        html { background: #000; }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--chrome);
+            background: #000;
+            overflow: hidden;
+        }
+
+        /* ── Slide container ── */
+        .deck {
+            position: relative;
+            width: var(--slide-w);
+            height: var(--slide-h);
+            margin: 0 auto;
+            /* Scale to fit viewport */
+            transform-origin: top left;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: var(--slide-w);
+            height: var(--slide-h);
+            background: var(--void);
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            overflow: hidden;
+        }
+
+        .slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* ── Title/section slides: flex layout ── */
+        .slide.slide--title,
+        .slide.slide--section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ── Header ── */
+        .slide-header {
+            padding: 28px 56px 0;
+        }
+
+        .slide-header h2 {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .slide-header .subtitle {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--acid);
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        /* ── Body ── */
+        .slide-body {
+            padding: 24px 56px;
+            overflow: hidden;
+        }
+
+        /* ── Footer ── */
+        .slide-footer {
+            padding: 12px 56px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: #64748b;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        /* ── Typography ── */
+        .t-display { font-family: var(--font-display); }
+        .t-mono { font-family: var(--font-mono); }
+
+        ul.bullets {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.bullets li {
+            padding: 10px 0;
+            padding-left: 28px;
+            position: relative;
+            font-size: 20px;
+            line-height: 1.5;
+            color: #cbd5e1;
+        }
+
+        ul.bullets li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            font-family: var(--font-mono);
+            color: var(--acid);
+            font-weight: 700;
+        }
+
+        ul.bullets li strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        ul.bullets li code {
+            font-family: var(--font-mono);
+            font-size: 0.85em;
+            background: var(--panel);
+            border: 1px solid var(--surface);
+            padding: 1px 6px;
+            border-radius: 3px;
+            color: var(--acid);
+        }
+
+        /* ── Code blocks ── */
+        .code-block {
+            background: var(--panel);
+            border: 1px solid var(--surface);
+            border-radius: 6px;
+            padding: 20px 24px;
+            font-family: var(--font-mono);
+            font-size: 16px;
+            line-height: 1.6;
+            color: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .code-block .kw { color: var(--signal); }
+        .code-block .str { color: var(--acid); }
+        .code-block .fn { color: var(--ice); }
+        .code-block .cmt { color: #94a3b8; font-style: italic; }
+
+        /* ── Two-column layout ── */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            height: 100%;
+            align-content: start;
+        }
+
+        .col-card {
+            background: var(--panel);
+            border: 1px solid var(--surface);
+            border-radius: 8px;
+            padding: 24px;
+        }
+
+        .col-card h3 {
+            font-family: var(--font-display);
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .col-card p, .col-card li {
+            font-size: 16px;
+            line-height: 1.55;
+            color: #cbd5e1;
+        }
+
+        .col-card code {
+            font-family: var(--font-mono);
+            font-size: 0.85em;
+            background: rgba(163,230,53,0.1);
+            border: 1px solid rgba(163,230,53,0.2);
+            padding: 1px 5px;
+            border-radius: 3px;
+            color: var(--acid);
+        }
+
+        /* ── Tags / labels ── */
+        .tag {
+            display: inline-block;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        .tag--acid { background: var(--acid-dim); color: var(--acid); border: 1px solid rgba(163,230,53,0.25); }
+        .tag--ice { background: var(--ice-dim); color: var(--ice); border: 1px solid rgba(103,232,249,0.25); }
+        .tag--signal { background: var(--signal-dim); color: var(--signal); border: 1px solid rgba(248,113,113,0.25); }
+
+        /* ── Callout box ── */
+        .callout {
+            border-radius: 6px;
+            padding: 20px 24px;
+        }
+        .callout--acid { background: var(--acid-dim); border-left: 3px solid var(--acid); }
+        .callout--ice { background: var(--ice-dim); border-left: 3px solid var(--ice); }
+        .callout--signal { background: var(--signal-dim); border-left: 3px solid var(--signal); }
+
+        /* ── Comparison grid ── */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .compare-card {
+            background: var(--panel);
+            border: 1px solid var(--surface);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .compare-card.good { border-color: rgba(163,230,53,0.4); }
+        .compare-card.bad { border-color: rgba(248,113,113,0.4); }
+
+        .compare-card h4 {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            margin-bottom: 12px;
+            letter-spacing: 0.04em;
+        }
+        .compare-card.good h4 { color: var(--acid); }
+        .compare-card.bad h4 { color: var(--signal); }
+
+        .compare-card p, .compare-card li {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #cbd5e1;
+        }
+
+        /* ── Navigation controls ── */
+        .nav-controls {
+            position: fixed;
+            bottom: 16px;
+            right: 24px;
+            display: flex;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--surface);
+            background: var(--panel);
+            color: var(--chrome);
+            font-family: var(--font-mono);
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s ease, border-color 0.15s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--surface);
+            border-color: var(--acid);
+            color: var(--acid);
+        }
+
+        .slide-counter {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+        }
+
+        /* ── Progress bar ── */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--acid);
+            transition: width 0.3s ease;
+            z-index: 200;
+        }
+
+        /* ── Responsive scaling ── */
+        @media (prefers-reduced-motion: reduce) {
+            .slide { transition: none; }
+            .progress-bar { transition: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="deck" id="deck">
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 1 — Title
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide slide--title active" data-slide="1">
+    <div style="text-align: center; padding: 0 80px;">
+        <div class="t-mono" style="font-size: 13px; color: var(--acid); letter-spacing: 0.1em; margin-bottom: 24px;">MODULE 01 — ADVANCED PROMPT ENGINEERING FOR JOURNALISTS</div>
+        <h1 class="t-display" style="font-size: 52px; font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 20px;">CLAUDE.md and context files</h1>
+        <p style="font-size: 22px; color: #94a3b8; max-width: 700px; margin: 0 auto 40px; line-height: 1.5;">Giving AI persistent memory about your work</p>
+        <div style="display: flex; justify-content: center; gap: 24px; align-items: center;">
+            <span style="font-size: 15px; color: #cbd5e1;">Joe Amditis</span>
+            <span style="color: var(--surface);">|</span>
+            <span style="font-size: 14px; color: #64748b;">Center for Cooperative Media</span>
+            <span style="color: var(--surface);">|</span>
+            <span style="font-size: 14px; color: #64748b;">Knight Center MOOC</span>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 2 — The blank-slate problem
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="2">
+    <div class="slide-header">
+        <div class="subtitle">THE PROBLEM</div>
+        <h2>Every new chat starts from zero</h2>
+    </div>
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 12px;">
+            <div>
+                <ul class="bullets">
+                    <li>AI doesn't know your <strong>beat</strong></li>
+                    <li>AI doesn't know your <strong>writing style</strong></li>
+                    <li>AI doesn't know what you <strong>worked on last session</strong></li>
+                    <li>You re-explain everything. <strong>Every. Time.</strong></li>
+                </ul>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div class="code-block" style="font-size: 14px;">
+                    <span class="cmt"># Monday</span><br>
+                    "I cover city hall for the Tribune.<br>
+                    &nbsp;The mayor is Linda Chen..."<br><br>
+                    <span class="cmt"># Tuesday</span><br>
+                    "I cover city hall for the Tribune.<br>
+                    &nbsp;The mayor is Linda Chen..."<br><br>
+                    <span class="cmt"># Wednesday</span><br>
+                    "I cover city hall for the Tribune..."
+                </div>
+                <div class="callout callout--acid" style="font-size: 15px;">
+                    <strong style="color: var(--acid);">Context files solve this.</strong><br>
+                    Write it once. Every session starts informed.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>CLAUDE.md and context files</span>
+        <span>2 / 16</span>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 3 — Section divider: The official context system
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide slide--section" data-slide="3">
+    <div style="text-align: center;">
+        <div class="t-mono" style="font-size: 72px; font-weight: 700; color: var(--acid); opacity: 0.15; margin-bottom: -20px;">01</div>
+        <div class="t-mono" style="font-size: 14px; color: var(--acid); letter-spacing: 0.15em; margin-bottom: 16px;">SECTION 01</div>
+        <h2 class="t-display" style="font-size: 44px; font-weight: 700; color: #fff;">The official context system</h2>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 4 — DIAGRAM: The 3 levels of CLAUDE.md
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="4">
+    <div class="slide-header">
+        <div class="subtitle">ARCHITECTURE</div>
+        <h2>The 3 levels of context</h2>
+    </div>
+    <div class="slide-body" style="display: flex; align-items: center; justify-content: center;">
+        <svg viewBox="0 0 1000 480" width="920" height="440" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+            <!-- Level 1: Global -->
+            <rect x="200" y="10" width="600" height="120" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+            <text x="510" y="48" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="14" fill="#a3e635">~/.claude/CLAUDE.md</text>
+            <text x="510" y="72" text-anchor="middle" font-family="'Fraunces', serif" font-size="22" font-weight="700" fill="#fff">Global</text>
+            <text x="510" y="100" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#94a3b8">Style preferences, skill level, general instructions</text>
+            <text x="510" y="118" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#94a3b8">Applies everywhere, every project</text>
+            <!-- Label: auto-loaded -->
+            <rect x="820" y="42" width="160" height="28" rx="4" fill="rgba(163,230,53,0.12)" stroke="rgba(163,230,53,0.25)" stroke-width="1"/>
+            <text x="900" y="61" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#a3e635">AUTO-LOADED</text>
+            <line x1="800" y1="56" x2="820" y2="56" stroke="#a3e635" stroke-width="1" stroke-dasharray="4,3"/>
+
+            <!-- Arrow 1 -->
+            <line x1="500" y1="130" x2="500" y2="170" stroke="#475569" stroke-width="2"/>
+            <polygon points="500,178 494,168 506,168" fill="#475569"/>
+
+            <!-- Level 2: Project -->
+            <rect x="200" y="180" width="600" height="120" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="2"/>
+            <text x="510" y="218" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="14" fill="#67e8f9">project/CLAUDE.md</text>
+            <text x="510" y="242" text-anchor="middle" font-family="'Fraunces', serif" font-size="22" font-weight="700" fill="#fff">Project</text>
+            <text x="510" y="270" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#94a3b8">Beat-specific context, terminology, conventions</text>
+            <text x="510" y="288" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#94a3b8">Read when you launch from that directory</text>
+            <!-- Label: auto-loaded -->
+            <rect x="820" y="212" width="160" height="28" rx="4" fill="rgba(103,232,249,0.12)" stroke="rgba(103,232,249,0.25)" stroke-width="1"/>
+            <text x="900" y="231" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#67e8f9">AUTO-LOADED</text>
+            <line x1="800" y1="226" x2="820" y2="226" stroke="#67e8f9" stroke-width="1" stroke-dasharray="4,3"/>
+
+            <!-- Arrow 2 -->
+            <line x1="500" y1="300" x2="500" y2="340" stroke="#475569" stroke-width="2"/>
+            <polygon points="500,348 494,338 506,338" fill="#475569"/>
+
+            <!-- Level 3: Session -->
+            <rect x="200" y="350" width="600" height="120" rx="8" fill="#1e293b" stroke="#475569" stroke-width="2" stroke-dasharray="6,4"/>
+            <text x="510" y="390" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="14" fill="#64748b">conversation</text>
+            <text x="510" y="414" text-anchor="middle" font-family="'Fraunces', serif" font-size="22" font-weight="700" fill="#94a3b8">Session context</text>
+            <text x="510" y="440" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#64748b">The conversation itself. Ephemeral.</text>
+            <text x="510" y="458" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#64748b">Gone when the session ends.</text>
+            <!-- Label: temporary -->
+            <rect x="820" y="382" width="160" height="28" rx="4" fill="rgba(248,113,113,0.12)" stroke="rgba(248,113,113,0.25)" stroke-width="1"/>
+            <text x="900" y="401" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="11" fill="#f87171">TEMPORARY</text>
+            <line x1="800" y1="396" x2="820" y2="396" stroke="#f87171" stroke-width="1" stroke-dasharray="4,3"/>
+
+            <!-- Left label -->
+            <text x="180" y="250" text-anchor="end" font-family="'Inter', sans-serif" font-size="12" fill="#475569" transform="rotate(-90, 180, 250)">PERSISTENCE</text>
+            <!-- Arrow along left side -->
+            <line x1="188" y1="130" x2="188" y2="370" stroke="#475569" stroke-width="1"/>
+            <polygon points="188,118 184,128 192,128" fill="#475569"/>
+        </svg>
+    </div>
+    <div class="slide-footer">
+        <span>CLAUDE.md and context files</span>
+        <span>4 / 16</span>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 5 — What goes in each level
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="5">
+    <div class="slide-header">
+        <div class="subtitle">WHAT GOES WHERE</div>
+        <h2>Two files, two purposes</h2>
+    </div>
+    <div class="slide-body">
+        <div class="two-col" style="margin-top: 8px;">
+            <div class="col-card" style="border-color: rgba(163,230,53,0.3);">
+                <div class="tag tag--acid">GLOBAL</div>
+                <h3><code>~/.claude/CLAUDE.md</code></h3>
+                <ul class="bullets" style="margin-top: 8px;">
+                    <li style="font-size: 16px; padding: 6px 0 6px 24px;">Your <strong>writing style</strong> preferences</li>
+                    <li style="font-size: 16px; padding: 6px 0 6px 24px;">Your <strong>skill level</strong> declarations</li>
+                    <li style="font-size: 16px; padding: 6px 0 6px 24px;">General <strong>tool preferences</strong></li>
+                    <li style="font-size: 16px; padding: 6px 0 6px 24px;">Things true about <strong>you</strong> across all projects</li>
+                </ul>
+            </div>
+            <div class="col-card" style="border-color: rgba(103,232,249,0.3);">
+                <div class="tag tag--ice">PROJECT</div>
+                <h3><code>CLAUDE.md</code></h3>
+                <ul class="bullets" style="margin-top: 8px;">
+                    <li style="font-size: 16px; padding: 6px 0 6px 24px;"><strong>Beat entities</strong> (names, titles, orgs)</li>
+                    <li style="font-size: 16px; padding: 6px 0 6px 24px;"><strong>Terminology</strong> specific to your coverage</li>
+                    <li style="font-size: 16px; padding: 6px 0 6px 24px;"><strong>Source standards</strong> and things to avoid</li>
+                    <li style="font-size: 16px; padding: 6px 0 6px 24px;"><strong>Hard-won lessons</strong> from past sessions</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>CLAUDE.md and context files</span>
+        <span>5 / 16</span>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 6 — What makes good context
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="6">
+    <div class="slide-header">
+        <div class="subtitle">WRITING GOOD CONTEXT</div>
+        <h2>What changes the output</h2>
+    </div>
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 4px;">
+            <div>
+                <ul class="bullets">
+                    <li><strong>Key entities</strong> -- mayor name, city council members, department heads</li>
+                    <li><strong>Style rules</strong> that differ from defaults (AP style, Oxford comma, dateline format)</li>
+                    <li><strong>Terminology</strong> the AI would confuse ("resolution" vs "ordinance")</li>
+                    <li><strong>Project structure</strong> -- what files exist, how they relate</li>
+                </ul>
+            </div>
+            <div>
+                <div class="compare-grid" style="grid-template-columns: 1fr;">
+                    <div class="compare-card bad" style="margin-bottom: 12px;">
+                        <h4>GENERIC -- DELETE THESE</h4>
+                        <p style="font-family: var(--font-mono); font-size: 14px;">"Be helpful and accurate"<br>"Always verify facts before publishing"<br>"Write clearly"</p>
+                    </div>
+                    <div class="compare-card good">
+                        <h4>SPECIFIC -- KEEP THESE</h4>
+                        <p style="font-family: var(--font-mono); font-size: 14px;">"The city uses 'resolution' for binding votes and 'ordinance' for legislation"<br>"Mayor: Linda Chen (D), elected 2024"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>CLAUDE.md and context files</span>
+        <span>6 / 16</span>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 7 — The deletion test
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="7">
+    <div class="slide-header">
+        <div class="subtitle">QUALITY CHECK</div>
+        <h2>The deletion test</h2>
+    </div>
+    <div class="slide-body">
+        <div style="margin-top: 8px;">
+            <div class="callout callout--ice" style="font-size: 18px; line-height: 1.6; margin-bottom: 28px;">
+                <strong style="color: var(--ice);">Before saving a line, ask:</strong> "If I delete this, would the AI's output change for someone who already knows my beat?"<br>If not -- cut it.
+            </div>
+            <div class="compare-grid">
+                <div class="compare-card bad">
+                    <h4>FAILS THE TEST</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 6px 0; font-size: 16px; color: #cbd5e1;"><span style="color: var(--signal); font-family: var(--font-mono);">x</span>&nbsp; "Verify facts before publishing"</li>
+                        <li style="padding: 6px 0; font-size: 16px; color: #cbd5e1;"><span style="color: var(--signal); font-family: var(--font-mono);">x</span>&nbsp; "Use professional language"</li>
+                        <li style="padding: 6px 0; font-size: 16px; color: #cbd5e1;"><span style="color: var(--signal); font-family: var(--font-mono);">x</span>&nbsp; "Be concise and clear"</li>
+                        <li style="padding: 6px 0; font-size: 16px; color: #94a3b8; font-style: italic;">These are defaults. They change nothing.</li>
+                    </ul>
+                </div>
+                <div class="compare-card good">
+                    <h4>PASSES THE TEST</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="padding: 6px 0; font-size: 16px; color: #cbd5e1;"><span style="color: var(--acid); font-family: var(--font-mono);">></span>&nbsp; "City council has 9 members, 5 needed for quorum"</li>
+                        <li style="padding: 6px 0; font-size: 16px; color: #cbd5e1;"><span style="color: var(--acid); font-family: var(--font-mono);">></span>&nbsp; "Use 'unhoused' not 'homeless'"</li>
+                        <li style="padding: 6px 0; font-size: 16px; color: #cbd5e1;"><span style="color: var(--acid); font-family: var(--font-mono);">></span>&nbsp; "Budget year runs Jul 1 -- Jun 30"</li>
+                        <li style="padding: 6px 0; font-size: 16px; color: #94a3b8; font-style: italic;">These are specific. They shape every output.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>CLAUDE.md and context files</span>
+        <span>7 / 16</span>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 8 — The /init command
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="8">
+    <div class="slide-header">
+        <div class="subtitle">GETTING STARTED</div>
+        <h2>The <code style="font-family: var(--font-mono); color: var(--acid); background: var(--acid-dim); padding: 2px 8px; border-radius: 4px; font-size: 28px;">/init</code> command</h2>
+    </div>
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 8px;">
+            <div>
+                <ul class="bullets">
+                    <li>Type <code>/init</code> inside a Claude Code session</li>
+                    <li>Claude <strong>scans your project</strong> and generates a CLAUDE.md with sensible defaults</li>
+                    <li>Review it, then <strong>customize for your beat</strong></li>
+                    <li>This is your <strong>starting point</strong>, not your finished product</li>
+                </ul>
+                <div class="callout callout--acid" style="margin-top: 20px; font-size: 15px;">
+                    <strong style="color: var(--acid);">The best context files are edited over time.</strong> Start with /init, then refine as you learn what the AI needs to know.
+                </div>
+            </div>
+            <div>
+                <div class="code-block" style="font-size: 14px;">
+                    <span class="cmt"># In your terminal:</span><br>
+                    <span class="fn">$</span> <span class="kw">cd</span> ~/city-hall-beat<br>
+                    <span class="fn">$</span> claude<br><br>
+                    <span class="cmt"># Inside the Claude session:</span><br>
+                    <span class="str">/init</span><br><br>
+                    <span class="cmt"># Claude analyzes your project and</span><br>
+                    <span class="cmt"># creates a CLAUDE.md tailored to</span><br>
+                    <span class="cmt"># what it finds in the directory</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>CLAUDE.md and context files</span>
+        <span>8 / 16</span>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 9 — Section divider: The memory system
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide slide--section" data-slide="9">
+    <div style="text-align: center;">
+        <div class="t-mono" style="font-size: 72px; font-weight: 700; color: var(--ice); opacity: 0.15; margin-bottom: -20px;">02</div>
+        <div class="t-mono" style="font-size: 14px; color: var(--ice); letter-spacing: 0.15em; margin-bottom: 16px;">SECTION 02</div>
+        <h2 class="t-display" style="font-size: 44px; font-weight: 700; color: #fff;">The memory system</h2>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 10 — DIAGRAM: Auto-memory architecture
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="10">
+    <div class="slide-header">
+        <div class="subtitle">ARCHITECTURE</div>
+        <h2>How auto-memory works</h2>
+    </div>
+    <div class="slide-body" style="display: flex; align-items: center; justify-content: center;">
+        <svg viewBox="0 0 1050 440" width="980" height="410" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+            <!-- Directory box -->
+            <rect x="20" y="20" width="440" height="400" rx="8" fill="none" stroke="#475569" stroke-width="1" stroke-dasharray="6,4"/>
+            <text x="40" y="50" font-family="'JetBrains Mono', monospace" font-size="12" fill="#64748b">~/.claude/projects/&lt;path&gt;/memory/</text>
+
+            <!-- MEMORY.md (index) -->
+            <rect x="50" y="72" width="380" height="72" rx="6" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+            <text x="70" y="100" font-family="'JetBrains Mono', monospace" font-size="15" font-weight="700" fill="#a3e635">MEMORY.md</text>
+            <text x="70" y="126" font-family="'Inter', sans-serif" font-size="13" fill="#94a3b8">Index file -- loaded into context automatically</text>
+
+            <!-- Individual memory files -->
+            <rect x="50" y="164" width="180" height="52" rx="5" fill="#1e293b" stroke="#67e8f9" stroke-width="1"/>
+            <rect x="50" y="228" width="180" height="52" rx="5" fill="#1e293b" stroke="#67e8f9" stroke-width="1"/>
+            <rect x="50" y="292" width="180" height="52" rx="5" fill="#1e293b" stroke="#67e8f9" stroke-width="1"/>
+            <rect x="50" y="356" width="180" height="52" rx="5" fill="#1e293b" stroke="#67e8f9" stroke-width="1"/>
+
+            <rect x="250" y="164" width="180" height="52" rx="5" fill="#1e293b" stroke="#67e8f9" stroke-width="1"/>
+            <rect x="250" y="228" width="180" height="52" rx="5" fill="#1e293b" stroke="#67e8f9" stroke-width="1"/>
+
+            <!-- File names -->
+            <text x="68" y="186" font-family="'JetBrains Mono', monospace" font-size="11" fill="#67e8f9">user_role.md</text>
+            <text x="68" y="202" font-family="'Inter', sans-serif" font-size="10" fill="#64748b">who you are, expertise</text>
+
+            <text x="68" y="250" font-family="'JetBrains Mono', monospace" font-size="11" fill="#67e8f9">feedback_testing.md</text>
+            <text x="68" y="266" font-family="'Inter', sans-serif" font-size="10" fill="#64748b">corrections, confirmations</text>
+
+            <text x="68" y="314" font-family="'JetBrains Mono', monospace" font-size="11" fill="#67e8f9">project_deadline.md</text>
+            <text x="68" y="330" font-family="'Inter', sans-serif" font-size="10" fill="#64748b">ongoing work, decisions</text>
+
+            <text x="68" y="378" font-family="'JetBrains Mono', monospace" font-size="11" fill="#67e8f9">reference_sources.md</text>
+            <text x="68" y="394" font-family="'Inter', sans-serif" font-size="10" fill="#64748b">pointers to resources</text>
+
+            <text x="268" y="186" font-family="'JetBrains Mono', monospace" font-size="11" fill="#67e8f9">feedback_style.md</text>
+            <text x="268" y="202" font-family="'Inter', sans-serif" font-size="10" fill="#64748b">what to repeat/avoid</text>
+
+            <text x="268" y="250" font-family="'JetBrains Mono', monospace" font-size="11" fill="#67e8f9">project_beats.md</text>
+            <text x="268" y="266" font-family="'Inter', sans-serif" font-size="10" fill="#64748b">coverage area notes</text>
+
+            <!-- Type labels -->
+            <rect x="155" y="168" width="50" height="16" rx="3" fill="rgba(163,230,53,0.12)"/>
+            <text x="180" y="179" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#a3e635">USER</text>
+            <rect x="155" y="232" width="72" height="16" rx="3" fill="rgba(248,113,113,0.12)"/>
+            <text x="191" y="243" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#f87171">FEEDBACK</text>
+            <rect x="155" y="296" width="62" height="16" rx="3" fill="rgba(103,232,249,0.12)"/>
+            <text x="186" y="307" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#67e8f9">PROJECT</text>
+            <rect x="155" y="360" width="72" height="16" rx="3" fill="rgba(103,232,249,0.12)"/>
+            <text x="191" y="371" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#67e8f9">REFERENCE</text>
+            <rect x="355" y="168" width="72" height="16" rx="3" fill="rgba(248,113,113,0.12)"/>
+            <text x="391" y="179" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#f87171">FEEDBACK</text>
+            <rect x="355" y="232" width="62" height="16" rx="3" fill="rgba(103,232,249,0.12)"/>
+            <text x="386" y="243" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8" fill="#67e8f9">PROJECT</text>
+
+            <!-- Arrows: MEMORY.md → "Loaded on session start" -->
+            <line x1="460" y1="108" x2="540" y2="108" stroke="#a3e635" stroke-width="2"/>
+            <polygon points="548,108 538,103 538,113" fill="#a3e635"/>
+
+            <!-- Target box: session start -->
+            <rect x="560" y="60" width="260" height="96" rx="8" fill="rgba(163,230,53,0.08)" stroke="rgba(163,230,53,0.3)" stroke-width="1"/>
+            <text x="690" y="96" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#a3e635">LOADED ON</text>
+            <text x="690" y="118" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#a3e635">SESSION START</text>
+            <text x="690" y="144" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#94a3b8">Always in context</text>
+
+            <!-- Arrows: individual files → "Loaded based on relevance" -->
+            <line x1="460" y1="290" x2="540" y2="290" stroke="#67e8f9" stroke-width="2"/>
+            <polygon points="548,290 538,285 538,295" fill="#67e8f9"/>
+
+            <!-- Target box: relevance -->
+            <rect x="560" y="240" width="260" height="100" rx="8" fill="rgba(103,232,249,0.08)" stroke="rgba(103,232,249,0.3)" stroke-width="1"/>
+            <text x="690" y="276" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#67e8f9">LOADED BASED ON</text>
+            <text x="690" y="298" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#67e8f9">RELEVANCE</text>
+            <text x="690" y="324" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#94a3b8">Claude selects what's needed</text>
+
+            <!-- Key -->
+            <rect x="560" y="370" width="260" height="48" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+            <circle cx="586" cy="394" r="5" fill="#a3e635"/>
+            <text x="598" y="398" font-family="'Inter', sans-serif" font-size="11" fill="#94a3b8">Automatic</text>
+            <circle cx="700" cy="394" r="5" fill="#67e8f9"/>
+            <text x="712" y="398" font-family="'Inter', sans-serif" font-size="11" fill="#94a3b8">On-demand</text>
+        </svg>
+    </div>
+    <div class="slide-footer">
+        <span>CLAUDE.md and context files</span>
+        <span>10 / 16</span>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 11 — Memory types
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="11">
+    <div class="slide-header">
+        <div class="subtitle">MEMORY TYPES</div>
+        <h2>Four categories of memory</h2>
+    </div>
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 4px;">
+            <div class="col-card" style="border-color: rgba(163,230,53,0.3);">
+                <div class="tag tag--acid">USER</div>
+                <h3 style="font-size: 18px;">Who you are</h3>
+                <p style="margin-top: 8px;">Your role, expertise level, what kind of work you do. Persists so you don't re-introduce yourself.</p>
+            </div>
+            <div class="col-card" style="border-color: rgba(248,113,113,0.3);">
+                <div class="tag tag--signal">FEEDBACK</div>
+                <h3 style="font-size: 18px;">Corrections and confirmations</h3>
+                <p style="margin-top: 8px;">What to repeat, what to avoid. Accumulated corrections compound over time. The AI learns your preferences.</p>
+            </div>
+            <div class="col-card" style="border-color: rgba(103,232,249,0.3);">
+                <div class="tag tag--ice">PROJECT</div>
+                <h3 style="font-size: 18px;">Ongoing work</h3>
+                <p style="margin-top: 8px;">Deadlines, decisions, current state. Keeps track of where you left off between sessions.</p>
+            </div>
+            <div class="col-card" style="border-color: rgba(103,232,249,0.3);">
+                <div class="tag tag--ice">REFERENCE</div>
+                <h3 style="font-size: 18px;">Where to find things</h3>
+                <p style="margin-top: 8px;">Pointers to external resources, file locations, URLs. So you don't re-explain your project structure.</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>CLAUDE.md and context files</span>
+        <span>11 / 16</span>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 12 — Context files should be versioned
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="12">
+    <div class="slide-header">
+        <div class="subtitle">VERSION CONTROL</div>
+        <h2>Commit your context</h2>
+    </div>
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 8px;">
+            <div>
+                <ul class="bullets">
+                    <li>CLAUDE.md is <strong>infrastructure</strong>, not a personal note</li>
+                    <li>Commit it to <strong>Git</strong></li>
+                    <li>When you push to GitHub, your context <strong>goes with it</strong></li>
+                    <li>When a colleague clones the repo, your accumulated beat knowledge is <strong>already there</strong></li>
+                </ul>
+                <div class="callout callout--ice" style="margin-top: 20px; font-size: 15px;">
+                    <strong style="color: var(--ice);">Shared context = shared standards.</strong> New team members and AI sessions start from your collective knowledge, not from zero.
+                </div>
+            </div>
+            <div>
+                <div class="code-block" style="font-size: 14px;">
+                    <span class="cmt"># Your project directory</span><br>
+                    city-hall-beat/<br>
+                    &nbsp;&nbsp;<span class="str">CLAUDE.md</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="cmt"># committed</span><br>
+                    &nbsp;&nbsp;stories/<br>
+                    &nbsp;&nbsp;data/<br>
+                    &nbsp;&nbsp;sources.csv<br><br>
+                    <span class="cmt"># A colleague clones:</span><br>
+                    <span class="fn">$</span> git clone repo-url<br>
+                    <span class="fn">$</span> cd city-hall-beat<br>
+                    <span class="fn">$</span> claude<br><br>
+                    <span class="cmt"># Claude already knows the beat.</span><br>
+                    <span class="cmt"># Mayor, terminology, style rules</span><br>
+                    <span class="cmt"># -- all loaded from CLAUDE.md</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>CLAUDE.md and context files</span>
+        <span>12 / 16</span>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 13 — Section divider: Extending the system
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide slide--section" data-slide="13">
+    <div style="text-align: center;">
+        <div class="t-mono" style="font-size: 72px; font-weight: 700; color: var(--signal); opacity: 0.15; margin-bottom: -20px;">03</div>
+        <div class="t-mono" style="font-size: 14px; color: var(--signal); letter-spacing: 0.15em; margin-bottom: 16px;">SECTION 03</div>
+        <h2 class="t-display" style="font-size: 44px; font-weight: 700; color: #fff;">Extending the system</h2>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 14 — Custom patterns (LESSONS.md example)
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="14">
+    <div class="slide-header">
+        <div class="subtitle">CUSTOM PATTERNS</div>
+        <h2>Structured error logs</h2>
+    </div>
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 4px;">
+            <div>
+                <ul class="bullets">
+                    <li>Create files like <code>LESSONS.md</code> to track patterns</li>
+                    <li>When something goes wrong, capture the <strong>failure category</strong></li>
+                    <li>Write the <strong>rule</strong> that prevents it next time</li>
+                    <li>Over time, this log becomes <strong>more valuable</strong> than individual corrections</li>
+                </ul>
+                <div class="callout callout--signal" style="margin-top: 20px; font-size: 15px;">
+                    <strong style="color: var(--signal);">Pattern, not anecdote.</strong> Don't log "Claude got the mayor's name wrong." Log "Always verify elected official names against the city website roster."
+                </div>
+            </div>
+            <div>
+                <div class="code-block" style="font-size: 13px;">
+                    <span class="cmt"># LESSONS.md</span><br><br>
+                    <span class="str">## Terminology</span><br>
+                    <span class="kw">Problem:</span> AI used "homeless" in<br>
+                    &nbsp;&nbsp;draft copy.<br>
+                    <span class="fn">Rule:</span> Always use "unhoused" per<br>
+                    &nbsp;&nbsp;style guide.<br><br>
+                    <span class="str">## Data sourcing</span><br>
+                    <span class="kw">Problem:</span> AI cited 2022 census<br>
+                    &nbsp;&nbsp;data as current.<br>
+                    <span class="fn">Rule:</span> Flag any statistic older<br>
+                    &nbsp;&nbsp;than 12 months. Prefer ACS<br>
+                    &nbsp;&nbsp;1-year estimates when available.<br><br>
+                    <span class="str">## Attribution</span><br>
+                    <span class="kw">Problem:</span> AI paraphrased a direct<br>
+                    &nbsp;&nbsp;quote without marking it.<br>
+                    <span class="fn">Rule:</span> Never alter quoted text.<br>
+                    &nbsp;&nbsp;Use [paraphrase] label.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>CLAUDE.md and context files</span>
+        <span>14 / 16</span>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 15 — The auto-load boundary
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide" data-slide="15">
+    <div class="slide-header">
+        <div class="subtitle">KEY DISTINCTION</div>
+        <h2>The auto-load boundary</h2>
+    </div>
+    <div class="slide-body">
+        <div style="margin-top: 8px;">
+            <svg viewBox="0 0 1100 350" width="1060" height="340" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 0 auto;">
+                <!-- Auto-loaded zone -->
+                <rect x="20" y="20" width="480" height="310" rx="8" fill="rgba(163,230,53,0.05)" stroke="rgba(163,230,53,0.3)" stroke-width="1"/>
+                <text x="260" y="52" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#a3e635" letter-spacing="0.1em">AUTO-LOADED ON SESSION START</text>
+
+                <!-- CLAUDE.md card -->
+                <rect x="50" y="76" width="200" height="80" rx="6" fill="#1e293b" stroke="#a3e635" stroke-width="1.5"/>
+                <text x="150" y="108" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700" fill="#a3e635">CLAUDE.md</text>
+                <text x="150" y="132" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#94a3b8">Project context</text>
+
+                <!-- MEMORY.md card -->
+                <rect x="270" y="76" width="200" height="80" rx="6" fill="#1e293b" stroke="#a3e635" stroke-width="1.5"/>
+                <text x="370" y="108" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="700" fill="#a3e635">MEMORY.md</text>
+                <text x="370" y="132" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#94a3b8">Session memory index</text>
+
+                <!-- Divider -->
+                <line x1="530" y1="20" x2="530" y2="330" stroke="#475569" stroke-width="2" stroke-dasharray="8,6"/>
+
+                <!-- Manual zone -->
+                <rect x="560" y="20" width="520" height="310" rx="8" fill="rgba(248,113,113,0.04)" stroke="rgba(248,113,113,0.2)" stroke-width="1"/>
+                <text x="820" y="52" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#f87171" letter-spacing="0.1em">NOT AUTO-LOADED</text>
+
+                <!-- Custom files -->
+                <rect x="590" y="76" width="200" height="80" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+                <text x="690" y="108" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="14" fill="#94a3b8">LESSONS.md</text>
+                <text x="690" y="132" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#64748b">Custom patterns</text>
+
+                <rect x="850" y="76" width="200" height="80" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+                <text x="950" y="108" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="14" fill="#94a3b8">SOURCES.md</text>
+                <text x="950" y="132" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#64748b">Source directory</text>
+
+                <!-- How-to box -->
+                <rect x="130" y="186" width="260" height="120" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+                <text x="260" y="214" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" font-weight="600" fill="#fff">Always in the AI's context</text>
+                <text x="260" y="240" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#94a3b8">No action needed from you.</text>
+                <text x="260" y="260" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#94a3b8">Claude reads these files</text>
+                <text x="260" y="280" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#94a3b8">at the start of every session.</text>
+
+                <!-- How-to box right -->
+                <rect x="620" y="186" width="410" height="120" rx="6" fill="#1e293b" stroke="#475569" stroke-width="1"/>
+                <text x="825" y="214" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" font-weight="600" fill="#fff">Two ways to make these available:</text>
+                <text x="660" y="244" font-family="'JetBrains Mono', monospace" font-size="12" fill="#a3e635">1.</text>
+                <text x="680" y="244" font-family="'Inter', sans-serif" font-size="12" fill="#94a3b8">Reference them from CLAUDE.md</text>
+                <text x="660" y="270" font-family="'JetBrains Mono', monospace" font-size="12" fill="#a3e635">2.</text>
+                <text x="680" y="270" font-family="'Inter', sans-serif" font-size="12" fill="#94a3b8">Tell Claude to read them: "Read LESSONS.md</text>
+                <text x="680" y="290" font-family="'Inter', sans-serif" font-size="12" fill="#94a3b8">before starting this task"</text>
+            </svg>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span>CLAUDE.md and context files</span>
+        <span>15 / 16</span>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     SLIDE 16 — Key takeaway
+     ══════════════════════════════════════════════════════════════ -->
+<div class="slide slide--title" data-slide="16">
+    <div style="text-align: center; padding: 0 100px;">
+        <div class="t-mono" style="font-size: 13px; color: var(--acid); letter-spacing: 0.1em; margin-bottom: 24px;">KEY TAKEAWAY</div>
+        <h2 class="t-display" style="font-size: 40px; font-weight: 700; color: #fff; line-height: 1.3; margin-bottom: 32px;">Context files are the bridge between one-off prompting and systematic AI delegation</h2>
+        <div style="display: flex; justify-content: center; gap: 48px; margin-top: 16px;">
+            <div style="text-align: center;">
+                <div style="font-family: var(--font-mono); font-size: 14px; color: var(--acid); margin-bottom: 6px;">WRITE ONCE</div>
+                <div style="font-size: 15px; color: #94a3b8;">Benefit every session</div>
+            </div>
+            <div style="color: var(--surface); font-size: 24px;">|</div>
+            <div style="text-align: center;">
+                <div style="font-family: var(--font-mono); font-size: 14px; color: var(--ice); margin-bottom: 6px;">VERSION THEM</div>
+                <div style="font-size: 15px; color: #94a3b8;">Commit to Git</div>
+            </div>
+            <div style="color: var(--surface); font-size: 24px;">|</div>
+            <div style="text-align: center;">
+                <div style="font-family: var(--font-mono); font-size: 14px; color: var(--ice); margin-bottom: 6px;">SHARE THEM</div>
+                <div style="font-size: 15px; color: #94a3b8;">Team knowledge</div>
+            </div>
+            <div style="color: var(--surface); font-size: 24px;">|</div>
+            <div style="text-align: center;">
+                <div style="font-family: var(--font-mono); font-size: 14px; color: var(--signal); margin-bottom: 6px;">UPDATE THEM</div>
+                <div style="font-size: 15px; color: #94a3b8;">When the AI makes mistakes</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div><!-- end .deck -->
+
+<!-- Navigation -->
+<div class="nav-controls">
+    <button class="nav-btn" id="prevBtn" aria-label="Previous slide">&larr;</button>
+    <span class="slide-counter" id="slideCounter">1 / 16</span>
+    <button class="nav-btn" id="nextBtn" aria-label="Next slide">&rarr;</button>
+</div>
+
+<script>
+(function() {
+    const deck = document.getElementById('deck');
+    const slides = deck.querySelectorAll('.slide');
+    const total = slides.length;
+    const counter = document.getElementById('slideCounter');
+    const progress = document.getElementById('progressBar');
+    let current = 0;
+
+    function scaleDeck() {
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const sw = 1280;
+        const sh = 720;
+        const scale = Math.min(vw / sw, vh / sh);
+        deck.style.transform = 'scale(' + scale + ')';
+        deck.style.width = sw + 'px';
+        deck.style.height = sh + 'px';
+        // Center vertically
+        const offsetY = Math.max(0, (vh - sh * scale) / 2);
+        const offsetX = Math.max(0, (vw - sw * scale) / 2);
+        deck.style.marginLeft = offsetX + 'px';
+        deck.style.marginTop = offsetY + 'px';
+    }
+
+    function goTo(n) {
+        if (n < 0 || n >= total) return;
+        slides[current].classList.remove('active');
+        current = n;
+        slides[current].classList.add('active');
+        counter.textContent = (current + 1) + ' / ' + total;
+        progress.style.width = ((current + 1) / total * 100) + '%';
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    document.getElementById('nextBtn').addEventListener('click', next);
+    document.getElementById('prevBtn').addEventListener('click', prev);
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+        if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+        if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+        if (e.key === 'End') { e.preventDefault(); goTo(total - 1); }
+    });
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    deck.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; });
+    deck.addEventListener('touchend', function(e) {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); }
+    });
+
+    window.addEventListener('resize', scaleDeck);
+    scaleDeck();
+    goTo(0);
+})();
+</script>
+
+</body>
+</html>
