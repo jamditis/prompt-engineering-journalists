@@ -13,6 +13,13 @@ A short but useful framing piece: LLMs are tools for manipulating language, not 
 
 ---
 
+**"A peek inside CLI tools"** — Ben Tossell, Ben's Bites, March 2026
+https://www.bensbites.com/p/a-peek-inside-cli-tools
+
+A step-by-step walkthrough of what happens when an AI agent uses command-line tools — listing files, creating folders, renaming, resizing images. Each command is explained in plain English. The key takeaway: agents run the same text commands a human would type in a terminal. The more CLIs you give an agent access to (Stripe for payments, Playwright for browsers, etc.), the more it can do. Good companion to the "What is a CLI?" explainer on the course site.
+
+---
+
 ### How journalists actually use AI
 
 **"AI adoption by UK journalists and their newsrooms: Surveying applications, approaches, and attitudes"** — Reuters Institute for the Study of Journalism, November 2025

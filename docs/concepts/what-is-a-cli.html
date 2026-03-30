@@ -64,6 +64,20 @@
                 </div>
 
                 <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What it looks like</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Here's a real command. Say you have a folder full of interview transcripts. To see what's in it:</p>
+                    <pre class="bg-void border border-white/10 rounded-lg p-4 mb-4 overflow-x-auto"><code class="text-acid font-mono text-sm">ls ./transcripts/</code></pre>
+                    <p class="text-gray-300 leading-relaxed mb-4"><code class="text-ice font-mono text-sm">ls</code> means "list." <code class="text-ice font-mono text-sm">./transcripts/</code> is the folder. That's it. The terminal prints every filename in that folder.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">To count how many files you have:</p>
+                    <pre class="bg-void border border-white/10 rounded-lg p-4 mb-4 overflow-x-auto"><code class="text-acid font-mono text-sm">ls ./transcripts/ | wc -l</code></pre>
+                    <p class="text-gray-300 leading-relaxed mb-4">The <code class="text-ice font-mono text-sm">|</code> (called a "pipe") sends the output of one command into another. <code class="text-ice font-mono text-sm">wc -l</code> counts lines. So this says: list the files, then count them.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">To find every transcript that mentions a specific source:</p>
+                    <pre class="bg-void border border-white/10 rounded-lg p-4 mb-4 overflow-x-auto"><code class="text-acid font-mono text-sm">grep -l "Jane Martinez" ./transcripts/*.txt</code></pre>
+                    <p class="text-gray-300 leading-relaxed mb-4"><code class="text-ice font-mono text-sm">grep</code> searches inside files. <code class="text-ice font-mono text-sm">-l</code> means "just give me the filenames." This returns every transcript that contains that name — instantly, across hundreds of files.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">These are commands you'd type yourself. When an AI agent uses a CLI, it runs the same commands — it just decides which ones to use and chains them together. For a closer look at how that works, see Ben Tossell's walkthrough in the <a href="https://www.bensbites.com/p/a-peek-inside-cli-tools" class="text-ice hover:text-acid transition-colors">optional resources</a>.</p>
+                </div>
+
+                <div>
                     <h2 class="font-display text-2xl text-chrome mb-4">What changes when you use a CLI tool</h2>
                     <p class="text-gray-300 leading-relaxed mb-4">The underlying AI model is the same whether you access it through a browser or a terminal. Claude Sonnet is Claude Sonnet either way. What changes is what you can do with the output.</p>
                     <p class="text-gray-300 leading-relaxed mb-4">CLI tools can read files directly from your computer and write results back to disk. They chain together — one command's output becomes the next command's input. And they can be scripted: save a workflow once and run it again next week without retyping anything.</p>
