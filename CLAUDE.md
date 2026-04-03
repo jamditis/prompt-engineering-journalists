@@ -184,6 +184,7 @@ All 4 modules + Introduction module have complete 8-document sets. Readings are 
   - `review.html`: modal width clamped with `min(680px, 92vw)`, sidebar stacks on mobile
 - **NICAR 2026 skills repo**: added Aaron Kessler's `amkessler/nicar2026_skills_in_codex_claude` as optional resource in Module 2 (site + starter kit + syllabus Google Doc)
 - **Starter kit references**: added `jamditis/mooc-starter-kit` to syllabus Google Doc (pre-course checklist, course repositories section) and Introductory Materials Google Doc
+- **OSS etiquette guide**: new standalone page at `docs/bonus-oss-etiquette/index.html` — full article on responsible open source contribution with AI tools. Case studies (curl, Ghostty, tldraw, OCaml, PSF), Willison's "proven to work" framework, 10-item checklist, disclosure standards, 3 Cs framework, 12 sourced references. Brief callout + link added to bonus Git & GitHub module. Card added to homepage grid. Sitemap updated. No nav bar entry (standalone resource, not a top-level module).
 
 # AI Writing Guidelines: Avoiding Slop Phrases
 Use this file as a reference when reviewing AI-generated content. These patterns indicate lazy, filler writing that should be edited or avoided.

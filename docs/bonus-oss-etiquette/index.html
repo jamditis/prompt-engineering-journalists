@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open source etiquette for AI-assisted contributors | Advanced prompt engineering</title>
+    <meta name="description" content="How to contribute to open source projects responsibly when using AI coding agents. Practical guidelines, real case studies, and common mistakes to avoid.">
+    <link rel="canonical" href="https://mooc.amditis.tech/bonus-oss-etiquette/" />
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://mooc.amditis.tech/bonus-oss-etiquette/" />
+    <meta property="og:title" content="Open source etiquette for AI-assisted contributors" />
+    <meta property="og:description" content="How to contribute to open source projects responsibly when using AI coding agents. Practical guidelines, real case studies, and common mistakes to avoid." />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Open source etiquette for AI-assisted contributors" />
+    <meta name="twitter:description" content="How to contribute to open source projects responsibly when using AI coding agents." />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind + Config -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* SVG animation keyframes */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes drawLine {
+            from { stroke-dashoffset: 200; }
+            to { stroke-dashoffset: 0; }
+        }
+        @keyframes pulse-dot {
+            0%, 100% { r: 6; opacity: 1; }
+            50% { r: 9; opacity: 0.7; }
+        }
+        .svg-animate-in { animation: fadeInUp 0.5s ease-out both; }
+        .svg-draw-line { stroke-dasharray: 200; animation: drawLine 1s ease-out both; }
+        .svg-pulse { animation: pulse-dot 2s ease-in-out infinite; }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 1.0s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .svg-animate-in, .svg-draw-line, .svg-pulse {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <!-- Header with nav -->
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
+                    <a href="../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Page header -->
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-ice font-mono mb-4">BONUS RESOURCE</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white leading-tight">DON'T BE THE PERSON WHO FLOODS OPEN SOURCE WITH AI SLOP</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-3xl">A guide to contributing responsibly when you're using AI coding agents &mdash; because every pull request costs someone their time, and most open source maintainers are volunteers.</p>
+            </div>
+        </section>
+
+        <!-- Content -->
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
+
+            <!-- ============================================ -->
+            <!-- WHY THIS PAGE EXISTS -->
+            <!-- ============================================ -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">Why this page exists</h2>
+                </div>
+                <div class="space-y-4">
+                    <p class="text-gray-300 text-sm leading-relaxed">I wrote this because I made this mistake myself. I was excited about a tool I'd been building with Claude Code, thought it could help an open source project I admire, and opened a pull request. The maintainer's response was polite but clear: the PR was unwelcome. It wasn't what they needed, it wasn't how they worked, and reviewing it was going to cost them time they didn't have.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">That experience is what turned me from someone who wanted to help into someone who understood why unsolicited AI-generated contributions are a growing problem in open source. I'm sharing what I learned so you can skip the embarrassment and go straight to being a good contributor.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">This course teaches you to use AI coding agents. That means you'll be able to generate code faster than you ever could before. That power comes with a responsibility: <strong class="text-chrome">just because you can generate a pull request in five minutes doesn't mean you should.</strong></p>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- THE CORE PROBLEM -->
+            <!-- ============================================ -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">The core problem: effort asymmetry</h2>
+                </div>
+                <div class="space-y-6">
+                    <div class="border border-white/10 bg-panel p-6">
+                        <p class="text-gray-300 text-sm leading-relaxed mb-6">AI coding agents have eliminated the natural friction that used to limit low-quality contributions. Writing code used to be hard enough that only people who cared would bother submitting a pull request. Now anyone can generate a plausible-looking PR in minutes. But reviewing that PR still takes just as long as it always did &mdash; often longer, because AI-generated code can look structurally fine while being logically wrong.</p>
+
+                        <!-- SVG: Effort Asymmetry -->
+                        <div class="border border-white/10 bg-void/50 p-4 rounded mb-4">
+                            <p class="text-xs text-gray-400 font-mono mb-3">THE EFFORT ASYMMETRY</p>
+                            <svg viewBox="0 0 600 200" class="w-full" role="img" aria-label="Diagram showing the effort asymmetry: a contributor spends 5 minutes generating a PR with an AI agent, but a maintainer spends 30 to 60 minutes reviewing, testing, responding to, and closing that same PR.">
+                                <!-- Contributor side -->
+                                <rect x="30" y="30" width="120" height="80" rx="6" fill="#1e293b" stroke="#67e8f9" stroke-width="2" class="svg-animate-in"/>
+                                <text x="90" y="55" text-anchor="middle" fill="#67e8f9" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" class="svg-animate-in">CONTRIBUTOR</text>
+                                <text x="90" y="75" text-anchor="middle" fill="#a3e635" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700" class="svg-animate-in delay-1">5 min</text>
+                                <text x="90" y="98" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="8" class="svg-animate-in delay-1">generate PR with AI</text>
+
+                                <!-- Arrow -->
+                                <line x1="160" y1="70" x2="215" y2="70" stroke="#475569" stroke-width="1.5" class="svg-draw-line delay-2"/>
+                                <polygon points="215,65 225,70 215,75" fill="#475569" class="svg-animate-in delay-2"/>
+                                <text x="190" y="55" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="8" class="svg-animate-in delay-2">submit</text>
+
+                                <!-- Maintainer side -->
+                                <rect x="230" y="15" width="340" height="110" rx="6" fill="#1e293b" stroke="#f87171" stroke-width="2" class="svg-animate-in delay-1"/>
+                                <text x="400" y="38" text-anchor="middle" fill="#f87171" font-family="JetBrains Mono, monospace" font-size="9" font-weight="600" class="svg-animate-in delay-1">VOLUNTEER MAINTAINER</text>
+                                <text x="400" y="62" text-anchor="middle" fill="#f87171" font-family="JetBrains Mono, monospace" font-size="20" font-weight="700" class="svg-animate-in delay-2">30-60 min</text>
+
+                                <!-- Maintainer task breakdown -->
+                                <text x="280" y="85" fill="#94a3b8" font-family="Inter, sans-serif" font-size="8" class="svg-animate-in delay-3">read the code</text>
+                                <text x="355" y="85" fill="#94a3b8" font-family="Inter, sans-serif" font-size="8" class="svg-animate-in delay-3">test locally</text>
+                                <text x="420" y="85" fill="#94a3b8" font-family="Inter, sans-serif" font-size="8" class="svg-animate-in delay-3">check for bugs</text>
+                                <text x="510" y="85" fill="#94a3b8" font-family="Inter, sans-serif" font-size="8" class="svg-animate-in delay-3">write feedback</text>
+                                <text x="280" y="100" fill="#94a3b8" font-family="Inter, sans-serif" font-size="8" class="svg-animate-in delay-4">verify it doesn't break anything</text>
+                                <text x="460" y="100" fill="#94a3b8" font-family="Inter, sans-serif" font-size="8" class="svg-animate-in delay-4">close if it's bad</text>
+
+                                <!-- Bottom callout -->
+                                <rect x="30" y="145" width="540" height="40" rx="4" fill="#1e293b" stroke="#f87171" stroke-width="1"/>
+                                <text x="300" y="163" text-anchor="middle" fill="#f87171" font-family="Inter, sans-serif" font-size="10" font-weight="600" class="svg-animate-in delay-5">Your 5-minute PR costs a volunteer an hour of their unpaid time.</text>
+                                <text x="300" y="178" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="9" class="svg-animate-in delay-5">Multiply by dozens of AI-generated PRs per week and you have a crisis.</text>
+                            </svg>
+                        </div>
+
+                        <div class="border-l-2 border-ice/50 pl-4 mt-4">
+                            <p class="text-gray-300 text-sm leading-relaxed italic">"Before AI, I might get one bad PR every six months. Now it feels like every other week."</p>
+                            <p class="text-gray-400 text-xs mt-1">&mdash; Mitchell Hashimoto, creator of Ghostty</p>
+                        </div>
+                    </div>
+
+                    <!-- Journalism analogy -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">The journalism analogy</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">If you've ever worked at a publication, you know what it's like to receive unsolicited pitches from people who clearly haven't read your outlet. They don't know your beat, they haven't looked at what you've published, and the pitch doesn't match your audience. Reading and responding to each one takes time, even if the answer is no.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mt-3">Now imagine those pitches arrive ten times faster because the sender used AI to generate them. The sender spent two minutes. You spent twenty. That's what's happening to open source maintainers right now.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- WHAT'S HAPPENING -->
+            <!-- ============================================ -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">What's happening right now</h2>
+                </div>
+                <div class="space-y-4 mb-6">
+                    <p class="text-gray-300 text-sm leading-relaxed">The problem has a name: <strong class="text-chrome">AI slop</strong>. It refers to plausible-looking but broken contributions &mdash; pull requests, issues, bug reports, even security disclosures &mdash; that are generated by AI tools and submitted without meaningful human review. The term is spreading because the problem is spreading.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">Here's what it looks like in practice:</p>
+                </div>
+
+                <div class="space-y-6">
+
+                    <!-- Case study: curl -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-xs font-mono text-signal bg-signal/10 px-2 py-1 rounded">CASE STUDY</span>
+                            <h3 class="font-display text-lg text-ice">curl shuts down its bug bounty program</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3"><a href="https://curl.se/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">curl</a> is one of the most widely used open source tools in the world &mdash; it's the command-line utility for transferring data via URLs. It runs on virtually every computer, phone, and server.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3">In July 2025, curl's creator Daniel Stenberg published <a href="https://daniel.haxx.se/blog/2025/07/14/death-by-a-thousand-slops/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"Death by a thousand slops"</a> describing how roughly 20% of the project's bug bounty submissions were AI-generated garbage. The valid rate dropped to just 5%. One submission described an "HTTP/3 Stream Dependency Cycle Exploit" complete with fake debugging sessions referencing <strong class="text-chrome">a function that doesn't exist in curl's codebase</strong>.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">By January 2026, Stenberg shut down curl's six-year bug bounty program entirely &mdash; over $86,000 in historical payouts ended because AI-generated submissions made triage unsustainable.</p>
+                        <div class="border-l-2 border-signal/50 pl-4 mt-4">
+                            <p class="text-gray-300 text-sm leading-relaxed italic">"Not to mention the emotional toll it takes to deal with these mind-numbing stupidities."</p>
+                            <p class="text-gray-400 text-xs mt-1">&mdash; Daniel Stenberg, curl creator</p>
+                        </div>
+                    </div>
+
+                    <!-- Case study: Ghostty -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-xs font-mono text-signal bg-signal/10 px-2 py-1 rounded">CASE STUDY</span>
+                            <h3 class="font-display text-lg text-ice">Ghostty implements zero-tolerance policy</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3"><a href="https://ghostty.org/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Ghostty</a> is a popular terminal emulator created by Mitchell Hashimoto (who also created Vagrant, Terraform, and co-founded HashiCorp). In January 2026, after months of escalating problems, Hashimoto adopted a <a href="https://github.com/ghostty-org/ghostty/blob/main/AI_POLICY.md" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">zero-tolerance AI policy</a>:</p>
+                        <ul class="space-y-2 text-sm text-gray-300 ml-4 mb-3">
+                            <li class="flex items-start gap-3"><span class="text-signal">&mdash;</span> AI-assisted PRs are only allowed for issues that have already been accepted by maintainers</li>
+                            <li class="flex items-start gap-3"><span class="text-signal">&mdash;</span> Drive-by AI PRs are closed immediately</li>
+                            <li class="flex items-start gap-3"><span class="text-signal">&mdash;</span> Repeat offenders go on a public list blocking all future contributions</li>
+                        </ul>
+                        <p class="text-gray-300 text-sm leading-relaxed">The policy requires that contributors fully understand every line of code they submit. Hashimoto was explicit that this isn't anti-AI &mdash; the Ghostty codebase itself is written with AI assistance, and maintainers use AI daily.</p>
+                        <div class="border-l-2 border-ice/50 pl-4 mt-4">
+                            <p class="text-gray-300 text-sm leading-relaxed italic">"This is not an anti-AI stance. This is an anti-idiot stance."</p>
+                            <p class="text-gray-400 text-xs mt-1">&mdash; Mitchell Hashimoto</p>
+                        </div>
+                    </div>
+
+                    <!-- Case study: tldraw -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-xs font-mono text-signal bg-signal/10 px-2 py-1 rounded">CASE STUDY</span>
+                            <h3 class="font-display text-lg text-ice">tldraw closes all external pull requests</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3"><a href="https://tldraw.dev/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">tldraw</a> is a popular open source drawing tool. In January 2026, creator Steve Ruiz began <a href="https://tldraw.dev/blog/stay-away-from-my-trash" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">auto-closing all external pull requests</a> due to AI slop.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3">Ruiz described a pattern: he'd write casual issue descriptions from personal notes, and external contributors would feed those descriptions to AI tools, generating "nonsense solutions based on nonsense issues" &mdash; AI on both sides of the contribution, with no human understanding in between.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">His central question cut to the heart of it: <strong class="text-chrome">"If writing the code is the easy part, why would I want someone else to write it?"</strong> The valuable part of a contribution isn't the code &mdash; it's the research, design thinking, and contextual understanding that justify the code review effort.</p>
+                    </div>
+
+                    <!-- Case study: OCaml -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-xs font-mono text-signal bg-signal/10 px-2 py-1 rounded">CASE STUDY</span>
+                            <h3 class="font-display text-lg text-ice">OCaml rejects a 13,000-line AI-generated PR</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3">In November 2025, the OCaml programming language received a massive pull request &mdash; over 13,000 lines &mdash; adding DWARF debugging support. The contributor described his role as "directing, shaping, cajoling, and reviewing" Claude Code rather than writing the code himself.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3">Maintainer Gabriel Scherer <a href="https://devclass.com/2025/11/27/ocaml-maintainers-reject-massive-ai-generated-pull-request/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">rejected it</a>, explaining that reviewing AI-generated code is more taxing than reviewing human-written code, and the project already had more contributors than reviewers. Copyright questions also arose when files credited a specific developer despite claims the code was AI-generated.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">The lesson: a 13,000-line PR with no prior design discussion is a burden, not a gift &mdash; regardless of whether a human or an AI wrote it.</p>
+                    </div>
+
+                    <!-- The security report problem -->
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="text-xs font-mono text-signal bg-signal/10 px-2 py-1 rounded">CASE STUDY</span>
+                            <h3 class="font-display text-lg text-ice">AI-generated security reports</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3">Seth Larson, the Python Software Foundation's Security Developer-in-Residence, documented a rise in <a href="https://sethmlarson.dev/slop-security-reports" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">AI-generated security reports</a> that "appear at first glance to be potentially legitimate and thus require time to refute." One report flagged urllib3's <em>deliberate</em> disabling of SSLv2 as a security vulnerability &mdash; the scanning tool couldn't understand that the code was intentionally secure.</p>
+                        <div class="border-l-2 border-signal/50 pl-4 mt-4">
+                            <p class="text-gray-300 text-sm leading-relaxed italic">"Security reports that waste maintainers' time result in confusion, stress, frustration, and isolation &mdash; which can add to burnout of highly-trusted contributors."</p>
+                            <p class="text-gray-400 text-xs mt-1">&mdash; Seth Larson, Python Software Foundation</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- THE POSITIVE EXAMPLE -->
+            <!-- ============================================ -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">What it looks like done right</h2>
+                </div>
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <h3 class="font-display text-lg text-acid mb-3">Joshua Rogers finds 50 real bugs in curl</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-3">In September 2025 &mdash; while curl was drowning in AI-generated garbage reports &mdash; security researcher Joshua Rogers used AI tools to identify <strong class="text-chrome">50 real bugs</strong> in curl's source code. Daniel Stenberg called the findings "actually truly awesome."</p>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-3">What made Rogers different from the slop submitters:</p>
+                    <ul class="space-y-2 text-sm text-gray-300 ml-4 mb-4">
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> He tested multiple AI tools and <strong class="text-chrome">evaluated their output himself</strong> using his own security expertise</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> He <strong class="text-chrome">filtered results</strong> before submitting &mdash; not raw AI output, but a curated list</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> He had the <strong class="text-chrome">domain knowledge</strong> to distinguish real bugs from hallucinated ones</li>
+                        <li class="flex items-start gap-3"><span class="text-acid">></span> He submitted findings in a <strong class="text-chrome">format that respected the maintainer's time</strong></li>
+                    </ul>
+                    <p class="text-gray-300 text-sm leading-relaxed">As Simon Willison noted: <a href="https://simonwillison.net/2025/Oct/2/curl/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"This is yet another illustration of how much more interesting these tools are when experienced professionals use them to augment their existing skills."</a></p>
+                    <p class="text-gray-300 text-sm leading-relaxed mt-3">The difference between Rogers and the slop submitters isn't the tool. It's the judgment, expertise, and care applied on top of the tool.</p>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- SIMON WILLISON'S FRAMEWORK -->
+            <!-- ============================================ -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">Your job is to deliver code you have proven to work</h2>
+                </div>
+                <div class="space-y-4 mb-6">
+                    <p class="text-gray-300 text-sm leading-relaxed">Simon Willison &mdash; co-creator of the Django web framework and one of the most respected voices on AI in software development &mdash; <a href="https://simonwillison.net/2025/Dec/18/code-proven-to-work/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">wrote a piece in December 2025</a> that nails the core principle:</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-6 space-y-4">
+                    <div class="border-l-2 border-acid/50 pl-4">
+                        <p class="text-gray-300 text-sm leading-relaxed italic">"As software engineers we don't just crank out code &mdash; in fact these days you could argue that's what the LLMs are for. We need to deliver code that works &mdash; and we need to include proof that it works as well. Not doing that directly shifts the burden of the actual work to whoever is expected to review our code."</p>
+                        <p class="text-gray-400 text-xs mt-1">&mdash; Simon Willison, <a href="https://simonwillison.net/2025/Dec/18/code-proven-to-work/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"Your job is to deliver code you have proven to work"</a></p>
+                    </div>
+
+                    <p class="text-gray-300 text-sm leading-relaxed">Willison's framework has two steps, neither optional:</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-void/50 border border-white/10 p-4 rounded">
+                            <p class="text-acid font-mono text-xs mb-2">1. MANUAL TESTING</p>
+                            <p class="text-gray-300 text-sm leading-relaxed">If you haven't seen the code do the right thing yourself, that code doesn't work. Run it. Check the output. Try the edge cases. If you can, paste terminal output or a screen recording into the PR to show your reviewer what you saw.</p>
+                        </div>
+                        <div class="bg-void/50 border border-white/10 p-4 rounded">
+                            <p class="text-acid font-mono text-xs mb-2">2. AUTOMATED TESTING</p>
+                            <p class="text-gray-300 text-sm leading-relaxed">Your contribution should include a test that proves the change works. That test should fail if you revert the change. AI coding agents are good at writing tests &mdash; there's no excuse for skipping this step.</p>
+                        </div>
+                    </div>
+
+                    <p class="text-gray-300 text-sm leading-relaxed">The key insight for AI-assisted work: <strong class="text-chrome">make your coding agent prove its changes work before you submit them</strong>. If Claude Code writes a fix, tell it to also write a test, run the test, and show you the results. Don't submit something you haven't seen succeed.</p>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- THE CHECKLIST -->
+            <!-- ============================================ -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-acid">Before you contribute: the checklist</h2>
+                </div>
+                <div class="space-y-4 mb-6">
+                    <p class="text-gray-300 text-sm leading-relaxed">Before you open a pull request on someone else's project &mdash; especially if you used AI tools to write any of the code &mdash; go through this list. Every item matters.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Item 1 -->
+                    <div class="border border-white/10 bg-panel p-5">
+                        <div class="flex items-start gap-4">
+                            <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm flex-shrink-0 rounded">01</span>
+                            <div>
+                                <h4 class="font-display text-sm text-chrome mb-1">Check for an AI contribution policy</h4>
+                                <p class="text-gray-300 text-sm leading-relaxed">Look for <code class="text-acid bg-surface px-1">AI_POLICY.md</code>, <code class="text-acid bg-surface px-1">AGENTS.md</code>, or references to AI in <code class="text-acid bg-surface px-1">CONTRIBUTING.md</code>. A <a href="https://github.com/melissawm/open-source-ai-contribution-policies" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">growing list of projects</a> have explicit policies. Some ban AI contributions entirely. Some require disclosure. Some allow AI with conditions. Respect whatever the project has decided.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="border border-white/10 bg-panel p-5">
+                        <div class="flex items-start gap-4">
+                            <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm flex-shrink-0 rounded">02</span>
+                            <div>
+                                <h4 class="font-display text-sm text-chrome mb-1">Read the existing code first</h4>
+                                <p class="text-gray-300 text-sm leading-relaxed">Understand the project's patterns, conventions, and architecture before pointing an AI at it. AI tools generate code that looks right but often doesn't match how the project actually works. The maintainer will see this immediately.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="border border-white/10 bg-panel p-5">
+                        <div class="flex items-start gap-4">
+                            <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm flex-shrink-0 rounded">03</span>
+                            <div>
+                                <h4 class="font-display text-sm text-chrome mb-1">Open an issue before opening a PR</h4>
+                                <p class="text-gray-300 text-sm leading-relaxed">Ask if the change is wanted. Describe the problem you're solving and your proposed approach. This takes five minutes and can save everyone hours. A 13,000-line surprise PR with no prior discussion is a burden, not a gift.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="border border-white/10 bg-panel p-5">
+                        <div class="flex items-start gap-4">
+                            <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm flex-shrink-0 rounded">04</span>
+                            <div>
+                                <h4 class="font-display text-sm text-chrome mb-1">Understand every line you submit</h4>
+                                <p class="text-gray-300 text-sm leading-relaxed">If you can't explain what your code does and how it interacts with the rest of the project without asking the AI again, you're not ready to submit. Mitchell Hashimoto's rule: "Never commit code you cannot explain. AI should help you learn faster, not think less."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 5 -->
+                    <div class="border border-white/10 bg-panel p-5">
+                        <div class="flex items-start gap-4">
+                            <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm flex-shrink-0 rounded">05</span>
+                            <div>
+                                <h4 class="font-display text-sm text-chrome mb-1">Test your changes yourself</h4>
+                                <p class="text-gray-300 text-sm leading-relaxed">Run the project's test suite. Run <em>your</em> changes manually. Add automated tests for new behavior. If your coding agent wrote the code, make it also prove the code works. Paste evidence into the PR: terminal output, screenshots, test results.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 6 -->
+                    <div class="border border-white/10 bg-panel p-5">
+                        <div class="flex items-start gap-4">
+                            <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm flex-shrink-0 rounded">06</span>
+                            <div>
+                                <h4 class="font-display text-sm text-chrome mb-1">Keep it small and focused</h4>
+                                <p class="text-gray-300 text-sm leading-relaxed">Small PRs that do one thing well are easier to review than sprawling changes. A 50-line fix with tests is more likely to get merged than a 500-line refactor nobody asked for. Start small, build trust, then scale up.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 7 -->
+                    <div class="border border-white/10 bg-panel p-5">
+                        <div class="flex items-start gap-4">
+                            <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm flex-shrink-0 rounded">07</span>
+                            <div>
+                                <h4 class="font-display text-sm text-chrome mb-1">Disclose AI usage</h4>
+                                <p class="text-gray-300 text-sm leading-relaxed">Note in the PR description that you used AI tools. This isn't shameful &mdash; it helps reviewers calibrate how much attention to give different parts of the code. More on the emerging standards for this below.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 8 -->
+                    <div class="border border-white/10 bg-panel p-5">
+                        <div class="flex items-start gap-4">
+                            <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm flex-shrink-0 rounded">08</span>
+                            <div>
+                                <h4 class="font-display text-sm text-chrome mb-1">Follow through on feedback</h4>
+                                <p class="text-gray-300 text-sm leading-relaxed">If a maintainer takes the time to review your PR and leave comments, respond to them. The social contract of open source includes iteration. Don't submit and disappear &mdash; that wastes the reviewer's investment.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 9 -->
+                    <div class="border border-white/10 bg-panel p-5">
+                        <div class="flex items-start gap-4">
+                            <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm flex-shrink-0 rounded">09</span>
+                            <div>
+                                <h4 class="font-display text-sm text-chrome mb-1">Follow the project's templates and guidelines</h4>
+                                <p class="text-gray-300 text-sm leading-relaxed">If there's a PR template, fill it out completely. If there's a CLA (Contributor License Agreement), sign it. If there's a code style guide, match it. These exist for a reason, and ignoring them signals that you didn't care enough to read them.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item 10 -->
+                    <div class="border border-white/10 bg-panel p-5">
+                        <div class="flex items-start gap-4">
+                            <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm flex-shrink-0 rounded">10</span>
+                            <div>
+                                <h4 class="font-display text-sm text-chrome mb-1">Don't spray PRs across dozens of repos</h4>
+                                <p class="text-gray-300 text-sm leading-relaxed">If you've opened similar AI-generated PRs to many repositories in a short period, maintainers will notice. It signals automated, indiscriminate submission rather than genuine engagement. Focus on one project at a time and contribute meaningfully.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- DISCLOSURE STANDARDS -->
+            <!-- ============================================ -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">Disclosing AI usage: the emerging standards</h2>
+                </div>
+                <div class="space-y-4 mb-6">
+                    <p class="text-gray-300 text-sm leading-relaxed">There's no single standard yet, but a consensus is forming. Several major projects now require or recommend commit trailers that indicate AI involvement:</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-6">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-white/10">
+                                    <th class="text-left text-acid font-mono text-xs py-3 pr-4">TAG</th>
+                                    <th class="text-left text-acid font-mono text-xs py-3 pr-4">USED BY</th>
+                                    <th class="text-left text-acid font-mono text-xs py-3">MEANING</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-300">
+                                <tr class="border-b border-white/10">
+                                    <td class="py-3 pr-4 font-mono text-ice text-xs">Assisted-by:</td>
+                                    <td class="py-3 pr-4">Fedora, Linux kernel, OpenInfra</td>
+                                    <td class="py-3">AI helped, but a human authored the work</td>
+                                </tr>
+                                <tr class="border-b border-white/10">
+                                    <td class="py-3 pr-4 font-mono text-ice text-xs">Generated-by:</td>
+                                    <td class="py-3 pr-4">Apache Software Foundation, OpenInfra</td>
+                                    <td class="py-3">AI generated substantial portions of the content</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4 font-mono text-ice text-xs">Co-developed-by:</td>
+                                    <td class="py-3 pr-4">Linux kernel (proposed)</td>
+                                    <td class="py-3">Joint human-AI development</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mt-6 space-y-3 text-sm text-gray-300 leading-relaxed">
+                        <p><strong class="text-chrome">The emerging consensus:</strong></p>
+                        <ul class="space-y-2 ml-4">
+                            <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Disclosure should be proportional.</strong> Autocomplete suggestions and grammar fixes don't need it. Substantial code generation does.</li>
+                            <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">The contributor remains accountable</strong> regardless of what tools they used. AI can't sign a CLA or a Developer Certificate of Origin.</li>
+                            <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Disclosure helps reviewers</strong> allocate attention. It's not punishment &mdash; it's context.</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 bg-void/50 border border-white/10 p-4 rounded">
+                        <p class="text-acid font-mono text-xs mb-2">EXAMPLE COMMIT MESSAGE</p>
+                        <pre class="text-sm overflow-x-auto"><code class="text-gray-300">Fix date parsing for non-US locale formats
+
+The existing regex assumed MM/DD/YYYY order. This patch adds
+locale-aware parsing using dateutil, with tests for ISO 8601,
+European (DD/MM/YYYY), and US formats.
+
+Assisted-by: Claude Code (anthropic.com)</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- THE LANDSCAPE -->
+            <!-- ============================================ -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">Where projects stand</h2>
+                </div>
+                <div class="space-y-4 mb-6">
+                    <p class="text-gray-300 text-sm leading-relaxed">As of early 2026, projects fall into three broad categories. <strong class="text-chrome">Always check the specific project's policy before contributing.</strong></p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="border border-signal/30 bg-panel p-5 rounded">
+                        <p class="text-signal font-mono text-xs mb-3">AI CONTRIBUTIONS BANNED</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3">No AI-generated code accepted, full stop. Usually driven by copyright uncertainty and quality concerns.</p>
+                        <p class="text-gray-400 text-xs">Examples: Gentoo Linux, QEMU, Zig, GIMP, Forgejo, Asahi Linux, Apache CouchDB</p>
+                    </div>
+                    <div class="border border-ice/30 bg-panel p-5 rounded">
+                        <p class="text-ice font-mono text-xs mb-3">ALLOWED WITH DISCLOSURE</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3">AI tools are fine as long as you disclose usage and take full responsibility. This is the most common stance.</p>
+                        <p class="text-gray-400 text-xs">Examples: Fedora, Linux kernel, Apache SF, CPython, Django, Rust, NumPy</p>
+                    </div>
+                    <div class="border border-acid/30 bg-panel p-5 rounded">
+                        <p class="text-acid font-mono text-xs mb-3">PROJECT-SPECIFIC RULES</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3">Custom policies ranging from "strongly discouraged" to "allowed only for accepted issues." Read the docs.</p>
+                        <p class="text-gray-400 text-xs">Examples: Ghostty (accepted issues only), tldraw (closed to external PRs), nvim-tree (discouraged)</p>
+                    </div>
+                </div>
+
+                <p class="text-gray-400 text-sm mt-4">The repository <a href="https://github.com/melissawm/open-source-ai-contribution-policies" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">melissawm/open-source-ai-contribution-policies</a> tracks these policies across open source projects.</p>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- THE 3 Cs -->
+            <!-- ============================================ -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">The 3 Cs: how maintainers evaluate contributors</h2>
+                </div>
+                <div class="space-y-4 mb-6">
+                    <p class="text-gray-300 text-sm leading-relaxed">The GitHub Blog published <a href="https://github.blog/open-source/maintainers/rethinking-open-source-mentorship-in-the-ai-era/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"Rethinking open source mentorship in the AI era"</a> proposing a useful framework for evaluating contributions. Before you submit a PR, ask yourself these three questions:</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="border border-white/10 bg-panel p-5 rounded">
+                        <p class="text-acid font-mono text-xs mb-3">COMPREHENSION</p>
+                        <p class="text-chrome text-sm font-bold mb-2">Do I understand the problem?</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Can you explain, in your own words, what's broken and why your change fixes it? If you'd need to ask the AI to answer questions about your own PR, you don't have comprehension yet.</p>
+                    </div>
+                    <div class="border border-white/10 bg-panel p-5 rounded">
+                        <p class="text-acid font-mono text-xs mb-3">CONTEXT</p>
+                        <p class="text-chrome text-sm font-bold mb-2">Am I providing the right information?</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Does your PR description explain the what and why? Did you disclose AI usage? Did you follow the project's PR template? Context reduces the reviewer's burden.</p>
+                    </div>
+                    <div class="border border-white/10 bg-panel p-5 rounded">
+                        <p class="text-acid font-mono text-xs mb-3">CONTINUITY</p>
+                        <p class="text-chrome text-sm font-bold mb-2">Will I be here for the follow-up?</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Will you respond to review comments? Will you fix issues that come up? Will you maintain what you built? Drive-by PRs signal that you don't care about the project &mdash; just about the contribution.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- THINGS TO NEVER DO -->
+            <!-- ============================================ -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-signal">Things you should never do</h2>
+                </div>
+                <div class="border border-signal/30 bg-signalDim p-6">
+                    <ul class="space-y-3 text-sm font-sans text-gray-300">
+                        <li class="flex items-start gap-3"><span class="text-signal font-bold">X</span> Submit AI output you haven't reviewed or tested</li>
+                        <li class="flex items-start gap-3"><span class="text-signal font-bold">X</span> Mass-file AI-generated issues or bug reports across many projects</li>
+                        <li class="flex items-start gap-3"><span class="text-signal font-bold">X</span> Submit PRs for issues you don't understand just because the AI made it easy</li>
+                        <li class="flex items-start gap-3"><span class="text-signal font-bold">X</span> Hide or deny AI usage when asked</li>
+                        <li class="flex items-start gap-3"><span class="text-signal font-bold">X</span> Submit a massive PR with no prior discussion or issue</li>
+                        <li class="flex items-start gap-3"><span class="text-signal font-bold">X</span> Use AI to hunt for bug bounties in projects you've never used</li>
+                        <li class="flex items-start gap-3"><span class="text-signal font-bold">X</span> Ignore PR templates, contribution guidelines, or CLAs</li>
+                        <li class="flex items-start gap-3"><span class="text-signal font-bold">X</span> Submit and disappear when someone leaves review feedback</li>
+                        <li class="flex items-start gap-3"><span class="text-signal font-bold">X</span> Open similar AI-generated PRs across dozens of repositories</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- THE BOTTOM LINE -->
+            <!-- ============================================ -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">The bottom line</h2>
+                </div>
+                <div class="border border-acid/30 bg-acidDim p-6 space-y-4">
+                    <p class="text-gray-300 text-sm leading-relaxed">AI coding agents are powerful tools. This course teaches you to use them. But the moment you point those tools at someone else's project, you take on a responsibility to that project's maintainers &mdash; people who are often unpaid volunteers building software the whole world depends on.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">The question isn't whether you <em>can</em> generate a pull request in five minutes. The question is whether the pull request is <strong class="text-chrome">worth someone else's hour</strong> to review.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">Be the Joshua Rogers, not the slop submitter. Use AI to augment your understanding, not to bypass it. Prove your code works before asking someone else to look at it. And when in doubt, open an issue first.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">Open source runs on trust, and trust is built by showing up with care.</p>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
+            <!-- SOURCES & FURTHER READING -->
+            <!-- ============================================ -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">Sources and further reading</h2>
+                </div>
+                <div class="border border-white/10 bg-panel p-6">
+                    <ul class="space-y-3 text-sm font-sans">
+                        <li><a href="https://simonwillison.net/2025/Dec/18/code-proven-to-work/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Simon Willison, "Your job is to deliver code you have proven to work" (Dec 2025)</a> <span class="text-gray-400">&mdash; the core framework for responsible contribution</span></li>
+                        <li><a href="https://daniel.haxx.se/blog/2025/07/14/death-by-a-thousand-slops/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Daniel Stenberg, "Death by a thousand slops" (Jul 2025)</a> <span class="text-gray-400">&mdash; the curl maintainer on AI-generated bug reports</span></li>
+                        <li><a href="https://sethmlarson.dev/slop-security-reports" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Seth Larson, "The new era of slop security reports"</a> <span class="text-gray-400">&mdash; Python Software Foundation on AI security report spam</span></li>
+                        <li><a href="https://github.com/ghostty-org/ghostty/blob/main/AI_POLICY.md" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Ghostty AI policy</a> <span class="text-gray-400">&mdash; Mitchell Hashimoto's zero-tolerance approach with rationale</span></li>
+                        <li><a href="https://tldraw.dev/blog/stay-away-from-my-trash" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Steve Ruiz, "Stay away from my trash" (Jan 2026)</a> <span class="text-gray-400">&mdash; why tldraw closed external PRs</span></li>
+                        <li><a href="https://simonwillison.net/2025/Oct/2/curl/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Simon Willison on Joshua Rogers' curl bug discoveries (Oct 2025)</a> <span class="text-gray-400">&mdash; the positive example of AI-assisted research</span></li>
+                        <li><a href="https://github.blog/open-source/maintainers/rethinking-open-source-mentorship-in-the-ai-era/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">GitHub Blog, "Rethinking open source mentorship in the AI era"</a> <span class="text-gray-400">&mdash; the 3 Cs framework</span></li>
+                        <li><a href="https://github.com/melissawm/open-source-ai-contribution-policies" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Open source AI contribution policies tracker</a> <span class="text-gray-400">&mdash; which projects have explicit AI policies</span></li>
+                        <li><a href="https://devclass.com/2025/11/27/ocaml-maintainers-reject-massive-ai-generated-pull-request/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">DevClass, "OCaml maintainers reject massive AI-generated pull request" (Nov 2025)</a> <span class="text-gray-400">&mdash; the 13,000-line PR case study</span></li>
+                        <li><a href="https://www.theregister.com/2026/02/03/github_kill_switch_pull_requests_ai/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">The Register, "GitHub ponders kill switch for pull requests" (Feb 2026)</a> <span class="text-gray-400">&mdash; GitHub's response to the problem</span></li>
+                        <li><a href="https://www.apache.org/legal/generative-tooling.html" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Apache Software Foundation generative tooling guidance</a> <span class="text-gray-400">&mdash; disclosure standards for ASF projects</span></li>
+                        <li><a href="https://blog.continue.dev/were-losing-open-contribution" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Continue Blog, "We're losing open contribution"</a> <span class="text-gray-400">&mdash; the broader impact on open source culture</span></li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between">
+                <a href="../" class="text-gray-400 hover:text-white text-sm font-mono transition-colors">Home</a>
+                <a href="../bonus-git-github/" class="text-acid hover:text-white text-sm font-mono transition-colors">Git &amp; GitHub</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>lucide.createIcons();</script>
+    <script src="../assets/js/copy-code.js"></script>
+</body>
+</html>
