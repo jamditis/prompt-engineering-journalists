@@ -15,19 +15,47 @@ This is the sequel to Prompt Engineering 101 for Journalists. It moves journalis
 
 ```
 ├── Introduction Module/     # Welcome, syllabus, requirements, getting help
+├── Introduction Module (example messages included)/  # Knight Center templates with sample content
 ├── Module 1/                # From chat window to command line (CLI setup + project context)
+│                            #   Contains both Module 1_*.md and Module 2_*.md files (merged weeks)
 ├── Module 2/                # Custom skills (domain expertise → reusable tools, hooks)
 ├── Module 3/                # CLI workflows (Unix philosophy, cost-conscious pipelines)
 ├── Module 4/                # Agents and RAG (grounded knowledge, source attribution)
 ├── Final Project/           # Guidelines, proposal template, examples
+├── Bonus Module_ Git and GitHub/  # Bonus module on Git/GitHub for journalists
+├── Biography and Instructor Photo/  # Instructor bio and headshot
 ├── Resources/
 │   ├── examples/            # Sample files for exercises
+│   ├── readings/            # Saved reference articles (e.g. Mollick HTML)
 │   ├── scripts/             # Starter shell scripts
 │   ├── skills/              # Example Claude skills
 │   ├── mcp-configs/         # MCP configuration examples
-│   └── mollick-reading-list.md  # Curated Ethan Mollick articles by theme (referenced from Module 1 Optional Resources)
-├── docs/                    # Course website (GitHub Pages)
-└── [Original .docx templates from Knight Center]
+│   └── mollick-reading-list.md  # Curated Ethan Mollick articles by theme
+├── docs/                    # Course website (GitHub Pages → mooc.amditis.tech)
+│   ├── module-1/ … module-4/   # Module content pages
+│   ├── syllabus/            # Syllabus page
+│   ├── final-project/       # Final project page
+│   ├── starter-kit/         # Pre-course starter kit
+│   ├── bonus-git-github/    # Bonus: Git & GitHub guide
+│   ├── bonus-oss-etiquette/ # Bonus: OSS etiquette guide
+│   ├── bonus-interviews/    # Bonus: interviews page
+│   ├── concepts/            # Concept explainer pages (context hygiene, hooks, CLI, etc.)
+│   ├── templates/           # Downloadable templates (CLAUDE.md, skill, pipeline, etc.)
+│   ├── slides/              # Slide decks for video modules
+│   ├── credits/             # Credits page
+│   ├── plans/               # Design/implementation plans (internal)
+│   ├── assets/              # CSS, JS, images
+│   ├── quick-reference.md   # Command quick-reference
+│   ├── troubleshooting.md   # Troubleshooting guide
+│   ├── review.html          # Content review tool
+│   └── llms.txt, sitemap.xml, robots.txt, CNAME
+├── SYLLABUS.md              # Canonical syllabus (markdown)
+├── COURSE_CHECKLIST.md      # Knight Center deliverables checklist
+├── PROJECT_LOG.md           # Development log
+├── VIDEO_SCRIPTS.md         # Video script outlines
+├── VIDEO_NARRATION_SCRIPTS.md  # Full narration scripts for videos
+├── deploy.sh                # Cloudflare Pages fallback deploy script
+└── review.html              # Standalone review tool (root copy)
 ```
 
 ## Key course repositories
@@ -52,7 +80,7 @@ When writing course content, frame CLI tools as harnesses, not just "different i
 
 ## Module content pattern
 
-Each module contains 8 markdown documents:
+Each module contains 9 markdown documents:
 - **Orientation Message** - Week introduction and learning objectives
 - **Midweek Message** - Mid-week check-in
 - **End of the Week Message** - Summary and transition
@@ -61,6 +89,9 @@ Each module contains 8 markdown documents:
 - **Discussion Forums** - 2-3 discussion prompts
 - **Quiz** - 5 multiple choice questions
 - **Exercise** - Step-by-step hands-on tutorial
+- **Exercise Solution Key** - Model answer and grader rubric
+
+Note: Module 1's directory contains two sets of 9 files (`Module 1_*.md` and `Module 2_*.md`) because the old Modules 1 and 2 were merged into a single week. The Bonus Module (Git and GitHub) also follows the 9-document pattern.
 
 ## Grading
 
@@ -145,7 +176,7 @@ Only these are official Claude Code patterns:
 
 **LESSON.md and RULE.md are not official Claude Code file types.** They were personal conventions. Do not reference them in course content.
 
-## Current state (as of Mar 2026)
+## Current state (as of Apr 2026)
 
 All 4 modules + Introduction module have complete 8-document sets. Readings are populated across all modules with required articles added and Mollick synthesis document created.
 
@@ -164,7 +195,7 @@ All 4 modules + Introduction module have complete 8-document sets. Readings are 
 - **Joe Amditis** (925 Struggle Street Substack): agent architecture piece assigned to modules 2 and 4
 - **Author diversity**: Clare Spencer, Jessy de Cooker included; agent research targeted Vicki Boykis, Hilke Schellmann, Meredith Broussard, Rachel Thomas, Joy Buolamwini, Rumman Chowdhury
 
-### Completed work (as of Mar 2026)
+### Completed work (as of Apr 2026)
 
 - **4-module restructure**: old Modules 1+2 merged into Module 1; 3→2, 4→3, 5→4; docs/index.html, README.md, CLAUDE.md, review.html all updated
 - **Optional resources readings**: Willison → Module 2; Vincent + Doctorow → Module 4
@@ -185,6 +216,15 @@ All 4 modules + Introduction module have complete 8-document sets. Readings are 
 - **NICAR 2026 skills repo**: added Aaron Kessler's `amkessler/nicar2026_skills_in_codex_claude` as optional resource in Module 2 (site + starter kit + syllabus Google Doc)
 - **Starter kit references**: added `jamditis/mooc-starter-kit` to syllabus Google Doc (pre-course checklist, course repositories section) and Introductory Materials Google Doc
 - **OSS etiquette guide**: new standalone page at `docs/bonus-oss-etiquette/index.html` — full article on responsible open source contribution with AI tools. Case studies (curl, Ghostty, tldraw, OCaml, PSF), Willison's "proven to work" framework, 10-item checklist, disclosure standards, 3 Cs framework, 12 sourced references. Brief callout + link added to bonus Git & GitHub module. Card added to homepage grid. Sitemap updated. No nav bar entry (standalone resource, not a top-level module).
+- **Bonus interviews page**: `docs/bonus-interviews/index.html`
+- **Concept explainer pages**: 8 standalone pages in `docs/concepts/` covering context hygiene, error logging, hooks as guardrails, AI session memory, context files, skills vs commands, CLI basics, and working with subagents
+- **Templates**: downloadable templates in `docs/templates/` (CLAUDE.md, exercise log, MCP config, pipeline script, project proposal, skill template, quick reference, troubleshooting)
+- **Slide decks**: 4 HTML slide decks in `docs/slides/` for video modules
+- **Video scripts**: `VIDEO_SCRIPTS.md` (outlines) and `VIDEO_NARRATION_SCRIPTS.md` (full narration scripts)
+- **Bonus Module (Git & GitHub)**: full 9-document set in `Bonus Module_ Git and GitHub/`
+- **Starter kit page**: `docs/starter-kit/index.html`
+- **Credits page**: `docs/credits/index.html`
+- **llms.txt**: `docs/llms.txt` for LLM-readable site description
 
 # AI Writing Guidelines: Avoiding Slop Phrases
 Use this file as a reference when reviewing AI-generated content. These patterns indicate lazy, filler writing that should be edited or avoided.

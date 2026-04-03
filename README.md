@@ -14,6 +14,8 @@ This course moves you from web-based AI chat interfaces to terminal CLI tools. B
 - Create automated pipelines that chain AI with other tools
 - Connect AI to your own archives using RAG and MCP
 
+**Course site:** [mooc.amditis.tech](https://mooc.amditis.tech)
+
 ## Course modules
 
 | Week | Topic | What you'll build |
@@ -22,6 +24,8 @@ This course moves you from web-based AI chat interfaces to terminal CLI tools. B
 | 2 | [Custom skills for Claude Code](docs/module-2/) | Source-verification skill |
 | 3 | [CLI workflows for newsrooms](docs/module-3/) | Automation script for a recurring task |
 | 4 | [Agents and RAG](docs/module-4/) | Connect Claude to a knowledge base |
+
+**Bonus modules:** [Git & GitHub for journalists](docs/bonus-git-github/) | [OSS etiquette with AI tools](docs/bonus-oss-etiquette/) | [Interviews](docs/bonus-interviews/)
 
 ## Quick start
 
@@ -62,8 +66,11 @@ gemini -p "Summarize the key points of the First Amendment in 3 bullets"
 
 ## Resources for students
 
+- **[Starter kit](docs/starter-kit/)** - Pre-course setup checklist
 - **[Quick reference](docs/quick-reference.md)** - Commands and shortcuts
 - **[Troubleshooting](docs/troubleshooting.md)** - Common issues and fixes
+- **[Concept explainers](docs/concepts/)** - Standalone guides on CLI basics, context files, hooks, and more
+- **[Templates](docs/templates/)** - Downloadable CLAUDE.md, skill, pipeline, and project templates
 - **[Example scripts](Resources/scripts/)** - Starter shell scripts
 - **[Sample skills](Resources/skills/)** - Claude skill templates
 - **[MCP configs](Resources/mcp-configs/)** - Configuration examples
