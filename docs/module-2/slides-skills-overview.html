@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skills and plugins overview | Advanced prompt engineering for journalists</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0f172a;
+    --bg-card: #1e293b;
+    --bg-card-border: #334155;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --accent: #a3e635;
+    --accent-pink: #f472b6;
+    --accent-cyan: #22d3ee;
+    --accent-amber: #fbbf24;
+    --white: #ffffff;
+  }
+
+  html, body {
+    background: #000;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text);
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .deck { position: relative; width: 1280px; height: 720px; margin: 0 auto; overflow: hidden; }
+
+  .slide {
+    position: absolute; top: 0; left: 0;
+    width: 1280px; height: 720px;
+    background: var(--bg);
+    padding: 60px 72px;
+    display: none; flex-direction: column;
+  }
+  .slide.active { display: flex; }
+
+  .progress { position: absolute; top: 0; left: 0; height: 4px; background: var(--accent); transition: width 0.3s ease; z-index: 10; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+  }
+
+  .slide-heading {
+    font-family: 'Playfair Display', serif; font-weight: 900; font-size: 42px;
+    color: var(--white); line-height: 1.15; margin-bottom: 32px;
+  }
+  .slide-heading.medium { font-size: 36px; }
+
+  .bullet-list { list-style: none; padding: 0; }
+  .bullet-list li {
+    font-size: 20px; line-height: 1.5; padding: 6px 0 6px 32px; position: relative; color: var(--text);
+  }
+  .bullet-list li::before {
+    content: '>'; position: absolute; left: 0; color: var(--accent);
+    font-family: 'JetBrains Mono', monospace; font-weight: 600;
+  }
+  .bullet-list li strong { color: var(--white); }
+
+  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; }
+
+  .card {
+    background: var(--bg-card); border: 1px solid var(--bg-card-border);
+    border-radius: 12px; padding: 28px 32px;
+  }
+
+  .card-tag {
+    display: inline-block; font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 4px; margin-bottom: 12px;
+  }
+  .card-tag.green { background: rgba(163,230,53,0.15); color: var(--accent); }
+  .card-tag.pink { background: rgba(244,114,182,0.15); color: var(--accent-pink); }
+  .card-tag.cyan { background: rgba(34,211,238,0.15); color: var(--accent-cyan); }
+  .card-tag.amber { background: rgba(251,191,36,0.15); color: var(--accent-amber); }
+
+  .card h3 {
+    font-family: 'Playfair Display', serif; font-weight: 700; font-size: 22px;
+    color: var(--white); margin-bottom: 8px;
+  }
+  .card p { font-size: 16px; color: var(--text-muted); line-height: 1.5; }
+  .card .bullet-list li { font-size: 16px; padding: 3px 0 3px 28px; }
+
+  .code-block {
+    background: #0c1222; border: 1px solid var(--bg-card-border); border-radius: 8px;
+    padding: 20px 24px; font-family: 'JetBrains Mono', monospace;
+    font-size: 14px; line-height: 1.6; color: var(--text); white-space: pre; overflow: hidden;
+  }
+  .code-block .comment { color: var(--text-dim); }
+  .code-block .keyword { color: var(--accent); }
+  .code-block .string { color: var(--accent-cyan); }
+  .code-block .heading { color: var(--accent-amber); font-weight: 600; }
+
+  code {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.85em;
+    background: rgba(163,230,53,0.1); color: var(--accent); padding: 2px 6px; border-radius: 3px;
+  }
+
+  .slide.title-slide { justify-content: center; align-items: center; text-align: center; }
+  .slide.title-slide::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 48px; height: 6px; background: var(--accent);
+  }
+
+  .slide-footer {
+    position: absolute; bottom: 24px; left: 72px; right: 72px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: 0.05em; }
+
+  .slide-nav { display: flex; align-items: center; gap: 8px; }
+  .nav-btn {
+    width: 36px; height: 36px; background: var(--bg-card); border: 1px solid var(--bg-card-border);
+    border-radius: 6px; color: var(--text-muted); font-size: 16px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; transition: background 0.15s;
+  }
+  .nav-btn:hover { background: var(--bg-card-border); }
+  .slide-counter { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-dim); min-width: 48px; text-align: center; }
+
+  .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; flex: 1; }
+
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    html, body { overflow: visible; background: var(--bg); width: 1280px; height: auto; }
+    .deck { width: 1280px; height: auto; transform: none !important; margin: 0 !important; }
+    .slide {
+      display: flex !important; position: relative; width: 1280px; height: 720px;
+      page-break-after: always; page-break-inside: avoid; break-after: page; break-inside: avoid;
+    }
+    .slide-nav, .nav-btn, .slide-counter { display: none !important; }
+    .progress { display: none !important; }
+  }
+
+  @media screen {
+    .deck { transform-origin: top left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+  <div class="progress" id="progress"></div>
+
+  <!-- SLIDE 1: Title -->
+  <div class="slide title-slide active" data-slide="1">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px;">
+      Module 02 — Advanced prompt engineering for journalists
+    </div>
+    <div style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 58px; color: var(--white); line-height: 1.1; margin-bottom: 16px;">
+      Skills and plugins
+    </div>
+    <div style="font-size: 24px; color: var(--text-muted); margin-bottom: 40px;">
+      Reusable tools for your CLI workflow
+    </div>
+    <div style="font-size: 16px; color: var(--text-dim);">
+      Joe Amditis <span style="margin: 0 12px; color: var(--bg-card-border);">|</span> Center for Cooperative Media <span style="margin: 0 12px; color: var(--bg-card-border);">|</span> Knight Center MOOC
+    </div>
+    <div class="slide-footer">
+      <div></div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter" id="counter">1 / 4</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: What is a skill? -->
+  <div class="slide" data-slide="2">
+    <div class="section-label">Skills</div>
+    <div class="slide-heading medium">A skill is a markdown file that becomes a slash command</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1;">
+      <div>
+        <ul class="bullet-list" style="margin-bottom: 24px;">
+          <li>Lives in <code>.claude/commands/</code></li>
+          <li>Filename = command name: <code>source-check.md</code> &rarr; <code>/source-check</code></li>
+          <li><strong>Plain English instructions</strong> — no programming language</li>
+          <li><strong>Only loads when invoked</strong> — keeps context window clean</li>
+          <li>Versioned in Git, shareable with colleagues</li>
+        </ul>
+        <div style="font-size: 16px; color: var(--text-muted); line-height: 1.6; padding-left: 32px;">
+          Think of it as a colleague you pull into a conversation for their specific expertise, then let go back to their desk.
+        </div>
+      </div>
+      <div class="code-block" style="font-size: 14px; line-height: 1.65; align-self: start;">
+<span class="comment">---</span>
+<span class="keyword">allowed-tools:</span> <span class="string">Bash, Read, Write, Grep</span>
+<span class="comment">---</span>
+
+<span class="heading"># Social media audit</span>
+Audit a public official's social media
+presence across platforms.
+
+<span class="heading">## Steps</span>
+1. Find accounts on all platforms
+2. Download public video content
+3. Transcribe audio
+4. Screenshot every second
+5. Detect on-screen text
+6. Run content analysis
+7. Build interactive results page</div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Skills and plugins overview</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">2</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: What is a plugin? -->
+  <div class="slide" data-slide="3">
+    <div class="section-label">Plugins</div>
+    <div class="slide-heading medium">A plugin is a package of skills + hooks, installed from GitHub</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1;">
+      <div>
+        <ul class="bullet-list" style="margin-bottom: 24px;">
+          <li><strong>Bundle of skills and hooks</strong> someone else has built</li>
+          <li>Install with one command from a GitHub repo</li>
+          <li>All skills show up as <strong>slash commands instantly</strong></li>
+          <li>All hooks start <strong>running automatically</strong></li>
+          <li>Can include agents, settings, and MCP server configs</li>
+        </ul>
+        <div style="margin-top: 16px;">
+          <div style="font-size: 14px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-bottom: 8px;">EXAMPLE</div>
+          <div class="code-block" style="font-size: 15px; line-height: 1.7; border-color: var(--accent); max-width: 480px;">
+<span class="keyword">$</span> claude install jamditis/claude-skills-journalism
+
+<span class="comment">Installed: 36 skills, 13 hooks</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom: 16px;">
+          <div class="card-tag green">Skills included</div>
+          <p>Source verification, FOIA requests, meeting minutes extraction, data cleaning, content formatting, beat-specific tools</p>
+        </div>
+        <div class="card">
+          <div class="card-tag pink">Hooks included</div>
+          <p>AI filler language detection, one-way-door checks before publishing, unattributed quote flags, style guide enforcement</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Skills and plugins overview</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">3</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: Skills vs plugins comparison -->
+  <div class="slide" data-slide="4">
+    <div class="section-label">Comparison</div>
+    <div class="slide-heading medium">Skills vs. plugins</div>
+    <div class="comparison" style="align-items: start;">
+      <div class="card" style="height: auto;">
+        <div class="card-tag green">Skill</div>
+        <h3>A single tool you build yourself</h3>
+        <div style="margin-top: 16px;">
+          <table style="width: 100%; font-size: 15px; border-collapse: collapse;">
+            <tr style="border-bottom: 1px solid var(--bg-card-border);">
+              <td style="padding: 8px 0; color: var(--text-dim); width: 110px;">What it is</td>
+              <td style="padding: 8px 0; color: var(--text);">One markdown file</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bg-card-border);">
+              <td style="padding: 8px 0; color: var(--text-dim);">Where it lives</td>
+              <td style="padding: 8px 0; color: var(--text);"><code>.claude/commands/</code></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bg-card-border);">
+              <td style="padding: 8px 0; color: var(--text-dim);">How you get it</td>
+              <td style="padding: 8px 0; color: var(--text);">Write it yourself</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bg-card-border);">
+              <td style="padding: 8px 0; color: var(--text-dim);">How you use it</td>
+              <td style="padding: 8px 0; color: var(--text);">Type <code>/command-name</code></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bg-card-border);">
+              <td style="padding: 8px 0; color: var(--text-dim);">Scope</td>
+              <td style="padding: 8px 0; color: var(--text);">One task</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: var(--text-dim);">Analogy</td>
+              <td style="padding: 8px 0; color: var(--text);">A recipe card you wrote</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="card" style="height: auto; border-color: var(--accent-cyan);">
+        <div class="card-tag cyan">Plugin</div>
+        <h3>A toolkit someone packaged and shared</h3>
+        <div style="margin-top: 16px;">
+          <table style="width: 100%; font-size: 15px; border-collapse: collapse;">
+            <tr style="border-bottom: 1px solid var(--bg-card-border);">
+              <td style="padding: 8px 0; color: var(--text-dim); width: 110px;">What it is</td>
+              <td style="padding: 8px 0; color: var(--text);">A GitHub repo with skills + hooks + config</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bg-card-border);">
+              <td style="padding: 8px 0; color: var(--text-dim);">Where it lives</td>
+              <td style="padding: 8px 0; color: var(--text);">Installed globally by Claude Code</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bg-card-border);">
+              <td style="padding: 8px 0; color: var(--text-dim);">How you get it</td>
+              <td style="padding: 8px 0; color: var(--text);"><code>claude install user/repo</code></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bg-card-border);">
+              <td style="padding: 8px 0; color: var(--text-dim);">How you use it</td>
+              <td style="padding: 8px 0; color: var(--text);">Skills appear as commands; hooks run automatically</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bg-card-border);">
+              <td style="padding: 8px 0; color: var(--text-dim);">Scope</td>
+              <td style="padding: 8px 0; color: var(--text);">An entire workflow or domain</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: var(--text-dim);">Analogy</td>
+              <td style="padding: 8px 0; color: var(--text);">A cookbook someone published</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 16px; font-size: 17px; color: var(--text-muted);">
+      You start by writing skills. When you have enough, you can package them as a plugin and share on GitHub.
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Skills and plugins overview</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">4</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  function show(n) {
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(n, total - 1));
+    slides[current].classList.add('active');
+    document.getElementById('progress').style.width = ((current + 1) / total * 100) + '%';
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
+  }
+
+  function next() { show(current + 1); }
+  function prev() { show(current - 1); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+  });
+
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); }
+  });
+
+  function scaleDeck() {
+    const deck = document.getElementById('deck');
+    const sw = window.innerWidth / 1280;
+    const sh = window.innerHeight / 720;
+    const scale = Math.min(sw, sh);
+    deck.style.transform = `scale(${scale})`;
+    deck.style.marginLeft = ((window.innerWidth - 1280 * scale) / 2) + 'px';
+    deck.style.marginTop = ((window.innerHeight - 720 * scale) / 2) + 'px';
+  }
+  scaleDeck();
+  window.addEventListener('resize', scaleDeck);
+  show(0);
+</script>
+</body>
+</html>
