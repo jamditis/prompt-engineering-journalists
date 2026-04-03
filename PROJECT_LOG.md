@@ -2,9 +2,11 @@
 
 ## Project overview
 
-5-week MOOC for the Knight Center for Journalism at UT Austin. Sequel to Prompt Engineering 101 for Journalists. Instructor: Joe Amditis, Center for Cooperative Media, Montclair State University.
+4-week MOOC for the Knight Center for Journalism at UT Austin. Sequel to Prompt Engineering 101 for Journalists. Instructor: Joe Amditis, Center for Cooperative Media, Montclair State University.
 
 The course moves journalists from web-based AI chat interfaces to terminal CLI tools. Each module extends a concept from the 101 course: web prompting to CLI, typing context every time to writing it once in a file, one-off prompts to reusable skills, no-code automation to scripted pipelines, understanding AI to building with agents and RAG.
+
+Note: Originally structured as 5 weeks; old Modules 1 and 2 were merged into Module 1 (see session history below for details).
 
 ## Session history
 
