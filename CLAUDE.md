@@ -178,7 +178,7 @@ Only these are official Claude Code patterns:
 
 ## Current state (as of Apr 2026)
 
-All 4 modules + Introduction module have complete 8-document sets. Readings are populated across all modules with required articles added and Mollick synthesis document created.
+All 4 modules have complete 9-document sets. The Introduction module has its own 5-document structure (Welcome, Syllabus, Requirements, Readings, Getting Help). Readings are populated across all modules with required articles added and Mollick synthesis document created.
 
 **Course is now 4 weeks** (merged old Modules 1+2 into Module 1). Old Module 1 LMS files live in `Module 1/Module 1_*.md`; old Module 2 LMS files live in `Module 1/Module 2_*.md` (labeled "Project context" in review tool). Modules 3→2, 4→3, 5→4.
 
