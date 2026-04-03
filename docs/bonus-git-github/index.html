@@ -95,6 +95,7 @@
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Know when to ask Claude Code to commit, branch, merge, push, or pull — and why each action matters</li>
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Set up a GitHub repository for a journalism project using Claude Code</li>
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Collaborate on a shared project by understanding pull requests, merge conflicts, and remote repositories</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Contribute responsibly to open source projects when using AI coding agents — understanding the real cost of a pull request and the etiquette that earns trust</li>
                     </ul>
                 </div>
             </section>
@@ -585,6 +586,26 @@
             </section>
 
             <!-- ============================================ -->
+            <!-- OSS ETIQUETTE CALLOUT -->
+            <!-- ============================================ -->
+            <section>
+                <div class="border-b border-white/10 pb-4 mb-6">
+                    <h2 class="font-display text-xl text-chrome">Contributing to open source with AI tools</h2>
+                </div>
+                <div class="border border-ice/30 bg-iceDim p-6 space-y-4">
+                    <p class="text-gray-300 text-sm leading-relaxed">Now that you understand Git and GitHub, you have the ability to contribute to open source projects. AI coding agents make it easy to generate pull requests in minutes. But that speed comes with a serious responsibility.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">Every pull request you submit costs a maintainer &mdash; often an unpaid volunteer &mdash; real time to review. If your AI-generated contribution is untested, doesn't match the project's patterns, or solves a problem nobody asked to be solved, you've just wasted someone's hour. At scale, this is burning out the people who keep open source running.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">Projects like curl, Ghostty, and tldraw have been forced to adopt strict policies or close external contributions entirely because of low-quality AI-generated submissions. The open source community has a name for this: <strong class="text-chrome">AI slop</strong>.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed"><strong class="text-chrome">Before you open a PR on someone else's project:</strong> read the contribution guidelines, open an issue first to ask if the change is wanted, test your code yourself, understand every line you submit, and disclose that you used AI tools.</p>
+                    <div class="mt-4 pt-4 border-t border-white/10">
+                        <a href="../bonus-oss-etiquette/" class="inline-flex items-center gap-2 text-acid hover:text-white text-sm font-mono transition-colors">
+                            Read the full guide: open source etiquette for AI-assisted contributors <span aria-hidden="true">&rarr;</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================ -->
             <!-- EXERCISE -->
             <!-- ============================================ -->
             <section>
@@ -739,6 +760,8 @@ Commit the script to this branch.</code></pre>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> When should you create a branch?</li>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What does "push to GitHub" mean, and when would you do it?</li>
                         <li class="flex items-start gap-3"><span class="text-signal">?</span> What is a pull request, and why does it matter for collaboration?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Why is it important to test your code and open an issue before submitting a PR to an open source project?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What is "AI slop" and why is it a problem for open source maintainers?</li>
                     </ul>
                 </div>
             </section>
@@ -755,6 +778,8 @@ Commit the script to this branch.</code></pre>
                         <li><a href="https://docs.github.com/en/get-started/quickstart" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">GitHub quickstart — Official guide to repositories, commits, and pull requests</span></li>
                         <li><a href="https://rogerdudler.github.io/git-guide/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-300">git - the simple guide — Single-page reference with no deep jargon</span></li>
                         <li><a href="https://skills.github.com/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[COURSE]</a> <span class="text-gray-300">GitHub Skills — Free interactive courses on pull requests, conflicts, and GitHub Pages</span></li>
+                        <li><a href="../bonus-oss-etiquette/" class="text-ice hover:text-acid transition-colors">[GUIDE]</a> <span class="text-gray-300">Open source etiquette for AI-assisted contributors — How to contribute responsibly with AI tools</span></li>
+                        <li><a href="https://simonwillison.net/2025/Dec/18/code-proven-to-work/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[ARTICLE]</a> <span class="text-gray-300">Simon Willison, "Your job is to deliver code you have proven to work" — The core principle of responsible contribution</span></li>
                     </ul>
                 </div>
             </section>
