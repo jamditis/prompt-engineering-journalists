@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 02 — Custom skills | Advanced prompt engineering for journalists</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<meta property="og:title" content="Module 02 — Custom skills">
+<meta property="og:description" content="Write it once, use it forever. From the Advanced prompt engineering for journalists MOOC.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mooc.amditis.tech/module-2/slides-video7.html">
+<meta property="og:image" content="https://mooc.amditis.tech/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Module 02 — Custom skills">
+<meta name="twitter:description" content="Write it once, use it forever. From the Advanced prompt engineering for journalists MOOC.">
+<meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0f172a;
+    --bg-card: #1e293b;
+    --bg-card-border: #334155;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --accent: #a3e635;
+    --accent-pink: #f472b6;
+    --accent-cyan: #22d3ee;
+    --accent-amber: #fbbf24;
+    --white: #ffffff;
+    --slide-w: 1280px;
+    --slide-h: 720px;
+  }
+
+  html, body {
+    background: #000;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text);
+    overflow: hidden;
+    height: 100%;
+  }
+
+  /* Slide container */
+  .deck {
+    position: relative;
+    width: var(--slide-w);
+    height: var(--slide-h);
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    top: 0; left: 0;
+    width: var(--slide-w);
+    height: var(--slide-h);
+    background: var(--bg);
+    padding: 60px 72px 60px 72px;
+    display: none;
+    flex-direction: column;
+  }
+
+  .slide.active { display: flex; }
+
+  /* Progress bar */
+  .progress {
+    position: absolute;
+    top: 0; left: 0;
+    height: 4px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+    z-index: 10;
+  }
+
+  /* Section label — monospace uppercase */
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  /* Slide heading */
+  .slide-heading {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 42px;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 32px;
+  }
+
+  .slide-heading.large {
+    font-size: 54px;
+    margin-bottom: 24px;
+  }
+
+  .slide-heading.medium {
+    font-size: 36px;
+  }
+
+  /* Subtitle */
+  .slide-subtitle {
+    font-size: 22px;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+
+  /* Body text */
+  .slide-body {
+    font-size: 18px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* Bullet list with green > markers */
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .bullet-list li {
+    font-size: 20px;
+    line-height: 1.5;
+    padding: 6px 0 6px 32px;
+    position: relative;
+    color: var(--text);
+  }
+
+  .bullet-list li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+  }
+
+  .bullet-list li strong {
+    color: var(--white);
+  }
+
+  /* Cards */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    flex: 1;
+  }
+
+  .card-grid.single { grid-template-columns: 1fr; }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--bg-card-border);
+    border-radius: 12px;
+    padding: 28px 32px;
+  }
+
+  .card-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+  }
+
+  .card-tag.green { background: rgba(163,230,53,0.15); color: var(--accent); }
+  .card-tag.pink { background: rgba(244,114,182,0.15); color: var(--accent-pink); }
+  .card-tag.cyan { background: rgba(34,211,238,0.15); color: var(--accent-cyan); }
+  .card-tag.amber { background: rgba(251,191,36,0.15); color: var(--accent-amber); }
+
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .card p, .card .bullet-list li {
+    font-size: 16px;
+    color: var(--text-muted);
+  }
+
+  .card .bullet-list li { font-size: 16px; padding: 3px 0 3px 28px; }
+
+  /* Code block */
+  .code-block {
+    background: #0c1222;
+    border: 1px solid var(--bg-card-border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+    white-space: pre;
+    overflow: hidden;
+  }
+
+  .code-block .comment { color: var(--text-dim); }
+  .code-block .keyword { color: var(--accent); }
+  .code-block .string { color: var(--accent-cyan); }
+  .code-block .heading { color: var(--accent-amber); font-weight: 600; }
+
+  /* Section divider slide */
+  .slide.divider {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .divider-number {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 120px;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .divider-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+
+  /* Title slide */
+  .slide.title-slide {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .title-module-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+  }
+
+  .title-main {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 64px;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .title-sub {
+    font-size: 24px;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+  }
+
+  .title-author {
+    font-size: 16px;
+    color: var(--text-dim);
+  }
+
+  .title-author span {
+    margin: 0 12px;
+    color: var(--bg-card-border);
+  }
+
+  /* Accent bar top-left on title */
+  .slide.title-slide::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 48px; height: 6px;
+    background: var(--accent);
+  }
+
+  /* Footer */
+  .slide-footer {
+    position: absolute;
+    bottom: 24px;
+    left: 72px;
+    right: 72px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+
+  .slide-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-btn {
+    width: 36px; height: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--bg-card-border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+
+  .nav-btn:hover { background: var(--bg-card-border); }
+
+  .slide-counter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    min-width: 48px;
+    text-align: center;
+  }
+
+  /* Comparison layout */
+  .comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    flex: 1;
+  }
+
+  .comparison .card.dim { opacity: 0.6; }
+  .comparison .card.highlight {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  /* Inline code */
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85em;
+    background: rgba(163,230,53,0.1);
+    color: var(--accent);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  /* Folder tree */
+  .folder-tree {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    padding: 16px 0;
+  }
+  .folder-tree .folder { color: var(--accent-cyan); }
+  .folder-tree .count { color: var(--text-dim); }
+
+  /* Prompt block */
+  .prompt-block {
+    background: #0c1222;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 20px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .prompt-prefix {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* Levels / steps */
+  .level-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  /* Print / PDF */
+  @page {
+    size: 1280px 720px;
+    margin: 0;
+  }
+
+  @media print {
+    html, body {
+      overflow: visible;
+      background: var(--bg);
+      width: 1280px;
+      height: auto;
+    }
+    .deck {
+      width: 1280px;
+      height: auto;
+      transform: none !important;
+      margin: 0 !important;
+    }
+    .slide {
+      display: flex !important;
+      position: relative;
+      width: 1280px;
+      height: 720px;
+      page-break-after: always;
+      page-break-inside: avoid;
+      break-after: page;
+      break-inside: avoid;
+    }
+    .slide-nav, .nav-btn, .slide-counter { display: none !important; }
+    .progress { display: none !important; }
+    .slide-footer { display: flex; }
+    .slide-footer .slide-nav { display: none !important; }
+  }
+
+  /* Fullscreen scaling */
+  @media screen {
+    .deck {
+      transform-origin: top left;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+  <div class="progress" id="progress"></div>
+
+  <!-- SLIDE 1: Title -->
+  <div class="slide title-slide active" data-slide="1">
+    <div class="title-module-label">Module 02 — Advanced prompt engineering for journalists</div>
+    <div class="title-main">Custom skills</div>
+    <div class="title-sub">Write it once, use it forever</div>
+    <div class="title-author">Joe Amditis <span>|</span> Center for Cooperative Media <span>|</span> Knight Center MOOC</div>
+    <div class="slide-footer">
+      <div></div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter" id="counter">1 / 21</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: The hook -->
+  <div class="slide" data-slide="2">
+    <div class="section-label">The power of CLI</div>
+    <div class="slide-heading">"What if you could do this in one prompt?"</div>
+    <div class="slide-body" style="font-size: 20px; line-height: 1.7; max-width: 960px;">
+      Scrape every video from NYC Mayor <strong style="color:var(--white)">Zohran Mamdani's</strong> Instagram, YouTube, TikTok, and Twitter accounts. Download them all. Transcribe every word of audio. Take a screenshot every second. Analyze all on-screen baked-in text. Put everything into a project folder. Run content analysis across all of it. Build an interactive web page with the results.
+    </div>
+    <div style="margin-top: auto; padding-top: 24px;">
+      <div style="font-size: 18px; color: var(--accent); font-family: 'JetBrains Mono', monospace;">All from a single terminal session.</div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">2</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Apps vs harnesses -->
+  <div class="slide" data-slide="3">
+    <div class="section-label">Apps vs harnesses</div>
+    <div class="slide-heading">Try that in a chat window</div>
+    <div class="comparison">
+      <div class="card dim">
+        <div class="card-tag pink">Browser chat</div>
+        <h3>ChatGPT, Claude.ai, Gemini</h3>
+        <ul class="bullet-list">
+          <li>No filesystem access</li>
+          <li>Can't install tools or packages</li>
+          <li>Can't run scripts or shell commands</li>
+          <li>One conversation = one task</li>
+          <li>Copy-paste everything manually</li>
+        </ul>
+      </div>
+      <div class="card highlight">
+        <div class="card-tag green">CLI harness</div>
+        <h3>Claude Code, Gemini CLI</h3>
+        <ul class="bullet-list">
+          <li><strong>Full filesystem</strong> read/write</li>
+          <li><strong>Installs packages</strong> as needed</li>
+          <li><strong>Runs scripts</strong>, coordinates tools</li>
+          <li><strong>Multi-step pipelines</strong> in one session</li>
+          <li><strong>Reads and writes</strong> thousands of files</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">3</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: The result -->
+  <div class="slide" data-slide="4">
+    <div class="section-label">The result</div>
+    <div class="slide-heading medium">One prompt. One session.</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; flex: 1;">
+      <div>
+        <div style="font-size: 14px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-bottom: 8px;">THE PROMPT</div>
+        <div class="prompt-block" style="font-size: 13px; line-height: 1.6;">
+<span class="prompt-prefix">$</span> claude
+
+Scrape all videos from Zohran
+Mamdani's Instagram, YouTube,
+TikTok, and Twitter accounts.
+Download each one. Transcribe
+the audio. Screenshot once per
+second. Detect on-screen text.
+Run content analysis. Build an
+interactive results page.</div>
+      </div>
+      <div>
+        <div style="font-size: 14px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; margin-bottom: 8px;">THE OUTPUT</div>
+        <div class="code-block" style="font-size: 14px; line-height: 1.7; border-color: var(--bg-card-border);">
+<span class="folder">mamdani-audit/</span>
+<span class="folder">  videos/</span>
+<span class="folder">    instagram/</span> <span class="count">(47 files)</span>
+<span class="folder">    youtube/</span> <span class="count">(23 files)</span>
+<span class="folder">    tiktok/</span> <span class="count">(112 files)</span>
+<span class="folder">    twitter/</span> <span class="count">(8 files)</span>
+<span class="folder">  transcripts/</span> <span class="count">(190 files)</span>
+<span class="folder">  screenshots/</span> <span class="count">(28,400 frames)</span>
+<span class="folder">  analysis/</span>
+    text-detection.json
+    content-themes.json
+<span class="folder">  results/</span>
+    index.html</div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">4</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: The repetition problem -->
+  <div class="slide" data-slide="5">
+    <div class="section-label">The problem</div>
+    <div class="slide-heading">That was powerful. Now do it again.</div>
+    <ul class="bullet-list" style="max-width: 840px;">
+      <li>You ran that audit once and it worked</li>
+      <li>Next month you want to audit a <strong>different official</strong></li>
+      <li>You dig through your <strong>chat history</strong> to find the prompt</li>
+      <li>You retype it from memory — <strong>slightly different each time</strong></li>
+      <li>You explain the same workflow to a colleague's session</li>
+      <li>Skills break that cycle</li>
+    </ul>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">5</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: Section divider — 01 -->
+  <div class="slide divider" data-slide="6">
+    <div class="divider-number">01</div>
+    <div class="divider-title">The prompt-to-skill progression</div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">6</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: Level 1 -->
+  <div class="slide" data-slide="7">
+    <div class="section-label">The prompt-to-skill progression</div>
+    <div class="slide-heading medium">Level 1: Ad-hoc prompt</div>
+    <div class="slide-subtitle">Type instructions each time</div>
+    <ul class="bullet-list" style="margin-bottom: 28px;">
+      <li>Works, but <strong>results vary</strong> with phrasing</li>
+      <li>You forget steps between sessions</li>
+      <li>Different wording = different output</li>
+    </ul>
+    <div class="prompt-block" style="font-size: 14px; max-width: 580px; border-color: var(--bg-card-border);">
+<span style="color: var(--text-dim);">Here are my meeting notes, pull out the action items</span></div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">7</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: Level 2 -->
+  <div class="slide" data-slide="8">
+    <div class="section-label">The prompt-to-skill progression</div>
+    <div class="slide-heading medium">Level 2: Saved prompt</div>
+    <div class="slide-subtitle">Save the prompt in a document, copy-paste when needed</div>
+    <ul class="bullet-list">
+      <li><strong>Consistent wording</strong> every time</li>
+      <li>Still manual — you have to <strong>remember to use it</strong></li>
+      <li>You are still the middleware</li>
+    </ul>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">8</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: Level 3 -->
+  <div class="slide" data-slide="9">
+    <div class="section-label">The prompt-to-skill progression</div>
+    <div class="slide-heading medium">Level 3: Custom slash command</div>
+    <ul class="bullet-list">
+      <li>Save prompt as <code>.md</code> file in <code>.claude/commands/</code></li>
+      <li>Filename becomes the command: <code>source-check.md</code> &rarr; <code>/source-check</code></li>
+      <li>Claude <strong>loads it when you type the slash</strong></li>
+      <li><strong>Versioned in Git</strong>, shareable with colleagues</li>
+    </ul>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">9</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: Level 4 -->
+  <div class="slide" data-slide="10">
+    <div class="section-label">The prompt-to-skill progression</div>
+    <div class="slide-heading medium">Level 4: Hook</div>
+    <div class="slide-subtitle">Automated check that runs in the background</div>
+    <ul class="bullet-list">
+      <li>You <strong>don't invoke it</strong> — it fires when conditions are met</li>
+      <li>Like an automated <strong>second reader</strong> checking your work</li>
+      <li>No manual trigger needed</li>
+    </ul>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">10</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: Section divider — 02 -->
+  <div class="slide divider" data-slide="11">
+    <div class="divider-number">02</div>
+    <div class="divider-title">Skills and commands</div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">11</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 12: Skills vs commands -->
+  <div class="slide" data-slide="12">
+    <div class="section-label">Skills vs commands</div>
+    <div class="slide-heading">Two flavors, one format</div>
+    <div class="comparison">
+      <div class="card">
+        <div class="card-tag green">Skill</div>
+        <h3>Domain knowledge applied with judgment</h3>
+        <p style="margin-top: 8px;">Like a style guide — reference material, contextual interpretation. The AI decides how to apply the instructions based on the situation.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag cyan">Command</div>
+        <h3>Deterministic trigger, same steps every time</h3>
+        <p style="margin-top: 8px;">Like a pre-publication checklist — fixed order, no skips. Same input, same sequence of actions, same output format.</p>
+      </div>
+    </div>
+    <div style="margin-top: 20px; text-align: center; font-size: 16px; color: var(--text-dim);">
+      Both are <code>.md</code> files in <code>.claude/commands/</code> — filename = slash command
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">12</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 13: Anatomy of a skill file -->
+  <div class="slide" data-slide="13">
+    <div class="section-label">Anatomy</div>
+    <div class="slide-heading medium">What a skill file looks like</div>
+    <div class="code-block" style="flex: 1; font-size: 15px; line-height: 1.7;">
+<span class="comment">---</span>
+<span class="keyword">allowed-tools:</span> <span class="string">Bash, Read, Write, Grep</span>
+<span class="comment">---</span>
+
+<span class="heading"># Social media audit</span>
+Audit a public official's social media presence across platforms.
+
+<span class="heading">## Steps</span>
+1. Find accounts on Instagram, YouTube, TikTok, Twitter
+2. Download all public video content (<span class="keyword">yt-dlp</span>)
+3. Transcribe audio (<span class="keyword">whisper</span>)
+4. Screenshot every second (<span class="keyword">ffmpeg</span>)
+5. Detect on-screen text (<span class="keyword">tesseract</span>)
+6. Run content analysis across transcripts + text
+7. Build interactive results page in <span class="keyword">results/</span></div>
+    <div style="display: flex; gap: 40px; margin-top: 16px;">
+      <div style="font-size: 14px; color: var(--text-dim);"><span style="color: var(--accent);">Top:</span> Frontmatter (metadata)</div>
+      <div style="font-size: 14px; color: var(--text-dim);"><span style="color: var(--accent-amber);">Middle:</span> Description (when to activate)</div>
+      <div style="font-size: 14px; color: var(--text-dim);"><span style="color: var(--white);">Bottom:</span> Instructions (what to do)</div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">13</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 14: Where skills live -->
+  <div class="slide" data-slide="14">
+    <div class="section-label">Where skills live</div>
+    <div class="slide-heading medium">Three levels of availability</div>
+    <div style="display: flex; flex-direction: column; gap: 16px; flex: 1; justify-content: center;">
+      <div class="card" style="display: flex; align-items: center; gap: 24px; padding: 20px 28px;">
+        <div class="card-tag green" style="margin-bottom: 0; white-space: nowrap;">Global</div>
+        <div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--accent);">~/.claude/commands/</div>
+          <div style="font-size: 15px; color: var(--text-muted); margin-top: 4px;">Available in all projects</div>
+        </div>
+      </div>
+      <div class="card" style="display: flex; align-items: center; gap: 24px; padding: 20px 28px;">
+        <div class="card-tag cyan" style="margin-bottom: 0; white-space: nowrap;">Project</div>
+        <div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--accent-cyan);">.claude/commands/</div>
+          <div style="font-size: 15px; color: var(--text-muted); margin-top: 4px;">Available in that project only, shared via Git</div>
+        </div>
+      </div>
+      <div class="card" style="display: flex; align-items: center; gap: 24px; padding: 20px 28px;">
+        <div class="card-tag amber" style="margin-bottom: 0; white-space: nowrap;">Remote</div>
+        <div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--accent-amber);">GitHub repositories</div>
+          <div style="font-size: 15px; color: var(--text-muted); margin-top: 4px;">Community skills you install as plugins</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">14</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 15: Section divider — 03 -->
+  <div class="slide divider" data-slide="15">
+    <div class="divider-number">03</div>
+    <div class="divider-title">Hooks</div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">15</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 16: Notify vs Stop -->
+  <div class="slide" data-slide="16">
+    <div class="section-label">Two types of hooks</div>
+    <div class="slide-heading">Notify vs. stop</div>
+    <div class="comparison">
+      <div class="card">
+        <div class="card-tag green">Notify hook</div>
+        <h3>The automated second reader</h3>
+        <ul class="bullet-list">
+          <li><strong>Flag issues</strong> without stopping your work</li>
+          <li>Unattributed quotes, AI filler language, style violations</li>
+          <li>Work continues — you review flags later</li>
+          <li>Like a copy editor marking up your draft while you keep writing</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-tag pink">Stop hook</div>
+        <h3>The one-way door guardian</h3>
+        <ul class="bullet-list">
+          <li><strong>Pause</strong> before irreversible actions</li>
+          <li>Deleting files, pushing code, publishing content</li>
+          <li>"This is about to do X — proceed?"</li>
+          <li>Editorial rule: does a human need to see this before it goes out?</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">16</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 17: Section divider — 04 -->
+  <div class="slide divider" data-slide="17">
+    <div class="divider-number">04</div>
+    <div class="divider-title">From session to skill</div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">17</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 18: The Mamdani workflow as a skill -->
+  <div class="slide" data-slide="18">
+    <div class="section-label">From session to skill</div>
+    <div class="slide-heading medium">Remember that social media audit?</div>
+    <div class="slide-subtitle" style="margin-bottom: 20px;">Here's what the skill file looks like.</div>
+    <div class="code-block" style="flex: 1; font-size: 14px; line-height: 1.6;">
+<span class="heading"># Social media audit</span>
+
+Audit a public official's social media presence across platforms.
+
+<span class="heading">## Input</span>
+The official's name and any known account handles.
+
+<span class="heading">## Steps</span>
+1. Find accounts on Instagram, YouTube, TikTok, Twitter
+2. Download all public video content (<span class="keyword">yt-dlp</span>)
+3. Transcribe audio (<span class="keyword">whisper</span>)
+4. Screenshot every second (<span class="keyword">ffmpeg</span>)
+5. Detect and extract on-screen text (<span class="keyword">tesseract</span>)
+6. Run content analysis across transcripts + text
+7. Build interactive results page in <span class="keyword">results/</span></div>
+    <div style="margin-top: 12px; font-size: 16px; color: var(--text-dim);">
+      <code>social-media-audit.md</code> &rarr; <code>/social-media-audit</code>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">18</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 19: Pain points the skill fixes -->
+  <div class="slide" data-slide="19">
+    <div class="section-label">Pain points &rarr; solutions</div>
+    <div class="slide-heading medium">What the skill encodes</div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-tag pink">Rate limits</div>
+        <h3>Platforms throttle downloads</h3>
+        <p>Skill adds delays between requests, retries on 429 errors, rotates user agents. You learned this the hard way once — the skill remembers forever.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag amber">Audio quality</div>
+        <h3>Some transcripts come back garbage</h3>
+        <p>Skill falls back to a local Whisper model when API results have low confidence. Flags files that need manual review.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag cyan">Platform blocks</div>
+        <h3>TikTok fights scraping</h3>
+        <p>Skill uses yt-dlp with cookie support and platform-specific extractors. Encodes the workaround so you don't rediscover it.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag green">Inconsistent output</div>
+        <h3>Every run produced a different folder layout</h3>
+        <p>Skill enforces a standard directory structure, naming conventions, and output manifest. Reproducible every time.</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">19</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 20: Session commands -->
+  <div class="slide" data-slide="20">
+    <div class="section-label">Reference</div>
+    <div class="slide-heading medium">Session commands</div>
+    <div style="display: flex; flex-direction: column; gap: 14px; flex: 1; justify-content: center; max-width: 720px;">
+      <div class="card" style="display: flex; align-items: center; gap: 20px; padding: 16px 24px;">
+        <code style="font-size: 18px; min-width: 110px;">/help</code>
+        <span style="font-size: 16px; color: var(--text-muted);">List available commands and installed skills</span>
+      </div>
+      <div class="card" style="display: flex; align-items: center; gap: 20px; padding: 16px 24px;">
+        <code style="font-size: 18px; min-width: 110px;">/plan</code>
+        <span style="font-size: 16px; color: var(--text-muted);">Think through approach before acting</span>
+      </div>
+      <div class="card" style="display: flex; align-items: center; gap: 20px; padding: 16px 24px;">
+        <code style="font-size: 18px; min-width: 110px;">/compact</code>
+        <span style="font-size: 16px; color: var(--text-muted);">Compress conversation when context gets long</span>
+      </div>
+      <div class="card" style="display: flex; align-items: center; gap: 20px; padding: 16px 24px;">
+        <code style="font-size: 18px; min-width: 110px;">/clear</code>
+        <span style="font-size: 16px; color: var(--text-muted);">Start fresh without leaving session</span>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">20</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 21: Your turn -->
+  <div class="slide" data-slide="21">
+    <div class="section-label">Your turn</div>
+    <div class="slide-heading">This week's exercise</div>
+    <div style="display: flex; flex-direction: column; gap: 16px; max-width: 840px;">
+      <div class="card" style="display: flex; align-items: flex-start; gap: 20px; padding: 20px 28px;">
+        <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--accent); min-width: 36px;">1</div>
+        <div>
+          <h3 style="font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--white);">Build a custom slash command</h3>
+          <p style="font-size: 15px; color: var(--text-muted); margin-top: 4px;">Pick a task you do on your beat. Write the skill file. Test it.</p>
+        </div>
+      </div>
+      <div class="card" style="display: flex; align-items: flex-start; gap: 20px; padding: 20px 28px;">
+        <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--accent); min-width: 36px;">2</div>
+        <div>
+          <h3 style="font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--white);">Install the journalism skills library</h3>
+          <p style="font-size: 15px; color: var(--text-muted); margin-top: 4px;">36 skills, 13 hooks. One install command.</p>
+        </div>
+      </div>
+      <div class="card" style="display: flex; align-items: flex-start; gap: 20px; padding: 20px 28px;">
+        <div style="font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--accent); min-width: 36px;">3</div>
+        <div>
+          <h3 style="font-family: 'Inter', sans-serif; font-weight: 600; font-size: 18px; color: var(--white);">Use /source-verification on a real claim</h3>
+          <p style="font-size: 15px; color: var(--text-muted); margin-top: 4px;">Find a viral claim. Run the skill. See structured analysis.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Module 2: Custom skills</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">21</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  function show(n) {
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(n, total - 1));
+    slides[current].classList.add('active');
+    document.getElementById('progress').style.width = ((current + 1) / total * 100) + '%';
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
+  }
+
+  function next() { show(current + 1); }
+  function prev() { show(current - 1); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+    if (e.key === 'Home') { e.preventDefault(); show(0); }
+    if (e.key === 'End') { e.preventDefault(); show(total - 1); }
+  });
+
+  // Touch support
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); }
+  });
+
+  // Scale deck to fit viewport
+  function scaleDeck() {
+    const deck = document.getElementById('deck');
+    const sw = window.innerWidth / 1280;
+    const sh = window.innerHeight / 720;
+    const scale = Math.min(sw, sh);
+    deck.style.transform = `scale(${scale})`;
+    deck.style.marginLeft = ((window.innerWidth - 1280 * scale) / 2) + 'px';
+    deck.style.marginTop = ((window.innerHeight - 720 * scale) / 2) + 'px';
+  }
+  scaleDeck();
+  window.addEventListener('resize', scaleDeck);
+
+  show(0);
+</script>
+</body>
+</html>

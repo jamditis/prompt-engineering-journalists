@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final project | Advanced prompt engineering for journalists</title>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0f172a;
+    --bg-card: #1e293b;
+    --bg-card-border: #334155;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --text-dim: #64748b;
+    --accent: #a3e635;
+    --accent-pink: #f472b6;
+    --accent-cyan: #22d3ee;
+    --accent-amber: #fbbf24;
+    --white: #ffffff;
+  }
+
+  html, body {
+    background: #000;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text);
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .deck { position: relative; width: 1280px; height: 720px; margin: 0 auto; overflow: hidden; }
+
+  .slide {
+    position: absolute; top: 0; left: 0;
+    width: 1280px; height: 720px;
+    background: var(--bg);
+    padding: 60px 72px;
+    display: none; flex-direction: column;
+  }
+  .slide.active { display: flex; }
+
+  .progress { position: absolute; top: 0; left: 0; height: 4px; background: var(--accent); transition: width 0.3s ease; z-index: 10; }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+  }
+
+  .slide-heading {
+    font-family: 'Playfair Display', serif; font-weight: 900; font-size: 42px;
+    color: var(--white); line-height: 1.15; margin-bottom: 32px;
+  }
+  .slide-heading.medium { font-size: 36px; margin-bottom: 24px; }
+
+  .bullet-list { list-style: none; padding: 0; }
+  .bullet-list li {
+    font-size: 20px; line-height: 1.5; padding: 6px 0 6px 32px; position: relative; color: var(--text);
+  }
+  .bullet-list li::before {
+    content: '>'; position: absolute; left: 0; color: var(--accent);
+    font-family: 'JetBrains Mono', monospace; font-weight: 600;
+  }
+  .bullet-list li strong { color: var(--white); }
+
+  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex: 1; }
+
+  .card {
+    background: var(--bg-card); border: 1px solid var(--bg-card-border);
+    border-radius: 12px; padding: 24px 28px;
+  }
+
+  .card-tag {
+    display: inline-block; font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 4px; margin-bottom: 10px;
+  }
+  .card-tag.green { background: rgba(163,230,53,0.15); color: var(--accent); }
+  .card-tag.pink { background: rgba(244,114,182,0.15); color: var(--accent-pink); }
+  .card-tag.cyan { background: rgba(34,211,238,0.15); color: var(--accent-cyan); }
+  .card-tag.amber { background: rgba(251,191,36,0.15); color: var(--accent-amber); }
+
+  .card h3 {
+    font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px;
+    color: var(--white); margin-bottom: 6px;
+  }
+  .card p { font-size: 15px; color: var(--text-muted); line-height: 1.5; }
+
+  code {
+    font-family: 'JetBrains Mono', monospace; font-size: 0.85em;
+    background: rgba(163,230,53,0.1); color: var(--accent); padding: 2px 6px; border-radius: 3px;
+  }
+
+  .slide.title-slide { justify-content: center; align-items: center; text-align: center; }
+  .slide.title-slide::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 48px; height: 6px; background: var(--accent);
+  }
+
+  .slide-footer {
+    position: absolute; bottom: 24px; left: 72px; right: 72px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: 0.05em; }
+
+  .slide-nav { display: flex; align-items: center; gap: 8px; }
+  .nav-btn {
+    width: 36px; height: 36px; background: var(--bg-card); border: 1px solid var(--bg-card-border);
+    border-radius: 6px; color: var(--text-muted); font-size: 16px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; transition: background 0.15s;
+  }
+  .nav-btn:hover { background: var(--bg-card-border); }
+  .slide-counter { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-dim); min-width: 48px; text-align: center; }
+
+  /* Requirement number badges */
+  .req-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 8px; font-family: 'JetBrains Mono', monospace;
+    font-size: 15px; font-weight: 600; flex-shrink: 0;
+  }
+
+  /* Idea cards — compact 3-col + 1 row */
+  .ideas-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; flex: 1;
+  }
+  .idea-card {
+    background: var(--bg-card); border: 1px solid var(--bg-card-border);
+    border-radius: 10px; padding: 18px 20px;
+  }
+  .idea-card h4 {
+    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px;
+    color: var(--white); margin-bottom: 4px;
+  }
+  .idea-card p { font-size: 13px; color: var(--text-muted); line-height: 1.45; }
+
+  /* Timeline row */
+  .timeline-row {
+    display: flex; align-items: center; gap: 0; margin-top: 8px;
+  }
+  .timeline-step {
+    flex: 1; text-align: center; position: relative; padding: 16px 12px;
+  }
+  .timeline-step::after {
+    content: ''; position: absolute; top: 50%; right: -1px; width: 2px; height: 32px;
+    background: var(--bg-card-border); transform: translateY(-50%);
+  }
+  .timeline-step:last-child::after { display: none; }
+  .timeline-week {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .timeline-desc { font-size: 15px; color: var(--text); line-height: 1.4; }
+
+  @page { size: 1280px 720px; margin: 0; }
+  @media print {
+    html, body { overflow: visible; background: var(--bg); width: 1280px; height: auto; }
+    .deck { width: 1280px; height: auto; transform: none !important; margin: 0 !important; }
+    .slide {
+      display: flex !important; position: relative; width: 1280px; height: 720px;
+      page-break-after: always; page-break-inside: avoid; break-after: page; break-inside: avoid;
+    }
+    .slide-nav, .nav-btn, .slide-counter { display: none !important; }
+    .progress { display: none !important; }
+  }
+
+  @media screen {
+    .deck { transform-origin: top left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+  <div class="progress" id="progress"></div>
+
+  <!-- SLIDE 1: Title -->
+  <div class="slide title-slide active" data-slide="1">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px;">
+      Advanced prompt engineering for journalists
+    </div>
+    <div style="font-family: 'Playfair Display', serif; font-weight: 900; font-size: 58px; color: var(--white); line-height: 1.1; margin-bottom: 16px;">
+      Final project
+    </div>
+    <div style="font-size: 22px; color: var(--text-muted); margin-bottom: 12px; max-width: 720px; line-height: 1.5;">
+      Build a CLI workflow that solves a real problem in your journalism practice
+    </div>
+    <div style="margin-top: 20px; display: inline-flex; align-items: center; gap: 10px; background: rgba(163,230,53,0.08); border: 1px solid rgba(163,230,53,0.2); border-radius: 8px; padding: 10px 20px;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--accent); font-weight: 600;">Optional</span>
+      <span style="color: var(--text-dim);">&mdash;</span>
+      <span style="font-size: 15px; color: var(--text-muted);">not required for your certificate</span>
+    </div>
+    <div style="font-size: 16px; color: var(--text-dim); margin-top: 40px;">
+      Joe Amditis <span style="margin: 0 12px; color: var(--bg-card-border);">|</span> Center for Cooperative Media <span style="margin: 0 12px; color: var(--bg-card-border);">|</span> Knight Center MOOC
+    </div>
+    <div class="slide-footer">
+      <div></div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter" id="counter">1 / 4</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: Requirements -->
+  <div class="slide" data-slide="2">
+    <div class="section-label">Requirements</div>
+    <div class="slide-heading medium">Your project must meet four criteria</div>
+    <div class="card-grid" style="align-items: start;">
+      <div class="card" style="display: flex; gap: 16px; align-items: flex-start;">
+        <div class="req-num" style="background: rgba(163,230,53,0.15); color: var(--accent);">1</div>
+        <div>
+          <h3 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 17px; color: var(--white); margin-bottom: 6px;">Use a CLI AI tool</h3>
+          <p style="font-size: 15px; color: var(--text-muted); line-height: 1.5;">Claude Code, Gemini CLI, Codex CLI, or another CLI tool with instructor approval</p>
+        </div>
+      </div>
+      <div class="card" style="display: flex; gap: 16px; align-items: flex-start;">
+        <div class="req-num" style="background: rgba(244,114,182,0.15); color: var(--accent-pink);">2</div>
+        <div>
+          <h3 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 17px; color: var(--white); margin-bottom: 6px;">Include automation</h3>
+          <p style="font-size: 15px; color: var(--text-muted); line-height: 1.5;">Go beyond a single prompt: a reusable script, multi-stage pipeline, scheduled task, or custom skill</p>
+        </div>
+      </div>
+      <div class="card" style="display: flex; gap: 16px; align-items: flex-start;">
+        <div class="req-num" style="background: rgba(34,211,238,0.15); color: var(--accent-cyan);">3</div>
+        <div>
+          <h3 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 17px; color: var(--white); margin-bottom: 6px;">Solve a real problem</h3>
+          <p style="font-size: 15px; color: var(--text-muted); line-height: 1.5;">Address an actual challenge: something you do manually, avoid because it's tedious, or that needs better consistency</p>
+        </div>
+      </div>
+      <div class="card" style="display: flex; gap: 16px; align-items: flex-start;">
+        <div class="req-num" style="background: rgba(251,191,36,0.15); color: var(--accent-amber);">4</div>
+        <div>
+          <h3 style="font-family: 'Inter', sans-serif; font-weight: 700; font-size: 17px; color: var(--white); margin-bottom: 6px;">Include documentation</h3>
+          <p style="font-size: 15px; color: var(--text-muted); line-height: 1.5;">A README explaining the problem, setup, usage, expected output, and limitations</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 20px; font-size: 15px; color: var(--text-dim); text-align: center; line-height: 1.5;">
+      Submit a <strong style="color: var(--text);">GitHub repository</strong> or <strong style="color: var(--text);">zip file</strong> with all code, config files, a README, and sample input/output.
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Final project</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">2</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: Project ideas -->
+  <div class="slide" data-slide="3">
+    <div class="section-label">Inspiration</div>
+    <div class="slide-heading medium">Suggested project ideas</div>
+    <div class="ideas-grid">
+      <div class="idea-card" style="border-left: 3px solid var(--accent);">
+        <h4>Newsletter pipeline</h4>
+        <p>Gather beat content, summarize developments, draft newsletter sections as reusable weekly output</p>
+      </div>
+      <div class="idea-card" style="border-left: 3px solid var(--accent-pink);">
+        <h4>Transcript processor</h4>
+        <p>Extract key quotes, identify themes, generate structured research documents from interview audio</p>
+      </div>
+      <div class="idea-card" style="border-left: 3px solid var(--accent-cyan);">
+        <h4>Source verification</h4>
+        <p>Encode your fact-checking process into a skill: check claims, document sources, flag what needs confirmation</p>
+      </div>
+      <div class="idea-card" style="border-left: 3px solid var(--accent-amber);">
+        <h4>Social content generator</h4>
+        <p>Take a published story and produce platform-specific posts, threads, and newsletter blurbs</p>
+      </div>
+      <div class="idea-card" style="border-left: 3px solid var(--accent);">
+        <h4>Meeting notes processor</h4>
+        <p>Extract action items and newsworthy decisions from city council, school board, or public meetings</p>
+      </div>
+      <div class="idea-card" style="border-left: 3px solid var(--accent-pink);">
+        <h4>Public records pipeline</h4>
+        <p>Clean and standardize messy public records (PDFs, spreadsheets, text files) for analysis</p>
+      </div>
+      <div class="idea-card" style="border-left: 3px solid var(--accent-cyan); grid-column: 1 / -1;">
+        <div style="display: flex; gap: 40px; align-items: center;">
+          <div>
+            <h4>Custom beat skill</h4>
+            <p>Build a specialized skill for your coverage area with domain knowledge and recurring task automation</p>
+          </div>
+          <div style="font-size: 13px; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; white-space: nowrap; padding: 8px 16px; border: 1px solid var(--bg-card-border); border-radius: 6px;">or invent your own &rarr;</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 12px; font-size: 15px; color: var(--text-dim); text-align: center;">
+      These are starting points. Adapt them to your beat or invent something new.
+    </div>
+    <div class="slide-footer">
+      <div class="footer-label">Final project</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">3</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: Timeline & submission -->
+  <div class="slide" data-slide="4">
+    <div class="section-label">Timeline &amp; submission</div>
+    <div class="slide-heading medium">How to submit your project</div>
+
+    <!-- Timeline bar -->
+    <div style="background: var(--bg-card); border: 1px solid var(--bg-card-border); border-radius: 12px; padding: 8px 0; margin-bottom: 28px;">
+      <div class="timeline-row">
+        <div class="timeline-step">
+          <div class="timeline-week" style="color: var(--accent);">Week 2</div>
+          <div class="timeline-desc"><strong style="color: var(--white);">Project proposal</strong></div>
+          <div style="font-size: 13px; color: var(--text-dim); margin-top: 2px;">Share your idea</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-week" style="color: var(--accent-pink);">Weeks 3 &ndash; 4</div>
+          <div class="timeline-desc"><strong style="color: var(--white);">Build your workflow</strong></div>
+          <div style="font-size: 13px; color: var(--text-dim); margin-top: 2px;">Use office hours for help</div>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-week" style="color: var(--accent-cyan);">End of Week 4</div>
+          <div class="timeline-desc"><strong style="color: var(--white);">Submit final project</strong></div>
+          <div style="font-size: 13px; color: var(--text-dim); margin-top: 2px;">Forum or Google Form</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two columns: submission options + getting help -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; flex: 1;">
+      <div class="card">
+        <div class="card-tag green">Submission options</div>
+        <div style="margin-top: 8px;">
+          <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
+            <div style="font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 18px; margin-top: 1px;">1</div>
+            <div>
+              <div style="font-size: 16px; color: var(--white); font-weight: 600;">Discussion forum</div>
+              <div style="font-size: 14px; color: var(--text-muted); line-height: 1.4;">Share your project publicly so other journalists can learn from it</div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: 12px;">
+            <div style="font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 18px; margin-top: 1px;">2</div>
+            <div>
+              <div style="font-size: 16px; color: var(--white); font-weight: 600;">Google Form</div>
+              <div style="font-size: 14px; color: var(--text-muted); line-height: 1.4;">Submit privately if you prefer not to share publicly</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-tag cyan">Getting help</div>
+        <ul class="bullet-list" style="margin-top: 8px;">
+          <li style="font-size: 16px; padding: 4px 0 4px 28px;">Post questions in the discussion forum</li>
+          <li style="font-size: 16px; padding: 4px 0 4px 28px;">Attend live office hours (Weeks 2&ndash;4)</li>
+          <li style="font-size: 16px; padding: 4px 0 4px 28px;">Share work-in-progress for peer feedback</li>
+          <li style="font-size: 16px; padding: 4px 0 4px 28px;">Review the example projects document</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 16px; font-size: 16px; color: var(--text-muted); line-height: 1.5;">
+      We encourage you to share your work &mdash; it helps other journalists see what's possible.
+    </div>
+
+    <div class="slide-footer">
+      <div class="footer-label">Final project</div>
+      <div class="slide-nav">
+        <button class="nav-btn" onclick="prev()">&larr;</button>
+        <span class="slide-counter">4</span>
+        <button class="nav-btn" onclick="next()">&rarr;</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  function show(n) {
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(n, total - 1));
+    slides[current].classList.add('active');
+    document.getElementById('progress').style.width = ((current + 1) / total * 100) + '%';
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
+  }
+
+  function next() { show(current + 1); }
+  function prev() { show(current - 1); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+  });
+
+  let touchStartX = 0;
+  document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); }
+  });
+
+  function scaleDeck() {
+    const deck = document.getElementById('deck');
+    const sw = window.innerWidth / 1280;
+    const sh = window.innerHeight / 720;
+    const scale = Math.min(sw, sh);
+    deck.style.transform = `scale(${scale})`;
+    deck.style.marginLeft = ((window.innerWidth - 1280 * scale) / 2) + 'px';
+    deck.style.marginTop = ((window.innerHeight - 720 * scale) / 2) + 'px';
+  }
+  scaleDeck();
+  window.addEventListener('resize', scaleDeck);
+  show(0);
+</script>
+</body>
+</html>
