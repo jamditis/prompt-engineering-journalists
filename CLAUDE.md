@@ -221,6 +221,7 @@ All 4 modules have complete 9-document sets. The Introduction module has its own
 - **Templates**: downloadable templates in `docs/templates/` (CLAUDE.md, exercise log, MCP config, pipeline script, project proposal, skill template, quick reference, troubleshooting)
 - **Slide decks**: 4 HTML slide decks in `docs/slides/` for video modules
 - **Video scripts**: `VIDEO_SCRIPTS.md` (outlines) and `VIDEO_NARRATION_SCRIPTS.md` (full narration scripts)
+- **Module 3 video alignment (Apr 2026)**: All 7 Module 3 docs updated to match recorded C1/C2 videos. Videos cover systems thinking, plan mode, scheduling (remote triggers, GitHub Actions), and Mamdani pipeline continuation — not the cron scheduler or Reroute NJ walkthrough originally planned. Quiz rewritten for module concepts. Discussion simplified to 2 questions. Readings trimmed to 3 articles, optional resources to 3. Google Docs in Knight Center delivery folder populated and synced. PR #24.
 - **Bonus Module (Git & GitHub)**: full 9-document set in `Bonus Module_ Git and GitHub/`
 - **Starter kit page**: `docs/starter-kit/index.html`
 - **Credits page**: `docs/credits/index.html`

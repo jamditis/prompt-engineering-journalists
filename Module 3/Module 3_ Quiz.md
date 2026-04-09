@@ -8,88 +8,89 @@
 
 ### Question 1
 
-What does the pipe operator (`|`) do in a command-line pipeline?
+Why should you use plan mode before asking your CLI tool to build a pipeline?
 
-A) Saves the output of a command to a file
+A) Plan mode makes the AI write better code
 
-B) Runs two commands at the same time
+B) It lets you review the approach before any files are written or API calls are made
 
-C) Takes the output of one command and sends it as input to the next command
+C) Plan mode is required — the tool won't build anything without it
 
-D) Connects to a remote server
+D) It automatically tests the pipeline before running it
 
-**Correct answer:** C
+**Correct answer:** B
 
-**Explanation:** The pipe operator is the foundation of the Unix philosophy — small tools that do one thing, connected together. The output of `curl` becomes the input to `readability`, which becomes the input to `claude`, all without creating temp files. This is what makes CLI workflows so composable.
+**Explanation:** Plan mode shows you what the AI intends to build before it starts. Catching a misunderstanding at the planning stage costs 30 seconds. Catching the same problem after a failed batch run costs time and money. It's the same reason you'd review a reporter's outline before they spend three days on a draft.
 
 ---
 
 ### Question 2
 
-You have a file called `articles.json` containing an array of article objects. Each object has a `headline` field. Which `jq` command extracts all the headlines?
+Where should API keys be stored when building automation scripts?
 
-A) `jq 'headline' articles.json`
+A) In the script file, near the top where they're easy to find
 
-B) `jq '.[].headline' articles.json`
+B) In your CLAUDE.md file so the AI can access them every session
 
-C) `jq '.headline[]' articles.json`
+C) In environment variables, never in source files or committed to GitHub
 
-D) `jq 'get headline' articles.json`
+D) In a shared Google Doc so your team can access them
 
-**Correct answer:** B
+**Correct answer:** C
 
-**Explanation:** `.[]]` iterates over all elements in the array; `.headline` selects the `headline` field from each object. `jq` is a lightweight command-line tool for transforming JSON — it pairs naturally with APIs and AI outputs that return structured data.
+**Explanation:** API keys are passwords. Storing them in a script file means anyone who sees the code — including anyone who finds it on GitHub — has access to your account. Environment variables keep secrets separate from code. If a key does end up in a commit, rotate it immediately.
 
 ---
 
 ### Question 3
 
-What is the purpose of a cron job?
+You've built a pipeline that processes news articles. Before running it on your full list of 200 URLs, what should you do first?
 
-A) To download files from the internet
+A) Run it on the full list overnight so it finishes by morning
 
-B) To schedule commands to run automatically at specified times
+B) Test it on 3-5 articles you've already read, so you can verify the output
 
-C) To convert text between different formats
+C) Ask the AI to review its own output for accuracy
 
-D) To test if a website is online
+D) Add a disclaimer to the output noting it was AI-generated
 
 **Correct answer:** B
 
-**Explanation:** Cron is the Unix scheduler. You specify time patterns (e.g., "run at 6am every weekday") and it executes your script automatically. This turns a one-off pipeline into an ongoing workflow — for example, a script that checks a government data source every morning and emails you if anything changed.
+**Explanation:** Testing on a small batch of known material lets you catch problems before they scale. If you test on articles you've already read, you can tell whether a bad summary reflects a pipeline problem or just a hard-to-summarize article. Running 200 articles through a broken pipeline wastes API credits and produces output you can't trust.
 
 ---
 
 ### Question 4
 
-In the pipeline `curl -s https://example.com/article | readability | claude "Summarize this"`, what happens if the `curl` command fails?
+Your pipeline script throws an error halfway through processing. What's the most effective next step?
 
-A) The pipeline retries automatically
+A) Rewrite the script from scratch
 
-B) An empty string is passed to the next command
+B) Search the internet for the error message
 
-C) The entire pipeline pauses and waits
+C) Paste the exact error message back into your CLI session and ask what went wrong
 
-D) Claude receives the error message and summarizes it
+D) Switch to a different AI tool and try again
 
-**Correct answer:** B
+**Correct answer:** C
 
-**Explanation:** By default, a pipeline continues even if a stage fails. The failed stage produces no output, so subsequent commands receive empty input. This is why the module covers `set -e` (exit on error) and exit code checking — silent failures are hard to debug, and a pipeline that "succeeds" with empty input can produce misleading results.
+**Explanation:** Your CLI tool already knows the code it built for you. When you paste the error back in, it can read the error in context and usually identify the problem immediately. This describe-build-test-break-fix loop is the core workflow pattern for building automation with CLI tools.
 
 ---
 
 ### Question 5
 
-Why might a journalist choose to run an AI model locally with Ollama instead of using a cloud API?
+What is the main benefit of breaking a pipeline into separate stages (fetch, clean, process, save)?
 
-A) Local models are always more accurate than cloud models
+A) Each stage uses a different AI model for better results
 
-B) Local models are free and unlimited, while cloud APIs charge per request
+B) When something fails, you know which stage broke and can fix it without touching the others
 
-C) Sensitive data never leaves the journalist's computer
+C) Separate stages run faster because they process in parallel
 
-D) Local models can process images, while cloud APIs cannot
+D) It reduces the number of API calls needed
 
-**Correct answer:** C
+**Correct answer:** B
 
-**Explanation:** Local models are useful when working with confidential sources, unpublished documents, or any material that shouldn't leave the reporter's machine. The tradeoff is capability — local models are generally less capable than frontier cloud models — but for sensitive reporting, keeping data local can be worth it.
+**Explanation:** Modular stages make failures localized. If the fetch stage works but the processing stage breaks, you fix the processing stage without redoing the fetch. Each stage has one job, produces a clear output, and can be tested independently. This is the same principle behind newsroom workflows — separate the reporting from the editing from the publishing.
+

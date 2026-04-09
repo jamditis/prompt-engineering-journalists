@@ -2,9 +2,9 @@
 
 ## Midweek message
 
-Hello everyone,
+Hi everyone,
 
-By now you should have watched the video — where I demo a real scheduled automation workflow and walk through Reroute NJ — and made progress on the article-to-newsletter pipeline exercise. If you've described your pipeline to Claude Code, reviewed the plan, and tested it on at least one article, you're on track.
+By now you should have watched the videos — the conceptual overview of pipeline automation and the live demo where I add scheduling and deployment to a real project — and made progress on the article-to-newsletter pipeline exercise. If you've described your pipeline to Claude Code, reviewed the plan, and tested it on at least one article, you're on track.
 
 Common sticking points this week:
 
@@ -16,8 +16,7 @@ Common sticking points this week:
 
 **The error debugging loop.** When something breaks — and it will — paste the exact error message back into your CLI session. Don't paraphrase. Your CLI tool already knows the code it built for you, so it can read the error in context and usually identify the problem immediately. This is the most important workflow pattern from this module.
 
-Discussion posts are due Friday. The thread on automating repetitive tasks has good ideas about what to build. If you haven't posted yet, think about what you do every morning or for every story.
-
-The exercise takes longer than previous weeks. Budget at least 90 minutes. Getting stuck is part of the learning.
+[INSERT STUDENT THREADS/DISCUSSIONS]
 
 Joe Amditis
+
