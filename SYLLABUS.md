@@ -121,9 +121,12 @@ This module focuses on automation — using AI to build the scripts and pipeline
 
 **Topics:**
 - From no-code automation to LLM-built workflow scripts
-- Asking Claude to build, explain, and run shell scripts inside an interactive session
-- Describing multi-stage pipelines: fetch, clean, analyze, format
+- Thinking in systems: inputs, processing stages, outputs, and feedback loops
+- Plan mode: reviewing the approach before building anything
+- Describing multi-stage pipelines: fetch, clean, process, format
+- Scheduling and triggers: making workflows run on their own
 - Testing small before running large — why this matters in batch work
+- The error debugging loop: paste the error back, get the diagnosis
 - API key security: environment variables, not source files
 
 **Supplementary material:** [How AI session memory works](https://mooc.amditis.tech/concepts/how-ai-session-memory-works.html) — plain-English explainer on context windows, caching, and why session setup matters

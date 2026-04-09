@@ -2,39 +2,7 @@
 
 ## Required readings
 
-Complete these readings before starting the exercise. They don't require any programming knowledge — the goal is to understand what makes a good automation candidate in journalism, how to handle API keys safely, and what to do when automated workflows break.
-
----
-
-### 1. Store config in the environment
-
-**"The Twelve-Factor App: Config (Factor III)"**
-https://12factor.net/config
-
-One page. Required reading.
-
-Your pipeline will use API keys. Those keys should never go in your code, your CLAUDE.md, or any file you commit to GitHub. This document explains why, and what to do instead: store secrets in environment variables, not in source files.
-
-The principle applies whether you write the code yourself or have Claude Code write it for you. When Claude writes your pipeline script, it will use this pattern automatically — but you need to understand it to verify the output and catch mistakes.
-
-**Time:** 5 minutes
-
----
-
-### 2. Errors, rate limits, and what to do about them
-
-**Claude Code API errors reference** — Anthropic Documentation
-https://docs.anthropic.com/en/api/errors
-
-Read the overview and the section on rate limit errors. Your pipeline will hit errors — rate limits when processing many documents, authentication failures when API keys are wrong, and occasional model errors. This reference shows what each error code means and the standard patterns for handling them.
-
-The patterns here — exponential backoff, retry logic, graceful degradation — are what Claude Code will write when you ask it to "handle errors properly." Understanding them lets you check the implementation and ask better follow-up questions when something breaks.
-
-**Time:** 15 minutes
-
----
-
-### 3. Real pipeline results: beat monitoring and translation
+### Real pipeline results: beat monitoring and translation
 
 **"Augmented beat reporting: where LLMs excel and where reporters still win"** — Nick Hagar, Generative AI in the Newsroom, October 28, 2025
 https://generative-ai-newsroom.com/augmented-beat-reporting-where-llms-excel-and-where-reporters-still-win-135decbe8675
@@ -76,3 +44,4 @@ As you read, think about:
 3. What would you do if your pipeline failed halfway through processing 50 documents?
 
 Bring answers to the discussion forum.
+
