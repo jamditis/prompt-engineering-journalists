@@ -3,7 +3,7 @@
 **Course:** Advanced prompt engineering for journalists
 **Instructor:** Joe Amditis, Center for Cooperative Media, Montclair State University
 
-These are camera-ready narration scripts. The promo and welcome videos target 1-2 and 2-3 minutes respectively. Instructional videos (3-12) target ~20 minutes (~3,000 words at 150 wpm). Stage directions are in [BRACKETS].
+These are camera-ready narration scripts. The promo and welcome videos target 1-2 and 2-3 minutes respectively. Instructional videos (3-10) target ~20 minutes (~3,000 words at 150 wpm). Videos 11-14 are shorter (~10-14 min, ~1,500-2,000 words). Stage directions are in [BRACKETS].
 
 ## Updated video map (4-module structure)
 
@@ -15,12 +15,14 @@ These are camera-ready narration scripts. The promo and welcome videos target 1-
 | **4** | **Getting started with Claude Code** | **Module 1** | **Screen recording** | **~20 min** |
 | **5** | **The context file problem** | **Module 1** | **Talking head + slides** | **~20 min** |
 | **6** | **Setting up your beat project** | **Module 1** | **Screen recording** | **~20 min** |
-| **7** | **From prompts to skills** | **Module 2** | **Talking head + slides** | **~20 min** |
-| **8** | **Installing and using journalism skills** | **Module 2** | **Screen recording** | **~20 min** |
+| **7** | **From prompts to skills** | **Module 2** | **Talking head + screen recording** | **~36 min (recorded)** |
+| **8** | **Installing and using journalism skills** | **Module 2** | **Screen recording** | **~13 min (recorded)** |
 | **9** | **Describing workflows and having AI build them** | **Module 3** | **Talking head + slides** | **~20 min** |
 | **10** | **Ask Claude Code to build you a pipeline** | **Module 3** | **Screen recording** | **~20 min** |
-| **11** | **Why AI makes things up (and how to fix it)** | **Module 4** | **Talking head + slides** | **~20 min** |
-| **12** | **Connecting Claude to a knowledge base** | **Module 4** | **Screen recording** | **~20 min** |
+| **11** | **Getting more out of your sessions** | **Module 4** | **Screen recording** | **~12-14 min** |
+| **12** | **Settings, caching, and connecting to data** | **Module 4** | **Talking head + slides** | **~12 min** |
+| **13** | **Calling other agents from the command line** | **Module 4** | **Screen recording** | **~10 min** |
+| **14** | **What's next + course close** | **Module 4** | **Talking head + slides** | **~10 min** |
 
 ---
 
@@ -720,313 +722,152 @@ That's the full Module 1 setup. You have a CLI tool, a context file that shapes 
 
 ---
 
-## Video 7: From prompts to skills — ~20 minutes
+## Video 7: From prompts to skills — ~36 minutes (recorded)
 
-**Format:** Talking head + slides
-**Length:** ~20 minutes
+**Format:** Talking head + screen recording (live demo, unscripted)
+**Actual length:** ~36 minutes
 **Module:** 2
+**Note:** This is a post-recording summary. The video was not scripted — Joe riffed and did live demos. What follows is a close representation of what was covered.
 
 ---
+
+### Section 1 — Conceptual overview (~5 min)
+
+[TALKING HEAD — Joe at desk, cat Reese visible ("special guest lecturer")]
+
+So this is Module 2. We've got a special guest lecturer here — this is Reese. She's going to help me explain skills, commands, and customizing AI workflows for repeatability. Module 2 is about complicated workflows — things you want to do more than once, the same way, without retyping everything.
+
+Let me start with definitions, because there are a few terms that get thrown around and they mean different things.
+
+**What is a skill?** A skill is a markdown file. Plain language instructions. No code. The key thing is it only loads when you invoke it — unlike MCP, which is always loaded and always taking up space in the context window. Skills are token-efficient. They sit on disk until you call them.
+
+**What is a plugin?** A plugin is a bundle of skills and commands. Example: PDF Playground at skills.amditis.tech has slide design skills packaged together. You install the whole bundle at once.
+
+Skills and commands show up as slash commands when you type a forward slash. You type `/` and you see a list of everything available.
+
+**Hooks** are different. Hooks run automatically — you never type a slash command for them. They fire based on conversation context or keywords.
+
+Example: a hook that prevents pushing to the main branch. You're working, you tell Claude to push, and the hook catches it — stops the action, warns you, makes you confirm.
+
+Another example: the one-way-door concept. Some decisions are hard to reverse — a database schema, a choice of programming language, an infrastructure config. The hook stops the model, uses AskUserQuestion to present alternatives, and makes you decide explicitly. That hook is available at skills.amditis.tech.
+
+Quick recap: a skill is a single reusable tool — a markdown file. A plugin is a collection of skills shared as a package. Hooks run automatically in the background.
+
+### Section 2 — Live demo: social media content analysis (~30 min)
+
+[SCREEN — Claude Code open in MOOC folder, launched with --dangerously-skip-permissions]
+
+Here's the task. I want to do a content analysis of NYC Mayor Zohran Mamdani's social media video content across five platforms: Instagram, YouTube, TikTok, Twitter, and Facebook. I paste in a prompt with all five social media URLs and request at least 15 videos from each platform.
+
+The brainstorming skill triggers automatically — that's from the Superpowers plugin. It kicks in before any work starts to scope the project.
+
+Then AskUserQuestion fires. This is the interactive decision-making tool. It walks me through a series of choices:
+
+- Content/text analysis purpose
+- OCR approach: use Claude's built-in vision, not Tesseract or EasyOCR — no need to install anything
+- Project folder: current repo
+- Frame sampling rate: every 3 seconds
+- Whisper model: large
+- Dashboard: single-page
+- Pipeline approach: sequential
+- Vision analysis: in-session, not API — saves money
+- Content analysis scope: themes, sentiment/tone, and cross-platform comparison
+
+The writing-plans skill creates an implementation plan with a work tree. I choose sub-agent driven development for implementation — Claude spawns sub-agents to handle different parts of the pipeline.
+
+[SCREEN — video downloading phase]
+
+**Video downloading.** YouTube and TikTok work right away with yt-dlp. 15 videos each, 30 total. No issues.
+
+Twitter, Instagram, and Facebook — yt-dlp fails on all three. So Claude switches to browser automation via Playwright. I log into all three platforms manually so the browser session has my credentials.
+
+Playwright navigates to Mamdani's profiles, finds video URLs, and downloads them. I give a navigation tip — look at timestamp indicators to identify video thumbnails vs. image posts. By the end: 76 total videos downloaded with JSON metadata. No watermarks, high resolution.
+
+[SCREEN — transcription phase]
+
+**Transcription.** Whisper large model runs on all 76 videos. It maxes the GPU and crashes OBS — the screen recording software — so I switch to the turbo model for faster processing. I mention batch processing APIs as an alternative for anyone dealing with large volumes. All 76 videos get transcribed successfully.
+
+[SCREEN — dashboard creation]
+
+**Dashboard.** The front-end design skill builds a dashboard skeleton while transcription is still running. The dashboard includes:
+
+- Video catalog with expandable transcripts
+- Topic analysis — budget, housing, and immigration come out as the top topics
+- Sentiment distribution — positive, urgent, neutral, negative
+- Cross-platform comparison
+- Transcript search
+
+I note some UI improvements I'd make: more color variety, modals instead of accordions for transcript display, and links back to the original videos.
+
+[SCREEN — vision/frame analysis]
+
+**Vision and frame analysis.** I sample a few videos rather than running the full set — running frame analysis on all 76 would take hours. The sampling shows it works.
+
+[SCREEN — CLAUDE.md and README updates]
+
+Claude updates the CLAUDE.md and README to log lessons learned from the session. That's the pattern from Module 1 — your context file evolves as you work.
+
+[TALKING HEAD — recurring throughout the demo]
+
+The message I keep coming back to: you can't do this in a browser chat window. Zero cost — no API charges because it's running in a Claude Code session. Every step is verifiable — you can see the files, read the transcripts, check the data. And it runs in the background while you do other things.
+
+---
+
+## Video 8: Installing and using journalism skills — ~13 minutes (recorded)
+
+**Format:** Screen recording with voiceover (live demo, unscripted)
+**Actual length:** ~13 minutes
+**Module:** 2
+**Note:** This is a post-recording summary, continuing directly from Video 7. The video was not scripted.
+
+---
+
+### Section 1 — Creating skills from the workflow (~8 min)
+
+[SCREEN — Claude Code session, continuing from the Mamdani analysis]
+
+I wish there were some more magical secret sauce here, but there isn't. Creating skills is just describing what you want and saving it as a file.
+
+I ask Claude to create four modular skills based on the workflow we just ran:
+
+1. **Video download** — the scraping/downloading pipeline
+2. **Transcription pipeline** — Whisper processing
+3. **Video frame analysis** — frame sampling and vision analysis
+4. **Video dashboard** — building the front-end display
+
+The decisions during creation:
+
+- **Modular, not monolithic.** Each skill does one thing. That way I can use the transcription pipeline on a project that doesn't need a dashboard, or run the dashboard skill on videos I downloaded some other way. Flexibility across projects.
+
+- **Project-only vs. global scope.** I initially want global so the skills are available everywhere. But hooks can "bleed" across projects — a hook designed for one project might fire unexpectedly in another. I start with project-only, then change to global during troubleshooting, then settle on a full Claude Code plugin with plugin.json, versioning, and the ability for others to install it.
+
+Claude uses Anthropic's built-in plugin development skills to create the plugin structure: a plugin.json file, individual SKILL.md files in subfolders, and associated scripts.
+
+The skill files themselves — they're not complex code documents. They're markdown with a little bit of bash. You can write them by hand or have the bot write them and review what it produces.
+
+### Section 2 — Testing and troubleshooting (~3 min)
+
+[SCREEN — trying to load the plugin]
+
+The plugin doesn't show up after I run the reload plugins command. I quit Claude Code, restart it — still nothing. Try again. Still not working.
+
+The issue: the plugin was created at the wrong directory path. Claude put the files in `claude-plugins` instead of `.claude/plugins`. Claude moves the files to the correct global location.
+
+After the fix: `/video-frames`, `/video-download`, `/video-dashboard` all appear as slash commands. I test the video-dashboard skill — it loads and launches the workflow.
+
+This is why we test. Don't just say it works — verify. Run the slash command, confirm it shows up, confirm it does what you expect.
+
+### Section 3 — Assignment and wrap-up (~2 min)
 
 [TALKING HEAD]
 
-You've written a prompt that works. It extracts action items from council minutes. You use it every week. And every week you either retype it from memory — slightly different each time — or dig through your notes to find it. That's not a system. That's a workaround.
+Your assignment: create or run your own workflow. It can be similar to what I just did or different — analyze a politician's social media, process a batch of documents, whatever fits your beat. Take notes as Claude works. Build your own slash commands or plugin based on what you learn.
 
-I did this myself for months before I figured out a better way. I had a note in my phone with prompts I liked. I'd open it, scroll to find the one I needed, copy it, switch to Claude Code, paste it in, and then modify it because the context was slightly different this time. That's four steps and a context switch before any work happens. Multiply that by every task you do repeatedly, and you've built yourself a second job: prompt librarian.
+It can be simple or complex — the more complex the workflow, the more likely you need skills and plugins to make it repeatable.
 
-Skills fix that.
+Check out skills.amditis.tech for pre-made skills: one-way-door hooks, PDF playground, plugins that help update the context of other skills. Browse, install, test. Then try building your own plugin.
 
-[SLIDE: progression diagram]
-
-Here's the maturity path. Most journalists are at stage one or two. This module moves you to three and four.
-
-**Stage one: ad-hoc prompts.** You type the instructions from memory each time. It works, but the results vary depending on how you phrase it that day. Monday you write "extract the key votes from these minutes." Tuesday you write "pull out all voting outcomes from this transcript." The phrasing is different, so the output is different. Subtle differences, but they add up when you're trying to be consistent.
-
-**Stage two: saved prompts.** You keep them in a notes app or a shared document. When you need one, you copy-paste it into Claude Code. Better — more consistent — but still manual. You have to find the right prompt, paste it, and often modify it for the current context. And if you improve the prompt, you have to remember to update the saved version. If a colleague wants your prompt, you email it to them.
-
-**Stage three: skills.** A skill is a markdown file that Claude Code loads as a slash command. You type `/meeting-minutes` and the instructions apply instantly. No copy-pasting. No searching through notes. No context-switching. And because it's a file in your project, it's version-controlled — changes are tracked, colleagues get the latest version automatically when they pull from GitHub.
-
-**Stage four: hooks.** These run automatically. You don't invoke them. They fire at specific points in your workflow — every time Claude reads a file, every time it tries to create something, every time it's about to make a change. Hooks are the background layer of quality control.
-
-**Stage five: plugins.** A package of skills and hooks that someone else has built and shared on GitHub. You install it with one command and get an entire toolkit. The journalism skills library we'll install in the demo is a plugin.
-
-This module covers stages three and four. By the end, you'll have installed a skills library and built a custom skill of your own.
-
-[SLIDE: annotated skill file]
-
-Let me show you what a skill actually is, because the simplicity is the point.
-
-A skill file is a markdown document. It lives in your project's `.claude/commands/` directory. The filename becomes the command name: `meeting-minutes.md` becomes `/meeting-minutes`. `source-verification.md` becomes `/source-verification`. The content of the file is the instructions Claude follows when you invoke the command.
-
-That's it. There's no special syntax. No programming language. No configuration file. It's a markdown document with instructions in plain English — the same kind of instructions you'd give a new reporter taking over your beat. "When processing city council minutes, extract all votes with the full vote count and the names of any dissenting members. Separate action items from discussion items. Flag anything that was tabled."
-
-Now here's the key concept: skills inject context only when you need it.
-
-Your CLAUDE.md loads every session — that's the right behavior for beat knowledge and style rules that should always be active. But a skill only loads when you type the slash command. If you're not doing source verification right now, those instructions aren't taking up space in the AI's context window. They're sitting in a file on disk, waiting for you to call them.
-
-This matters because context has a cost. Not in dollars — in attention. The more instructions the AI is holding in memory at once, the more likely it is to lose track of something. Remember the drift problem from Module 1? That's partly a context overload problem. If your CLAUDE.md has beat knowledge plus style rules plus workflow instructions plus source verification instructions plus meeting minutes extraction rules plus FOIA drafting guidelines — that's a lot of context loaded on every single session, even when you only need one of those capabilities.
-
-Skills let you keep specialized instructions out of the background and bring them in only when they're relevant. Think of it as a colleague you pull into a conversation for their specific expertise and then let them go back to their desk. You don't keep the FOIA expert in the room when you're working on meeting minutes.
-
-This is what I mean by "token-efficient context management" — you get precise, relevant instructions at the moment you need them, and nothing cluttering the window when you don't.
-
-[RECAP — after skill anatomy]
-
-A skill is a markdown file in `.claude/commands/`. The filename is the command. You invoke it with a slash. It loads instructions only when called, keeping your context window clean the rest of the time.
-
-[SLIDE: skill examples for journalism]
-
-What kinds of skills make sense for journalism? Here are some examples.
-
-**Source verification.** A skill that applies the SIFT method to a claim: check the source, find the original, trace it upstream, look for confirmation. You paste a claim, invoke `/source-verification`, and get a structured analysis of what holds up and what doesn't.
-
-**Meeting minutes extraction.** A skill that processes city council or board meeting transcripts and pulls out votes, action items, named officials, and tabled items. Type `/meeting-minutes` after feeding it a transcript.
-
-**FOIA request drafting.** A skill that takes your description of what records you want and drafts a FOIA request following your state's specific requirements — addressing it to the right office, citing the right statute, including the right language about fee waivers.
-
-**Content formatting.** A skill that takes a draft story and formats it to your publication's specific requirements — headline format, byline style, dateline conventions, photo caption format.
-
-**Data cleaning.** A skill that takes a messy dataset — inconsistent names, mixed formats, missing fields — and standardizes it according to rules you've defined.
-
-Each of these is a task you do repeatedly, where consistency matters, and where the instructions are specific enough that the AI needs guidance to do it your way instead of generically.
-
-[SLIDE: hook flow diagram]
-
-Hooks are different from skills, and the distinction matters.
-
-Skills are things you invoke: you type a command and the instructions load. Hooks are things that fire automatically. You don't call them. They run on their own at specific trigger points.
-
-Two kinds.
-
-**Notify hooks** run in the background and flag issues without stopping your work. Think of them as an automated second reader sitting behind you. The work keeps going, but problems get marked for your attention. A notify hook might flag an unattributed quote in a summary. It might catch AI-generated filler language — words like "comprehensive" or "innovative" that sound impressive but add nothing. It might note that a claim hasn't been verified against a primary source.
-
-The key: notify hooks don't interrupt. They observe and report. You review the flags when you're ready.
-
-**Stop hooks** are different. They pause execution and require your explicit confirmation before continuing. These are for one-way doors — actions that are hard to undo.
-
-Concrete example: the journalism skills library includes a hook called `one-way-door-check`. Every time Claude Code tries to create a new file, this hook examines the filename and the content. If the file looks like a hard-to-reverse decision — a database schema, an API contract, an infrastructure configuration, a published article — the hook blocks the write and forces Claude to stop.
-
-Claude can't just create the file. It has to present you with what it's about to create, explain why, and offer alternatives. You review and decide. For routine files — notes, drafts, data exports — the hook passes silently. You never even know it ran.
-
-You never invoke this hook. It fires automatically, every time. And the hook script itself is readable — you can open it and see exactly what patterns it checks. A few dozen lines. That transparency is the point: if you disagree with a rule, you change the file.
-
-Newsrooms already work this way. You have editorial review before publication. You have sign-off requirements before legal settlements. You have approval chains before public statements. A stop hook is the automated version of "does someone need to see this before it goes out?"
-
-[RECAP — after hooks]
-
-Two types of hooks. Notify hooks flag problems without stopping work — like an automated second reader. Stop hooks block one-way-door decisions until you approve. Both fire automatically. You never invoke them.
-
-[SLIDE: plugin concept]
-
-At the top of the maturity path: plugins. A plugin is a package of skills and hooks that someone has assembled and shared on GitHub. You install the whole package with one command. All the skills show up as slash commands. All the hooks start running automatically.
-
-The journalism skills library is a plugin: 36 skills and 13 hooks, installed in one step. Source verification, FOIA requests, data journalism, editorial workflows, quality checks. The exercise this week has you install it, use it, and build on it.
-
-And at the far end of what's possible: Superpowers — a third-party plugin that fires different skills automatically at each stage of a project. Brainstorming before any code is written. Test-driven development during implementation. Code review after tasks are completed. A complete structured workflow, installed in one command. The journalism skills plugin follows the same model, built for newsroom work instead of software development.
-
-[SLIDE: skills by category]
-
-The journalism skills library has 36 skills across several categories:
-
-Source verification and fact-checking. FOIA requests and public records. Data journalism workflows. Editorial quality checks. Content formatting and production. Beat-specific tools.
-
-You don't need to use all of them. Browse the library. Find the skills that match tasks you actually do. Ignore the rest. The exercise asks you to install the library, try the source-verification skill on a real claim, and create one custom skill of your own.
-
-The concept generalizes beyond the library. Say you're building a source-tracking system — a tool that suggests relevant sources for a story topic, and then after you've written the story, generates a diversity audit of who you quoted. That tool has two distinct tasks: suggesting sources before writing, and analyzing the finished article after writing. Those are two skills. Build each one, invoke each one when you need it, and neither clutters your context when you're doing other work.
-
-Think about your own workflow. What do you do every week that follows the same pattern? What instructions do you find yourself retyping? Those are skills waiting to be built.
-
-[SLIDE: when skills aren't worth it]
-
-A quick note on when skills are overkill. Not every prompt needs to become a skill.
-
-If you do something once — a specific research question, a one-time formatting task — just type the prompt. Don't create a skill for it. Skills are for tasks you repeat.
-
-If the task is so simple that the prompt is one sentence — "summarize this in three bullets" — a skill file adds overhead without much benefit. The value of skills comes from complex, multi-step instructions that would be tedious to retype correctly every time.
-
-The threshold: if you've done it three times and you'll do it again, it's probably worth making into a skill. If it's a one-off, just type the prompt.
-
-[SLIDE: arc diagram — module 2 highlighted]
-
-In Module 1, you set up the project and got context files working. This week you add reusable tools. By the end of Module 2, your project will have a custom skill you built yourself, a library of journalism-specific tools, and hooks running in the background checking your work. Module 3, you'll describe a full workflow and have the AI build the automation.
-
-[RECAP — closing]
-
-The progression: ad-hoc prompts, saved prompts, skills, hooks, plugins. Skills are markdown files that load with a slash command. Hooks fire automatically — notify hooks flag problems, stop hooks block one-way doors. Plugins bundle both into installable packages. In the demo, I'll install the journalism skills library, run source-verification on a real claim, and build a custom skill step by step. See you there.
-
----
-
-## Video 8: Installing and using journalism skills — ~20 minutes
-
-**Format:** Screen recording with voiceover
-**Length:** ~20 minutes
-**Module:** 2
-
----
-
-[SCREEN: Terminal, Claude Code open in greenfield-beat directory]
-
-Today we're going to do three things: install the journalism skills library, use the source-verification skill on a real claim, and build a custom skill from scratch. By the end of this video, your project has working tools — not just context, but actual reusable commands.
-
-I'm in my greenfield-beat directory. This is the same project from Module 1 — it already has the CLAUDE.md with our beat context. Claude Code is open. Let's start with the install.
-
-[SCREEN: Claude Code session]
-
-I type: `/install-github-plugin jamditis/claude-skills-journalism`
-
-[SCREEN: Claude cloning and installing]
-
-Watch what's happening. It's cloning the repository from GitHub — downloading all 36 skills and 13 hooks. It's registering them with Claude Code so they show up as slash commands. One command did all of that.
-
-Let me verify it worked. I'll type `/help` and scroll down.
-
-[SCREEN: Help output showing new slash commands]
-
-See all those new commands? `/source-verification`, `/foia-requests`, `/data-journalism`, `/fact-check-workflow`, `/ap-style-check`. Each one of those is a markdown file with instructions that Claude follows when you invoke it. They weren't there before the install. Now they're part of my toolkit.
-
-And the hooks are running too — silently, in the background. The `one-way-door-check` hook I described in the previous video is now active. Every time Claude tries to create a file that looks like a hard-to-reverse decision, it'll pause and ask for confirmation. I won't see it until it triggers. That's the point.
-
-[SCREEN: Opening a skill file]
-
-Before we use any of these, let me show you what's inside one. I type: "Open the source-verification skill file so I can read it."
-
-[SCREEN: Skill file content visible]
-
-Look at this. It's a markdown document — the same format you'd write a CLAUDE.md in. At the top, there's a YAML header: the skill name, a description, and some metadata. Then the body: step-by-step instructions.
-
-Let me read through it. "When this skill is invoked, apply the SIFT method to evaluate the claim." It breaks down the steps: stop and identify the specific claims being made. Find the original source. Trace the claim upstream to its origin. Look for independent confirmation from other sources. For each claim, note: verified, partially verified, unverified, or debunked. Include the evidence source for each determination.
-
-This is the same method you'd follow manually if you were verifying a claim for a story. The skill makes it consistent — the same steps in the same order every time — and fast, because the AI does the lookup and structuring work.
-
-And you can read every line. You can edit it. You can copy it, rename it, and modify it for your beat. It's not a black box. It's a text file with instructions.
-
-[SCREEN: Claude Code session]
-
-Now let's use it. I've got a claim to check — the kind of thing that shows up in your social media feeds or your tip inbox.
-
-I paste: "A Facebook post claims the city of Greenfield spent $4.2 million on a parking garage with only 200 spaces, making it the most expensive per-space parking structure in the state."
-
-Now I invoke the skill: `/source-verification`
-
-[SCREEN: Claude working through the SIFT method]
-
-Watch what it does. It's following the skill instructions step by step. First, it isolates the specific claims: there's a dollar amount ($4.2 million), a capacity number (200 spaces), and a comparative claim (most expensive per-space in the state). Three distinct, testable claims.
-
-Then it starts working through the SIFT method. It looks for the original source of the Facebook post — who posted it, when, is there a link to a source? It searches for primary documentation: city council minutes, budget records, local news coverage of the parking garage project.
-
-[SCREEN: Structured output appearing]
-
-Look at the results. Let me walk through them.
-
-**Claim 1: $4.2 million cost.** The city did approve a parking garage project. But the amount in the council resolution is $3.8 million, not $4.2 million. The $4.2 million figure doesn't appear in any official documentation the skill found. The post inflated the number by $400,000. Status: partially wrong.
-
-**Claim 2: 200 spaces.** The council resolution specifies a 200-space garage. That matches the post. Status: confirmed.
-
-**Claim 3: Most expensive per-space in the state.** This would require a statewide dataset of parking structure costs and capacities. No such dataset is available. The skill can't verify or debunk this — it doesn't have the data. Status: unverifiable with available evidence.
-
-Three claims checked in about 30 seconds. One is wrong, one is correct, one can't be determined. And notice what the skill didn't do: it didn't call the post "false." It didn't issue a verdict. It told you which parts held up, which didn't, and where it ran out of evidence. It's reporting uncertainty, not hiding it. That's the editorial judgment baked into the skill instructions.
-
-Compare that to doing this manually. You'd spend 15-20 minutes searching for the council resolution, cross-referencing the dollar amount, checking the space count, and then probably giving up on the statewide comparison because the data doesn't exist in a convenient form. The skill does the same work in seconds, and — because it follows the same steps every time — the analysis is consistent whether you run it at 9am or 9pm, whether you're fresh or on deadline.
-
-[SCREEN: Claude Code session]
-
-Let me run it on one more claim, so you can see the pattern. I paste: "A newsletter claims that Greenfield's police department overtime budget increased 340% over the last three years."
-
-Then: `/source-verification`
-
-[SCREEN: Claude working through the verification]
-
-Same method, different claim. It's looking for the police department budget records, checking the overtime line items for each of the last three years, and calculating the actual percentage change.
-
-[SCREEN: Results]
-
-The overtime budget did increase — but by 180%, not 340%. The newsletter appears to have compared the lowest single month to the highest single month rather than using annual totals. The skill notes the discrepancy and explains the likely methodological issue.
-
-That's the kind of nuance you need for accurate reporting. Not "the claim is wrong" but "the claim uses a misleading comparison methodology, and here's the actual number."
-
-[RECAP — after source verification demos]
-
-Two claims checked. One inflated a number. The other used a misleading comparison. Both times, the skill followed the same steps, gave structured verdicts, and flagged what it couldn't verify. Same method, consistent results, 30 seconds each. That's what a skill buys you.
-
-[SCREEN: Claude Code session]
-
-Now let's build a custom skill. This is the part that connects to your exercise — because the exercise asks you to create a skill of your own.
-
-I'll start with Plan Mode. I type: "I want to create a skill called meeting-minutes that extracts action items, votes, and named officials from a city council transcript. The output should be a structured summary with: all votes including the full count and names of dissenters, all action items with the responsible party and deadline, and all named officials with their role. Plan the skill file structure — sections, steps, output format — but don't write the file yet."
-
-[SCREEN: Claude presenting a proposed structure]
-
-Look at the plan. It's proposing a YAML header with the skill name and description. An input section describing what the skill expects — a meeting transcript or minutes document. Then processing rules: what to look for. Motions and votes — extract the motion text, the mover and seconder, the vote count, and any named dissenters. Action items — extract the task, who it's assigned to, and any stated deadline. Named officials — who spoke, their title or role. Then an output format: structured sections for each category.
-
-I like this, but I want to add something. I type: "Good start. Also include a section for items that were tabled or deferred — these tend to come back at future meetings and I want to track them separately. And add a 'Discussion highlights' section that captures any notable exchanges or disagreements that didn't result in a formal vote."
-
-[SCREEN: Claude updating the plan]
-
-It incorporated both additions. The plan now has five output sections: votes, action items, named officials, tabled items, and discussion highlights. That's a solid skill structure.
-
-Let me review once more. The processing rules look right. The output format is clear. I type: "Looks good — go ahead and write the skill file."
-
-[SCREEN: Claude creating the file in .claude/commands/]
-
-Done. The skill is now at `.claude/commands/meeting-minutes.md` in my project directory. Let me open it to show you what it looks like.
-
-[SCREEN: Skill file visible]
-
-There's the YAML header with the name and description. The instructions are in plain English — readable, editable, shareable. Any journalist could open this file, read it, and understand exactly what the skill does. And they could modify it: add a section, change the output format, adjust what gets flagged.
-
-Now let's test it. I type: `/meeting-minutes`
-
-Then: "Apply this to council-minutes-excerpt.md."
-
-[SCREEN: Claude processing the transcript]
-
-Watch it work through the document. It's identifying motions, counting votes, pulling out names and titles, finding action items with deadlines, and separating tabled items into their own section.
-
-[SCREEN: Output visible]
-
-There it is. Let me walk through the output.
-
-**Votes:** The park renovation was approved 5-2, with Council Members Davis and Ramirez dissenting. The appropriations cycle timeline was approved unanimously. The emergency water main allocation was approved 7-2.
-
-**Action items:** Public Works to submit the park renovation timeline by March 15. City Manager to provide cost estimates for the water main project by the next session. Council Secretary to schedule a public hearing on the zoning amendment for April.
-
-**Named officials:** Mayor Chen presided. Council Members listed with their vote on each item. City Manager Park presented the budget update.
-
-**Tabled items:** The commercial zoning amendment was tabled pending a public hearing. The parking enforcement review was deferred to next month at Council Member Davis's request.
-
-**Discussion highlights:** Davis raised concerns about the park renovation's impact on the adjacent neighborhood. Ramirez questioned the cost projections, citing a similar project in a neighboring city that came in 40% over budget.
-
-That's a complete meeting summary, structured for a reporter's needs. The tabled items section is going to save me time later — those items will come back, and now I have a record of when they were deferred and why.
-
-[SCREEN: Claude Code session]
-
-Let me iterate on this. The output is good, but I want to refine one thing. I type: "Update the meeting-minutes skill. In the Votes section, add the agenda item number if available — that makes it easier to cross-reference with the published agenda."
-
-[SCREEN: Claude updating the skill file]
-
-It opened the skill file, found the votes processing section, and added the rule about agenda item numbers. The skill file is now better than it was five minutes ago. That's how skills improve — you use them, notice what's missing, and update the file.
-
-[RECAP — after custom skill build + iteration]
-
-Plan the skill, build it, test on real material, iterate. The whole file is plain English markdown. The iteration is a sentence: "add agenda item numbers." The file updates. Skills get better the more you use them.
-
-[SCREEN: Claude Code session]
-
-Let me commit this to Git before I move on. I type: "Commit the new meeting-minutes skill and the installed journalism skills library with the message 'Add journalism skills library and custom meeting-minutes skill.'"
-
-[SCREEN: Git commit]
-
-Done. The skill is version-controlled. If I make changes to it later, I can see the history. If a colleague clones this repo, they get the skill. If I break something, I can roll back.
-
-[SCREEN: voiceover, terminal visible]
-
-Let me recap the workflow. Plan the skill: describe what it should do, let Claude propose the structure, review before anything is written. Build: approve the plan, Claude writes the file. Test: run it on real material and check the output. Iterate: notice what's missing, update the file. Commit: save the version.
-
-That's the workflow for creating any tool in this course. You describe what you want. The AI proposes. You review. It builds. You test. You refine. You commit.
-
-Your exercise this week: create a skill for a task you actually do — source verification, data cleaning, content formatting, meeting minutes, whatever fits your beat. Test it on real material. Post what you built in the forum — your classmates are building different skills for different beats, and seeing what they made is half the learning.
-
-See you in Module 3, where we take these skills and build full automation workflows around them.
+Head to the instructor forums for discussion.
 
 ---
 
@@ -1423,434 +1264,435 @@ One more thing. That paywall failure is the most important moment in this demo. 
 
 [SCREEN: voiceover, project directory visible]
 
-Your project now has a context file from Module 1, custom skills from Module 2, and a tested, debugged, version-controlled workflow from Module 3. Each layer built on the last. The context file tells the AI what your beat is about. The skills give it reusable editorial instructions. The workflow chains those capabilities into a pipeline that runs on multiple documents without you sitting at the keyboard. And at every stage, you stayed in control — reviewing plans, checking outputs, approving fixes.
+Your project now has a context file from Module 1, custom skills and hooks from Module 2, and a tested, debugged, version-controlled workflow from Module 3. Each layer built on the last. The context file tells the AI what your beat is about. The skills give it reusable editorial instructions. The workflow chains those capabilities into a pipeline that runs on multiple documents without you sitting at the keyboard. And at every stage, you stayed in control — reviewing plans, checking outputs, approving fixes.
 
 In Module 4, we're going to connect this project to external data sources — your own document archives, databases, APIs — and tackle the problem that makes all of that hard: getting the AI to cite its sources accurately and admit when it doesn't know something. See you there.
 
 ---
 
 
-## Video 11: Why AI makes things up (and how to fix it) — ~20 minutes
-
-**Format:** Talking head + slides
-**Module:** 4 — Agents, tools, and data access
-
----
-
-[TALKING HEAD]
-
-AI makes things up. You know this. The term is hallucination — the model produces text that sounds confident and specific but has no basis in fact. A name that doesn't exist. A citation to a paper that was never published. A statistic that's close to the real number but off by enough to be wrong.
-
-You've probably seen this yourself. You paste a document into Claude or ChatGPT and ask a question, and somewhere in the response there's a detail that doesn't come from the document at all. The model filled it in. It generated something plausible instead of something true.
-
-For most uses of AI, this is annoying. For journalism, it's disqualifying. A hallucinated fact in a published story is a correction, a retraction, or a lawsuit. There's no middle ground. So if you're going to use AI in your reporting workflow — and you should, because the efficiency gains are real — you need to understand exactly why hallucination happens and what the fix looks like.
-
-The explanation is straightforward. And it leads directly to the tools you'll use in this module.
-
-[SLIDE: two types of knowledge — parametric vs. grounded]
-
-Here's the core distinction. AI models have two ways of knowing things, and they're not equally reliable.
-
-The first is **parametric knowledge**. This is everything the model absorbed during training. Billions of documents, web pages, books, articles — compressed into the model's parameters. When you ask Claude who won the 2020 presidential election, it's drawing on parametric knowledge. That information was in the training data.
-
-Parametric knowledge has three problems. First, it's frozen at a cutoff date. The model doesn't know what happened after its training data ends. If a city council voted on something last Tuesday, the model has no idea. Second, even within its training window, it's sometimes wrong. The training data contains errors, contradictions, and outdated information. The model absorbed all of it. Third — and this is the one that matters most for journalism — parametric knowledge is not citable. You can't trace it back to a specific source. "The model's training data" is not an attribution.
-
-The second type is **grounded knowledge**. This is information retrieved from actual documents at the time you ask the question. The model didn't memorize it during training — it's reading it right now, from a specific file, and it can tell you which file it came from. Grounded knowledge has a source. It has a citation. It traces back to an origin you can verify.
-
-That distinction — parametric versus grounded — is the entire foundation of this module.
-
-[SLIDE: RAG pipeline — retrieve, then generate]
-
-The technique for replacing parametric knowledge with grounded knowledge is called RAG — retrieval-augmented generation. The name describes exactly what it does. You augment the generation step with a retrieval step.
-
-Here's how it works. You ask a question. Before the model generates a response, the system searches a knowledge base — a collection of documents you've provided. It finds the documents most relevant to your question. Those documents get passed to the model along with your question. The model then generates its response based on those retrieved documents, not its training data.
-
-The result is different in a specific way: the response cites its sources. Not "according to my training data" — but "according to council-minutes-2026-02-12.md, paragraph 4." You can open that file and check. The attribution survives the AI step.
-
-For a journalist, that's the difference between a tool you can use and a tool you can't.
-
-[SLIDE: attribution chain — question to source to output]
-
-Let me make this concrete with a reporting scenario.
-
-You're covering a city budget dispute. You have 40 documents: council minutes, press releases, budget memos, interview transcripts. You ask your AI assistant: "What was the original cost estimate for the Riverside Park renovation, and how has it changed?"
-
-Without RAG — without grounded knowledge — the model draws on whatever it absorbed during training. Maybe it saw a news article about a park renovation in some city. Maybe it saw budget figures from a different municipality. It generates a plausible-sounding answer with specific numbers that may or may not be real. You have no way to verify where those numbers came from without doing the research yourself, which defeats the purpose.
-
-With RAG, the model searches your 40 documents. It finds the relevant council minutes and the budget memo. It pulls the actual figures from those documents. It tells you: "The original estimate was $2.1 million according to the March budget memo. The revised estimate of $3.4 million appears in the June council minutes, with the increase attributed to soil remediation costs." You can open both files and check.
-
-"Claude said this" is not attributable. "Claude synthesized this from council-minutes-2026-02-12.md, paragraph 4" is. That's the standard. If you can't trace an AI-generated claim back to a source document, it doesn't belong in your reporting.
-
-[RECAP — after parametric vs. grounded + RAG]
-
-Parametric knowledge: memorized during training, frozen at a cutoff, uncitable. Grounded knowledge: retrieved from documents at query time, current, traceable to a source file. RAG is the technique that gets you from one to the other — retrieve first, then generate. That distinction drives everything in this module.
-
-[SLIDE: newsroom examples — Washington Post, New York Times, Geneea]
-
-Newsrooms are already building this way. Let me walk through three examples at different scales.
-
-The Washington Post built an internal tool called **Haystacker**. It analyzes video, photos, and text across large document sets — the kind of multi-step research that would take a team of reporters days to do manually. Haystacker can process thousands of pages of court filings or government documents and surface patterns, connections, and anomalies. Think about what that means for an investigative team sitting on a document dump from a FOIA request: instead of dividing pages among reporters and hoping nobody misses the one paragraph that matters, the tool can surface every potentially relevant passage across the entire set. But — and this is the part that matters — human editors review every output before anything goes to publication. The tool does the searching. The journalists do the verification and the editorial judgment.
-
-The New York Times built **Echo**, an internal tool for article summarization, SEO headline generation, and newsletter drafting. Some of Echo's tasks are more automated than others. Summarization and headline suggestions run with lighter oversight — the output is a starting point that editors refine. Newsletter drafting gets heavier review. The Times drew a line: tasks where a wrong output is easy to catch and low-stakes get more automation. Tasks where a wrong output could mislead readers get more human review. That's a thoughtful way to draw the line, and it maps to a principle you can apply in your own work.
-
-**Geneea**, a Czech AI company, built a RAG system specifically for newsrooms. Journalists query their own archives — years of published articles — and get answers with citations to the original stories. Need to reconstruct the timeline of a political scandal from three years of coverage? Ask the system. It returns the timeline with links to each source article. The citations aren't decorative — they're the point. The system is useful because you can verify every claim it makes against the original reporting.
-
-Three different scales, three different implementations, same principle: the AI retrieves from real documents and the humans verify the output.
-
-[RECAP — after newsroom examples]
-
-Three newsrooms, three tools, same pattern: the AI retrieves from real documents, humans verify the output. Washington Post uses it for FOIA document dumps, the Times for summaries and headlines, Geneea for archive search with citations. The citations aren't decorative — they're the point.
-
-[SLIDE: autonomy spectrum — read-only, supervised action, autonomous]
-
-This brings us to a broader question: how much autonomy should an AI tool have?
-
-There's a spectrum. On one end: **read-only**. The AI researches and summarizes, but it takes no action. You read the output and decide what to do with it. On the other end: **autonomous**. The AI acts on its own — sends emails, publishes content, updates databases — and you review the log afterward.
-
-In the middle: **supervised action**. The AI proposes actions — drafts an email, suggests a story lead, flags a discrepancy in a dataset — and you approve, modify, or reject each one before it happens.
-
-For journalism, supervised action is the right level. Not because there's a regulation that says so, but because you are still the journalist. The AI is a research collaborator, not a reporter. It doesn't have sources. It doesn't have editorial judgment. It doesn't understand the political context of why a council member's vote matters. You do.
-
-Human-in-the-loop is not optional. Not as a disclaimer, not as a compliance checkbox — but because every fact that goes into a published story needs a human who decided it belonged there.
-
-[SLIDE: agents vs. chatbots — tools, autonomy, multi-step plans]
-
-You've been hearing the word "agent" more and more. Let me define it precisely, because it gets used loosely.
-
-A chatbot takes your input and produces output. One turn at a time. You ask, it answers. That's what you've been doing in browser-based AI interfaces.
-
-An **agent** is different in three specific ways. First, it has **tools** — access to files, databases, APIs, web searches, or other software. It can take actions beyond generating text. Second, it has **autonomy** — it can decide which tools to use and in what order, without you specifying every step. Third, it executes **multi-step plans** — it breaks a complex task into subtasks and works through them sequentially, adjusting its approach based on the results of each step.
-
-Claude Code, the tool you've been using all course, is an agent. When you say "read all the PDFs in this folder and find every mention of Greenfield Construction," Claude Code decides how to approach that — which files to read first, how to search them, how to organize the results. It uses tools (file reading, text search) and follows a multi-step plan. You didn't specify the steps. You specified the goal.
-
-In non-interactive mode — `claude -p` with a prompt passed directly — the agent runs without back-and-forth. It takes the prompt, executes the plan, and returns the result. That's how scheduled automation works: you describe the task, the agent handles the execution. You saw this pattern in Module 3 when we built a pipeline that could run on a schedule. The difference in Module 4 is that the agent has access to external data — not just the files in your project folder, but a structured knowledge base it can search and cite.
-
-[SLIDE: MCP architecture — server, client, protocol]
-
-So how do you connect an agent to your data? That's where MCP comes in.
-
-**Model Context Protocol** is an open standard created by Anthropic for connecting AI models to external data sources and tools. Think of it as a bridge between Claude and the things Claude needs to access — your files, a database, an API, a spreadsheet.
-
-An MCP server is a small program that exposes a data source in a standardized way. There are MCP servers for file systems, databases, Google Drive, Slack, GitHub — dozens of them. When you configure Claude Code to use an MCP server, Claude gains the ability to search, read, and interact with that data source as if it were a native tool.
-
-In today's demo, you'll see this in action: a folder of journalism documents becomes a queryable knowledge base. Claude searches it, retrieves relevant content, and cites specific files in its answers. That's RAG, implemented through MCP.
-
-The configuration is a JSON file — and you don't have to write it yourself. You describe what you want to connect, and Claude handles the setup. That's the pattern for this whole course.
-
-[SLIDE: De Cooker's quote extraction research]
-
-Before we move to the demo, I want to highlight one piece of research that connects several ideas from this module.
-
-Jessy de Cooker, writing for Generative AI in the Newsroom, built a system to extract and classify quotes from newspaper articles using GPT-3.5 and Pydantic structured outputs. She tested it on 2,464 Dutch newspaper articles and measured the results against human annotation. The overall F1 score — a standard measure of accuracy — was 0.75. Strong on direct quotes, weaker on paraphrases and split quotes.
-
-Two findings matter here. First, the model showed systematic bias against non-Western names and Dutch names outside the dominant training data. Names that appeared less frequently in the training corpus were more likely to be missed or misattributed. That's a parametric knowledge problem — the model's training data has gaps, and those gaps create blind spots in the output. If you're using AI to process source material, you need to know that some sources are less visible to the model than others.
-
-Second — and this connects to everything we've covered about context files and skills — de Cooker argues that prompt design is a methodological artifact. The specific wording of the prompt changes the results. Different prompts produce different extraction patterns. That means the prompt isn't neutral. It's a research instrument, and like any research instrument, it needs to be documented, versioned, and shared. That's exactly what CLAUDE.md files and skills do. They make the prompt visible, repeatable, and auditable.
-
-[RECAP — after agents, MCP, and grounded knowledge]
-
-So here's where we are. Parametric knowledge is what the model learned during training — broad but not verifiable. Grounded knowledge comes from real documents you connect via RAG and MCP. Agents are models plus tools — they can read files, run code, search archives. And de Cooker's research shows why this matters: the prompt itself shapes the output, so making prompts visible and versioned — which is what context files and skills do — is a methodological requirement, not a convenience.
-
-[SLIDE: Joe's agent infrastructure — Raspberry Pi, Gmail, Slack, Telegram]
-
-I want to tell you about something I built, because it illustrates both the potential and the problems of agent infrastructure.
-
-I have a Claude Code agent running on a Raspberry Pi — a $180 computer sitting on a shelf in my home office. It has its own Gmail account, Google Drive, and Calendar access. It connects to Slack and Telegram. It runs on a schedule: full check-ins every two hours on weekdays, lighter monitoring scans every 15 minutes.
-
-The agent reads my email, checks for new meeting transcripts, monitors Slack channels for mentions, and drafts responses. It never sends anything without my approval. It drafts an email, sends me a Telegram notification with approve, edit, and cancel buttons, and waits. I tap a button on my phone. That's the human-in-the-loop.
-
-I wrote about this in detail on my Substack — that article is in your readings for this module — and the "what goes wrong" section is the most important part. Because things go wrong.
-
-Early on, a test accidentally sent an email to a real contact. The approval system wasn't fully wired up yet, and a button tap during testing triggered a send. That's a one-way door — you can't unsend an email. The fix: a confirmation step that shows the full recipient list before sending. Written after the failure, not before.
-
-The CPU locked up during a heavy processing job — the Raspberry Pi ran out of memory and the whole system froze. The fix: resource limits on agent sessions, with automatic shutdown if memory usage crosses a threshold.
-
-The scheduler silently failed for three days. No errors in the logs — it just stopped running. A cron job wasn't loading the right environment variables after a system update. I didn't notice because there were no error notifications — the absence of activity is hard to detect. The fix: a heartbeat check that sends an alert if the scheduler hasn't run in the expected window.
-
-Each of those failures produced a rule. The rules are written into the system's configuration files — the same kind of context files you've been building all course. What oversight looks like in practice isn't a policy document. It's a set of rules written after specific things went wrong.
-
-[RECAP — after personal agent story]
-
-The pattern from that agent story is the same pattern we've seen all course: build it, run it, watch it fail, write a rule so it doesn't fail the same way again. The accidental email became an approval step. The memory crash became a resource limit. The silent scheduler failure became a heartbeat check. Every failure produced a rule, and those rules live in context files — the same kind of files you've been writing since week one.
-
-[SLIDE: where data connections break]
-
-Let me be direct about what's hard. Setting up an MCP connection or a RAG pipeline is not the difficult part. Making it work reliably over time is.
-
-Permissions change. An API token expires and your pipeline silently returns empty results instead of throwing an error. A database schema gets updated and the fields your queries depend on no longer exist. A file path changes because someone reorganized a shared drive. The MCP server you configured yesterday can't connect today because a firewall rule changed overnight.
-
-These aren't exotic failure modes. They're Tuesday. Making data connections work reliably is harder than setting them up in the first place. And the failure pattern is almost always the same: something silently stops working, and you don't notice until you look at the output and realize it's wrong or empty.
-
-The defense is the same one we've used all course: test frequently, check outputs, and don't trust a pipeline that hasn't been verified recently. The debug cycle you learned in Module 3 — see the error, paste the error, get the fix — applies here too. Most MCP problems are config problems. Wrong paths, expired tokens, typos in JSON. Claude can diagnose them if you show it the error.
-
-[SLIDE: arc check — live and shareable]
-
-You're at the final stage of the course arc. In Module 1, you set up the project and put it on GitHub. In Module 2, you built skills — reusable tools that encode your editorial expertise. In Module 3, you built workflows and learned to test and debug them. Now, in Module 4, you connect your project to real data and make it a complete, shareable system.
-
-The arc check for this stage: your project is live — connected to documents, producing grounded, citable output — and shareable. Someone can clone your repository and inherit the same setup: the context file, the skills, the workflows, the data connections.
-
-[TALKING HEAD]
-
-In the demo, you'll see all of this in practice. I'm going to connect Claude to a local archive of journalism documents using MCP, query those documents with source citations, show you what happens when the knowledge base doesn't have the answer, debug a common configuration error, and then commit the finished project and push it to GitHub.
-
-This is the last demo of the course. And at the end, I'm going to close out the four modules and tell you what comes next. See you there.
-
----
-
-## Video 12: Connecting Claude to a knowledge base — ~20 minutes
+## Video 11: Getting more out of your sessions — ~12-14 minutes
 
 **Format:** Screen recording with voiceover
-**Module:** 4 — Agents, tools, and data access
+**Module:** 4 — Power user techniques and the landscape
 
 ---
 
-[SCREEN: Terminal, cursor blinking]
+[SCREEN: Claude Code session open in terminal]
 
-Today I'm connecting Claude to a local archive of journalism documents using MCP. At the end of this video, we're publishing the finished project to GitHub. This is the last demo of the course — the capstone. Everything you've built over four weeks comes together here.
+You've been using Claude Code for three weeks now. You've built a project, written skills, created a pipeline. But there's a good chance you've been driving with half the gears. There are features in Claude Code that change the quality of your sessions — not just what you can do, but how well the AI thinks about what you're asking. This video covers four of them: extended thinking, structured outputs, plan mode, and session management.
 
-Let me open the project.
+None of these are complicated. But they're the difference between getting a quick answer and getting a good one.
 
-[SCREEN: Typing `cd ~/Documents/greenfield-beat && claude`]
+### Extended thinking
 
-I navigate to the beat project directory — the same project we've been building since Module 1. I type `claude` and press Enter.
-
-This project already has a CLAUDE.md with beat context and style rules. It has skills from Module 2 — source verification, meeting minutes extraction. It has the article-to-newsletter pipeline from Module 3. Now we're adding the last piece: a connection to a document archive that Claude can search and cite.
-
-[SCREEN: Claude Code session open]
-
-First, I need to set up MCP. I'm going to describe what I want and let Claude handle the configuration.
-
-I type: "I want to connect Claude to a local folder called beat-archive as a knowledge base. Set up an MCP server that lets me query those documents. Walk me through what you're doing."
-
-[SCREEN: Claude explaining and configuring MCP]
-
-Watch what Claude does here. It's explaining what MCP is — a protocol for connecting AI to data sources. It's going to create or update a configuration file that tells Claude Code where to find the MCP server and what it can access.
-
-Claude is writing the config now. It's setting up a filesystem MCP server pointed at the `beat-archive` directory inside our project. The configuration goes into `.claude.json` — that's the file Claude Code reads at startup to know which MCP connections are available.
-
-Let me look at what it wrote. There's the server definition — the type, the path to the archive directory, the permissions. This is JSON, and it's readable. You could open this file and understand what it's doing. But you didn't have to write it. You described the goal and Claude produced the configuration.
-
-Now I need to restart Claude Code to load the new MCP connection. I'll exit and re-launch.
-
-[SCREEN: Exiting session, typing `claude` again]
-
-Back in. Let me verify the connection is active. I type: `/mcp`
-
-[SCREEN: MCP status showing the filesystem server]
-
-There it is. The filesystem server is connected, pointed at the beat-archive directory. Claude now has access to those files as a queryable knowledge base.
-
-But the archive is empty. Let's fix that.
+[SLIDE: extended-thinking.svg]
 
 [SCREEN: Claude Code session]
 
-I type: "Organize the example documents we've been using throughout the course — the press releases, council minutes, and interview notes — into the beat-archive folder. Create a clean directory structure."
+When you send a message to Claude, it normally responds right away. Extended thinking changes that. It tells Claude to pause and reason through the problem before responding — like asking a reporter to think about the story for five minutes before writing the lede instead of just typing the first thing that comes to mind.
 
-[SCREEN: Claude moving and organizing files]
+You trigger it with natural language. "Think harder about this." "Think deeply about this before responding." You can also set a thinking budget — "use extended thinking" or adjust it in settings.
 
-Claude is creating subdirectories inside beat-archive: `press-releases`, `council-minutes`, `interviews`. It's copying the documents we've used in previous demos — the park closure press release, the council minutes excerpt, the budget memo, the interview transcripts. These are the same files from Modules 1 through 3, now organized as a searchable archive.
+Let me show you the difference. I have two budget documents here — the original park renovation budget and the revised version from three months later. I'm going to ask Claude to compare them, first without extended thinking, then with it.
 
-Let me show you what the folder looks like.
+First pass. I type: "Compare these two budget documents and tell me what changed."
 
-[SCREEN: Directory listing of beat-archive]
+[SCREEN: Claude responding quickly with a surface-level comparison]
 
-There it is. Six documents across three categories. This is a small archive — in a real newsroom, you'd have hundreds or thousands of documents. You might have five years of council minutes, a decade of budget reports, a folder of interview transcripts that grows every week. The principle is the same at any scale — the more documents in the archive, the more useful the queries become, because the model has more material to search and cross-reference. Let's start querying.
+It catches the big number — the total went from $2.1 million to $3.4 million. It notes a few line-item changes. Fine. Correct. But shallow.
 
-[SCREEN: Claude Code session]
+Now I type: "Think harder about this. Look at every line item, check if any categories were added or removed, and flag anything that looks unusual."
 
-First question. I type: "What did the city council decide about Riverside Park?"
+[SCREEN: Claude thinking indicator, then a detailed response]
 
-[SCREEN: Claude searching the archive and responding]
+Different answer. This time it caught that a $180,000 line item for "community engagement" appeared in the revised budget but wasn't in the original. It flagged that the soil remediation cost doubled between documents but the explanatory note didn't change. It noticed that three line items were reclassified from "capital" to "operating," which affects how the spending is reported in annual financial statements.
 
-Watch the response. Claude searched the archive, found the relevant council minutes, and pulled the specific decision. Look at the citation: it names the file — `council-minutes/council-minutes-excerpt.md` — and references the specific section where the vote is recorded. The park renovation was approved 5-2, with Davis and Ramirez dissenting.
+Any one of those could be a story. The reclassification one is subtle — moving spending from "capital" to "operating" changes which budget category absorbs the cost, and it can affect borrowing limits and reporting thresholds. That's the kind of detail a quick read misses. Extended thinking found it because it had time to compare every line, not just the totals.
 
-That's not parametric knowledge. Claude didn't pull this from its training data. It read a specific document in your archive and cited it. If you wanted to verify this, you'd open that file and check. The attribution chain is intact.
+That's what extended thinking gets you. It's slower — maybe 15-20 seconds instead of 5. But it catches what a quick pass misses. For simple questions, you don't need it. For anything that requires comparing documents, analyzing data, or finding patterns, it's worth the wait.
 
-Second question. I type: "Are there any mentions of contractor billing in these documents?"
+One thing to watch for: extended thinking uses more tokens, which means more cost. For a single budget comparison, the difference is small. If you're running extended thinking on 50 documents in a batch, it adds up. Use it where the depth matters. Skip it for straightforward lookups.
 
-[SCREEN: Claude searching and responding]
+[RECAP]
 
-This one is more interesting because it has to search across multiple documents. Claude found references in the council minutes — a discussion about cost overruns on the park project — and in the budget memo, which itemizes contractor payments. It cites both files, with the relevant sections noted.
+Extended thinking tells Claude to reason before responding. Trigger it with "think harder" or "think deeply about this." It's slower but catches details that quick responses miss — useful for document comparison, data analysis, and anything where surface-level answers aren't enough.
 
-Notice what it didn't do: it didn't invent a contractor billing scandal that isn't in the documents. It reported what it found. The response is grounded in the actual files.
+### Structured outputs
 
-Third question. I type: "Write a background paragraph on the park closure situation, citing your sources."
-
-[SCREEN: Claude generating a sourced paragraph]
-
-This is where the value becomes clear for daily reporting. Claude wrote a paragraph that synthesizes information from three documents: the press release announcing the closure, the council minutes recording the vote, and the budget memo showing the cost estimates. Each claim in the paragraph has a citation. The cost figure comes from the budget memo. The vote count comes from the council minutes. The closure timeline comes from the press release.
-
-If this paragraph appeared in a story, every fact in it traces back to a source document. That's the standard.
-
-Now let me push it further. I type: "Cross-reference the budget figures mentioned in the press release with the council minutes. Do the numbers match?"
-
-[SCREEN: Claude cross-referencing documents]
-
-This is a multi-step analysis. Claude is reading both documents, pulling the dollar figures from each, and comparing them. The press release says the renovation will cost $2.1 million. The council minutes reference a revised estimate of $3.4 million due to soil remediation. The press release was issued before the cost revision — it's using outdated figures.
-
-That's a discrepancy that a reporter should know about. The press release went out to the public with one number; the council approved a different, higher number. Was the press release written before the revision? Did someone in the mayor's office use the old figure deliberately? Those are editorial questions — Claude can't answer them. But it surfaced the discrepancy, which is the hard part. Finding the mismatch across two documents buried in a stack of files. That's what the archive connection gives you.
-
-And Claude found it by reading two documents and comparing the numbers. Not from training data — from your archive.
-
-[RECAP — after cross-reference query]
-
-That's four queries so far, each one building on the last. A simple factual lookup — what happened with Riverside Park. A cross-document search for contractor billing. A sourced background paragraph. And a cross-reference that caught a dollar-figure discrepancy between the press release and the council minutes. Every answer cited specific files. That's the difference grounded knowledge makes.
+[SLIDE: structured-outputs.svg]
 
 [SCREEN: Claude Code session]
 
-Now I want to show you something equally important: what happens when the archive doesn't have the answer.
+Most of the time when you ask Claude a question, you get prose back. A paragraph. A few sentences. That's fine for reading, but it's a dead end. You can't sort a paragraph. You can't filter it. You can't load it into a spreadsheet or feed it to another script.
 
-I type: "What's the mayor's position on the new highway project?"
+Structured output means asking for data in a reusable format — JSON, CSV, a markdown table. The same information, organized so you can do something with it.
 
-[SCREEN: Claude responding that it doesn't have relevant documents]
+Let me show you. Here's a press release about the park renovation. I type: "Extract the key data from this press release as JSON. Include the project name, total cost, timeline, key contacts, and any dollar figures mentioned."
 
-Look at the response. Claude searched the archive and didn't find any documents about a highway project. Instead of making something up — instead of generating a plausible-sounding answer from its training data — it told me it doesn't have the evidence.
+[SCREEN: Claude returning JSON]
 
-This is the correct behavior. This is what you want. An AI tool that says "I don't have documents about that" is more useful than one that fabricates an answer. The absence of evidence is information. It tells you the archive doesn't cover this topic, which means you need to find the source material yourself before reporting on it.
+Look at the output. Clean JSON with fields for each data point. Project name, cost, start date, end date, contacts with names and titles, a list of all dollar figures with descriptions. You could save this to a file, load it into Python, merge it with data from other press releases. The information went from prose — a press release you'd have to re-read every time — to structured data you can search, sort, and combine.
 
-If this were a chatbot without grounded knowledge, you might get a paragraph about highway projects that sounds specific but has no basis in any real document. That's worse than no answer at all, because it looks like it could be real.
+Now combine this with extended thinking. I type: "Think carefully about this press release and extract every claim that could be fact-checked, as a JSON array. For each claim, include the text, the type of claim (dollar amount, date, attribution, statistic), and what you'd need to verify it."
 
-[RECAP — after "I don't know" test]
+[SCREEN: Claude thinking, then returning structured fact-check list]
 
-Two things to hold onto. First: when the archive has the answer, you get citations — specific files, specific sections, verifiable claims. Second: when the archive doesn't have the answer, a grounded system tells you so instead of making something up. Both behaviors matter. The citations let you verify. The refusal to guess keeps you from publishing something that sounds right but isn't.
+That's a fact-check checklist extracted from a press release in seconds. Each item has the claim text, the category, and what verification would look like. You could build a skill that does this for every press release that crosses your desk.
 
-[SCREEN: Claude Code session]
+[RECAP]
 
-Now let me show you what happens when the MCP configuration breaks, because it will break. This is the most common class of problems you'll hit.
+Ask for JSON, CSV, or tables instead of prose. Structured data is reusable — you can sort it, filter it, feed it to scripts, or combine it with other data. Pair structured outputs with extended thinking for detailed extraction tasks like fact-check lists.
 
-I'm going to simulate a config error. I'll ask Claude to read the MCP config file and I'll change the archive path to something that doesn't exist.
+### Plan mode
 
-I type: "Open the .claude.json file and show me the MCP configuration."
-
-[SCREEN: Config file visible]
-
-There's the config. The archive path is `./beat-archive`. I'm going to change it to `./beat-archives` — plural, a typo. A one-character difference.
-
-I type: "Change the beat-archive path in the MCP config to beat-archives — I want to test what happens with a wrong path."
-
-[SCREEN: Claude updating the config]
-
-Done. Now I'll restart Claude Code and try a query.
-
-[SCREEN: Exiting and relaunching Claude]
-
-I type: "What did the city council decide about Riverside Park?"
-
-[SCREEN: Error or empty response]
-
-There it is. The MCP server either threw an error or returned nothing. The path doesn't exist, so there's nothing to search. In some cases you'd see an explicit error message. In others — and this is the more dangerous case — you'd get silence. No results, no error. Just an empty response that looks like the archive has no relevant documents, when the real problem is that the archive isn't connected at all.
-
-This is what I meant in the lecture about silent failures. The system doesn't always tell you something's wrong. Sometimes it just gives you nothing and you have to figure out why.
-
-Let me fix it. I paste the error back — or describe the symptom — to Claude.
-
-I type: "The MCP filesystem server isn't returning any results. I just changed the path in .claude.json. Can you check the config and fix it?"
-
-[SCREEN: Claude diagnosing and fixing the typo]
-
-Claude opened the config, found the typo — `beat-archives` instead of `beat-archive` — and fixed it. One character. That's all it took to break the entire knowledge base connection.
-
-Most MCP problems are config problems: wrong paths, missing permissions, typos in JSON. If you remember one thing from this debugging section, make it this: when your MCP connection stops working, check the config file first. Nine times out of ten, that's where the problem is. The debug cycle is the same one you've used all course. See the problem. Show it to Claude. Get the fix.
-
-Let me restart one more time and verify.
-
-[SCREEN: Relaunching, running /mcp, asking a test query]
-
-Connection is back. The test query returns results with citations. We're good.
-
-[RECAP — after config debugging]
-
-That's the debug cycle for MCP: something stops working, you check the config file, you find the typo or the wrong path, you fix it, you restart, you test. Same loop you learned in Module 3 — see the error, show it to Claude, get the fix. Most MCP problems are config problems, and most config problems are one-character typos.
+[SLIDE: plan-mode-flow.svg]
 
 [SCREEN: Claude Code session]
 
-Now let me compare grounded versus ungrounded answers side by side, so you can see the difference clearly.
+Plan mode is Claude proposing a plan before doing anything. Instead of immediately creating files and running commands, it lays out what it intends to do and waits for your approval.
 
-I type: "Without using the MCP knowledge base, just from your general knowledge, what do you know about the Riverside Park renovation in Greenfield?"
+You can trigger it with Shift+Tab in the input area, or type `/plan`. It's useful whenever the task has multiple steps and you want to review the approach before Claude starts executing.
 
-[SCREEN: Claude's ungrounded response]
+Here's the scenario. I have 20 PDF press releases from the past month and I want to extract key data from each one. I type: "I have 20 PDFs in the press-releases folder. I want to extract the key data from each one — project name, dollar amounts, contacts, dates — and compile everything into a single CSV. Plan this before you start."
 
-Look at this. Without the archive, Claude either says it doesn't have specific information about this — which is honest — or it generates a generic response about park renovations that sounds plausible but isn't about this specific project. There are no citations. No file names. No specific dates or dollar figures from real documents.
+[SCREEN: Claude presenting a plan with numbered steps]
 
-Now I ask the same thing with the archive connected.
+Look at the plan. Step one: list the files in the directory. Step two: read the first PDF and identify the data fields. Step three: build an extraction prompt. Step four: run it on all 20 files. Step five: compile the results into a CSV. Step six: spot-check three entries against the source PDFs.
 
-I type: "Now use the beat-archive to answer: what do you know about the Riverside Park renovation?"
+I can approve this, edit it, or reject it. Maybe I want to add a step — "normalize the dollar figures to remove commas and dollar signs." Maybe I want to change the order — check the extraction on three files before running all 20. The plan is editable.
 
-[SCREEN: Claude's grounded response with citations]
+I approve with modifications. Claude starts executing, step by step. And I can watch each step as it runs. If step three produces a bad extraction prompt, I can stop, adjust, and restart — before it runs on all 20 files. That's the value: you catch the problem at the plan stage, not after it's been applied to your entire dataset.
 
-Same question. With MCP, the response has specific figures from the budget memo, vote counts from the council minutes, timeline details from the press release. Every claim has a citation.
+Without plan mode, Claude would have started immediately — creating files, running extractions, building the CSV. It might have done all of it correctly. But if it made a wrong assumption about the data format in step two, you wouldn't find out until you opened the finished CSV and realized half the entries were wrong. Plan mode puts the checkpoint before the work, not after.
 
-That's the difference between parametric and grounded knowledge, made visible. Same model, same question. The archive is what makes it citable. And if you take the archive away — if you disconnect the MCP server — the model goes back to generating from training data. The grounding isn't permanent. It depends on the connection being active and the documents being accessible. That's why the config matters, and that's why you test it.
+This is editorial oversight applied to a tool. You're not approving every keystroke, but you're reviewing the approach before work starts. The same instinct that makes you check a reporter's story plan before they spend a week on it.
+
+[RECAP]
+
+Plan mode (Shift+Tab or /plan) makes Claude propose before executing. You see the steps, approve or edit them, then Claude runs the plan. Use it for multi-step tasks where you want to review the approach first — the same editorial oversight you'd apply to any delegated work.
+
+### Memory, /compact, and session management
+
+[SLIDE: context-window-session.svg]
+
+[SCREEN: Claude Code session with a long conversation visible]
+
+Long sessions eat context. Every message you send and every response Claude gives takes up space in the context window. Eventually, the older parts of the conversation start falling off — the model can't see them anymore. Your carefully crafted instructions from the beginning of the session get pushed out by the volume of recent exchanges.
+
+The `/compact` command compresses the conversation. It takes your session history and condenses it into a summary, freeing up space. Think of it like clearing your desk but keeping your notes — the details of every exchange go away, but the key decisions and context survive.
+
+I type: `/compact`
+
+[SCREEN: Claude compacting the session]
+
+The session is shorter now. Claude still knows what we've been working on — the project, the decisions we made, the files we've touched — but the token count dropped. For long work sessions where you're iterating on something for an hour, running /compact every 20-30 minutes keeps the conversation responsive.
+
+Memory works differently. When you tell Claude to remember something, it persists across sessions. I type: "Remember that we always use AP style in this project — more than, not over, for quantities."
+
+[SCREEN: Claude confirming memory saved]
+
+Next time I start a session in this project, Claude will know that rule. Memory is for persistent preferences — your style guide, your beat conventions, things that should carry forward. /compact is for session hygiene — keeping the current conversation from getting too long.
+
+When should you start fresh? When you're switching topics entirely. When the session has gone on for more than an hour of heavy work. When Claude starts repeating itself or forgetting earlier instructions — that's a sign the context window is full.
+
+The connection to the next video: all of this costs money. Every token in the context window has a price. How that pricing works — and how settings like prompt caching affect it — is what we'll cover next.
+
+[RECAP]
+
+Long sessions fill the context window. Use /compact to compress conversation history and free up space. Use memory ("remember that...") for rules that should persist across sessions. Start a fresh session when switching topics or when Claude starts losing earlier context. Session hygiene keeps your work responsive and your costs down.
+
+[SCREEN: Terminal]
+
+Those are the features. Extended thinking for deeper analysis. Structured outputs for reusable data. Plan mode for editorial oversight. And session management to keep everything running clean. Next video: what's happening under the hood — settings, caching, and how Claude connects to your data.
+
+---
+
+
+## Video 12: Settings, caching, and connecting to data — ~12 minutes
+
+**Format:** Talking head + slides + brief screen demos
+**Module:** 4 — Power user techniques and the landscape
+
+---
+
+[TALKING HEAD]
+
+Before you type your first message in a Claude Code session, things are already happening. Settings load. MCP servers connect. The model initializes. This video covers what's going on under the hood — the configuration layer, how caching works, and how Claude connects to external data. Understanding this saves you money and keeps your sessions running well.
+
+### Settings and configuration
+
+[SLIDE: settings-hierarchy.svg]
+
+[SCREEN: Claude Code /config menu]
+
+Type `/config` in any session and you get the settings menu. This is where you control how Claude Code behaves: which model to use, how permissions work, what tools are available.
+
+Permissions matter the most here. Claude Code has different permission modes. At one end: it asks before doing anything — reading a file, running a command, writing to disk. At the other end: it acts without asking. For a course project, the default is fine. For anything touching real data or production systems, you want Claude asking before it acts. You can adjust this in /config.
+
+Settings have a hierarchy. There are three levels: global settings that apply to every project, project settings that apply to one repo, and session settings that apply to the current conversation only. Higher levels override lower ones.
+
+Global settings live in your home directory. Project settings live in `.claude/settings.json` or `.claude.json` in the project root. Session settings are temporary — they last until you close the session.
+
+Here's why this matters. Say you set the model to Claude Opus 4.6 globally. But for one project, you want to use Sonnet because it's faster and cheaper for simple tasks. You set the project-level config, and it overrides the global one — but only for that project. Everything else still uses Opus.
+
+The `.claude.json` file is the one you'll touch most often. It holds project-level configuration, and it's where MCP server connections are defined. When you share a project on GitHub, this file goes with it — anyone who clones the repo gets the same configuration.
+
+Here's a concrete example. Say you build a beat project that connects to a local document archive via MCP and uses Sonnet as the default model because it's fast enough for your daily tasks. You put both of those preferences in `.claude.json`. When a colleague clones your repo, their Claude Code session starts with those same settings — the MCP connection, the model preference, the permissions level. They don't have to configure anything. That's the payoff of project-level settings: they travel with the work.
+
+One thing to know: you can also set project-level configurations through `.claude/settings.json`, which uses a slightly different format. Either works. The `.claude.json` file is the more common approach because it's visible in the project root and easy to find. If both exist, Claude Code merges them — and if they conflict, `.claude/settings.json` takes priority.
+
+[RECAP]
+
+Settings come in three layers: global, project, and session. Higher levels override lower ones. Project settings live in `.claude.json`, which travels with the repo. Permissions control how much Claude can do without asking — default is fine for coursework, tighten it for anything touching real data.
+
+### Prompt caching
+
+[SLIDE: prompt-caching.svg]
+
+[TALKING HEAD]
+
+This is something most tutorials skip, and it costs people money.
+
+When you have a conversation with Claude, Anthropic caches the conversation prefix — the earlier messages in your session. The next time you send a message, the system doesn't reprocess everything from scratch. It reads from the cache, which is faster and cheaper.
+
+Here's where it goes wrong: if you switch models mid-session, the cache breaks. Every previous message in the conversation has to be reprocessed with the new model. That costs more, it's slower, and the quality can drop because you're forcing a cold start in the middle of a conversation that had context built up.
+
+The rule is simple: decide which model you're using before you start the session. If you need to switch models, start a fresh session. Don't switch mid-conversation.
+
+This also connects to /compact. When you compress your session history, the new compacted conversation creates a fresh cache. That's part of why /compact helps with long sessions — it resets the cache to a clean state instead of letting it grow stale with hundreds of exchanges.
+
+For this course, the cost differences are small — we're talking fractions of a cent per message. But the principle matters because it scales. If you build a pipeline that processes 200 documents, a mid-session model switch could double the processing cost for no reason.
+
+[RECAP]
+
+Anthropic caches your conversation prefix to save time and money. Switching models mid-session breaks the cache and reprocesses everything. Rule: pick your model before starting. Need to switch? Start a fresh session. This also explains why /compact helps — it resets the cache to a clean state.
+
+### MCP: connecting Claude to data
+
+[SLIDE: mcp-architecture.svg]
+
+[TALKING HEAD]
+
+Model Context Protocol — MCP — is how you connect Claude to external data sources. It's an open standard that lets AI models talk to files, databases, APIs, and other services through a consistent interface.
+
+Think of it as a bridge. On one side: Claude, which needs to read and search data. On the other side: your data, wherever it lives. MCP servers are the bridge. Each server exposes one data source in a standardized way.
+
+There are MCP servers for the filesystem — so Claude can read files in a specific directory. There are servers for Google Drive, Slack, GitHub, databases. Dozens of them, built by different developers.
+
+[SCREEN: Brief view of a .mcp.json file]
+
+The configuration lives in `.mcp.json` or in the `.claude.json` file I mentioned earlier. It's JSON that tells Claude Code which servers to connect to and where to find them. You don't have to write this by hand — you can describe what you want to connect and Claude will generate the config.
+
+[SLIDE: parametric-vs-grounded.svg]
+
+Here's why MCP matters for journalism, in 60 seconds.
+
+An AI model knows two kinds of things. **Parametric knowledge** is what it absorbed during training — billions of documents compressed into its parameters. It's broad, it has a cutoff date, and you can't cite it. "The model's training data" is not an attribution.
+
+**Grounded knowledge** is information from a specific document that the model reads at query time. It has a source. You can verify it. "According to council-minutes-2026-03-12.md, paragraph 4" — that's citable.
+
+MCP is what gives Claude access to grounded knowledge. Without it, Claude answers from training data. With it, Claude searches your documents and cites specific files.
+
+For a beat project, the filesystem MCP server is the most useful starting point. Point it at a folder of your source documents — council minutes, press releases, interview transcripts — and Claude can search and cite from that folder. You ask "what did the city council decide about the park renovation?" and instead of generating something from training data, Claude reads your actual council minutes and tells you, citing the file and paragraph.
+
+That's the difference that matters for reporting. "According to council-minutes-2026-03-12.md, paragraph 4" is a verifiable citation. "Based on my training data" is not.
+
+I'll be honest about the rough edges. MCP connections break. Tokens expire. Paths change. A server that worked yesterday returns errors today because a config file has a typo. The debug cycle is the same one you learned in Module 3: see the error, paste it to Claude, get the fix. Most MCP problems are config problems — wrong paths, expired credentials, malformed JSON. The readings for this module go deeper into MCP setup and troubleshooting.
+
+The exercise for this module walks you through setting up an MCP connection to a document archive. It's hands-on — you'll configure the server, query your documents, and see the citations in action. I'm covering the concepts here so you know what's happening when you do that work.
+
+[RECAP]
+
+MCP connects Claude to data sources through a standard protocol. Servers bridge Claude to files, APIs, databases. Config lives in .mcp.json or .claude.json. The key distinction: parametric knowledge (from training, uncitable) vs. grounded knowledge (from your documents, citable). MCP gives you grounded knowledge. Expect config to break sometimes — same debug cycle as Module 3.
+
+[TALKING HEAD]
+
+Now you know what's under the hood. Settings control behavior and travel with the project. Caching saves money but breaks if you switch models. MCP connects Claude to your data and gives you citable answers. Next video: Claude Code isn't the only CLI agent, and you can use them together.
+
+---
+
+
+## Video 13: Calling other agents from the command line — ~10 minutes
+
+**Format:** Screen recording with voiceover
+**Module:** 4 — Power user techniques and the landscape
+
+---
+
+[SCREEN: Terminal with Claude Code, Gemini CLI, and Codex logos side by side]
+
+Claude Code isn't the only CLI agent. There are four major ones right now, and you can use them together — even calling one from inside another. This video covers the landscape and shows you the pattern.
+
+### The landscape
+
+[SLIDE: cli-agents-landscape.svg]
+
+[SCREEN: Split view showing different CLI tools]
+
+Four CLI agents, four companies, four models.
+
+**Claude Code** is from Anthropic. It's the tool you've been using all course. It's a paid subscription. It reads CLAUDE.md for project context. It has strong tool use — file access, shell commands, MCP connections. You know how it works.
+
+**Gemini CLI** is from Google. It has a free tier — 1,000 requests per day, which is generous for experimentation. It reads GEMINI.md for project context. Same idea as CLAUDE.md, different filename. The free tier makes it a good second opinion on any task where you want to compare outputs.
+
+**Codex CLI** is from OpenAI. It's a paid tool. It reads AGENTS.md for project context. It has its own strengths — particularly with code generation and refactoring. Different model architecture, different training data, different tendencies.
+
+**GitHub Copilot CLI** is from GitHub, which is Microsoft. It has a free tier plus a Pro plan. It uses the repository context directly — your code, your README, your issues. It's built for developers but useful for anyone working in a repo.
+
+Different models, different strengths. Like different reporters covering the same story — they'll notice different things, lead with different angles, miss different details. That's the point. A second opinion costs nothing when one of the tools has a free tier.
+
+[RECAP]
+
+Four CLI agents: Claude Code (Anthropic, paid, CLAUDE.md), Gemini CLI (Google, free tier, GEMINI.md), Codex CLI (OpenAI, paid, AGENTS.md), and GitHub Copilot CLI (GitHub/Microsoft, free tier, repo context). Each reads its own context file format and has different strengths.
+
+### Calling other agents from Claude Code
+
+[SLIDE: cross-agent-workflow.svg]
 
 [SCREEN: Claude Code session]
 
-Let's write a README for this project. It's going to be the documentation that someone sees when they find the repo on GitHub.
+Here's the practical part. You can call other CLI agents from inside Claude Code using subprocess calls — shelling out to another tool, getting the result back, and continuing your work.
 
-I type: "Write a README for this project. Explain what it does, what's in the repository, how to set it up including the MCP configuration, how to use it, and what its limitations are. Be specific about the limitations — what the system can't do, what kinds of questions it won't answer well, where human judgment is still required."
+The pattern looks like this. I'm in a Claude Code session. I have a press release I want analyzed. I want to see how two different models handle the same task.
 
-[SCREEN: Claude writing the README]
+I type: "Run this press release through Gemini CLI and ask it to extract the key claims as JSON. Use the command `gemini -p` with the prompt. Then compare its output with your own extraction."
 
-Let me scroll through what it wrote. There's a project description — a beat reporting toolkit for covering Greenfield city government. A list of what's in the repo: CLAUDE.md for project context, skills for meeting minutes and source verification, the newsletter pipeline from Module 3, the MCP configuration for the document archive.
+[SCREEN: Claude Code running gemini -p as a subprocess]
 
-Setup instructions: clone the repo, install Claude Code, restart to load MCP. Usage examples: sample queries with expected output. And the limitations section — this is the important part. The system only knows what's in the archive. It can't verify claims against external sources. It can't assess whether a source is credible, only whether a document contains a particular claim. Budget figures may be outdated if newer documents haven't been added. Human review is required before any output is used in published reporting.
+Watch what happens. Claude Code shells out to Gemini CLI using `gemini -p` — the `-p` flag means non-interactive, just process the prompt and return the result. The Gemini model reads the press release, extracts claims, and returns JSON. Claude Code captures that output.
 
-That limitations section is doing real work. It tells the next person who uses this project exactly where the boundaries are.
+Now Claude does its own extraction on the same press release. Two sets of results from two different models.
 
-[SCREEN: Claude Code session]
+[SCREEN: Side-by-side comparison]
 
-Time to commit and push. I type: "Commit everything — the MCP configuration, the beat-archive folder, the README, and any other changes — with the message 'Add document archive with MCP, README, and course capstone.' Then push to GitHub."
+Look at the differences. Both models caught the headline claim and the dollar figures. But Gemini flagged a quote attribution that Claude missed — it noticed the press release attributed a statement to the "parks department" without naming a specific person. Claude caught a date inconsistency that Gemini missed — the press release says "last Tuesday" but the dateline is from a Wednesday.
 
-[SCREEN: Claude running git add, commit, push]
+Neither model caught everything. Together, they caught more than either one alone. That's the value of multi-model comparison. Same input, different blind spots.
 
-Done. Let me open the repository in a browser.
+The key limit: each subprocess call is fresh. When Claude Code shells out to Gemini CLI, Gemini doesn't know anything about your Claude Code session — your project context, your conversation history, your CLAUDE.md. It gets the prompt and nothing else. So the prompts you send to external agents need to be self-contained. You have to include the full text of whatever you want analyzed, plus clear instructions about the output format. Don't assume the other model knows anything about your project.
 
-[SCREEN: GitHub repository page]
+In practice, this means you structure the prompt carefully. Instead of "analyze that press release from earlier," you'd say "Here's a press release. Extract the key claims as a JSON array. Each claim should have the text, the type, and what verification would require." Self-contained. No dependencies on prior conversation.
 
-There it is. Look at what's in this repo.
+GitHub Copilot CLI has another useful pattern. Inside Copilot, the `/delegate` command sends a task to a cloud-based agent that creates a draft pull request and works in the background. It's free parallel compute for code changes. You describe the task, and the cloud agent does the work asynchronously — you can keep working on other things while it runs.
 
-CLAUDE.md — the context file you wrote in Module 1. Every beat-specific rule, every style preference, every workflow instruction. Claude reads this at the start of every session.
+[RECAP]
 
-The `.claude/commands/` directory — your skills from Module 2. Meeting minutes extraction, source verification. Reusable tools that encode your editorial expertise as slash commands.
+Call other CLI agents from Claude Code using subprocess patterns — `gemini -p`, `copilot -p`. Each subprocess is a fresh session with no shared context, so prompts need to be self-contained. Multi-model comparison catches what a single model misses. Copilot's /delegate creates cloud-based PRs in the background.
 
-The pipeline script from Module 3 — the article-to-newsletter workflow you built, tested, broke, fixed, and committed.
+### When to use which
 
-The `.claude.json` config — the MCP connection to your document archive. The bridge between Claude and your source material.
+[SCREEN: Terminal]
 
-The `beat-archive/` folder — the actual documents. Press releases, council minutes, interview transcripts. The knowledge base that grounds Claude's answers in real sources.
+I'm not going to give you a feature comparison chart. Those go stale in weeks. Instead, here's a framework — four questions to ask when choosing a tool for a specific task.
 
-And the README — documentation that tells anyone who finds this repo what it does and how to use it.
+**Task type.** Is this analysis, code generation, document search, or something else? Some models handle certain task types better. Try the same task in two tools and see which output you'd trust more. For instance, if you're extracting structured data from a long document, run the same extraction through two models and see which one gets the edge cases right.
 
-Every decision about how Claude works on this project is committed here. Clone this repository on a new machine and the same context comes with it. The same skills load. The same MCP connection configures itself. The same editorial rules apply. Hand the link to a colleague and they inherit the same environment you built.
+**Context needs.** Does this task need your full project context — your CLAUDE.md, your skills, your MCP connections? If yes, use the tool you've configured. If it's a standalone question — "what's the AP style for this?" or "summarize this article" — any tool works.
 
-That's context engineering at full scale. That's what you've spent four weeks building.
+**Tool access.** Does the task need file access, shell commands, or MCP connections? Claude Code and Codex CLI have strong tool use. Gemini CLI is more limited in what it can access directly. If you need the tool to read files from disk, create scripts, and run them, stick with Claude Code or Codex.
 
-[SCREEN: GitHub repo, then transition to voiceover]
+**Cost.** Gemini CLI's free tier handles 1,000 requests a day. For experimentation, comparison checks, and second opinions, free is hard to beat. Save the paid tools for tasks that need their specific capabilities.
 
-Your final project asks you to build something like this for a real journalism use case. It can be a pipeline, a skill library, a RAG setup, or some combination. The requirements are: it solves a real problem on your beat, it has a CLAUDE.md, it's documented, and it's on GitHub. The rest is your design. The exercise description has the full details and the rubric.
+Honest assessment: for most journalism tasks at this level, any of these tools works. The differences matter more for code-heavy work and large-scale automation. The most useful habit isn't picking the "best" tool — it's trying more than one and comparing the output. If you only ever use one model, you don't know what its blind spots are. Two models looking at the same document will catch more than one.
 
-[VOICEOVER, screen fades to course title card]
+One more practical note. Each tool reads its own context file format — CLAUDE.md, GEMINI.md, AGENTS.md. If you work with multiple tools on the same project, you'd ideally maintain multiple context files. That's more overhead than most people need. A simpler approach: pick a primary tool and use the others for spot-checking. Your primary tool gets the full project setup. The others get self-contained prompts for specific tasks.
 
-Let me close out the course.
+[SCREEN: Terminal]
 
-Four weeks ago, you were using AI through a browser. You'd type a message, get a response, type another message. Each session started from zero. You couldn't hand the AI a folder of documents. You couldn't save a workflow and reuse it. You couldn't share what you'd built with a colleague.
+That's the landscape. Four CLI agents, one subprocess pattern to connect them, and a framework for choosing. Last video: where this is all heading and the course wrap-up.
 
-Here's what you built.
+---
 
-In Module 1, you moved from the browser to the terminal. You installed Claude Code, set up a project, and wrote a context file that gives the AI your beat knowledge at the start of every session. You learned the difference between apps and harnesses — and you started working at the harness layer.
 
-In Module 2, you turned your best prompts into skills — reusable tools that run with a slash command instead of being retyped from memory. You installed a journalism skills library and built a custom skill for your own beat. The prompts became infrastructure.
+## Video 14: What's next + course close — ~10 minutes
 
-In Module 3, you described a multi-step workflow in plain English and had Claude build it. You tested it, watched it fail, diagnosed the failure, and fixed it. You learned the core loop: describe, build, test, break, fix, commit. And you learned to check the security of what you build before running it on real data.
+**Format:** Talking head + slides
+**Module:** 4 — Power user techniques and the landscape
 
-In Module 4 — today — you connected Claude to a document archive and saw the difference between parametric and grounded knowledge. You asked questions and got answers with citations to specific files. You saw the system refuse to answer when it didn't have the evidence. And you pushed the finished project to GitHub, where anyone can clone it and inherit the same setup.
+---
 
-That's the arc: from typing into a chat window to building a documented, tested, shareable AI workflow that's grounded in your own source material.
+[TALKING HEAD]
 
-The tools will change. Claude Code will get updates. New CLI tools will appear. MCP will evolve. Models will get more capable. The specific software you used in this course will look different in a year.
+The tools will change. The way of working won't.
 
-The way of working won't change. Writing clear context. Building reusable tools. Testing before deploying. Grounding AI output in real sources. Keeping a human in the loop. Documenting what you build so others can use it. Those are durable skills. They're the same skills you use in journalism — clear communication, organized documentation, skepticism of unverified claims, and showing your work.
+That's been the premise of this course from the beginning, and it's worth spending the last video on what it means in practice. Where are CLI agents heading, how do you stay current without burning out on the news cycle, and what did you actually build over these four weeks?
 
-You came in knowing how to use AI through a browser. You're leaving knowing how to work with AI as a collaborator — with your files, on your terms, in a form you can share.
+### Where this is heading
+
+[SLIDE: autonomy-spectrum.svg]
+
+CLI agents are getting more capable every month. The models get smarter. The tool access gets broader. The context windows get larger. Six months from now, the specific commands you learned in this course might have slightly different syntax. The models behind them will be different versions. Some of the limitations we worked around — context window limits, caching quirks — might be resolved.
+
+But the direction is clear: more autonomy, more capability, more integration with external systems.
+
+Multi-agent coordination is already happening. One agent researches. Another writes. A third reviews the output. You've seen a simple version of this — calling Gemini CLI from inside Claude Code. The next version is agents coordinating without you in the middle, passing tasks to each other and reporting back.
+
+That's where the autonomy question gets harder, not easier. As these tools get more capable, the temptation is to let them do more without oversight. But for journalism, the opposite should happen. The more capable the tool, the more important the human in the loop becomes. Because the errors get harder to spot. A model that's right 99% of the time is more dangerous than one that's right 80% of the time — you stop checking.
+
+[SLIDE: tool-evaluation-framework.svg]
+
+When new tools appear — and they will, every few weeks — here are four questions to evaluate them.
+
+**Does it have file access?** Can you point it at your project directory and have it read, write, and modify files? If not, you're back to copy-pasting into a chat window.
+
+**Does it support context files?** Can you write a CLAUDE.md or equivalent — persistent instructions the tool reads at the start of every session? If not, you're re-explaining your preferences every time.
+
+**Does it have tool use?** Can it run commands, connect to data sources, call APIs? Or does it only generate text? Tool use is what separates a harness from an app.
+
+**Is it transparent?** Can you see what it's doing — which files it read, which commands it ran, what plan it's following? If the tool is a black box, you can't verify its work.
+
+Those four questions tell you whether a new tool is a step forward or sideways. File access, context files, tool use, transparency. If it has all four, it's worth trying. If it's missing any, you know what the tradeoff is.
+
+[RECAP]
+
+CLI agents will keep getting more capable. Multi-agent coordination is next — agents passing tasks to each other. The autonomy question gets harder as tools improve. When evaluating new tools, check four things: file access, context file support, tool use, and transparency.
+
+### Staying current
+
+[TALKING HEAD]
+
+New AI tools ship every week. New models, new features, new frameworks. You can't track all of it, and you shouldn't try. Here's what works.
+
+Three sources that are worth following regularly.
+
+**Simon Willison's blog** (simonwillison.net). He's a developer who tests everything and writes honest, detailed notes about what works and what doesn't. No hype. When a new tool comes out, his write-up is usually the best first read.
+
+**Generative AI in the Newsroom** (generative-ai-newsroom.com). This is the journalism-specific source — practitioners writing about how they're using AI in actual newsrooms. You've been reading articles from this site all course. It stays relevant because it's grounded in real work, not product announcements.
+
+**Ethan Mollick's One Useful Thing** (oneusefulthing.substack.com). Mollick is the researcher whose models/apps/harnesses framework we used in Module 1. He writes about AI from a practical standpoint — how to think about these tools, not just how to use them.
+
+Here's the filter for everything else: "Does this change how I'd do a task I already do?" If a new tool or feature doesn't change your workflow on something concrete, you can file it away and check back later. If it does — if it makes a task faster, or more reliable, or possible for the first time — that's worth an afternoon of testing.
+
+One more thing: keep your CLAUDE.md files alive. As your workflow evolves, update the context files. The skills you built in Module 2, the pipelines from Module 3 — those aren't finished products. They're living documents. A context file you wrote three months ago and never updated is doing less work than it should be.
+
+[RECAP]
+
+Follow Willison's blog, Generative AI in the Newsroom, and Mollick's One Useful Thing for durable, hype-free coverage. Filter new tools with one question: does this change how I'd do a task I already do? And keep your context files updated — they're living documents, not finished products.
+
+### Course recap and send-off
+
+[TALKING HEAD]
+
+Let me close out the course. Here's what you built.
+
+In Module 1, you moved from the browser to the terminal. You installed Claude Code, set up a beat project, and wrote a CLAUDE.md file — a context document that gives the AI your beat knowledge, your style preferences, and your workflow rules at the start of every session. You learned the difference between apps and harnesses. You started working at the harness layer.
+
+In Module 2, you turned your domain expertise into reusable skills. You built custom slash commands for your beat — source verification, fact extraction, whatever your reporting needs. You installed hooks that enforce rules automatically. The prompts became infrastructure.
+
+In Module 3, you described a multi-step workflow in plain English and had Claude build it. You tested it on one document, then five, then twenty. You watched it fail, diagnosed the failure, and fixed it. You learned the core loop: describe, build, test, break, fix, commit. And you learned to check the security and cost of what you build before running it at scale.
+
+In Module 4, you went under the hood. Extended thinking for deeper analysis. Structured outputs for reusable data. Plan mode for editorial oversight. Settings and caching to keep sessions efficient. MCP to connect Claude to your data. Other CLI agents to get second opinions. And now this — where it's heading and how to stay current.
+
+[SLIDE: course-arc.svg]
+
+The arc of the course: from prompting to managing. In week one, you typed messages into a chat window. By week four, you're delegating tasks to an AI agent that has your project context, your custom tools, and your editorial rules — and you're reviewing its work like you'd review a junior reporter's draft.
+
+That shift — from prompting to managing — is the skill that transfers. The specific tools will change. Claude Code might look different in a year. New CLI agents will appear. Models will get smarter. But the way of working stays the same: clear context, reusable tools, tested workflows, grounded data, human oversight.
+
+Those are journalism skills applied to a new tool. Clear communication. Organized documentation. Skepticism of unverified claims. Showing your work. You already had those skills. Now you have a new place to use them.
+
+Your final project asks you to build something real — a pipeline, a skill library, a RAG setup, or some combination — for your beat. The requirements are in the exercise description. It solves a real problem, it has a CLAUDE.md, it's documented, and it's on GitHub.
 
 Good luck with the final project. I'll see you in the discussion forums.
 
@@ -1859,10 +1701,13 @@ Good luck with the final project. I'll see you in the discussion forums.
 ## Production notes (updated for all modules)
 
 ### The running project
-The greenfield-beat project threads through all demo videos. It starts as an empty folder in Video 4 and grows into a full project by Video 12.
+The greenfield-beat project threads through all demo videos. It starts as an empty folder in Video 4 and grows into a full project by Video 10.
 
 ### Module 1 (4 videos)
 Module 1 has more videos than other modules because it covers the merged content (CLI intro + context files). Videos 3 and 5 are talking head/conceptual. Videos 4 and 6 are screen recordings showing the same project being built incrementally. Consider recording 4 and 6 back-to-back since they use the same project.
+
+### Module 4 (4 videos)
+Module 4 has 4 shorter videos (11-14) instead of 2 longer ones. Videos 11 and 13 are screen recordings. Videos 12 and 14 are talking head + slides. Consider recording 11 and 13 back-to-back (both voiceover over screen), and 12 and 14 back-to-back (both talking head).
 
 ### Slides to prepare
 - Four takeaways list (Video 1)
@@ -1893,27 +1738,30 @@ Module 1 has more videos than other modules because it covers the merged content
 - When automation is worth it: frequency vs. setup cost (Video 9)
 - Batch processing pattern: one → five → full (Video 9)
 - Arc check: context → skills → workflows (Video 9)
-- Two types of knowledge: parametric vs. grounded (Video 11)
-- RAG pipeline: retrieve → generate (Video 11)
-- Attribution chain: question → source → output (Video 11)
-- Newsroom examples: Washington Post Haystacker, NYT Echo, Geneea (Video 11)
-- Autonomy spectrum: read-only → supervised → autonomous (Video 11)
-- Agents vs. chatbots: tools, autonomy, multi-step plans (Video 11)
-- MCP architecture: server, client, protocol (Video 11)
-- De Cooker's quote extraction research summary (Video 11)
-- Joe's agent infrastructure: Raspberry Pi, Gmail, Slack, Telegram (Video 11)
-- Where data connections break (Video 11)
-- Arc check: live and shareable (Video 11)
+- Extended thinking diagram (Video 11)
+- Structured outputs diagram (Video 11)
+- Plan mode flow diagram (Video 11)
+- Context window and session management diagram (Video 11)
+- Settings hierarchy: global → project → session (Video 12)
+- Prompt caching diagram (Video 12)
+- MCP architecture: server, client, protocol (Video 12)
+- Parametric vs. grounded knowledge (Video 12)
+- CLI agents landscape: Claude Code, Gemini CLI, Codex CLI, Copilot CLI (Video 13)
+- Cross-agent workflow diagram (Video 13)
+- Autonomy spectrum: read-only → supervised → autonomous (Video 14)
+- Tool evaluation framework: file access, context files, tool use, transparency (Video 14)
+- Course arc diagram: prompting → managing (Video 14)
 
 ### Files needed before recording
 - `Resources/examples/beat-project/park-closure.md` — sample press release
 - `Resources/examples/beat-project/council-minutes-excerpt.md` — sample transcript
-- A real or realistic Facebook claim for the source-verification demo
+- Two budget documents (original and revised) for the extended thinking comparison demo (Video 11)
 - A clean terminal with increased font size (24pt minimum)
 - The greenfield-beat project pre-scaffolded for Videos 6 and 8 (or build live)
 - 10 news article URLs for Video 10 (mix of accessible and paywalled)
 - A paywalled article URL confirmed to return < 200 chars of content (Video 10)
 - ANTHROPIC_API_KEY set in the environment (Video 10)
 - `article_pipeline.py` pre-built for fallback if live coding takes too long (Video 10)
-- beat-archive folder with 6+ documents across 3 categories for Video 12
-- A `.claude.json` MCP config pre-built for fallback if live setup takes too long (Video 12)
+- 20 PDF press releases in a folder for the plan mode demo (Video 11)
+- Gemini CLI installed and authenticated for cross-agent demo (Video 13)
+- A press release prepared for the multi-model comparison demo (Video 13)

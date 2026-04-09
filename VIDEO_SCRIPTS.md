@@ -5,7 +5,7 @@
 
 ## Overview
 
-Each module has at most 2 recorded lectures, plus possible guest interviews. The original plan called for 4 shorter videos per module (~6 min each). In practice, the content works better as 1-2 longer videos (~15-20 min) that combine talking head and screen recording in a single flow.
+Modules 1-3 have 1-2 recorded lectures each (~15-20 min), combining talking head and screen recording in a single flow. Module 4 has 4 shorter videos (~10-14 min each) with varied formats — screen recording with voiceover, talking head with slides, and mixed.
 
 | # | Video | Module | Format | Length | Status |
 |---|-------|--------|--------|--------|--------|
@@ -13,12 +13,14 @@ Each module has at most 2 recorded lectures, plus possible guest interviews. The
 | 2 | Welcome video | Intro | Talking head | 2-3 min | Planned |
 | A1 | Escaping the browser | Module 1 | Talking head + screen recording | ~20 min | Recorded |
 | A2 | (TBD — possible second video or guest) | Module 1 | — | — | Open |
-| B1 | From prompts to skills | Module 2 | Talking head + screen recording | ~15-20 min | Planned |
-| B2 | (TBD — possible second video or guest) | Module 2 | — | — | Open |
+| B1 | From prompts to skills | Module 2 | Talking head + screen recording | ~36 min | Recorded |
+| B2 | Skills from workflows | Module 2 | Screen recording + voiceover | ~13 min | Recorded |
 | C1 | Describing workflows and having AI build them | Module 3 | Talking head + screen recording | ~15-20 min | Planned |
 | C2 | (TBD — possible second video or guest) | Module 3 | — | — | Open |
-| D1 | Agents, tools, and data access | Module 4 | Talking head + screen recording | ~15-20 min | Planned |
-| D2 | (TBD — possible second video or guest) | Module 4 | — | — | Open |
+| 11 | Getting more out of your sessions | Module 4 | Screen recording + voiceover | ~12-14 min | Planned |
+| 12 | Settings, caching, and connecting to data | Module 4 | Talking head + slides + screen demos | ~12 min | Planned |
+| 13 | Calling other agents from the command line | Module 4 | Screen recording + voiceover | ~10 min | Planned |
+| 14 | What's next + course close | Module 4 | Talking head + slides | ~10 min | Planned |
 
 ---
 
@@ -175,66 +177,66 @@ These may be addressed in a second Module 1 video, in written materials, or in l
 
 ---
 
-## Module 2, Video B1: From prompts to skills
+## Module 2, Video B1: From prompts to skills (RECORDED)
 
 **Format:** Combined talking head + screen recording
-**Length:** ~20 minutes
-**Topic:** The maturity progression from ad-hoc prompts to reusable skills and automated hooks, demonstrated live using meeting minutes extraction as the running example
+**Length:** ~36 minutes
+**File:** `MOOC-B1_eng.srt`
+**Topic:** What skills, commands, plugins, and hooks are; live demo building a social media video content analysis pipeline across five platforms using Claude Code
 
-### Outline (flexible — you will riff on these beats, not read them)
+### What was covered
 
-**Opening (~2 min) — The problem with retyping**
-You have a prompt you use every week for extracting action items from council meeting minutes. Every week you retype it or dig through your notes to find it. That's not a system. This module turns your best prompts into reusable tools.
+**0:00-5:00 — Introduction and concepts**
+- Opens with Joe and his cat Reese as "guest lecturer"
+- What are skills, commands, plugins, hooks? Skills = markdown files that load on demand via slash commands. Plugins = bundles of skills. Hooks = auto-triggered actions (notify and stop types).
+- One-way-door concept: stop hooks block irreversible actions for human review
+- References skills.amditis.tech as a resource
 
-**The progression (~3 min) — Show the maturity ladder**
-Walk through the five stages with the meeting minutes example:
-1. **Ad-hoc prompt**: you type the extraction instructions from memory each time
-2. **Saved prompt**: you paste it from a notes doc — better, but still manual
-3. **Skill**: a markdown file in `.claude/commands/` that Claude Code loads as a slash command — type `/meeting-minutes` and it runs
-4. **Hook**: runs automatically on a trigger — e.g., every time Claude writes a file, a hook checks that all claims are attributed to named sources
-5. **Plugin**: a shareable package of skills and hooks that colleagues can install
+**5:00-36:00 — Live demo: social media video content analysis pipeline**
+Full live walkthrough building a multi-platform video analysis pipeline for NYC Mayor Zohran Mamdani's social media presence (Instagram, YouTube, TikTok, Twitter, Facebook).
 
-Most journalists are at stage 1 or 2. This module gets you to 3 and introduces 4.
+- **Planning phase:** Uses the Superpowers plugin (brainstorming skill, writing-plans skill, subagent-driven development skill) for structured planning. AskUserQuestion tool for interactive decision-making during the planning process.
+- **Video download — YouTube + TikTok:** yt-dlp downloads 15 videos from each platform successfully
+- **Video download — Twitter, Instagram, Facebook:** yt-dlp fails for these platforms. Switches to Playwright browser automation, logging into social accounts manually so Playwright can access the content
+- **Result:** 76 total videos downloaded across 5 platforms
+- **Whisper transcription:** Starts with the large model, but GPU maxes out while running OBS for screen recording. Switches to the turbo model to free up resources.
+- **Frame extraction + vision analysis:** Sampled frames from videos, not full frame-by-frame extraction
+- **Interactive dashboard:** Builds a local dashboard with video catalog, transcript search, topic analysis, sentiment distribution, and cross-platform comparison
+- **Project hygiene:** Updates CLAUDE.md and README with project state and lessons learned as the workflow progresses
 
-**Live demo: building the skill (~8 min) — Screen recording**
-1. Start with the raw prompt — paste a meeting minutes extraction prompt into Claude Code, run it on a sample transcript, show the output
-2. Explain: "I've typed this prompt dozens of times. Let's turn it into something permanent."
-3. Ask Claude Code to create a custom slash command: "Create a slash command called /meeting-minutes that does what I just asked — extracts action items, votes, and named officials from a transcript and outputs them as a structured list"
-4. Watch Claude create the file in `.claude/commands/meeting-minutes.md`
-5. Open the file — show that it's just a markdown file with the prompt instructions inside
-6. Quit the session, relaunch, type `/meeting-minutes` on a different transcript — show it works
-7. Iterate: "Add a section that flags any votes where the margin was close — 5-4 or 4-3 — and mark those as 'contested'"
-
-**Hooks intro (~4 min) — Explain and show**
-- Two kinds: notify hooks (flag issues in the background) and stop hooks (block actions that need human approval)
-- Show or describe a concrete example: an attribution-check hook that runs after every Claude response and flags any claim not tied to a named source
-- Mention the journalism skills library (36 skills, 13 hooks) as a resource — students don't need to install it, but they can browse it for ideas
-- Mention Superpowers (obra/superpowers) as an example of what a full plugin looks like at the high end
-
-**Session commands (~2 min) — Quick tips**
-Cover the Claude Code session management basics that will be useful from now on:
-- `/help` — see all available commands
-- `/plan` — have Claude outline an approach before building
-- `/compact` — compress the conversation when it gets long
-- `/clear` — start fresh
-
-**Wrap-up (~1 min)**
-Your project now has a working custom skill. In Module 3, you'll build a workflow that runs automatically — scheduled tasks, pipelines, and scripts that do the work without you sitting at the keyboard.
-
-### Topics NOT covered in this video (addressed in written materials)
-- Detailed SKILL.md file format (covered in exercise)
-- Installing the journalism skills library (optional resource, not required)
-- How hooks are configured technically (settings.json) — covered in exercise tips
+### Key themes from the recording
+- The CLI can do things the browser interface cannot (file access, tool chaining, persistent output)
+- No external API cost — all processing happens locally
+- Traceable and verifiable — every step produces files you can inspect
+- Work continues in the background while you do other things
 
 ---
 
-## Module 2, Video B2: (open slot)
+## Module 2, Video B2: Skills from workflows (RECORDED)
 
-**Status:** Not yet recorded. Possible topics for a second video or guest interview:
-- Walking through the journalism skills library in detail
-- Guest: a journalist who built custom skills for their beat
-- Deep dive on hooks — building one from scratch, testing it, iterating
-- Session management tips and configuration walkthrough
+**Format:** Screen recording with voiceover
+**Length:** ~13 minutes
+**File:** `MOOC-B2_eng.srt`
+**Topic:** Turning the B1 demo workflow into reusable skills and a proper Claude Code plugin; assignment walkthrough
+
+### What was covered
+
+**0:00-8:00 — Building skills from the pipeline**
+- Continuation from B1 — taking the ad-hoc workflow and packaging it as reusable skills
+- Creates 4 modular skills: video download, transcription, frame analysis, video dashboard
+- Builds a proper Claude Code plugin with plugin.json and versioning
+
+**8:00-10:00 — Troubleshooting**
+- Plugin didn't show up after creation — wrong directory placement
+- Had to move files to the correct location and restart Claude Code multiple times before the plugin loaded
+
+**10:00-11:00 — Testing**
+- Runs the video-dashboard skill to verify the plugin works end-to-end
+
+**11:00-13:00 — Assignment walkthrough**
+- Students should run their own workflow (any topic, any platforms), take notes on pain points and insights, then build their own slash commands or plugin from what they learned
+- Points to skills.amditis.tech for pre-made skills (one-way-door, PDF playground, etc.)
+- Directs students to instructor forums for discussion and help
 
 ---
 
@@ -300,78 +302,178 @@ Your project now has automation — something that runs on its own and does usef
 
 ---
 
-## Module 4, Video D1: Agents, tools, and data access
+## Module 4, Video 11: Getting more out of your sessions
 
-**Format:** Combined talking head + screen recording
-**Length:** ~20 minutes
-**Topic:** What makes something an "agent" vs. a chatbot; non-interactive mode with `claude -p`; connecting AI to data sources via MCP; Reroute NJ as a real-world agent-driven project; where these tools break down
+**Format:** Screen recording with voiceover
+**Length:** ~12-14 minutes
+**Topic:** Extended thinking, structured outputs, plan mode, memory, /compact, and session management — the features that change the quality and durability of your Claude Code sessions
 
-### Outline (flexible — you will riff on these beats, not read them)
+### Outline (flexible — riff on these beats, don't read them)
 
-**Opening (~2 min) — Chatbots vs. agents**
-Everything you've done so far has been interactive — you type, Claude responds, you direct. An agent is what happens when you step back and let the AI execute a multi-step plan on its own. It has tools (file access, web access, code execution), it makes decisions about which tool to use, and it keeps going until the task is done or it hits something it can't resolve.
+**Opening (~1 min) — You've been driving with half the gears**
+You've been using Claude Code for three weeks now. You've set up projects, built skills, automated workflows. But you've been using the tool on autopilot — there are features built into Claude Code that most people never discover, and they change the quality of what you get back. This video covers the ones that matter most.
 
-This module covers two things: how to run Claude autonomously using `claude -p`, and how to connect it to your data using MCP.
+**Extended thinking (~3 min) — Explain + demo**
+- What it is: you can tell Claude to think before it responds. Instead of generating an answer immediately, it works through the problem step by step — reading, comparing, checking — before giving you a result.
+- How to trigger it: just say "think harder" or "think deeply about this." You can also set a thinking budget in settings.
+- Demo: take two budget documents. Ask Claude to compare them — first normally, then with "think carefully about this." Show how the extended thinking version catches discrepancies the quick version misses.
+- The tradeoff: slower, uses more tokens, not worth it for simple asks. Use it when the task requires actual analysis, not just retrieval.
+- [SLIDE: extended-thinking.svg]
 
-**Non-interactive mode: `claude -p` (~4 min) — Explain + demo**
-- `claude -p "process all the PDFs in this folder and extract key dates"` — Claude runs the task, writes the output, and exits. No back-and-forth. No session to manage.
-- Show a live demo: run `claude -p` on a folder of sample documents. Watch it process them one by one and write results to an output file.
-- Explain when to use it: batch processing, scheduled tasks (pair with cron from Module 3), pipeline stages where you want consistent behavior without human interaction
-- Explain when NOT to use it: when you need to review intermediate steps, when the task requires judgment calls, when you're exploring and iterating
+**Structured outputs (~3 min) — Explain + demo**
+- The idea: instead of getting prose back, ask for data in a specific format — JSON, CSV, markdown table, YAML.
+- Why this matters: a JSON array of extracted sources can feed a script or spreadsheet. A CSV of quotes can go into a database. Prose summaries just sit there — you can't do anything with them programmatically.
+- Demo: take a press release. Ask Claude to extract all named people, dollar amounts, and dates — first as prose, then as JSON. Show how the JSON is immediately usable.
+- Combining with extended thinking: "Think carefully about which quotes in this transcript are newsworthy, then return them as a JSON array with speaker, quote, and context fields."
+- [SLIDE: structured-outputs.svg]
 
-**MCP: connecting to data sources (~4 min) — Explain the concept**
-- Model Context Protocol is a standard for giving AI access to external data — files, databases, APIs, web services
-- The idea: instead of pasting data into a prompt, you point the AI at a data source and let it query what it needs
-- An MCP server exposes data in a way Claude can read. A filesystem MCP server makes a folder queryable. A database MCP server lets Claude run queries.
-- Where this breaks: permissions, authentication, schema mismatches, silent failures. The real skill is debugging the connection, not just setting it up.
+**Plan mode (~3 min) — Explain + demo**
+- What it is: instead of Claude just starting to work, it proposes a plan first. You review the plan, and you can approve it, edit it, or reject it.
+- How to enter: type /plan or press shift+tab.
+- Demo: "I need to process 20 PDFs and extract the budget line items from each one." Claude proposes its approach — which files to read first, what to extract, where to save results. Walk through approving, editing a step, then letting it run.
+- The journalism lesson: plan mode is editorial oversight applied to the tool itself. You're reviewing the approach before it executes, the same way an editor reviews a story plan before the reporter writes.
+- [SLIDE: plan-mode-flow.svg]
 
-**Live demo: `claude -p` on a document folder (~4 min) — Screen recording**
-1. Show a folder of sample journalism documents (press releases, transcripts, notes)
-2. Run `claude -p "Read every document in this folder. For each one, extract: the date, the main topic, all named people, and any dollar amounts mentioned. Save the results as a CSV."`
-3. Watch it process. Show the output CSV.
-4. "I didn't sit here and feed these in one at a time. I described the output format I wanted, pointed at the folder, and walked away. This is what autonomous processing looks like."
+**Memory, /compact, and session management (~3-4 min) — Explain + demo**
+- The problem: long sessions eat context. Claude has a finite window — and as the conversation fills up, it starts losing track of what you said earlier. You'll notice it repeating itself, missing details, or getting sluggish.
+- /compact: manually compress the conversation. Claude summarizes what's happened so far and frees up space. Use it when you notice the session degrading.
+- Memory: Claude can remember things across sessions. Tell it "remember that we use AP style" or "remember that my editor is Sarah" and it persists. Show how to check what it remembers.
+- Session hygiene: when to start a new session vs. keep going. Rule of thumb — if you're switching topics or the session feels off, start fresh. A clean session with a good CLAUDE.md beats a long session with accumulated context.
+- This connects to the caching discussion in the next video.
+- [SLIDE: context-window-session.svg]
 
-**Reroute NJ deep dive (~4 min) — Real-world agent example**
-Walk through Reroute NJ as a complete example of what this course teaches:
-- **Module 1 concepts in action**: the project has a CLAUDE.md, lives on GitHub, built from the terminal
-- **Module 2 concepts**: the page generation and translation workflows are reusable scripts — describe what you want, Claude builds it
-- **Module 3 concepts**: the coverage scraper runs on a cron schedule, commits and pushes automatically, handles dirty worktrees
-- **Module 4 concepts**: the scraper connects to external data sources (news sites, NJ Transit alerts), processes them autonomously, and publishes results without human intervention
-- 11 languages, zero build step, serving a real community during a real infrastructure disruption
-- "This is what it looks like when you put all four modules together on a real project."
-
-**Where things break (~2 min)**
-Be honest about what doesn't work:
-- MCP connections fail silently — you think it's querying your data but it's actually hallucinating
-- Rate limits, token limits, and context window limits are real constraints
-- Autonomous mode can do damage if you're not careful — it will happily delete files or overwrite data if you ask it to
-- The human is still the journalist — the AI is a collaborator, not a replacement
-
-**Course wrap-up (~1 min)**
-"Over four weeks, you went from typing prompts in a browser to building a project that runs on your machine, uses custom skills, automates workflows, and connects to real data. Every piece of that project is documented on GitHub — clone it on a new machine and it works. Share it with a colleague and they inherit the context. That's the shift: from prompting to building. Good luck with the final project."
-
-### Topics NOT covered in this video (addressed in written materials)
-- Detailed MCP configuration (exercise walks through it with Claude)
-- RAG as a formal concept (woven into MCP discussion naturally)
-- Parametric vs. grounded knowledge terminology (written materials cover this)
-- Specific MCP server types and setup (exercise + readings)
+**Close (~30 sec)**
+"Those are the features that change how you work inside a session. Extended thinking for complex analysis, structured outputs for reusable data, plan mode for oversight, and context management to keep sessions healthy. Next video: what's happening under the hood when you start a session, and how to control it."
 
 ---
 
-## Module 4, Video D2: (open slot)
+## Module 4, Video 12: Settings, caching, and connecting to data
 
-**Status:** Not yet recorded. Possible topics for a second video or guest interview:
-- Setting up an MCP server for local files and querying across them
-- Guest: a journalist using AI agents in their newsroom
-- Deep dive on where MCP/data connections fail and how to debug them
-- Demonstration of a more advanced agent workflow (multi-step delegation)
+**Format:** Talking head + slides + brief screen demos
+**Length:** ~12 minutes
+**Topic:** Settings and configuration, prompt caching and why mid-session changes hurt, MCP at a conceptual level — what's happening under the hood
+
+### Outline (flexible — riff on these beats, don't read them)
+
+**Opening (~1 min) — What happens before your first message**
+Every time you launch Claude Code, a bunch of things happen before you type anything. It reads your CLAUDE.md, loads your settings, connects to any configured MCP servers, sets up the model, and initializes the context window. This video is about understanding and controlling that process.
+
+**Settings and configuration (~4 min) — Explain + show**
+- The settings menu: type /config. Walk through what's there — model selection, permissions, theme.
+- Permission modes: you can adjust what Claude does without asking. Useful when you trust the workflow. Dangerous when you don't. Show the spectrum from "ask me everything" to "just do it."
+- The settings hierarchy: global settings (~/.claude/settings.json) → project settings (.claude.json) → session overrides (/config). Higher layers override lower ones. This means you can set defaults globally and customize per project.
+- The .claude.json file: project-specific settings that live in the repo and travel with it. Anyone who clones the repo gets the same configuration.
+- [SLIDE: settings-hierarchy.svg]
+
+**Prompt caching and mid-session changes (~4 min) — Explain with slides**
+- What prompt caching is: Anthropic caches the beginning of your conversation so it doesn't have to reprocess it every turn. This makes responses faster and cheaper.
+- Why it breaks: if you switch models mid-session — say, from Sonnet to Opus — the cache is invalidated. The entire conversation has to be reprocessed from scratch. You lose the speed benefit and pay full price.
+- Same thing happens if you change certain settings mid-session.
+- The practical rule: decide your model and settings before you start working. If you need to switch, just start a fresh session. It's faster than fighting a broken cache.
+- This isn't just about cost — it affects response quality too. A cache miss means the model is reprocessing everything cold.
+- [SLIDE: prompt-caching.svg]
+
+**MCP: connecting Claude to external data (~4 min) — Explain with slides**
+- What MCP is: Model Context Protocol. An open standard for connecting AI to data sources — files, databases, APIs, Google Drive, Slack. Think of it as a bridge.
+- What an MCP server does: it's a small program that makes a data source available to Claude in a standardized way. There are dozens of them for different things.
+- What the config looks like: show a .mcp.json file briefly. "This is JSON. It tells Claude where to find the server and what it can access. You don't have to write this by hand — describe what you want and Claude generates it."
+- The grounded vs. parametric distinction in 60 seconds: when Claude answers from documents it's actually reading, it can cite them. When it answers from training data, it's guessing. That distinction matters for journalism — citable vs. not.
+- Honest about the rough edges: MCP connections break. Tokens expire. Paths change. Permissions shift. This is the part of the tool stack that's still being figured out.
+- Where to go deeper: the readings for this module cover MCP setup and RAG in detail for students who want to try it.
+- [SLIDE: mcp-architecture.svg, parametric-vs-grounded.svg]
+
+**Close (~30 sec)**
+"Now you know what's happening under the hood — settings, caching, data connections. Next video: Claude Code isn't the only CLI agent, and the interesting part is you can use them together."
+
+---
+
+## Module 4, Video 13: Calling other agents from the command line
+
+**Format:** Screen recording with voiceover
+**Length:** ~10 minutes
+**Topic:** The CLI agent landscape (Claude Code, Gemini CLI, Codex CLI, Copilot CLI), calling one from inside another, and a framework for choosing
+
+### Outline (flexible — riff on these beats, don't read them)
+
+**Opening (~1 min) — You don't have to pick one**
+This course has focused on Claude Code, but it's not the only CLI agent. There are four major ones right now, and the interesting thing is you don't have to choose just one. You can use them together — even from inside the same session.
+
+**The landscape: four CLI agents (~3 min) — Explain with slides**
+- Claude Code (Anthropic): the tool you've been using. Paid — requires API credits or a Max subscription. Context file: CLAUDE.md.
+- Gemini CLI (Google): free tier with 1,000 requests per day. Context file: GEMINI.md. Good for quick tasks where you want to save money.
+- Codex CLI (OpenAI): paid, requires API credits or subscription. Context file: AGENTS.md.
+- GitHub Copilot CLI (GitHub/Microsoft): comes with Copilot Pro, also has a limited free tier. Uses repo context rather than a dedicated context file.
+- They use different models underneath. Different strengths, different pricing, different context conventions. Think of them as different reporters covering the same story — you'd ask each one different questions.
+- [SLIDE: cli-agents-landscape.svg]
+
+**Calling other agents from inside Claude Code (~4 min) — Demo**
+- The pattern: Claude Code can shell out to any command-line tool, including other AI agents. It's just a subprocess call.
+- Demo: inside a Claude Code session, ask it to run gemini -p "summarize this article" or copilot -p "review this code." Show the output coming back into the Claude Code session.
+- Copilot's /delegate: offloads tasks to a cloud agent that creates a draft PR. Free parallel compute.
+- Journalism demo: take the same press release. Run it through Claude and Gemini. Compare what each one flags as the lead. "Two models, same document, different editorial instincts."
+- The practical limit: each subprocess call is a fresh session with no shared context. The calling agent doesn't know what the other agent "thought" — only what it returned.
+- [SLIDE: cross-agent-workflow.svg]
+
+**When to use which tool (~2 min) — Framework, not comparison**
+- Don't do a feature-by-feature comparison — that's stale in months.
+- Instead, four questions: What's the task? How much context does it need? Does it need tool access? How cost-sensitive am I?
+- Honest take: for most journalism tasks, any of these will work. The differences matter at the edges — long documents, complex multi-step reasoning, structured output reliability.
+- The real advice: try more than one. Develop your own sense. You wouldn't use one source for every story.
+
+**Close (~30 sec)**
+"You now know the full landscape of CLI agents and how to use them together. Last video: where all of this is heading, how to stay current, and a recap of the whole course."
+
+---
+
+## Module 4, Video 14: What's next + course close
+
+**Format:** Talking head + slides
+**Length:** ~10 minutes
+**Topic:** Where CLI agents are heading, how to evaluate new tools, staying current without drowning, course recap and send-off
+
+### Outline (flexible — riff on these beats, don't read them)
+
+**Opening (~30 sec) — The tools will change, the way of working won't**
+This is the last video. I want to talk about what comes next — not specific product announcements, but where this whole space is heading and how to keep up without losing your mind.
+
+**Where this is heading (~4 min) — Talking head + slides**
+- The trend: CLI agents are getting more capable fast. More tools, longer context windows, better reasoning, more autonomy. What you learned in this course is the floor, not the ceiling.
+- Multi-agent patterns: agents that coordinate with each other — one does research, another writes, another reviews. You're not there yet, but it's the direction.
+- The autonomy question: as these tools get more powerful, the editorial judgment question gets harder, not easier. The human-in-the-loop principle from this course doesn't expire — it gets more important. The more capable the tool, the more carefully you need to supervise it.
+- How to evaluate new tools when they show up: four questions. Does it have file access? Does it support context files? Can it use tools? Can you see what it's doing? If a new tool passes all four, it's worth trying. If not, it's probably hype.
+- [SLIDE: autonomy-spectrum.svg, tool-evaluation-framework.svg]
+
+**Staying current without drowning (~3 min)**
+- The problem: new tools, new features, new models every week. Nobody can track all of it.
+- Sources worth following: Simon Willison's blog (best single source on what's actually new vs. hype), Generative AI in the Newsroom (journalism-specific), Ethan Mollick's One Useful Thing (the big picture).
+- The test for whether a new feature matters: "Does this change how I'd do a task I already do?" If yes, learn it. If not, skip it and check back in six months.
+- Keep your CLAUDE.md files alive. Update them as you learn new things, as your beat changes, as tools evolve. The context file is the living document of your working relationship with the tool.
+
+**Course recap and send-off (~3 min) — Talking head**
+- Module 1: you moved from the browser to the terminal. You installed Claude Code, set up a project, and wrote a context file. You learned what a harness is and started using one.
+- Module 2: you turned your expertise into reusable tools. Custom skills, hooks, slash commands that encode your editorial standards.
+- Module 3: you described a workflow in plain English and had the AI build it. You tested it, broke it, debugged it, and committed it.
+- Module 4: you learned the features and techniques that make you a power user — extended thinking, structured outputs, plan mode, caching, multi-agent workflows, and how to evaluate what comes next.
+- The arc: from prompting to managing. You're not typing messages into a chat window anymore. You're building environments, delegating work, and maintaining tools.
+- Final project: build something real for your beat. Put it on GitHub. Someone can clone it and inherit your setup.
+- "Good luck with the final project. I'll see you in the discussion forums."
+- [SLIDE: course-arc.svg]
+
+### Production notes
+- All 4 videos are shorter than the Module 1-3 videos (~10-14 min vs. ~20 min)
+- Videos 11 and 13 are screen recordings with voiceover — no talking head segments
+- Video 12 mixes talking head with slides and brief screen demos
+- Video 14 is talking head with slides — no screen recording
+- Keep demos short and focused: show one thing, explain it, move on. Don't build anything from scratch.
+- Slide references point to SVGs in docs/slides/module-4-diagrams/
 
 ---
 
 ## Production notes
 
 ### Recording style
-- Combined talking head + screen recording in a single continuous take (~20 min each)
+- Modules 1-3: combined talking head + screen recording in a single continuous take (~15-20 min each)
+- Module 4: shorter videos (~10-14 min), varied formats (see per-video notes above)
 - No formal script — outline the beats, then riff naturally
 - Transitions between talking head and screen recording happen organically (minimize jump cuts)
 - PowerShell is the primary terminal for demos (matches Module 1 video)
@@ -384,10 +486,12 @@ Be honest about what doesn't work:
 
 ### Files to prepare before recording
 - `Resources/examples/beat-project/` files — press releases, council minutes, interview notes
-- A sample city council meeting transcript for the Module 2 skill demo
+- Social media accounts bookmarked for a live demo (Module 2 used Zohran Mamdani)
 - The scheduler/cron setup for the Module 3 automation demo
-- A folder of sample documents for the Module 4 `claude -p` demo
-- Reroute NJ project accessible for Module 3 reference and Module 4 deep dive
+- Two budget documents for the Module 4 extended thinking demo
+- A press release for the Module 4 structured outputs and cross-agent demos
+- 20 sample PDFs for the Module 4 plan mode demo
+- A .mcp.json config file to show briefly in Video 12
 
 ### The running project
 The demo videos should use the same project throughout — starting as an empty folder in Module 1, growing into a full project by Module 4. This makes the arc concrete and visible. Students see one project evolve across four weeks, not four disconnected demos.
