@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap');
+    </style>
+    <marker id="arrowMuted" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#a3e635"/>
+    </marker>
+    <marker id="arrowCyan" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#67e8f9"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="58" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="42" fill="#f1f5f9">Commands: deterministic triggers for complex workflows</text>
+
+  <!-- ============================================================ -->
+  <!-- TOP SECTION: Comparison table                                 -->
+  <!-- ============================================================ -->
+
+  <!-- Table header background -->
+  <rect x="120" y="100" width="1680" height="50" rx="8" fill="#334155"/>
+  <!-- Round only top corners by clipping -->
+  <text x="350" y="132" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#f1f5f9">Approach</text>
+  <text x="870" y="132" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#f1f5f9">Behavior</text>
+  <text x="1560" y="132" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#f1f5f9">Reliability</text>
+
+  <!-- Divider lines (vertical) -->
+  <line x1="580" y1="100" x2="580" y2="370" stroke="#334155" stroke-width="1"/>
+  <line x1="1360" y1="100" x2="1360" y2="370" stroke="#334155" stroke-width="1"/>
+
+  <!-- Row 1: Natural language -->
+  <rect x="120" y="150" width="1680" height="70" rx="0" fill="#1e293b"/>
+  <line x1="120" y1="220" x2="1800" y2="220" stroke="#334155" stroke-width="1"/>
+  <text x="170" y="192" font-family="Inter, sans-serif" font-weight="500" font-size="22" fill="#f1f5f9">Natural language</text>
+  <text x="620" y="192" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">May be interpreted or ignored</text>
+  <!-- Red indicator -->
+  <circle cx="1500" cy="185" r="10" fill="#f87171"/>
+  <text x="1520" y="192" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#f87171">Low</text>
+
+  <!-- Row 2: Skills -->
+  <rect x="120" y="220" width="1680" height="70" rx="0" fill="#1e293b" fill-opacity="0.6"/>
+  <line x1="120" y1="290" x2="1800" y2="290" stroke="#334155" stroke-width="1"/>
+  <text x="170" y="262" font-family="Inter, sans-serif" font-weight="500" font-size="22" fill="#f1f5f9">Skills</text>
+  <text x="620" y="262" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">Knowledge but probabilistic activation</text>
+  <!-- Cyan indicator -->
+  <circle cx="1500" cy="255" r="10" fill="#67e8f9"/>
+  <text x="1520" y="262" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#67e8f9">Medium</text>
+
+  <!-- Row 3: /Commands -->
+  <rect x="120" y="290" width="1680" height="80" rx="0" fill="#1e293b"/>
+  <rect x="120" y="290" width="1680" height="80" rx="0" fill="none" stroke="#a3e635" stroke-width="1.5" stroke-opacity="0.4"/>
+  <text x="170" y="338" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="22" fill="#a3e635">/commands</text>
+  <text x="620" y="332" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">Deterministic trigger --</text>
+  <text x="620" y="358" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">always executes as defined</text>
+  <!-- Green indicator -->
+  <circle cx="1500" cy="335" r="10" fill="#a3e635"/>
+  <text x="1520" y="342" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#a3e635">High</text>
+
+  <!-- ============================================================ -->
+  <!-- Section divider                                               -->
+  <!-- ============================================================ -->
+  <line x1="120" y1="420" x2="1800" y2="420" stroke="#334155" stroke-width="1" stroke-dasharray="8 4"/>
+  <text x="960" y="465" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#f1f5f9">Command architecture example</text>
+
+  <!-- ============================================================ -->
+  <!-- BOTTOM SECTION: Command architecture flow                     -->
+  <!-- ============================================================ -->
+
+  <!-- Phase 0: Command trigger -->
+  <rect x="60" y="520" width="340" height="80" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="230" y="553" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="20" fill="#a3e635">/presentation-to-shorts</text>
+  <text x="230" y="580" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#94a3b8">command trigger</text>
+
+  <!-- Arrow trigger → phase 1 -->
+  <line x1="400" y1="560" x2="448" y2="560" stroke="#a3e635" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+  <!-- Phase 1: Content analysis -->
+  <rect x="460" y="510" width="280" height="100" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="600" y="543" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#f1f5f9">Phase 1</text>
+  <text x="600" y="570" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8">Content analysis</text>
+  <rect x="530" y="585" width="140" height="22" rx="4" fill="#334155"/>
+  <text x="600" y="601" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="13" fill="#67e8f9">Opus model</text>
+
+  <!-- Arrow phase 1 → phase 2 -->
+  <line x1="740" y1="560" x2="788" y2="560" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowMuted)"/>
+
+  <!-- Phase 2: Parallel processing (larger, with 3 subagent branches) -->
+  <rect x="800" y="490" width="400" height="200" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="2"/>
+  <text x="1000" y="523" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#f1f5f9">Phase 2: Parallel processing</text>
+
+  <!-- Subagent branch 1: Titles -->
+  <rect x="830" y="545" width="150" height="48" rx="6" fill="#0f172a" stroke="#67e8f9" stroke-width="1"/>
+  <text x="905" y="575" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="16" fill="#67e8f9">Titles</text>
+
+  <!-- Subagent branch 2: Thumbnails -->
+  <rect x="1000" y="545" width="170" height="48" rx="6" fill="#0f172a" stroke="#67e8f9" stroke-width="1"/>
+  <text x="1085" y="575" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="16" fill="#67e8f9">Thumbnails</text>
+
+  <!-- Subagent branch 3: Social copy -->
+  <rect x="880" y="608" width="170" height="48" rx="6" fill="#0f172a" stroke="#67e8f9" stroke-width="1"/>
+  <text x="965" y="638" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="16" fill="#67e8f9">Social copy</text>
+
+  <text x="1000" y="678" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="14" fill="#94a3b8">3 subagents in parallel</text>
+
+  <!-- Arrow phase 2 → phase 3 -->
+  <line x1="1200" y1="560" x2="1248" y2="560" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowMuted)"/>
+
+  <!-- Phase 3: Assembly -->
+  <rect x="1260" y="510" width="260" height="100" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="1390" y="543" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#f1f5f9">Phase 3</text>
+  <text x="1390" y="570" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8">Assembly</text>
+  <rect x="1330" y="585" width="120" height="22" rx="4" fill="#334155"/>
+  <text x="1390" y="601" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="13" fill="#67e8f9">Sonnet model</text>
+
+  <!-- Arrow phase 3 → phase 4 -->
+  <line x1="1520" y1="560" x2="1568" y2="560" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowMuted)"/>
+
+  <!-- Phase 4: Export -->
+  <rect x="1580" y="520" width="260" height="80" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="1710" y="553" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#a3e635">Phase 4</text>
+  <text x="1710" y="580" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8">Export to output folder</text>
+
+  <!-- ============================================================ -->
+  <!-- Bottom summary line                                           -->
+  <!-- ============================================================ -->
+  <rect x="200" y="750" width="1520" height="60" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="960" y="787" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="22" fill="#94a3b8">One command replaces: content analysis tool + project management + team handoffs + hours of coordination</text>
+
+  <!-- ============================================================ -->
+  <!-- Visual extras: connecting dots showing the old way            -->
+  <!-- ============================================================ -->
+  <text x="960" y="870" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="22" fill="#f1f5f9">Why commands beat prompts</text>
+
+  <!-- Three mini-cards for key advantages -->
+  <rect x="200" y="900" width="420" height="90" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="220" y="935" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#a3e635">Reproducible</text>
+  <text x="220" y="965" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">Same trigger, same execution every time</text>
+
+  <rect x="750" y="900" width="420" height="90" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="770" y="935" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#a3e635">Composable</text>
+  <text x="770" y="965" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">Chain phases with model routing</text>
+
+  <rect x="1300" y="900" width="420" height="90" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="1320" y="935" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#a3e635">Delegatable</text>
+  <text x="1320" y="965" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">Hand off to anyone -- no training needed</text>
+
+  <!-- Page label -->
+  <text x="1880" y="1060" text-anchor="end" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#334155">02 / commands as apps</text>
+</svg>

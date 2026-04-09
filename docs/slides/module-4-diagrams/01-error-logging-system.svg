@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap');
+    </style>
+    <marker id="arrowGreen" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#a3e635"/>
+    </marker>
+    <marker id="arrowMuted" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="58" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="42" fill="#f1f5f9">The error logging feedback loop</text>
+
+  <!-- ============================================================ -->
+  <!-- LOOP: 5 steps arranged in an elongated oval                  -->
+  <!-- Top row: steps 1, 2, 3  |  Bottom row: steps 5, 4           -->
+  <!-- ============================================================ -->
+
+  <!-- Step 1: Error occurs (top-left) — signal/red -->
+  <rect x="100" y="120" width="320" height="130" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+  <circle cx="134" cy="155" r="18" fill="#f87171"/>
+  <text x="134" y="162" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="17" fill="#0f172a">1</text>
+  <text x="162" y="160" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#f87171">Error occurs</text>
+  <text x="120" y="195" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8">Claude makes a mistake</text>
+  <text x="120" y="220" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8">during a task</text>
+
+  <!-- Arrow 1 → 2 -->
+  <line x1="420" y1="185" x2="518" y2="185" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowMuted)"/>
+
+  <!-- Step 2: /log_error captures it (top-center) — ice/cyan -->
+  <rect x="530" y="120" width="380" height="130" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="2"/>
+  <circle cx="564" cy="155" r="18" fill="#67e8f9"/>
+  <text x="564" y="162" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="17" fill="#0f172a">2</text>
+  <text x="592" y="160" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="22" fill="#67e8f9">/log_error</text>
+  <text x="778" y="160" font-family="Inter, sans-serif" font-weight="400" font-size="22" fill="#f1f5f9"> captures it</text>
+  <text x="550" y="195" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8">Forks context and interviews</text>
+  <text x="550" y="220" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8">you about what went wrong</text>
+
+  <!-- Arrow 2 → 3 -->
+  <line x1="910" y1="185" x2="1008" y2="185" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowMuted)"/>
+
+  <!-- Step 3: Structured log (top-right) — wider for fields -->
+  <rect x="1020" y="100" width="440" height="220" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <circle cx="1054" cy="135" r="18" fill="#334155"/>
+  <text x="1054" y="142" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="17" fill="#f1f5f9">3</text>
+  <text x="1082" y="140" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#f1f5f9">Structured log</text>
+
+  <!-- Log structure key/value fields -->
+  <text x="1045" y="175" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#67e8f9">timestamp</text>
+  <text x="1190" y="175" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#94a3b8">2026-04-09T14:32</text>
+  <text x="1045" y="199" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#67e8f9">category</text>
+  <text x="1190" y="199" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#94a3b8">hallucination</text>
+  <text x="1045" y="223" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#67e8f9">trigger</text>
+  <text x="1190" y="223" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#94a3b8">"Add error handling..."</text>
+  <text x="1045" y="247" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#67e8f9">expected</text>
+  <text x="1190" y="247" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#a3e635">vs.</text>
+  <text x="1220" y="247" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#f87171">actual</text>
+  <text x="1045" y="271" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#67e8f9">root_cause</text>
+  <text x="1190" y="271" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#94a3b8">analysis text...</text>
+  <text x="1045" y="295" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#67e8f9">fix</text>
+  <text x="1190" y="295" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#a3e635">corrective action</text>
+
+  <!-- Arrow 3 → 4 (down on the right) -->
+  <path d="M 1380 320 L 1380 380 L 1380 418" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowMuted)"/>
+
+  <!-- Step 4: Pattern analysis (bottom-right) -->
+  <rect x="1120" y="430" width="360" height="130" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <circle cx="1154" cy="465" r="18" fill="#334155"/>
+  <text x="1154" y="472" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="17" fill="#f1f5f9">4</text>
+  <text x="1182" y="470" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#f1f5f9">Pattern analysis</text>
+  <text x="1140" y="505" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8">Review logs periodically,</text>
+  <text x="1140" y="530" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8">identify recurring failures</text>
+
+  <!-- Arrow 4 → 5 -->
+  <line x1="1120" y1="495" x2="1002" y2="495" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowMuted)"/>
+
+  <!-- Step 5: Improve prompts and skills (bottom-center) — acid/green -->
+  <rect x="600" y="430" width="390" height="130" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <circle cx="634" cy="465" r="18" fill="#a3e635"/>
+  <text x="634" y="472" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="17" fill="#0f172a">5</text>
+  <text x="662" y="470" font-family="Inter, sans-serif" font-weight="600" font-size="22" fill="#a3e635">Improve prompts and skills</text>
+  <text x="620" y="505" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8">Update CLAUDE.md, refine skills,</text>
+  <text x="620" y="530" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8">add guardrails</text>
+
+  <!-- Arrow 5 → 1 (loop-back, going left and up) with "Better outcomes" label -->
+  <path d="M 600 495 L 260 495 L 260 250" fill="none" stroke="#a3e635" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+  <rect x="168" y="354" width="184" height="36" rx="6" fill="#0f172a" stroke="#a3e635" stroke-width="1.5"/>
+  <text x="260" y="378" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="18" fill="#a3e635">Better outcomes</text>
+
+  <!-- ============================================================ -->
+  <!-- Center of loop: motto                                         -->
+  <!-- ============================================================ -->
+  <rect x="480" y="340" width="520" height="56" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1.5" stroke-dasharray="6 3"/>
+  <text x="740" y="376" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="22" fill="#f1f5f9">Tightest feedback loops = fastest learning</text>
+
+  <!-- ============================================================ -->
+  <!-- Failure categories (5 pills)                                  -->
+  <!-- ============================================================ -->
+  <text x="100" y="640" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#f1f5f9">Failure categories</text>
+
+  <rect x="100" y="662" width="190" height="38" rx="19" fill="#1e293b" stroke="#f87171" stroke-width="1.5"/>
+  <text x="195" y="687" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f87171">Hallucination</text>
+
+  <rect x="310" y="662" width="220" height="38" rx="19" fill="#1e293b" stroke="#f87171" stroke-width="1.5"/>
+  <text x="420" y="687" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f87171">Instruction ignored</text>
+
+  <rect x="550" y="662" width="180" height="38" rx="19" fill="#1e293b" stroke="#f87171" stroke-width="1.5"/>
+  <text x="640" y="687" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f87171">Context lost</text>
+
+  <rect x="750" y="662" width="165" height="38" rx="19" fill="#1e293b" stroke="#f87171" stroke-width="1.5"/>
+  <text x="832" y="687" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f87171">Wrong tool</text>
+
+  <rect x="935" y="662" width="260" height="38" rx="19" fill="#1e293b" stroke="#f87171" stroke-width="1.5"/>
+  <text x="1065" y="687" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f87171">Incomplete execution</text>
+
+  <!-- ============================================================ -->
+  <!-- Example log entry (right side, lower)                         -->
+  <!-- ============================================================ -->
+  <rect x="100" y="740" width="860" height="300" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="130" y="776" font-family="Inter, sans-serif" font-weight="600" font-size="22" fill="#f1f5f9">Example error log entry</text>
+
+  <text x="130" y="810" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#334155">---</text>
+  <text x="130" y="836" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#67e8f9">timestamp:</text>
+  <text x="270" y="836" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#94a3b8">2026-04-09T14:32:01Z</text>
+  <text x="130" y="860" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#67e8f9">category:</text>
+  <text x="260" y="860" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#f87171">hallucination</text>
+  <text x="130" y="884" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#67e8f9">trigger:</text>
+  <text x="250" y="884" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#94a3b8">"Add error handling to auth flow"</text>
+  <text x="130" y="908" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#67e8f9">expected:</text>
+  <text x="270" y="908" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#a3e635">try/catch around OAuth flow</text>
+  <text x="130" y="932" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#67e8f9">actual:</text>
+  <text x="240" y="932" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#f87171">invented non-existent API method</text>
+  <text x="130" y="956" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#67e8f9">root_cause:</text>
+  <text x="290" y="956" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#94a3b8">No docs in context for the OAuth library version</text>
+  <text x="130" y="980" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#67e8f9">fix:</text>
+  <text x="190" y="980" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#a3e635">Added library docs to project context</text>
+  <text x="130" y="1010" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#334155">---</text>
+
+  <!-- ============================================================ -->
+  <!-- /log_success note (bottom)                                    -->
+  <!-- ============================================================ -->
+  <rect x="1040" y="940" width="780" height="56" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="1.5"/>
+  <text x="1060" y="974" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="20" fill="#a3e635">/log_success</text>
+  <text x="1250" y="974" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">-- logging what works is equally valuable</text>
+
+  <!-- Page label -->
+  <text x="1880" y="1060" text-anchor="end" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#334155">01 / error logging system</text>
+</svg>
