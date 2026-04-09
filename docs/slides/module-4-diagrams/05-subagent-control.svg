@@ -1,0 +1,216 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap');
+    </style>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#a3e635"/>
+    </marker>
+    <marker id="arrowMuted" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f87171"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="58" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="42" fill="#f1f5f9">Subagent control: parallelize, isolate, validate</text>
+
+  <!-- ============================================= -->
+  <!-- TOP SECTION: The key rule                     -->
+  <!-- ============================================= -->
+
+  <!-- Rule background panel -->
+  <rect x="280" y="90" width="1360" height="70" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <rect x="280" y="90" width="1360" height="70" rx="8" fill="#a3e635" opacity="0.06"/>
+
+  <text x="960" y="135" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="34" fill="#a3e635">More subagents &gt;&gt; More tasks per subagent</text>
+
+  <!-- ============================================= -->
+  <!-- MIDDLE SECTION: Side-by-side comparison       -->
+  <!-- ============================================= -->
+
+  <!-- LEFT SIDE: Overloaded subagent -->
+  <text x="80" y="210" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#f87171">Overloaded subagent</text>
+
+  <!-- Single large box -->
+  <rect x="80" y="230" width="800" height="320" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+
+  <!-- Subagent label -->
+  <text x="480" y="268" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="22" fill="#f87171">Subagent 1</text>
+
+  <!-- Divider under label -->
+  <line x1="120" y1="280" x2="840" y2="280" stroke="#334155" stroke-width="1"/>
+
+  <!-- Task A -->
+  <rect x="120" y="295" width="720" height="46" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="480" y="324" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="20" fill="#f1f5f9">Task A</text>
+
+  <!-- Task B -->
+  <rect x="120" y="351" width="720" height="46" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="480" y="380" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="20" fill="#f1f5f9">Task B</text>
+
+  <!-- Task C -->
+  <rect x="120" y="407" width="720" height="46" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="480" y="436" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="20" fill="#f1f5f9">Task C</text>
+
+  <!-- Task D -->
+  <rect x="120" y="463" width="720" height="46" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="480" y="492" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="20" fill="#f1f5f9">Task D</text>
+
+  <!-- Verdict below -->
+  <text x="480" y="580" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#f87171">Context polluted, tasks compete, quality drops</text>
+
+
+  <!-- RIGHT SIDE: Focused subagents -->
+  <text x="1040" y="210" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#a3e635">Focused subagents</text>
+
+  <!-- Subagent 1: Task A -->
+  <rect x="1040" y="230" width="400" height="70" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="1060" y="272" font-family="Inter, sans-serif" font-weight="600" font-size="18" fill="#a3e635">Subagent 1:</text>
+  <text x="1186" y="272" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="18" fill="#f1f5f9">Task A</text>
+
+  <!-- Subagent 2: Task B -->
+  <rect x="1040" y="314" width="400" height="70" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="1060" y="356" font-family="Inter, sans-serif" font-weight="600" font-size="18" fill="#a3e635">Subagent 2:</text>
+  <text x="1186" y="356" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="18" fill="#f1f5f9">Task B</text>
+
+  <!-- Subagent 3: Task C -->
+  <rect x="1040" y="398" width="400" height="70" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="1060" y="440" font-family="Inter, sans-serif" font-weight="600" font-size="18" fill="#a3e635">Subagent 3:</text>
+  <text x="1186" y="440" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="18" fill="#f1f5f9">Task C</text>
+
+  <!-- Subagent 4: Task D -->
+  <rect x="1040" y="482" width="400" height="70" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="1060" y="524" font-family="Inter, sans-serif" font-weight="600" font-size="18" fill="#a3e635">Subagent 4:</text>
+  <text x="1186" y="524" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="18" fill="#f1f5f9">Task D</text>
+
+  <!-- Parallel arrows (right side of each box) -->
+  <line x1="1460" y1="265" x2="1530" y2="265" stroke="#a3e635" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="1460" y1="349" x2="1530" y2="349" stroke="#a3e635" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="1460" y1="433" x2="1530" y2="433" stroke="#a3e635" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="1460" y1="517" x2="1530" y2="517" stroke="#a3e635" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+  <!-- Parallel bracket/label -->
+  <text x="1550" y="398" font-family="Inter, sans-serif" font-weight="600" font-size="18" fill="#a3e635" transform="rotate(90,1550,398)">parallel</text>
+
+  <!-- Right-side bracket lines -->
+  <line x1="1540" y1="265" x2="1540" y2="517" stroke="#a3e635" stroke-width="1.5" opacity="0.5"/>
+  <line x1="1535" y1="265" x2="1545" y2="265" stroke="#a3e635" stroke-width="1.5" opacity="0.5"/>
+  <line x1="1535" y1="517" x2="1545" y2="517" stroke="#a3e635" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Verdict below -->
+  <text x="1300" y="580" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#a3e635">Clean context, isolated work, parallel execution</text>
+
+
+  <!-- ============================================= -->
+  <!-- BOTTOM SECTION: Hallucination chain warning   -->
+  <!-- ============================================= -->
+
+  <!-- Divider -->
+  <line x1="80" y1="620" x2="1840" y2="620" stroke="#334155" stroke-width="1"/>
+
+  <!-- Section label -->
+  <text x="80" y="660" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#f87171">Hallucination chain warning</text>
+
+  <!-- === Flow diagram: Subagent A → verify → Subagent B → verify → Subagent C === -->
+
+  <!-- Subagent A output box -->
+  <rect x="80" y="690" width="300" height="70" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="230" y="732" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#f1f5f9">Subagent A output</text>
+
+  <!-- Small red warning bubble above A -->
+  <circle cx="360" cy="700" r="10" fill="#f87171" opacity="0.3"/>
+  <text x="360" y="705" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="12" fill="#f87171">!</text>
+
+  <!-- Arrow A → checkpoint 1 -->
+  <line x1="380" y1="725" x2="430" y2="725" stroke="#f87171" stroke-width="2" marker-end="url(#arrowRed)"/>
+  <text x="408" y="710" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="13" fill="#94a3b8">passed</text>
+
+  <!-- Checkpoint 1 (green checkmark) -->
+  <rect x="440" y="706" width="40" height="40" rx="6" fill="#0f172a" stroke="#a3e635" stroke-width="2"/>
+  <text x="460" y="733" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="20" fill="#a3e635">&#x2713;</text>
+  <text x="460" y="762" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="13" fill="#a3e635">Verify</text>
+
+  <!-- Arrow checkpoint 1 → B -->
+  <line x1="490" y1="725" x2="538" y2="725" stroke="#a3e635" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+  <!-- Subagent B box -->
+  <rect x="550" y="690" width="260" height="70" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="680" y="732" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#f1f5f9">Subagent B</text>
+
+  <!-- Medium red warning bubble above B -->
+  <circle cx="790" cy="695" r="16" fill="#f87171" opacity="0.35"/>
+  <text x="790" y="701" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="14" fill="#f87171">!</text>
+
+  <!-- Arrow B → checkpoint 2 -->
+  <line x1="810" y1="725" x2="860" y2="725" stroke="#f87171" stroke-width="2" marker-end="url(#arrowRed)"/>
+  <text x="838" y="710" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="13" fill="#94a3b8">passed</text>
+
+  <!-- Checkpoint 2 (green checkmark) -->
+  <rect x="870" y="706" width="40" height="40" rx="6" fill="#0f172a" stroke="#a3e635" stroke-width="2"/>
+  <text x="890" y="733" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="20" fill="#a3e635">&#x2713;</text>
+  <text x="890" y="762" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="13" fill="#a3e635">Verify</text>
+
+  <!-- Arrow checkpoint 2 → C -->
+  <line x1="920" y1="725" x2="968" y2="725" stroke="#a3e635" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+  <!-- Subagent C box -->
+  <rect x="980" y="690" width="260" height="70" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="1110" y="732" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#f1f5f9">Subagent C</text>
+
+  <!-- Large red warning bubble above C — error compounds -->
+  <circle cx="1220" cy="688" r="24" fill="#f87171" opacity="0.4"/>
+  <text x="1220" y="694" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="18" fill="#f87171">!</text>
+
+  <!-- "Error compounds" label -->
+  <line x1="1246" y1="688" x2="1310" y2="688" stroke="#f87171" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="1320" y="694" font-family="Inter, sans-serif" font-weight="600" font-size="18" fill="#f87171">Error compounds at each step</text>
+
+  <!-- Growing bubble visualization to show escalation -->
+  <circle cx="360" cy="700" r="10" fill="none" stroke="#f87171" stroke-width="1" opacity="0.4" stroke-dasharray="3,2"/>
+  <circle cx="790" cy="695" r="16" fill="none" stroke="#f87171" stroke-width="1" opacity="0.4" stroke-dasharray="3,2"/>
+  <circle cx="1220" cy="688" r="24" fill="none" stroke="#f87171" stroke-width="1" opacity="0.4" stroke-dasharray="3,2"/>
+
+  <!-- Without checks warning -->
+  <rect x="80" y="795" width="1760" height="44" rx="8" fill="#f87171" opacity="0.06"/>
+  <rect x="80" y="795" width="1760" height="44" rx="8" fill="none" stroke="#f87171" stroke-width="1" opacity="0.3"/>
+  <text x="960" y="823" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#f87171">Without checks: each handoff amplifies error from the previous stage</text>
+
+  <!-- Solution text -->
+  <rect x="80" y="860" width="1760" height="60" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="1.5"/>
+  <text x="960" y="896" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#a3e635">Insert deterministic checks between handoffs -- validate before passing</text>
+
+  <!-- Deterministic check examples -->
+  <text x="160" y="952" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="17" fill="#94a3b8">Type checks</text>
+  <circle cx="130" cy="947" r="8" fill="#a3e635" opacity="0.3"/>
+  <text x="130" y="952" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="12" fill="#a3e635">&#x2713;</text>
+
+  <text x="400" y="952" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="17" fill="#94a3b8">Schema validation</text>
+  <circle cx="370" cy="947" r="8" fill="#a3e635" opacity="0.3"/>
+  <text x="370" y="952" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="12" fill="#a3e635">&#x2713;</text>
+
+  <text x="690" y="952" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="17" fill="#94a3b8">File existence checks</text>
+  <circle cx="660" cy="947" r="8" fill="#a3e635" opacity="0.3"/>
+  <text x="660" y="952" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="12" fill="#a3e635">&#x2713;</text>
+
+  <text x="1000" y="952" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="17" fill="#94a3b8">Test suites</text>
+  <circle cx="970" cy="947" r="8" fill="#a3e635" opacity="0.3"/>
+  <text x="970" y="952" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="12" fill="#a3e635">&#x2713;</text>
+
+  <text x="1240" y="952" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="17" fill="#94a3b8">Grep for expected output</text>
+  <circle cx="1210" cy="947" r="8" fill="#a3e635" opacity="0.3"/>
+  <text x="1210" y="952" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="12" fill="#a3e635">&#x2713;</text>
+
+  <text x="1540" y="952" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="17" fill="#94a3b8">Human review gates</text>
+  <circle cx="1510" cy="947" r="8" fill="#a3e635" opacity="0.3"/>
+  <text x="1510" y="952" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="12" fill="#a3e635">&#x2713;</text>
+
+  <!-- Bottom note -->
+  <text x="960" y="1010" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#334155">Never trust the output of one LLM call as input to another without deterministic verification</text>
+
+</svg>

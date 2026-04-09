@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <marker id="arrow-muted" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#a3e635"/>
+    </marker>
+    <marker id="arrow-ice" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#67e8f9"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f87171"/>
+    </marker>
+    <marker id="arrow-chrome" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f1f5f9"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="42" font-weight="700" fill="#f1f5f9">Plan mode: review before execution</text>
+
+  <!-- STEP 1: You describe the task -->
+  <rect x="80" y="300" width="340" height="280" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <!-- User icon -->
+  <circle cx="250" cy="370" r="28" fill="none" stroke="#67e8f9" stroke-width="2"/>
+  <circle cx="250" cy="360" r="10" fill="#67e8f9"/>
+  <path d="M228 385 Q250 400 272 385" fill="none" stroke="#67e8f9" stroke-width="2"/>
+  <text x="250" y="430" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#f1f5f9">You describe</text>
+  <text x="250" y="460" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#f1f5f9">the task</text>
+
+  <!-- Prompt example -->
+  <rect x="110" y="485" width="280" height="60" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="250" y="513" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="16" fill="#94a3b8">"Analyze these budget</text>
+  <text x="250" y="533" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="16" fill="#94a3b8">PDFs for discrepancies"</text>
+
+  <!-- Arrow 1→2 -->
+  <line x1="420" y1="440" x2="530" y2="440" stroke="#f1f5f9" stroke-width="2" marker-end="url(#arrow-chrome)"/>
+
+  <!-- STEP 2: Claude proposes a plan -->
+  <rect x="540" y="260" width="400" height="360" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="2"/>
+  <text x="740" y="305" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#67e8f9">Claude proposes a plan</text>
+
+  <!-- Numbered steps -->
+  <rect x="575" y="325" width="330" height="46" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="600" y="354" font-family="'JetBrains Mono', monospace" font-size="17" fill="#67e8f9">1</text>
+  <text x="625" y="354" font-family="Inter, sans-serif" font-size="18" fill="#f1f5f9">Read both PDF files</text>
+
+  <rect x="575" y="385" width="330" height="46" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="600" y="414" font-family="'JetBrains Mono', monospace" font-size="17" fill="#67e8f9">2</text>
+  <text x="625" y="414" font-family="Inter, sans-serif" font-size="18" fill="#f1f5f9">Extract line items</text>
+
+  <rect x="575" y="445" width="330" height="46" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="600" y="474" font-family="'JetBrains Mono', monospace" font-size="17" fill="#67e8f9">3</text>
+  <text x="625" y="474" font-family="Inter, sans-serif" font-size="18" fill="#f1f5f9">Compare year-over-year</text>
+
+  <rect x="575" y="505" width="330" height="46" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="600" y="534" font-family="'JetBrains Mono', monospace" font-size="17" fill="#67e8f9">4</text>
+  <text x="625" y="534" font-family="Inter, sans-serif" font-size="18" fill="#f1f5f9">Flag discrepancies</text>
+
+  <rect x="575" y="565" width="330" height="46" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="600" y="594" font-family="'JetBrains Mono', monospace" font-size="17" fill="#67e8f9">5</text>
+  <text x="625" y="594" font-family="Inter, sans-serif" font-size="18" fill="#f1f5f9">Generate summary report</text>
+
+  <!-- Three branching arrows from step 2 -->
+
+  <!-- APPROVE branch (top) -->
+  <line x1="940" y1="370" x2="1100" y2="310" stroke="#a3e635" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+
+  <!-- Approve box -->
+  <rect x="1110" y="260" width="130" height="60" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="1175" y="297" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" font-weight="600" fill="#a3e635">Approve</text>
+
+  <!-- Arrow to executes -->
+  <line x1="1240" y1="290" x2="1370" y2="290" stroke="#a3e635" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+  <!-- Claude executes -->
+  <rect x="1380" y="250" width="440" height="80" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="1600" y="298" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#a3e635">Claude executes the plan</text>
+
+  <!-- EDIT branch (middle) -->
+  <line x1="940" y1="440" x2="1100" y2="470" stroke="#67e8f9" stroke-width="2.5" marker-end="url(#arrow-ice)"/>
+
+  <!-- Edit box -->
+  <rect x="1110" y="440" width="130" height="60" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="2"/>
+  <text x="1175" y="477" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" font-weight="600" fill="#67e8f9">Edit</text>
+
+  <!-- Curved arrow looping back to step 2 -->
+  <path d="M1175 500 L1175 560 Q1175 590 1145 590 L820 590 Q740 590 740 630 L740 650" fill="none" stroke="#67e8f9" stroke-width="2" marker-end="url(#arrow-ice)"/>
+  <text x="960" y="660" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#67e8f9">Refine the plan and re-propose</text>
+  <!-- Loop arrow back up -->
+  <path d="M740 660 Q740 700 700 700 L580 700 Q540 700 540 660 L540 440 Q540 420 560 420" fill="none" stroke="#67e8f9" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- REJECT branch (bottom) -->
+  <line x1="940" y1="500" x2="1100" y2="620" stroke="#f87171" stroke-width="2.5" marker-end="url(#arrow-red)"/>
+
+  <!-- Reject box -->
+  <rect x="1110" y="600" width="130" height="60" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+  <text x="1175" y="637" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" font-weight="600" fill="#f87171">Reject</text>
+
+  <!-- Arrow to rethink -->
+  <line x1="1240" y1="630" x2="1370" y2="630" stroke="#f87171" stroke-width="2" marker-end="url(#arrow-red)"/>
+
+  <!-- Rethink approach -->
+  <rect x="1380" y="590" width="440" height="80" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+  <text x="1600" y="638" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#f87171">Rethink approach</text>
+
+  <!-- Legend symbols next to branches -->
+  <text x="1010" y="340" font-family="Inter, sans-serif" font-size="28" fill="#a3e635">&#10003;</text>
+  <text x="1020" y="468" font-family="Inter, sans-serif" font-size="22" fill="#67e8f9">&#9998;</text>
+  <text x="1010" y="590" font-family="Inter, sans-serif" font-size="28" fill="#f87171">&#10005;</text>
+
+  <!-- Bottom note -->
+  <rect x="610" y="990" width="700" height="50" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="960" y="1022" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="20" fill="#94a3b8">Enter with: /plan or shift+tab</text>
+</svg>

@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap');
+    </style>
+    <marker id="arrowMuted" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#a3e635"/>
+    </marker>
+    <marker id="arrowRed" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#f87171"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="58" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="42" fill="#f1f5f9">Hooks: programmatic guardrails for flow state</text>
+
+  <!-- ============================================================ -->
+  <!-- TOP SECTION: Problem/solution spectrum (3 columns)            -->
+  <!-- ============================================================ -->
+
+  <!-- Column 1: Permission prompts (muted) -->
+  <rect x="120" y="110" width="520" height="260" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="380" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#94a3b8">Permission prompts</text>
+
+  <!-- Frown indicator -->
+  <circle cx="380" cy="200" r="30" fill="none" stroke="#94a3b8" stroke-width="2"/>
+  <circle cx="367" cy="192" r="4" fill="#94a3b8"/>
+  <circle cx="393" cy="192" r="4" fill="#94a3b8"/>
+  <path d="M 363 215 Q 380 205, 397 215" fill="none" stroke="#94a3b8" stroke-width="2"/>
+
+  <text x="380" y="265" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#f1f5f9">Safe but breaks flow</text>
+  <text x="380" y="295" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">Every action needs approval.</text>
+  <text x="380" y="320" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">Constant context switching.</text>
+  <text x="380" y="345" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">You become the bottleneck.</text>
+
+  <!-- Arrow between col 1 and col 2 -->
+  <text x="680" y="240" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="28" fill="#334155">+</text>
+
+  <!-- Column 2: Skip permissions alone (signal/red) -->
+  <rect x="700" y="110" width="520" height="260" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+  <text x="960" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#f87171">Skip permissions (alone)</text>
+
+  <!-- Warning triangle -->
+  <polygon points="960,175 940,215 980,215" fill="none" stroke="#f87171" stroke-width="2"/>
+  <text x="960" y="210" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="18" fill="#f87171">!</text>
+
+  <text x="960" y="265" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#f1f5f9">Flow state but no guardrails</text>
+  <text x="960" y="295" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">Claude runs uninterrupted.</text>
+  <text x="960" y="320" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">But nothing prevents</text>
+  <text x="960" y="345" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">dangerous operations.</text>
+
+  <!-- Equals sign between col 2 and col 3 -->
+  <text x="1260" y="240" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="28" fill="#334155">=</text>
+
+  <!-- Column 3: Hooks + skip permissions (acid/green) -->
+  <rect x="1280" y="110" width="520" height="260" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="1540" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#a3e635">Hooks + skip permissions</text>
+
+  <!-- Checkmark -->
+  <circle cx="1540" cy="200" r="30" fill="none" stroke="#a3e635" stroke-width="2"/>
+  <polyline points="1522,200 1535,215 1560,186" fill="none" stroke="#a3e635" stroke-width="3"/>
+
+  <text x="1540" y="265" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#f1f5f9">Flow state WITH safety</text>
+  <text x="1540" y="295" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">Claude runs uninterrupted.</text>
+  <text x="1540" y="320" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">Programmatic rules catch</text>
+  <text x="1540" y="345" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">dangerous patterns automatically.</text>
+
+  <!-- ============================================================ -->
+  <!-- Section divider                                               -->
+  <!-- ============================================================ -->
+  <line x1="120" y1="415" x2="1800" y2="415" stroke="#334155" stroke-width="1" stroke-dasharray="8 4"/>
+  <text x="960" y="460" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#f1f5f9">Hook interception flow</text>
+
+  <!-- ============================================================ -->
+  <!-- BOTTOM SECTION: Hook interception flow                        -->
+  <!-- ============================================================ -->
+
+  <!-- Step: Claude attempts action -->
+  <rect x="80" y="500" width="340" height="110" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="250" y="538" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#f1f5f9">Claude attempts action</text>
+  <rect x="115" y="555" width="270" height="32" rx="4" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="250" y="577" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#f87171">rm -rf /important/path</text>
+
+  <!-- Arrow → pre-hook -->
+  <line x1="420" y1="555" x2="488" y2="555" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowMuted)"/>
+
+  <!-- Step: Pre-hook intercepts -->
+  <rect x="500" y="490" width="420" height="160" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="2"/>
+  <text x="710" y="525" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#67e8f9">Pre-hook intercepts</text>
+
+  <!-- Script inspection panel -->
+  <rect x="525" y="540" width="370" height="90" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="545" y="565" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="14" fill="#94a3b8">#!/bin/bash</text>
+  <text x="545" y="585" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="14" fill="#67e8f9">if</text>
+  <text x="570" y="585" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="14" fill="#94a3b8"> [[ "$cmd" =~ rm.*-rf ]]; </text>
+  <text x="818" y="585" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="14" fill="#67e8f9">then</text>
+  <text x="555" y="605" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="14" fill="#f87171">exit 2</text>
+  <text x="624" y="605" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="14" fill="#94a3b8">  # block command</text>
+  <text x="545" y="625" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="14" fill="#67e8f9">fi</text>
+
+  <!-- Branch point -->
+  <circle cx="960" cy="555" r="6" fill="#94a3b8"/>
+
+  <!-- ============================================================ -->
+  <!-- Branch A: Pattern matched (RED — blocked)                     -->
+  <!-- ============================================================ -->
+  <!-- Arrow to blocked -->
+  <path d="M 960 555 L 1040 555 L 1040 480 L 1108 480" fill="none" stroke="#f87171" stroke-width="2" marker-end="url(#arrowRed)"/>
+
+  <rect x="1120" y="440" width="440" height="110" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+  <text x="1340" y="473" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#f87171">Pattern matched</text>
+
+  <!-- Blocked output -->
+  <rect x="1145" y="488" width="390" height="40" rx="4" fill="#0f172a" stroke="#f87171" stroke-width="1"/>
+  <text x="1340" y="514" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="15" fill="#f87171">BLOCKED -- command never executes</text>
+
+  <!-- X icon -->
+  <circle cx="1615" cy="472" r="16" fill="none" stroke="#f87171" stroke-width="2"/>
+  <line x1="1607" y1="464" x2="1623" y2="480" stroke="#f87171" stroke-width="2"/>
+  <line x1="1623" y1="464" x2="1607" y2="480" stroke="#f87171" stroke-width="2"/>
+
+  <!-- ============================================================ -->
+  <!-- Branch B: No match (GREEN — proceeds)                         -->
+  <!-- ============================================================ -->
+  <!-- Arrow to proceeds -->
+  <path d="M 960 555 L 1040 555 L 1040 650 L 1108 650" fill="none" stroke="#a3e635" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+  <rect x="1120" y="610" width="300" height="80" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="1270" y="643" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#a3e635">No match</text>
+  <text x="1270" y="673" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8">Action proceeds</text>
+
+  <!-- Arrow → post-hook -->
+  <line x1="1420" y1="650" x2="1478" y2="650" stroke="#a3e635" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+  <!-- Post-hook validates -->
+  <rect x="1490" y="610" width="300" height="80" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="1640" y="643" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#f1f5f9">Post-hook validates</text>
+  <text x="1640" y="673" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8">Log, verify, audit</text>
+
+  <!-- ============================================================ -->
+  <!-- Label for branches                                            -->
+  <!-- ============================================================ -->
+  <text x="1040" y="460" font-family="Inter, sans-serif" font-weight="500" font-size="15" fill="#f87171">match</text>
+  <text x="1040" y="635" font-family="Inter, sans-serif" font-weight="500" font-size="15" fill="#a3e635">safe</text>
+
+  <!-- ============================================================ -->
+  <!-- Common blocked patterns (small reference)                     -->
+  <!-- ============================================================ -->
+  <rect x="80" y="730" width="520" height="210" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="100" y="765" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#f1f5f9">Common patterns to block</text>
+
+  <text x="100" y="800" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#f87171">rm -rf</text>
+  <text x="200" y="800" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#94a3b8">recursive force delete</text>
+
+  <text x="100" y="826" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#f87171">git push --force</text>
+  <text x="290" y="826" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#94a3b8">rewrite remote history</text>
+
+  <text x="100" y="852" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#f87171">chmod 777</text>
+  <text x="240" y="852" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#94a3b8">world-writable permissions</text>
+
+  <text x="100" y="878" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#f87171">curl | bash</text>
+  <text x="260" y="878" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#94a3b8">pipe remote code to shell</text>
+
+  <text x="100" y="904" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="15" fill="#f87171">DROP TABLE / DELETE FROM</text>
+  <text x="380" y="904" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#94a3b8">destructive SQL</text>
+
+  <!-- ============================================================ -->
+  <!-- Hook types reference                                          -->
+  <!-- ============================================================ -->
+  <rect x="660" y="730" width="520" height="210" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="680" y="765" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#f1f5f9">Hook types</text>
+
+  <text x="680" y="800" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="16" fill="#67e8f9">PreToolUse</text>
+  <text x="680" y="825" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#94a3b8">Runs before any tool call. Can block it.</text>
+
+  <text x="680" y="860" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="16" fill="#67e8f9">PostToolUse</text>
+  <text x="680" y="885" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#94a3b8">Runs after a tool call. Can log or validate.</text>
+
+  <text x="680" y="920" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="16" fill="#67e8f9">Stop</text>
+  <text x="680" y="940" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#94a3b8">Runs when Claude finishes a turn.</text>
+
+  <!-- ============================================================ -->
+  <!-- Bottom note                                                   -->
+  <!-- ============================================================ -->
+  <rect x="1240" y="940" width="580" height="56" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="1.5"/>
+  <text x="1530" y="975" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#a3e635">Deterministic safety: programmatic rules, not probabilistic judgment</text>
+
+  <!-- Page label -->
+  <text x="1880" y="1060" text-anchor="end" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#334155">03 / hooks for safety</text>
+</svg>

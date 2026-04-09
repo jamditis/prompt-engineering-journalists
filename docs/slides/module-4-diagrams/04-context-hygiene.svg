@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap');
+    </style>
+    <linearGradient id="qualityLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a3e635"/>
+      <stop offset="40%" stop-color="#a3e635"/>
+      <stop offset="60%" stop-color="#f87171"/>
+      <stop offset="100%" stop-color="#f87171"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="58" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="42" fill="#f1f5f9">Context hygiene: every token must earn its place</text>
+
+  <!-- ============================================= -->
+  <!-- TOP SECTION: Context degradation visualization -->
+  <!-- ============================================= -->
+
+  <!-- Section label -->
+  <text x="80" y="110" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#94a3b8">Context degradation</text>
+
+  <!-- Context window bar background -->
+  <rect x="80" y="130" width="1760" height="60" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+
+  <!-- Green (relevant) portion — left ~48% -->
+  <rect x="80" y="130" width="845" height="60" rx="8" fill="#a3e635" opacity="0.18"/>
+  <rect x="80" y="130" width="845" height="60" rx="8" fill="none" stroke="#a3e635" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Red (context rot) portion — right ~52% -->
+  <rect x="925" y="130" width="915" height="60" rx="0 8 8 0" fill="#f87171" opacity="0.1"/>
+  <rect x="925" y="130" width="915" height="60" rx="0 8 8 0" fill="none" stroke="#f87171" stroke-width="1" opacity="0.3"/>
+
+  <!-- Threshold line at ~50% -->
+  <line x1="925" y1="118" x2="925" y2="202" stroke="#f87171" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="925" y="112" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="16" fill="#f87171">~50k tokens -- performance degrades 50%+</text>
+
+  <!-- Left label -->
+  <text x="80" y="214" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="16" fill="#94a3b8">0 tokens</text>
+
+  <!-- Green section label -->
+  <text x="500" y="167" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#a3e635">Relevant context -- high-quality responses</text>
+
+  <!-- Red section label -->
+  <text x="1382" y="155" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="18" fill="#f87171">Context rot -- stale info, unrelated topics,</text>
+  <text x="1382" y="178" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="18" fill="#f87171">bloated CLAUDE.md</text>
+
+  <!-- Quality curve showing degradation -->
+  <path d="M 100 248 L 400 250 Q 600 252 800 262 Q 880 270 925 290 Q 980 318 1100 358 Q 1300 405 1600 420 L 1820 424" fill="none" stroke="url(#qualityLine)" stroke-width="3" opacity="0.7"/>
+
+  <!-- Quality labels -->
+  <text x="82" y="240" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#a3e635">Quality: high</text>
+  <text x="1750" y="418" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#f87171">Quality: low</text>
+
+  <!-- Decline arrow tip -->
+  <polygon points="1820,424 1810,416 1810,432" fill="#f87171" opacity="0.6"/>
+
+
+  <!-- ============================================= -->
+  <!-- MIDDLE SECTION: Warning signs                 -->
+  <!-- ============================================= -->
+
+  <!-- Section label -->
+  <text x="80" y="490" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#94a3b8">Warning signs</text>
+
+  <!-- Card 1 -->
+  <rect x="80" y="510" width="330" height="90" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="1.5" opacity="0.9"/>
+  <circle cx="108" cy="540" r="12" fill="#f87171" opacity="0.25"/>
+  <text x="108" y="545" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="15" fill="#f87171">!</text>
+  <text x="130" y="540" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f1f5f9">Multiple unrelated projects</text>
+  <text x="130" y="565" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f1f5f9">in one session</text>
+
+  <!-- Card 2 -->
+  <rect x="430" y="510" width="330" height="90" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="1.5" opacity="0.9"/>
+  <circle cx="458" cy="540" r="12" fill="#f87171" opacity="0.25"/>
+  <text x="458" y="545" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="15" fill="#f87171">!</text>
+  <text x="480" y="540" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f1f5f9">CLAUDE.md instructions you</text>
+  <text x="480" y="565" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f1f5f9">don't remember adding</text>
+
+  <!-- Card 3 -->
+  <rect x="780" y="510" width="330" height="90" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="1.5" opacity="0.9"/>
+  <circle cx="808" cy="540" r="12" fill="#f87171" opacity="0.25"/>
+  <text x="808" y="545" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="15" fill="#f87171">!</text>
+  <text x="830" y="540" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f1f5f9">CLAUDE.md exceeding</text>
+  <text x="830" y="565" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f1f5f9">50 lines</text>
+
+  <!-- Card 4 -->
+  <rect x="1130" y="510" width="330" height="90" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="1.5" opacity="0.9"/>
+  <circle cx="1158" cy="540" r="12" fill="#f87171" opacity="0.25"/>
+  <text x="1158" y="545" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="15" fill="#f87171">!</text>
+  <text x="1180" y="540" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f1f5f9">Claude referencing</text>
+  <text x="1180" y="565" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f1f5f9">outdated discussion</text>
+
+  <!-- Card 5 -->
+  <rect x="1480" y="510" width="360" height="90" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="1.5" opacity="0.9"/>
+  <circle cx="1508" cy="540" r="12" fill="#f87171" opacity="0.25"/>
+  <text x="1508" y="545" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="15" fill="#f87171">!</text>
+  <text x="1530" y="540" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f1f5f9">Degraded response</text>
+  <text x="1530" y="565" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f1f5f9">quality</text>
+
+
+  <!-- ============================================= -->
+  <!-- BOTTOM SECTION: Compaction strategies          -->
+  <!-- ============================================= -->
+
+  <!-- Section label -->
+  <text x="80" y="660" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#94a3b8">Compaction strategies</text>
+
+  <!-- Strategy 1: /compact — acid border -->
+  <rect x="80" y="680" width="420" height="140" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="100" y="716" font-family="'JetBrains Mono', monospace" font-weight="600" font-size="24" fill="#a3e635">/compact</text>
+  <text x="100" y="748" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">Manual compression at the</text>
+  <text x="100" y="774" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">right moments</text>
+  <text x="100" y="804" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#94a3b8">Summarize and discard old context</text>
+
+  <!-- Strategy 2: /clear + CLAUDE.md — ice border -->
+  <rect x="520" y="680" width="420" height="140" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="2"/>
+  <text x="540" y="716" font-family="'JetBrains Mono', monospace" font-weight="600" font-size="22" fill="#67e8f9">/clear + CLAUDE.md</text>
+  <text x="540" y="748" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">Clean breakpoints between</text>
+  <text x="540" y="774" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">contexts</text>
+  <text x="540" y="804" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#94a3b8">Fresh start with persistent instructions</text>
+
+  <!-- Strategy 3: Subagent isolation — ice border -->
+  <rect x="960" y="680" width="420" height="140" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="2"/>
+  <text x="980" y="716" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#67e8f9">Subagent isolation</text>
+  <text x="980" y="748" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">Delegate to keep main</text>
+  <text x="980" y="774" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">context clean</text>
+  <text x="980" y="804" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#94a3b8">Subagents get fresh context windows</text>
+
+  <!-- Strategy 4: Double-escape — acid border, highlighted as most underutilized -->
+  <rect x="1400" y="680" width="440" height="140" rx="8" fill="#a3e635" opacity="0.06"/>
+  <rect x="1400" y="680" width="440" height="140" rx="8" fill="none" stroke="#a3e635" stroke-width="2.5"/>
+  <!-- Star indicator -->
+  <text x="1816" y="702" font-family="Inter, sans-serif" font-weight="700" font-size="22" fill="#a3e635" text-anchor="end">*</text>
+  <text x="1420" y="716" font-family="'JetBrains Mono', monospace" font-weight="600" font-size="24" fill="#a3e635">Double-escape</text>
+  <text x="1420" y="748" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">Restore conversation without</text>
+  <text x="1420" y="774" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">losing code</text>
+  <text x="1420" y="804" font-family="Inter, sans-serif" font-weight="500" font-size="16" fill="#a3e635">Most underutilized technique</text>
+
+
+  <!-- ============================================= -->
+  <!-- Bottom note                                    -->
+  <!-- ============================================= -->
+
+  <!-- Divider line -->
+  <line x1="80" y1="860" x2="1840" y2="860" stroke="#334155" stroke-width="1"/>
+
+  <!-- Bottom quote -->
+  <text x="960" y="910" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="28" fill="#94a3b8">Treat context like a precious resource</text>
+  <text x="960" y="950" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="28" fill="#f87171">Stale context is harmful context</text>
+
+  <!-- Subtle pattern explanation at very bottom -->
+  <text x="960" y="1010" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#334155">Context window management is the single biggest determinant of Claude Code output quality</text>
+
+</svg>

@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap');
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto" fill="#94a3b8">
+      <polygon points="0 0, 10 3.5, 0 7"/>
+    </marker>
+    <marker id="arrowhead-rev" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto" fill="#94a3b8">
+      <polygon points="10 0, 0 3.5, 10 7"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="80" font-family="Inter, sans-serif" font-weight="700" font-size="42" fill="#f1f5f9" text-anchor="middle">MCP: connecting Claude to your data</text>
+
+  <!-- Center hub: Claude Code -->
+  <rect x="770" y="380" width="380" height="160" rx="12" fill="#1e293b" stroke="#a3e635" stroke-width="3"/>
+  <text x="960" y="448" font-family="Inter, sans-serif" font-weight="700" font-size="32" fill="#f1f5f9" text-anchor="middle">Claude Code</text>
+  <text x="960" y="485" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8" text-anchor="middle">AI assistant</text>
+
+  <!-- ===== Spoke 1: Filesystem (top-left) ===== -->
+  <!-- Connector line -->
+  <line x1="810" y1="400" x2="460" y2="230" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead-rev)" marker-start="url(#arrowhead)"/>
+  <!-- MCP label on line -->
+  <rect x="575" y="295" width="100" height="24" rx="4" fill="#0f172a"/>
+  <text x="625" y="313" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="14" fill="#67e8f9" text-anchor="middle">MCP</text>
+
+  <!-- Card -->
+  <rect x="200" y="140" width="280" height="120" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <!-- Folder icon -->
+  <rect x="230" y="168" width="36" height="28" rx="3" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+  <rect x="230" y="162" width="18" height="8" rx="2" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+  <text x="282" y="188" font-family="Inter, sans-serif" font-weight="600" font-size="22" fill="#f1f5f9">Filesystem</text>
+  <text x="230" y="228" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">Your local files and folders</text>
+
+  <!-- ===== Spoke 2: Database (top-right) ===== -->
+  <line x1="1110" y1="400" x2="1460" y2="230" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" marker-start="url(#arrowhead-rev)"/>
+  <rect x="1225" y="295" width="100" height="24" rx="4" fill="#0f172a"/>
+  <text x="1275" y="313" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="14" fill="#67e8f9" text-anchor="middle">MCP</text>
+
+  <rect x="1440" y="140" width="280" height="120" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <!-- Cylinder icon (database) -->
+  <ellipse cx="1478" cy="172" rx="16" ry="6" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+  <line x1="1462" y1="172" x2="1462" y2="196" stroke="#67e8f9" stroke-width="1.5"/>
+  <line x1="1494" y1="172" x2="1494" y2="196" stroke="#67e8f9" stroke-width="1.5"/>
+  <ellipse cx="1478" cy="196" rx="16" ry="6" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+  <text x="1510" y="190" font-family="Inter, sans-serif" font-weight="600" font-size="22" fill="#f1f5f9">Database</text>
+  <text x="1470" y="230" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">SQLite, Postgres, etc.</text>
+
+  <!-- ===== Spoke 3: APIs (right) ===== -->
+  <line x1="1150" y1="460" x2="1440" y2="460" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" marker-start="url(#arrowhead-rev)"/>
+  <rect x="1245" y="440" width="100" height="24" rx="4" fill="#0f172a"/>
+  <text x="1295" y="458" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="14" fill="#67e8f9" text-anchor="middle">MCP</text>
+
+  <rect x="1440" y="400" width="280" height="120" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <!-- Cloud icon -->
+  <ellipse cx="1478" cy="450" rx="18" ry="12" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+  <ellipse cx="1468" cy="456" rx="10" ry="8" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+  <ellipse cx="1488" cy="456" rx="10" ry="8" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+  <text x="1515" y="458" font-family="Inter, sans-serif" font-weight="600" font-size="22" fill="#f1f5f9">APIs</text>
+  <text x="1470" y="496" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">Web services, public data</text>
+
+  <!-- ===== Spoke 4: Google Drive (bottom-right) ===== -->
+  <line x1="1110" y1="520" x2="1460" y2="690" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)" marker-start="url(#arrowhead-rev)"/>
+  <rect x="1225" y="585" width="100" height="24" rx="4" fill="#0f172a"/>
+  <text x="1275" y="603" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="14" fill="#67e8f9" text-anchor="middle">MCP</text>
+
+  <rect x="1440" y="660" width="280" height="120" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <!-- Document icon -->
+  <rect x="1462" y="686" width="28" height="34" rx="2" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+  <polyline points="1480,686 1480,696 1490,696" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+  <line x1="1468" y1="700" x2="1484" y2="700" stroke="#67e8f9" stroke-width="1"/>
+  <line x1="1468" y1="706" x2="1484" y2="706" stroke="#67e8f9" stroke-width="1"/>
+  <line x1="1468" y1="712" x2="1480" y2="712" stroke="#67e8f9" stroke-width="1"/>
+  <text x="1500" y="710" font-family="Inter, sans-serif" font-weight="600" font-size="22" fill="#f1f5f9">Google Drive</text>
+  <text x="1470" y="750" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">Shared documents</text>
+
+  <!-- ===== Spoke 5: Slack (bottom-left) ===== -->
+  <line x1="810" y1="520" x2="460" y2="690" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead-rev)" marker-start="url(#arrowhead)"/>
+  <rect x="575" y="585" width="100" height="24" rx="4" fill="#0f172a"/>
+  <text x="625" y="603" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="14" fill="#67e8f9" text-anchor="middle">MCP</text>
+
+  <rect x="200" y="660" width="280" height="120" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <!-- Chat icon -->
+  <rect x="230" y="688" width="32" height="24" rx="6" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+  <polygon points="238,712 234,722 246,712" fill="none" stroke="#67e8f9" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="275" y="708" font-family="Inter, sans-serif" font-weight="600" font-size="22" fill="#f1f5f9">Slack</text>
+  <text x="230" y="750" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">Messages and channels</text>
+
+  <!-- ===== Left spoke (bonus): left side ===== -->
+  <line x1="770" y1="460" x2="480" y2="460" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead-rev)" marker-start="url(#arrowhead)"/>
+  <rect x="575" y="440" width="100" height="24" rx="4" fill="#0f172a"/>
+  <text x="625" y="458" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="14" fill="#67e8f9" text-anchor="middle">MCP</text>
+
+  <rect x="200" y="400" width="280" height="120" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <!-- Browser/web icon -->
+  <rect x="230" y="428" width="32" height="24" rx="3" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+  <line x1="230" y1="438" x2="262" y2="438" stroke="#67e8f9" stroke-width="1"/>
+  <circle cx="236" cy="433" r="2" fill="#67e8f9"/>
+  <circle cx="243" cy="433" r="2" fill="#67e8f9"/>
+  <text x="275" y="448" font-family="Inter, sans-serif" font-weight="600" font-size="22" fill="#f1f5f9">Browser</text>
+  <text x="230" y="496" font-family="Inter, sans-serif" font-weight="400" font-size="17" fill="#94a3b8">Web pages, research</text>
+
+  <!-- Bottom note -->
+  <rect x="360" y="880" width="1200" height="60" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="960" y="918" font-family="Inter, sans-serif" font-weight="400" font-size="22" fill="#94a3b8" text-anchor="middle">MCP = Model Context Protocol -- an open standard for connecting AI to data sources</text>
+</svg>

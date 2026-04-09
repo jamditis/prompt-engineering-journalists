@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="68" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="42" fill="#f1f5f9">Lean tool stack: context is precious real estate</text>
+
+  <!-- ============================================ -->
+  <!-- TOP SECTION: Context cost visualization      -->
+  <!-- ============================================ -->
+
+  <!-- Section label -->
+  <text x="960" y="128" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="22" fill="#94a3b8">Every token of context must fight for its place</text>
+
+  <!-- Context window bar background -->
+  <rect x="80" y="155" width="1760" height="130" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Segment 1: Your actual work (acid green) — ~72% of 1760 = 1267px -->
+  <rect x="84" y="159" width="1259" height="122" rx="6" fill="#a3e635" opacity="0.15"/>
+  <rect x="84" y="159" width="1259" height="122" rx="6" fill="none" stroke="#a3e635" stroke-width="2"/>
+  <text x="710" y="212" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="22" fill="#a3e635">Your actual work — prompts, code, reasoning</text>
+  <text x="710" y="244" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="18" fill="#94a3b8">~70-80%</text>
+
+  <!-- Segment 2: Context7 MCP (ice cyan) — 140px -->
+  <rect x="1349" y="159" width="140" height="122" rx="6" fill="#67e8f9" opacity="0.10"/>
+  <rect x="1349" y="159" width="140" height="122" rx="6" fill="none" stroke="#67e8f9" stroke-width="2"/>
+  <text x="1419" y="212" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="15" fill="#67e8f9">Context7</text>
+  <text x="1419" y="232" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="15" fill="#67e8f9">MCP</text>
+  <text x="1419" y="258" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="12" fill="#94a3b8">Worth it</text>
+
+  <!-- Segment 3: Dev Browser (ice cyan) — 140px -->
+  <rect x="1495" y="159" width="140" height="122" rx="6" fill="#67e8f9" opacity="0.10"/>
+  <rect x="1495" y="159" width="140" height="122" rx="6" fill="none" stroke="#67e8f9" stroke-width="2"/>
+  <text x="1565" y="212" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="15" fill="#67e8f9">Dev</text>
+  <text x="1565" y="232" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="15" fill="#67e8f9">Browser</text>
+  <text x="1565" y="258" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="12" fill="#94a3b8">Worth it</text>
+
+  <!-- Divider line between good and bad -->
+  <line x1="1649" y1="167" x2="1649" y2="273" stroke="#334155" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- Red bloat segments (increasing size) -->
+  <rect x="1663" y="167" width="36" height="108" rx="5" fill="#f87171" opacity="0.12"/>
+  <rect x="1663" y="167" width="36" height="108" rx="5" fill="none" stroke="#f87171" stroke-width="1.5"/>
+  <text x="1681" y="225" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="11" fill="#f87171" transform="rotate(-90,1681,225)">#1</text>
+
+  <rect x="1707" y="167" width="50" height="108" rx="5" fill="#f87171" opacity="0.12"/>
+  <rect x="1707" y="167" width="50" height="108" rx="5" fill="none" stroke="#f87171" stroke-width="1.5"/>
+  <text x="1732" y="225" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="11" fill="#f87171" transform="rotate(-90,1732,225)">#2</text>
+
+  <rect x="1765" y="167" width="66" height="108" rx="5" fill="#f87171" opacity="0.12"/>
+  <rect x="1765" y="167" width="66" height="108" rx="5" fill="none" stroke="#f87171" stroke-width="1.5"/>
+  <text x="1798" y="225" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="11" fill="#f87171" transform="rotate(-90,1798,225)">#3</text>
+
+  <!-- Labels below bar for worth-it tools -->
+  <text x="1419" y="310" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#67e8f9">Current docs,</text>
+  <text x="1419" y="330" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#67e8f9">prevents hallucinated APIs</text>
+
+  <text x="1565" y="310" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#67e8f9">Visual debugging,</text>
+  <text x="1565" y="330" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#67e8f9">screenshots</text>
+
+  <!-- Red bloat label -->
+  <text x="1740" y="310" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="16" fill="#f87171">Context bloat</text>
+  <text x="1740" y="332" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="14" fill="#94a3b8">Haven't used in a week</text>
+
+  <!-- ============================================ -->
+  <!-- Divider between sections                     -->
+  <!-- ============================================ -->
+  <line x1="160" y1="390" x2="1760" y2="390" stroke="#334155" stroke-width="1" stroke-dasharray="8,6"/>
+
+  <!-- Section label -->
+  <text x="960" y="440" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="30" fill="#f1f5f9">The audit checklist</text>
+
+  <!-- ============================================ -->
+  <!-- BOTTOM SECTION: 4 audit cards                -->
+  <!-- ============================================ -->
+
+  <!-- Card 1: Audit weekly (acid border) -->
+  <rect x="80" y="480" width="420" height="280" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="110" y="522" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="18" fill="#a3e635">01</text>
+  <text x="142" y="522" font-family="Inter, sans-serif" font-weight="700" font-size="24" fill="#f1f5f9">Audit weekly</text>
+  <!-- Divider line inside card -->
+  <line x1="110" y1="540" x2="470" y2="540" stroke="#334155" stroke-width="1"/>
+  <text x="110" y="575" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">Did I use this tool in</text>
+  <text x="110" y="603" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">the last 7 days?</text>
+  <text x="110" y="660" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#f1f5f9">If not, remove it.</text>
+
+  <!-- Card 2: Context cost test (ice border) -->
+  <rect x="530" y="480" width="420" height="280" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="2"/>
+  <text x="560" y="522" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="18" fill="#67e8f9">02</text>
+  <text x="592" y="522" font-family="Inter, sans-serif" font-weight="700" font-size="24" fill="#f1f5f9">Context cost test</text>
+  <line x1="560" y1="540" x2="920" y2="540" stroke="#334155" stroke-width="1"/>
+  <text x="560" y="575" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">Is this worth</text>
+  <text x="560" y="608" font-family="'JetBrains Mono', monospace" font-weight="600" font-size="24" fill="#f1f5f9">500+ tokens</text>
+  <text x="560" y="641" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">per session?</text>
+
+  <!-- Card 3: Prefer built-in (ice border) -->
+  <rect x="980" y="480" width="420" height="280" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="2"/>
+  <text x="1010" y="522" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="18" fill="#67e8f9">03</text>
+  <text x="1042" y="522" font-family="Inter, sans-serif" font-weight="700" font-size="24" fill="#f1f5f9">Prefer built-in</text>
+  <line x1="1010" y1="540" x2="1370" y2="540" stroke="#334155" stroke-width="1"/>
+  <text x="1010" y="575" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">Check if Claude handles</text>
+  <text x="1010" y="603" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">it natively before</text>
+  <text x="1010" y="631" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">adding an MCP.</text>
+
+  <!-- Card 4: Start minimal (acid border) -->
+  <rect x="1430" y="480" width="420" height="280" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="1460" y="522" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="18" fill="#a3e635">04</text>
+  <text x="1492" y="522" font-family="Inter, sans-serif" font-weight="700" font-size="24" fill="#f1f5f9">Start minimal</text>
+  <line x1="1460" y1="540" x2="1820" y2="540" stroke="#334155" stroke-width="1"/>
+  <text x="1460" y="575" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">Context7 + Dev Browser.</text>
+  <text x="1460" y="607" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">Add more only when</text>
+  <text x="1460" y="639" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">you hit a clear</text>
+  <text x="1460" y="671" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">limitation.</text>
+
+  <!-- ============================================ -->
+  <!-- Bottom note                                  -->
+  <!-- ============================================ -->
+  <text x="960" y="840" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="24" fill="#94a3b8">A lean stack is not limitation — it's optimization.</text>
+  <text x="960" y="876" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="24" fill="#94a3b8">Maximize context for actual problem-solving.</text>
+
+  <!-- Page label -->
+  <text x="1880" y="1060" text-anchor="end" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#334155">06 / lean tool stack</text>
+</svg>

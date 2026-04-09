@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="80" font-family="Inter, sans-serif" font-weight="700" font-size="42" fill="#f1f5f9" text-anchor="middle">Where settings live</text>
+
+  <!-- Layer 1: Global settings (bottom, widest) -->
+  <rect x="310" y="620" width="1300" height="180" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="960" y="680" font-family="Inter, sans-serif" font-weight="600" font-size="30" fill="#f1f5f9" text-anchor="middle">Global settings</text>
+  <text x="960" y="720" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="22" fill="#94a3b8" text-anchor="middle">~/.claude/settings.json</text>
+  <text x="960" y="760" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8" text-anchor="middle">Applies to all projects</text>
+
+  <!-- Layer 2: Project settings (middle) -->
+  <rect x="460" y="400" width="1000" height="180" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="2"/>
+  <text x="960" y="460" font-family="Inter, sans-serif" font-weight="600" font-size="30" fill="#f1f5f9" text-anchor="middle">Project settings</text>
+  <text x="960" y="500" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="22" fill="#67e8f9" text-anchor="middle">.claude.json in project root</text>
+  <text x="960" y="540" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8" text-anchor="middle">Travels with the repo</text>
+
+  <!-- Layer 3: Session overrides (top, narrowest) -->
+  <rect x="610" y="180" width="700" height="180" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="960" y="240" font-family="Inter, sans-serif" font-weight="600" font-size="30" fill="#f1f5f9" text-anchor="middle">Session overrides</text>
+  <text x="960" y="280" font-family="'JetBrains Mono', monospace" font-weight="400" font-size="22" fill="#a3e635" text-anchor="middle">/config during a session</text>
+  <text x="960" y="320" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8" text-anchor="middle">This session only</text>
+
+  <!-- Override arrow on the left side -->
+  <line x1="230" y1="750" x2="230" y2="230" stroke="#f1f5f9" stroke-width="2.5" stroke-dasharray="8,4"/>
+  <!-- Arrowhead -->
+  <polygon points="230,215 222,235 238,235" fill="#f1f5f9"/>
+
+  <!-- Arrow label -->
+  <text x="215" y="500" font-family="Inter, sans-serif" font-weight="600" font-size="22" fill="#f1f5f9" text-anchor="middle" transform="rotate(-90, 215, 500)">Overrides</text>
+
+  <!-- Small connecting lines between layers -->
+  <line x1="960" y1="360" x2="960" y2="400" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <line x1="960" y1="580" x2="960" y2="620" stroke="#334155" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <!-- Bottom note -->
+  <text x="960" y="880" font-family="Inter, sans-serif" font-weight="400" font-size="22" fill="#94a3b8" text-anchor="middle">Higher layers override lower ones</text>
+
+  <!-- Legend dots -->
+  <circle cx="580" cy="960" r="8" fill="none" stroke="#334155" stroke-width="2"/>
+  <text x="598" y="966" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8">Global</text>
+
+  <circle cx="740" cy="960" r="8" fill="none" stroke="#67e8f9" stroke-width="2"/>
+  <text x="758" y="966" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#67e8f9">Project</text>
+
+  <circle cx="900" cy="960" r="8" fill="none" stroke="#a3e635" stroke-width="2"/>
+  <text x="918" y="966" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#a3e635">Session</text>
+</svg>

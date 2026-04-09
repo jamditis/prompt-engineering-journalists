@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <marker id="arrow-muted" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#a3e635"/>
+    </marker>
+    <marker id="arrow-ice" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#67e8f9"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="42" font-weight="700" fill="#f1f5f9">Extended thinking: before vs. after</text>
+
+  <!-- Divider line -->
+  <line x1="960" y1="110" x2="960" y2="960" stroke="#334155" stroke-width="2" stroke-dasharray="8,6"/>
+
+  <!-- LEFT SIDE: Without extended thinking -->
+  <text x="480" y="140" text-anchor="middle" font-family="Inter, sans-serif" font-size="28" font-weight="600" fill="#94a3b8">Without extended thinking</text>
+
+  <!-- Complex question box (left) -->
+  <rect x="280" y="260" width="400" height="80" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="480" y="308" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" fill="#f1f5f9">Complex question</text>
+
+  <!-- Arrow down -->
+  <line x1="480" y1="340" x2="480" y2="500" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-muted)"/>
+
+  <!-- Surface-level answer box -->
+  <rect x="280" y="510" width="400" height="80" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+  <text x="480" y="558" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" fill="#f87171">Surface-level answer</text>
+
+  <!-- Red X indicator -->
+  <circle cx="380" y="700" r="24" fill="none" stroke="#f87171" stroke-width="2" cy="700"/>
+  <text x="380" y="708" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" font-weight="700" fill="#f87171">!</text>
+  <text x="416" y="708" font-family="Inter, sans-serif" font-size="20" fill="#94a3b8">May miss key details</text>
+
+  <!-- RIGHT SIDE: With extended thinking -->
+  <text x="1440" y="140" text-anchor="middle" font-family="Inter, sans-serif" font-size="28" font-weight="600" fill="#a3e635">With extended thinking</text>
+
+  <!-- Complex question box (right) -->
+  <rect x="1240" y="180" width="400" height="70" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="1440" y="222" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" fill="#f1f5f9">Complex question</text>
+
+  <!-- Arrow down to thinking chain -->
+  <line x1="1440" y1="250" x2="1440" y2="300" stroke="#67e8f9" stroke-width="2" marker-end="url(#arrow-ice)"/>
+
+  <!-- Thinking chain container -->
+  <rect x="1160" y="310" width="560" height="420" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="1190" y="345" font-family="'JetBrains Mono', monospace" font-size="18" fill="#67e8f9">thinking...</text>
+
+  <!-- Step 1 -->
+  <rect x="1200" y="365" width="480" height="56" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="1230" y="385" font-family="'JetBrains Mono', monospace" font-size="16" fill="#67e8f9">1</text>
+  <text x="1260" y="400" font-family="Inter, sans-serif" font-size="22" fill="#f1f5f9">Read the documents carefully</text>
+
+  <!-- Connector -->
+  <line x1="1440" y1="421" x2="1440" y2="440" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Step 2 -->
+  <rect x="1200" y="440" width="480" height="56" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="1230" y="460" font-family="'JetBrains Mono', monospace" font-size="16" fill="#67e8f9">2</text>
+  <text x="1260" y="475" font-family="Inter, sans-serif" font-size="22" fill="#f1f5f9">Compare the figures</text>
+
+  <!-- Connector -->
+  <line x1="1440" y1="496" x2="1440" y2="515" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Step 3 -->
+  <rect x="1200" y="515" width="480" height="56" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="1230" y="535" font-family="'JetBrains Mono', monospace" font-size="16" fill="#67e8f9">3</text>
+  <text x="1260" y="550" font-family="Inter, sans-serif" font-size="22" fill="#f1f5f9">Check for discrepancies</text>
+
+  <!-- Connector -->
+  <line x1="1440" y1="571" x2="1440" y2="590" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Step 4 -->
+  <rect x="1200" y="590" width="480" height="56" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="1230" y="610" font-family="'JetBrains Mono', monospace" font-size="16" fill="#67e8f9">4</text>
+  <text x="1260" y="625" font-family="Inter, sans-serif" font-size="22" fill="#f1f5f9">Form a supported conclusion</text>
+
+  <!-- Step 5 -->
+  <rect x="1200" y="665" width="480" height="56" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="1230" y="685" font-family="'JetBrains Mono', monospace" font-size="16" fill="#67e8f9">5</text>
+  <text x="1260" y="700" font-family="Inter, sans-serif" font-size="22" fill="#f1f5f9">Draft answer with evidence</text>
+
+  <!-- Connector -->
+  <line x1="1440" y1="646" x2="1440" y2="665" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Arrow down to result -->
+  <line x1="1440" y1="730" x2="1440" y2="790" stroke="#a3e635" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+  <!-- Deeper answer box -->
+  <rect x="1200" y="800" width="480" height="70" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="1440" y="842" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" fill="#a3e635">Deeper, more accurate answer</text>
+
+  <!-- Bottom note -->
+  <rect x="560" y="990" width="800" height="50" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="960" y="1022" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="20" fill="#94a3b8">Trigger with: "think harder" or "think deeply about this"</text>
+</svg>

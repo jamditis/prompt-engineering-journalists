@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="80" font-family="Inter, sans-serif" font-weight="700" font-size="42" fill="#f1f5f9" text-anchor="middle">How prompt caching works (and breaks)</text>
+
+  <!-- Center divider -->
+  <line x1="960" y1="120" x2="960" y2="900" stroke="#334155" stroke-width="1.5" stroke-dasharray="8,6"/>
+
+  <!-- ===== LEFT SIDE: Cache hit ===== -->
+  <text x="480" y="150" font-family="Inter, sans-serif" font-weight="600" font-size="32" fill="#a3e635" text-anchor="middle">Cache hit</text>
+
+  <!-- Turn 1 (cached) -->
+  <rect x="180" y="200" width="600" height="100" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="210" y="238" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#94a3b8">You:</text>
+  <text x="260" y="238" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">Analyze this dataset for trends...</text>
+  <text x="210" y="272" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#94a3b8">Claude:</text>
+  <text x="290" y="272" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">I found three key patterns...</text>
+
+  <!-- Turn 2 (cached) -->
+  <rect x="180" y="320" width="600" height="100" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2" stroke-dasharray="8,4"/>
+  <text x="210" y="358" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#94a3b8">You:</text>
+  <text x="260" y="358" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">Which trend is most significant?</text>
+  <text x="210" y="392" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#94a3b8">Claude:</text>
+  <text x="290" y="392" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">The second trend shows a 40% rise...</text>
+
+  <!-- Cached label bracket -->
+  <line x1="150" y1="210" x2="150" y2="410" stroke="#a3e635" stroke-width="2"/>
+  <line x1="150" y1="210" x2="165" y2="210" stroke="#a3e635" stroke-width="2"/>
+  <line x1="150" y1="410" x2="165" y2="410" stroke="#a3e635" stroke-width="2"/>
+  <text x="140" y="320" font-family="Inter, sans-serif" font-weight="500" font-size="16" fill="#a3e635" text-anchor="end" transform="rotate(-90, 140, 320)">Cached -- fast and cheap</text>
+
+  <!-- Turn 3 (new, normal) -->
+  <rect x="180" y="440" width="600" height="100" rx="8" fill="#1e293b" stroke="#f1f5f9" stroke-width="2"/>
+  <text x="210" y="478" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#94a3b8">You:</text>
+  <text x="260" y="478" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">Make a chart of that trend</text>
+  <text x="210" y="512" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#94a3b8">Claude:</text>
+  <text x="290" y="512" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">Here's the visualization...</text>
+
+  <!-- Label for turn 3 -->
+  <text x="800" y="495" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f1f5f9" text-anchor="start">Only this part</text>
+  <text x="800" y="518" font-family="Inter, sans-serif" font-weight="500" font-size="17" fill="#f1f5f9" text-anchor="start">is processed</text>
+  <line x1="785" y1="490" x2="795" y2="490" stroke="#f1f5f9" stroke-width="1.5"/>
+
+  <!-- Checkmark icon -->
+  <circle cx="480" cy="600" r="24" fill="none" stroke="#a3e635" stroke-width="2"/>
+  <polyline points="466,600 476,612 496,590" fill="none" stroke="#a3e635" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="480" y="650" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#a3e635" text-anchor="middle">Fast, efficient</text>
+
+  <!-- ===== RIGHT SIDE: Cache miss ===== -->
+  <text x="1440" y="150" font-family="Inter, sans-serif" font-weight="600" font-size="32" fill="#f87171" text-anchor="middle">Cache miss</text>
+
+  <!-- Turn 1 (reprocessed) -->
+  <rect x="1140" y="200" width="600" height="100" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+  <text x="1170" y="238" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#94a3b8">You:</text>
+  <text x="1220" y="238" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">Analyze this dataset for trends...</text>
+  <text x="1170" y="272" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#94a3b8">Claude:</text>
+  <text x="1250" y="272" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">I found three key patterns...</text>
+
+  <!-- Turn 2 (reprocessed) -->
+  <rect x="1140" y="320" width="600" height="100" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+  <text x="1170" y="358" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#94a3b8">You:</text>
+  <text x="1220" y="358" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">Which trend is most significant?</text>
+  <text x="1170" y="392" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#94a3b8">Claude:</text>
+  <text x="1250" y="392" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">The second trend shows a 40% rise...</text>
+
+  <!-- Turn 3 (reprocessed) -->
+  <rect x="1140" y="440" width="600" height="100" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+  <text x="1170" y="478" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#94a3b8">You:</text>
+  <text x="1220" y="478" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">Make a chart of that trend</text>
+  <text x="1170" y="512" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#94a3b8">Claude:</text>
+  <text x="1250" y="512" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f1f5f9">Here's the visualization...</text>
+
+  <!-- Reprocessed bracket -->
+  <line x1="1110" y1="210" x2="1110" y2="530" stroke="#f87171" stroke-width="2"/>
+  <line x1="1110" y1="210" x2="1125" y2="210" stroke="#f87171" stroke-width="2"/>
+  <line x1="1110" y1="530" x2="1125" y2="530" stroke="#f87171" stroke-width="2"/>
+  <text x="1100" y="380" font-family="Inter, sans-serif" font-weight="500" font-size="16" fill="#f87171" text-anchor="end" transform="rotate(-90, 1100, 380)">Entire conversation reprocessed</text>
+
+  <!-- Cause callout -->
+  <rect x="1200" y="580" width="480" height="100" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="1440" y="618" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#f87171" text-anchor="middle">What causes a cache miss?</text>
+  <text x="1440" y="650" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8" text-anchor="middle">Model changed mid-session</text>
+  <text x="1440" y="674" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8" text-anchor="middle">Settings modified after conversation started</text>
+
+  <!-- X icon -->
+  <circle cx="1440" cy="730" r="24" fill="none" stroke="#f87171" stroke-width="2"/>
+  <line x1="1428" y1="718" x2="1452" y2="742" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="1452" y1="718" x2="1428" y2="742" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="1440" y="780" font-family="Inter, sans-serif" font-weight="500" font-size="20" fill="#f87171" text-anchor="middle">Slow, expensive</text>
+
+  <!-- Bottom rule -->
+  <rect x="310" y="880" width="1300" height="70" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="960" y="924" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#f1f5f9" text-anchor="middle">Rule: decide your model before you start. Switching mid-session = start fresh.</text>
+</svg>

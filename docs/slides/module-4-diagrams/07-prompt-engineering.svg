@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap');
+    </style>
+    <marker id="arrowMuted" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrowIce" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#67e8f9"/>
+    </marker>
+    <marker id="arrowAcid" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#a3e635"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="68" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="42" fill="#f1f5f9">Prompt engineering: voice + automation</text>
+
+  <!-- ============================================ -->
+  <!-- TOP SECTION: The two bottlenecks             -->
+  <!-- ============================================ -->
+
+  <text x="960" y="128" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="22" fill="#94a3b8">The two bottlenecks</text>
+
+  <!-- Left card: Bottleneck 1 — Typing speed -->
+  <rect x="80" y="155" width="860" height="210" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <!-- Card header bar -->
+  <rect x="80" y="155" width="860" height="48" rx="8" fill="#334155" opacity="0.4"/>
+  <rect x="80" y="195" width="860" height="8" fill="#1e293b"/>
+  <text x="110" y="187" font-family="Inter, sans-serif" font-weight="700" font-size="22" fill="#f1f5f9">Bottleneck 1: Typing speed</text>
+
+  <text x="110" y="240" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">Complex prompts need detailed specs</text>
+
+  <text x="110" y="280" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">Typing is slow — speaking is</text>
+  <text x="533" y="280" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#67e8f9"> 3-4x faster</text>
+
+  <text x="110" y="320" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">Voice captures nuance and stream-of-consciousness</text>
+
+  <!-- Right card: Bottleneck 2 — Repetitive structure -->
+  <rect x="980" y="155" width="860" height="210" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <!-- Card header bar -->
+  <rect x="980" y="155" width="860" height="48" rx="8" fill="#334155" opacity="0.4"/>
+  <rect x="980" y="195" width="860" height="8" fill="#1e293b"/>
+  <text x="1010" y="187" font-family="Inter, sans-serif" font-weight="700" font-size="22" fill="#f1f5f9">Bottleneck 2: Repetitive structure</text>
+
+  <text x="1010" y="240" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">XML tags, role assignment, formatting</text>
+
+  <text x="1010" y="280" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">Best practices are well-documented and repeatable</text>
+
+  <text x="1010" y="320" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#67e8f9">This can be automated</text>
+
+  <!-- ============================================ -->
+  <!-- Divider                                      -->
+  <!-- ============================================ -->
+  <line x1="160" y1="400" x2="1760" y2="400" stroke="#334155" stroke-width="1" stroke-dasharray="8,6"/>
+
+  <!-- ============================================ -->
+  <!-- BOTTOM SECTION: The Reprompter workflow       -->
+  <!-- ============================================ -->
+
+  <text x="960" y="450" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="30" fill="#f1f5f9">The Reprompter workflow</text>
+
+  <!-- Step 1: Press keybind -->
+  <rect x="60" y="485" width="220" height="170" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <!-- Keyboard icon (simple rectangle with keys) -->
+  <rect x="125" y="505" width="90" height="30" rx="4" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+  <rect x="130" y="510" width="16" height="20" rx="2" fill="#334155"/>
+  <rect x="150" y="510" width="16" height="20" rx="2" fill="#334155"/>
+  <rect x="170" y="510" width="16" height="20" rx="2" fill="#334155"/>
+  <rect x="190" y="510" width="16" height="20" rx="2" fill="#334155"/>
+  <text x="170" y="567" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="18" fill="#f1f5f9">Press keybind</text>
+  <text x="170" y="595" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#94a3b8">Activates voice</text>
+  <text x="170" y="615" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#94a3b8">capture</text>
+
+  <!-- Arrow 1 -> 2 -->
+  <line x1="280" y1="570" x2="328" y2="570" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrowMuted)"/>
+
+  <!-- Step 2: Dictate -->
+  <rect x="340" y="480" width="280" height="180" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="2"/>
+  <!-- Mic icon -->
+  <rect x="465" y="498" width="18" height="28" rx="9" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+  <path d="M 456 518 Q 456 535 474 535 Q 492 535 492 518" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+  <line x1="474" y1="535" x2="474" y2="543" stroke="#67e8f9" stroke-width="1.5"/>
+  <text x="480" y="575" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="20" fill="#f1f5f9">Dictate</text>
+  <text x="480" y="605" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#94a3b8">Speak your idea —</text>
+  <text x="480" y="627" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#67e8f9">3-4x faster than typing</text>
+
+  <!-- Arrow 2 -> 3 -->
+  <line x1="620" y1="570" x2="668" y2="570" stroke="#67e8f9" stroke-width="2" marker-end="url(#arrowIce)"/>
+
+  <!-- Step 3: Clarifying questions -->
+  <rect x="680" y="480" width="280" height="180" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="2"/>
+  <!-- Question mark icon -->
+  <text x="820" y="525" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="28" fill="#67e8f9">?</text>
+  <text x="820" y="565" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="18" fill="#f1f5f9">Clarifying questions</text>
+  <text x="820" y="595" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#94a3b8">AI asks what's missing —</text>
+  <text x="820" y="617" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#94a3b8">surfaces forgotten</text>
+  <text x="820" y="639" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#94a3b8">requirements</text>
+
+  <!-- Arrow 3 -> 4 -->
+  <line x1="960" y1="570" x2="1008" y2="570" stroke="#67e8f9" stroke-width="2" marker-end="url(#arrowIce)"/>
+
+  <!-- Step 4: Answer -->
+  <rect x="1020" y="480" width="260" height="180" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="2"/>
+  <!-- Speech bubble icon -->
+  <rect x="1127" y="498" width="36" height="24" rx="6" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+  <polygon points="1138,522 1142,532 1148,522" fill="none" stroke="#67e8f9" stroke-width="1.5"/>
+  <text x="1150" y="565" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="18" fill="#f1f5f9">Answer</text>
+  <text x="1150" y="595" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#94a3b8">Voice responses to</text>
+  <text x="1150" y="617" text-anchor="middle" font-family="Inter, sans-serif" font-weight="400" font-size="15" fill="#94a3b8">refine intent</text>
+
+  <!-- Arrow 4 -> 5 -->
+  <line x1="1280" y1="570" x2="1328" y2="570" stroke="#67e8f9" stroke-width="2" marker-end="url(#arrowAcid)"/>
+
+  <!-- Step 5: Enhanced prompt (largest panel) -->
+  <rect x="1340" y="470" width="510" height="200" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2.5"/>
+  <text x="1595" y="510" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="22" fill="#a3e635">Enhanced prompt</text>
+  <line x1="1370" y1="525" x2="1820" y2="525" stroke="#334155" stroke-width="1"/>
+  <!-- Output structure items -->
+  <text x="1390" y="555" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="16" fill="#67e8f9">&lt;xml_tags&gt;</text>
+  <text x="1555" y="555" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#94a3b8">Structured sections</text>
+  <text x="1390" y="585" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="16" fill="#67e8f9">&lt;role&gt;</text>
+  <text x="1480" y="585" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#94a3b8">Expert assignment</text>
+  <text x="1390" y="615" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="16" fill="#67e8f9">&lt;rules&gt;</text>
+  <text x="1490" y="615" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#94a3b8">Best practices baked in</text>
+  <text x="1390" y="645" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="16" fill="#67e8f9">&lt;format&gt;</text>
+  <text x="1510" y="645" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#94a3b8">Output spec included</text>
+
+  <!-- ============================================ -->
+  <!-- Alternative path: Model interviews           -->
+  <!-- ============================================ -->
+
+  <!-- Divider label -->
+  <text x="120" y="730" font-family="Inter, sans-serif" font-weight="600" font-size="18" fill="#94a3b8">Option 2: Model interviews</text>
+  <line x1="360" y1="724" x2="1840" y2="724" stroke="#334155" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Alternative path card -->
+  <rect x="80" y="755" width="1760" height="100" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="120" y="795" font-family="Inter, sans-serif" font-weight="600" font-size="22" fill="#f1f5f9">Skip the system — just ask Claude to interview you about what you want.</text>
+  <text x="120" y="830" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8">Conversation reveals requirements naturally. Start with "Interview me about what I need" and answer its questions.</text>
+
+  <!-- ============================================ -->
+  <!-- Bottom note                                  -->
+  <!-- ============================================ -->
+  <text x="960" y="935" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="24" fill="#94a3b8">Stop typing prompts character by character.</text>
+  <text x="960" y="971" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="24" fill="#94a3b8">Speak your ideas, let automation handle structure.</text>
+
+  <!-- Page label -->
+  <text x="1880" y="1060" text-anchor="end" font-family="Inter, sans-serif" font-weight="400" font-size="16" fill="#334155">07 / prompt engineering</text>
+</svg>
