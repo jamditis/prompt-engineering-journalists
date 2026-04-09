@@ -172,7 +172,7 @@ Specific product announcements or release dates. Detailed multi-agent architectu
 The 9 LMS documents (orientation message, midweek message, end-of-week message, readings, optional resources, discussion, quiz, exercise, exercise solution key) need to be updated to reflect the new video content and module framing. Key changes:
 
 - **Orientation message:** Reframe from "agents, tools, and data access" to "the power user's guide" — techniques, features, and landscape
-- **Readings:** Keep MCP and RAG readings as supplementary/optional. Add readings on prompt caching, CLI agent comparison, or other topics covered in the new videos.
+- **Readings:** No official product documentation (Anthropic docs, OpenAI docs, etc.) — students can find those on their own. All readings should come from journalism and media practitioners and thinkers: Simon Willison, Ethan Mollick, Scott Klein, the Marshall Project, Generative AI in the Newsroom contributors, Nieman Lab, etc. Real case studies and guides written by people who think about these tools in the context of journalism work. Keep MCP and RAG readings only if they come from journalism-adjacent sources (e.g., the Geneea newsroom RAG piece, Willison's writing on MCP). Drop any that are just product docs.
 - **Quiz:** Rewrite to cover the new content (extended thinking, structured outputs, plan mode, caching, MCP concepts, multi-agent CLI landscape)
 - **Exercise:** Needs significant rework. Current exercise is a full MCP setup. New exercise should match the module's energy — possibly a "try these features" sampler rather than a single build.
 - **Discussion:** Revise prompts to match new topics

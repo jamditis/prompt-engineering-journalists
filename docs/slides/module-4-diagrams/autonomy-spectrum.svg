@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="spectrum-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="35%" stop-color="#334155"/>
+      <stop offset="50%" stop-color="#a3e635"/>
+      <stop offset="65%" stop-color="#a3e635"/>
+      <stop offset="100%" stop-color="#f87171"/>
+    </linearGradient>
+    <linearGradient id="spectrum-glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#94a3b8" stop-opacity="0.15"/>
+      <stop offset="45%" stop-color="#a3e635" stop-opacity="0.1"/>
+      <stop offset="55%" stop-color="#a3e635" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#f87171" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="80" text-anchor="middle" font-family="Inter, sans-serif" font-size="42" font-weight="700" fill="#f1f5f9">The autonomy spectrum</text>
+
+  <!-- ═══════════════════ Spectrum bar ═══════════════════ -->
+  <!-- Glow background -->
+  <rect x="160" y="290" width="1600" height="120" rx="12" fill="url(#spectrum-glow)"/>
+
+  <!-- Main bar -->
+  <rect x="160" y="310" width="1600" height="80" rx="8" fill="#1e293b" stroke="url(#spectrum-grad)" stroke-width="3"/>
+
+  <!-- Bar fill segments -->
+  <rect x="163" y="313" width="530" height="74" rx="6" fill="#334155" opacity="0.4"/>
+  <rect x="697" y="313" width="526" height="74" rx="0" fill="#a3e635" opacity="0.12"/>
+  <rect x="1227" y="313" width="530" height="74" rx="6" fill="#f87171" opacity="0.08"/>
+
+  <!-- Segment labels on the bar -->
+  <text x="428" y="360" text-anchor="middle" font-family="Inter, sans-serif" font-size="26" font-weight="700" fill="#94a3b8">Read-only</text>
+  <text x="960" y="360" text-anchor="middle" font-family="Inter, sans-serif" font-size="26" font-weight="700" fill="#a3e635">Supervised action</text>
+  <text x="1492" y="360" text-anchor="middle" font-family="Inter, sans-serif" font-size="26" font-weight="700" fill="#f87171">Autonomous</text>
+
+  <!-- ═══════════════════ Description cards below bar ═══════════════════ -->
+
+  <!-- Read-only card -->
+  <rect x="180" y="430" width="480" height="140" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="420" y="475" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" fill="#94a3b8">AI researches and summarizes.</text>
+  <text x="420" y="510" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" fill="#94a3b8">You decide what to do.</text>
+  <text x="420" y="550" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#334155">Example: "Read this PDF and list the key claims"</text>
+
+  <!-- Supervised action card -->
+  <rect x="720" y="430" width="480" height="140" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="960" y="475" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" fill="#f1f5f9">AI proposes actions.</text>
+  <text x="960" y="510" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" fill="#f1f5f9">You approve, edit, or reject.</text>
+  <text x="960" y="550" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#94a3b8">Example: "Draft a FOIA request for me to review"</text>
+
+  <!-- Autonomous card -->
+  <rect x="1260" y="430" width="480" height="140" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="1.5"/>
+  <text x="1500" y="475" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" fill="#f87171">AI acts on its own.</text>
+  <text x="1500" y="510" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" fill="#f87171">You review logs after.</text>
+  <text x="1500" y="550" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#334155">Example: "Monitor this feed and alert me"</text>
+
+  <!-- ═══════════════════ Sweet spot marker ═══════════════════ -->
+  <!-- Arrow pointing to center -->
+  <polygon points="960,260 940,230 980,230" fill="#a3e635"/>
+  <rect x="840" y="195" width="240" height="36" rx="6" fill="#a3e635"/>
+  <text x="960" y="221" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#0f172a">Best for journalism</text>
+
+  <!-- ═══════════════════ Bottom divider ═══════════════════ -->
+  <line x1="320" y1="680" x2="1600" y2="680" stroke="#334155" stroke-width="1"/>
+
+  <!-- ═══════════════════ Key principle ═══════════════════ -->
+  <text x="960" y="750" text-anchor="middle" font-family="Inter, sans-serif" font-size="30" font-weight="600" fill="#f1f5f9">You are still the journalist.</text>
+  <text x="960" y="800" text-anchor="middle" font-family="Inter, sans-serif" font-size="26" fill="#94a3b8">The AI is a research collaborator, not a reporter.</text>
+
+  <!-- Supplementary points -->
+  <rect x="280" y="860" width="1360" height="130" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="960" y="905" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" fill="#94a3b8">The supervised middle ground gives you AI speed without giving up editorial control.</text>
+  <text x="960" y="945" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" fill="#94a3b8">Move left for sensitive work. Move right only for low-stakes automation.</text>
+</svg>

@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <marker id="arrow-muted" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#a3e635"/>
+    </marker>
+    <linearGradient id="fill-gradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#334155" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#67e8f9" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="compact-gradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#334155" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#334155" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="42" font-weight="700" fill="#f1f5f9">Managing context over a long session</text>
+
+  <!-- Subtitle -->
+  <text x="960" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" fill="#94a3b8">The context window is finite — earlier messages fade as it fills up</text>
+
+  <!-- =========== MAIN TIMELINE =========== -->
+
+  <!-- Timeline container background -->
+  <rect x="100" y="200" width="1720" height="160" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Label: Context window -->
+  <text x="960" y="192" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="600" fill="#94a3b8">Context window</text>
+
+  <!-- PHASE 1: Session start — mostly empty -->
+  <!-- Empty bar section -->
+  <rect x="130" y="230" width="340" height="100" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <!-- Small used portion -->
+  <rect x="130" y="230" width="60" height="100" rx="6" fill="#a3e635" opacity="0.25"/>
+  <text x="300" y="285" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#a3e635">Full context available</text>
+
+  <!-- Label: Session start -->
+  <text x="300" y="370" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#f1f5f9">Session start</text>
+
+  <!-- PHASE 2: Context filling up -->
+  <!-- Conversation segments filling the bar -->
+  <rect x="500" y="230" width="450" height="100" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <!-- Colored segments representing conversation turns -->
+  <rect x="500" y="230" width="50" height="100" rx="0" fill="#67e8f9" opacity="0.2"/>
+  <rect x="553" y="230" width="45" height="100" fill="#a3e635" opacity="0.2"/>
+  <rect x="601" y="230" width="55" height="100" fill="#67e8f9" opacity="0.25"/>
+  <rect x="659" y="230" width="40" height="100" fill="#a3e635" opacity="0.25"/>
+  <rect x="702" y="230" width="60" height="100" fill="#67e8f9" opacity="0.3"/>
+  <rect x="765" y="230" width="50" height="100" fill="#a3e635" opacity="0.3"/>
+  <rect x="818" y="230" width="45" height="100" fill="#67e8f9" opacity="0.35"/>
+  <rect x="866" y="230" width="55" height="100" fill="#f87171" opacity="0.3"/>
+  <rect x="924" y="230" width="26" height="100" fill="#67e8f9" opacity="0.15"/>
+
+  <!-- Warning text -->
+  <text x="725" y="394" text-anchor="middle" font-family="Inter, sans-serif" font-size="17" fill="#f87171">Context filling up — earlier details may be lost</text>
+  <text x="725" y="370" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#f1f5f9">Mid-session</text>
+
+  <!-- /compact action point -->
+  <!-- Vertical dashed line marking the compact event -->
+  <line x1="1020" y1="210" x2="1020" y2="350" stroke="#a3e635" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- /compact badge -->
+  <rect x="978" y="168" width="90" height="32" rx="6" fill="#a3e635"/>
+  <text x="1023" y="190" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="16" font-weight="700" fill="#0f172a">/compact</text>
+
+  <!-- PHASE 3: After compact — space freed -->
+  <rect x="1070" y="230" width="720" height="100" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <!-- Compressed blocks (smaller, merged) -->
+  <rect x="1070" y="230" width="80" height="100" rx="0" fill="#334155" opacity="0.5"/>
+  <rect x="1153" y="230" width="60" height="100" fill="#334155" opacity="0.4"/>
+  <rect x="1216" y="230" width="50" height="100" fill="#334155" opacity="0.3"/>
+
+  <!-- Free space indication -->
+  <text x="1520" y="285" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#a3e635">Space recovered</text>
+
+  <!-- Label: After compact -->
+  <text x="1430" y="370" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" font-weight="600" fill="#f1f5f9">After /compact</text>
+  <text x="1430" y="394" text-anchor="middle" font-family="Inter, sans-serif" font-size="17" fill="#94a3b8">Conversation compressed, key points kept</text>
+
+  <!-- =========== TIMELINE ARROW =========== -->
+  <line x1="100" y1="430" x2="1820" y2="430" stroke="#334155" stroke-width="1.5" marker-end="url(#arrow-muted)"/>
+  <text x="1840" y="436" font-family="Inter, sans-serif" font-size="16" fill="#94a3b8">time</text>
+
+  <!-- =========== EXPLANATION CARDS =========== -->
+
+  <!-- Card 1: What fills context -->
+  <rect x="100" y="490" width="520" height="280" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="130" y="530" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#f1f5f9">What fills the context window</text>
+  <line x1="130" y1="545" x2="590" y2="545" stroke="#334155" stroke-width="1"/>
+
+  <text x="150" y="580" font-family="Inter, sans-serif" font-size="20" fill="#67e8f9">&#8226;</text>
+  <text x="175" y="580" font-family="Inter, sans-serif" font-size="20" fill="#f1f5f9">Your messages and prompts</text>
+
+  <text x="150" y="615" font-family="Inter, sans-serif" font-size="20" fill="#67e8f9">&#8226;</text>
+  <text x="175" y="615" font-family="Inter, sans-serif" font-size="20" fill="#f1f5f9">Claude's responses</text>
+
+  <text x="150" y="650" font-family="Inter, sans-serif" font-size="20" fill="#67e8f9">&#8226;</text>
+  <text x="175" y="650" font-family="Inter, sans-serif" font-size="20" fill="#f1f5f9">Files and documents read into chat</text>
+
+  <text x="150" y="685" font-family="Inter, sans-serif" font-size="20" fill="#67e8f9">&#8226;</text>
+  <text x="175" y="685" font-family="Inter, sans-serif" font-size="20" fill="#f1f5f9">Tool results (search, code output)</text>
+
+  <text x="150" y="720" font-family="Inter, sans-serif" font-size="20" fill="#67e8f9">&#8226;</text>
+  <text x="175" y="720" font-family="Inter, sans-serif" font-size="20" fill="#f1f5f9">System instructions</text>
+
+  <!-- Card 2: When to use /compact -->
+  <rect x="700" y="490" width="520" height="280" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="730" y="530" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#f1f5f9">When to use /compact</text>
+  <line x1="730" y1="545" x2="1190" y2="545" stroke="#334155" stroke-width="1"/>
+
+  <text x="750" y="580" font-family="Inter, sans-serif" font-size="20" fill="#a3e635">&#8226;</text>
+  <text x="775" y="580" font-family="Inter, sans-serif" font-size="20" fill="#f1f5f9">Claude starts repeating itself</text>
+
+  <text x="750" y="615" font-family="Inter, sans-serif" font-size="20" fill="#a3e635">&#8226;</text>
+  <text x="775" y="615" font-family="Inter, sans-serif" font-size="20" fill="#f1f5f9">Responses miss earlier details</text>
+
+  <text x="750" y="650" font-family="Inter, sans-serif" font-size="20" fill="#a3e635">&#8226;</text>
+  <text x="775" y="650" font-family="Inter, sans-serif" font-size="20" fill="#f1f5f9">You see a context limit warning</text>
+
+  <text x="750" y="685" font-family="Inter, sans-serif" font-size="20" fill="#a3e635">&#8226;</text>
+  <text x="775" y="685" font-family="Inter, sans-serif" font-size="20" fill="#f1f5f9">Switching to a new subtopic</text>
+
+  <text x="750" y="720" font-family="Inter, sans-serif" font-size="20" fill="#a3e635">&#8226;</text>
+  <text x="775" y="720" font-family="Inter, sans-serif" font-size="20" fill="#f1f5f9">Long investigation, many file reads</text>
+
+  <!-- Card 3: Memory — persistent layer -->
+  <rect x="1300" y="490" width="520" height="280" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="1.5"/>
+  <text x="1330" y="530" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#a3e635">Memory: persists across sessions</text>
+  <line x1="1330" y1="545" x2="1790" y2="545" stroke="#334155" stroke-width="1"/>
+
+  <text x="1330" y="580" font-family="Inter, sans-serif" font-size="20" fill="#f1f5f9">Unlike the context window, memory</text>
+  <text x="1330" y="610" font-family="Inter, sans-serif" font-size="20" fill="#f1f5f9">survives when you close a session.</text>
+
+  <text x="1330" y="655" font-family="Inter, sans-serif" font-size="18" fill="#94a3b8">Store preferences and instructions:</text>
+
+  <rect x="1340" y="675" width="460" height="46" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="1360" y="703" font-family="'JetBrains Mono', monospace" font-size="16" fill="#a3e635">claude, remember that we use AP style</text>
+
+  <text x="1330" y="745" font-family="Inter, sans-serif" font-size="18" fill="#94a3b8">Saved to CLAUDE.md, loaded every session.</text>
+
+  <!-- =========== BOTTOM SUMMARY =========== -->
+  <rect x="310" y="820" width="1300" height="60" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="960" y="857" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" fill="#94a3b8">Context window = short-term memory (one session)  |  Memory = long-term memory (persists forever)</text>
+
+  <!-- Visual metaphor: session timeline at bottom -->
+  <!-- Session 1 -->
+  <rect x="310" y="920" width="350" height="40" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="485" y="946" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#94a3b8">Session 1</text>
+
+  <!-- Session 2 -->
+  <rect x="700" y="920" width="350" height="40" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="875" y="946" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#94a3b8">Session 2</text>
+
+  <!-- Session 3 -->
+  <rect x="1090" y="920" width="350" height="40" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="1265" y="946" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#94a3b8">Session 3</text>
+
+  <!-- Gap indicators -->
+  <text x="672" y="946" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" fill="#334155">|</text>
+  <text x="1062" y="946" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" fill="#334155">|</text>
+
+  <!-- Memory bar spanning all sessions -->
+  <rect x="310" y="980" width="1130" height="30" rx="6" fill="#a3e635" opacity="0.15" stroke="#a3e635" stroke-width="1"/>
+  <text x="875" y="1001" text-anchor="middle" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#a3e635">Memory persists across all sessions</text>
+
+  <!-- Arrow showing persistence -->
+  <line x1="1440" y1="995" x2="1550" y2="995" stroke="#a3e635" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow-green)"/>
+  <text x="1575" y="1001" font-family="Inter, sans-serif" font-size="15" fill="#a3e635">forever</text>
+</svg>

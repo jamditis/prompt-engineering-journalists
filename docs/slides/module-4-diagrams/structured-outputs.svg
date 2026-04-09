@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <marker id="arrow-muted" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#a3e635"/>
+    </marker>
+    <marker id="arrow-ice" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#67e8f9"/>
+    </marker>
+    <marker id="arrow-chrome" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f1f5f9"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="42" font-weight="700" fill="#f1f5f9">Same data, different formats</text>
+
+  <!-- Source card -->
+  <rect x="60" y="320" width="360" height="340" rx="8" fill="#1e293b" stroke="#334155" stroke-width="2"/>
+  <text x="240" y="360" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="600" fill="#67e8f9">Source: press release</text>
+  <line x1="90" y1="375" x2="390" y2="375" stroke="#334155" stroke-width="1"/>
+  <text x="90" y="405" font-family="Inter, sans-serif" font-size="17" fill="#94a3b8">"The city awarded $2.4M to</text>
+  <text x="90" y="430" font-family="Inter, sans-serif" font-size="17" fill="#94a3b8">Acme Construction for the</text>
+  <text x="90" y="455" font-family="Inter, sans-serif" font-size="17" fill="#94a3b8">Main St bridge repair, $1.8M</text>
+  <text x="90" y="480" font-family="Inter, sans-serif" font-size="17" fill="#94a3b8">to Rivera Paving for Oak Ave</text>
+  <text x="90" y="505" font-family="Inter, sans-serif" font-size="17" fill="#94a3b8">resurfacing, and $960K to</text>
+  <text x="90" y="530" font-family="Inter, sans-serif" font-size="17" fill="#94a3b8">Greenleaf Landscaping for</text>
+  <text x="90" y="555" font-family="Inter, sans-serif" font-size="17" fill="#94a3b8">park maintenance..."</text>
+
+  <!-- Arrows from source to outputs -->
+  <!-- Arrow to Prose -->
+  <line x1="420" y1="380" x2="530" y2="190" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow-muted)"/>
+  <!-- Arrow to JSON -->
+  <line x1="420" y1="430" x2="530" y2="430" stroke="#a3e635" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <!-- Arrow to CSV -->
+  <line x1="420" y1="490" x2="530" y2="670" stroke="#67e8f9" stroke-width="2" marker-end="url(#arrow-ice)"/>
+  <!-- Arrow to Markdown table -->
+  <line x1="420" y1="550" x2="530" y2="900" stroke="#f1f5f9" stroke-width="2" marker-end="url(#arrow-chrome)"/>
+
+  <!-- OUTPUT 1: Prose (muted — dead end) -->
+  <rect x="540" y="120" width="1320" height="180" rx="8" fill="#1e293b" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="570" y="158" font-family="Inter, sans-serif" font-size="22" font-weight="600" fill="#94a3b8">Prose</text>
+
+  <!-- Label badge -->
+  <rect x="1560" y="135" width="270" height="32" rx="6" fill="#0f172a" stroke="#94a3b8" stroke-width="1"/>
+  <text x="1695" y="157" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#f87171">Hard to reuse</text>
+
+  <text x="570" y="195" font-family="Inter, sans-serif" font-size="18" fill="#94a3b8">The city council approved three contracts totaling $5.16 million.</text>
+  <text x="570" y="222" font-family="Inter, sans-serif" font-size="18" fill="#94a3b8">Acme Construction will receive $2.4 million for the Main Street</text>
+  <text x="570" y="249" font-family="Inter, sans-serif" font-size="18" fill="#94a3b8">bridge repair. Rivera Paving was awarded $1.8 million for Oak...</text>
+
+  <!-- OUTPUT 2: JSON (acid green — best for scripts) -->
+  <rect x="540" y="340" width="1320" height="200" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="1.5"/>
+  <text x="570" y="378" font-family="Inter, sans-serif" font-size="22" font-weight="600" fill="#a3e635">JSON</text>
+
+  <!-- Label badge -->
+  <rect x="1460" y="355" width="370" height="32" rx="6" fill="#0f172a" stroke="#a3e635" stroke-width="1"/>
+  <text x="1645" y="377" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#a3e635">Feeds scripts and databases</text>
+
+  <text x="570" y="415" font-family="'JetBrains Mono', monospace" font-size="18" fill="#a3e635">[</text>
+  <text x="590" y="440" font-family="'JetBrains Mono', monospace" font-size="18" fill="#f1f5f9">{"name": "Acme Construction", "amount": 2400000, "project": "Main St bridge"},</text>
+  <text x="590" y="465" font-family="'JetBrains Mono', monospace" font-size="18" fill="#f1f5f9">{"name": "Rivera Paving", "amount": 1800000, "project": "Oak Ave resurfacing"},</text>
+  <text x="590" y="490" font-family="'JetBrains Mono', monospace" font-size="18" fill="#f1f5f9">{"name": "Greenleaf Landscaping", "amount": 960000, "project": "Park maintenance"}</text>
+  <text x="570" y="515" font-family="'JetBrains Mono', monospace" font-size="18" fill="#a3e635">]</text>
+
+  <!-- OUTPUT 3: CSV (ice — spreadsheets) -->
+  <rect x="540" y="580" width="1320" height="190" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="1.5"/>
+  <text x="570" y="618" font-family="Inter, sans-serif" font-size="22" font-weight="600" fill="#67e8f9">CSV</text>
+
+  <!-- Label badge -->
+  <rect x="1520" y="595" width="310" height="32" rx="6" fill="#0f172a" stroke="#67e8f9" stroke-width="1"/>
+  <text x="1675" y="617" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#67e8f9">Opens in spreadsheets</text>
+
+  <text x="570" y="658" font-family="'JetBrains Mono', monospace" font-size="18" fill="#67e8f9">name,amount,project</text>
+  <text x="570" y="685" font-family="'JetBrains Mono', monospace" font-size="18" fill="#f1f5f9">Acme Construction,2400000,Main St bridge</text>
+  <text x="570" y="712" font-family="'JetBrains Mono', monospace" font-size="18" fill="#f1f5f9">Rivera Paving,1800000,Oak Ave resurfacing</text>
+  <text x="570" y="739" font-family="'JetBrains Mono', monospace" font-size="18" fill="#f1f5f9">Greenleaf Landscaping,960000,Park maintenance</text>
+
+  <!-- OUTPUT 4: Markdown table (chrome — clean for reports) -->
+  <rect x="540" y="810" width="1320" height="200" rx="8" fill="#1e293b" stroke="#f1f5f9" stroke-width="1.5"/>
+  <text x="570" y="848" font-family="Inter, sans-serif" font-size="22" font-weight="600" fill="#f1f5f9">Markdown table</text>
+
+  <!-- Label badge -->
+  <rect x="1560" y="825" width="270" height="32" rx="6" fill="#0f172a" stroke="#f1f5f9" stroke-width="1"/>
+  <text x="1695" y="847" text-anchor="middle" font-family="Inter, sans-serif" font-size="16" fill="#f1f5f9">Clean for reports</text>
+
+  <!-- Table rendering -->
+  <!-- Header row -->
+  <rect x="590" y="870" width="260" height="36" rx="0" fill="#334155"/>
+  <rect x="860" y="870" width="180" height="36" rx="0" fill="#334155"/>
+  <rect x="1050" y="870" width="300" height="36" rx="0" fill="#334155"/>
+  <text x="610" y="895" font-family="Inter, sans-serif" font-size="17" font-weight="600" fill="#f1f5f9">Contractor</text>
+  <text x="880" y="895" font-family="Inter, sans-serif" font-size="17" font-weight="600" fill="#f1f5f9">Amount</text>
+  <text x="1070" y="895" font-family="Inter, sans-serif" font-size="17" font-weight="600" fill="#f1f5f9">Project</text>
+
+  <!-- Data rows -->
+  <line x1="590" y1="906" x2="1350" y2="906" stroke="#334155" stroke-width="1"/>
+  <text x="610" y="930" font-family="Inter, sans-serif" font-size="17" fill="#f1f5f9">Acme Construction</text>
+  <text x="880" y="930" font-family="Inter, sans-serif" font-size="17" fill="#f1f5f9">$2,400,000</text>
+  <text x="1070" y="930" font-family="Inter, sans-serif" font-size="17" fill="#f1f5f9">Main St bridge</text>
+
+  <line x1="590" y1="942" x2="1350" y2="942" stroke="#334155" stroke-width="1"/>
+  <text x="610" y="966" font-family="Inter, sans-serif" font-size="17" fill="#f1f5f9">Rivera Paving</text>
+  <text x="880" y="966" font-family="Inter, sans-serif" font-size="17" fill="#f1f5f9">$1,800,000</text>
+  <text x="1070" y="966" font-family="Inter, sans-serif" font-size="17" fill="#f1f5f9">Oak Ave resurfacing</text>
+
+  <line x1="590" y1="978" x2="1350" y2="978" stroke="#334155" stroke-width="1"/>
+  <text x="610" y="1000" font-family="Inter, sans-serif" font-size="17" fill="#f1f5f9">Greenleaf Landscaping</text>
+  <text x="880" y="1000" font-family="Inter, sans-serif" font-size="17" fill="#f1f5f9">$960,000</text>
+  <text x="1070" y="1000" font-family="Inter, sans-serif" font-size="17" fill="#f1f5f9">Park maintenance</text>
+
+  <!-- Takeaway -->
+  <text x="960" y="1060" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" fill="#94a3b8">Structured data is reusable. Prose is a dead end.</text>
+</svg>

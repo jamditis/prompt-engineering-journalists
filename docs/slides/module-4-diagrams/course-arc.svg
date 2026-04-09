@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <linearGradient id="progress-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#94a3b8"/>
+      <stop offset="100%" stop-color="#a3e635"/>
+    </linearGradient>
+    <marker id="arrow-grad" markerWidth="12" markerHeight="8" refX="12" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#a3e635"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="42" font-weight="700" fill="#f1f5f9">The course arc: from prompting to managing</text>
+
+  <!-- ═══════════════════ Top label bar: Prompting → Managing ═══════════════════ -->
+  <text x="280" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-size="28" font-weight="600" fill="#94a3b8">Prompting</text>
+  <line x1="400" y1="143" x2="1520" y2="143" stroke="url(#progress-grad)" stroke-width="3" marker-end="url(#arrow-grad)"/>
+  <text x="1660" y="150" text-anchor="middle" font-family="Inter, sans-serif" font-size="28" font-weight="600" fill="#a3e635">Managing</text>
+
+  <!-- ═══════════════════ Timeline connector line ═══════════════════ -->
+  <line x1="280" y1="440" x2="1640" y2="440" stroke="#334155" stroke-width="3"/>
+
+  <!-- Timeline dots -->
+  <circle cx="340" cy="440" r="10" fill="#94a3b8"/>
+  <circle cx="780" cy="440" r="10" fill="#94a3b8"/>
+  <circle cx="1200" cy="440" r="10" fill="#a3e635" opacity="0.7"/>
+  <circle cx="1620" cy="440" r="10" fill="#a3e635"/>
+
+  <!-- ═══════════════════ Module 1 card ═══════════════════ -->
+  <rect x="140" y="210" width="400" height="200" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Terminal icon -->
+  <rect x="175" y="235" width="50" height="36" rx="4" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="188" y="260" font-family="'JetBrains Mono', monospace" font-size="16" fill="#94a3b8">&gt;_</text>
+
+  <text x="240" y="260" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#94a3b8">Module 1</text>
+
+  <text x="175" y="305" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#f1f5f9">From chat to</text>
+  <text x="175" y="337" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#f1f5f9">command line</text>
+
+  <text x="175" y="385" font-family="Inter, sans-serif" font-size="18" fill="#94a3b8">Context files, CLI setup, Git</text>
+
+  <!-- Connector to timeline -->
+  <line x1="340" y1="410" x2="340" y2="430" stroke="#334155" stroke-width="2"/>
+
+  <!-- ═══════════════════ Module 2 card ═══════════════════ -->
+  <rect x="580" y="210" width="400" height="200" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Wrench icon -->
+  <rect x="615" y="235" width="50" height="36" rx="4" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="629" y="260" font-family="Inter, sans-serif" font-size="18" fill="#94a3b8">&#9881;</text>
+
+  <text x="680" y="260" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#94a3b8">Module 2</text>
+
+  <text x="615" y="305" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#f1f5f9">Custom skills</text>
+
+  <text x="615" y="355" font-family="Inter, sans-serif" font-size="18" fill="#94a3b8">Slash commands, hooks, plugins</text>
+
+  <!-- Connector to timeline -->
+  <line x1="780" y1="410" x2="780" y2="430" stroke="#334155" stroke-width="2"/>
+
+  <!-- ═══════════════════ Module 3 card ═══════════════════ -->
+  <rect x="1000" y="210" width="400" height="200" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="1.5" opacity="0.8"/>
+
+  <!-- Pipeline icon -->
+  <rect x="1035" y="235" width="50" height="36" rx="4" fill="#0f172a" stroke="#a3e635" stroke-width="1.5" opacity="0.7"/>
+  <text x="1047" y="260" font-family="Inter, sans-serif" font-size="18" fill="#a3e635" opacity="0.7">&#8680;</text>
+
+  <text x="1100" y="260" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#a3e635" opacity="0.7">Module 3</text>
+
+  <text x="1035" y="305" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#f1f5f9">CLI workflows</text>
+
+  <text x="1035" y="355" font-family="Inter, sans-serif" font-size="18" fill="#94a3b8">Automation, plan mode, testing</text>
+
+  <!-- Connector to timeline -->
+  <line x1="1200" y1="410" x2="1200" y2="430" stroke="#334155" stroke-width="2"/>
+
+  <!-- ═══════════════════ Module 4 card ═══════════════════ -->
+  <rect x="1420" y="210" width="400" height="200" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+
+  <!-- Layers icon -->
+  <rect x="1455" y="240" width="40" height="8" rx="2" fill="#a3e635"/>
+  <rect x="1455" y="253" width="40" height="8" rx="2" fill="#a3e635" opacity="0.7"/>
+  <rect x="1455" y="266" width="40" height="8" rx="2" fill="#a3e635" opacity="0.4"/>
+
+  <text x="1510" y="260" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#a3e635">Module 4</text>
+
+  <text x="1455" y="305" font-family="Inter, sans-serif" font-size="24" font-weight="600" fill="#f1f5f9">Going deeper</text>
+
+  <text x="1455" y="355" font-family="Inter, sans-serif" font-size="18" fill="#94a3b8">Techniques, features, landscape</text>
+
+  <!-- Connector to timeline -->
+  <line x1="1620" y1="410" x2="1620" y2="430" stroke="#a3e635" stroke-width="2"/>
+
+  <!-- ═══════════════════ Bottom section ═══════════════════ -->
+
+  <!-- Progression summary cards -->
+  <rect x="140" y="520" width="400" height="100" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="340" y="565" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" fill="#94a3b8">Learn the interface</text>
+  <text x="340" y="595" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#334155">Web chat → terminal</text>
+
+  <rect x="580" y="520" width="400" height="100" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="780" y="565" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" fill="#94a3b8">Build domain tools</text>
+  <text x="780" y="595" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#334155">One-off prompts → reusable skills</text>
+
+  <rect x="1000" y="520" width="400" height="100" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="1200" y="565" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" fill="#f1f5f9">Automate workflows</text>
+  <text x="1200" y="595" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#334155">Manual steps → pipelines</text>
+
+  <rect x="1420" y="520" width="400" height="100" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="1"/>
+  <text x="1620" y="565" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" fill="#a3e635">Manage agents</text>
+  <text x="1620" y="595" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" fill="#334155">Single tool → multi-agent landscape</text>
+
+  <!-- Connecting arrows between summary cards -->
+  <text x="555" y="575" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" fill="#334155">&#8594;</text>
+  <text x="990" y="575" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" fill="#334155">&#8594;</text>
+  <text x="1410" y="575" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" fill="#334155">&#8594;</text>
+
+  <!-- ═══════════════════ Closing line ═══════════════════ -->
+  <line x1="280" y1="700" x2="1640" y2="700" stroke="#334155" stroke-width="1"/>
+
+  <text x="960" y="770" text-anchor="middle" font-family="Inter, sans-serif" font-size="26" fill="#f1f5f9">From typing messages in a chat window</text>
+  <text x="960" y="815" text-anchor="middle" font-family="Inter, sans-serif" font-size="26" fill="#94a3b8">to building environments, delegating work, and maintaining tools.</text>
+</svg>

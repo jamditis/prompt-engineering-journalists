@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="42" font-weight="700" fill="#f1f5f9">Four questions for evaluating new AI tools</text>
+
+  <!-- ═══════════════════ Question 1 ═══════════════════ -->
+  <rect x="240" y="130" width="1440" height="150" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Checkmark circle -->
+  <circle cx="310" cy="205" r="28" fill="none" stroke="#a3e635" stroke-width="2.5"/>
+  <text x="310" y="215" text-anchor="middle" font-family="Inter, sans-serif" font-size="28" font-weight="700" fill="#a3e635">&#10003;</text>
+
+  <!-- Number -->
+  <text x="370" y="195" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#94a3b8">01</text>
+
+  <!-- Question -->
+  <text x="420" y="195" font-family="Inter, sans-serif" font-size="28" font-weight="600" fill="#f1f5f9">Does it have file access?</text>
+
+  <!-- Description -->
+  <text x="420" y="237" font-family="Inter, sans-serif" font-size="22" fill="#94a3b8">Can it read your local files and project folders?</text>
+
+  <!-- ═══════════════════ Question 2 ═══════════════════ -->
+  <rect x="240" y="310" width="1440" height="150" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Checkmark circle -->
+  <circle cx="310" cy="385" r="28" fill="none" stroke="#a3e635" stroke-width="2.5"/>
+  <text x="310" y="395" text-anchor="middle" font-family="Inter, sans-serif" font-size="28" font-weight="700" fill="#a3e635">&#10003;</text>
+
+  <!-- Number -->
+  <text x="370" y="375" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#94a3b8">02</text>
+
+  <!-- Question -->
+  <text x="420" y="375" font-family="Inter, sans-serif" font-size="28" font-weight="600" fill="#f1f5f9">Does it support context files?</text>
+
+  <!-- Description -->
+  <text x="420" y="417" font-family="Inter, sans-serif" font-size="22" fill="#94a3b8">Can you write persistent instructions it loads every session?</text>
+
+  <!-- ═══════════════════ Question 3 ═══════════════════ -->
+  <rect x="240" y="490" width="1440" height="150" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Checkmark circle -->
+  <circle cx="310" cy="565" r="28" fill="none" stroke="#a3e635" stroke-width="2.5"/>
+  <text x="310" y="575" text-anchor="middle" font-family="Inter, sans-serif" font-size="28" font-weight="700" fill="#a3e635">&#10003;</text>
+
+  <!-- Number -->
+  <text x="370" y="555" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#94a3b8">03</text>
+
+  <!-- Question -->
+  <text x="420" y="555" font-family="Inter, sans-serif" font-size="28" font-weight="600" fill="#f1f5f9">Can it use tools?</text>
+
+  <!-- Description -->
+  <text x="420" y="597" font-family="Inter, sans-serif" font-size="22" fill="#94a3b8">Can it run code, search the web, or access APIs?</text>
+
+  <!-- ═══════════════════ Question 4 ═══════════════════ -->
+  <rect x="240" y="670" width="1440" height="150" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- Checkmark circle -->
+  <circle cx="310" cy="745" r="28" fill="none" stroke="#a3e635" stroke-width="2.5"/>
+  <text x="310" y="755" text-anchor="middle" font-family="Inter, sans-serif" font-size="28" font-weight="700" fill="#a3e635">&#10003;</text>
+
+  <!-- Number -->
+  <text x="370" y="735" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#94a3b8">04</text>
+
+  <!-- Question -->
+  <text x="420" y="735" font-family="Inter, sans-serif" font-size="28" font-weight="600" fill="#f1f5f9">Can you see what it's doing?</text>
+
+  <!-- Description -->
+  <text x="420" y="777" font-family="Inter, sans-serif" font-size="22" fill="#94a3b8">Is the reasoning and tool use visible, not a black box?</text>
+
+  <!-- ═══════════════════ Bottom tagline ═══════════════════ -->
+  <rect x="240" y="890" width="1440" height="100" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="1.5"/>
+  <text x="960" y="935" text-anchor="middle" font-family="Inter, sans-serif" font-size="24" fill="#94a3b8">If a new tool passes all four, it's worth trying. If not, it's probably hype.</text>
+  <text x="960" y="970" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" fill="#334155">These criteria separate working tools from marketing demos.</text>
+</svg>

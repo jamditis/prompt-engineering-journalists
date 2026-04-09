@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap');
+    </style>
+    <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="5" refY="3.5" orient="auto" fill="#f87171">
+      <polygon points="0 0, 10 3.5, 0 7"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="5" refY="3.5" orient="auto" fill="#a3e635">
+      <polygon points="0 0, 10 3.5, 0 7"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="80" font-family="Inter, sans-serif" font-weight="700" font-size="42" fill="#f1f5f9" text-anchor="middle">Two types of knowledge</text>
+
+  <!-- Center divider -->
+  <line x1="960" y1="120" x2="960" y2="900" stroke="#334155" stroke-width="2"/>
+
+  <!-- ===== LEFT PATH: Parametric knowledge ===== -->
+  <text x="480" y="150" font-family="Inter, sans-serif" font-weight="600" font-size="30" fill="#f87171" text-anchor="middle">Parametric knowledge</text>
+
+  <!-- Training data block -->
+  <rect x="260" y="200" width="440" height="120" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+  <text x="480" y="255" font-family="Inter, sans-serif" font-weight="600" font-size="26" fill="#f1f5f9" text-anchor="middle">Training data</text>
+  <text x="480" y="290" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8" text-anchor="middle">Billions of web pages, books, articles</text>
+
+  <!-- Arrow down -->
+  <line x1="480" y1="320" x2="480" y2="390" stroke="#f87171" stroke-width="2" marker-end="url(#arrow-red)"/>
+
+  <!-- Model generates block -->
+  <rect x="260" y="400" width="440" height="90" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="1.5"/>
+  <text x="480" y="440" font-family="Inter, sans-serif" font-weight="500" font-size="22" fill="#f1f5f9" text-anchor="middle">Model generates</text>
+  <text x="480" y="468" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8" text-anchor="middle">from memory</text>
+
+  <!-- Arrow down -->
+  <line x1="480" y1="490" x2="480" y2="560" stroke="#f87171" stroke-width="2" marker-end="url(#arrow-red)"/>
+
+  <!-- Output block with warnings -->
+  <rect x="260" y="570" width="440" height="200" rx="8" fill="#1e293b" stroke="#f87171" stroke-width="2"/>
+  <text x="480" y="610" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#f1f5f9" text-anchor="middle">Output</text>
+
+  <!-- Warning items -->
+  <circle cx="310" cy="656" r="6" fill="#f87171"/>
+  <text x="328" y="662" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f87171">No citations</text>
+
+  <circle cx="310" cy="696" r="6" fill="#f87171"/>
+  <text x="328" y="702" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f87171">May be outdated</text>
+
+  <circle cx="310" cy="736" r="6" fill="#f87171"/>
+  <text x="328" y="742" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#f87171">Can't verify source</text>
+
+  <!-- ===== RIGHT PATH: Grounded knowledge ===== -->
+  <text x="1440" y="150" font-family="Inter, sans-serif" font-weight="600" font-size="30" fill="#a3e635" text-anchor="middle">Grounded knowledge</text>
+
+  <!-- Your documents block -->
+  <rect x="1220" y="200" width="440" height="120" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <!-- Small file icons inside -->
+  <rect x="1260" y="230" width="20" height="26" rx="2" fill="none" stroke="#a3e635" stroke-width="1.2"/>
+  <rect x="1290" y="226" width="20" height="26" rx="2" fill="none" stroke="#a3e635" stroke-width="1.2"/>
+  <rect x="1320" y="232" width="20" height="26" rx="2" fill="none" stroke="#a3e635" stroke-width="1.2"/>
+  <text x="1440" y="255" font-family="Inter, sans-serif" font-weight="600" font-size="26" fill="#f1f5f9" text-anchor="middle">Your documents</text>
+  <text x="1440" y="290" font-family="Inter, sans-serif" font-weight="400" font-size="18" fill="#94a3b8" text-anchor="middle">PDFs, notes, datasets, public records</text>
+
+  <!-- Arrow down with RAG label -->
+  <line x1="1440" y1="320" x2="1440" y2="390" stroke="#a3e635" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <rect x="1460" y="338" width="120" height="26" rx="4" fill="#0f172a" stroke="#a3e635" stroke-width="1"/>
+  <text x="1520" y="357" font-family="'JetBrains Mono', monospace" font-weight="500" font-size="16" fill="#a3e635" text-anchor="middle">Retrieval (RAG)</text>
+
+  <!-- Model reads block -->
+  <rect x="1220" y="400" width="440" height="90" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="1.5"/>
+  <text x="1440" y="440" font-family="Inter, sans-serif" font-weight="500" font-size="22" fill="#f1f5f9" text-anchor="middle">Model reads</text>
+  <text x="1440" y="468" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#94a3b8" text-anchor="middle">actual files</text>
+
+  <!-- Arrow down -->
+  <line x1="1440" y1="490" x2="1440" y2="560" stroke="#a3e635" stroke-width="2" marker-end="url(#arrow-green)"/>
+
+  <!-- Output block with positives -->
+  <rect x="1220" y="570" width="440" height="200" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2"/>
+  <text x="1440" y="610" font-family="Inter, sans-serif" font-weight="600" font-size="24" fill="#f1f5f9" text-anchor="middle">Output</text>
+
+  <!-- Positive items -->
+  <circle cx="1270" cy="656" r="6" fill="#a3e635"/>
+  <text x="1288" y="662" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#a3e635">Cites specific files</text>
+
+  <circle cx="1270" cy="696" r="6" fill="#a3e635"/>
+  <text x="1288" y="702" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#a3e635">Current as your archive</text>
+
+  <circle cx="1270" cy="736" r="6" fill="#a3e635"/>
+  <text x="1288" y="742" font-family="Inter, sans-serif" font-weight="400" font-size="20" fill="#a3e635">Verifiable</text>
+
+  <!-- Bottom takeaway -->
+  <rect x="310" y="870" width="1300" height="70" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="960" y="914" font-family="Inter, sans-serif" font-weight="500" font-size="24" fill="#f1f5f9" text-anchor="middle">MCP connects Claude to your documents -- grounding replaces guessing with citing</text>
+</svg>

@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="960" y="72" text-anchor="middle" font-family="Inter, sans-serif" font-size="42" font-weight="700" fill="#f1f5f9">Four CLI agents</text>
+
+  <!-- ═══════════════════ TOP-LEFT: Claude Code ═══════════════════ -->
+  <rect x="120" y="130" width="820" height="340" rx="8" fill="#1e293b" stroke="#a3e635" stroke-width="2.5"/>
+
+  <!-- Agent name -->
+  <text x="170" y="195" font-family="Inter, sans-serif" font-size="36" font-weight="700" fill="#f1f5f9">Claude Code</text>
+
+  <!-- Company -->
+  <text x="170" y="240" font-family="Inter, sans-serif" font-size="24" fill="#94a3b8">Anthropic</text>
+
+  <!-- Cost tier -->
+  <rect x="170" y="268" width="720" height="44" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="195" y="297" font-family="Inter, sans-serif" font-size="22" fill="#f1f5f9">Paid (API credits or Max subscription)</text>
+
+  <!-- Context file -->
+  <rect x="170" y="330" width="720" height="44" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="195" y="359" font-family="Inter, sans-serif" font-size="20" fill="#94a3b8">Context file:</text>
+  <text x="345" y="359" font-family="'JetBrains Mono', monospace" font-size="20" fill="#a3e635">CLAUDE.md</text>
+
+  <!-- Accent dot -->
+  <circle cx="885" cy="162" r="8" fill="#a3e635"/>
+
+  <!-- ═══════════════════ TOP-RIGHT: Gemini CLI ═══════════════════ -->
+  <rect x="980" y="130" width="820" height="340" rx="8" fill="#1e293b" stroke="#67e8f9" stroke-width="2.5"/>
+
+  <!-- Agent name -->
+  <text x="1030" y="195" font-family="Inter, sans-serif" font-size="36" font-weight="700" fill="#f1f5f9">Gemini CLI</text>
+
+  <!-- Company -->
+  <text x="1030" y="240" font-family="Inter, sans-serif" font-size="24" fill="#94a3b8">Google</text>
+
+  <!-- Cost tier -->
+  <rect x="1030" y="268" width="720" height="44" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="1055" y="297" font-family="Inter, sans-serif" font-size="22" fill="#f1f5f9">Free tier (1,000 requests/day)</text>
+
+  <!-- Context file -->
+  <rect x="1030" y="330" width="720" height="44" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="1055" y="359" font-family="Inter, sans-serif" font-size="20" fill="#94a3b8">Context file:</text>
+  <text x="1205" y="359" font-family="'JetBrains Mono', monospace" font-size="20" fill="#67e8f9">GEMINI.md</text>
+
+  <!-- Accent dot -->
+  <circle cx="1745" cy="162" r="8" fill="#67e8f9"/>
+
+  <!-- ═══════════════════ BOTTOM-LEFT: Codex CLI ═══════════════════ -->
+  <rect x="120" y="510" width="820" height="340" rx="8" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+
+  <!-- Agent name -->
+  <text x="170" y="575" font-family="Inter, sans-serif" font-size="36" font-weight="700" fill="#f1f5f9">Codex CLI</text>
+
+  <!-- Company -->
+  <text x="170" y="620" font-family="Inter, sans-serif" font-size="24" fill="#94a3b8">OpenAI</text>
+
+  <!-- Cost tier -->
+  <rect x="170" y="648" width="720" height="44" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="195" y="677" font-family="Inter, sans-serif" font-size="22" fill="#f1f5f9">Paid (API credits or subscription)</text>
+
+  <!-- Context file -->
+  <rect x="170" y="710" width="720" height="44" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="195" y="739" font-family="Inter, sans-serif" font-size="20" fill="#94a3b8">Context file:</text>
+  <text x="345" y="739" font-family="'JetBrains Mono', monospace" font-size="20" fill="#94a3b8">AGENTS.md</text>
+
+  <!-- Accent dot -->
+  <circle cx="885" cy="542" r="8" fill="#94a3b8"/>
+
+  <!-- ═══════════════════ BOTTOM-RIGHT: GitHub Copilot CLI ═══════════════════ -->
+  <rect x="980" y="510" width="820" height="340" rx="8" fill="#1e293b" stroke="#f1f5f9" stroke-width="2"/>
+
+  <!-- Agent name -->
+  <text x="1030" y="575" font-family="Inter, sans-serif" font-size="36" font-weight="700" fill="#f1f5f9">GitHub Copilot CLI</text>
+
+  <!-- Company -->
+  <text x="1030" y="620" font-family="Inter, sans-serif" font-size="24" fill="#94a3b8">GitHub / Microsoft</text>
+
+  <!-- Cost tier -->
+  <rect x="1030" y="648" width="720" height="44" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="1055" y="677" font-family="Inter, sans-serif" font-size="22" fill="#f1f5f9">Free tier available, or Copilot Pro</text>
+
+  <!-- Context file -->
+  <rect x="1030" y="710" width="720" height="44" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+  <text x="1055" y="739" font-family="Inter, sans-serif" font-size="20" fill="#94a3b8">Context file:</text>
+  <text x="1205" y="739" font-family="'JetBrains Mono', monospace" font-size="20" fill="#f1f5f9">(uses repo context)</text>
+
+  <!-- Accent dot -->
+  <circle cx="1745" cy="542" r="8" fill="#f1f5f9"/>
+
+  <!-- ═══════════════════ Bottom tagline ═══════════════════ -->
+  <text x="960" y="940" text-anchor="middle" font-family="Inter, sans-serif" font-size="26" fill="#94a3b8">Different models, different strengths — try more than one</text>
+</svg>
