@@ -92,9 +92,9 @@
                     <a href="#objectives" class="text-gray-300 hover:text-acid transition-colors py-1">03 — Learning objectives</a>
                     <a href="#orientation" class="text-gray-300 hover:text-acid transition-colors py-1">04 — Pre-course orientation</a>
                     <a href="#module-1" class="text-gray-300 hover:text-acid transition-colors py-1">05 — Module 1: From chat window to command line</a>
-                    <a href="#module-2" class="text-gray-300 hover:text-acid transition-colors py-1">06 — Module 2: Custom skills for Claude Code</a>
-                    <a href="#module-3" class="text-gray-300 hover:text-acid transition-colors py-1">07 — Module 3: CLI workflows for newsrooms</a>
-                    <a href="#module-4" class="text-gray-300 hover:text-acid transition-colors py-1">08 — Module 4: Agents, tools, and data access</a>
+                    <a href="#module-2" class="text-gray-300 hover:text-acid transition-colors py-1">06 — Module 2: Custom skills, plugins, and hooks</a>
+                    <a href="#module-3" class="text-gray-300 hover:text-acid transition-colors py-1">07 — Module 3: Automation, pipelines, and triggered workflows</a>
+                    <a href="#module-4" class="text-gray-300 hover:text-acid transition-colors py-1">08 — Module 4: Advanced prompting patterns</a>
                     <a href="#assignments" class="text-gray-300 hover:text-acid transition-colors py-1">09 — Assignments and participation</a>
                     <a href="#tools" class="text-gray-300 hover:text-acid transition-colors py-1">10 — Required tools</a>
                     <a href="#website" class="text-gray-300 hover:text-acid transition-colors py-1">11 — Course website and repositories</a>
@@ -110,7 +110,7 @@
                 <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
                     <p>This course is the sequel to <a href="https://journalismcourses.org/product/prompt-engineering-101-for-journalists/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Prompt Engineering 101 for Journalists</a>. The 101 course taught you to use AI through web interfaces — writing prompts, understanding context windows, and working with tools like ChatGPT and Claude.ai. This course moves you from the browser to the terminal. CLI tools run on your machine — with access to your files, your data, and your compute power. Instead of uploading a document to a chat window and copying the result, you can point AI at a folder of public records and tell it to classify, summarize, and organize them — then walk away while it works. You can leave a web scraper running overnight, process a dataset too large to paste into a chat box, or build a pipeline that pulls data from a public API, cleans it, and generates a visualization. CLI tools give you a real machine, not a sandbox.</p>
                     <p>The course draws on Ethan Mollick's framework of <strong class="text-chrome">models</strong> (the underlying AI intelligence), <strong class="text-chrome">apps</strong> (chat interfaces like ChatGPT.com and Claude.ai), and <strong class="text-chrome">harnesses</strong> (systems that give models tools, file access, and multi-step autonomy). The 101 course taught you to use apps. This course teaches you to use harnesses — CLI tools like Claude Code, Gemini CLI, and Codex CLI that let AI read your files, run scripts, and chain tasks together. But the framework only tells you what these tools are. The course teaches you what to do with them, grounded in real-world workflows: building newsroom tools, scraping and processing public data, automating content pipelines, and creating reusable systems that your colleagues can share and build on.</p>
-                    <p>The philosophical shift: you stop prompting and start managing. Instead of crafting one-off messages in a chat window, you build persistent environments — context files, skills, workflows, agent configurations — and delegate work. Each module builds on a concept from the 101 course and extends it: web prompting becomes CLI prompting, typing context every time becomes writing it once in a file, one-off prompts become reusable skills, no-code automation becomes scripted pipelines, and understanding AI becomes hands-on work with agents, tools, and data access.</p>
+                    <p>The philosophical shift: you stop prompting and start managing. Instead of crafting one-off messages in a chat window, you build persistent environments — context files, skills, plugins, automated pipelines — and delegate work. Each module builds on a concept from the 101 course and extends it: web prompting becomes CLI prompting, typing context every time becomes writing it once in a file, one-off prompts become reusable skills, no-code automation becomes scheduled pipelines, and crafting single messages becomes managing a workflow — deciding what to delegate, when to step in, and how to verify the result.</p>
                 </div>
             </section>
 
@@ -135,10 +135,10 @@
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ol class="space-y-3 text-sm text-gray-300 list-none">
                         <li class="bullet-item"><span class="text-ice font-mono shrink-0">1.</span> Install and operate command-line AI tools, and explain the advantages of programmatic AI access over web interfaces</li>
-                        <li class="bullet-item"><span class="text-ice font-mono shrink-0">2.</span> Write project context files (CLAUDE.md, GEMINI.md, AGENTS.md), process journalism documents using CLI tools, and use Git and GitHub for version control and sharing</li>
-                        <li class="bullet-item"><span class="text-ice font-mono shrink-0">3.</span> Create custom skills, hooks, and CLAUDE.md files that encode journalism expertise into reusable tools</li>
-                        <li class="bullet-item"><span class="text-ice font-mono shrink-0">4.</span> Build resource-conscious automation workflows with checkpointing, testing strategies, and multi-stage processing</li>
-                        <li class="bullet-item"><span class="text-ice font-mono shrink-0">5.</span> Connect AI tools to local files and external data sources via MCP, and understand where these connections break down</li>
+                        <li class="bullet-item"><span class="text-ice font-mono shrink-0">2.</span> Write project context files (CLAUDE.md, GEMINI.md, AGENTS.md) and use them to process real newsroom documents from the filesystem</li>
+                        <li class="bullet-item"><span class="text-ice font-mono shrink-0">3.</span> Create custom skills, hooks, and plugins that encode journalism expertise into reusable, shareable tools</li>
+                        <li class="bullet-item"><span class="text-ice font-mono shrink-0">4.</span> Build automated, scheduled pipelines using cloud triggers, GitHub Actions, and GitHub Pages — and recognize where a workflow should stay manual</li>
+                        <li class="bullet-item"><span class="text-ice font-mono shrink-0">5.</span> Manage a CLI session as a manager rather than a prompter — budgeting the context window, delegating to sub-agents, running cross-model code review, and applying editorial judgment to the result</li>
                     </ol>
                 </div>
             </section>
@@ -164,9 +164,9 @@
                         <li class="bullet-item"><span class="text-acid">></span> Watch the welcome video (available in the course platform)</li>
                         <li class="bullet-item"><span class="text-acid">></span> Install <a href="https://nodejs.org" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Node.js</a> version 20 or higher and verify your terminal environment</li>
                         <li class="bullet-item"><span class="text-acid">></span> Set up Claude Code, Gemini CLI, or Codex CLI (see <a href="#tools" class="text-ice hover:text-acid transition-colors">Required tools</a> below for options)</li>
-                        <li class="bullet-item"><span class="text-acid">></span> Create a <a href="https://github.com" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">GitHub</a> account and <a href="https://github.com/jamditis/mooc-starter-kit/fork" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">fork the starter kit repo</a></li>
-                        <li class="bullet-item"><span class="text-acid">></span> Review Git basics — what repositories, commits, and cloning are</li>
+                        <li class="bullet-item"><span class="text-acid">></span> Create a <a href="https://github.com" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">GitHub</a> account if you don't have one — optional for the main modules, required for the bonus Git and GitHub module</li>
                         <li class="bullet-item"><span class="text-acid">></span> Familiarize yourself with basic terminal commands and navigation</li>
+                        <li class="bullet-item"><span class="text-acid">></span> Optional: if you're new to Git and GitHub, the separate <a href="../bonus-git-github/" class="text-ice hover:text-acid transition-colors">bonus module</a> in this course is a self-paced walkthrough you can do alongside Module 1 or later</li>
                     </ul>
                 </div>
             </section>
@@ -186,15 +186,17 @@
                     <h3 class="font-mono text-sm text-acid mb-4">Topics</h3>
                     <ul class="space-y-2 text-sm text-gray-300">
                         <li class="bullet-item"><span class="text-gray-500">—</span> Models, apps, and harnesses: Mollick's framework for the agentic era</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Escaping the browser: why CLI tools give you access to real compute power</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Comparing web and CLI workflows side by side on the same task</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> File persistence: why CLI output survives after a session ends</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> The CLI as compute access: scripting, piping, file access, and long-running processes</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> "Work where your files live" — no more upload/download cycles</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Comparing web and CLI workflows side by side on the same research task</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> The "fresh conversation" problem: why web chat context evaporates</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> The three layers of project context: global, project, and session</li>
                         <li class="bullet-item"><span class="text-gray-500">—</span> Project context files: CLAUDE.md, GEMINI.md, AGENTS.md</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Creating a context file with <code class="text-acid bg-surface px-1 text-xs">/init</code> and customizing it for your beat</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Global vs. project-level context files</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Slash commands, configuration, and the <code class="text-acid bg-surface px-1 text-xs">@</code> file-tagging syntax</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> GitHub as version control for code and context files</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> IDE alternatives for those without terminal access (VS Code, Cursor, Windsurf, AntiGravity)</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> What goes in a context file (beat knowledge, style, source standards, terminology)</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> The "deletion test" for context file content</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> MEMORY.md, sub-memory files, and the four types of memory (user, feedback, project, reference)</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Treating context files as versionable workflow infrastructure, not personal notes</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Processing documents (press releases, datasets, transcripts) from the filesystem</li>
                     </ul>
                 </div>
 
@@ -210,47 +212,50 @@
                     <h3 class="font-mono text-sm text-acid mb-4">Activities</h3>
                     <ul class="space-y-3 text-sm text-gray-300">
                         <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Watch:</strong> <a href="../module-1/#main" class="text-ice hover:text-acid transition-colors">"Escaping the browser"</a> — CLI tools vs. web interfaces, live Claude Code demo, CLAUDE.md setup with /init, global vs. project-level context files</li>
-                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Read before the exercise:</strong> tool documentation (choose one: <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Claude Code</a>, <a href="https://github.com/google-gemini/gemini-cli" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Gemini CLI</a>, or <a href="https://github.com/openai/codex" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Codex CLI</a>), context file documentation for <a href="https://docs.anthropic.com/en/docs/claude-code/memory" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Claude Code</a>, <a href="https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/gemini-md.md" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Gemini CLI</a>, and <a href="https://github.com/openai/codex/blob/main/AGENTS.md" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Codex</a>; <a href="https://docs.github.com/en/get-started/start-your-journey/hello-world" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">GitHub basics</a></li>
+                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Read before the exercise:</strong> tool documentation (choose one: <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Claude Code</a>, <a href="https://github.com/google-gemini/gemini-cli" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Gemini CLI</a>, or <a href="https://github.com/openai/codex" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Codex CLI</a>) and the context file documentation for whichever tool you picked: <a href="https://docs.anthropic.com/en/docs/claude-code/memory" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Claude Code</a>, <a href="https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/gemini-md.md" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Gemini CLI</a>, or <a href="https://github.com/openai/codex/blob/main/AGENTS.md" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Codex</a></li>
                         <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Read after the exercise:</strong> Mollick's <a href="https://www.oneusefulthing.org/p/a-guide-to-which-ai-to-use-in-the" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"A guide to which AI to use in the agentic era,"</a> Amditis's <a href="https://generative-ai-newsroom.com/vibe-coding-for-newsrooms-6848b17dac99" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"Vibe coding for newsrooms,"</a> Schmid's <a href="https://www.philschmid.de/context-engineering" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"Prompt engineering vs. context engineering,"</a> Amditis's <a href="https://strugglestreet.substack.com/p/im-a-claude-code-agent-with-my-own" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"I'm a Claude Code agent with my own Gmail account"</a></li>
-                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Exercise:</strong> Install your CLI tool, fork and clone the <a href="https://github.com/jamditis/mooc-starter-kit" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">starter kit repo</a>, customize the CLAUDE.md for your beat, and compare document processing with and without context — submit screenshots or command output showing the difference</li>
-                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Discussion</strong> (choose one): What surprised you about working in the terminal compared to a web chat interface? Or: What did you put in your CLAUDE.md, and what would you add for your beat?</li>
+                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Exercise:</strong> Install your CLI tool, set up a project folder (choose one: city hall beat, public data tracking, or content processing workspace), write a CLAUDE.md, and compare document processing with and without context — submit screenshots or command output showing the difference</li>
+                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Discussion</strong> (choose one): What surprised you about working in the terminal compared to a web chat interface? Or: What would you put in a context file for your beat, and why?</li>
                         <li class="bullet-item"><span class="text-acid shrink-0">></span> Quiz</li>
                     </ul>
                 </div>
+                <p class="text-xs text-gray-500 italic mt-4">Version control is not a Module 1 topic in the filmed videos — Git and GitHub are covered in the separate <a href="../bonus-git-github/" class="text-ice hover:text-acid transition-colors not-italic">bonus module</a> if you want to learn them alongside the course.</p>
             </section>
 
             <!-- Module 2 -->
             <section id="module-2">
                 <div class="border-b border-white/10 pb-4 mb-6">
                     <div class="text-xs text-acid font-mono mb-2">MODULE 02</div>
-                    <h2 class="font-display text-xl text-ice">Custom skills for Claude Code</h2>
+                    <h2 class="font-display text-xl text-ice">Custom skills, plugins, and hooks<span class="text-acid">*</span></h2>
                 </div>
                 <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
-                    <p class="text-gray-400"><strong class="text-chrome">Focus:</strong> Encoding domain expertise into reusable, shareable tools</p>
+                    <p class="text-gray-400"><strong class="text-chrome">Focus:</strong> Turning real workflows into reusable skills and shareable plugins</p>
                     <p class="text-gray-500 text-xs italic">*The lessons in this module will generally apply to other models/LLMs, but they will be tailored for Claude Code specifically.</p>
-                    <p>Once you have a working project environment, the next step is encoding your editorial standards into reusable tools instead of typing them every session. This module covers how to create custom slash commands, set up hooks that automate quality checks, and manage your CLI sessions effectively. The goal is to shift from crafting prompts on the fly to building a toolkit that reflects how your newsroom works.</p>
+                    <p>Once you have a working project environment, the next step is encoding your editorial standards into reusable tools instead of typing them every session. This module covers skills, commands, hooks, and plugins — what each one is, when to use which, and how to package a real workflow so a colleague can install it with one command. The video walks through a full end-to-end live demo: scraping the most recent videos from NYC Mayor Zohran Mamdani's Twitter, TikTok, YouTube, Instagram, and Facebook accounts, transcribing them with Whisper, extracting frames, running content analysis, and building an interactive dashboard. The second video turns that same pipeline into a proper Claude Code plugin.</p>
                 </div>
 
                 <div class="mt-6 border border-white/10 bg-panel p-6">
                     <h3 class="font-mono text-sm text-acid mb-4">Topics</h3>
                     <ul class="space-y-2 text-sm text-gray-300">
-                        <li class="bullet-item"><span class="text-gray-500">—</span> The progression: ad-hoc prompts → saved prompts → skills → hooks → plugins</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Creating custom slash commands: markdown files in <code class="text-acid bg-surface px-1">~/.claude/commands/</code> (personal) or <code class="text-acid bg-surface px-1">.claude/commands/</code> (project)</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Notify hooks vs. stop hooks: automated second readers and one-way-door guardrails</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Skills, commands, plugins, and hooks: what each one is, as markdown files or bundles that load on demand</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Custom slash commands: markdown files in <code class="text-acid bg-surface px-1">~/.claude/commands/</code> (personal) or <code class="text-acid bg-surface px-1">.claude/commands/</code> (project)</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Hooks as guardrails: scripts that run before or after a Claude action — pre-hooks can block, post-hooks can validate or flag</li>
                         <li class="bullet-item"><span class="text-gray-500">—</span> Building on CLAUDE.md: from project context to reusable skills</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Session commands: <code class="text-acid bg-surface px-1">/help</code>, <code class="text-acid bg-surface px-1">/plan</code>, <code class="text-acid bg-surface px-1">/compact</code>, <code class="text-acid bg-surface px-1">/clear</code> — managing your Claude Code session</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> When CLI tools are worth the setup cost and when they are not</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> The journalism skills library (36 skills, 13 hooks) — optional resource for browsing and inspiration</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Skills vs. MCP servers: static instructions vs. live data connections</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> A live end-to-end demo: scraping, transcribing, analyzing, and dashboarding a five-platform social media content pipeline</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> The Superpowers plugin's brainstorming and sub-agent driven development skills</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> <code class="text-acid bg-surface px-1">--dangerously-skip-permissions</code> and why it should only be used in tightly scoped demo or sandbox contexts, not real newsroom work</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> The Browser Automation skill with Playwright for when direct scraping fails</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Packaging a workflow as a Claude Code plugin: <code class="text-acid bg-surface px-1">plugin.json</code>, versioning, and Anthropic's official plugin development skill</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> The journalism skills library (36 skills, 13 hooks) — a working reference for what a plugin looks like in practice</li>
                     </ul>
                 </div>
 
                 <div class="mt-4 border border-white/10 bg-panel p-6">
                     <h3 class="font-mono text-sm text-acid mb-4">Activities</h3>
                     <ul class="space-y-3 text-sm text-gray-300">
-                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Watch:</strong> <a href="../module-2/#main" class="text-ice hover:text-acid transition-colors">"Skills, workflows, and plugins"</a> — covers skills, commands, plugins, and hooks, then a live social media content analysis demo and turning the workflow into reusable skills and a shareable plugin</li>
-                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Required readings:</strong> <a href="https://docs.anthropic.com/en/docs/claude-code/tutorials#custom-slash-commands" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Claude Code custom commands documentation</a>, <a href="https://github.com/jamditis/claude-skills-journalism" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">journalism skills repo overview</a>, <a href="https://modelcontextprotocol.io/introduction" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">MCP basics</a>, Hagar's <a href="https://generative-ai-newsroom.com/coding-agents-for-investigative-journalism-8b65bc30f9ea" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"Coding agents for investigative journalism"</a></li>
-                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Exercise:</strong> Build a custom slash command for a task you repeat weekly, install the journalism skills library, and test source verification on a real claim</li>
+                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Watch:</strong> <a href="../module-2/#main" class="text-ice hover:text-acid transition-colors">"Custom skills, plugins, and hooks"</a> — a full live end-to-end demo of the Mamdani five-platform social media pipeline, followed by a second video that turns the same workflow into a shareable Claude Code plugin</li>
+                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Required readings:</strong> <a href="https://docs.anthropic.com/en/docs/claude-code/tutorials#custom-slash-commands" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Claude Code custom commands and plugin documentation</a>, the <a href="https://github.com/obra/superpowers" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Superpowers plugin README</a>, and Nick Hagar's <a href="https://generative-ai-newsroom.com/coding-agents-for-investigative-journalism-8b65bc30f9ea" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"Coding agents for investigative journalism"</a></li>
+                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Exercise:</strong> Create a custom skill (choose one: source-verification, data-cleaning, content formatting, or a scraping helper), invoke it with a slash command, and package it as a one-skill plugin a colleague could install</li>
                         <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Discussion</strong> (choose one): What skills would help your newsroom, and how would you share them with colleagues? Or: How do you decide which parts of your editorial process are worth encoding into reusable tools versus handling manually?</li>
                         <li class="bullet-item"><span class="text-acid shrink-0">></span> Quiz</li>
                     </ul>
@@ -261,21 +266,26 @@
             <section id="module-3">
                 <div class="border-b border-white/10 pb-4 mb-6">
                     <div class="text-xs text-acid font-mono mb-2">MODULE 03</div>
-                    <h2 class="font-display text-xl text-ice">CLI workflows for newsrooms</h2>
+                    <h2 class="font-display text-xl text-ice">Automation, pipelines, and triggered workflows</h2>
                 </div>
                 <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
-                    <p class="text-gray-400"><strong class="text-chrome">Focus:</strong> Describe the workflow in plain English — let the LLM build the automation</p>
-                    <p>This module focuses on automation — using AI to build the scripts and pipelines that handle your recurring newsroom tasks. Rather than building automation by hand, you describe what you need in plain English and let the AI construct the workflow. You will learn when automation makes sense for a given task, how to inspect and understand what the AI built, and why testing small before running large matters.</p>
+                    <p class="text-gray-400"><strong class="text-chrome">Focus:</strong> Stop running workflows manually. Schedule them with cloud triggers, GitHub Actions, and GitHub Pages</p>
+                    <p>This module is about the shift from "I can do this once" to "this runs on its own." You will learn to think about automation as a system — input nodes, conveyor belts, transformers, and output destinations — before writing any code. Then you will see how to schedule a workflow so it runs without you, either on a cloud trigger, through a GitHub Action, or via a hybrid where the cloud detects new data and your local machine does the heavy work. The module continues the multi-platform Mamdani scraping project from Module 2 and takes it fully automated, end to end.</p>
                 </div>
 
                 <div class="mt-6 border border-white/10 bg-panel p-6">
                     <h3 class="font-mono text-sm text-acid mb-4">Topics</h3>
                     <ul class="space-y-2 text-sm text-gray-300">
-                        <li class="bullet-item"><span class="text-gray-500">—</span> From no-code automation to LLM-built workflow scripts</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Asking Claude to build, explain, and run shell scripts inside an interactive session</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Describing multi-stage pipelines: fetch, clean, analyze, format</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Testing small before running large — why this matters in batch work</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> API key security: environment variables, not source files</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Why non-programmers stall at this step, and how to get past it</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Thinking in systems: input nodes → conveyor belts → transformers → output destinations (with Factorio and Satisfactory as the mental-model reference)</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Planning before building: plan mode as a habit, not a feature</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Multi-stage pipelines with one job per stage (fetch, clean, process, save)</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Three rules: stage the pipeline, test small, and never put secrets in code</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Claude Code's two schedulers: in-session <code class="text-acid bg-surface px-1">cron.create</code> vs. cloud <code class="text-acid bg-surface px-1">remote trigger</code></li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Hybrid pipelines: cloud detects, local transcribes</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Google Drive desktop sync as a simpler alternative to the Drive API</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> GitHub Actions and GitHub Pages for the output layer</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Debugging real Copilot review feedback, branch protection rules, and an accidental self-triggering PR loop</li>
                     </ul>
                 </div>
 
@@ -287,10 +297,10 @@
                 <div class="mt-4 border border-white/10 bg-panel p-6">
                     <h3 class="font-mono text-sm text-acid mb-4">Activities</h3>
                     <ul class="space-y-3 text-sm text-gray-300">
-                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Watch:</strong> <a href="../module-3/#main" class="text-ice hover:text-acid transition-colors">"Describing workflows, building pipelines"</a> — live demo of a cron-based scheduler, walkthrough of Reroute NJ (reroutenj.org) as a CLI-built automation example</li>
-                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Required readings:</strong> <a href="https://12factor.net/config" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Twelve-Factor App config</a> (API key security), <a href="https://docs.anthropic.com/en/api/errors" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Claude Code API errors reference</a>, Hagar's <a href="https://generative-ai-newsroom.com/augmented-beat-reporting-where-llms-excel-and-where-reporters-still-win-135decbe8675" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"Augmented beat reporting,"</a> Spencer's <a href="https://generative-ai-newsroom.com/inside-the-new-multilingual-newsrooms-using-genai-for-translation-4c3b17269811" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"Inside the new multilingual newsrooms using GenAI for translation"</a></li>
-                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Exercise:</strong> Ask Claude to build a shell script for a recurring task (choose one: city council agenda prep sheet, web scraping pipeline, batch document processing, or weekly content roundup) — then walk through what it built and why</li>
-                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Discussion</strong> (choose one): Think about the tasks you do every week that follow the same pattern — meeting previews, weekly roundups, data pulls. Which one would you hand to an AI assistant first, and what instructions would it need? Or: What are the risks of automating editorial workflows, and how would you mitigate them?</li>
+                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Watch:</strong> <a href="../module-3/#main" class="text-ice hover:text-acid transition-colors">"Automation, pipelines, and triggered workflows"</a> — systems thinking and plan mode as a habit, then a second video on Claude Code's two schedulers, hybrid pipelines, and taking the Mamdani Module 2 project fully automated through GitHub Actions and GitHub Pages</li>
+                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Required readings:</strong> Hagar's <a href="https://generative-ai-newsroom.com/augmented-beat-reporting-where-llms-excel-and-where-reporters-still-win-135decbe8675" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"Augmented beat reporting,"</a> Spencer's <a href="https://generative-ai-newsroom.com/inside-the-new-multilingual-newsrooms-using-genai-for-translation-4c3b17269811" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"Inside the new multilingual newsrooms using GenAI for translation,"</a> and optional: <a href="https://simonwillison.net/tags/llms/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Simon Willison on evaluating LLM pipelines</a></li>
+                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Exercise:</strong> Stage a small automated pipeline of your own (choose one: city council agenda prep sheet, web scraping pipeline, batch document processing, or weekly content roundup) — describe it in plain English to Claude, run it once end-to-end on real data, then schedule it to run on its own</li>
+                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Discussion</strong> (choose one): Think about the tasks you do every week that follow the same pattern — meeting previews, weekly roundups, data pulls. Which one would you hand to an automated pipeline first, and what instructions would it need? Or: What are the risks of automating editorial workflows, and how would you mitigate them?</li>
                         <li class="bullet-item"><span class="text-acid shrink-0">></span> Quiz</li>
                     </ul>
                 </div>
@@ -300,33 +310,37 @@
             <section id="module-4">
                 <div class="border-b border-white/10 pb-4 mb-6">
                     <div class="text-xs text-acid font-mono mb-2">MODULE 04</div>
-                    <h2 class="font-display text-xl text-ice">Agents, tools, and data access</h2>
+                    <h2 class="font-display text-xl text-ice">Advanced prompting patterns</h2>
                 </div>
                 <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
-                    <p class="text-gray-400"><strong class="text-chrome">Focus:</strong> How AI tools take multi-step action, connect to data sources, and where they break down</p>
-                    <p>This module covers the most advanced concepts in the course: how AI systems take multi-step actions autonomously, and how to connect them to your own data. You will learn the difference between interactive and non-interactive mode (<code class="text-acid bg-surface px-1">claude -p</code>), connect Claude to local files via Model Context Protocol (MCP), and discover — through hands-on experience — where these data connections fail and how to debug them. Making these connections work reliably — debugging permissions, auth, and schema mismatches — is harder than setting them up.</p>
+                    <p class="text-gray-400"><strong class="text-chrome">Focus:</strong> From prompting to managing — context hygiene, sub-agents, cross-model code review, and the editorial judgment that still has to come from you</p>
+                    <p>This module pulls back from the mechanics to the craft. Once you know how to install the tools, write context files, build skills and plugins, and schedule pipelines, the work shifts from prompting to managing — clear instructions, feedback, and evaluation criteria, the same skills you would use with a new staff writer. Module 4 is four short videos on the patterns that separate useful output from slop: managing the context window as a budget, delegating to sub-agents without losing editorial control, calling a different model for a cross-model code review before you commit, and running long work on a home machine while supervising it from your phone. The closing argument is the one the course keeps returning to: editorial judgment becomes more important as the tools get better, not less.</p>
                 </div>
 
                 <div class="mt-6 border border-white/10 bg-panel p-6">
                     <h3 class="font-mono text-sm text-acid mb-4">Topics</h3>
                     <ul class="space-y-2 text-sm text-gray-300">
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Chatbots vs. agents: what makes an AI tool an agent (tools, autonomy, multi-step plans)</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Interactive vs. non-interactive mode: what <code class="text-acid bg-surface px-1">claude -p</code> is and how it enables autonomous workflows</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Agent delegation: describing multi-step work and letting the AI plan and execute</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> MCP (Model Context Protocol) as a standard for connecting AI to external data sources</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> MCP server types: filesystem, database, web, search, custom</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Where data connections break: permissions, auth, schema mismatches, and silent failures</li>
-                        <li class="bullet-item"><span class="text-gray-500">—</span> Real-world examples: Washington Post's Haystacker, NYT's Echo</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Effort and thinking levels: <code class="text-acid bg-surface px-1">/effort</code> low/medium/high/max/auto and what each one costs</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> What actually lives in your context window: system prompt, tools, custom agents, memory files, skills, messages</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> The million-token window and why quality degrades past 20–30% usage</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> <code class="text-acid bg-surface px-1">/compact</code> with and without custom summarization instructions</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> The 40% rule: capping conversations at 40% of the context window, and rewinding instead of patching</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Sub-agents, fresh context windows, and "agent telephone" — why sub-agent tasks must stay narrowly scoped</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> The double-escape rewind trick for undoing bad decisions (but not past a compact)</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Cross-model code review: calling GitHub Copilot CLI and OpenAI Codex CLI as non-interactive sub-agents from inside Claude Code via the <code class="text-acid bg-surface px-1">-p</code> flag</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> Context isolation — sub-agent reviews don't count against your main session's tokens</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> <code class="text-acid bg-surface px-1">/remote-control</code> for driving a session from the web or your phone, and picking up where you left off</li>
+                        <li class="bullet-item"><span class="text-gray-500">—</span> The journalist-as-product-manager framing, and four questions for picking any tool (what's the task, how much context, does it need tool access, what's your real money budget)</li>
                     </ul>
                 </div>
 
                 <div class="mt-4 border border-white/10 bg-panel p-6">
                     <h3 class="font-mono text-sm text-acid mb-4">Activities</h3>
                     <ul class="space-y-3 text-sm text-gray-300">
-                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Watch:</strong> <a href="../module-4/#main" class="text-ice hover:text-acid transition-colors">"Agents, tools, and data access"</a> — <code class="text-acid bg-surface px-1 text-xs">claude -p</code> autonomous processing, Reroute NJ deep dive, MCP data connections</li>
-                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Required readings:</strong> <a href="https://www.axios.com/2024/08/20/washington-post-ai-tool-data" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">WaPo Haystacker</a> and <a href="https://www.niemanlab.org/2025/02/the-new-york-times-will-let-reporters-use-ai-tools-while-its-lawyers-litigate-ai-tools/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">NYT Echo</a> case studies, Anthropic's <a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">MCP introduction</a> and <a href="https://modelcontextprotocol.io/quickstart" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">quickstart guide</a>, de Cooker's <a href="https://generative-ai-newsroom.com/extracting-quotes-from-news-articles-with-llms-8e231aae77e7" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"Extracting quotes from news articles with LLMs,"</a> Amditis's <a href="https://strugglestreet.substack.com/p/im-a-claude-code-agent-with-my-own" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"I'm a Claude Code agent with my own Gmail account"</a></li>
-                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Exercise:</strong> Connect Claude to a data source via MCP (choose one: folder of local documents, scraped web data, collection of news articles, or a public API dataset), then query across it and document what worked and what didn't</li>
-                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Discussion</strong> (choose one): Where should newsrooms draw the line on AI autonomy, and what safeguards matter most? Or: When is it worth the setup cost to connect AI to a live data source versus just giving it the files directly?</li>
+                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Watch:</strong> <a href="../module-4/#main" class="text-ice hover:text-acid transition-colors">"Advanced prompting patterns"</a> — four short videos on effort/context window, the 40% rule and sub-agents, cross-model code review via <code class="text-acid bg-surface px-1 text-xs">-p</code>, and remote control plus editorial judgment</li>
+                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Required readings:</strong> Ethan Mollick's <a href="https://www.oneusefulthing.org/p/management-as-ai-superpower" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"Management as AI superpower,"</a> Clare Spencer's <a href="https://generative-ai-newsroom.com/how-to-budget-for-your-newsrooms-ai-project-a13fea25d4e4" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"How to Budget for Your Newsroom's AI Project"</a> (GAIN), Simon Willison's <a href="https://simonwillison.net/2025/Dec/10/normalization-of-deviance/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"The normalization of deviance in AI,"</a> de Cooker's <a href="https://generative-ai-newsroom.com/extracting-quotes-from-news-articles-with-llms-8e231aae77e7" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"Extracting quotes from news articles with LLMs,"</a> and Amditis's <a href="https://strugglestreet.substack.com/p/im-a-claude-code-agent-with-my-own" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"I'm a Claude Code agent with my own Gmail account"</a></li>
+                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Exercise:</strong> Manage a full Claude Code session as a manager, not a prompter — take a context-window baseline, load a real file, compact the session, then call a different model (Codex CLI, Copilot CLI, or Gemini CLI) through its non-interactive <code class="text-acid bg-surface px-1">-p</code> flag for a second-opinion review of the most important file in the session, and reconcile the two reads</li>
+                        <li class="bullet-item"><span class="text-acid shrink-0">></span> <strong class="text-chrome">Discussion</strong> (choose one): Where in your own work would you most easily slip into Willison's "normalization of deviance" pattern — and what would you have to check in six months to catch it? Or: Which part of your reporting workflow would you delegate to a sub-agent, which part would you keep, and why?</li>
                         <li class="bullet-item"><span class="text-acid shrink-0">></span> Quiz</li>
                         <li class="bullet-item"><span class="text-acid shrink-0">></span> Final project due (optional — see below)</li>
                     </ul>
@@ -366,15 +380,15 @@
                             </div>
                             <div class="p-4 flex items-start gap-3 text-sm">
                                 <span class="text-acid font-mono shrink-0">M2</span>
-                                <span class="text-gray-300">Create a custom skill (source verification, data cleaning, content formatting, or other) and test it on a real example</span>
+                                <span class="text-gray-300">Create a custom skill and package it as a one-skill plugin a colleague could install</span>
                             </div>
                             <div class="p-4 flex items-start gap-3 text-sm">
                                 <span class="text-acid font-mono shrink-0">M3</span>
-                                <span class="text-gray-300">Ask Claude to build an automation script for a recurring newsroom task, then examine what it built</span>
+                                <span class="text-gray-300">Stage a real automated pipeline, run it end-to-end once, then schedule it to run on its own</span>
                             </div>
                             <div class="p-4 flex items-start gap-3 text-sm">
                                 <span class="text-acid font-mono shrink-0">M4</span>
-                                <span class="text-gray-300">Connect Claude to a data source via MCP and document what worked and what didn't</span>
+                                <span class="text-gray-300">Manage a full session as a manager — take a context baseline, compact, and call a different model through its <code class="text-acid bg-surface px-1 text-xs">-p</code> flag for a cross-model review</span>
                             </div>
                         </div>
                     </div>
@@ -488,11 +502,9 @@
                     <p>Companion website (supplementary reference): <a href="https://mooc.amditis.tech" class="text-ice hover:text-acid transition-colors">mooc.amditis.tech</a></p>
                 </div>
 
+                <p class="text-sm text-gray-300 leading-relaxed mt-4">The following GitHub repositories are maintained as supplementary reference material. Students should access course content through the Knight Center platform.</p>
+
                 <div class="mt-6 border border-white/10 bg-panel divide-y divide-white/5">
-                    <div class="p-5">
-                        <a href="https://github.com/jamditis/mooc-starter-kit" target="_blank" rel="noopener" class="font-mono text-sm text-acid hover:text-white transition-colors">mooc-starter-kit</a>
-                        <p class="text-gray-400 text-sm mt-1">Your course workspace. Fork this repo and use it for all four modules. Contains sample documents, skill templates, starter scripts, and MCP config examples.</p>
-                    </div>
                     <div class="p-5">
                         <a href="https://github.com/jamditis/prompt-engineering-journalists" target="_blank" rel="noopener" class="font-mono text-sm text-acid hover:text-white transition-colors">prompt-engineering-journalists</a>
                         <p class="text-gray-400 text-sm mt-1">Course materials, exercises, and the companion website (maintained for reference)</p>
@@ -535,18 +547,18 @@
                             </tr>
                             <tr>
                                 <td class="p-4 text-gray-400">2</td>
-                                <td class="p-4 text-gray-300">Custom skills for Claude Code</td>
-                                <td class="p-4 text-gray-300">Custom skill of your choice</td>
+                                <td class="p-4 text-gray-300">Custom skills, plugins, and hooks</td>
+                                <td class="p-4 text-gray-300">Custom skill packaged as a plugin</td>
                             </tr>
                             <tr>
                                 <td class="p-4 text-gray-400">3</td>
-                                <td class="p-4 text-gray-300">CLI workflows for newsrooms</td>
-                                <td class="p-4 text-gray-300">Automation script for a recurring task</td>
+                                <td class="p-4 text-gray-300">Automation, pipelines, and triggered workflows</td>
+                                <td class="p-4 text-gray-300">Automation pipeline with a scheduler or trigger</td>
                             </tr>
                             <tr>
                                 <td class="p-4 text-gray-400">4</td>
-                                <td class="p-4 text-gray-300">Agents, tools, and data access</td>
-                                <td class="p-4 text-gray-300">MCP data connection + final project (optional)</td>
+                                <td class="p-4 text-gray-300">Advanced prompting patterns</td>
+                                <td class="p-4 text-gray-300">Context-management and cross-model review exercise + final project (optional)</td>
                             </tr>
                         </tbody>
                     </table>
