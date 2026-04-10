@@ -20,7 +20,7 @@ Think of skills as the journalism equivalent of style guides or reporting checkl
 
 **This week's videos** demonstrate the full power of CLI-based workflows through a live demo, then show how to turn that workflow into reusable skills and a shareable plugin.
 
-**Video 1 (~36 min)** opens with a quick overview of what skills, commands, plugins, and hooks are — markdown files that load on demand, bundles of tools you can share, and automated checks that fire without you invoking them. Then it goes into a live demo: a social media video content analysis pipeline on NYC Mayor Zohran Mamdani's accounts across five platforms (YouTube, TikTok, Twitter, Instagram, Facebook). You'll see the entire process — downloading 76 videos, transcribing them with Whisper, extracting frames for on-screen text analysis, and building an interactive dashboard — all from a single CLI session. Along the way, the video shows how plugins like Superpowers add structured planning and how browser automation (Playwright) handles platforms that block standard scraping tools. The key point: none of this is possible from a web chat interface.
+**Video 1 (~36 min)** opens with a quick overview of the four building blocks — skills and commands are markdown files that load on demand, plugins are bundles of skills and hooks you can share, and hooks are scripts that run before or after Claude acts to block, validate, or log what it does. Then it goes into a live demo: a social media video content analysis pipeline on NYC Mayor Zohran Mamdani's accounts across five platforms (YouTube, TikTok, Twitter, Instagram, Facebook). You'll see the entire process — downloading 76 videos, transcribing them with Whisper, extracting frames for on-screen text analysis, and building an interactive dashboard — all from a single CLI session. Along the way, the video shows how plugins like Superpowers add structured planning and how browser automation (Playwright) handles platforms that block standard scraping tools. The key point: none of this is possible from a web chat interface.
 
 **Video 2 (~13 min)** picks up where Video 1 left off: turning everything from the demo into four modular skills and packaging them as a proper Claude Code plugin. You'll see the troubleshooting process when the plugin doesn't show up (wrong directory, restart needed), and the assignment for this module.
 
@@ -28,7 +28,7 @@ Think of skills as the journalism equivalent of style guides or reporting checkl
 
 **Skill** → A markdown file in `.claude/commands/` that Claude Code loads as a slash command. You type `/your-command-name` and the instructions apply. No copy-pasting, no searching through notes.
 
-**Hook** → An automated check that runs in the background. No invocation needed — it fires on its own when certain conditions are met. Two kinds: notify hooks (flag issues without stopping work) and stop hooks (pause before irreversible actions, like the one-way-door-check hook discussed in the video).
+**Hook** → A script that runs before or after a Claude action, with no invocation needed. Pre-hooks run before an action executes and can block it; post-hooks run after and can validate, flag, or log the result. The video shows a one-way-door-check pre-hook that pauses before irreversible actions like deletes and pushes.
 
 **Plugin** → A bundle of skills and hooks packaged together. You can share them on GitHub and install them with one command. The video demo ends with the instructor building one from scratch.
 
