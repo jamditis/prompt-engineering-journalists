@@ -1,15 +1,10 @@
-# Module 3: CLI workflows for newsrooms
+# Module 3: Automation, pipelines, and triggered workflows
 
-## Exercise: Build an article-to-newsletter pipeline
+## Exercise: Stage and schedule a real automated pipeline
 
-In this exercise, you'll describe a pipeline to your CLI LLM and have it build the automation for you. The pipeline:
+In this exercise you'll pick a recurring task from your own work, describe it to a CLI tool as a pipeline, run it end-to-end once on real data, and then schedule it so it runs without you. The goal is not a novel pipeline — it's a small, boring, correct one that actually runs on a schedule and produces output you'd show a colleague.
 
-1. Fetches an article from the web
-2. Extracts the main content
-3. Summarizes it with AI
-4. Formats it for a newsletter
-
-You won't write shell code. You'll describe what you want, review what the LLM builds, test it on an article you already know, and refine it until the output is good enough to actually use. By the end, you'll have a reusable script you can run on any URL.
+You will not write shell code. You'll describe the workflow to Claude Code (or Gemini CLI, or Codex CLI) in plain English, review what it plans to build, let it build it, test it on a small batch, and then hand it off to a scheduler. You stay in the driver's seat — you sketch the system, you approve the plan, you verify the output, you decide when it runs. The CLI tool does the typing.
 
 ---
 
@@ -17,180 +12,151 @@ You won't write shell code. You'll describe what you want, review what the LLM b
 
 Before starting, make sure you have:
 
-- **Claude Code (or Gemini CLI) installed and running.** If you haven't done this yet, return to Module 1.
-- **An API key with available credits.** Anthropic API at console.anthropic.com, or Gemini API (free tier) at aistudio.google.com.
-- **Node.js installed** (from Module 1).
-
-You'll also need a readability tool installed — this is what strips ads and navigation from web pages before summarizing. Ask your CLI tool to install it for you:
-
-> "I need a command-line tool that can fetch a URL and extract just the article text, stripping out ads, navigation, and other junk. What's the best option and how do I install it?"
-
-Follow the instructions it gives you. If the install fails, paste the error back and ask it to troubleshoot.
+- **A CLI tool installed and running.** Claude Code, Gemini CLI, or Codex CLI. If you haven't done this yet, return to Module 1.
+- **A project folder for this module with its own CLAUDE.md (or GEMINI.md / AGENTS.md).** You set one of these up in Module 1. You can reuse it or create a new one for this week's work.
+- **An API key with available credits** for whichever CLI tool you're using.
+- **A GitHub account.** You will need one if you choose to use GitHub Actions as the scheduler — which is a good choice for this exercise even if you haven't used GitHub before. If you're new to Git and GitHub, the course's bonus module walks through the basics and is a good companion for this exercise.
 
 ---
 
-## Part 1: Describe the pipeline and review what gets built
+## Part 1: Pick the pipeline
 
-### Step 1: Set up a project folder
+Pick exactly one of the four workflows below. If your actual beat has a recurring task that looks like any of them, use your real task instead — the goal is a pipeline you'd actually run, not a demo.
 
-Open your terminal, create a folder for this exercise, and start your CLI LLM:
+1. **City council agenda prep sheet.** A pipeline that fetches the next meeting's agenda from your city's or county's public website, pulls out the items most likely to matter to readers (budgets, rezonings, police oversight, votes that weren't in the consent calendar), and produces a short prep doc with links and a couple of lines of context per item.
+2. **Web scraping pipeline.** A pipeline that watches a public website for new items — press releases from a state agency, a court docket, an RFP board, a social media account — and produces a running log of what's new, with the date, the source URL, and a short summary per item.
+3. **Batch document processing.** A pipeline that takes a folder of documents (PDFs, press releases, transcripts, public-records responses) and runs a consistent transformation on all of them — classifying them, extracting names and dates, pulling quotes, flagging specific phrases, or summarizing them — into a single output file you can search and sort.
+4. **Weekly content roundup.** A pipeline that collects the most important items from several sources (your own newsroom's CMS, an RSS feed, a Google Alerts feed, a newsletter archive) over the last seven days and assembles a draft newsletter, morning brief, or end-of-week recap that a human editor can polish before sending.
 
-```
-mkdir newsletter-pipeline
-cd newsletter-pipeline
+Write down — in one or two sentences — which one you picked, where the input is coming from, and what the output should look like. You'll hand this to Claude Code in Part 2.
+
+## Part 2: Describe the pipeline and review the plan
+
+### Step 1: Launch your CLI tool in your module project folder
+
+Open a terminal, change into your project folder, and launch Claude Code.
+
+```terminal
+cd ~/your-module-3-folder
 claude
 ```
 
-(Or use `gemini` if you're working with Gemini CLI.)
+(Use `gemini` or `codex` instead of `claude` if you're working with those tools.)
 
-### Step 2: Use plan mode to describe the pipeline
+### Step 2: Turn on plan mode and describe the workflow as a system
 
-Before asking your CLI tool to build anything, ask it to plan first.
+Before Claude builds anything, you want it to plan. In Claude Code, turn on plan mode by typing `/plan` inside the session. In Gemini CLI or Codex, add the instruction explicitly at the top of your first message.
 
-**In Claude Code:** Type `/plan` to enter plan mode. Claude will explore the request and present a plan for your review before writing anything.
+Then paste a prompt like this — substituting the workflow you picked in Part 1:
 
-**In Gemini CLI:** Prefix your request: "Before building anything, plan this out step by step and wait for my approval."
+```claude code
+/plan
 
-**In Codex CLI:** Ask it to plan first: "Plan this out step by step and wait for my approval before writing any code." You can also start Codex with `--approval-mode suggest` to see proposed changes before they're applied.
+I want to stage an automated pipeline for my beat and then schedule it so it runs without me.
 
-Then describe the workflow in plain English:
+The workflow: [one or two sentences describing the task you picked in Part 1 — what comes in, what happens to it, what comes out]
 
-> "I want to build a pipeline that takes a news article URL as input, fetches the article, strips out the junk like ads and navigation, summarizes it in 2-3 sentences in a tone suitable for a newsletter, and saves the output to a markdown file with today's date in the filename. I want to be able to run this from the command line by passing in a URL. Plan this out — don't build anything yet."
-
-Your CLI tool will present its proposed approach: what stages it plans to build, what tools it plans to use, where it plans to put the API key, how it plans to handle errors. **Review this before approving.**
-
-Ask yourself:
-- Does this match what you asked for, or is it proposing something more complex?
-- Is the API key handling mentioned? (It should be.)
-- Are the four stages there — fetch, extract, summarize, format?
-- Is there anything you want to change before it starts building?
-
-If something looks off, say so now. Redirect the plan before any code is written. Once you're satisfied, tell it to proceed.
-
-### Step 3: Review the script before running it
-
-Ask your CLI tool to walk you through what it built:
-
-> "Walk me through what this script does, step by step. Are there any security concerns I should know about?"
-
-Specifically, check where the API key is handled. It should never be hardcoded in the script — it should read from an environment variable. If it isn't, ask:
-
-> "The API key is hardcoded in the script. Rewrite it to read from an environment variable instead. Also show me how to set that environment variable on my system."
-
-Follow the instructions for setting the environment variable. You'll likely need to add a line to your shell profile (`.zshrc` or `.bashrc`) and either restart your terminal or run `source ~/.zshrc`.
-
----
-
-## Part 2: Test on something you already know
-
-### Step 4: Pick an article you've actually read
-
-Before running the pipeline, pick a news article you've actually read recently — something where you know what it says. This is the same principle from Module 2: test new tools on material you can verify.
-
-If you test on an article you've never read, you can't tell if a bad summary is a pipeline problem or just a hard-to-summarize article. Use something familiar first.
-
-### Step 5: Run it and check the output
-
-Run the script on your test article. The exact command will depend on what your CLI tool built for you, but it will look something like:
-
-```
-./pipeline.sh "https://[the article URL]"
+Before writing any code, sketch this as a pipeline: input nodes, conveyor belts, transformers, output destinations. Tell me which steps are "stages" in the one-job-per-stage sense. Then propose a plan for building it — what files you'd create, what tools you'd use, how you'd handle the API key, how you'd handle rate limiting if we hit a list of items. Don't build anything yet. I want to review the plan first.
 ```
 
-Check the output file. Ask yourself:
-- Is the summary accurate?
-- Is the length and tone right for a newsletter — or does it read like an abstract?
-- Is anything missing that a reader would need?
+Claude will present the pipeline as a system (input → belt → transformer → output) and then propose a plan with the stages, tools, and security considerations. **Read the plan before approving it.** Specifically check:
 
-### Step 6: Refine the output
+- Are the stages separated — one job per stage, so failures are localized?
+- Is the API key handling mentioned, and is it going to use an environment variable (not a hardcoded string)?
+- Is the output going somewhere you can actually inspect — a file, a folder, a markdown doc — not just printed to the terminal and lost?
+- Does the plan include a small-batch test mode, so you can run it on 3-5 inputs before running it on the full batch?
 
-If the summary isn't what you wanted, describe the problem:
+If anything looks wrong, say so before approving. This is the whole point of plan mode — redirect the plan now, not after the pipeline is built.
 
-> "The summary reads like an academic abstract. Rewrite the prompt so the output is punchier — one or two sentences that lead with the most newsworthy fact."
+### Step 3: Let Claude build it, then ask Claude to explain what it built
 
-Or:
+Once you approve the plan, Claude will build the pipeline. When it's done, ask:
 
-> "The output file has no headline — just the summary and the URL. Add a step that asks the model to extract the article's headline and put it at the top of the output."
+```claude code
+Walk me through what you built, stage by stage. For each stage, tell me what the input is, what happens to the data, and what the output is. Then tell me where the API key is read from and how to set it. Then tell me how I'd run this on 3 inputs as a small-batch test before running it on the full batch.
+```
 
-Iterate until the output looks like something you'd actually use in a newsletter.
-
----
-
-## Part 3: Add rate limiting and batch processing
-
-### Step 7: Add rate limiting before processing multiple articles
-
-Before you run this on a batch of articles, ask your CLI tool to add rate limiting:
-
-> "I want to process multiple articles. Add a 2-second pause between API calls so I don't get rate-limited. Also add a progress indicator that shows which article it's currently processing."
-
-This isn't optional. Sending 20 requests in 10 seconds will get you throttled. The pause is responsible engineering, not a workaround.
-
-### Step 8: Add batch processing
-
-Ask your CLI tool to extend the pipeline for batch use:
-
-> "Build a separate script called process-batch.sh that reads URLs from a text file called urls.txt (one URL per line) and runs the pipeline on each one. Collect all the output into a single file called newsletter-draft.md. Include the timestamp in the filename."
-
-Then create a `urls.txt` file with 3-5 article URLs. Start with articles you've already read so you can verify the output. Run it on the small batch before adding more.
-
-### Step 9: Add checkpointing (optional)
-
-If you plan to process large batches, ask your CLI tool to add checkpointing:
-
-> "If the batch job fails halfway through, I don't want to restart from the beginning. Add a checkpoint log that tracks which URLs have already been processed. On restart, skip the ones already done."
-
-This matters when you're processing 50 or 100 documents. You won't need it for 5 URLs, but it's a good habit to build into any pipeline you plan to reuse.
+The answer you get is your mental model of the pipeline. If any part of the walkthrough is surprising to you, stop and ask follow-ups until you understand it. You're going to schedule this thing to run without you — you need to actually know what it does.
 
 ---
 
-## Step 10: Schedule it (optional)
+## Part 3: Run it once end-to-end on real data
 
-If you want the pipeline to run automatically — every morning, or on a schedule — ask your CLI tool:
+### Step 4: Do the small-batch test
 
-> "I want to run this pipeline automatically at 7 AM every weekday. How do I schedule it on my operating system? Walk me through the setup."
+Ask Claude to run the pipeline on a small number of real inputs first:
 
-Follow the instructions. The approach will vary by OS. Review whatever it sets up before you consider it done.
+```claude code
+Run the pipeline on 3 real inputs — the first 3 items from my actual source, not test data. Show me the output for each one. If any stage fails, show me the exact error and propose a fix before touching anything else.
+```
+
+Review the three outputs. For each one, ask yourself:
+
+- Does the output look right — would you actually send it to a colleague or use it in your reporting?
+- Is anything missing that a human would include?
+- Is anything there that shouldn't be?
+
+If the output is wrong in the same way across all three inputs, that's a prompt or extraction problem — describe what you want instead and ask Claude to fix the relevant stage. If only one of the three is wrong, that's either a bad input or an edge case — look at the input before changing the pipeline.
+
+### Step 5: Iterate until the output is something you'd actually use
+
+This is the editorial-judgment step and it's the most important one in the exercise. A pipeline that runs on a schedule and produces output nobody trusts is worse than one that doesn't run at all. Keep iterating until the small-batch output passes your own "would I show this to an editor" check.
+
+When you're describing a change to Claude, be specific. "Make the summaries better" produces nothing useful. "The summaries lead with the organization's name — rewrite the prompt so they lead with the newsworthy fact instead" produces a targeted fix. The specificity is where your journalism expertise enters the pipeline.
+
+### Step 6: Run it on the full batch
+
+Once the small-batch output is right, run the pipeline on the full list. Ask Claude to keep the small-batch test as a separate mode you can re-run anytime — you'll want it later for debugging.
+
+---
+
+## Part 4: Schedule it
+
+### Step 7: Pick a scheduler
+
+Ask Claude to help you choose between the three options from Video 2:
+
+```claude code
+I want to schedule this pipeline to run without me. My machine situation is: [describe — laptop that sleeps, desktop that stays on, or nothing always on]. The pipeline needs to run [describe — daily at 6am, every Monday morning, etc]. Walk me through whether cron.create, a cloud remote trigger, or a GitHub Actions scheduled job is the right fit, and why. Then pick one and recommend it.
+```
+
+Three valid answers:
+
+- **`cron.create`** inside a long-lived Claude Code session on a machine that stays on
+- **A cloud `remote trigger`** that runs on Anthropic's infrastructure even when your laptop is closed
+- **A GitHub Actions scheduled job** on a cron, which is the best fit for most people doing this exercise for the first time — it's free within generous limits, it doesn't need any machine to be on, and it gives you a log you can inspect after the fact
+
+If you don't have a strong reason to pick the other two, use GitHub Actions.
+
+### Step 8: Set up the scheduler
+
+Describe the schedule you want and let Claude set it up:
+
+```claude code
+Set up the pipeline to run on [the schedule you picked] using [the scheduler you picked]. Walk me through each setup step — including any secrets I need to wire up, any permissions I need to grant, and anything I need to click on a website. Don't assume anything. I'm doing this for the first time.
+```
+
+For GitHub Actions, this will involve creating a `.github/workflows/` YAML file, adding the pipeline's API key to the repo's encrypted secrets, and enabling write permissions for the Action if the pipeline needs to commit its output back to the repo.
+
+### Step 9: Verify it actually fires
+
+Don't just trust that the scheduler is wired up correctly. Trigger one run manually to confirm the pipeline runs end-to-end in the scheduled environment. For GitHub Actions, the `workflow_dispatch` trigger lets you run a scheduled workflow by hand from the Actions tab in your repo. For `cron.create`, run it once in the session and inspect the log. For a cloud remote trigger, fire one test invocation and read the result.
+
+If the manual run succeeds and the output looks right, you're done. The scheduler will fire on its own from here.
 
 ---
 
 ## Troubleshooting
 
-When something breaks, paste the error directly into your CLI session:
+**Plan mode skipped.** If you caught yourself letting Claude build something without a plan review, that's the single most common mistake this week. Stop, revert, and re-run with `/plan`. Making it a habit is the whole point.
 
-> "Here's what I got when I ran the script — what went wrong and how do I fix it?"
-> [paste error message]
+**The API key is in the script.** Ask Claude to move it to an environment variable (for local) or to the repo's secret store (for GitHub Actions), and rotate the key immediately if the repo is public or shared.
 
-Paste the exact error text. Don't paraphrase. Your CLI tool already knows the code it wrote, so it can read the error in context and usually identify the problem immediately.
+**GitHub Action fails with a permissions error.** Two common causes: the Action doesn't have write permissions (fix in the repo settings under Actions → General → Workflow permissions → Read and write), or the pipeline is trying to read a secret that isn't wired up (fix in Settings → Secrets and variables → Actions → New repository secret).
 
-**Common situations:**
+**Pipeline works locally but fails in the scheduled environment.** Usually a path problem or a missing dependency. Paste the exact error from the Action log (or the cron log) back into your Claude Code session. Don't paraphrase — Claude already knows the pipeline it built, so with the real error text it can usually point at the fix on the first try.
 
-**"API key not found" or similar.**
-Your environment variable probably isn't set, or you need to restart your terminal after adding it. Ask: "The script can't find my API key environment variable. What might be wrong?"
-
-**Article content comes back empty.**
-Some sites block automated requests. Ask: "The content extraction step returned empty output for this URL. How do I check whether the site is blocking the request, and what are my options?"
-
-**Output format looks wrong.**
-Paste a sample of the bad output and describe what you expected: "The summary came back as a bulleted list, but I want flowing prose. How do I fix the prompt that generates it?"
-
-**Rate limit errors.**
-Paste the error: "I'm getting rate limit errors. Can you add exponential backoff to the retry logic?"
-
-**The script runs but produces nothing.**
-Ask: "The script completed without errors but the output file is empty. Walk me through how to add debug output so I can see what's happening at each stage."
-
----
-
-## What you built
-
-You now have:
-
-1. A working pipeline that turns article URLs into newsletter-ready summaries — built by describing the workflow, not writing code
-2. Output you refined by testing on material you already knew and iterating on the prompt until it was right
-3. A script you understand because you reviewed it and directed its construction
-
-The technique — describe the workflow, let the LLM build it, test on known material, iterate — works for any automation task you'll encounter. Different pipeline, same method.
+**Self-triggering PR loop.** If the pipeline pushes its output back to the repo and that push triggers a new Action run, you've built a loop. Ask Claude to add a path filter or a commit-author filter so commits from the Action itself don't re-trigger the workflow. This is the same bug the live demo in Video 2 hits, so if you're debugging it, you are not alone.
 
 ---
 
@@ -198,6 +164,7 @@ The technique — describe the workflow, let the LLM build it, test on known mat
 
 Post in the exercise forum:
 
-1. A screenshot of your pipeline running successfully on at least one article
-2. One example newsletter item it generated
-3. One thing you changed through iteration — what did the first output look like, and what did you describe to your CLI tool to improve it?
+1. A one-line description of the pipeline you built (which of the four workflows, what the inputs and outputs are)
+2. A screenshot of the scheduler firing successfully — a GitHub Actions log page, a cloud trigger log, or a `cron.create` confirmation
+3. One example of the output the pipeline produced on real data (paste the text, link to a published page, or attach a file)
+4. The single most useful iteration you made during Part 3 — what the first output looked like, what you told Claude to fix it, and how the output changed
