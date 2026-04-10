@@ -10,9 +10,9 @@ This course moves you from web-based AI chat interfaces to terminal CLI tools. B
 
 - Use Claude Code, Gemini CLI, and other AI tools from the command line
 - Write project context files that give AI persistent instructions about your beat
-- Build custom Claude skills for journalism workflows
-- Create automated pipelines that chain AI with other tools
-- Connect AI to your own archives using RAG and MCP
+- Build custom Claude skills, plugins, and hooks for journalism workflows
+- Create automated pipelines you can schedule with cloud triggers or GitHub Actions
+- Manage a CLI session as a manager — budgeting the context window, delegating to sub-agents, and running cross-model code review
 
 **Course site:** [mooc.amditis.tech](https://mooc.amditis.tech)
 
@@ -20,10 +20,10 @@ This course moves you from web-based AI chat interfaces to terminal CLI tools. B
 
 | Week | Topic | What you'll build |
 |------|-------|-------------------|
-| 1 | [From chat window to command line](docs/module-1/) | CLI tool + beat context file |
-| 2 | [Custom skills for Claude Code](docs/module-2/) | Source-verification skill |
-| 3 | [CLI workflows for newsrooms](docs/module-3/) | Automation script for a recurring task |
-| 4 | [Agents and RAG](docs/module-4/) | Connect Claude to a knowledge base |
+| 1 | [From chat window to command line](docs/module-1/) | CLI tool + beat context file + document processing |
+| 2 | [Custom skills, plugins, and hooks](docs/module-2/) | Custom skill packaged as a plugin |
+| 3 | [Automation, pipelines, and triggered workflows](docs/module-3/) | Automation pipeline with a scheduler or trigger |
+| 4 | [Advanced prompting patterns](docs/module-4/) | Context-management and cross-model review exercise |
 
 **Bonus modules:** [Git & GitHub for journalists](docs/bonus-git-github/) | [OSS etiquette with AI tools](docs/bonus-oss-etiquette/) | [Interviews](docs/bonus-interviews/)
 
@@ -80,7 +80,7 @@ gemini -p "Summarize the key points of the First Amendment in 3 bullets"
 | Tool | Install | Cost | Best for |
 |------|---------|------|----------|
 | [Gemini CLI](https://github.com/google-gemini/gemini-cli) | `npm i -g @google/gemini-cli` | Free tier | Starting out |
-| [Claude Code](https://claude.ai/code) | `npm i -g @anthropic-ai/claude-code` | $20-100/mo | Skills, MCP |
+| [Claude Code](https://claude.ai/code) | `npm i -g @anthropic-ai/claude-code` | $20-100/mo | Skills, plugins, sub-agents |
 | [Codex CLI](https://github.com/openai/codex) | `npm i -g @openai/codex` | ChatGPT sub | OpenAI users |
 
 ## License
