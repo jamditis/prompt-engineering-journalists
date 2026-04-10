@@ -10,9 +10,9 @@ This course moves you from web-based AI chat interfaces to terminal CLI tools. B
 
 - Use Claude Code, Gemini CLI, and other AI tools from the command line
 - Write project context files that give AI persistent instructions about your beat
-- Build custom Claude skills for journalism workflows
-- Create automated pipelines that chain AI with other tools
-- Connect AI to your own archives using RAG and MCP
+- Build custom Claude skills, plugins, and hooks for journalism workflows
+- Create automated pipelines you can schedule with cloud triggers or GitHub Actions
+- Manage a CLI session as a manager — budgeting the context window, delegating to sub-agents, and running cross-model code review
 
 **Course site:** [mooc.amditis.tech](https://mooc.amditis.tech)
 
@@ -80,7 +80,7 @@ gemini -p "Summarize the key points of the First Amendment in 3 bullets"
 | Tool | Install | Cost | Best for |
 |------|---------|------|----------|
 | [Gemini CLI](https://github.com/google-gemini/gemini-cli) | `npm i -g @google/gemini-cli` | Free tier | Starting out |
-| [Claude Code](https://claude.ai/code) | `npm i -g @anthropic-ai/claude-code` | $20-100/mo | Skills, MCP |
+| [Claude Code](https://claude.ai/code) | `npm i -g @anthropic-ai/claude-code` | $20-100/mo | Skills, plugins, sub-agents |
 | [Codex CLI](https://github.com/openai/codex) | `npm i -g @openai/codex` | ChatGPT sub | OpenAI users |
 
 ## License

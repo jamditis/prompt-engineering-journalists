@@ -160,7 +160,7 @@ This module pulls back from the mechanics to the craft. Once you know how to ins
 - The 40% rule: capping conversations at 40% of the context window, and rewinding instead of patching
 - Sub-agents, fresh context windows, and "agent telephone" — why sub-agent tasks must stay narrowly scoped
 - The double-escape rewind trick for undoing bad decisions (but not past a compact)
-- Cross-model code review: calling Copilot CLI and Codex CLI as non-interactive sub-agents from inside Claude Code via the `-p` flag
+- Cross-model code review: calling GitHub Copilot CLI and OpenAI Codex CLI as non-interactive sub-agents from inside Claude Code via the `-p` flag
 - Context isolation — sub-agent reviews don't count against your main session's tokens
 - `/remote-control` for driving a session from the web or your phone, and picking up where you left off
 - The journalist-as-product-manager framing, and four questions for picking any tool (what's the task, how much context, does it need tool access, what's your real money budget)
