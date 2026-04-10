@@ -1,4 +1,4 @@
-# Module 3: Custom skills for Claude Code
+# Module 2: Custom skills for Claude Code
 
 ## Required readings
 

@@ -5,17 +5,17 @@
 **Time required:** 45-60 minutes
 **Prerequisites:** Claude Code installed, GitHub account
 
-In this exercise, you'll build your own custom slash command (following the same progression shown in the video with meeting minutes extraction), install the journalism skills repository, and use source-verification to check a viral claim.
+In this exercise, you'll build your own custom slash command (applying the same skill-creation process shown in Video 2), install the journalism skills repository, and use source-verification to check a viral claim.
 
 ---
 
 ## Part 1: Build your own custom slash command (20 minutes)
 
-The video this week showed the full progression: raw prompt, saved prompt, custom slash command, hook. In this part, you'll follow that same path for a task on your own beat.
+The videos this week showed how a full workflow (scraping, transcribing, analyzing, and building a dashboard) gets turned into reusable skills and a plugin. In this part, you'll follow that same process for a task on your own beat — start with what you do, then save it as a skill.
 
 ### Choose a task
 
-Pick one thing you do repeatedly that involves a consistent process — not a one-off question, but something with steps you follow every time. The video used meeting minutes extraction. Your task should be similarly specific to your work.
+Pick one thing you do repeatedly that involves a consistent process — not a one-off question, but something with steps you follow every time. The video used a social media content analysis pipeline as its example, but your task can be much simpler — it just needs to be specific to your work.
 
 Good candidates:
 - Reviewing a specific type of document (press releases, budget reports, public records)

@@ -7,8 +7,8 @@ Week 2 is complete.
 This week you learned how to turn prompts you type repeatedly into permanent, reusable tools. You saw the full progression — raw prompt to saved prompt to custom slash command to hook — and built a custom skill of your own.
 
 **What you did:**
-- Watched the prompt-to-skill progression using meeting minutes extraction as the running example
-- Learned session commands (`/help`, `/plan`, `/compact`, `/clear`) for managing your Claude Code sessions
+- Watched the live demo of a social media video content analysis pipeline across five platforms (Video 1) and the process of turning that workflow into reusable skills and a plugin (Video 2)
+- Learned how skills, hooks, commands, and plugins work — and how they fit together
 - Created a custom slash command for a task on your beat
 - Installed the journalism skills repository and explored hooks
 - Understood the difference between notify hooks and stop hooks
