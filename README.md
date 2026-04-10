@@ -20,10 +20,10 @@ This course moves you from web-based AI chat interfaces to terminal CLI tools. B
 
 | Week | Topic | What you'll build |
 |------|-------|-------------------|
-| 1 | [From chat window to command line](docs/module-1/) | CLI tool + beat context file |
-| 2 | [Custom skills for Claude Code](docs/module-2/) | Source-verification skill |
-| 3 | [CLI workflows for newsrooms](docs/module-3/) | Automation script for a recurring task |
-| 4 | [Agents and RAG](docs/module-4/) | Connect Claude to a knowledge base |
+| 1 | [From chat window to command line](docs/module-1/) | CLI tool + beat context file + document processing |
+| 2 | [Custom skills, plugins, and hooks](docs/module-2/) | Custom skill packaged as a plugin |
+| 3 | [Automation, pipelines, and triggered workflows](docs/module-3/) | Automation pipeline with a scheduler or trigger |
+| 4 | [Advanced prompting patterns](docs/module-4/) | Context-management and cross-model review exercise |
 
 **Bonus modules:** [Git & GitHub for journalists](docs/bonus-git-github/) | [OSS etiquette with AI tools](docs/bonus-oss-etiquette/) | [Interviews](docs/bonus-interviews/)
 

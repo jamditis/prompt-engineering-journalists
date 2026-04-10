@@ -1,4 +1,4 @@
-# Module 3: CLI workflows for newsrooms
+# Module 3: Automation, pipelines, and triggered workflows
 
 ## Optional resources
 
