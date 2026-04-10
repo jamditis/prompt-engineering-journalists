@@ -1,4 +1,4 @@
-# Module 4: Agents, tools, and data access
+# Module 4: Advanced prompting patterns
 
 ## Quiz
 
@@ -8,91 +8,91 @@ Complete this quiz after finishing the readings and hands-on exercise. You have 
 
 ### Question 1
 
-What distinguishes an AI agent from a standard chatbot?
+Claude Code advertises a million-token context window. At what point does quality actually start to degrade, according to the videos and readings in this module?
 
-A) Agents use larger language models with more parameters
+A) The million-token claim is accurate — quality stays consistent until you hit the hard limit
 
-B) Agents can use tools, make decisions, and complete multi-step tasks without continuous human input
+B) Past about 20-30% of the window, quality starts to drop and the model's reasoning gets less reliable
 
-C) Agents are always connected to the internet
+C) Only past 80% of the window, when the model is actively pruning older messages
 
-D) Agents can only work with text, not images or video
+D) It varies by model so unpredictably that there's no rule of thumb
 
 **Correct answer:** B
 
-**Explanation:** The defining characteristic of an agent is its ability to take actions (use tools), make decisions about what to do next, and work through multi-step tasks. A standard chatbot responds to individual prompts; an agent pursues goals across multiple steps.
+**Explanation:** The million-token window is real in the sense that the model will accept that much input, but the quality of reasoning on that input starts to degrade well before you hit the limit — in practice around 20-30% usage. This is why the module teaches the context window as a *budget* rather than a ceiling, and why `/compact`, sub-agents, and the 40% rule all exist. Knowing the contents of your context window matters more than knowing the total.
 
 ---
 
 ### Question 2
 
-What does running `claude -p "your prompt here"` do differently from launching an interactive Claude Code session?
+You're in a Claude Code session and you've just made a bad decision — you asked Claude to refactor a file, it went off in a direction you didn't want, and you want to undo it without losing the five good decisions you made before that. Which of the following is the right move, and when does it stop working?
 
-A) It uses a different, more powerful model
+A) Close the session entirely and start over — there's no way to rewind a Claude Code session
 
-B) It sends a single prompt, prints the result to stdout, and exits — no interactive session, no back-and-forth
+B) Press escape twice to rewind to an earlier state in the session. This works until you've run `/compact`, which fuses older messages together and makes fine-grained rewinding impossible.
 
-C) It bypasses the CLAUDE.md context file
+C) Press escape twice to rewind. It always works regardless of whether you've run `/compact`.
 
-D) It runs the prompt but requires manual approval before producing output
+D) Type `/undo` — Claude Code has a built-in undo command for every action
 
 **Correct answer:** B
 
-**Explanation:** Non-interactive mode (`claude -p`) sends one prompt, gets a result, and exits. This makes it possible to use Claude in shell scripts, cron jobs, and automated pipelines — anywhere you need consistent, hands-off processing. An interactive session is better when you need to review intermediate steps or iterate on results.
+**Explanation:** The double-escape rewind trick is the fastest way to undo a bad decision without losing the good ones before it. The critical gotcha is that rewinding only works within uncompacted history — once you've run `/compact`, the older messages have been fused into a summary and the fine-grained turn-by-turn history you'd need to rewind into is gone. The practical lesson: rewind before you compact, not after.
 
 ---
 
 ### Question 3
 
-What problem does the Model Context Protocol (MCP) solve?
+What is the "40% rule" as taught in Module 4, and why does it matter?
 
-A) It encrypts all communications between AI systems
+A) At most 40% of your work should be delegated to AI — keep 60% manual
 
-B) It provides a standard way to connect AI models to external data sources and tools
+B) Cap your Claude Code conversations at about 40% of the context window and start a fresh session rather than pushing past that point. Quality drops sharply past 40%, and rewinding is cheaper than patching a session that has already degraded.
 
-C) It prevents AI models from generating false information
+C) Only 40% of the tokens in the context window actually contain your conversation — the rest is system prompt and tool definitions you can't control
 
-D) It translates between different programming languages
+D) `/compact` reduces a session's context usage by about 40% on average
 
 **Correct answer:** B
 
-**Explanation:** MCP is Anthropic's open standard for connecting AI models to external data sources (like databases, file systems, or APIs) and tools (like web browsers or code executors). Before MCP, each integration required custom code; MCP provides a common protocol.
+**Explanation:** The 40% rule is a behavioral discipline, not a technical limit. Once a conversation has consumed about 40% of the context window, quality starts to drop and you should rewind and continue in a fresh session — not keep pushing. This feels wasteful the first few times because it looks like you're throwing away progress. You're not. You're protecting the work you already did from the context rot that's about to hit. The honest way to continue past 40% is to summarize the session's decisions into a file, launch a fresh session, and load the file — not to keep going in the same window.
 
 ---
 
 ### Question 4
 
-Why does connecting AI to your own documents (via MCP or a knowledge base) reduce hallucination compared to standard prompting?
+You're inside a Claude Code session and you want a second opinion on the most important file from a different model family before you commit. You have Claude Code (Anthropic), Codex CLI (OpenAI), and Gemini CLI (Google) all installed. What's the pattern the module teaches for getting that second opinion, and why?
 
-A) Connected data sources are always verified and accurate
+A) Copy the file into a web interface for ChatGPT and paste the response back — same result, easier workflow
 
-B) The AI is slower when reading files, giving it more time to think
+B) Ask Claude inside your main session to review the file again — Claude is smart enough to catch its own mistakes
 
-C) The AI generates responses grounded in your source documents rather than relying on what it learned during training, which can be outdated or wrong
+C) From inside your Claude Code session, call the other tool with its non-interactive `-p` flag (e.g., `codex -p "review this file for..."` or `gemini -p "..."`). The review runs as a separate process, so its tokens don't count against your main session, and you get a second opinion from a different model family that has different blind spots than Claude.
 
-D) MCP servers filter out false information automatically
+D) Open a second terminal window, launch an interactive Codex or Gemini session, and paste the file in by hand
 
 **Correct answer:** C
 
-**Explanation:** Without a data connection, AI relies on "parametric knowledge" — patterns learned during training that can be outdated, incomplete, or wrong, with no way to check the source. When connected to your documents, the AI can draw from material you've provided and cite specific files. This doesn't eliminate errors, but it creates a citation trail: you can check what the AI said against what the document actually says.
+**Explanation:** The `-p` flag runs a single non-interactive prompt and exits. From inside Claude Code, you can call `codex -p "..."` or `gemini -p "..."` (or `copilot -p "..."`) as a one-shot sub-agent that returns a second opinion from a different model family — without polluting your main session's context window. This is context isolation in practice: the review runs in a separate process, its tokens don't count against your main session, and you can do this cheaply and often. The reason it matters is that a second model family has different blind spots than yours, and editorial judgment gets sharper when two models with different failure modes disagree and you have to reconcile them.
 
 ---
 
 ### Question 5
 
-A journalist builds an agent pipeline that works in three stages: a first subagent searches her archive for relevant articles, a second subagent extracts key facts from what the first found, and a third subagent drafts a briefing document from those facts. In stage one, the first subagent misidentifies an article's year, reporting a 2019 event as 2021. What is the most likely outcome?
+Module 4's closing argument is about editorial judgment. Which statement best captures it?
 
-A) The later subagents will catch and correct the error because they have access to the original documents
+A) Editorial judgment matters less as the tools get better, because the tools will eventually catch the things journalists currently catch
 
-B) The error will likely compound — the second subagent analyzes incorrect facts, and the third subagent drafts a briefing based on them, making the final document wrong in ways that aren't obvious
+B) Editorial judgment matters about the same — AI is a neutral tool that amplifies existing skill
 
-C) The pipeline will automatically halt when it detects inconsistent information
+C) Editorial judgment becomes *more* important as the tools get better, not less. The model can't tell you whether the lead is wrong, the quote is out of context, or the story is worth telling — and a pipeline that produces output nobody trusts is worse than no pipeline at all.
 
-D) Only the briefing document will be affected; the archive search results are stored separately
+D) Editorial judgment becomes less important for routine work but more important for investigative reporting
 
-**Correct answer:** B
+**Correct answer:** C
 
-**Explanation:** When subagents pass outputs to each other, errors in early stages become inputs to later stages. The second subagent has no way to know the year was wrong — it works with what it received. The third subagent has no way to know either. The final document is wrong, the error is harder to trace than a single-session mistake, and there's no automatic detection. This is why verification at each handoff matters: check intermediate outputs before passing them to the next stage, the same way you'd verify a source's claims before citing them in a story.
+**Explanation:** The video argument — and the argument the course keeps returning to — is that the better the model gets at typing, the more important your editorial judgment becomes. The model can do the research, the drafting, the formatting, the scheduling, the packaging. It cannot make the call about whether the lead is wrong, whether a source is credible, whether a story is worth telling, whether the framing is fair. Those are your calls, and they become load-bearing in exact proportion to how much work you're delegating to the model. A working pipeline that produces output nobody trusts is worse than no pipeline at all, which is why the Module 3 rule about checking the output and the Module 4 rule about managing the session are really the same rule said twice.
 
 ---
 

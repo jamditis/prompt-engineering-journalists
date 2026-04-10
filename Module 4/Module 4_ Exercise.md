@@ -1,385 +1,210 @@
-# Module 4: Agents, tools, and data access
+# Module 4: Advanced prompting patterns
 
-## Hands-on exercise: Configure Claude Code with MCP to query a local knowledge base
+## Exercise: Manage a full session as a manager, not a prompter
 
-**Time estimate:** 90 minutes
+In this exercise you'll manage a complete Claude Code session from the inside the way a product manager manages a junior hire: taking a context-window baseline, loading a real file, compacting the session, then calling a different model family through its non-interactive `-p` flag for a second-opinion review of the most important file you're working with, and finally reconciling the two reads into a judgment you'd actually act on.
 
-**What you'll build:** A local knowledge base of markdown files that Claude Code can search and reference when answering questions.
-
-**Prerequisites:**
-- A computer running macOS, Windows, or Linux
-- Basic familiarity with the command line
-- A code editor (VS Code recommended)
+You will not write shell code. You will not install MCP servers. You will not build a pipeline. The entire exercise happens inside one Claude Code session and one one-shot call-out to a different model. The skill you're practicing is managing the session — not stacking tools on top of it.
 
 ---
 
-## Part 1: Install Claude Code
+## Prerequisites
 
-### Step 1.1: Install Node.js
+Before starting, make sure you have:
 
-Claude Code requires Node.js. Check if you have it:
+- **Claude Code installed and authenticated.** If you haven't done this yet, return to Module 1.
+- **A project folder with a CLAUDE.md (or GEMINI.md / AGENTS.md).** You set one of these up in Module 1 — reuse it.
+- **At least one real file in the project folder** that you actually care about. A beat context file, a draft article, a public-records response, a scraped dataset, a CSV, a skill you wrote in Module 2, a pipeline script from Module 3. Anything from your own work that isn't toy data.
+- **A second CLI tool installed for the cross-model review.** One of:
+  - **OpenAI Codex CLI** (`npm install -g @openai/codex`) — requires a ChatGPT Plus subscription or OpenAI API key
+  - **GitHub Copilot CLI** (`npm install -g @github/copilot`) — requires a GitHub Copilot subscription
+  - **Gemini CLI** (`npm install -g @google/gemini-cli`) — free tier with a Google account, 1,000 requests per day. This is the zero-cost option if you don't have a second paid subscription.
 
-```bash
-node --version
-```
+The cross-model review step needs a *different* model family than the one running your main session. If your main session is Claude Code, your second tool can be any of the three above. If you're running your main session in Gemini CLI instead, your second tool should be Claude Code, Codex, or Copilot.
 
-If you see a version number (v18 or higher), skip to Step 1.2. Otherwise, install Node.js from https://nodejs.org/ (choose the LTS version).
+---
 
-### Step 1.2: Install Claude Code
+## Part 1: Start clean and take a baseline
 
-Open your terminal and run:
+### Step 1: Launch Claude Code in your project folder
 
-```bash
-npm install -g @anthropic-ai/claude-code
-```
+Open a terminal and launch Claude Code from inside the project folder that has your CLAUDE.md.
 
-Verify the installation:
-
-```bash
-claude --version
-```
-
-### Step 1.3: Authenticate
-
-Run Claude Code and follow the prompts to authenticate with your Anthropic account:
-
-```bash
+```terminal
+cd ~/your-project-folder
 claude
 ```
 
-You'll be directed to a browser to log in. After authentication, you can close the browser and return to your terminal.
+Claude should load the CLAUDE.md automatically. If it doesn't, you're not in the right directory.
+
+### Step 2: Take a context-window baseline
+
+Before you do anything else, ask Claude what's already in the context window:
+
+```claude code
+Before I do anything else in this session, give me a baseline reading of what's currently in my context window. Specifically:
+
+1. How much of the context window is used right now? Give me the percentage and the approximate token count.
+2. What's actually loaded? Break it down by category — system prompt, tools, memory files, skills, my CLAUDE.md, anything else. For each category, tell me roughly what percentage of the window it takes.
+3. Given the 40% rule we covered in the videos, how much "working room" do I have for the rest of this session?
+
+Be specific. Don't round so aggressively that I lose the signal.
+```
+
+Write down (on paper, in a notes file — anywhere outside the chat) three numbers from Claude's answer: the current percentage used, the approximate tokens used, and the percentage consumed by your CLAUDE.md specifically. You're going to compare these later.
 
 ---
 
-## Part 2: Create a sample knowledge base
+## Part 2: Load a real file and feel the budget
 
-We'll create a small knowledge base about a fictional local news organization. In a real project, this would be your archive, source documents, or research materials.
+### Step 3: Pick and load the most important file from your project folder
 
-### Step 2.1: Create the directory structure
+Tell Claude which file to read and ask for a baseline understanding of it:
 
-```bash
-mkdir -p ~/journalism-kb/articles
-mkdir -p ~/journalism-kb/sources
-mkdir -p ~/journalism-kb/background
+```claude code
+Read the file [path/to/your/file] and tell me:
+
+1. What is this file for? Who's the audience and what problem is it solving?
+2. What are the three most important things in it from a journalism perspective — not from a code perspective?
+3. What questions would you ask me, as the editor of this work, before you made any changes to it?
+
+Don't suggest changes yet. Just read it and prove to me you understood it.
 ```
 
-### Step 2.2: Create sample content
+This is the Mollick framing in practice — you're treating Claude like a junior hire who just picked up a new assignment. You want evidence it read the thing and understood the stakes before it starts doing work.
 
-Create the following files using your text editor. Save each file in the indicated location.
+### Step 4: Take a second context-window reading
 
-**File: ~/journalism-kb/articles/city-budget-2025.md**
+Now ask Claude what loading that file did to your budget:
 
-```markdown
-# City approves $450M budget for 2025
-
-Published: January 15, 2025
-Reporter: Sarah Chen
-
-The City Council approved a $450 million budget for fiscal year 2025 in a 7-2 vote Tuesday night.
-
-Key allocations:
-- Public safety: $125 million (up 8% from 2024)
-- Infrastructure: $95 million (up 12% from 2024)
-- Education partnerships: $45 million (unchanged)
-- Parks and recreation: $28 million (down 5% from 2024)
-
-Council members Martinez and Thompson voted against, citing concerns about reduced parks funding.
-
-"We're seeing record usage of city parks since the pandemic," Martinez said. "This is the wrong time to cut."
-
-Mayor Williams defended the budget: "Public safety and infrastructure are non-negotiable priorities. We've made difficult choices."
-
-The budget takes effect March 1, 2025.
+```claude code
+Now that you've read [the file], take a second context-window reading. How much has my context window usage grown since the baseline you gave me in Step 2? What's in the window now that wasn't there before? Am I still under 40%?
 ```
 
-**File: ~/journalism-kb/sources/martinez-interview.md**
-
-```markdown
-# Interview: Council Member Martinez on budget vote
-
-Date: January 16, 2025
-Interviewer: Sarah Chen
-Format: Phone interview, 15 minutes
-
-## Key quotes
-
-On the parks funding cut:
-"Look, I understand we have finite resources. But parks aren't a luxury. They're public health infrastructure. During COVID, parks were the only safe gathering spaces we had."
-
-On the public safety increase:
-"I'm not against public safety funding. I'm against the framing that it has to come at the expense of everything else. We could have found other efficiencies."
-
-On the vote:
-"I voted no because I think we'll regret this in two years. Usage data shows parks visits are up 40% since 2019. We're cutting services at the moment of peak demand."
-
-## Background
-
-Martinez represents District 4, which includes three of the city's largest parks. She's been on the council since 2020 and chairs the Parks Committee.
-```
-
-**File: ~/journalism-kb/background/city-budget-history.md**
-
-```markdown
-# City budget history: 2020-2024
-
-## Overview
-
-The city's budget has grown from $380 million (2020) to $425 million (2024), a 12% increase over five years.
-
-## Year-by-year breakdown
-
-### 2020: $380M
-- Public safety: $98M (26%)
-- Infrastructure: $72M (19%)
-- Education: $45M (12%)
-- Parks: $32M (8%)
-- Other: $133M (35%)
-
-### 2021: $385M
-- Flat growth due to pandemic revenue shortfall
-- Parks temporarily increased to $38M for outdoor programming
-
-### 2022: $395M
-- Recovery began; infrastructure prioritized
-- Parks returned to $32M
-
-### 2023: $410M
-- Public safety increased to $108M following staffing study
-- Parks: $30M
-
-### 2024: $425M
-- Infrastructure bond approved
-- Parks: $29.5M
-- Public safety: $116M
-
-## Trends
-
-Public safety has grown from 26% to 27% of the budget.
-Parks has declined from 8% to 7% of the budget.
-Infrastructure has grown from 19% to 20% following the bond.
-```
-
-### Step 2.3: Create an index file
-
-**File: ~/journalism-kb/index.md**
-
-```markdown
-# Journalism knowledge base
-
-This knowledge base contains research materials for the city budget story (January 2025).
-
-## Contents
-
-### Articles
-- city-budget-2025.md: Published story on the 2025 budget approval
-
-### Sources
-- martinez-interview.md: Interview transcript with Council Member Martinez
-
-### Background
-- city-budget-history.md: Five-year budget history (2020-2024)
-
-## Usage notes
-
-All quotes in source documents are verbatim from recorded interviews.
-Budget figures are from official city documents.
-```
+Write down the new percentage and the delta from Step 2. That delta is the cost of loading that file — not a theoretical cost, an actual one. This is what the "context window is a budget" lesson feels like in practice.
 
 ---
 
-## Part 3: Configure MCP for file access
+## Part 3: Compact with and without instructions, and compare
 
-Now we'll configure Claude Code to access your knowledge base using MCP.
+### Step 5: Run a bare `/compact` and see what you lose
 
-### Step 3.1: Locate your Claude Code configuration
+Run `/compact` with no custom instructions:
 
-Claude Code stores its configuration in different locations depending on your operating system:
-
-- **macOS:** `~/.claude/`
-- **Windows:** `%APPDATA%\Claude\`
-- **Linux:** `~/.config/claude/`
-
-### Step 3.2: Create or edit the MCP configuration
-
-Create a file called `claude_desktop_config.json` in your Claude configuration directory:
-
-**macOS/Linux: ~/.claude/claude_desktop_config.json**
-
-```json
-{
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "/Users/YOUR_USERNAME/journalism-kb"
-      ]
-    }
-  }
-}
+```claude code
+/compact
 ```
 
-**Windows: %APPDATA%\Claude\claude_desktop_config.json**
+Claude will summarize the session so far and continue. Now ask:
 
-```json
-{
-  "mcpServers": {
-    "filesystem": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "C:\\Users\\YOUR_USERNAME\\journalism-kb"
-      ]
-    }
-  }
-}
+```claude code
+After that bare /compact, tell me:
+
+1. What did you keep from the pre-compact conversation?
+2. What did you drop?
+3. Specifically: do you still remember the three most important things I asked you to identify about [the file] in Step 3? If I asked you one of those questions right now, could you answer without re-reading the file?
 ```
 
-Replace `YOUR_USERNAME` with your actual username.
+Read the answer carefully. If Claude says it kept everything important, check by asking one of the specific things from Step 3 — without letting it re-read the file. If it can't answer, that's the lesson: bare `/compact` throws away things you needed. Write down what you lost.
 
-### Step 3.3: Restart Claude Code
+### Step 6: Rewind and try again with a custom instruction
 
-Close and reopen Claude Code for the configuration to take effect:
+If you're inside a rewind-capable turn history, press escape twice to rewind to before the bare `/compact`. (This works only if you haven't done something the rewind can't undo — if it doesn't work cleanly, just restart from Step 3 in a fresh session.)
 
-```bash
-claude
+Now run `/compact` with a custom summarization instruction:
+
+```claude code
+/compact
+
+Keep everything about [the file], including the three most important things you identified in Step 3, the questions you'd ask the editor, and my original instructions for how to read the file. Compact only the meta-conversation about context windows and the baseline readings.
 ```
+
+Then ask Claude the same diagnostic question from Step 5:
+
+```claude code
+Same diagnostic as before. What did you keep and what did you drop? Can you still answer the three-most-important-things question about [the file] without re-reading it?
+```
+
+Write down the difference. This is the pattern you'll use in real work: tell `/compact` what matters *before* you run it, not after it's already thrown away things you needed.
 
 ---
 
-## Part 4: Test your knowledge base
+## Part 4: Cross-model code review via the `-p` flag
 
-Now test that Claude Code can access your knowledge base.
+### Step 7: Call a different model family for a second opinion
 
-### Step 4.1: Verify the connection
+This is the highest-leverage advanced pattern of the week. From inside your main Claude Code session, ask Claude to call a different CLI tool non-interactively for a second-opinion review of the same file.
 
-In Claude Code, type:
+```claude code
+I want a cross-model second opinion on [path/to/your/file]. Run one of the following, depending on what I have installed, as a non-interactive call using the -p flag. Pick the one I have access to:
 
-```
-What files are available in my knowledge base?
-```
+- gemini -p "Review the file at [full path]. What are the top three things a journalist editor should catch in this file that might be missed by someone who wrote it? Be specific. Don't suggest style changes — I want editorial and structural issues."
+- codex -p "[same prompt]"
+- copilot -p "[same prompt]"
 
-Claude should list the files in your journalism-kb directory. If it doesn't, check your configuration file for typos.
-
-### Step 4.2: Query the knowledge base
-
-Try these prompts:
-
-**Prompt 1: Basic retrieval**
-```
-What was the total city budget approved for 2025?
+Run the one that's installed. Show me the raw output. Then tell me: which of these three things, if any, would you (Claude) have missed if I had only asked you?
 ```
 
-Expected: Claude should cite the city-budget-2025.md article and provide the $450 million figure.
+Claude will call out to the other tool as a subprocess and return its output. The review runs in a separate process, so the tokens it consumes don't count against your main session's context window. This is context isolation in practice.
 
-**Prompt 2: Cross-reference**
-```
-How does the 2025 parks budget compare to previous years?
-```
+If none of those tools are installed, this is the moment to install one. `gemini` is free for this exercise — `npm install -g @google/gemini-cli` and a Google account is all you need. The other two require paid subscriptions. You must do this step with a second model family, not by asking Claude twice.
 
-Expected: Claude should pull from both the article and the background document to show the trend.
+### Step 8: Compare the two reads
 
-**Prompt 3: Source attribution**
-```
-What did Council Member Martinez say about the parks funding cut? Include the exact quote.
-```
+Now you have two reads on the same file: Claude's from Part 2, and the second model's from Step 7. Ask Claude to help you compare:
 
-Expected: Claude should cite the interview transcript and provide the verbatim quote.
+```claude code
+Compare the two reads on [the file]:
 
-**Prompt 4: Synthesis**
-```
-Write a 100-word summary of the budget story for social media, based on the documents in my knowledge base.
+1. What did both models agree on?
+2. What did each model flag that the other missed?
+3. For the things only one model flagged, tell me which are worth taking seriously and why.
+4. Which review, if either, seems to be working from a better understanding of the file?
+
+Don't try to be diplomatic. Tell me what you actually think, and tell me where the other model caught something you missed.
 ```
 
-Expected: Claude should synthesize information from multiple documents.
+This is the editorial judgment moment. Read Claude's comparison carefully and make your own call. Don't assume either review is right by default. Don't assume the second model is automatically smarter because it's a "second opinion." Your job is to reconcile the two reads into a single editorial judgment you'd actually act on.
 
 ---
 
-## Part 5: Verify before you trust
+## Part 5: Reconcile and debrief
 
-Before reflecting on what worked, do a verification pass. This is a habit worth building now, before you use these tools on real reporting.
+### Step 9: Write the reconciled judgment yourself
 
-### Step 5.1: Check the numbers
+Outside of the chat — in a notes file, in a Google Doc, on paper — write a short paragraph that answers this question: **"Based on both reviews, what would I actually do next with this file?"** Be specific. Don't say "I would iterate." Say "I would rewrite the second paragraph to lead with the dollar figure and drop the procedural framing, because both reviews flagged the procedural lede as the weakest part, and the Codex review specifically pointed out the dollar figure is buried." The specificity is where the editorial judgment lives.
 
-From your Prompt 2 response (how the parks budget changed over years), find the relevant line in `city-budget-history.md` and confirm the numbers Claude cited match what the document actually says. Don't skim — read the exact figures.
+### Step 10: Write the session debrief
 
-If they match: note it. If they don't: that's a hallucination, and it's the exercise working as intended. Run `/log_error` if you set it up in Module 3.
+Finally, step back and write a short session debrief (for your own notes):
 
-### Step 5.2: Check the quote
-
-From your Prompt 3 response (the Martinez quote on parks funding), find the quote in `martinez-interview.md` and read it verbatim. Does Claude's response reproduce it exactly, or has it paraphrased, combined, or subtly changed it?
-
-If Claude paraphrased: the paraphrase may be accurate in meaning but it is not a direct quote. A RAG system that retrieves quotes can still hallucinate them if the model summarizes instead of pulling the exact text. Note whether the phrasing Claude used is faithful or not.
-
-### Step 5.3: What this means for pipelines
-
-When you build a pipeline that processes many documents and synthesizes their content — as in Module 4, or in a real newsroom RAG system — errors in step three aren't visible until you check. A fabricated paraphrase at the retrieval stage can become a cited fact at the synthesis stage. The verification you just did manually is what you'd need to build into any automated pipeline: a check that compares AI-generated outputs against the source documents before the output leaves the pipeline.
-
----
-
-## Part 6: Reflection questions
-
-After completing the exercise, answer these questions in your course journal or discussion post:
-
-1. **Accuracy:** Did Claude correctly cite information from your knowledge base? Did you notice any errors or hallucinations during the verification step?
-
-2. **Attribution:** How useful was having source documents for verifying Claude's responses? What would you have missed without the originals?
-
-3. **Limitations:** What questions could Claude NOT answer well, given the limited knowledge base?
-
-4. **Journalism applications:** How might you use this setup in your own reporting? What documents would you include in your knowledge base?
-
-5. **Maintenance:** If this were a production system, who would be responsible for keeping the knowledge base current? What processes would you need?
-
-6. **Verification cost:** How long did the verification step in Part 5 take? If you were processing 200 documents instead of 3, what would that cost in time? What's the minimum verification that would give you enough confidence to publish?
+1. What did the bare `/compact` lose that the instructed `/compact` kept?
+2. What did the other model catch that Claude missed — if anything?
+3. Looking at the context-window readings from Steps 2 and 4, how much of your 40% budget had you used by the time you were ready to do actual work? What would you cut if you had to run this session tighter next time?
+4. What would you delegate to a sub-agent next time, and what would you keep in your main session? Why?
 
 ---
 
 ## Troubleshooting
 
-**Claude doesn't recognize the knowledge base:**
-- Check that the path in your configuration file is correct
-- Ensure there are no typos in the JSON file
-- Restart Claude Code after making changes
+**"Claude can't read the context window directly."** Claude Code exposes some context-window metadata through `/context` and related session commands. If your Claude's answer to Step 2 is vague, try running `/context` first and then asking Claude to interpret it. The specific percentages matter less than the relative deltas between readings.
 
-**Permission errors:**
-- Make sure the knowledge base directory is readable
-- On macOS/Linux, run: `chmod -R 755 ~/journalism-kb`
+**"The `-p` call-out fails."** Three common causes: (1) the second CLI tool isn't on your `PATH` — ask Claude to verify and point at the install instructions, (2) the second tool needs its own auth flow — Gemini CLI in particular needs `gemini auth login` once before it can run non-interactively, (3) the file path you passed to the `-p` call isn't absolute — relative paths often don't resolve when a subprocess runs in a different working directory.
 
-**MCP server fails to start:**
-- Ensure Node.js is installed and up to date
-- Try running the server manually: `npx @modelcontextprotocol/server-filesystem ~/journalism-kb`
+**"The double-escape rewind doesn't work."** You've probably already run `/compact`, which fuses older messages and makes fine-grained rewinding impossible. Start a fresh session from Step 3.
 
-**Still stuck?**
-Post in the course discussion forum with:
-- Your operating system
-- The exact error message
-- Your configuration file (remove any sensitive paths)
+**"The two model reviews agree on everything and there's nothing to reconcile."** Congratulations, the file is probably clean — or you asked an overly general review prompt and got two generic responses. Try a more specific review prompt: ask each model about a specific stake in the file, not "review this."
+
+**"I only have Claude Code installed."** Install Gemini CLI for the cross-model review. It's free, it's one command, and the exercise doesn't work without a second model family. `npm install -g @google/gemini-cli` followed by `gemini` to authenticate. This is a one-time setup.
 
 ---
 
-## Extension activities (optional)
+## Submit your work
 
-If you finish early or want to go deeper:
+Post in the exercise forum:
 
-1. **Add your own documents:** Replace the sample files with real research materials from a story you're working on.
-
-2. **Test the limits:** Add 20+ documents and see how well Claude handles larger knowledge bases.
-
-3. **Compare with and without RAG:** Ask the same questions with and without the MCP connection. Document the differences in accuracy and attribution.
-
-4. **Explore other MCP servers:** Check the MCP documentation for other server types (databases, APIs, etc.).
-
----
-
-## Submission
-
-Submit a screenshot showing:
-1. Your Claude Code terminal with a successful query
-2. Claude's response citing information from your knowledge base
-
-Also submit your answers to the five reflection questions (Part 5).
-
-**Due:** End of Module 4
+1. **The three context-window readings** you wrote down in Steps 2, 4, and after `/compact`. Rough numbers are fine.
+2. **A before/after note on `/compact`** — what bare `/compact` lost that the instructed `/compact` kept, in one or two sentences
+3. **The raw output of the cross-model review** (Step 7). Don't paraphrase — paste the actual output the second tool returned.
+4. **Your reconciled judgment paragraph** (Step 9). This is the most important part of the submission. It's where your editorial judgment becomes visible.
+5. **One sentence on the single most useful thing you learned about managing a session** — what you'd do differently in your next Claude Code session because of this exercise.

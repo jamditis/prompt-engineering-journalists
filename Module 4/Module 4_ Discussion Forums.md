@@ -1,4 +1,4 @@
-# Module 4: Agents, tools, and data access
+# Module 4: Advanced prompting patterns
 
 ## Discussion forum prompts
 
@@ -6,73 +6,63 @@ Participate in **at least two** of the three discussions below. Your initial pos
 
 ---
 
-## Discussion 1: Drawing the line on AI autonomy
+## Discussion 1: Normalization of deviance in your own work
 
-The Washington Post's Haystacker can analyze thousands of documents and surface patterns that humans might miss. The New York Times's Echo can draft newsletter content with minimal human input.
+Simon Willison applies Diane Vaughan's "normalization of deviance" concept — originally used to explain the Challenger disaster — to AI systems: organizations that repeatedly use risky practices without visible consequences start to treat those practices as safe. Absence of a successful attack becomes proof that the security is strong enough. It isn't.
 
-**Question:** Where should newsrooms draw the line between AI assistance and AI autonomy?
+**Question:** Where in your own work would "normalization of deviance" be easiest to slip into — and what would you have to actually check in six months to catch it before it becomes a headline?
 
-Consider these scenarios:
-- An agent that automatically publishes breaking news alerts based on wire service feeds
-- An agent that drafts follow-up questions during a live interview
-- An agent that decides which stories to promote on the homepage based on engagement predictions
+Pick one specific workflow from your own reporting or newsroom — a pipeline you're running now, a skill you wrote in Module 2, a scheduled job from Module 3, a prompt you've saved, a file you paste into Claude every week. For that workflow, write:
 
-For each scenario (or others you imagine), explain:
-1. What level of human oversight would you require?
-2. What could go wrong if the AI operated without that oversight?
-3. How would you explain the AI's role to your audience?
+1. What's the risky practice that's "mostly working" right now?
+2. What would the drift look like over six months? Be specific — what would change gradually that you wouldn't notice day to day?
+3. What concrete check would you run in six months to catch the drift? A literal sentence, a specific file to re-read, a specific test to re-run. Not "I'll pay more attention."
+
+The Willison piece (required reading) is the load-bearing reference here. Don't answer abstractly — pick one thing and describe the audit you'd actually do.
 
 ---
 
-## Discussion 1b: Verifying what the pipeline produced
+## Discussion 2: What to delegate to a sub-agent, what to keep in your own session
 
-When a multi-step AI pipeline processes your documents and produces output — a summary, a quote extraction, a briefing — how do you check that it's right?
+Ethan Mollick's "Management as AI superpower" frames working with AI as managing a junior hire: clear instructions, feedback, and evaluation criteria. The course has a slightly sharper version: you're a product manager running a model that's doing most of the keystrokes. The skill is deciding what to delegate.
 
-Manual verification of every output defeats much of the point of automation. But no verification at all means publishing based on what an automated system claims, not what your sources actually say.
+**Question:** Pick one reporting workflow you actually do. Split it into three buckets: what you'd delegate to a sub-agent with a narrowly-scoped instruction, what you'd keep in your main session so you can course-correct in real time, and what you'd never hand to a model at all. For each bucket, explain the *why* as much as the *what*.
 
-**Question:** How would you design a minimum viable verification step for an AI pipeline that processes large volumes of documents? What would you check, how would you sample, and what would trigger a full manual review?
+Consider in your response:
 
-Think about this in terms of a real newsroom scenario: a pipeline that processes 50 press releases per week and extracts key claims for reporters to follow up on. What could go wrong if a claim is wrong? Who would catch it? When?
+- Which pieces are high-context, low-judgment? Those are sub-agent candidates.
+- Which pieces require you to hold multiple things in your head at once and make a call based on the combination? Those belong in your main session.
+- Which pieces are the editorial judgment calls you can't delegate without abdicating the job? Those are the "never" pile.
+
+Use your own beat or real work — not a hypothetical. The specificity is the point of the exercise.
 
 ---
 
-## Discussion 2: Data connections and the problem of context
+## Discussion 3: The four questions, applied to a tool you're actually picking
 
-When you connect AI to your data — whether through MCP, a knowledge base, or a document folder processed with `claude -p` — you're choosing what the AI can see. "Relevant" is a judgment call, and what you leave out shapes the output as much as what you include.
+Video D4 asks four questions to evaluate any AI tool:
 
-**Question:** How should journalists think about what data to connect to AI tools, and what to leave out?
+1. **What's the task?** What specifically do you need the tool to do?
+2. **How much context does it need?** How big is the file, the dataset, the conversation history?
+3. **Does it need tool access?** Can it get away with a pure-language task, or does it need file access, web access, code execution, a database?
+4. **What's your real money budget?** Not just the subscription price. The total cost of a month of actual use, including labor, API overages, and the time to set it up.
 
-Consider:
-- A knowledge base built from your newsroom's published articles excludes stories that were never written (gaps in coverage)
-- A folder of public records may contain errors or outdated information
-- A collection of interview transcripts captures what sources said, not necessarily what's true
-- An MCP connection to a database gives the AI access to whatever the database contains — including stale or incomplete data
+**Question:** Pick a tool you're actually evaluating right now — for your beat, your newsroom, your personal workflow, a final project you're thinking about — and walk through all four questions for that specific tool. Don't pick Claude Code (too on-the-nose). Pick something you're genuinely on the fence about.
 
 In your response:
-1. Describe a specific scenario where the contents of a connected data source could bias the AI's output
-2. What safeguards would you put in place?
-3. How does this compare to the biases already present in traditional research methods?
 
----
+- Write one or two sentences on the task itself
+- Give a specific answer to each of the four questions for that tool
+- Commit to a decision at the end: use it, don't use it, pilot it for a month, or keep waiting. "I'm not sure" is not a decision.
+- Acknowledge the one thing you'd have to check to change your mind
 
-## Discussion 3: The infrastructure question
-
-Building agent-driven workflows and data connections requires technical infrastructure: servers, databases, APIs, and staff who can maintain them. Large organizations like the Post and Times can build custom tools. Smaller newsrooms cannot.
-
-**Question:** What does this mean for the future of local and independent journalism?
-
-In your response, address:
-1. Should news organizations share AI infrastructure, and if so, how?
-2. What role should vendors, foundations, or industry associations play?
-3. What's the risk if only large newsrooms can afford these tools?
-
-You might draw on your own newsroom's situation or experiences from earlier in the course.
+Clare Spencer's GAIN piece on budgeting (required reading) has concrete numbers and is the best single reference for question 4. Use it.
 
 ---
 
 ## Discussion guidelines
 
-- Ground your arguments in the readings, but bring in your own experience
+- Ground your arguments in the readings, but bring in your own work
 - Disagree respectfully; explain why you see it differently
 - Avoid generalizations like "AI will never..." or "AI will always..."
 - Ask follow-up questions of your classmates
