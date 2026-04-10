@@ -46,7 +46,7 @@ https://simonwillison.net/2025/Dec/10/normalization-of-deviance/
 
 *Reading time: 8 minutes*
 
-Willison applies Diane Vaughan's "normalization of deviance" concept — originally used to explain the Challenger disaster — to AI systems. Organizations that repeatedly use risky AI practices without visible consequences start to treat those practices as safe. His warning: *"organizations confuse the absence of a successful attack with the presence of robust security."*
+Willison applies Diane Vaughan's "normalization of deviance" concept — originally used to explain the Challenger disaster — to AI systems. Organizations that repeatedly use risky AI practices without visible consequences start to treat those practices as safe. His warning: organizations mistake the absence of a successful attack for proof that their security is strong enough.
 
 For journalists running automated pipelines, the pattern is real: if your automation produces mostly-correct output and nothing visibly fails, it becomes easy to stop checking. That's when the failures compound. This piece is the load-bearing argument for the video 1 and video 2 claims about context hygiene, the 40% rule, and why human review becomes *more* important as tools get better, not less.
 
