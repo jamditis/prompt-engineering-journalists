@@ -6,7 +6,7 @@
 
 ---
 
-**Discussion post — Exercise 3**
+**Exercise submission — Exercise 3**
 
 I picked the "city council agenda prep sheet" option because I actually do that by hand every Monday afternoon for my beat and I was curious whether this week's pipeline approach would make it go away as a recurring task. It did.
 

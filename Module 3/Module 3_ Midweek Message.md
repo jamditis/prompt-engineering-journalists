@@ -18,6 +18,6 @@ A few common sticking points this week.
 
 **Rule of thumb on the three rules.** If you're stuck, ask yourself which of the three rules you'd be breaking with the next thing you're about to try. If the answer is "test small," go run it on 3 inputs before you touch the 300-input batch. If the answer is "never put secrets in code," stop and move that key to an environment variable before you do anything else. The rules exist so that the interesting mistakes happen to somebody else, not to you.
 
-[INSERT STUDENT THREADS/DISCUSSIONS]
+Keep going. The gap between "I wrote a working pipeline" and "I have a pipeline that runs on its own while I'm asleep" is smaller than it looks from the outside, and you're already on the far side of it.
 
 Joe Amditis

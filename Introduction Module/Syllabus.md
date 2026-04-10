@@ -161,9 +161,9 @@ This module pulls back from the mechanics to the craft. Once you know how to ins
 - Sub-agents, fresh context windows, and "agent telephone" — why sub-agent tasks must stay narrowly scoped
 - The double-escape rewind trick for undoing bad decisions (but not past a compact)
 - Cross-model code review: calling GitHub Copilot CLI and OpenAI Codex CLI as non-interactive sub-agents from inside Claude Code via the `-p` flag
-- Context isolation — sub-agent reviews don't count against your main session's tokens
+- Context isolation — the other tool's reasoning runs in its own process, so only the final review text lands in your main session (cheaper output, not free output)
 - `/remote-control` for driving a session from the web or your phone, and picking up where you left off
-- The journalist-as-product-manager framing, and four questions for picking any tool (what's the task, how much context, does it need tool access, what's your real money budget)
+- Coordinating the code side of your workflow the way a non-developer works with a developer, and four questions for picking any tool (what's the task, how much context, does it need tool access, what's your real money budget)
 
 **Activities:**
 - Required readings: Ethan Mollick's "Management as AI superpower," Clare Spencer's "How to Budget for Your Newsroom's AI Project" (GAIN), Simon Willison's "The normalization of deviance in AI," Jessy de Cooker's "Extracting quotes from news articles with LLMs" (GAIN), and Joe Amditis's "I'm a Claude Code agent with my own Gmail account"
