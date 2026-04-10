@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Module 4: Agents, tools, and data access | Advanced prompt engineering</title>
+    <title>Module 4: Advanced prompting patterns | Advanced prompt engineering</title>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../assets/js/config.js"></script>
@@ -12,15 +12,15 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mooc.amditis.tech/module-4/" />
-    <meta property="og:title" content="Module 4: Agents, tools, and data access" />
-    <meta property="og:description" content="Build agents with tool access and retrieval-augmented generation for grounded, source-attributed journalism workflows." />
+    <meta property="og:title" content="Module 4: Advanced prompting patterns" />
+    <meta property="og:description" content="From prompting to managing. Context hygiene, sub-agents, cross-model review, and editorial judgment when the model does more of the keystrokes." />
     <meta property="og:image" content="https://mooc.amditis.tech/assets/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Module 4: Agents, tools, and data access" />
-    <meta name="twitter:description" content="Build agents with tool access and retrieval-augmented generation for grounded, source-attributed journalism workflows." />
+    <meta name="twitter:title" content="Module 4: Advanced prompting patterns" />
+    <meta name="twitter:description" content="From prompting to managing. Context hygiene, sub-agents, cross-model review, and editorial judgment when the model does more of the keystrokes." />
     <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png" />
     <script src="https://unpkg.com/lucide@latest"></script>
 <script src="../assets/js/ask-ai.js" defer></script>
@@ -52,8 +52,8 @@
         <section class="py-12 px-6 border-b border-white/10">
             <div class="max-w-5xl mx-auto">
                 <div class="text-xs text-acid font-mono mb-4">MODULE 04</div>
-                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">AGENTS, TOOLS, AND DATA ACCESS</h1>
-                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">How AI tools take multi-step action, connect to data sources, and where they break down.</p>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">ADVANCED PROMPTING PATTERNS</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">From prompting to managing — context hygiene, sub-agents, cross-model review, and the editorial judgment that still has to come from you.</p>
             </div>
         </section>
 
@@ -67,10 +67,11 @@
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Explain the difference between chatbots and agents -- what tools, autonomy, and multi-step planning look like in practice, and where human oversight is required</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Use <code class="text-acid bg-surface px-1">claude -p</code> for non-interactive mode, enabling scripted and autonomous workflows that process documents without manual intervention</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Configure a basic MCP server to connect Claude Code to a local knowledge base, giving the AI access to your source documents</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Evaluate the tradeoffs between AI autonomy and editorial control, identifying where grounded, source-attributed responses matter and where things break down</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Manage the context window as a budget — know what fills it, what evicts it, and when to compact or start fresh</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Apply the 40% rule: when a session is more than roughly 40% full, quality drops and you should rewind rather than patch</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Delegate work to sub-agents without losing editorial control, and verify between handoffs to stop errors from compounding</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Run cross-model code review by calling Copilot CLI or Codex CLI as a sub-agent through their non-interactive <code class="text-acid bg-surface px-1">-p</code> flag</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Use the four questions framework — what it does, what it costs in labor, who else is using it, how cost-sensitive the work is — to pick a tool before you pay for one</li>
                     </ul>
                 </div>
             </section>
@@ -81,24 +82,59 @@
                     <h2 class="font-display text-xl text-chrome">Before you start</h2>
                 </div>
                 <div class="space-y-4">
-                    <p class="text-gray-300 text-sm leading-relaxed">Agents and data access introduce a new failure mode: errors that compound across pipeline stages. When Claude delegates work to subagents or pulls data from external sources, mistakes in early steps become assumed facts in later ones. The concept below explains how this works and what to do about it.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">The shift this module asks you to make is the one Ethan Mollick keeps arguing for: stop thinking of yourself as a prompter, and start thinking of yourself as a manager. Clear instructions, feedback, and evaluation criteria — the same skills you'd use with a new staff writer — are what separate useful output from slop. The readings this week line up directly with that frame.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">There is one failure mode you need to understand before you delegate anything to a sub-agent. Read the concept page first.</p>
                     <a href="../concepts/working-with-subagents.html" class="inline-flex items-center gap-2 text-ice text-sm hover:text-acid transition-colors">
-                        Read: working with subagents — compounding errors and verification →
+                        Read: working with sub-agents — compounding errors and verification →
                     </a>
                 </div>
             </section>
 
-            <!-- Module video -->
+            <!-- Module videos -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-ice">Agents, tools, and data access</h2>
+                    <h2 class="font-display text-xl text-ice">Videos</h2>
                 </div>
-                <div class="max-w-3xl">
-                    <!-- Video embed: replace the src below with the Google Drive file ID once recorded -->
-                    <div class="relative w-full rounded-lg overflow-hidden border border-white/10 bg-panel flex items-center justify-center" style="padding-bottom:56.25%">
-                        <p class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm font-mono">Video coming soon</p>
+                <p class="text-gray-300 text-sm leading-relaxed mb-6 max-w-3xl">Module 4 is four short videos. Each one introduces one piece of the manager's toolkit. They embed here once Knight Center publishes the course.</p>
+
+                <div class="space-y-8">
+
+                    <div class="max-w-3xl">
+                        <div class="text-xs text-acid font-mono mb-2">VIDEO 1 · ~11 MIN</div>
+                        <h3 class="font-display text-lg text-chrome mb-3">Effort, thinking, and the shape of the context window</h3>
+                        <div class="relative w-full rounded-lg overflow-hidden border border-white/10 bg-panel flex items-center justify-center" style="padding-bottom:56.25%">
+                            <p class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm font-mono">Video coming soon</p>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-3">Why session setup matters more than any individual prompt. What <code class="text-acid bg-surface px-1">/effort</code> and <code class="text-acid bg-surface px-1">/compact</code> actually do. What's in your context window right now, and what's eating most of it.</p>
                     </div>
-                    <p class="text-gray-400 text-sm mt-3">In this video, Joe demonstrates <code class="text-acid bg-surface px-1">claude -p</code> processing a folder of documents autonomously, walks through MCP configuration, and does a deep dive into Reroute NJ -- a real-world project that applies concepts from all four modules.</p>
+
+                    <div class="max-w-3xl">
+                        <div class="text-xs text-acid font-mono mb-2">VIDEO 2 · ~6 MIN</div>
+                        <h3 class="font-display text-lg text-chrome mb-3">The 40% rule, rewinding, and sub-agents</h3>
+                        <div class="relative w-full rounded-lg overflow-hidden border border-white/10 bg-panel flex items-center justify-center" style="padding-bottom:56.25%">
+                            <p class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm font-mono">Video coming soon</p>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-3">When a session is more than roughly 40% full, quality drops. The fix isn't a better prompt — it's rewinding to a clean state or delegating the next step to a focused sub-agent. Why one sub-agent per task beats one sub-agent with a broad mandate.</p>
+                    </div>
+
+                    <div class="max-w-3xl">
+                        <div class="text-xs text-acid font-mono mb-2">VIDEO 3 · ~8 MIN</div>
+                        <h3 class="font-display text-lg text-chrome mb-3">Cross-model code review with Copilot CLI and Codex CLI</h3>
+                        <div class="relative w-full rounded-lg overflow-hidden border border-white/10 bg-panel flex items-center justify-center" style="padding-bottom:56.25%">
+                            <p class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm font-mono">Video coming soon</p>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-3">GitHub Copilot CLI and OpenAI Codex CLI both expose a non-interactive <code class="text-acid bg-surface px-1">-p</code> flag. That means Claude can call them as sub-agents for a second opinion on any file before you commit it. A different model catches what the primary misses, and the overhead is one prompt.</p>
+                    </div>
+
+                    <div class="max-w-3xl">
+                        <div class="text-xs text-acid font-mono mb-2">VIDEO 4 · ~14 MIN</div>
+                        <h3 class="font-display text-lg text-chrome mb-3">Remote control, mobile continuation, and the journalist as product manager</h3>
+                        <div class="relative w-full rounded-lg overflow-hidden border border-white/10 bg-panel flex items-center justify-center" style="padding-bottom:56.25%">
+                            <p class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm font-mono">Video coming soon</p>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-3">Running long work on a home machine and supervising it from a phone. The port-forwarding story, the four questions to ask before picking any tool, and why the editorial judgment this course keeps returning to gets <em>more</em> important as the tools get better.</p>
+                    </div>
+
                 </div>
             </section>
 
@@ -108,86 +144,100 @@
                     <h2 class="font-display text-xl text-chrome">Key concepts</h2>
                 </div>
                 <div class="space-y-4">
+
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Chatbots vs. agents</h3>
+                        <h3 class="font-display text-lg text-acid mb-3">The context window is a budget</h3>
                         <div class="text-gray-300 text-sm leading-relaxed space-y-3">
-                            <p><span class="text-ice">Chatbot:</span> Responds to prompts using only its training data. Can't take actions, access external information, or modify files. Like talking to someone who can only answer from memory.</p>
-                            <p><span class="text-acid">Agent:</span> Can use tools, access data sources, and take actions. Breaks complex tasks into steps, decides what tools to use, and executes multi-step plans. Claude Code is an agent -- it can read files, run commands, and make changes to your projects.</p>
+                            <p>Every session has a fixed amount of working memory. Your CLAUDE.md, every file Claude has read, every tool result, and every turn of the conversation all share the same space. When the budget is full, quality drops — the model starts forgetting early instructions, missing details, or making things up.</p>
+                            <p>You control that budget with three things: what you put in at the start (stable context first), what you let in during the session (read the file you need, skip the one you don't), and when you reset (<code class="text-acid bg-surface px-1">/compact</code> to summarize, <code class="text-acid bg-surface px-1">/clear</code> or a new session to wipe). Session setup matters more than any individual prompt.</p>
                         </div>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Non-interactive mode: <code class="text-acid">claude -p</code></h3>
+                        <h3 class="font-display text-lg text-acid mb-3">The 40% rule: rewind, don't patch</h3>
                         <div class="text-gray-300 text-sm leading-relaxed space-y-3">
-                            <p>Running <code class="text-acid bg-surface px-1">claude -p "your prompt here"</code> sends a single prompt without entering an interactive session. Claude processes the prompt, prints the result to stdout, and exits. This is what makes scripted pipelines and autonomous workflows possible.</p>
-                            <p>Practical uses: a shell script that runs <code class="text-acid bg-surface px-1">claude -p</code> on every file in a folder, a cron job that checks data daily, or piping output from one command into another. Once you can call Claude from a script, you can build workflows that run without you.</p>
+                            <p>When a session crosses roughly 40% of its context budget, output quality starts to drop in ways that are hard to see from inside the conversation. The model gives answers that <em>look</em> right but miss the thing you actually asked for, or repeat earlier mistakes because the earlier mistakes are still in its view of the conversation.</p>
+                            <p>The fix is not a better prompt. The fix is a clean state. Rewind to a checkpoint, start a new session with the key files, or hand the next step to a focused sub-agent that does not carry the clutter. Patching your way through a polluted session burns time and produces worse work.</p>
+                            <p class="text-gray-400">Simon Willison's <a href="https://simonwillison.net/2025/Dec/10/normalization-of-deviance/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">"The normalization of deviance in AI"</a> is the load-bearing argument for why this gets worse, not better, the longer you work without resetting.</p>
                         </div>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Agent delegation and multi-step workflows</h3>
+                        <h3 class="font-display text-lg text-acid mb-3">Sub-agents and the telephone problem</h3>
                         <div class="text-gray-300 text-sm leading-relaxed space-y-3">
-                            <p>Agents don't just answer questions -- they break work into steps and execute each one. Claude Code can read a file, decide what needs to change, make the edit, run a test, and fix problems it finds along the way. Each step informs the next.</p>
-                            <p>This also means agents can delegate. Claude Code can spawn subagents to handle parts of a larger task in parallel. The risk: errors in early steps become assumed facts in later ones. The skill is knowing how to verify intermediate results, not just the final output.</p>
+                            <p>Delegating to a sub-agent is not free. Every handoff is a chance for a fact to drift. A hallucinated claim in step one becomes an analysis premise in step two and a headline candidate in step three, and by the end nobody in the chain remembers where the claim came from.</p>
+                            <p>Two rules from practice: verify between stages — a deterministic check, a spot-read by you, or a second model — instead of trusting a sub-agent's claims. And keep each sub-agent narrow. More sub-agents, each focused on one task, consistently outperform fewer sub-agents with broad mandates, because the narrow ones never accumulate the same pollution a main session does.</p>
                         </div>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Connecting AI to data sources with MCP</h3>
+                        <h3 class="font-display text-lg text-acid mb-3">Cross-model review via the <code class="text-acid">-p</code> flag</h3>
                         <div class="text-gray-300 text-sm leading-relaxed space-y-3">
-                            <p>Language models only know what's in their training data. To work with your files, your databases, or live information from the web, the model needs a connection layer. Model Context Protocol (MCP) is an open standard for this -- it lets you plug data sources into Claude the same way you'd add plugins to a browser.</p>
-                            <p>This is sometimes called retrieval-augmented generation (RAG): the model retrieves relevant information from an external source and uses it to generate a grounded response instead of relying on memory alone. MCP is how you set up that retrieval in practice.</p>
-                            <p>Every tool you connect costs context. Each MCP server you configure consumes tokens in your session before you've asked anything -- the server's schema, its available tools, its connection overhead. Before connecting a data source, ask whether the capability it adds justifies what it takes from your context budget. A database connection you rarely need still consumes context on every session where you don't use it. A lean, purposeful set of integrations outperforms a crowded one.</p>
+                            <p>GitHub Copilot CLI and OpenAI Codex CLI both expose a non-interactive mode: <code class="text-acid bg-surface px-1">copilot -p "..."</code> and <code class="text-acid bg-surface px-1">codex -p "..."</code>. That means Claude can call either of them from inside your session, read the response, and bring it back to you.</p>
+                            <p>The practical use is a second-opinion review before you commit or publish. A different model from a different vendor, with different training and different blind spots, will catch things the primary model skipped. You ask Claude: "Use Codex CLI to review the file I just wrote and tell me what it flagged." The overhead is one prompt. The catch rate is real.</p>
+                            <p class="text-gray-400">This is the pattern Joe demonstrates in video 3. The same pattern works with Gemini CLI and any other tool that exposes a non-interactive flag.</p>
                         </div>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">MCP server types</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Common MCP servers include:</p>
-                        <ul class="space-y-2 text-sm font-sans text-gray-300">
-                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Filesystem:</strong> Read and write files in specified directories</li>
-                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Database:</strong> Query databases (SQLite, PostgreSQL, etc.)</li>
-                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Web:</strong> Fetch and parse web pages</li>
-                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Search:</strong> Search engines, vector databases for semantic search</li>
-                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Custom:</strong> Any tool or API you want Claude to access</li>
-                        </ul>
+                        <h3 class="font-display text-lg text-acid mb-3">Four questions for picking a tool</h3>
+                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
+                            <p>Before you pay for anything, answer four questions:</p>
+                            <ol class="space-y-2 text-sm font-sans text-gray-300 ml-4 list-decimal">
+                                <li><strong class="text-chrome">What does it actually do?</strong> Not what the landing page says — what does it do for <em>your</em> reporting workflow, today?</li>
+                                <li><strong class="text-chrome">What does it cost in labor, not tokens?</strong> JournalismAI found ~65% of newsroom AI budgets go to people, not processors. Setup, review, maintenance, and re-training are the real cost.</li>
+                                <li><strong class="text-chrome">Who else is using it for this?</strong> One practitioner writeup beats a dozen launch posts. If nobody in the field has written about using the tool for your kind of work, you are the pilot.</li>
+                                <li><strong class="text-chrome">How cost-sensitive is the work?</strong> A $2,000 Reuters project replaced a $40,000 pre-AI version. A $1.50 Jeremy Merrill dataset-overview tool ran for a whole year. Most journalists think about token cost and get the other three questions wrong.</li>
+                            </ol>
+                            <p>The fourth question is the one the Clare Spencer reading is built around, and it's the one the field most often skips.</p>
+                        </div>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Where data connections break down</h3>
+                        <h3 class="font-display text-lg text-acid mb-3">Editorial judgment is the last line</h3>
                         <div class="text-gray-300 text-sm leading-relaxed space-y-3">
-                            <p>Setting up an MCP server is straightforward. Debugging it when things go wrong takes practice. Common failures:</p>
-                            <ul class="space-y-2 text-sm font-sans text-gray-300 mt-2">
-                                <li class="flex items-start gap-3"><span class="text-signal">></span> <strong class="text-chrome">Permissions:</strong> The server can't read the files you pointed it at, or the database user lacks access to the table you need</li>
-                                <li class="flex items-start gap-3"><span class="text-signal">></span> <strong class="text-chrome">Auth failures:</strong> API keys expired, tokens revoked, OAuth scopes too narrow -- the connection looks configured but returns nothing useful</li>
-                                <li class="flex items-start gap-3"><span class="text-signal">></span> <strong class="text-chrome">Schema mismatches:</strong> The data source changed its column names, field types, or API response format since you set things up</li>
-                                <li class="flex items-start gap-3"><span class="text-signal">></span> <strong class="text-chrome">Silent failures:</strong> The server starts, Claude tries to use it, but gets empty results or malformed data -- and keeps going without flagging the problem</li>
-                            </ul>
-                            <p class="mt-3">The pattern for journalists: when Claude gives you an answer based on external data, check the source. Ask it to show you the raw data it retrieved. If it can't, the connection may be broken and the answer may be fabricated from training data instead.</p>
+                            <p>As the tools get better at the middle of the work, the parts at the edges get <em>more</em> important, not less. Deciding what a story is. Deciding whether a source is trustworthy. Deciding whether the pattern you are seeing is real or an artifact of how you asked the question. Deciding whether to publish at all.</p>
+                            <p>The failure mode the field is already sliding into is what Willison calls "normalization of deviance" — automations that produce mostly-correct output with no visible failure, until the one day they don't. The counterweight is boring and manual: you keep checking. The human-in-the-loop does not become optional just because the loop got faster.</p>
                         </div>
                     </div>
+
                 </div>
             </section>
 
-            <!-- From the field -->
+            <!-- Reading from the field -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">From the field</h2>
+                    <h2 class="font-display text-xl text-chrome">Reading from the field</h2>
                 </div>
+                <p class="text-gray-300 text-sm leading-relaxed mb-6 max-w-3xl">The four required readings for Module 4 are practitioner writing from late 2025 and early 2026. Read them before the discussion forum.</p>
                 <div class="space-y-4">
+
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Reroute NJ</h3>
-                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
-                            <p><a href="https://reroutenj.org" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Reroute NJ</a> is a public transit guide built during a real infrastructure disruption in New Jersey -- 11 languages, zero build step, serving a real community. The project applies concepts from all four modules: a CLAUDE.md for project context (Module 1), reusable scripts for page generation and translation (Module 2), a cron-scheduled scraper that commits and pushes automatically (Module 3), and autonomous data connections to external sources like news sites and NJ Transit alerts (Module 4).</p>
-                        </div>
+                        <div class="text-xs text-ice font-mono mb-2">ESSAY · ETHAN MOLLICK · JAN 2026</div>
+                        <h3 class="font-display text-lg text-acid mb-3"><a href="https://www.oneusefulthing.org/p/management-as-ai-superpower" target="_blank" rel="noopener" class="text-acid hover:text-ice transition-colors">Management as AI superpower</a></h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">The single best framing for the shift this module is trying to make explicit: working with CLI agents is less like coding and more like managing a team of junior hires. The skills that separate useful output from slop — clear instructions, feedback, evaluation criteria — are the same skills you'd use with a new staff writer.</p>
                     </div>
+
                     <div class="border border-white/10 bg-panel p-6">
-                        <h3 class="font-display text-lg text-acid mb-3">Jay Rosen digital archive</h3>
-                        <div class="text-gray-300 text-sm leading-relaxed space-y-3">
-                            <p>The <a href="https://github.com/jamditis/rosen-scraper" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Jay Rosen digital archive</a> is a collection of 765+ records from journalist Jay Rosen's career. The project applies entity extraction and grounded knowledge retrieval to primary source materials, turning raw documents into a searchable knowledge base.</p>
-                        </div>
+                        <div class="text-xs text-ice font-mono mb-2">CASE STUDY · CLARE SPENCER · GAIN · MAR 2026</div>
+                        <h3 class="font-display text-lg text-acid mb-3"><a href="https://generative-ai-newsroom.com/how-to-budget-for-your-newsrooms-ai-project-28d7e5a169a0" target="_blank" rel="noopener" class="text-acid hover:text-ice transition-colors">How to Budget for Your Newsroom's AI Project</a></h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">The question most journalists get wrong, with concrete numbers from NICAR and JournalismAI. Jeremy Merrill spent $1.50 over a year on a dataset-overview tool at the Washington Post. Reuters spent about $2,000 processing 28,000 pages of prison temperature logs — work that had previously cost $40,000 in data-entry labor. JournalismAI analyzed 30+ funded projects and found labor is about 65% of the typical budget. Read this before you pay $20 or $200 a month for anything.</p>
                     </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="text-xs text-ice font-mono mb-2">ESSAY · SIMON WILLISON · DEC 2025</div>
+                        <h3 class="font-display text-lg text-acid mb-3"><a href="https://simonwillison.net/2025/Dec/10/normalization-of-deviance/" target="_blank" rel="noopener" class="text-acid hover:text-ice transition-colors">The normalization of deviance in AI</a></h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">Willison applies Diane Vaughan's Challenger-disaster concept to AI systems. Organizations that repeatedly use risky AI practices without visible consequences start to treat those practices as safe. His warning: organizations mistake the absence of a successful attack for proof that their security is strong enough. For journalists running automated pipelines, it is the load-bearing argument for why human review becomes more important as tools get better, not less.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="text-xs text-ice font-mono mb-2">CASE STUDY · JOE AMDITIS · 925 STRUGGLE STREET · FEB 2026</div>
+                        <h3 class="font-display text-lg text-acid mb-3"><a href="https://strugglestreet.substack.com/p/im-a-claude-code-agent-with-my-own" target="_blank" rel="noopener" class="text-acid hover:text-ice transition-colors">I'm a Claude Code agent with my own Gmail account</a></h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">Written from the first-person perspective of a Claude Code agent running on a Raspberry Pi in New Jersey. The agent has its own Gmail, Drive, Calendar, a Slack bot, and Telegram integration. It runs on a schedule and never takes external action without approval — it drafts, sends a Telegram notification with approve/edit/cancel buttons, and waits. The "what goes wrong" section is required reading: this is what human oversight actually looks like in practice.</p>
+                    </div>
+
                 </div>
+                <p class="text-gray-400 text-xs mt-6">Optional resources for this module — including Nick Hagar's Pulitzer-investigation evaluation, Sachita Nishal's tool-evaluation methodology, Ethan Mollick on interviewing new models, and Simon Willison on the "lethal trifecta" — live in the Module 4 reading list on the course LMS.</p>
             </section>
 
             <!-- Exercise -->
@@ -197,31 +247,19 @@
                 </div>
 
                 <div class="border border-acid/30 bg-acidDim p-6 mb-8">
-                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Set up an MCP server that gives Claude controlled access to a data source, then query it to ground Claude's responses in real documents instead of training data.</span></p>
+                    <p class="text-sm font-sans"><span class="text-acid font-bold font-mono">GOAL:</span> <span class="text-gray-300">Manage one full Claude Code session as a manager, not a prompter. Watch the context window fill, compact it, then call a different model through its non-interactive flag for a second-opinion review of the most important file in the session.</span></p>
                 </div>
+
+                <p class="text-gray-300 text-sm mb-8">Pick any project folder on your machine where you have a real file you care about — a story draft, a pipeline script from Module 3, a CLAUDE.md, anything. Change into that folder before launching Claude, so the session starts with real context instead of an empty room.</p>
 
                 <!-- Step 1 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">01</span>
-                        Understand the default file access
+                        Launch Claude Code in your project folder
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Claude Code can already read and write files in your current working directory. MCP extends this by:</p>
-                    <ul class="space-y-2 text-sm font-sans text-gray-300 ml-11">
-                        <li class="flex items-start gap-3"><span class="text-acid">></span> Giving access to specific directories you configure</li>
-                        <li class="flex items-start gap-3"><span class="text-acid">></span> Enabling more structured queries (search within files, list by criteria)</li>
-                        <li class="flex items-start gap-3"><span class="text-acid">></span> Supporting additional data sources beyond the filesystem</li>
-                    </ul>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="mb-8">
-                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
-                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
-                        Create a research documents folder
-                    </h3>
-                    <p class="text-gray-300 text-sm mb-4">Open your terminal, launch Claude Code, and ask it to set up the folder. Choose one of the scenarios below (or make up your own):</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                    <p class="text-gray-300 text-sm mb-4">Open a terminal, change into the folder you picked, and launch Claude Code. Any CLAUDE.md file there will load into the session automatically — that's the first thing in your context window.</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
@@ -230,37 +268,15 @@
                         </div>
                         <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
                     </div>
-                    <p class="text-gray-300 text-sm mb-2"><strong class="text-chrome">Option A: local government documents</strong></p>
-                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a folder called research-docs in my home directory with three realistic sample documents I can use to test data queries: a city budget summary for fiscal year 2024 with department-level breakdowns, school board meeting minutes from January 2024, and quarterly crime statistics for Q4 2024. Use believable fictional numbers and names throughout.</code></pre>
-                    </div>
-                    <p class="text-gray-300 text-sm mb-2"><strong class="text-chrome">Option B: scraped web data</strong></p>
-                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a folder called research-docs in my home directory with three realistic sample files simulating scraped web content: a local news site's recent coverage of a zoning dispute (5 articles as separate text files), a city council member's public social media posts from the last month, and an archived community forum thread about a proposed development. Use believable fictional names and details.</code></pre>
-                    </div>
-                    <p class="text-gray-300 text-sm mb-2"><strong class="text-chrome">Option C: folder of news articles</strong></p>
-                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a folder called research-docs in my home directory with six realistic sample news articles about a fictional county's opioid crisis response, spanning 2023-2024. Include a mix of hard news, a feature profile, an editorial, and a data-driven piece. Each should be a separate text file with a byline, date, and publication name. Use believable fictional details throughout.</code></pre>
-                    </div>
-                    <p class="text-gray-300 text-sm mb-2"><strong class="text-chrome">Option D: public API dataset</strong></p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="mb-8">
+                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
+                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">02</span>
+                        Take a baseline reading of the context window
+                    </h3>
+                    <p class="text-gray-300 text-sm mb-4">Before you ask Claude to do any real work, ask it what's already in its window. This is the habit the module is trying to build: you start every session by knowing where the budget stands.</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -268,7 +284,7 @@
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Create a folder called research-docs in my home directory with realistic sample data files simulating public API output: a JSON file of 311 service requests for a city (50+ entries with categories, dates, locations, and resolution status), a CSV of restaurant health inspection scores, and a JSON file of building permit applications from the last quarter. Use believable fictional data throughout.</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Before I give you any task, tell me what's already in your context window. What CLAUDE.md (if any) loaded, what you know about this folder, roughly how much of your context budget is used, and what the biggest items are. An honest estimate is fine.</code></pre>
                     </div>
                 </div>
 
@@ -276,20 +292,17 @@
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">03</span>
-                        Configure MCP in Claude Code
+                        Load a real working file and watch the budget change
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Ask Claude to set up the MCP filesystem server configuration. Stay in the same session:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                    <p class="text-gray-300 text-sm mb-4">Now put something substantial into the session so you can feel the shift. Pick a file that actually matters to you — a long draft, a config, a script.</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Set up MCP filesystem server access to my ~/research-docs folder. Create or update ~/.claude/claude_desktop_config.json with the correct configuration. Use the actual path to my research-docs directory (not a placeholder). Tell me what you wrote so I can verify it.</code></pre>
-                    </div>
-                    <div class="border border-signal/30 bg-signalDim p-4">
-                        <p class="text-sm font-sans text-gray-300"><span class="text-signal font-bold font-mono">VERIFY:</span> Check that the path in the config file matches your actual username and home directory. Claude should detect this automatically, but confirm the path before moving on.</p>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Read the most important file in this folder — the one whose correctness matters most to me right now. Summarize it in three sentences, then tell me how the context window changed from your last check and what's taking up the most room now.</code></pre>
                     </div>
                 </div>
 
@@ -297,17 +310,17 @@
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">04</span>
-                        Install the MCP filesystem server
+                        Compact the session and compare
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">The server will be installed automatically when needed, but you can pre-install it:</p>
+                    <p class="text-gray-300 text-sm mb-4">Run <code class="text-acid bg-surface px-1">/compact</code> inside the session. It asks Claude to summarize the conversation so far and drop the original messages. Some detail is always lost — this step is about noticing what.</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
                             <div class="w-3 h-3 rounded-full bg-acid/50"></div>
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">npm install -g @modelcontextprotocol/server-filesystem</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Run /compact. After it finishes, tell me three things: what information from the session was preserved, what was lost or reduced, and what's now taking up the most space in the window.</code></pre>
                     </div>
                 </div>
 
@@ -315,19 +328,10 @@
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">05</span>
-                        Restart Claude Code and verify
+                        Get a second opinion from a different model
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Start a new Claude Code session:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">claude</code></pre>
-                    </div>
-                    <p class="text-gray-300 text-sm mb-4">Ask Claude to list what MCP tools are available:</p>
+                    <p class="text-gray-300 text-sm mb-4">This is the cross-model review pattern from video 3. You stay inside your Claude Code session and ask Claude to shell out to either Codex CLI or GitHub Copilot CLI using their non-interactive <code class="text-acid bg-surface px-1">-p</code> flag. Claude runs the command, reads the other model's answer, and brings it back to you.</p>
+                    <p class="text-gray-300 text-sm mb-4">If neither tool is installed yet, Claude will tell you. Install whichever one you have credentials for (<code class="text-acid bg-surface px-1">@openai/codex</code> or <code class="text-acid bg-surface px-1">@github/copilot</code>) and try again. Gemini CLI also works if you'd rather use that.</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -335,36 +339,17 @@
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">What MCP servers and tools do you have access to?</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Check whether codex (from @openai/codex), copilot (from @github/copilot), or gemini (from @google/gemini-cli) is installed on this machine. Pick whichever one is available. Use its non-interactive -p flag to ask it to review the important file from step 3 — tell it to look for bugs, factual errors, missing edge cases, and anything that would embarrass me if it got published. Show me the other model's raw output, then summarize what it found.</code></pre>
                     </div>
-                    <p class="text-gray-400 text-xs mt-2">You should see the filesystem server listed with access to your research-docs folder.</p>
                 </div>
 
                 <!-- Step 6 -->
                 <div class="mb-8">
                     <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
                         <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">06</span>
-                        Query your documents
+                        Reconcile the two reads and write a debrief
                     </h3>
-                    <p class="text-gray-300 text-sm mb-4">Now query your document collection. The key difference from a normal chat: Claude is pulling answers from your files, not from memory. Try these (adapt to whichever data option you chose):</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden mb-2">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Using only the files in my research-docs folder, summarize the key facts. For each fact, tell me which file it came from and quote the relevant passage.</code></pre>
-                    </div>
-                    <div class="border border-white/10 bg-panel overflow-hidden mb-2">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Search my research documents for any names or organizations that appear in more than one file. What connections can you identify?</code></pre>
-                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Two different models looking at the same file will disagree. That's the point — the disagreements are where you find things you missed. This is also the step where you practice the editorial judgment the module ends on: you, not either model, make the final call on anything meaningful.</p>
                     <div class="border border-white/10 bg-panel overflow-hidden">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50"></div>
@@ -372,25 +357,7 @@
                             <div class="w-3 h-3 rounded-full bg-ice/50"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Look at my research documents and identify gaps -- what questions would a reporter still need answered? What data is missing that would make the story stronger?</code></pre>
-                    </div>
-                </div>
-
-                <!-- Step 7 -->
-                <div class="mb-8">
-                    <h3 class="font-display text-lg text-chrome mb-4 flex items-center gap-3">
-                        <span class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold text-sm">07</span>
-                        Build a research workflow
-                    </h3>
-                    <p class="text-gray-300 text-sm mb-4">Use your document collection to draft a story. This prompt asks Claude to act as a research assistant -- grounding its work in your files, not its training data:</p>
-                    <div class="border border-white/10 bg-panel overflow-hidden">
-                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-signal/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-acid/50"></div>
-                            <div class="w-3 h-3 rounded-full bg-ice/50"></div>
-                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
-                        </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Using only my research documents, help me outline a story. For each point in the outline, cite the specific file and passage it came from. Flag any claims that would need independent verification. Identify gaps where I'd need additional sources or data.</code></pre>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Compare your own read of that file with what the other model said. Where do you agree? Where do you disagree? For each disagreement, tell me which read you think is correct and why — then flag the parts where the call is genuinely mine to make, not yours. Then write a one-page debrief of this session: what I'd do differently next time, at what point the context window was most at risk, and which piece of this workflow I should make a habit.</code></pre>
                     </div>
                 </div>
             </section>
@@ -403,52 +370,43 @@
                 <div class="border border-signal/30 bg-signalDim p-6">
                     <p class="text-sm font-sans text-gray-300 mb-4"><span class="text-signal font-bold">Self-check:</span> Make sure you can answer these before moving on.</p>
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What is the main difference between a chatbot and an AI agent?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> When would you use <code class="text-acid bg-surface px-1">claude -p</code> instead of an interactive session?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What does MCP stand for and what problem does it solve for journalists working with local data?</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Name two ways an MCP data connection can fail silently, and how you'd catch the problem.</li>
-                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Why is it important to ask Claude to cite which file a fact came from when using external data?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What is in your context window right now, and what's taking up the most room?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Why is the 40% rule about quality, not capacity — and what do you do when you hit it?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> Name two failure modes for sub-agent delegation and how you'd catch each one before it reaches the published version.</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> When would you call Copilot CLI or Codex CLI as a sub-agent instead of working only inside Claude Code?</li>
+                        <li class="flex items-start gap-3"><span class="text-signal">?</span> What are the four questions for picking a new tool — and which one do most journalists get wrong?</li>
                     </ul>
                 </div>
             </section>
 
-            <!-- Readings and resources -->
+            <!-- Resources -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">Resources</h2>
+                    <h2 class="font-display text-xl text-chrome">Going deeper</h2>
                 </div>
                 <div class="border border-white/10 bg-panel p-6">
+                    <p class="text-gray-300 text-sm mb-4">The optional resources for Module 4 — practitioner writing from late 2025 and early 2026 — are listed in the Module 4 reading list on the course LMS. The short list worth knowing about:</p>
                     <ul class="space-y-3 text-sm font-sans">
-                        <li><a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Model Context Protocol - Official MCP documentation and specification</span></li>
-                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-300">Claude Code documentation - MCP configuration reference</span></li>
-                        <li><a href="https://github.com/modelcontextprotocol/servers" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REPO]</a> <span class="text-gray-300">MCP Servers repository - Collection of official and community MCP servers</span></li>
-                        <li><a href="https://www.anthropic.com/news/model-context-protocol" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[ARTICLE]</a> <span class="text-gray-300">Introducing the Model Context Protocol - Anthropic's announcement explaining MCP</span></li>
+                        <li><a href="https://generative-ai-newsroom.com/building-investigative-tipsheets-with-claude-code-2e872b26358e" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[CASE STUDY]</a> <span class="text-gray-300">Nick Hagar, <em>Building Investigative Tipsheets with Claude Code</em> — a Claude Code skill tested against 30 leads pulled from seven Pulitzer winners and finalists.</span></li>
+                        <li><a href="https://generative-ai-newsroom.com/generating-and-evaluating-news-angles-for-a-story-discovery-tool-047dcd64e5b8" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[CASE STUDY]</a> <span class="text-gray-300">Sachita Nishal, <em>Generating and Evaluating News Angles</em> — four small models compared, and the single best piece of practical tool-selection advice in the reading list.</span></li>
+                        <li><a href="https://www.oneusefulthing.org/p/giving-your-ai-a-job-interview" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[ESSAY]</a> <span class="text-gray-300">Ethan Mollick, <em>Giving your AI a Job Interview</em> — treat a new model like a new hire: test it on work you already know the right answer to.</span></li>
+                        <li><a href="https://blog.fsck.com/2025/10/09/superpowers/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[ESSAY]</a> <span class="text-gray-300">Jesse Vincent, <em>Superpowers: how I'm using coding agents in October 2025</em> — a working developer's account of what holds up and what breaks down at the edges.</span></li>
+                        <li><a href="https://simonwillison.net/2025/Oct/22/living-dangerously-with-claude/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[ESSAY]</a> <span class="text-gray-300">Simon Willison, <em>Living dangerously with Claude</em> — what happens when you give Claude Code full permissions, and the "lethal trifecta" framework for when that's actually safe.</span></li>
+                        <li><a href="https://pluralistic.net/2025/09/17/automating-gang-stalking-delusion/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[ESSAY]</a> <span class="text-gray-300">Cory Doctorow, <em>AI psychosis and the warped mirror</em> — a skeptical counterweight to agentic-systems hype. Worth reading before designing any agent-based workflow.</span></li>
                     </ul>
+                    <p class="text-gray-400 text-xs mt-6">Background reference only (not required): <a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Claude Code documentation</a> for the scheduler, sub-agents, <code class="text-acid bg-surface px-1">/compact</code>, <code class="text-acid bg-surface px-1">/effort</code>, and <code class="text-acid bg-surface px-1">/remote-control</code>. <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/copilot-in-the-cli" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">GitHub Copilot CLI</a> and <a href="https://platform.openai.com/docs/codex" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">OpenAI Codex CLI</a> both document the non-interactive <code class="text-acid bg-surface px-1">-p</code> flag used in video 3. The <a href="https://modelcontextprotocol.io/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">Model Context Protocol</a> spec exists here if you want to explore it on your own — it is not a Module 4 topic in the filmed course.</p>
                 </div>
             </section>
 
-            <!-- Troubleshooting -->
+            <!-- When things get weird -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">Troubleshooting</h2>
+                    <h2 class="font-display text-xl text-chrome">When things get weird</h2>
                 </div>
-                <div class="border border-white/10 bg-panel divide-y divide-white/5">
-                    <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">MCP server doesn't appear in Claude Code</h4>
-                        <p class="text-gray-400 text-sm">Check that your config file is valid JSON (no trailing commas, proper quoting). Use <code class="text-acid bg-surface px-1">cat ~/.claude/claude_desktop_config.json</code> to verify the contents. Restart Claude Code after making changes.</p>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">"Permission denied" accessing files</h4>
-                        <p class="text-gray-400 text-sm">The MCP server can only access directories you've explicitly configured. Check that the path in your config matches the actual directory, and that your user has read permission on those files.</p>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">Server fails to start</h4>
-                        <p class="text-gray-400 text-sm">Make sure Node.js and npm are installed and in your PATH. Try running the server manually to see error messages: <code class="text-acid bg-surface px-1">npx @modelcontextprotocol/server-filesystem ~/research-docs</code></p>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">Claude doesn't seem to use the documents</h4>
-                        <p class="text-gray-400 text-sm">Be explicit in your prompts: "Search my research documents for..." or "Using the files in my research folder...". Claude may not automatically search documents unless asked.</p>
-                    </div>
+                <div class="border border-white/10 bg-panel p-6 space-y-4">
+                    <p class="text-gray-300 text-sm leading-relaxed">Most Module 4 failures are context failures, not tool failures. The symptoms: the model starts giving answers that almost-but-don't-quite address what you asked, it repeats a mistake you already corrected, or it asserts something confidently that contradicts a file you know it read. All three mean the window is too full, too polluted, or both.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">The cure is almost always the same. Don't patch. Don't argue with it. Rewind to the last clean state, or start a new session with only the files you actually need, or hand the next step to a narrow sub-agent that carries none of the clutter. The 40% rule exists because the cost of the reset is always less than the cost of finishing in a polluted window.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">If a cross-model review in step 5 of the exercise fails — the other CLI isn't installed, the <code class="text-acid bg-surface px-1">-p</code> flag returns an error, the output is garbled — ask Claude to diagnose it the same way it would any other shell error: paste the error back in and ask what's wrong.</p>
                 </div>
             </section>
 
