@@ -68,13 +68,13 @@ A) Copy the file into a web interface for ChatGPT and paste the response back �
 
 B) Ask Claude inside your main session to review the file again — Claude is smart enough to catch its own mistakes
 
-C) From inside your Claude Code session, call the other tool with its non-interactive `-p` flag (e.g., `codex -p "review this file for..."` or `gemini -p "..."`). The review runs as a separate process, so its tokens don't count against your main session, and you get a second opinion from a different model family that has different blind spots than Claude.
+C) From inside your Claude Code session, call the other tool with its non-interactive `-p` flag (e.g., `codex -p "review this file for..."` or `gemini -p "..."`). The other tool's reasoning runs in its own separate process, so none of its intermediate thinking consumes your main session's context budget, and you get a second opinion from a different model family that has different blind spots than Claude.
 
 D) Open a second terminal window, launch an interactive Codex or Gemini session, and paste the file in by hand
 
 **Correct answer:** C
 
-**Explanation:** The `-p` flag runs a single non-interactive prompt and exits. From inside Claude Code, you can call `codex -p "..."` or `gemini -p "..."` (or `copilot -p "..."`) as a one-shot sub-agent that returns a second opinion from a different model family — without polluting your main session's context window. This is context isolation in practice: the review runs in a separate process, its tokens don't count against your main session, and you can do this cheaply and often. The reason it matters is that a second model family has different blind spots than yours, and editorial judgment gets sharper when two models with different failure modes disagree and you have to reconcile them.
+**Explanation:** The `-p` flag runs a single non-interactive prompt and exits. From inside Claude Code, you can call `codex -p "..."` or `gemini -p "..."` (or `copilot -p "..."`) as a one-shot sub-agent that returns a second opinion from a different model family. Context isolation in practice: the other tool's full reasoning chain runs in its own separate process, so none of its intermediate thinking, file reads, or working memory show up in your Claude Code session. Only the final review text comes back into your main session — and that returned text does consume some tokens once it lands in the conversation, so it's cheaper than running the same review inside your main session, not free. The reason this pattern matters is that a second model family has different blind spots than yours, and editorial judgment gets sharper when two models with different failure modes disagree and you have to reconcile them.
 
 ---
 
@@ -92,7 +92,7 @@ D) Editorial judgment becomes less important for routine work but more important
 
 **Correct answer:** C
 
-**Explanation:** The video argument — and the argument the course keeps returning to — is that the better the model gets at typing, the more important your editorial judgment becomes. The model can do the research, the drafting, the formatting, the scheduling, the packaging. It cannot make the call about whether the lead is wrong, whether a source is credible, whether a story is worth telling, whether the framing is fair. Those are your calls, and they become load-bearing in exact proportion to how much work you're delegating to the model. A working pipeline that produces output nobody trusts is worse than no pipeline at all, which is why the Module 3 rule about checking the output and the Module 4 rule about managing the session are really the same rule said twice.
+**Explanation:** The video argument — and the argument the course keeps returning to — is that the better the model gets at the back-office work, the more important your editorial judgment becomes. The model can write the scripts, run the pipelines, assemble the data, handle the formatting, schedule the jobs, package the outputs. It cannot make the call about whether the lead is wrong, whether a source is credible, whether a story is worth telling, whether the framing is fair. Those are your calls, and they become load-bearing in exact proportion to how much of the code side of your workflow you're delegating to the model. A working pipeline that produces output nobody trusts is worse than no pipeline at all, which is why the Module 3 rule about checking the output and the Module 4 rule about managing the session are really the same rule said twice.
 
 ---
 

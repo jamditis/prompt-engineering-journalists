@@ -4,7 +4,7 @@
 
 You've completed the final module of the course.
 
-This week was deliberately different from the first three. Modules 1-3 built mechanics — how to set up the tools, write context files, package skills and plugins, and schedule pipelines. Module 4 pulled back from the mechanics to the craft. The shift is real and it's the point: you do not finish this course as a better prompter. You finish it as a manager of a model that is now doing more of the keystrokes than you are.
+This week was deliberately different from the first three. Modules 1-3 built mechanics — how to set up the tools, write context files, package skills and plugins, and schedule pipelines. Module 4 pulled back from the mechanics to the craft. The shift is real and it's the point: you do not finish this course as a better prompter. You finish it as a project coordinator for a model that's doing the coding keystrokes on the scripts, skills, and pipelines that support your reporting.
 
 **What you learned:**
 
@@ -15,12 +15,12 @@ This week was deliberately different from the first three. Modules 1-3 built mec
 - The 40% rule: cap conversations at about 40% of the window, rewind rather than patch, and feel the discomfort of starting over
 - Sub-agents and fresh context windows. Why delegating a narrowly-scoped task is cheap and useful, and why "agent telephone" — chaining sub-agents so one's output becomes the next one's input — is the failure mode to avoid
 - The double-escape rewind trick for undoing a bad decision, and why it stops working the moment you run `/compact`
-- Cross-model code review via the `-p` flag. Calling Codex CLI, GitHub Copilot CLI, or Gemini CLI as non-interactive sub-agents from inside Claude Code to get a second opinion from a different model family on the most important file in your session. Context isolation means the review's tokens don't count against your main session.
+- Cross-model code review via the `-p` flag. Calling Codex CLI, GitHub Copilot CLI, or Gemini CLI as non-interactive sub-agents from inside Claude Code to get a second opinion from a different model family on the most important file in your session. The outside review runs in its own context, but any output you bring back into your Claude Code session still counts against that session's context budget — so what you get is cheaper output, not free output.
 - `/remote-control` for driving a long-running session from the web or your phone, and picking up where you left off
 - The four questions for picking any AI tool: what's the task, how much context does it need, does it need tool access, what's your real money budget
 - Editorial judgment as the skill that becomes *more* important, not less, as the tools get better
 
-**The full arc of the course.** In Module 1 you moved from a browser chat window to a terminal and learned to write project context that follows your work across sessions. In Module 2 you encoded editorial expertise as reusable skills and packaged a real workflow as a shareable plugin. In Module 3 you sketched an automation as a system, staged a real pipeline, and scheduled it so it runs without you. In Module 4 you learned to manage the session itself — to treat the context window as a budget, to delegate narrowly to sub-agents, to get a second opinion from a different model before you commit, and to keep editorial judgment in your own hands as the model takes over more of the keystrokes.
+**The full arc of the course.** In Module 1 you moved from a browser chat window to a terminal and learned to write project context that follows your work across sessions. In Module 2 you encoded editorial expertise as reusable skills and packaged a real workflow as a shareable plugin. In Module 3 you sketched an automation as a system, staged a real pipeline, and scheduled it so it runs without you. In Module 4 you learned to manage the session itself — to treat the context window as a budget, to delegate narrowly to sub-agents, to get a second opinion from a different model before you commit, and to keep editorial judgment in your own hands while the model handles more of the code-side keystrokes.
 
 Four weeks, four shifts: typing → context files, ad-hoc prompts → reusable skills and plugins, one-off runs → scheduled pipelines, prompting → managing. Each shift makes the next one possible. You finish this course with a set of habits and a toolchain that compounds every time you use them.
 

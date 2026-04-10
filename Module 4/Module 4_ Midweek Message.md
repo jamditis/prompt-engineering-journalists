@@ -18,8 +18,6 @@ A few common sticking points this week.
 
 **"`/remote-control` is confusing — do I have to use it for the exercise?"** No. Remote control is a Video D4 feature for driving a long-running session from your phone or a web browser. It's useful but optional. The required exercise is the cross-model review in Video D3, not remote control. If you want to try remote control separately, go for it — but it's not on the grading rubric.
 
-**One reframe for the hard part of this week.** You are the product manager now. The model is the writer, the intern, the junior hire. Your job is to give it clear instructions, evaluate the work it returns, and decide what ships. If you find yourself doing the typing, stop and ask whether you should be delegating that part to the model and reviewing the output instead. If you find yourself accepting output without reading it, stop and remember that editorial judgment is the thing that can't be delegated.
-
-[INSERT STUDENT THREADS/DISCUSSIONS]
+**One reframe for the hard part of this week.** When you're working on the code side of your workflow — a script, a skill, a pipeline, a config file — the skills that pay off are the project-coordinator ones: specify what you want clearly, read what the model returns, give direct feedback, and decide what you'll keep. If you find yourself typing code you could have described in a sentence, stop and delegate it. If you find yourself accepting the model's code without reading it, stop and read it — that's the judgment call that can't be delegated. (Your reporting and your writing are separate from all of this. Module 4 is not about handing the model your story.)
 
 Joe Amditis

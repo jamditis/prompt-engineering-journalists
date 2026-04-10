@@ -2,7 +2,9 @@
 
 ## Exercise: Manage a full session as a manager, not a prompter
 
-In this exercise you'll manage a complete Claude Code session from the inside the way a product manager manages a junior hire: taking a context-window baseline, loading a real file, compacting the session, then calling a different model family through its non-interactive `-p` flag for a second-opinion review of the most important file you're working with, and finally reconciling the two reads into a judgment you'd actually act on.
+In this exercise you'll manage a complete Claude Code session the way a project coordinator works with a developer: taking a context-window baseline, loading a real file, compacting the session, then calling a different model family through its non-interactive `-p` flag for a second-opinion review of the most important file you're working with, and finally reconciling the two reads into a judgment you'd actually act on.
+
+The file you load should be a code-side artifact from your workflow — a skill, a pipeline script, a config file, a `CLAUDE.md` context file, a shell script, a scraped dataset you re-use each week. Don't use this exercise to run an editorial review on a draft news story. Module 4 is about managing the *software side* of your work — the scripts, skills, and pipelines the model is helping you build — not delegating the journalism itself. The cross-model review step is most useful when what you're looking for is code-side problems: reliability, correctness, missing edge cases, fragile assumptions, things that will bite you when the script runs unattended.
 
 You will not write shell code. You will not install MCP servers. You will not build a pipeline. The entire exercise happens inside one Claude Code session and one one-shot call-out to a different model. The skill you're practicing is managing the session — not stacking tools on top of it.
 
@@ -14,7 +16,7 @@ Before starting, make sure you have:
 
 - **Claude Code installed and authenticated.** If you haven't done this yet, return to Module 1.
 - **A project folder with a CLAUDE.md (or GEMINI.md / AGENTS.md).** You set one of these up in Module 1 — reuse it.
-- **At least one real file in the project folder** that you actually care about. A beat context file, a draft article, a public-records response, a scraped dataset, a CSV, a skill you wrote in Module 2, a pipeline script from Module 3. Anything from your own work that isn't toy data.
+- **At least one real code-side file in the project folder** that you actually care about. Good options: a skill you wrote in Module 2, a pipeline script from Module 3, a `CLAUDE.md` context file, a beat context file, a scraped dataset or CSV you re-use, a config file that keeps breaking, a shell script you use for your beat. Pick something from your own work that isn't toy data — but do *not* pick a draft news story. The exercise is about reviewing the code and infrastructure the model helps you manage, not about editing your journalism.
 - **A second CLI tool installed for the cross-model review.** One of:
   - **OpenAI Codex CLI** (`npm install -g @openai/codex`) — requires a ChatGPT Plus subscription or OpenAI API key
   - **GitHub Copilot CLI** (`npm install -g @github/copilot`) — requires a GitHub Copilot subscription
@@ -64,14 +66,14 @@ Tell Claude which file to read and ask for a baseline understanding of it:
 ```claude code
 Read the file [path/to/your/file] and tell me:
 
-1. What is this file for? Who's the audience and what problem is it solving?
-2. What are the three most important things in it from a journalism perspective — not from a code perspective?
-3. What questions would you ask me, as the editor of this work, before you made any changes to it?
+1. What is this file for? What workflow does it sit inside, and what problem is it solving for me?
+2. What are the three things in it that are most load-bearing — the things that, if they broke, would break the workflow? Not style issues. Real dependencies, real assumptions, real failure modes.
+3. What questions would you ask me, as the person responsible for this file, before you made any changes to it?
 
 Don't suggest changes yet. Just read it and prove to me you understood it.
 ```
 
-This is the Mollick framing in practice — you're treating Claude like a junior hire who just picked up a new assignment. You want evidence it read the thing and understood the stakes before it starts doing work.
+This is the Mollick framing in practice — you're giving Claude a specific code-side assignment and asking for evidence it understood the file before it starts making changes. A good project coordinator doesn't hand off work without confirming the developer knows what they're touching.
 
 ### Step 4: Take a second context-window reading
 
@@ -102,7 +104,7 @@ After that bare /compact, tell me:
 
 1. What did you keep from the pre-compact conversation?
 2. What did you drop?
-3. Specifically: do you still remember the three most important things I asked you to identify about [the file] in Step 3? If I asked you one of those questions right now, could you answer without re-reading the file?
+3. Specifically: do you still remember the three load-bearing things I asked you to identify about [the file] in Step 3? If I asked you one of those questions right now, could you answer without re-reading the file?
 ```
 
 Read the answer carefully. If Claude says it kept everything important, check by asking one of the specific things from Step 3 — without letting it re-read the file. If it can't answer, that's the lesson: bare `/compact` throws away things you needed. Write down what you lost.
@@ -116,13 +118,13 @@ Now run `/compact` with a custom summarization instruction:
 ```claude code
 /compact
 
-Keep everything about [the file], including the three most important things you identified in Step 3, the questions you'd ask the editor, and my original instructions for how to read the file. Compact only the meta-conversation about context windows and the baseline readings.
+Keep everything about [the file], including the three load-bearing things you identified in Step 3, the questions you'd ask me before making changes, and my original instructions for how to read the file. Compact only the meta-conversation about context windows and the baseline readings.
 ```
 
 Then ask Claude the same diagnostic question from Step 5:
 
 ```claude code
-Same diagnostic as before. What did you keep and what did you drop? Can you still answer the three-most-important-things question about [the file] without re-reading it?
+Same diagnostic as before. What did you keep and what did you drop? Can you still answer the three-load-bearing-things question about [the file] without re-reading it?
 ```
 
 Write down the difference. This is the pattern you'll use in real work: tell `/compact` what matters *before* you run it, not after it's already thrown away things you needed.
@@ -138,14 +140,14 @@ This is the highest-leverage advanced pattern of the week. From inside your main
 ```claude code
 I want a cross-model second opinion on [path/to/your/file]. Run one of the following, depending on what I have installed, as a non-interactive call using the -p flag. Pick the one I have access to:
 
-- gemini -p "Review the file at [full path]. What are the top three things a journalist editor should catch in this file that might be missed by someone who wrote it? Be specific. Don't suggest style changes — I want editorial and structural issues."
+- gemini -p "Review the file at [full path]. What are the top three issues a careful reviewer should catch in this file — correctness problems, missing edge cases, reliability risks, fragile assumptions, or things that will break when the file runs under real-world conditions? Be specific. If the file has a clear purpose, evaluate it against that purpose. Don't stop at surface-level style."
 - codex -p "[same prompt]"
 - copilot -p "[same prompt]"
 
 Run the one that's installed. Show me the raw output. Then tell me: which of these three things, if any, would you (Claude) have missed if I had only asked you?
 ```
 
-Claude will call out to the other tool as a subprocess and return its output. The review runs in a separate process, so the tokens it consumes don't count against your main session's context window. This is context isolation in practice.
+Claude will call out to the other tool as a subprocess and return its output. The other tool's reasoning runs entirely in its own separate process — none of its intermediate thinking, file reads, or working memory shows up in your Claude Code session. That's the useful form of context isolation. What does come back into your main session is the final review text itself, and that text does consume tokens once it lands in the conversation. So you're paying for cheaper output (just the final review), not free output (the whole reasoning chain that produced it).
 
 If none of those tools are installed, this is the moment to install one. `gemini` is free for this exercise — `npm install -g @google/gemini-cli` and a Google account is all you need. The other two require paid subscriptions. You must do this step with a second model family, not by asking Claude twice.
 
@@ -164,7 +166,7 @@ Compare the two reads on [the file]:
 Don't try to be diplomatic. Tell me what you actually think, and tell me where the other model caught something you missed.
 ```
 
-This is the editorial judgment moment. Read Claude's comparison carefully and make your own call. Don't assume either review is right by default. Don't assume the second model is automatically smarter because it's a "second opinion." Your job is to reconcile the two reads into a single editorial judgment you'd actually act on.
+This is the judgment moment. Read Claude's comparison carefully and make your own call. Don't assume either review is right by default. Don't assume the second model is automatically smarter because it's a "second opinion." Your job is to reconcile the two reads into a single decision about what, if anything, you'd actually change in the file.
 
 ---
 
@@ -172,7 +174,7 @@ This is the editorial judgment moment. Read Claude's comparison carefully and ma
 
 ### Step 9: Write the reconciled judgment yourself
 
-Outside of the chat — in a notes file, in a Google Doc, on paper — write a short paragraph that answers this question: **"Based on both reviews, what would I actually do next with this file?"** Be specific. Don't say "I would iterate." Say "I would rewrite the second paragraph to lead with the dollar figure and drop the procedural framing, because both reviews flagged the procedural lede as the weakest part, and the Codex review specifically pointed out the dollar figure is buried." The specificity is where the editorial judgment lives.
+Outside of the chat — in a notes file, in a Google Doc, on paper — write a short paragraph that answers this question: **"Based on both reviews, what would I actually do next with this file?"** Be specific. Don't say "I would iterate." Say something concrete, like: "I would add a retry with exponential backoff around the fetch call and log the HTTP status code before swallowing errors, because both reviews flagged the bare `except:` as silently hiding network failures and the Gemini review pointed out there's no request timeout either." The specificity is where the judgment lives — a project coordinator who can't name the exact change they want isn't coordinating anything.
 
 ### Step 10: Write the session debrief
 

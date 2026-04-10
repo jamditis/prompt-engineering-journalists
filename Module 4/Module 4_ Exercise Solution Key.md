@@ -6,7 +6,7 @@
 
 ---
 
-**Discussion post — Exercise 4**
+**Exercise submission — Exercise 4**
 
 I used my own beat context file (a 3,400-word CLAUDE.md I wrote for covering the state courts in my jurisdiction) and the draft of a story I'm working on about a recent appellate ruling. I ran the session in Claude Code and used Gemini CLI (free tier) for the cross-model review. Here's what I submitted.
 

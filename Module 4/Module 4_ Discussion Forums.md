@@ -24,7 +24,7 @@ The Willison piece (required reading) is the load-bearing reference here. Don't 
 
 ## Discussion 2: What to delegate to a sub-agent, what to keep in your own session
 
-Ethan Mollick's "Management as AI superpower" frames working with AI as managing a junior hire: clear instructions, feedback, and evaluation criteria. The course has a slightly sharper version: you're a product manager running a model that's doing most of the keystrokes. The skill is deciding what to delegate.
+Ethan Mollick's "Management as AI superpower" frames working with AI as managing a junior hire: clear instructions, feedback, and evaluation criteria. The course sharpens that framing for the code side of the work specifically: when the model is writing scripts, skills, pipelines, and configs for you, you're coordinating that work the way a non-developer coordinates with a developer — not delegating the journalism itself. The skill is deciding what to delegate on the code side, and the "never" pile is everything that would count as abdicating the editorial job.
 
 **Question:** Pick one reporting workflow you actually do. Split it into three buckets: what you'd delegate to a sub-agent with a narrowly-scoped instruction, what you'd keep in your main session so you can course-correct in real time, and what you'd never hand to a model at all. For each bucket, explain the *why* as much as the *what*.
 
