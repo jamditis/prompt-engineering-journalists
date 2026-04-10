@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Module 3: CLI workflows | Advanced prompt engineering</title>
+    <title>Module 3: Automation, pipelines, and triggered workflows | Advanced prompt engineering</title>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../assets/js/config.js"></script>
@@ -12,15 +12,15 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://mooc.amditis.tech/module-3/" />
-    <meta property="og:title" content="Module 3: CLI workflows for newsrooms" />
-    <meta property="og:description" content="Chain CLI tools into pipelines using the Unix philosophy to build cost-conscious automation for newsroom tasks." />
+    <meta property="og:title" content="Module 3: Automation, pipelines, and triggered workflows" />
+    <meta property="og:description" content="Turn a one-off pipeline into a scheduled, self-running system using cloud remote triggers, GitHub Actions, and GitHub Pages." />
     <meta property="og:image" content="https://mooc.amditis.tech/assets/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Module 3: CLI workflows for newsrooms" />
-    <meta name="twitter:description" content="Chain CLI tools into pipelines using the Unix philosophy to build cost-conscious automation for newsroom tasks." />
+    <meta name="twitter:title" content="Module 3: Automation, pipelines, and triggered workflows" />
+    <meta name="twitter:description" content="Turn a one-off pipeline into a scheduled, self-running system using cloud remote triggers, GitHub Actions, and GitHub Pages." />
     <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png" />
     <script src="https://unpkg.com/lucide@latest"></script>
 <script src="../assets/js/ask-ai.js" defer></script>
@@ -52,8 +52,8 @@
         <section class="py-12 px-6 border-b border-white/10">
             <div class="max-w-5xl mx-auto">
                 <div class="text-xs text-acid font-mono mb-4">MODULE 03</div>
-                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">CLI WORKFLOWS</h1>
-                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Describe workflows in plain English, let your CLI LLM build the automation, and learn to test, debug, and refine pipelines for your reporting.</p>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">AUTOMATION, PIPELINES, AND TRIGGERED WORKFLOWS</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Stop running workflows manually. Think of reporting tools as systems with input nodes, conveyor belts, and output destinations — then let cloud remote triggers, GitHub Actions, and GitHub Pages run them for you on a schedule.</p>
             </div>
         </section>
 
@@ -63,13 +63,14 @@
             <!-- Module 3 video -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-ice">Describing workflows, building pipelines</h2>
+                    <h2 class="font-display text-xl text-ice">Watch: automation, pipelines, and triggered workflows</h2>
                 </div>
                 <div class="max-w-3xl">
-                    <div class="relative w-full rounded-lg overflow-hidden border border-white/10 bg-panel flex items-center justify-center" style="padding-bottom:56.25%">
-                        <p class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm font-mono">Video available in the course platform</p>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3"><strong class="text-chrome">Video 1 (~12 min)</strong> is about the shift from "I can do this once" to "this runs on its own." It covers why non-programmers stall at automation, thinking in systems — input nodes, conveyor belts, transformers, and output destinations — and what an automation actually is. Then it walks through planning multi-stage pipelines with one job per stage (fetch, clean, process, save), modularization and chaining, secret hygiene, and three rules: stage the pipeline, test small, never put secrets in code.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-3"><strong class="text-chrome">Video 2 (~29 min)</strong> continues the Module 2 Mamdani project and automates it end to end. You'll see a side-by-side comparison of Claude Code's two schedulers — the in-session <code class="text-acid bg-surface px-1">cron.create</code> and the cloud-based remote trigger — and a hybrid setup where the cloud detects new videos and the local machine handles transcription. The video also uses Google Drive desktop sync as a simpler alternative to the Drive API, publishes the dashboard via GitHub Pages and GitHub Actions, and debugs Copilot review feedback, branch protection rules, and an accidental self-triggering PR loop live.</p>
+                        <p class="text-gray-400 text-xs">Videos will be embedded here when available.</p>
                     </div>
-                    <p class="text-gray-400 text-sm mt-3">In this video, Joe demonstrates a real cron-based scheduler that checks for new content, processes it, and sends results on a recurring schedule. He also walks through Reroute NJ (reroutenj.org), a zero-build static site in 11 languages built with CLI tools — including page generation scripts, a translation pipeline, and scrapers that commit and push changes automatically.</p>
                 </div>
             </section>
 
@@ -80,11 +81,12 @@
                 </div>
                 <div class="border border-ice/30 bg-iceDim p-6">
                     <ul class="space-y-2 text-sm font-sans text-gray-300">
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Describe a multi-step journalism workflow in plain English and have your CLI LLM translate it into a working, reusable script</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Describe a reporting workflow as a system: input nodes, conveyor belts, transformers, and output destinations</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Plan a multi-stage pipeline with one job per stage (fetch, clean, process, save) so failures stay isolated</li>
                         <li class="flex items-start gap-3"><span class="text-ice">></span> Use plan mode (<code class="text-acid bg-surface px-1">/plan</code>) to review the approach before any code is written or any command is run</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Test AI-built scripts on a small number of real examples before running them on full workloads</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Diagnose pipeline failures by pasting errors back into your CLI session and iterating on fixes</li>
-                        <li class="flex items-start gap-3"><span class="text-ice">></span> Apply security practices: API keys in environment variables, scripts reviewed before deployment</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Choose between the two schedulers: in-session <code class="text-acid bg-surface px-1">cron.create</code> for local jobs, cloud remote triggers for always-on runs</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Publish a static dashboard using GitHub Pages and trigger rebuilds with GitHub Actions</li>
+                        <li class="flex items-start gap-3"><span class="text-ice">></span> Apply the three rules: stage the pipeline, test small, never put secrets in code</li>
                     </ul>
                 </div>
             </section>
@@ -109,6 +111,12 @@
                 </div>
                 <div class="space-y-4">
                     <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Think in systems, not scripts</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Non-programmers usually stall here — at the jump from "I ran this once" to "this runs on its own." The fix is to stop thinking about scripts and start thinking about systems. Every automation has the same four parts: <strong class="text-chrome">input nodes</strong> (where data enters), <strong class="text-chrome">conveyor belts</strong> (how it moves), <strong class="text-chrome">transformers</strong> (what changes it), and <strong class="text-chrome">output destinations</strong> (where it ends up).</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">If you've played Factorio or Satisfactory, you already know the model. A fetcher pulls posts off a social platform → a transcription stage runs Whisper → a content analysis stage labels them → the labeled output lands in a dashboard. When you describe a workflow to Claude this way, it gets the architecture right the first time instead of building one long script that breaks halfway through.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Describe the workflow, let the LLM build it</h3>
                         <p class="text-gray-300 text-sm leading-relaxed mb-4">Instead of asking your CLI tool to help with one document, you describe an entire workflow — a sequence of steps from input to output — and it builds the script that automates it.</p>
                         <p class="text-gray-300 text-sm leading-relaxed">"Fetch this URL, strip out the ads, summarize it in three bullets, save it as a markdown file with today's date in the filename." That's a workflow description. Your CLI tool turns it into a reusable script. You review it, test it on a few real examples, and refine it until the output is what you want.</p>
@@ -131,6 +139,27 @@ and wait for my approval before taking any action."</span></code></pre>
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Pipeline stages</h3>
                         <p class="text-gray-300 text-sm leading-relaxed">The right way to build a pipeline: separate stages, each with a clear input and output. Fetch. Clean. Analyze. Format. When something breaks, you know which stage failed — and you can fix one without touching the others.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Two schedulers: local and cloud</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Claude Code has two ways to run a job on a schedule, and they solve different problems.</p>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex gap-3"><span class="text-acid shrink-0">></span> <span><strong class="text-chrome">In-session <code class="text-acid bg-surface px-1">cron.create</code></strong> — schedules a job from inside an active Claude Code session. Runs on your local machine, uses your local tools (Whisper, FFmpeg, YTDLP), and stops when your computer sleeps. Good for anything that needs GPU or long-running local work.</span></li>
+                            <li class="flex gap-3"><span class="text-acid shrink-0">></span> <span><strong class="text-chrome">Cloud remote triggers</strong> — run in Anthropic's cloud on a fixed schedule. They don't need your computer to be on, but they can't touch your local files or tools. Good for detection ("did anything new show up?"), notifications, and anything that fits in pure API calls.</span></li>
+                            <li class="flex gap-3"><span class="text-acid shrink-0">></span> <span><strong class="text-chrome">Hybrid</strong> — the pattern the video uses. A cloud trigger detects new videos every few hours and writes a tiny queue file. When your local machine wakes up, an in-session cron drains the queue and runs transcription on the GPU. You get the always-on detection of the cloud plus the local tools of your workstation.</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">GitHub Actions and GitHub Pages for the output layer</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Once your pipeline produces something worth publishing — a dashboard, a CSV, an interactive page — you need an output destination that's always online. GitHub Pages is free, versioned, and every update is a commit you can audit later.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">GitHub Actions is the trigger that fires when new output arrives. The pattern is simple: your local pipeline writes output into a repo, a commit pushes it to GitHub, a workflow in <code class="text-acid bg-surface px-1">.github/workflows/</code> rebuilds the site, and GitHub Pages serves the new version. The Module 2 Mamdani dashboard updates this way every time new videos are processed — no server, no deploy script, no hosting bill.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Watch out for self-triggering loops</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed">The Module 3 video debugs a real bug you will hit at some point: a GitHub Actions workflow that opens a PR, which triggers the same workflow, which opens another PR. These loops are easy to create and embarrassingly expensive to leave running. The defense is branch protection rules and a condition at the top of the workflow that filters out self-authored pushes. When the Copilot PR reviewer flags branching or trigger logic, read it carefully — these are exactly the bugs it catches best.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
@@ -289,43 +318,52 @@ and wait for my approval before taking any action."</span></code></pre>
                 </div>
             </section>
 
-            <!-- Readings and resources -->
+            <!-- Reading from the field -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">Resources</h2>
+                    <h2 class="font-display text-xl text-chrome">Reading from the field</h2>
                 </div>
-                <div class="border border-white/10 bg-panel p-6">
-                    <ul class="space-y-3 text-sm font-sans">
-                        <li><a href="https://www.gnu.org/software/bash/manual/bash.html" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[DOCS]</a> <span class="text-gray-300">Bash Reference Manual - Complete bash documentation</span></li>
-                        <li><a href="https://missing.csail.mit.edu/2020/shell-tools/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[COURSE]</a> <span class="text-gray-300">The Missing Semester: Shell Tools - MIT's guide to shell scripting</span></li>
-                        <li><a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[REF]</a> <span class="text-gray-300">Claude Code documentation - Non-interactive mode reference</span></li>
-                        <li><a href="https://explainshell.com/" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">[TOOL]</a> <span class="text-gray-300">ExplainShell - Paste any shell command to see what each part does</span></li>
-                    </ul>
+                <p class="text-gray-400 text-sm mb-6 max-w-3xl">Three pieces by working practitioners on the themes of this module — real pipelines, real costs, real failure modes. Start here instead of the docs.</p>
+                <div class="space-y-4">
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-mono text-acid">[CASE STUDY]</span>
+                            <span class="text-xs font-mono text-gray-500">Generative AI in the Newsroom · Mar 2026</span>
+                        </div>
+                        <h3 class="font-display text-lg text-ice mb-2"><a href="https://generative-ai-newsroom.com/wrangling-messy-documents-with-coding-agents-196b9b8e8959" target="_blank" rel="noopener" class="hover:text-acid transition-colors">Wrangling Messy Documents with Coding Agents</a></h3>
+                        <p class="text-xs text-gray-500 mb-3">Nick Hagar</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">The clearest practitioner illustration of <em>stage the pipeline, one job per stage</em>. Hagar built a single skill with three modes — Transcription, Structuring, and Automated OCR — then tested it on three published investigations including a Pulitzer-winning NYT lobbying series and a Marshall Project / NYT Pulitzer finalist on New York prison discipline records. Crosses from Claude Code to Gemini 3 and back when one model's vision isn't good enough. His final line is the editorial argument this course keeps returning to: <em>coding agents are versatile tools for handling labor-intensive tasks under the supervision of an expert human.</em></p>
+                    </div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-mono text-acid">[CASE STUDY]</span>
+                            <span class="text-xs font-mono text-gray-500">Generative AI in the Newsroom · Oct 2025</span>
+                        </div>
+                        <h3 class="font-display text-lg text-ice mb-2"><a href="https://generative-ai-newsroom.com/augmented-beat-reporting-where-llms-excel-and-where-reporters-still-win-135decbe8675" target="_blank" rel="noopener" class="hover:text-acid transition-colors">Augmented beat reporting: where LLMs excel and where reporters still win</a></h3>
+                        <p class="text-xs text-gray-500 mb-3">Nick Hagar</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">A working beat-monitoring pipeline built for about $0.15 a day. The models hit an F1 of 0.94 at extracting relevant use cases from articles but only 31% exact alignment with human newsworthiness judgment. A one-week pilot still surfaced three high-value leads the reporter hadn't found elsewhere. The lesson maps directly onto this module: LLMs are good first-pass filters, but the decision about what's worth pursuing stays with the journalist.</p>
+                    </div>
+                    <div class="border border-white/10 bg-panel p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-mono text-acid">[ESSAY]</span>
+                            <span class="text-xs font-mono text-gray-500">simonwillison.net · Dec 2025</span>
+                        </div>
+                        <h3 class="font-display text-lg text-ice mb-2"><a href="https://simonwillison.net/2025/Dec/18/code-proven-to-work/" target="_blank" rel="noopener" class="hover:text-acid transition-colors">Code proven to work</a></h3>
+                        <p class="text-xs text-gray-500 mb-3">Simon Willison</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Willison's argument that publishing pipeline outputs without personally verifying them shifts the verification burden onto the reader. The principle maps straight onto automated newsroom pipelines: you are responsible for checking that what your script produced is correct, not just that it ran without errors. Read this before you schedule anything on a recurring trigger.</p>
+                    </div>
                 </div>
+                <p class="text-gray-500 text-xs mt-6 max-w-3xl">Background reference (for when you need syntax, not framing): <a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-gray-400 hover:text-ice">Claude Code schedulers and remote triggers</a>, <a href="https://docs.github.com/en/actions/writing-workflows/about-workflows" target="_blank" rel="noopener" class="text-gray-400 hover:text-ice">GitHub Actions workflows</a>, and <a href="https://docs.github.com/en/pages" target="_blank" rel="noopener" class="text-gray-400 hover:text-ice">GitHub Pages</a>.</p>
             </section>
 
-            <!-- Troubleshooting -->
+            <!-- When things break -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-chrome">Troubleshooting</h2>
+                    <h2 class="font-display text-xl text-chrome">When things break</h2>
                 </div>
-                <div class="border border-white/10 bg-panel divide-y divide-white/5">
-                    <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">"Permission denied" when running the script</h4>
-                        <p class="text-gray-400 text-sm">You need to make the script executable: <code class="text-acid bg-surface px-1">chmod +x run-pipeline.sh</code></p>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">"command not found: claude"</h4>
-                        <p class="text-gray-400 text-sm">Claude Code isn't in your PATH. If you used the native installer (<code class="text-acid bg-surface px-1">curl -fsSL https://claude.ai/install.sh | sh</code>), restart your terminal. See <a href="https://code.claude.com/docs" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">code.claude.com/docs</a> for troubleshooting steps.</p>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">Script produces empty output</h4>
-                        <p class="text-gray-400 text-sm">Check that the input file exists and isn't empty. Add <code class="text-acid bg-surface px-1">set -e</code> at the top of your script to stop on errors, making problems easier to diagnose.</p>
-                    </div>
-                    <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">Special characters in filenames cause errors</h4>
-                        <p class="text-gray-400 text-sm">Always quote variable references in scripts: use <code class="text-acid bg-surface px-1">"$file"</code> not <code class="text-acid bg-surface px-1">$file</code>. This handles spaces and special characters correctly.</p>
-                    </div>
+                <div class="border border-white/10 bg-panel p-6 max-w-3xl">
+                    <p class="text-gray-300 text-sm leading-relaxed mb-3">The most useful debugging move in a CLI session is also the simplest: <strong class="text-chrome">paste the error back into the chat and ask what it means.</strong> Your tool already knows the code it built for you, so it can read the error in context and usually identify the problem immediately. Don't paraphrase. Don't translate. Copy the exact output and hand it back.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">If you're stuck in a loop — the same error three times in a row, the same fix that doesn't work — that's the signal to stop and replan. Enter plan mode (<code class="text-acid bg-surface px-1">/plan</code>) and ask for a different approach instead of retrying the broken one. The course's Module 4 goes deeper on rewinding bad conversations and capping sessions before they drift.</p>
                 </div>
             </section>
 
