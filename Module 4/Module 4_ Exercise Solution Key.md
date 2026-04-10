@@ -1,235 +1,105 @@
-# Module 4: Agents, tools, and data access — exercise solution key
+# Module 4: Advanced prompting patterns — exercise solution key
+
+---
 
 ## Model student submission
 
-### Part 1: Query results (in place of screenshots)
+---
 
-The following describes what a successful terminal session looks like for each of the four test prompts in Part 4. Each response is written as Claude would actually answer given the knowledge base files configured via MCP.
+**Exercise submission — Exercise 4**
+
+I used my own beat context file (a 3,400-word CLAUDE.md I wrote for covering the state courts in my jurisdiction) and the draft of a story I'm working on about a recent appellate ruling. I ran the session in Claude Code and used Gemini CLI (free tier) for the cross-model review. Here's what I submitted.
 
 ---
 
-**Verification prompt: "What files are available in my knowledge base?"**
+### 1. The three context-window readings
 
-Before running the four test prompts, the exercise asks students to verify their MCP connection. A successful response looks like this:
+- **Step 2 (baseline, empty session):** ~11% used, around 120K tokens. Claude's breakdown: system prompt ~2%, tools and schemas ~3%, my CLAUDE.md ~5%, memory file ~1%. Working room to 40%: 29%, or about 320K tokens. Already over my own expectation — I had assumed a fresh session was closer to 3-5%.
+- **Step 4 (after loading the draft article):** ~23%. The draft added ~12% on its own. I was a little surprised by this — the article is only about 2,200 words, and I had expected it to consume maybe 3-4% of the window. Claude's reply pointed out that the token cost includes both the file contents and the turn-by-turn back-and-forth we'd had up to that point, which I hadn't been counting as part of "the file." Worth noting for next time.
+- **After the bare `/compact`:** ~14%. Gave me back about 9% of the window but dropped things I had explicitly asked it to keep. I rewound and re-ran with a custom instruction, which got me to ~16% but preserved the things I needed.
 
-> I can see the following files in your journalism-kb directory:
+### 2. What bare `/compact` lost that instructed `/compact` kept
+
+Bare `/compact` kept the high-level gist of the article but dropped one of the three "most important things" Claude had identified in Step 3 — specifically the observation that the draft buried a dollar figure ($2.4M in fees at stake) in the fourth paragraph when it should have been in the lede. When I asked Claude the diagnostic question after the bare compact, it gave me a generic "the article covers a recent appellate ruling" answer and couldn't retrieve the buried-dollar-figure observation. After rewinding and running `/compact keeping everything about the draft including the three most important things and my original editor framing`, the same diagnostic question returned the specific buried-dollar-figure observation. That's the lesson of the week for me in one sentence: **tell `/compact` what matters before you run it, not after**.
+
+### 3. Raw output from the cross-model review (Gemini CLI)
+
+I called `gemini -p` on the draft article via Claude. Here's the raw Gemini output, copy-pasted:
+
+> Review of [draft article] — top three editorial issues from a journalism perspective:
 >
-> - `index.md` — knowledge base index
-> - `articles/city-budget-2025.md` — published story on the 2025 budget
-> - `sources/martinez-interview.md` — interview transcript with Council Member Martinez
-> - `background/city-budget-history.md` — five-year budget history (2020–2024)
+> 1. **The lede is procedural, not substantive.** The article opens with "A three-judge panel of the New Jersey Appellate Division on Wednesday affirmed..." which leads with the court's action rather than the stake. The actual story — that $2.4 million in attorneys' fees are at stake and the ruling effectively resets precedent for similar cases in the state — is buried in paragraph four. Consider leading with the stake.
 >
-> Would you like me to read any of these?
+> 2. **Attribution imbalance.** The article quotes the prevailing party's attorney twice (once directly, once paraphrased) and the losing side's attorney zero times. The losing side submitted a written response that's referenced but not excerpted. For a 1,200-word appellate-ruling story, giving both sides actual voice is both fairer and more interesting.
+>
+> 3. **The "similar cases in the state" claim is unsourced.** Paragraph 6 says this ruling "could affect dozens of similar cases currently pending in New Jersey appellate courts," but doesn't cite where that number comes from. If it's from the prevailing attorney, say so. If it's from the reporter's own court-records research, say so. Unsourced magnitude claims in appellate coverage are a credibility problem.
 
-If Claude lists the files by name and path, the MCP filesystem server is working. If Claude responds that it doesn't have file access or asks the student to paste the content manually, the configuration has not loaded correctly.
+The Claude side of the review (from Step 3, before the cross-model call) had flagged the buried dollar figure and the attribution imbalance, but had not flagged the unsourced magnitude claim in paragraph 6. That's the single most useful thing the cross-model review did for me. Claude had read over that paragraph without stopping on it, and Gemini stopped on it immediately.
+
+### 4. Reconciled judgment
+
+Based on both reviews, here's what I'd actually do next with the draft:
+
+> Rewrite the lede to lead with the $2.4M at stake and the precedent reset, not the panel's procedural action. Add a sourced citation for the "dozens of similar cases" claim in paragraph 6 — I wrote that number from memory after talking to the winning side's attorney, so I need to either attribute it to him on the record or pull a real court-records count before the story goes out. Call the losing side's attorney for a quote; a written response is not a substitute in a story this short. Everything else — the paragraph ordering, the transition between the ruling summary and the impact section, the closing graf — stays as-is.
+
+The cross-model review didn't change my mind on anything Claude had already flagged. It caught one additional thing (the unsourced magnitude claim) that changed my pre-publication checklist. That's the shape of the exercise: most of the value was reinforcement, and the high-leverage value was one specific catch that I wouldn't have made on my own.
+
+### 5. The single most useful thing I learned about managing a session
+
+Running `/compact` without a custom instruction is gambling. For anything I care about, I'm going to write the summarization instruction in a note first, paste it in after `/compact`, and then verify the thing I wanted preserved is actually preserved with a diagnostic question — before I continue working. That's a habit I didn't have before this exercise.
 
 ---
-
-**Prompt 1: "What was the total city budget approved for 2025?"**
-
-A correct response draws from `articles/city-budget-2025.md` and provides the vote count along with the total figure:
-
-> According to `city-budget-2025.md`, the City Council approved a **$450 million budget** for fiscal year 2025 in a **7-2 vote** on Tuesday, January 15, 2025.
->
-> Key allocations from the approved budget:
-> - Public safety: $125 million (up 8% from 2024)
-> - Infrastructure: $95 million (up 12% from 2024)
-> - Education partnerships: $45 million (unchanged)
-> - Parks and recreation: $28 million (down 5% from 2024)
->
-> Council members Martinez and Thompson voted against the budget.
-
-The response must name the source file. It should not fabricate additional details (e.g., committee hearing names, specific revenue sources) that are not in the document.
-
----
-
-**Prompt 2: "How does the 2025 parks budget compare to previous years?"**
-
-This prompt requires Claude to cross-reference `articles/city-budget-2025.md` and `background/city-budget-history.md`. A correct response shows the trend across all available years and cites both files:
-
-> Based on `city-budget-2025.md` and `city-budget-history.md`, here is how parks funding has changed:
->
-> | Year | Budget total | Parks allocation | Parks as % of total |
-> |------|-------------|-----------------|---------------------|
-> | 2020 | $380M | $32M | 8% |
-> | 2021 | $385M | $38M | ~10% (temporary pandemic increase) |
-> | 2022 | $395M | $32M | ~8% |
-> | 2023 | $410M | $30M | ~7.3% |
-> | 2024 | $425M | $29.5M | ~6.9% |
-> | 2025 | $450M | $28M | ~6.2% |
->
-> The trend is clear: parks funding has declined both in raw dollars (from $32M in 2020 to $28M in 2025) and as a share of the total budget (from 8% in 2020 to just over 6% in 2025). The background document notes that parks has fallen from 8% to 7% of budget over five years; the 2025 cut continues that trajectory.
->
-> The 2021 figure is an outlier — parks funding temporarily increased to $38M that year for outdoor programming during the pandemic, then returned to pre-pandemic levels in 2022.
-
-Note that the 2025 parks percentage (6.2%) requires arithmetic Claude performs from the documents: $28M ÷ $450M. Students should accept that figure or calculate it themselves to verify. The background document says parks went from 8% to 7% over 2020–2024, covering five years of data. The 2025 figure extends beyond the background document's range, which is why both files are required to give the full picture.
-
----
-
-**Prompt 3: "What did Council Member Martinez say about the parks funding cut? Include the exact quote."**
-
-This prompt tests whether Claude reads from the interview transcript rather than the published story. The published story (`city-budget-2025.md`) contains one Martinez quote about parks: *"We're seeing record usage of city parks since the pandemic. This is the wrong time to cut."* The interview transcript (`sources/martinez-interview.md`) contains three distinct quotes. A correct response cites the interview transcript specifically and provides the longer, more detailed quotes:
-
-> From `sources/martinez-interview.md` (phone interview conducted January 16, 2025 by Sarah Chen):
->
-> On the parks funding cut:
-> *"Look, I understand we have finite resources. But parks aren't a luxury. They're public health infrastructure. During COVID, parks were the only safe gathering spaces we had."*
->
-> On the vote:
-> *"I voted no because I think we'll regret this in two years. Usage data shows parks visits are up 40% since 2019. We're cutting services at the moment of peak demand."*
->
-> On the public safety increase:
-> *"I'm not against public safety funding. I'm against the framing that it has to come at the expense of everything else. We could have found other efficiencies."*
->
-> The index notes that all quotes in source documents are verbatim from recorded interviews.
-
-If Claude only returns the shorter quote from the published article, it did not read the interview transcript — that is a partial answer and worth partial credit only. Graders should check which file Claude cites.
-
----
-
-**Prompt 4: "Write a 100-word summary of the budget story for social media, based on the documents in my knowledge base."**
-
-This prompt tests synthesis. Claude should draw from all three content files and should not add information not present in any of them. A correct response looks like this:
-
-> The City Council approved a $450 million budget for 2025 in a 7-2 vote, with Council members Martinez and Thompson dissenting. Public safety and infrastructure both received increases — 8% and 12%, respectively — while parks funding dropped 5% to $28 million, continuing a five-year decline. Martinez, who chairs the Parks Committee, called parks "public health infrastructure" and said usage data shows visits are up 40% since 2019. "We're cutting services at the moment of peak demand," she said. Mayor Williams defended the budget, calling public safety and infrastructure "non-negotiable priorities." The budget takes effect March 1.
-
-This is 99 words. Acceptable responses will vary in phrasing but must:
-- Mention the $450M total and 7-2 vote
-- Name Martinez (and ideally Thompson) as the dissenting votes
-- Reference both the public safety/infrastructure increases and the parks decrease
-- Include at least one Martinez quote
-- Not fabricate information (e.g., quotes from the mayor beyond what appears in the article, committee vote details, public testimony)
-
----
-
-### Part 2: Reflection answers (5 questions)
-
-**1. Accuracy: Did Claude correctly cite information from your knowledge base? Did you notice any errors or hallucinations?**
-
-For the most part, Claude was accurate on the factual retrieval questions. When I asked for the budget total and the vote count, it pulled the correct figures directly from the article and cited the file by name. The cross-reference question was where I had to pay attention — Claude had to do a small calculation to express the 2025 parks budget as a percentage of the total, and I verified that math myself ($28M ÷ $450M = 6.2%).
-
-The place where Claude could easily go wrong — and where I stayed alert — was the synthesis prompt. If I had asked about something the knowledge base doesn't cover, like what community groups said about the parks cut or how the budget compared to neighboring cities, Claude would have either admitted it didn't know or, in a worse case, made something up. I didn't push it that far in this exercise, but that boundary is important to understand. The knowledge base is only as good as what's in it. If you ask a question it can't answer from the documents, you have to treat that response with real skepticism.
-
-**2. Attribution: How useful was having source documents for verifying Claude's responses?**
-
-Having the source files made verification fast in a way that just using Claude.ai directly doesn't. When Claude said Martinez called parks "public health infrastructure," I could immediately open `martinez-interview.md` and confirm the quote was verbatim. I didn't have to go find a web link or hope the AI was paraphrasing accurately.
-
-This matters for journalism specifically because there's a real difference between a verbatim quote and a paraphrase, and that difference is ethically significant. If Claude had slightly reworded the quote or merged two different things Martinez said into one sentence, the document was right there for me to catch it. In a typical ChatGPT session with pasted context, you'd have the same ability in principle, but the workflow here — with named files and explicit citations — made me more likely to actually check rather than assume.
-
-The index file also helped. Knowing that the knowledge base index notes all quotes are "verbatim from recorded interviews" gave me a useful framing for how to treat anything Claude returned from that file.
-
-**3. Limitations: What questions could Claude NOT answer well, given the limited knowledge base?**
-
-A few gaps were obvious even before I started. The knowledge base has nothing about the mayor beyond a single quote in the news article. If I asked "What has Mayor Williams said about parks funding over the past few years?" Claude would have nothing to draw from and might either say so (good) or fill in the gap with something plausible-sounding that isn't in any document (bad).
-
-Similarly, the knowledge base covers only one story and its background. There's no community reaction, no information about what happened at the public hearing before the vote, no coverage of parks advocacy groups or park usage data beyond what Martinez cited. The moment a question goes beyond what's in those three content files, the system's usefulness drops sharply.
-
-This points to a design principle: a knowledge base is only as good as what you put in it, and gaps in the knowledge base create hallucination risk. If a reporter uses this setup to answer questions about a story and asks something the documents don't cover, they need to know to treat Claude's response as potentially invented rather than retrieved.
-
-**4. Journalism applications: How might you use this setup in your own reporting? What documents would you include in your knowledge base?**
-
-The clearest use case I can see is source organization during an investigation with a lot of documents. If I'm working a FOIA dump — say, 200 pages of city emails — I could process them into structured markdown files (or use Claude Code to do that processing), index them, and then query across the whole set. Instead of ctrl-F searching one PDF at a time, I could ask "Which emails mention the parks maintenance contract?" and get a response that cites specific documents.
-
-For beat reporting, a knowledge base of background files — a mayor's voting history, key sources' previous quotes, budget trends going back five years — would let me quickly check context before interviews or while writing. The budget history file in this exercise is a good example of what that looks like: a reference document I'd maintain and update each year.
-
-For breaking news with multiple documents coming in fast (court filings, press releases, statements), having a structured place to drop them and query across them is faster than switching between browser tabs and re-reading everything from scratch.
-
-The documents I'd include would depend on the beat, but the general categories are: primary source documents (official records, filings), interview notes and transcripts, my own published stories as searchable background, and running reference files for recurring topics.
-
-**5. Maintenance: If this were a production system, who would be responsible for keeping the knowledge base current? What processes would you need?**
-
-This is the question the exercise made me think about most seriously. The knowledge base in this exercise is a snapshot — it reflects what was known as of mid-January 2025. If the city passed a budget amendment in March, or if Martinez gave a press conference with updated comments on the parks cut, that wouldn't be in the knowledge base. Claude would still answer based on the old documents. That's a real problem if you're using this as a reference system rather than a one-time research tool.
-
-For a production setup, someone has to own the knowledge base. In a newsroom, that probably means a specific reporter on a specific beat, or a data/research desk if the organization has one. You'd need a process for adding new documents (court filings, official statements, interview transcripts) as they come in, and for updating or retiring outdated documents rather than just leaving old versions alongside new ones.
-
-Version tracking matters for the same reason it matters in any collaborative document system: if Claude cites `city-budget-history.md` from 2023 and that file hasn't been updated since, you need to know that. Clear file naming conventions (dates in filenames, explicit "last updated" headers in the documents) would help. Stale documents that look authoritative are worse than no documents, because they give the system false confidence.
-
-The honest answer is that maintaining a knowledge base is ongoing editorial work. The technology is the easy part. The discipline of keeping it current is what determines whether it's useful or a liability.
 
 ---
 
 ## Grader notes
 
+---
+
 ### What strong work looks like
 
-Strong submissions demonstrate that the student understood what the MCP connection does — that Claude is reading from their documents, not retrieving from training data — and can articulate why that distinction matters for journalism. The best reflection answers go beyond "it worked" to think about edge cases, failure modes, and the conditions under which this setup is and isn't trustworthy.
+Strong submissions do four things that separate them from adequate ones.
 
-On the technical side, strong work shows correct file paths in the MCP configuration (no `YOUR_USERNAME` placeholder left in), a working verification screenshot, and query responses that cite specific filenames rather than generic statements like "according to my knowledge base."
+1. **They show real context-window numbers, not "I took a baseline."** The exercise asks for three specific readings (Step 2, Step 4, and after `/compact`). Strong submissions include the percentages and note where they were surprising — "I had assumed a fresh session was ~3%, the real number was ~11%." Weak submissions just say "I took a baseline" without ever showing the numbers. The whole point of the baseline step is that students see what's actually in their window. If the numbers aren't in the submission, the student probably skipped the step.
 
-The synthesis prompt (Prompt 4) is the best single indicator of whether the student understood the exercise's core point. If the summary adds information not in the knowledge base — details about the mayor's track record, community response, comparisons to other cities — the student didn't catch that Claude was hallucinating. If the summary stays within the documents and is clearly grounded in them, the student understood what they were building.
+2. **Their `/compact` before/after is specific about what was lost.** A strong submission names a specific thing bare `/compact` dropped and shows how the instructed `/compact` kept it. A weak submission says "bare compact was worse than instructed compact" without evidence. The whole point of Steps 5-6 is that students feel the difference between the two compacts on the same file. If the student can't name what was dropped, they either ran only one compact or didn't do the diagnostic question.
+
+3. **They actually ran the cross-model review with a different model family, and they pasted the raw output.** This is the most load-bearing step in the exercise and the one most likely to be skipped or faked. A strong submission pastes the actual raw output from Gemini/Codex/Copilot and names at least one thing the second model caught that the first model didn't — or honestly notes that the two reviews agreed on everything, and explains why that's a signal about the file itself (probably cleaner than the student thought). A weak submission describes the cross-model review in the abstract without showing either tool's output.
+
+4. **Their reconciled judgment is a specific plan, not a vague conclusion.** The reconciled judgment paragraph (Step 9) is the exercise's equivalent of the Module 3 editorial iteration note. Strong submissions say exactly what they'd change and why, drawing on specific points from both reviews. Weak submissions say "I learned that managing a session matters." The point of the exercise is to produce editorial judgment that looks like editorial judgment — a specific next action on a specific file for a specific reason.
+
+---
 
 ### Rubric
 
-| Component | Points | Criteria |
-|-----------|--------|----------|
-| MCP configuration (Part 3) | 15 | Config file exists and is correctly formatted; path points to actual knowledge base directory; no placeholder username remaining |
-| Verification screenshot (Part 4.1) | 10 | Claude lists the knowledge base files by name, confirming MCP connection works |
-| Prompt 1 response (Part 4.2) | 10 | Correct figure ($450M), correct vote count (7-2), source file cited |
-| Prompt 2 response (Part 4.2) | 15 | Cross-references both article and history file; shows multi-year trend; cites both files |
-| Prompt 3 response (Part 4.2) | 15 | Cites interview transcript (not just the article); returns verbatim quotes; distinguishes between the two source documents |
-| Prompt 4 response (Part 4.2) | 10 | Synthesis stays within the knowledge base; includes vote, Martinez opposition, budget changes; no invented details |
-| Reflection questions (Part 5) | 25 | All five answered; at least three show genuine engagement with implications, not just "it worked fine" |
-| **Total** | **100** | |
+| Element | Full credit | Partial credit | No credit |
+|---|---|---|---|
+| **Three context-window readings** (15%) | All three readings present with numbers, at least one moment of noticing something unexpected about the readings. | Some numbers present but not all three, or no reflection on what the numbers meant. | No numbers at all; student describes "taking a baseline" without showing it. |
+| **Before/after `/compact` note** (20%) | Names a specific thing bare `/compact` dropped and shows how instructed `/compact` kept it. Shows the diagnostic question's results in both cases. | Mentions the difference but without a specific dropped item. | No comparison, or only one `/compact` run. |
+| **Raw cross-model review output** (30%) | Real raw output from a second model family (Gemini, Codex, Copilot — not ChatGPT web, not "Claude on a different day"). Student identifies at least one thing the second model caught that the first didn't, or honestly notes full agreement. | Output is described rather than pasted; or cross-model review was simulated ("I asked Claude twice"). | No cross-model review performed, or performed against the same model. |
+| **Reconciled judgment paragraph** (30%) | A specific next action with specific reasons, drawing on specific points from both reviews. Reads like an editor's note, not a summary. | Generic conclusion ("I'd iterate more") without specific changes. | No judgment paragraph, or judgment paragraph has nothing to do with the reviews. |
+| **Session-management takeaway** (5%) | One concrete habit the student is going to carry forward. Specific enough to actually change behavior. | Generic reflection about "context management being important." | Missing. |
 
-Partial credit on query responses: if Claude's answer is correct but doesn't cite a filename, deduct 3 points. If the answer is partially correct (e.g., gives the right budget total but misses the vote count), deduct proportionally.
-
-### Expected query results (for graders to check against)
-
-**Prompt 1 — correct answer elements:**
-- Total: $450 million
-- Vote: 7-2
-- No votes: Martinez and Thompson
-- Source: `articles/city-budget-2025.md`
-- Optionally: key allocation figures (public safety $125M, infrastructure $95M, parks $28M)
-
-Do not penalize for including or omitting the allocation table — the prompt only asked about the total. Penalize if Claude adds information not in the document (e.g., fabricated dissenting council members other than Martinez and Thompson).
-
-**Prompt 2 — correct answer elements:**
-- 2025 parks: $28M (from `city-budget-2025.md`)
-- 2024 parks: $29.5M (from `city-budget-history.md`)
-- 2023 parks: $30M (from `city-budget-history.md`)
-- 2022 parks: $32M (from `city-budget-history.md`)
-- 2021 parks: $38M — note this was a temporary pandemic increase, should be flagged as an outlier
-- 2020 parks: $32M (from `city-budget-history.md`)
-- Both source files cited
-- Trend: parks declined from 8% to 7% of total budget over 2020–2024, continuing down in 2025
-
-Partial credit if student only has one file's data (e.g., only 2024 and 2025 from the article). Full credit requires cross-reference.
-
-**Prompt 3 — correct answer elements:**
-- Source cited: `sources/martinez-interview.md` (not just `articles/city-budget-2025.md`)
-- Verbatim quote on parks: "Look, I understand we have finite resources. But parks aren't a luxury. They're public health infrastructure. During COVID, parks were the only safe gathering spaces we had."
-- Optionally: quote on the vote ("I voted no because I think we'll regret this in two years...") and quote on public safety ("I'm not against public safety funding...")
-
-This prompt has the clearest right/wrong answer. If Claude returns only the quote from the published article ("We're seeing record usage of city parks since the pandemic. This is the wrong time to cut."), it did not read the interview transcript. Award 8/15 for that outcome and note the issue.
-
-**Prompt 4 — correct answer elements:**
-- Mentions $450M total
-- Mentions 7-2 vote
-- Names Martinez as a dissenting vote (Thompson optional but acceptable)
-- References both increases (public safety, infrastructure) and the parks decrease
-- Includes at least one direct quote
-- Does not add information not present in the knowledge base (e.g., no public testimony, no mayoral record, no comparison to other city budgets)
-- Approximately 100 words (85–115 is acceptable)
-
-Deduct 5 points if the summary includes fabricated details. Deduct 3 points if it runs significantly over or under word count without explanation.
+---
 
 ### Common issues to watch for
 
-**Configuration errors that look like exercise completion:**
-Some students will paste their MCP configuration but not actually verify it works. If the screenshot shows Claude Code open but not listing knowledge base files — or if the student skipped the verification step — the MCP connection was not confirmed. Do not award full configuration points without evidence the connection worked.
+**The student skipped the baseline reading and pretended it happened.** If the three numbers are missing or suspiciously round ("I had 5% at the start, 15% after the file, 10% after compact"), push back. The whole point of Steps 2 and 4 is that students see the real numbers. Ask them to re-run and submit the actual Claude Code readings.
 
-**"YOUR_USERNAME" left in the config:**
-This is the most common error. It means Claude Code cannot find the knowledge base path and the configuration is not functional. It's worth a comment but not automatic zero — the student may have corrected it in practice and just submitted the uncleaned example from the exercise instructions.
+**The student simulated the cross-model review with a second Claude session.** This is the most common shortcut and the one that defeats the exercise. The point of cross-model review is that you get a second opinion from a *different* model family with *different* blind spots. Asking Claude twice — even in a separate session — doesn't give you that. If a submission's "cross-model review" is clearly a second Claude response, ask the student to install Gemini CLI (free tier) and re-run. Do not award the 30% for this step without evidence of an actual second model.
 
-**Using the article quote for Prompt 3 instead of the interview transcript:**
-A student whose Claude response to Prompt 3 only returns "We're seeing record usage of city parks since the pandemic. This is the wrong time to cut." got the basic answer but missed the richer interview content. This is worth flagging in feedback because it reveals a gap in understanding: the student may not have checked which document Claude was reading from.
+**The student pasted Gemini (or Codex or Copilot) output but didn't actually use the `-p` flag.** This is subtle. Some students will install the tool, launch an interactive session, paste the file contents in by hand, and paste the response back into their submission. That works for the educational purpose — they did get a second opinion — but it misses the specific skill the exercise is teaching, which is orchestrating the cross-model review from inside Claude Code via `-p` without leaving the session. Award the review step, but note in feedback that the `-p` flag is the pattern worth learning because it makes the second opinion fast enough to use routinely.
 
-**Synthesis that invents details:**
-If the 100-word summary mentions community opposition, a public hearing, advocacy groups, other council members' comments, or anything else not in the three content files, Claude hallucinated. Students who notice this and flag it in their reflection demonstrate real understanding of the exercise's purpose. Students who don't notice it — and submit the invented summary without comment — should get feedback about why this matters.
+**The reconciled judgment is vague.** "I would iterate and improve the file based on both reviews" is not a reconciled judgment — it's a non-answer. A real reconciled judgment names a specific change, a specific reason drawn from one or both reviews, and acknowledges which parts of the reviews the student is *not* going to act on and why. Prompt vague submissions to rewrite the reconciled judgment with at least one specific action.
 
-**Reflection answers that stay surface-level:**
-The reflection is 25% of the grade. Answers that say only "yes it worked" or "I would use this for research" without engaging with the implications of accuracy, attribution, limitations, and maintenance are not meeting the standard. Use the model answers above as a benchmark. The maintenance question in particular rewards students who think ahead to editorial process and workflow, not just the technology.
+**The student ran everything but didn't `/compact` at all.** The before/after `/compact` step is required. If the submission talks about the file and the cross-model review but not about `/compact`, they skipped Steps 5-6. Ask them to go back and run the two compacts on a fresh session.
 
-**Students who report Claude refusing to access files:**
-This usually means the MCP server didn't start. Common causes: Node.js not installed or outdated, path in the config file is wrong, or Claude Code was not restarted after the config change. Point them to the troubleshooting section of the exercise and ask them to try again if time allows.
+**The student used bare `/compact` only and says it was fine.** This is possible but unlikely. Bare `/compact` does often lose something from Step 3 because the "three most important things" question is exactly the kind of specific detail that gets smoothed over in a generic summary. If a student claims bare `/compact` preserved everything, ask them to show the diagnostic answer they got. Usually the answer is generic enough to reveal that the specifics were lost even though the student didn't notice.
+
+**The student used a file that's too small for the exercise to matter.** If the "most important file" is 200 words of toy content, the `/compact` step won't have anything to lose and the cross-model review won't have anything interesting to catch. Ask the student to re-run on a real file — a draft story, a beat context file, a pipeline script, anything real from their Module 1-3 work.
+
+---
+
+### What the grader does not need to check
+
+The grader does not need to verify the technical correctness of the two reviews themselves. If Claude and Gemini disagree about whether a lede is procedural, that's an editorial question, not a grading question. The grader is assessing whether the student ran the exercise, noticed the disagreement, and produced editorial judgment about how to resolve it — not whether the judgment matches what the grader would have done on the same file.
