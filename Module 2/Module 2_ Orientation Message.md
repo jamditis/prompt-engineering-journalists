@@ -18,17 +18,19 @@ This matters because encoding specific methods and standards is different for ev
 
 Think of skills as the journalism equivalent of style guides or reporting checklists — except the AI follows them every time without reminders.
 
-**This week's video demo** walks through the full progression using meeting minutes extraction as a running example:
+**This week's videos** demonstrate the full power of CLI-based workflows through a live demo, then show how to turn that workflow into reusable skills and a shareable plugin.
 
-**Ad-hoc prompt** → You type instructions each time. "Here are my meeting notes, pull out the action items." Works, but slow and inconsistent.
+**Video 1 (~36 min)** opens with a quick overview of the four building blocks — skills and commands are markdown files that load on demand, plugins are bundles of skills and hooks you can share, and hooks are scripts that run before or after Claude acts to block, validate, or log what it does. Then it goes into a live demo: a social media video content analysis pipeline on NYC Mayor Zohran Mamdani's accounts across five platforms (YouTube, TikTok, Twitter, Instagram, Facebook). You'll see the entire process — downloading 76 videos, transcribing them with Whisper, extracting frames for on-screen text analysis, and building an interactive dashboard — all from a single CLI session. Along the way, the video shows how plugins like Superpowers add structured planning and how browser automation (Playwright) handles platforms that block standard scraping tools. The key point: none of this is possible from a web chat interface.
 
-**Saved prompt** → You save that prompt in a document so you can copy-paste it next time. Better, but still manual.
+**Video 2 (~13 min)** picks up where Video 1 left off: turning everything from the demo into four modular skills and packaging them as a proper Claude Code plugin. You'll see the troubleshooting process when the plugin doesn't show up (wrong directory, restart needed), and the assignment for this module.
 
-**Custom slash command** → You save the prompt as a file in `.claude/commands/`, and Claude Code loads it automatically when you type the slash command. Consistent and shareable across your team.
+**Key concepts introduced in the videos:**
 
-**Hook** → An automated check that runs in the background. No invocation needed — it fires on its own when certain conditions are met.
+**Skill** → A markdown file in `.claude/commands/` that Claude Code loads as a slash command. You type `/your-command-name` and the instructions apply. No copy-pasting, no searching through notes.
 
-The video also covers session commands you'll use regularly: `/help` (see available commands), `/plan` (enter plan mode before building), `/compact` (compress your conversation when context gets long), and `/clear` (start fresh). These are built into Claude Code and work in every session.
+**Hook** → A script that runs before or after a Claude action, with no invocation needed. Pre-hooks run before an action executes and can block it; post-hooks run after and can validate, flag, or log the result. The video shows a one-way-door-check pre-hook that pauses before irreversible actions like deletes and pushes.
+
+**Plugin** → A bundle of skills and hooks packaged together. You can share them on GitHub and install them with one command. The video demo ends with the instructor building one from scratch.
 
 This week covers custom skills and hooks. By Module 3, you'll see how these fit into larger automated workflows.
 
@@ -94,7 +96,7 @@ In the exercise this week, you'll create `/log_error` and `/log_success` command
 
 Last week you wrote a CLAUDE.md file to give the AI persistent context about your beat. That file changed how the AI responds to *every* prompt in your project. This week, you'll build on that with custom slash commands and hooks — reusable tools that you trigger on demand for specific tasks.
 
-If CLAUDE.md is the AI reading your newsroom's style guide before starting work, a custom slash command is the AI following a specific reporting checklist when you tell it to. The video demo shows this progression clearly: the meeting minutes extraction prompt starts as something you type every time, then becomes a saved command that fires with a single slash.
+If CLAUDE.md is the AI reading your newsroom's style guide before starting work, a custom slash command is the AI following a specific reporting checklist when you tell it to. The video demo shows this in action: after running a full content analysis pipeline, the instructor takes the lessons and workflows from that session and saves them as reusable skills and a shareable plugin.
 
 Before trusting a new skill on live work, test it on material you've already covered — a press release you fact-checked last month, a council vote you looked up yourself. Compare what the skill catches against what you found. If it misses something you caught, that's an instruction to add. If it flags something that wasn't a problem, that's an instruction to cut. This is the same instinct reporters bring to new sources: verify something you can already check before relying on it for something you can't.
 
@@ -118,7 +120,7 @@ By the end of this week, you will be able to:
 
 ## This week's work
 
-- **Video:** Watch the demo walking through the prompt-to-skill progression (meeting minutes extraction example) and session commands
+- **Video:** Watch the two-part demo — a live social media content analysis pipeline (Video 1), followed by turning that workflow into reusable skills and a plugin (Video 2)
 - **Readings:** Claude Code documentation on custom commands, plus an overview of the instructor's journalism skills repository
 - **Exercise:** Build your own custom slash command skill for a task on your beat, and install the journalism skills repository
 - **Discussion:** Share your experience customizing AI tools and discuss what skills would help your newsroom
