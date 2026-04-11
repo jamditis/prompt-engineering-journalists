@@ -61,7 +61,7 @@
             <div class="max-w-5xl mx-auto">
                 <div class="text-xs text-acid font-mono mb-4">EXERCISE FILES — MODULE 01</div>
                 <h1 class="font-display text-4xl md:text-5xl font-bold text-white">City hall beat project</h1>
-                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Four sample journalism documents for the Module 1 exercise. Download the files or copy the contents into your <code class="text-acid bg-surface px-1 text-sm">city-hall-beat</code> directory to begin.</p>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Sample files for the Module 1 exercise: four source documents to work with, plus a reference <code class="text-acid bg-surface px-1 text-sm">CLAUDE.md</code> example. Download the files or copy the contents into your <code class="text-acid bg-surface px-1 text-sm">city-hall-beat</code> directory to begin.</p>
             </div>
         </section>
 
@@ -74,7 +74,7 @@
                     <ul class="text-gray-300 leading-relaxed space-y-2 list-disc list-inside">
                         <li><strong class="text-white">Download</strong> — right-click each file link below and choose "Save link as..."</li>
                         <li><strong class="text-white">Copy + paste</strong> — expand each file below, click copy, paste into a new file in your project directory</li>
-                        <li><strong class="text-white">Let Claude fetch them</strong> — once you're in a Claude Code session inside your <code class="text-acid bg-surface px-1 text-sm">city-hall-beat</code> directory, ask Claude to download the four files from <code class="text-acid bg-surface px-1 text-sm">mooc.amditis.tech/beat-project/</code></li>
+                        <li><strong class="text-white">Let Claude fetch them</strong> — once you're in a Claude Code session inside your <code class="text-acid bg-surface px-1 text-sm">city-hall-beat</code> directory, ask Claude to download the four source files (press release, council minutes, interview notes, tip email) from <code class="text-acid bg-surface px-1 text-sm">mooc.amditis.tech/beat-project/</code>. The <code class="text-acid bg-surface px-1 text-sm">sample-claude-md.md</code> file on this page is an optional reference, not one of the four exercise files.</li>
                     </ul>
                 </div>
 
@@ -93,7 +93,7 @@
                                 <a href="press-release-park-closure.md" download class="copy-btn text-ice hover:text-acid border border-white/20 px-3 py-1 transition-colors">DOWNLOAD</a>
                             </summary>
                             <div class="border-t border-white/10 p-5 relative">
-                                <button onclick="copyFile('file1')" class="copy-btn absolute top-6 right-6 text-ice hover:text-acid border border-white/20 px-3 py-1 bg-void transition-colors">COPY</button>
+                                <button onclick="copyFile('file1', this)" class="copy-btn absolute top-6 right-6 text-ice hover:text-acid border border-white/20 px-3 py-1 bg-void transition-colors">COPY</button>
                                 <pre id="file1" class="text-xs text-gray-300 whitespace-pre-wrap font-mono overflow-x-auto pr-20"># City of Greenfield — Office of the Mayor
 
 ## FOR IMMEDIATE RELEASE
@@ -141,7 +141,7 @@ Residents with questions can contact the Parks and Recreation Department at (555
                                 <a href="council-minutes-excerpt.md" download class="copy-btn text-ice hover:text-acid border border-white/20 px-3 py-1 transition-colors">DOWNLOAD</a>
                             </summary>
                             <div class="border-t border-white/10 p-5 relative">
-                                <button onclick="copyFile('file2')" class="copy-btn absolute top-6 right-6 text-ice hover:text-acid border border-white/20 px-3 py-1 bg-void transition-colors">COPY</button>
+                                <button onclick="copyFile('file2', this)" class="copy-btn absolute top-6 right-6 text-ice hover:text-acid border border-white/20 px-3 py-1 bg-void transition-colors">COPY</button>
                                 <pre id="file2" class="text-xs text-gray-300 whitespace-pre-wrap font-mono overflow-x-auto pr-20"># Greenfield City Council — Regular meeting minutes (excerpt)
 
 **Date:** March 10, 2025
@@ -191,7 +191,7 @@ No vote was taken. The item will be on the agenda for the March 24 meeting.
                                 <a href="interview-notes-martinez.md" download class="copy-btn text-ice hover:text-acid border border-white/20 px-3 py-1 transition-colors">DOWNLOAD</a>
                             </summary>
                             <div class="border-t border-white/10 p-5 relative">
-                                <button onclick="copyFile('file3')" class="copy-btn absolute top-6 right-6 text-ice hover:text-acid border border-white/20 px-3 py-1 bg-void transition-colors">COPY</button>
+                                <button onclick="copyFile('file3', this)" class="copy-btn absolute top-6 right-6 text-ice hover:text-acid border border-white/20 px-3 py-1 bg-void transition-colors">COPY</button>
                                 <pre id="file3" class="text-xs text-gray-300 whitespace-pre-wrap font-mono overflow-x-auto pr-20"># Interview notes — Council Member Alex Martinez
 
 **Date:** March 12, 2025
@@ -242,7 +242,7 @@ Martinez declined to comment on whether he plans to run for council again.
                                 <a href="tip-email.md" download class="copy-btn text-ice hover:text-acid border border-white/20 px-3 py-1 transition-colors">DOWNLOAD</a>
                             </summary>
                             <div class="border-t border-white/10 p-5 relative">
-                                <button onclick="copyFile('file4')" class="copy-btn absolute top-6 right-6 text-ice hover:text-acid border border-white/20 px-3 py-1 bg-void transition-colors">COPY</button>
+                                <button onclick="copyFile('file4', this)" class="copy-btn absolute top-6 right-6 text-ice hover:text-acid border border-white/20 px-3 py-1 bg-void transition-colors">COPY</button>
                                 <pre id="file4" class="text-xs text-gray-300 whitespace-pre-wrap font-mono overflow-x-auto pr-20"># Reader tip — received via email
 
 **From:** greenfield_resident_2019@gmail.com
@@ -271,8 +271,8 @@ Thank you for covering this. The park is important to our neighborhood and we wa
                         </details>
                     </div>
 
-                    <div class="border border-white/10 bg-panel">
-                        <details>
+                    <div id="sample-claude-md" class="border border-white/10 bg-panel scroll-mt-24">
+                        <details open>
                             <summary class="p-5 flex justify-between items-center hover:bg-white/5">
                                 <div>
                                     <div class="flex items-center gap-2">
@@ -285,7 +285,7 @@ Thank you for covering this. The park is important to our neighborhood and we wa
                                 <a href="sample-claude-md.md" download class="copy-btn text-ice hover:text-acid border border-white/20 px-3 py-1 transition-colors">DOWNLOAD</a>
                             </summary>
                             <div class="border-t border-white/10 p-5 relative">
-                                <button onclick="copyFile('file5')" class="copy-btn absolute top-6 right-6 text-ice hover:text-acid border border-white/20 px-3 py-1 bg-void transition-colors">COPY</button>
+                                <button onclick="copyFile('file5', this)" class="copy-btn absolute top-6 right-6 text-ice hover:text-acid border border-white/20 px-3 py-1 bg-void transition-colors">COPY</button>
                                 <pre id="file5" class="text-xs text-gray-300 whitespace-pre-wrap font-mono overflow-x-auto pr-20"># CLAUDE.md — Example context file for a city hall beat
 
 This is a reference example. Use it as a starting point, but write your own based on your beat.
@@ -361,15 +361,43 @@ Current officials:
     </div>
 
     <script>
-        function copyFile(id) {
-            const text = document.getElementById(id).innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                const btn = event.target;
-                const original = btn.textContent;
-                btn.textContent = 'COPIED';
-                btn.classList.add('text-acid');
-                setTimeout(() => { btn.textContent = original; btn.classList.remove('text-acid'); }, 1500);
-            });
+        function showCopied(btn) {
+            if (!btn) return;
+            const original = btn.textContent;
+            btn.textContent = 'COPIED';
+            btn.classList.add('text-acid');
+            setTimeout(function () {
+                btn.textContent = original;
+                btn.classList.remove('text-acid');
+            }, 1500);
+        }
+
+        function fallbackCopy(text) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            let ok = false;
+            try { ok = document.execCommand('copy'); } catch (_) {}
+            document.body.removeChild(ta);
+            return ok;
+        }
+
+        function copyFile(id, btn) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const text = el.innerText;
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text)
+                    .then(function () { showCopied(btn); })
+                    .catch(function () { if (fallbackCopy(text)) showCopied(btn); });
+                return;
+            }
+            if (fallbackCopy(text)) showCopied(btn);
         }
     </script>
 </body>
