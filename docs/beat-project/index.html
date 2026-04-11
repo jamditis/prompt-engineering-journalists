@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City hall beat project files | Advanced prompt engineering for journalists</title>
+    <meta name="description" content="Sample documents for the Module 1 city-hall-beat exercise: press release, council minutes, interview notes, and a reader tip email.">
+
+    <meta property="og:title" content="City hall beat project files">
+    <meta property="og:description" content="Sample documents for the Module 1 city-hall-beat exercise: press release, council minutes, interview notes, and a reader tip email.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mooc.amditis.tech/beat-project/">
+    <meta property="og:image" content="https://mooc.amditis.tech/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="City hall beat project files">
+    <meta name="twitter:description" content="Sample documents for the Module 1 city-hall-beat exercise.">
+    <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+    <style>
+        .copy-btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+        }
+        details > summary { cursor: pointer; list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] > summary .chevron { transform: rotate(90deg); }
+        .chevron { transition: transform 0.2s; display: inline-block; }
+    </style>
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../module-1/" class="text-acid">[ 01 ]</a>
+                    <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
+                    <a href="../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">EXERCISE FILES — MODULE 01</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">City hall beat project</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Four sample journalism documents for the Module 1 exercise. Download the files or copy the contents into your <code class="text-acid bg-surface px-1 text-sm">city-hall-beat</code> directory to begin.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="space-y-8">
+
+                <div class="border border-white/10 bg-panel p-6">
+                    <h2 class="font-display text-xl text-chrome mb-3">How to use these files</h2>
+                    <p class="text-gray-300 leading-relaxed mb-3">You have three options:</p>
+                    <ul class="text-gray-300 leading-relaxed space-y-2 list-disc list-inside">
+                        <li><strong class="text-white">Download</strong> — right-click each file link below and choose "Save link as..."</li>
+                        <li><strong class="text-white">Copy + paste</strong> — expand each file below, click copy, paste into a new file in your project directory</li>
+                        <li><strong class="text-white">Let Claude fetch them</strong> — once you're in a Claude Code session inside your <code class="text-acid bg-surface px-1 text-sm">city-hall-beat</code> directory, ask Claude to download the four files from <code class="text-acid bg-surface px-1 text-sm">mooc.amditis.tech/beat-project/</code></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-6">
+
+                    <div class="border border-white/10 bg-panel">
+                        <details>
+                            <summary class="p-5 flex justify-between items-center hover:bg-white/5">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="chevron text-acid">›</span>
+                                        <span class="font-display text-lg text-white">press-release-park-closure.md</span>
+                                    </div>
+                                    <p class="text-sm text-gray-400 mt-1 ml-6">A city press release about closing a park for infrastructure work</p>
+                                </div>
+                                <a href="press-release-park-closure.md" download class="copy-btn text-ice hover:text-acid border border-white/20 px-3 py-1 transition-colors">DOWNLOAD</a>
+                            </summary>
+                            <div class="border-t border-white/10 p-5 relative">
+                                <button onclick="copyFile('file1')" class="copy-btn absolute top-6 right-6 text-ice hover:text-acid border border-white/20 px-3 py-1 bg-void transition-colors">COPY</button>
+                                <pre id="file1" class="text-xs text-gray-300 whitespace-pre-wrap font-mono overflow-x-auto pr-20"># City of Greenfield — Office of the Mayor
+
+## FOR IMMEDIATE RELEASE
+
+**Date:** March 15, 2025
+**Contact:** Sarah Chen, Communications Director
+**Phone:** (555) 432-1100
+**Email:** schen@greenfield.gov
+
+---
+
+## Mayor Torres announces temporary closure of Riverside Park for infrastructure improvements
+
+**GREENFIELD** — Mayor Diana Torres today announced that Riverside Park will be temporarily closed beginning April 1 for critical infrastructure improvements. The closure is expected to last approximately four months.
+
+"Riverside Park is one of Greenfield's greatest assets, and this investment ensures it will serve our community for decades to come," said Mayor Torres. "I know the temporary closure is an inconvenience, but the alternative — letting the infrastructure deteriorate further — would cost taxpayers far more in the long run."
+
+The $2.3 million project will address aging water and drainage systems, replace the playground equipment that was installed in 2004, resurface the walking trails, and upgrade the lighting throughout the park. The project is funded through the city's Capital Improvement Program, which was approved by the City Council in January.
+
+City Engineer Robert Huang said the park's drainage system has exceeded its useful life. "We've been patching the drainage for the last three years," Huang said. "A full replacement now prevents a much more expensive emergency repair later."
+
+The closure will affect the park's walking trails, playground, sports fields, and picnic areas. The Riverside Community Center, which is located adjacent to the park, will remain open during construction.
+
+The city has arranged for additional programming at Lincoln Park and Memorial Field to offset the closure. Youth sports leagues will be relocated to Memorial Field for the spring and summer seasons.
+
+Construction will be performed by Meridian Infrastructure LLC, which was selected through the city's competitive bidding process. The project is expected to be completed by August 1, weather permitting.
+
+Residents with questions can contact the Parks and Recreation Department at (555) 432-1200 or visit greenfield.gov/riverside-project for updates.
+
+###</pre>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel">
+                        <details>
+                            <summary class="p-5 flex justify-between items-center hover:bg-white/5">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="chevron text-acid">›</span>
+                                        <span class="font-display text-lg text-white">council-minutes-excerpt.md</span>
+                                    </div>
+                                    <p class="text-sm text-gray-400 mt-1 ml-6">Meeting minutes with budget discussion about the park closure</p>
+                                </div>
+                                <a href="council-minutes-excerpt.md" download class="copy-btn text-ice hover:text-acid border border-white/20 px-3 py-1 transition-colors">DOWNLOAD</a>
+                            </summary>
+                            <div class="border-t border-white/10 p-5 relative">
+                                <button onclick="copyFile('file2')" class="copy-btn absolute top-6 right-6 text-ice hover:text-acid border border-white/20 px-3 py-1 bg-void transition-colors">COPY</button>
+                                <pre id="file2" class="text-xs text-gray-300 whitespace-pre-wrap font-mono overflow-x-auto pr-20"># Greenfield City Council — Regular meeting minutes (excerpt)
+
+**Date:** March 10, 2025
+**Location:** City Hall, Council Chambers
+**Called to order:** 7:02 PM
+**Members present:** Council President Walsh, Council Members Okafor, Rivera, Kim, Petrov, Goldstein, Nash
+
+---
+
+## Agenda item 7: FY2026 budget discussion — Parks and Recreation
+
+Council President Walsh opened discussion on the Parks and Recreation budget allocation for FY2026.
+
+**Parks Director Lisa Nakamura** presented the department's budget request of $4.8 million, an increase of $600,000 over the current fiscal year. She said the increase was driven by the Riverside Park infrastructure project ($2.3 million) and rising maintenance costs across the city's 12 parks.
+
+**Council Member Okafor** asked whether the Riverside Park project could be phased over two fiscal years to reduce the budget impact. Nakamura said phasing was considered but rejected because the drainage system needs full replacement — a partial fix would cost nearly as much and leave the park closed longer.
+
+**Council Member Rivera** said he had received "dozens of calls" from residents in the Riverside neighborhood concerned about the closure. He asked whether the city had explored keeping portions of the park open during construction. Nakamura said the contractor determined that safety requirements made partial access impractical.
+
+**Council Member Kim** asked about the contractor selection process. City Manager Harold Briggs said Meridian Infrastructure was the lowest qualified bidder at $2.3 million. The next lowest bid was $2.7 million from Apex Construction. Kim asked whether Meridian had performed work for the city before. Briggs said they completed the Memorial Field renovation in 2022 on time and under budget.
+
+**Council Member Petrov** raised concerns about cost overruns. He cited the 2019 library renovation, which exceeded its budget by 40%. Briggs said the library project involved unexpected structural issues discovered during demolition, which he called "not comparable" to the park project. Petrov said he remained concerned and asked for quarterly progress reports.
+
+**Council Member Goldstein** asked about the impact on the summer youth programs. Nakamura said all youth sports leagues would be relocated to Memorial Field and Lincoln Park. She said the department had already coordinated with league organizers. Goldstein asked whether Memorial Field had enough capacity. Nakamura said it would require "some scheduling adjustments" but was workable.
+
+**Council Member Nash** said she supported the project but wanted to know whether any of the funding could come from state grants. Briggs said the city applied for a state infrastructure grant in December but had not received a response. He said the project would proceed regardless because the drainage system "cannot wait another year."
+
+No vote was taken. The item will be on the agenda for the March 24 meeting.
+
+---
+
+*Minutes recorded by City Clerk Patricia Donovan*</pre>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel">
+                        <details>
+                            <summary class="p-5 flex justify-between items-center hover:bg-white/5">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="chevron text-acid">›</span>
+                                        <span class="font-display text-lg text-white">interview-notes-martinez.md</span>
+                                    </div>
+                                    <p class="text-sm text-gray-400 mt-1 ml-6">Raw interview notes with a former council member</p>
+                                </div>
+                                <a href="interview-notes-martinez.md" download class="copy-btn text-ice hover:text-acid border border-white/20 px-3 py-1 transition-colors">DOWNLOAD</a>
+                            </summary>
+                            <div class="border-t border-white/10 p-5 relative">
+                                <button onclick="copyFile('file3')" class="copy-btn absolute top-6 right-6 text-ice hover:text-acid border border-white/20 px-3 py-1 bg-void transition-colors">COPY</button>
+                                <pre id="file3" class="text-xs text-gray-300 whitespace-pre-wrap font-mono overflow-x-auto pr-20"># Interview notes — Council Member Alex Martinez
+
+**Date:** March 12, 2025
+**Location:** Phone interview
+**Duration:** ~20 minutes
+**Context:** Martinez is not on the current council (term ended Dec 2024) but served 8 years including during the 2019 library renovation. Reached out for background on the Riverside Park project.
+
+---
+
+## Notes (paraphrased, not direct quotes unless in quotation marks)
+
+Martinez said he was watching the Riverside Park situation closely. He said the $2.3 million price tag "sounds about right" for the scope of work described, but cautioned that the city has a history of underestimating infrastructure costs.
+
+On the library comparison: Martinez said Petrov's concerns are valid. He was on the council during the library renovation and said the 40% cost overrun was partly due to the unexpected structural issues Briggs mentioned, but also partly due to change orders that were approved without full council review. "The structural stuff was genuinely unforeseen. But about $200K of that overrun was scope creep — additions that got approved by the city manager without coming back to us."
+
+Martinez said he thinks the current council should require that any change orders over $50,000 come back to the full council for approval. He said this was proposed in 2020 but never voted on.
+
+On the contractor: Martinez said Meridian did good work on Memorial Field. "No complaints on the quality. But I'd want to know if they've done drainage work at this scale before. Playground equipment and trail resurfacing are different from underground infrastructure."
+
+Martinez said he's heard from neighborhood residents that some are worried the park closure is a precursor to selling part of the land for development. He called this "completely unfounded as far as I know" but said the mayor's office hasn't done enough to communicate the project timeline to residents.
+
+He mentioned that the original drainage system was installed in 1987 and was supposed to last 30 years. "So it's actually past due. The question isn't whether to fix it but whether $2.3 million is the right number."
+
+Martinez declined to comment on whether he plans to run for council again.
+
+---
+
+## My observations
+
+- Martinez is being careful not to criticize the current council directly but is clearly signaling concerns
+- The change order issue is worth following up — check if any policy was adopted after 2020
+- The development rumor is new to me — worth asking the mayor's office about directly
+- Need to verify the 1987 installation date for the drainage system independently</pre>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel">
+                        <details>
+                            <summary class="p-5 flex justify-between items-center hover:bg-white/5">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="chevron text-acid">›</span>
+                                        <span class="font-display text-lg text-white">tip-email.md</span>
+                                    </div>
+                                    <p class="text-sm text-gray-400 mt-1 ml-6">A reader email tip about a possible conflict of interest</p>
+                                </div>
+                                <a href="tip-email.md" download class="copy-btn text-ice hover:text-acid border border-white/20 px-3 py-1 transition-colors">DOWNLOAD</a>
+                            </summary>
+                            <div class="border-t border-white/10 p-5 relative">
+                                <button onclick="copyFile('file4')" class="copy-btn absolute top-6 right-6 text-ice hover:text-acid border border-white/20 px-3 py-1 bg-void transition-colors">COPY</button>
+                                <pre id="file4" class="text-xs text-gray-300 whitespace-pre-wrap font-mono overflow-x-auto pr-20"># Reader tip — received via email
+
+**From:** greenfield_resident_2019@gmail.com
+**To:** newsroom@greenfielddaily.com
+**Date:** March 13, 2025
+**Subject:** Question about Riverside Park contractor
+
+---
+
+Hi,
+
+I saw your article about the Riverside Park closure. I wanted to let you know that the contractor they picked, Meridian Infrastructure, is owned by Tom Kerrigan. Tom Kerrigan's brother-in-law is James Whitfield, who works in the city's procurement office.
+
+I'm not saying anything improper happened but it seems like something people should know about, especially since the bid was for $2.3 million of taxpayer money. The competitive bidding process should be truly competitive.
+
+I live in the Riverside neighborhood and I've been going to council meetings about this. At the March 10 meeting nobody mentioned this connection.
+
+I tried looking up the bidding documents on the city's website but the procurement page just says "awarded to Meridian Infrastructure LLC" without showing the other bids or the scoring criteria.
+
+Thank you for covering this. The park is important to our neighborhood and we want to make sure the project is handled properly.
+
+— A concerned Greenfield resident
+
+(Please don't use my name if you write about this)</pre>
+                            </div>
+                        </details>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel">
+                        <details>
+                            <summary class="p-5 flex justify-between items-center hover:bg-white/5">
+                                <div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="chevron text-acid">›</span>
+                                        <span class="font-display text-lg text-white">sample-claude-md.md</span>
+                                        <span class="copy-btn text-acid border border-acid/30 px-2 py-0.5 ml-2">REFERENCE</span>
+                                    </div>
+                                    <p class="text-sm text-gray-400 mt-1 ml-6">An example CLAUDE.md for a city hall beat — use as a reference, write your own</p>
+                                </div>
+                                <a href="sample-claude-md.md" download class="copy-btn text-ice hover:text-acid border border-white/20 px-3 py-1 transition-colors">DOWNLOAD</a>
+                            </summary>
+                            <div class="border-t border-white/10 p-5 relative">
+                                <button onclick="copyFile('file5')" class="copy-btn absolute top-6 right-6 text-ice hover:text-acid border border-white/20 px-3 py-1 bg-void transition-colors">COPY</button>
+                                <pre id="file5" class="text-xs text-gray-300 whitespace-pre-wrap font-mono overflow-x-auto pr-20"># CLAUDE.md — Example context file for a city hall beat
+
+This is a reference example. Use it as a starting point, but write your own based on your beat.
+
+---
+
+## Beat
+
+I cover Greenfield city government for the Greenfield Daily News. This includes the mayor's office, city council (7 members), city manager, and city departments (Parks &amp; Rec, Public Works, Finance, Police, Fire).
+
+Current officials:
+- Mayor Diana Torres (D), elected November 2023, took office January 2024
+- Council President: Margaret Walsh
+- City Manager: Harold Briggs (appointed, not elected)
+
+## Style
+
+- AP style for all writing
+- No Oxford comma
+- "The city" on second reference (not "Greenfield" every time)
+- Spell out numbers under 10
+- Use "council member," not "councilman/councilwoman" unless the person prefers it
+- Dollar amounts: $2.3 million, not $2,300,000
+
+## Source standards
+
+- Attribute all claims to named sources
+- Flag unverified claims separately from verified ones
+- If a source makes a factual claim (dates, dollar amounts, vote counts), note whether I can verify it independently
+- Anonymous sources: note why they requested anonymity and what their position is relative to the story
+
+## Terminology
+
+- The annual budget process in Greenfield is called the "appropriations cycle"
+- City council votes are called "resolutions" (binding) or "ordinances" (legislation) — don't use these interchangeably
+- The Capital Improvement Program (CIP) is the multi-year infrastructure funding plan — don't call it "the capital budget"
+- "Change orders" are modifications to a construction contract after it's been awarded
+
+## Avoid
+
+- Don't use "taxpayers" as a synonym for "residents" — not all residents pay property taxes
+- Don't use "slammed," "blasted," or "fired back" to describe council disagreements — use "criticized," "questioned," or "pushed back on"
+- Don't editorialize about whether spending is too high or too low — present the numbers and the arguments
+- Don't use "according to sources" — always name the source or explain the anonymity</pre>
+                            </div>
+                        </details>
+                    </div>
+
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">NEXT:</span> Back to <a href="../module-1/" class="text-ice hover:text-acid transition-colors">Module 1</a> to continue the exercise once you have all four files in your <code class="text-acid bg-surface px-1 text-xs">city-hall-beat</code> directory.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="../module-1/" class="text-xs font-mono text-acid">MODULE 01</a>
+                        <a href="../syllabus/" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">SYLLABUS</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function copyFile(id) {
+            const text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                const original = btn.textContent;
+                btn.textContent = 'COPIED';
+                btn.classList.add('text-acid');
+                setTimeout(() => { btn.textContent = original; btn.classList.remove('text-acid'); }, 1500);
+            });
+        }
+    </script>
+</body>
+</html>

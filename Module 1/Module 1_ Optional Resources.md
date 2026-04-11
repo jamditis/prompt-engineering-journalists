@@ -61,7 +61,7 @@ Willison's end-of-year review of what actually happened in AI in 2025: the rise 
 
 Ethan Mollick's framework (models / apps / harnesses) runs through this entire course. If the required readings sparked your interest, a curated list of his other articles is available in the course resources:
 
-**Mollick reading list** — `Resources/mollick-reading-list.md`
+**Mollick reading list** — https://mooc.amditis.tech/mollick
 
 Organized by theme: getting started, working methods, agents and automation, AI capabilities and limits, and education. Each entry includes a direct link and a brief description of why it's relevant to journalism work.
 
