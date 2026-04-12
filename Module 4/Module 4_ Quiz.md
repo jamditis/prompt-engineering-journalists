@@ -56,7 +56,7 @@ D) Cap your Claude Code conversations at about 40% of the context window and sta
 
 **Correct answer:** D
 
-**Explanation:** The 40% rule is a behavioral discipline, not a technical limit. Once a conversation has consumed about 40% of the context window, quality starts to drop and you should compact or clear and continue in a fresh session — not keep pushing. This feels wasteful the first few times because it looks like you're throwing away progress. You're not. You're protecting the work you already did from the context rot that's about to hit. The honest way to continue past 40% is to summarize the session's decisions into a file, launch a fresh session, and load the file — not to keep going in the same window.
+**Explanation:** The 40% rule is a behavioral discipline, not a technical limit. Once a conversation has consumed about 40% of the context window, quality starts to drop and you should compact, clear, or start a fresh session — not keep pushing. This feels wasteful the first few times because it looks like you're throwing away progress. You're not. You're protecting the work you already did from the context rot that's about to hit. The honest way to continue past 40% is to summarize the session's decisions into a file, launch a fresh session, and load the file — not to keep going in the same window.
 
 ---
 
