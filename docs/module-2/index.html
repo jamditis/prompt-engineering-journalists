@@ -97,16 +97,114 @@
                 </div>
             </section>
 
-            <!-- Module 2 video -->
+            <!-- Module 2 videos -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-ice">Watch: skills, workflows, and plugins</h2>
+                    <h2 class="font-display text-xl text-ice">Watch</h2>
                 </div>
                 <div class="max-w-3xl">
-                    <div class="border border-white/10 bg-panel p-6">
-                        <p class="text-gray-300 text-sm leading-relaxed mb-3"><strong class="text-chrome">Video 1 (~36 min)</strong> covers what skills, commands, plugins, and hooks are, then demonstrates a live social media content analysis pipeline on NYC Mayor Zohran Mamdani's accounts across five platforms — downloading 76 videos, transcribing them with Whisper, and building an interactive dashboard, all from a single CLI session.</p>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-3"><strong class="text-chrome">Video 2 (~13 min)</strong> shows how to turn that workflow into four reusable skills and a shareable Claude Code plugin, including troubleshooting when things don't work the first time.</p>
-                        <p class="text-gray-400 text-xs">Videos will be embedded here when available.</p>
+                    <div class="video-tabs">
+                        <div class="video-tab-bar" role="tablist" aria-label="Module 2 videos">
+                            <button type="button" role="tab" id="m2-v1-tab" aria-controls="m2-v1-panel" aria-selected="true" tabindex="0" class="video-tab">V1 &middot; 36 MIN</button>
+                            <button type="button" role="tab" id="m2-v2-tab" aria-controls="m2-v2-panel" aria-selected="false" tabindex="-1" class="video-tab">V2 &middot; 13 MIN</button>
+                        </div>
+
+                        <div id="m2-v1-panel" role="tabpanel" aria-labelledby="m2-v1-tab" class="video-panel">
+                            <div class="text-xs text-acid font-mono mb-2">VIDEO 1 &middot; ~36 MIN</div>
+                            <h3 class="font-display text-lg text-chrome mb-3">Skills, commands, plugins, hooks</h3>
+                            <div class="video-embed-slot">
+                                <div class="video-coming-soon">Video coming soon</div>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">Joe opens Module 2 by defining skills, plugins, and hooks &mdash; markdown files that load only when called, packaged bundles of those files, and automatic guardrails that fire on keywords. Then he runs a live end-to-end demo: scraping every recent video from NYC Mayor Zohran Mamdani's YouTube, TikTok, Twitter, Instagram, and Facebook, transcribing them with Whisper, OCR'ing frames, and generating an analysis dashboard &mdash; all in roughly two hours on one machine.</p>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TOPICS COVERED</div>
+                                <div class="video-topics">
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="file-text"></i></div><div><div class="video-topic-title">Skills are just markdown</div><div class="video-topic-sub">Plain-language instructions that only load when invoked. No code, no tokens wasted unless the task is relevant</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="layers"></i></div><div><div class="video-topic-title">Plugins bundle skills</div><div class="video-topic-sub">A collection of related skills packaged together &mdash; shareable, installable, editable at skills.amditis.tech</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="shield"></i></div><div><div class="video-topic-title">Hooks as guardrails</div><div class="video-topic-sub">Automatic triggers for keywords or contexts. The one-way door hook saves you from irreversible decisions before you make them</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="video"></i></div><div><div class="video-topic-title">The Mamdani scrape</div><div class="video-topic-sub">Single prompt, five platforms, 76 videos pulled at full resolution without watermarks &mdash; impossible in the browser</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="git-branch"></i></div><div><div class="video-topic-title">Sub-agent driven development</div><div class="video-topic-sub">Superpowers plugin dispatches a fresh agent per task. Reviews happen between steps, work tree enforces dependencies</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="layout"></i></div><div><div class="video-topic-title">Dashboard from one prompt</div><div class="video-topic-sub">Front-end design skill auto-triggers and scaffolds the analysis dashboard while transcription runs on your GPU in parallel</div></div></div>
+                                </div>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">KEY TAKEAWAYS</div>
+                                <ul class="space-y-3">
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Skills only cost tokens when they're relevant. Unlike MCPs, which load into every conversation at the start, skills sit on disk until something in the task triggers them. That means you can have dozens of specialized guardrails and workflows available without bloating every prompt.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">The browser can't do this. Joe pulled 76 full-resolution videos across five platforms, ran Whisper transcription on a local GPU, sampled frames for OCR, and built an interactive dashboard &mdash; all from one prompt with occasional nudges. You cannot get a web chat window to touch your files, your GPU, or your browser profile the way the terminal agent can.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Stop hooks and ask-user-question beat raw prompts. When the task was complex, the brainstorming skill fired, which uses ask-user-question to interview Joe about purpose, sampling rate, model size, and output format before writing a single file. That interview catches misalignment up front instead of debugging it three hours in.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Build skills to make one-time workflows repeatable. After the Mamdani run worked, the move is to codify what you learned &mdash; the video download flow, the Whisper config, the dashboard layout &mdash; as a skill so the next subject (any politician, any beat) runs the same pipeline automatically.</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TIMESTAMPS</div>
+                                <div class="video-timestamps">
+                                    <div class="video-timestamp"><span class="video-timestamp-time">00:00</span><span class="video-timestamp-label">Module 2 intro and guest lecturer Reese</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">01:13</span><span class="video-timestamp-label">What is a skill, what is a plugin</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">03:40</span><span class="video-timestamp-label">Hooks and the one-way door pattern</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">05:59</span><span class="video-timestamp-label">Skill vs command vs plugin recap</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">07:28</span><span class="video-timestamp-label">The Mamdani social media task</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">09:04</span><span class="video-timestamp-label">Launching Claude Code with <code class="text-acid bg-surface px-1">--dangerously-skip-permissions</code></span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">11:34</span><span class="video-timestamp-label">Brainstorming skill fires, ask-user-question interview</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">17:53</span><span class="video-timestamp-label">Sub-agent driven development plan</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">21:33</span><span class="video-timestamp-label">Twitter, Instagram, Facebook fail &mdash; switching to browser automation</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">26:28</span><span class="video-timestamp-label">76 videos downloaded, moving to transcription</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">28:02</span><span class="video-timestamp-label">Whisper large crashes OBS, switching to turbo model</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">33:48</span><span class="video-timestamp-label">Reviewing the dashboard output and noting fixes</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="m2-v2-panel" role="tabpanel" aria-labelledby="m2-v2-tab" class="video-panel">
+                            <div class="text-xs text-acid font-mono mb-2">VIDEO 2 &middot; ~13 MIN</div>
+                            <h3 class="font-display text-lg text-chrome mb-3">Installing and using journalism skills</h3>
+                            <div class="video-embed-slot">
+                                <div class="video-coming-soon">Video coming soon</div>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">Joe takes the working Mamdani pipeline and turns it into a reusable Claude Code plugin &mdash; four modular skills plus a plugin.json, an index page, and an SVG-animated docs site &mdash; all generated by the agent using Anthropic's official plugin development skills. Then he debugs the one gotcha (wrong install path), tests that the slash commands actually show up, and hands off the module assignment.</p>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TOPICS COVERED</div>
+                                <div class="video-topics">
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="package"></i></div><div><div class="video-topic-title">Modular vs monolithic</div><div class="video-topic-sub">Four small skills that chain together beat one giant orchestrator. You can call just the parts you need on future projects</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="folder-tree"></i></div><div><div class="video-topic-title">Plugin structure</div><div class="video-topic-sub"><code class="text-acid bg-surface px-1">plugin.json</code>, a <code class="text-acid bg-surface px-1">skill.md</code> per capability, helper scripts in subfolders &mdash; all generated by the plugin development skill</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="globe"></i></div><div><div class="video-topic-title">Docs page with SVG</div><div class="video-topic-sub">Plugin ships with an index.html that explains what each skill does, with animations, for the next person who installs it</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="refresh-cw"></i></div><div><div class="video-topic-title">Reload plugins trap</div><div class="video-topic-sub">The skill was created at the wrong path (<code class="text-acid bg-surface px-1">.claude-plugins</code> instead of <code class="text-acid bg-surface px-1">.claude/plugins</code>). Restart and reload-plugins didn't fix it &mdash; reinstall did</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="check-circle"></i></div><div><div class="video-topic-title">Verify before claiming done</div><div class="video-topic-sub">Type a forward slash, confirm the commands show up, run one end to end. "I did it" without a test run is not done</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="share-2"></i></div><div><div class="video-topic-title">Shareable as a proper plugin</div><div class="video-topic-sub">Bundled with versioning so colleagues can install it, fork it, and swap their own defaults without rewriting the pipeline</div></div></div>
+                                </div>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">KEY TAKEAWAYS</div>
+                                <ul class="space-y-3">
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">There is no secret sauce. Joe's whole pitch in this video is that turning a working workflow into a skill is as simple as saying "let's save this for later" after you've confirmed it works. The bot already has plugin development skills from Anthropic baked in and knows the file layout &mdash; your job is describing what was useful and testing that the commands load.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Modular skills beat one big orchestrator. Joe started leaning toward a hybrid &mdash; one orchestrator with four stage skills &mdash; but switched to pure modular. The reason: you want to pull individual pieces (video download, transcribe, frame extract, dashboard) into projects that don't need the whole pipeline.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Even the plugin-creator misfires. Claude wrote the plugin to the wrong directory on the first try. Reload-plugins didn't catch it, quitting and resuming didn't catch it &mdash; Joe had to paste the docs and tell the agent to use the proper install method. This is why you test.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Use these tools to build things that don't need these tools. The output of this video is a Python pipeline and an HTML dashboard. Once built, it runs on its own. The AI was the means of constructing it, not a runtime dependency for executing it.</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TIMESTAMPS</div>
+                                <div class="video-timestamps">
+                                    <div class="video-timestamp"><span class="video-timestamp-time">00:00</span><span class="video-timestamp-label">No secret sauce &mdash; just describe what you want</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">00:27</span><span class="video-timestamp-label">Picking which pipeline pieces to turn into skills</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">00:55</span><span class="video-timestamp-label">Modular vs one orchestrator, project-local vs global</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">01:52</span><span class="video-timestamp-label">Proper plugin vs loose skill files</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">02:15</span><span class="video-timestamp-label">Plugin development skill takes over</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">04:02</span><span class="video-timestamp-label">Skills.md files being written</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">05:41</span><span class="video-timestamp-label">Video dashboard skill auto-generates a docs page</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">06:43</span><span class="video-timestamp-label">Testing the plugin &mdash; slash commands not showing</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">09:11</span><span class="video-timestamp-label">Wrong install path &mdash; fixing and retesting</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">10:27</span><span class="video-timestamp-label">Skills load, running the first command</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">11:18</span><span class="video-timestamp-label">Module assignment and skills.amditis.tech</span></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -422,5 +520,6 @@ Claim to verify: "A new study from Harvard Medical School found that drinking co
 
     <script>lucide.createIcons();</script>
     <script src="../assets/js/copy-code.js"></script>
+    <script src="../assets/js/video-tabs.js"></script>
 </body>
 </html>

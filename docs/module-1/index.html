@@ -60,17 +60,116 @@
         <!-- Content sections -->
         <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
 
-            <!-- Module 1 video -->
+            <!-- Module 1 videos -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-ice">Watch: from chat window to command line</h2>
+                    <h2 class="font-display text-xl text-ice">Watch</h2>
                 </div>
                 <div class="max-w-3xl">
-                    <div class="border border-white/10 bg-panel p-6">
-                        <p class="text-gray-300 text-sm leading-relaxed mb-3"><strong class="text-chrome">Video 1 (~26 min)</strong> frames the shift from apps to harnesses, walks through installing Claude Code on Windows in PowerShell, and runs a side-by-side comparison of Claude Code and Claude on the web on the same research task — extracting CCM staff profiles from the Center's website. You'll see why the terminal version keeps working when the web version gives up, then finish by running <code class="text-acid bg-surface px-1">/init</code> to generate a first CLAUDE.md.</p>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-3"><strong class="text-chrome">Video 2 (~22 min)</strong> is all about context files. It covers the three layers of context (global, project, session), what belongs in each CLAUDE.md, a "deletion test" for deciding what context is worth keeping, MEMORY.md and sub-memory files, and the four types of memory (user, feedback, project, reference). The video closes with an argument for treating context files as workflow infrastructure — written once, committed to GitHub, reused forever.</p>
-                        <p class="text-gray-400 text-xs">Videos will be embedded here when available. Two bonus interviews live on the <a href="../bonus-interviews/" class="text-ice hover:text-acid transition-colors">bonus interviews page</a>: Madi McCool on rebuilding a nonprofit site with Claude Code, and Mike Janssen on using Codex CLI in a small public media newsroom.</p>
+                    <div class="video-tabs">
+                        <div class="video-tab-bar" role="tablist" aria-label="Module 1 videos">
+                            <button type="button" role="tab" id="m1-v1-tab" aria-controls="m1-v1-panel" aria-selected="true" tabindex="0" class="video-tab">V1 &middot; 26 MIN</button>
+                            <button type="button" role="tab" id="m1-v2-tab" aria-controls="m1-v2-panel" aria-selected="false" tabindex="-1" class="video-tab">V2 &middot; 22 MIN</button>
+                        </div>
+
+                        <div id="m1-v1-panel" role="tabpanel" aria-labelledby="m1-v1-tab" class="video-panel">
+                            <div class="text-xs text-acid font-mono mb-2">VIDEO 1 &middot; ~26 MIN</div>
+                            <h3 class="font-display text-lg text-chrome mb-3">From chat window to command line</h3>
+                            <div class="video-embed-slot">
+                                <div class="video-coming-soon">Video coming soon</div>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">Joe frames the shift from browser-based AI to terminal-based AI, walks through a PowerShell setup, then runs Claude Code and Claude on the Web on the same research task side by side. The video ends by running <code class="text-acid bg-surface px-1">/init</code> to scaffold a first <code class="text-acid bg-surface px-1">CLAUDE.md</code>.</p>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TOPICS COVERED</div>
+                                <div class="video-topics">
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="layers"></i></div><div><div class="video-topic-title">Apps vs harnesses</div><div class="video-topic-sub">Mollick's framing &mdash; same model, different capabilities based on the tools and environment it's given</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="arrow-right-from-line"></i></div><div><div class="video-topic-title">Why escape the browser</div><div class="video-topic-sub">Scripts, scheduled tasks, overnight scrapers &mdash; work a web chat can't do because it can't touch your files</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="terminal"></i></div><div><div class="video-topic-title">PowerShell install and launch</div><div class="video-topic-sub">Open a terminal, <code class="text-acid bg-surface px-1">cd</code> into a folder, type <code class="text-acid bg-surface px-1">claude</code>, and you're in an interactive session</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="split-square-horizontal"></i></div><div><div class="video-topic-title">Claude Code vs Claude on the Web</div><div class="video-topic-sub">Same prompt, side by side. Web hits a tool-use limit; the terminal keeps working and saves files that persist</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="file-plus"></i></div><div><div class="video-topic-title">Running <code class="text-acid bg-surface px-1">/init</code></div><div class="video-topic-sub">Point Claude at a folder, let it read what's there, and have it scaffold your first <code class="text-acid bg-surface px-1">CLAUDE.md</code> automatically</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="folder-tree"></i></div><div><div class="video-topic-title">Global vs project CLAUDE.md</div><div class="video-topic-sub">Two tiers. User-level settings live in <code class="text-acid bg-surface px-1">~/.claude/</code>; project-specific context lives in the folder. Edit both as you work</div></div></div>
+                                </div>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">KEY TAKEAWAYS</div>
+                                <ul class="space-y-3">
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">You need a paid account for one of the three major models &mdash; Claude Code, Codex/ChatGPT, or Gemini CLI. The $20/month plan is fine. Free accounts can't do most of what this course covers (Gemini CLI's free tier is the one exception).</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">GitHub is your Google Drive for code. Joe spent a year wrestling with Google Drive as a code store before moving to GitHub &mdash; version history mismatches, overwrites, accidental deletions. GitHub fixed all of it.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">The terminal gives you more from the same prompt. In the side-by-side, Claude on the Web finished faster but hit its tool-use limit. Claude Code kept going, saved persistent files, and produced a more thorough report that any future session can read back.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm"><code class="text-acid bg-surface px-1">CLAUDE.md</code> is your bread and butter. Every launch in a folder reads that file first. Put global preferences at the user level, project-specific rules in the folder, and update both as you learn what the model keeps getting wrong.</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TIMESTAMPS</div>
+                                <div class="video-timestamps">
+                                    <div class="video-timestamp"><span class="video-timestamp-time">00:00</span><span class="video-timestamp-label">Introduction and course framing</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">01:17</span><span class="video-timestamp-label">IDE alternatives if you can't use the terminal</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">02:26</span><span class="video-timestamp-label">Why a GitHub account matters</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">03:27</span><span class="video-timestamp-label">Paid accounts for Claude, Gemini, or Codex</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">06:09</span><span class="video-timestamp-label">Apps vs harnesses &mdash; Mollick's framework</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">08:29</span><span class="video-timestamp-label">Setup walkthrough in PowerShell</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">11:14</span><span class="video-timestamp-label">Side by side &mdash; Claude Code vs Claude on the Web</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">17:03</span><span class="video-timestamp-label">The Web hits a tool-use limit, the CLI keeps going</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">19:13</span><span class="video-timestamp-label">Running <code class="text-acid bg-surface px-1">/init</code> to scaffold CLAUDE.md</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">22:00</span><span class="video-timestamp-label">The "Senator Joe" test &mdash; CLAUDE.md in action</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">23:20</span><span class="video-timestamp-label">Global vs project-level CLAUDE.md</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">25:31</span><span class="video-timestamp-label">Exercise prompt and wrap-up</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="m1-v2-panel" role="tabpanel" aria-labelledby="m1-v2-tab" class="video-panel">
+                            <div class="text-xs text-acid font-mono mb-2">VIDEO 2 &middot; ~22 MIN</div>
+                            <h3 class="font-display text-lg text-chrome mb-3">Context files, CLAUDE.md, and memory</h3>
+                            <div class="video-embed-slot">
+                                <div class="video-coming-soon">Video coming soon</div>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">Joe walks through the three layers of context (global, project, session), what belongs in each <code class="text-acid bg-surface px-1">CLAUDE.md</code>, a "deletion test" for deciding what context is worth keeping, <code class="text-acid bg-surface px-1">MEMORY.md</code> and sub-memory files, and the four types of memory. The video closes with an argument for treating context files as workflow infrastructure &mdash; written once, committed to GitHub, reused forever.</p>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TOPICS COVERED</div>
+                                <div class="video-topics">
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="database"></i></div><div><div class="video-topic-title">The stateless problem</div><div class="video-topic-sub">Every session starts from zero. Context files fix this so you stop re-explaining yourself each chat</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="layers"></i></div><div><div class="video-topic-title">Three layers of context</div><div class="video-topic-sub">Global in <code class="text-acid bg-surface px-1">~/.claude/</code>, project in the folder, session is the live conversation. The first two auto-load</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="scan-search"></i></div><div><div class="video-topic-title">The deletion test</div><div class="video-topic-sub">Strip a line from your context file, re-run the same prompt, compare outputs. If nothing changes, cut it</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="target"></i></div><div><div class="video-topic-title">Specific beats generic</div><div class="video-topic-sub">"Verify facts" is useless. "Two-pass cross-check against the council spreadsheet" is actually useful</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="brain"></i></div><div><div class="video-topic-title">MEMORY.md and the four memory types</div><div class="video-topic-sub">Auto-loads alongside <code class="text-acid bg-surface px-1">CLAUDE.md</code>. User, feedback, project, reference &mdash; four buckets for what the model should remember</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="git-branch"></i></div><div><div class="video-topic-title">Context as infrastructure</div><div class="video-topic-sub">Not personal notes &mdash; workflow pipelines. Commit them to Git so fork-and-clone inherits the knowledge. Strip PII first</div></div></div>
+                                </div>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">KEY TAKEAWAYS</div>
+                                <ul class="space-y-3">
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Write it once, reap it forever. A small investment up front stops you from re-explaining yourself on every new chat. The outputs slowly and iteratively improve as you refine the file over weeks and months.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">The four memory types fit everything you'll ever want to remember &mdash; user (who you are), feedback (what you've corrected), project (the big picture), reference (pointers to external files). If you can't slot something into one of those four, it probably doesn't need to be saved.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Context files aren't Post-it notes. They're infrastructure. Treat them the way you'd treat a config file for a production system &mdash; version them, commit them, strip PII before pushing, and update them whenever the model makes a mistake you don't want to see twice.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">You can always just tell the model to read things on demand &mdash; git history, a webpage, the last three sessions. Auto-loading isn't the only pattern. "Go read X before starting" works just as well for one-off needs.</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TIMESTAMPS</div>
+                                <div class="video-timestamps">
+                                    <div class="video-timestamp"><span class="video-timestamp-time">00:00</span><span class="video-timestamp-label">Introduction and what this video covers</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">01:34</span><span class="video-timestamp-label">Why context files matter</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">02:33</span><span class="video-timestamp-label">The stateless problem</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">03:42</span><span class="video-timestamp-label">Three layers &mdash; global, project, session</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">08:02</span><span class="video-timestamp-label">The deletion test</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">09:32</span><span class="video-timestamp-label">Specific beats generic</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">11:47</span><span class="video-timestamp-label">MEMORY.md and the memory folder</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">13:51</span><span class="video-timestamp-label">The four memory types</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">15:04</span><span class="video-timestamp-label">Context as infrastructure</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">15:43</span><span class="video-timestamp-label">Committing CLAUDE.md to Git</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">20:18</span><span class="video-timestamp-label">Exercise prompt and next module teaser</span></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <p class="text-gray-400 text-xs mt-4">Two bonus interviews live on the <a href="../bonus-interviews/" class="text-ice hover:text-acid transition-colors">bonus interviews page</a>: Madi McCool on rebuilding a nonprofit site with Claude Code, and Mike Janssen on using Codex CLI in a small public media newsroom.</p>
                 </div>
             </section>
 
@@ -622,5 +721,6 @@ claude</code></pre>
 
     <script>lucide.createIcons();</script>
     <script src="../assets/js/copy-code.js"></script>
+    <script src="../assets/js/video-tabs.js"></script>
 </body>
 </html>

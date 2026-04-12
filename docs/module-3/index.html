@@ -60,16 +60,113 @@
         <!-- Content sections -->
         <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
 
-            <!-- Module 3 video -->
+            <!-- Module 3 videos -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-ice">Watch: automation, pipelines, and triggered workflows</h2>
+                    <h2 class="font-display text-xl text-ice">Watch</h2>
                 </div>
                 <div class="max-w-3xl">
-                    <div class="border border-white/10 bg-panel p-6">
-                        <p class="text-gray-300 text-sm leading-relaxed mb-3"><strong class="text-chrome">Video 1 (~12 min)</strong> is about the shift from "I can do this once" to "this runs on its own." It covers why non-programmers stall at automation, thinking in systems — input nodes, conveyor belts, transformers, and output destinations — and what an automation actually is. Then it walks through planning multi-stage pipelines with one job per stage (fetch, clean, process, save), modularization and chaining, secret hygiene, and three rules: stage the pipeline, test small, never put secrets in code.</p>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-3"><strong class="text-chrome">Video 2 (~29 min)</strong> continues the Module 2 Mamdani project and automates it end to end. You'll see a side-by-side comparison of Claude Code's two schedulers — the in-session <code class="text-acid bg-surface px-1">cron.create</code> and the cloud-based remote trigger — and a hybrid setup where the cloud detects new videos and the local machine handles transcription. The video also uses Google Drive desktop sync as a simpler alternative to the Drive API, publishes the dashboard via GitHub Pages and GitHub Actions, and debugs Copilot review feedback, branch protection rules, and an accidental self-triggering PR loop live.</p>
-                        <p class="text-gray-400 text-xs">Videos will be embedded here when available.</p>
+                    <div class="video-tabs">
+                        <div class="video-tab-bar" role="tablist" aria-label="Module 3 videos">
+                            <button type="button" role="tab" id="m3-v1-tab" aria-controls="m3-v1-panel" aria-selected="true" tabindex="0" class="video-tab">V1 &middot; 12 MIN</button>
+                            <button type="button" role="tab" id="m3-v2-tab" aria-controls="m3-v2-panel" aria-selected="false" tabindex="-1" class="video-tab">V2 &middot; 29 MIN</button>
+                        </div>
+
+                        <div id="m3-v1-panel" role="tabpanel" aria-labelledby="m3-v1-tab" class="video-panel">
+                            <div class="text-xs text-acid font-mono mb-2">VIDEO 1 &middot; ~12 MIN</div>
+                            <h3 class="font-display text-lg text-chrome mb-3">Systems thinking for non-programmers</h3>
+                            <div class="video-embed-slot">
+                                <div class="video-coming-soon">Video coming soon</div>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">Module 3 opens with a reframe &mdash; instead of sitting at the terminal babysitting a one-shot task, you design pipelines that run themselves on a trigger. Joe argues the block most journalists hit here isn't code, it's systems thinking, and he walks through the conveyor-belt mental model, multi-stage pipeline design, secret hygiene, and the three rules he wants you to carry into the hands-on video.</p>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TOPICS COVERED</div>
+                                <div class="video-topics">
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="repeat"></i></div><div><div class="video-topic-title">From one-off to running on its own</div><div class="video-topic-sub">The goal shifts from "I babysit this task" to "an event fires and the pipeline handles itself." That's where most non-programmers stall</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="git-merge"></i></div><div><div class="video-topic-title">Think in conveyor belts</div><div class="video-topic-sub">Nodes, splitters, mergers. If you've played Factorio or Satisfactory you already know this &mdash; resources flow in, get transformed, flow out</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="layers"></i></div><div><div class="video-topic-title">Multi-stage pipelines</div><div class="video-topic-sub">Fetch, clean, process, document. Each stage does one job. Outputs are repeatable, saveable, and chainable</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="clipboard-check"></i></div><div><div class="video-topic-title">Plan before you build</div><div class="video-topic-sub">Don't let the agent spend hours on a draft before you've reviewed the pitch. Use plan mode or Superpowers to catch misalignment early</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="shield-alert"></i></div><div><div class="video-topic-title">Secret hygiene</div><div class="video-topic-sub">Never hard-code keys, especially if you're pushing to GitHub. Joe's own early OpenAI key got scraped and he woke up to a $50 bill</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="flask-conical"></i></div><div><div class="video-topic-title">Test on five, not 5,000</div><div class="video-topic-sub">Verify each stage on a handful of inputs before you let a pipeline grind through a database. Failures stay localized when you catch them small</div></div></div>
+                                </div>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">KEY TAKEAWAYS</div>
+                                <ul class="space-y-3">
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">You're managing, not prompting. Joe is explicit that the role shifts when you move into automation &mdash; you're designing the workspace, the inputs, the fallback mechanisms, and the destinations. The agent inhabits that environment and does the work, but the architecture is yours.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Modularize everything. Each pipeline stage should be a self-contained unit that can be tested, documented, and swapped without breaking neighbors. Chain stages together (email &rarr; clean &rarr; process &rarr; CRM &rarr; Kanban &rarr; next pipeline) but never build one monolithic script that has to succeed or fail as a whole.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Skip automation fundamentals and you'll stall. If you jumped straight into generation without ever touching Zapier, N8N, or basic trigger-response tools, go back. The mental model is the thing &mdash; the CLI agent is just a more flexible engine for the same ideas.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Basic security is non-negotiable but don't spiral. Don't commit secrets. Ask the agent to audit for hard-coded values. Use spend limits on your API accounts as a backstop. But don't go so paranoid that you assume every script needs CIA-grade defense &mdash; the goal is proactive, not perfect.</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TIMESTAMPS</div>
+                                <div class="video-timestamps">
+                                    <div class="video-timestamp"><span class="video-timestamp-time">00:00</span><span class="video-timestamp-label">Module 3 intro</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">00:22</span><span class="video-timestamp-label">From one-off task to automated pipeline</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">02:13</span><span class="video-timestamp-label">Systems thinking and the Factorio analogy</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">04:43</span><span class="video-timestamp-label">What automation actually means</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">05:47</span><span class="video-timestamp-label">Plan before you build</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">07:12</span><span class="video-timestamp-label">Multi-stage pipeline &mdash; fetch, clean, process, document</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">09:07</span><span class="video-timestamp-label">Test on five before scaling to 5,000</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">09:15</span><span class="video-timestamp-label">Secret hygiene and the $50 OpenAI mistake</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">11:04</span><span class="video-timestamp-label">Three rules recap &mdash; stage, test, secrets</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">11:52</span><span class="video-timestamp-label">Transition to the hands-on video</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="m3-v2-panel" role="tabpanel" aria-labelledby="m3-v2-tab" class="video-panel">
+                            <div class="text-xs text-acid font-mono mb-2">VIDEO 2 &middot; ~29 MIN</div>
+                            <h3 class="font-display text-lg text-chrome mb-3">Automating the Mamdani project end to end</h3>
+                            <div class="video-embed-slot">
+                                <div class="video-coming-soon">Video coming soon</div>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">Joe picks up the Mamdani pipeline and automates it &mdash; a daily remote trigger on Anthropic's cloud that checks for new videos, a local run for the GPU-heavy transcription, a GitHub Actions workflow that deploys a live dashboard to GitHub Pages, and a Copilot-reviewed PR with 10 comments. The video ends by debugging a self-triggering PR loop Joe accidentally created by merging with his own account.</p>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TOPICS COVERED</div>
+                                <div class="video-topics">
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="calendar"></i></div><div><div class="video-topic-title"><code class="text-acid bg-surface px-1">cron.create</code> vs remote trigger</div><div class="video-topic-sub"><code class="text-acid bg-surface px-1">cron.create</code> fires only while Claude Code is open (seven-day timer). Remote triggers run on Anthropic's cloud even when your machine is off</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="git-fork"></i></div><div><div class="video-topic-title">Hybrid scheduler</div><div class="video-topic-sub">Remote trigger checks daily for new videos, uploads a report to Google Drive. GPU-heavy transcription stays local. Best of both worlds</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="cloud-upload"></i></div><div><div class="video-topic-title">Google Drive desktop sync</div><div class="video-topic-sub">Skip the Google Drive API nightmare &mdash; drop files into a folder that Google Drive desktop already syncs and you're done</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="globe"></i></div><div><div class="video-topic-title">GitHub Pages + Actions</div><div class="video-topic-sub">Free public dashboard deployed from a workflow. Daily cron runs yt-dlp, rebuilds analysis, commits to master, deploys the site</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="message-square-warning"></i></div><div><div class="video-topic-title">Copilot review, 10 comments</div><div class="video-topic-sub">Some solid catches, some nitpicks. Joe tells Claude to fix everything reasonable and re-run &mdash; that's the workflow loop</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="alert-triangle"></i></div><div><div class="video-topic-title">The self-triggering PR loop</div><div class="video-topic-sub">Analysis writes a slightly different file each run, so every merge creates a diff, which triggers another PR. Guard only catches bot pushes, not user merges</div></div></div>
+                                </div>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">KEY TAKEAWAYS</div>
+                                <ul class="space-y-3">
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Stack automations you already have. Joe's whole architecture is glued-together pieces that aren't built for each other &mdash; Google Drive desktop for sync, GitHub Copilot for PR review, GitHub Pages for hosting, Anthropic remote triggers for the daily check. Each one does one thing well, and the result is a pipeline where he barely has to touch anything.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Remote triggers don't get your GPU. They run in an isolated cloud environment that clones your repo and runs Claude Code there. That's great for fetching metadata and committing reports, but anything that needs local files, yt-dlp, or Whisper has to stay on your machine. Plan the split up front.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Branch protection plus Copilot auto-review is a pattern. Instead of having the action commit to master directly, have it open a PR. The branch protection rule forces the PR, Copilot auto-reviews on open, you get an email, you review, you merge. Free QA loop for every scheduled run.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Loops are easy to create accidentally. Joe's analysis script produced a slightly different output each run (timestamp, ordering), so every merge was a real diff. His self-trigger guard only caught commits from the bot &mdash; merges from Joe himself slipped through and kicked off another PR. Fix: normalize outputs so runs with no new videos produce an identical file.</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TIMESTAMPS</div>
+                                <div class="video-timestamps">
+                                    <div class="video-timestamp"><span class="video-timestamp-time">00:00</span><span class="video-timestamp-label">Planning automation for new Mamdani videos</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">02:20</span><span class="video-timestamp-label">YouTube and TikTok only &mdash; the rest need Playwright</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">04:35</span><span class="video-timestamp-label"><code class="text-acid bg-surface px-1">cron.create</code> vs remote trigger &mdash; two scheduling machines</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">06:30</span><span class="video-timestamp-label">Hybrid scheduler: remote check, local pipeline</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">07:11</span><span class="video-timestamp-label">Google Drive desktop sync instead of the API</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">09:47</span><span class="video-timestamp-label">Configuring the /schedule skill and prompt</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">10:29</span><span class="video-timestamp-label">Firing the remote trigger in the cloud</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">13:02</span><span class="video-timestamp-label">Adding GitHub Pages and a daily Action</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">17:24</span><span class="video-timestamp-label">Opening the PR and waiting for Copilot</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">19:25</span><span class="video-timestamp-label">10 Copilot comments, fix everything reasonable</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">22:18</span><span class="video-timestamp-label">Pages deployment fails on branch protection</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">25:50</span><span class="video-timestamp-label">Self-triggering PR loop &mdash; diagnosing and fixing</span></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -380,5 +477,6 @@ and wait for my approval before taking any action."</span></code></pre>
 
     <script>lucide.createIcons();</script>
     <script src="../assets/js/copy-code.js"></script>
+    <script src="../assets/js/video-tabs.js"></script>
 </body>
 </html>
