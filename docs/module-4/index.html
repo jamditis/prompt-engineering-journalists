@@ -90,51 +90,211 @@
                 </div>
             </section>
 
-            <!-- Module videos -->
+            <!-- Module 4 videos -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
-                    <h2 class="font-display text-xl text-ice">Videos</h2>
+                    <h2 class="font-display text-xl text-ice">Watch</h2>
                 </div>
-                <p class="text-gray-300 text-sm leading-relaxed mb-6 max-w-3xl">Module 4 is four short videos. Each one introduces one piece of the manager's toolkit. They embed here once Knight Center publishes the course.</p>
+                <p class="text-gray-300 text-sm leading-relaxed mb-6 max-w-3xl">Module 4 is four short videos. Each one introduces one piece of the manager's toolkit.</p>
 
-                <div class="space-y-8">
-
-                    <div class="max-w-3xl">
-                        <div class="text-xs text-acid font-mono mb-2">VIDEO 1 · ~11 MIN</div>
-                        <h3 class="font-display text-lg text-chrome mb-3">Effort, thinking, and the shape of the context window</h3>
-                        <div class="relative w-full rounded-lg overflow-hidden border border-white/10 bg-panel flex items-center justify-center" style="padding-bottom:56.25%">
-                            <p class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm font-mono">Video coming soon</p>
+                <div class="max-w-3xl">
+                    <div class="video-tabs">
+                        <div class="video-tab-bar" role="tablist" aria-label="Module 4 videos">
+                            <button type="button" role="tab" id="m4-v1-tab" aria-controls="m4-v1-panel" aria-selected="true" tabindex="0" class="video-tab">V1 &middot; 11 MIN</button>
+                            <button type="button" role="tab" id="m4-v2-tab" aria-controls="m4-v2-panel" aria-selected="false" tabindex="-1" class="video-tab">V2 &middot; 6 MIN</button>
+                            <button type="button" role="tab" id="m4-v3-tab" aria-controls="m4-v3-panel" aria-selected="false" tabindex="-1" class="video-tab">V3 &middot; 8 MIN</button>
+                            <button type="button" role="tab" id="m4-v4-tab" aria-controls="m4-v4-panel" aria-selected="false" tabindex="-1" class="video-tab">V4 &middot; 14 MIN</button>
                         </div>
-                        <p class="text-gray-400 text-sm mt-3">Why session setup matters more than any individual prompt. What <code class="text-acid bg-surface px-1">/effort</code> and <code class="text-acid bg-surface px-1">/compact</code> actually do. What's in your context window right now, and what's eating most of it.</p>
-                    </div>
 
-                    <div class="max-w-3xl">
-                        <div class="text-xs text-acid font-mono mb-2">VIDEO 2 · ~6 MIN</div>
-                        <h3 class="font-display text-lg text-chrome mb-3">The 40% rule, rewinding, and sub-agents</h3>
-                        <div class="relative w-full rounded-lg overflow-hidden border border-white/10 bg-panel flex items-center justify-center" style="padding-bottom:56.25%">
-                            <p class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm font-mono">Video coming soon</p>
+                        <div id="m4-v1-panel" role="tabpanel" aria-labelledby="m4-v1-tab" class="video-panel">
+                            <div class="text-xs text-acid font-mono mb-2">VIDEO 1 &middot; ~11 MIN</div>
+                            <h3 class="font-display text-lg text-chrome mb-3">Effort, thinking, and the shape of the context window</h3>
+                            <div class="video-embed-slot">
+                                <div class="video-coming-soon">Video coming soon</div>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">Module 4 pivots away from live demos back to the core prompting techniques. Joe shows the <code class="text-acid bg-surface px-1">/effort</code> command (low through max), walks through every component that eats your context window &mdash; system prompt, tools, agents, memory, skills, messages, auto-compact buffer &mdash; and explains why the million-token context Anthropic announced doesn't actually give you a million usable tokens of good quality.</p>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TOPICS COVERED</div>
+                                <div class="video-topics">
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="gauge"></i></div><div><div class="video-topic-title">The <code class="text-acid bg-surface px-1">/effort</code> command</div><div class="video-topic-sub">Low, medium, high, max, auto. Higher effort means deeper reasoning and faster token burn &mdash; session limits drain accordingly</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="pie-chart"></i></div><div><div class="video-topic-title">What fills your context</div><div class="video-topic-sub">System prompt, tools, custom agents, memory files, skills, messages, free space, auto-compact buffer. You can see the breakdown</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="trending-down"></i></div><div><div class="video-topic-title">The million-token lie</div><div class="video-topic-sub">Anthropic expanded context to 1M but quality still degrades past roughly 20&ndash;30% usage. Nothing else about the model changed</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="minimize"></i></div><div><div class="video-topic-title"><code class="text-acid bg-surface px-1">/compact</code> with a focus</div><div class="video-topic-sub">Pass an additional instruction like "preserve VLC streaming config" and the summary targets the context you actually need to keep</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="eye"></i></div><div><div class="video-topic-title">Status line visibility</div><div class="video-topic-sub">Put the token percentage in your status line so you always know when you're approaching the degradation zone</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="hard-drive"></i></div><div><div class="video-topic-title">Everything is saved locally</div><div class="video-topic-sub">Full JSONL transcripts for every conversation and sub-agent live on your machine. You can point Claude at one and read it back</div></div></div>
+                                </div>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">KEY TAKEAWAYS</div>
+                                <ul class="space-y-3">
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Effort costs money. <code class="text-acid bg-surface px-1">/effort max</code> gives you the model's deepest reasoning, but it also burns tokens like crazy and eats into your session limits. Use it when the task actually benefits from slow thinking &mdash; not as a default.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">The million-token context window is marketing. In practice, response quality still starts degrading somewhere between 20% and 30% of the window, same as when the limit was 200k. Keep a close eye on your token percentage and compact aggressively.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Compact with a hint. Plain <code class="text-acid bg-surface px-1">/compact</code> lets the model pick what to preserve. Adding a phrase like "focus on the VLC streaming configuration" tells it exactly which thread of the conversation matters, which is the difference between a useful summary and a vague one.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Your conversation transcripts are security-relevant. Every session, including sub-agent calls, is saved as JSONL on your machine. That's useful &mdash; you can point Claude at an old transcript and ask "what did we decide" &mdash; but it's also the reason you should never paste API keys or raw secrets into a chat. They persist.</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TIMESTAMPS</div>
+                                <div class="video-timestamps">
+                                    <div class="video-timestamp"><span class="video-timestamp-time">00:00</span><span class="video-timestamp-label">Module 4 intro &mdash; back to prompting fundamentals</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">01:41</span><span class="video-timestamp-label">Effort and thinking &mdash; <code class="text-acid bg-surface px-1">/effort</code> low to max</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">02:46</span><span class="video-timestamp-label">Context window components</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">05:35</span><span class="video-timestamp-label">Quality degrades past 20&ndash;30% usage</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">06:19</span><span class="video-timestamp-label">Status line for token visibility</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">06:47</span><span class="video-timestamp-label">Running <code class="text-acid bg-surface px-1">/compact</code> on a conversation</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">07:37</span><span class="video-timestamp-label">Compact with custom summarization instructions</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">08:46</span><span class="video-timestamp-label">Control-O to see the full transcript</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">09:01</span><span class="video-timestamp-label">The saved JSONL conversation history</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">10:09</span><span class="video-timestamp-label">Security implications of saved transcripts</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">10:48</span><span class="video-timestamp-label">Memory and context as one system</span></div>
+                                </div>
+                            </div>
                         </div>
-                        <p class="text-gray-400 text-sm mt-3">When a session is more than roughly 40% full, quality drops. The fix isn't a better prompt — it's rewinding to a clean state or delegating the next step to a focused sub-agent. Why one sub-agent per task beats one sub-agent with a broad mandate.</p>
-                    </div>
 
-                    <div class="max-w-3xl">
-                        <div class="text-xs text-acid font-mono mb-2">VIDEO 3 · ~8 MIN</div>
-                        <h3 class="font-display text-lg text-chrome mb-3">Cross-model code review with Copilot CLI and Codex CLI</h3>
-                        <div class="relative w-full rounded-lg overflow-hidden border border-white/10 bg-panel flex items-center justify-center" style="padding-bottom:56.25%">
-                            <p class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm font-mono">Video coming soon</p>
+                        <div id="m4-v2-panel" role="tabpanel" aria-labelledby="m4-v2-tab" class="video-panel" hidden>
+                            <div class="text-xs text-acid font-mono mb-2">VIDEO 2 &middot; ~6 MIN</div>
+                            <h3 class="font-display text-lg text-chrome mb-3">The 40% rule, rewinding, and sub-agents</h3>
+                            <div class="video-embed-slot">
+                                <div class="video-coming-soon">Video coming soon</div>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">Joe gives you three moves for when a conversation gets too big: dump it at 40% and start fresh, rewind with double-escape to a known-good point, or delegate to sub-agents with their own context windows. He also warns about "agent telephone," where a sub-agent gets something slightly wrong and the error compounds into your main conversation.</p>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TOPICS COVERED</div>
+                                <div class="video-topics">
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="percent"></i></div><div><div class="video-topic-title">The 40% rule</div><div class="video-topic-sub">Keep your conversation load under 40% of the context window. When you hit it, dump, compact, or start fresh</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="rotate-ccw"></i></div><div><div class="video-topic-title">Fresh conversation per task</div><div class="video-topic-sub">One conversation per task or group of tasks. If you can't pick up clean in a new session, your project state isn't well-documented enough</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="alert-circle"></i></div><div><div class="video-topic-title">Signs of context rot</div><div class="video-topic-sub">Claude repeats itself, pulls threads from unrelated areas, or references outdated details. Around 350k tokens is where it shows up</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="rewind"></i></div><div><div class="video-topic-title">Double-escape to rewind</div><div class="video-topic-sub">Tap escape twice to get a menu and rewind to any earlier point in the conversation &mdash; unless you've already compacted past it</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="users"></i></div><div><div class="video-topic-title">Sub-agents with fresh context</div><div class="video-topic-sub">Each one gets its own million-token window. Great for offloading tasks without burning your main conversation's budget</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="ear-off"></i></div><div><div class="video-topic-title">Agent telephone problem</div><div class="video-topic-sub">A sub-agent gets a detail slightly wrong and reports clean results. Your main agent has no idea, and the error compounds through every next turn</div></div></div>
+                                </div>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">KEY TAKEAWAYS</div>
+                                <ul class="space-y-3">
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">The fresh-session test tells you if your project is documented enough. If you can end a conversation, start a brand-new one in the same project, and still get quality results, your <code class="text-acid bg-surface px-1">CLAUDE.md</code> and memory files are doing their job. If you can't, fix the docs before you blame the model.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Compaction burns your rewind history. Once you compact, double-escape can't get you back past that point. Joe prefers starting fresh conversations over compacting for exactly this reason &mdash; compacting trades rewindability for fewer tokens, and he'd rather keep the safety net.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Sub-agents save tokens but don't trust them blindly. Fresh context window per sub-agent means you can run heavy work without eating your main conversation's budget. But sub-agents only have the instructions you give them &mdash; they can't see your full context, and small errors in their reports silently poison future turns.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Watch for repetition and drift. The clearest early signal that a conversation has gone stale is the model starting to repeat itself or pulling in threads from unrelated work. The minute you notice it, save your state to a memory file and start over.</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TIMESTAMPS</div>
+                                <div class="video-timestamps">
+                                    <div class="video-timestamp"><span class="video-timestamp-time">00:00</span><span class="video-timestamp-label">The 40% rule and per-task conversations</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">01:12</span><span class="video-timestamp-label">The fresh-session test</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">02:10</span><span class="video-timestamp-label">Signs of context degradation</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">02:45</span><span class="video-timestamp-label">Warning signs &mdash; CLAUDE.md drift and repetition</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">03:10</span><span class="video-timestamp-label"><code class="text-acid bg-surface px-1">/clear</code> vs <code class="text-acid bg-surface px-1">/quit</code></span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">03:19</span><span class="video-timestamp-label">Sub-agents and their own context windows</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">04:33</span><span class="video-timestamp-label">Agent telephone and compounding errors</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">05:16</span><span class="video-timestamp-label">Double-escape to rewind</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">05:47</span><span class="video-timestamp-label">Why Joe prefers new conversations over compacting</span></div>
+                                </div>
+                            </div>
                         </div>
-                        <p class="text-gray-400 text-sm mt-3">GitHub Copilot CLI and OpenAI Codex CLI both expose a non-interactive <code class="text-acid bg-surface px-1">-p</code> flag. That means Claude can call them as sub-agents for a second opinion on any file before you commit it. A different model catches what the primary misses, and the overhead is one prompt.</p>
-                    </div>
 
-                    <div class="max-w-3xl">
-                        <div class="text-xs text-acid font-mono mb-2">VIDEO 4 · ~14 MIN</div>
-                        <h3 class="font-display text-lg text-chrome mb-3">Remote control, mobile continuation, and four questions for picking any tool</h3>
-                        <div class="relative w-full rounded-lg overflow-hidden border border-white/10 bg-panel flex items-center justify-center" style="padding-bottom:56.25%">
-                            <p class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm font-mono">Video coming soon</p>
+                        <div id="m4-v3-panel" role="tabpanel" aria-labelledby="m4-v3-tab" class="video-panel" hidden>
+                            <div class="text-xs text-acid font-mono mb-2">VIDEO 3 &middot; ~8 MIN</div>
+                            <h3 class="font-display text-lg text-chrome mb-3">Cross-model code review with Copilot CLI and Codex CLI</h3>
+                            <div class="video-embed-slot">
+                                <div class="video-coming-soon">Video coming soon</div>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">Joe demonstrates calling one CLI agent from inside another using the <code class="text-acid bg-surface px-1">-p</code> non-interactive flag. From a Claude Code session, he spawns GitHub Copilot and Codex as sub-agents to review the same PR, compares their comments against each other, and watches his main conversation's token count stay flat because the reviews happen in separate contained contexts.</p>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TOPICS COVERED</div>
+                                <div class="video-topics">
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="terminal"></i></div><div><div class="video-topic-title">The <code class="text-acid bg-surface px-1">-p</code> flag</div><div class="video-topic-sub">Non-interactive, one-and-done prompt mode. Lets you spawn a CLI agent as a sub-process from inside another session</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="users-round"></i></div><div><div class="video-topic-title">CLI agents as sub-agents</div><div class="video-topic-sub">Call Copilot or Codex from within Claude Code. They run in an isolated shell and report results back into your conversation</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="search"></i></div><div><div class="video-topic-title">Second opinion before the PR</div><div class="video-topic-sub">Get a review right in your terminal before you push anything to GitHub. No notifications, no drama, no teammates interrupted</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="settings-2"></i></div><div><div class="video-topic-title">Install-on-demand</div><div class="video-topic-sub"><code class="text-acid bg-surface px-1">npm install -g @github/copilot</code>, Codex auto-detects existing auth. Claude can set up its own sub-agent tools mid-conversation</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="zap"></i></div><div><div class="video-topic-title">Token savings are real</div><div class="video-topic-sub">Joe's main conversation stayed at 6% through multiple Copilot and Codex reviews because all the work happened in separate context windows</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="scale"></i></div><div><div class="video-topic-title">Sharper critique, different blind spots</div><div class="video-topic-sub">Codex caught two high-severity issues Copilot missed &mdash; including that Joe's PR loop fix wasn't actually fixing the loop</div></div></div>
+                                </div>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">KEY TAKEAWAYS</div>
+                                <ul class="space-y-3">
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Play the models off each other. Copilot and Codex have different training data and different review styles. In this video, Codex caught vulnerabilities Copilot missed &mdash; one was the real reason the PR loop kept firing. If you have access to more than one CLI agent, use them as sanity checks on each other before shipping code.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm"><code class="text-acid bg-surface px-1">-p</code> is the key primitive. Non-interactive prompt mode is what makes cross-tool review possible. Joe's main Claude Code session just shells out to <code class="text-acid bg-surface px-1">copilot -p "review this"</code> and <code class="text-acid bg-surface px-1">codex -p "review this"</code>, captures the output, and continues working. You don't need MCP, you don't need an API integration &mdash; it's just one CLI calling another.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Sub-agent reviews don't eat your tokens. Every review in this video happened in a separate, isolated context window. Joe's main conversation stayed at 6% usage the entire time because the token cost of Copilot and Codex ran against those other subscriptions, not against his Claude budget.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Paste the docs when Claude gets it wrong. Both Copilot CLI and Codex CLI exist but Claude assumed wrong command names and flags on the first try. Joe's move every time: pull up the official docs, paste them into the chat, tell the model to retry. Faster than arguing.</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TIMESTAMPS</div>
+                                <div class="video-timestamps">
+                                    <div class="video-timestamp"><span class="video-timestamp-time">00:00</span><span class="video-timestamp-label">Getting a second opinion before pushing a PR</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">01:00</span><span class="video-timestamp-label">The <code class="text-acid bg-surface px-1">-p</code> non-interactive flag</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">01:42</span><span class="video-timestamp-label">Setting up Copilot CLI inside Claude Code</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">03:15</span><span class="video-timestamp-label">Installing via <code class="text-acid bg-surface px-1">npm install -g @github/copilot</code></span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">04:37</span><span class="video-timestamp-label">Copilot comments on the PR</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">05:13</span><span class="video-timestamp-label">Switching to Codex CLI with the same <code class="text-acid bg-surface px-1">-p</code> trick</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">05:50</span><span class="video-timestamp-label">Main conversation still at 6% &mdash; separate contexts</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">06:48</span><span class="video-timestamp-label">Codex comes back with a sharper critique</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">07:35</span><span class="video-timestamp-label">Claude Code's own <code class="text-acid bg-surface px-1">/code-review</code> skill</span></div>
+                                </div>
+                            </div>
                         </div>
-                        <p class="text-gray-400 text-sm mt-3">Running long work on a home machine and supervising it from a phone. The port-forwarding story, the four questions to ask before picking any tool, and why the editorial judgment this course keeps returning to gets <em>more</em> important as the tools get better.</p>
-                    </div>
 
+                        <div id="m4-v4-panel" role="tabpanel" aria-labelledby="m4-v4-tab" class="video-panel" hidden>
+                            <div class="text-xs text-acid font-mono mb-2">VIDEO 4 &middot; ~14 MIN</div>
+                            <h3 class="font-display text-lg text-chrome mb-3">Remote control, mobile continuation, and four questions</h3>
+                            <div class="video-embed-slot">
+                                <div class="video-coming-soon">Video coming soon</div>
+                            </div>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-4">Joe demonstrates <code class="text-acid bg-surface px-1">/remote-control</code>, which lets you drive a local Claude Code session from claude.ai in a browser or phone &mdash; the feature he spent a month trying to build himself before Anthropic shipped it properly. Then he closes the course with a framework of four questions that will outlast any specific model or tool, plus a speech about why human judgment matters more as the models get more powerful, not less.</p>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TOPICS COVERED</div>
+                                <div class="video-topics">
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="smartphone"></i></div><div><div class="video-topic-title"><code class="text-acid bg-surface px-1">/remote-control</code> from your phone</div><div class="video-topic-sub">Drive a local terminal session from claude.ai on any device. Upload photos from your phone and they land in the terminal in real time</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="wifi"></i></div><div><div class="video-topic-title">No more port forwarding</div><div class="video-topic-sub">Joe spent a month almost exposing his shell to the open internet trying to build this himself. Use the built-in feature, not a homebrew</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="help-circle"></i></div><div><div class="video-topic-title">Question one &mdash; what is the task</div><div class="video-topic-sub">What am I trying to do, and what does a good outcome look like? Answer this before you pick a tool</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="book-open"></i></div><div><div class="video-topic-title">Question two &mdash; how much context</div><div class="video-topic-sub">Treat the agent like a junior employee on a new beat. Give it enough institutional knowledge without drowning it</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="wrench"></i></div><div><div class="video-topic-title">Question three &mdash; what tools and access</div><div class="video-topic-sub">Firecrawl, Airtable, Firebase, yt-dlp, FFmpeg &mdash; what gear does the agent need, and what credentials do you have to hand over</div></div></div>
+                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="dollar-sign"></i></div><div><div class="video-topic-title">Question four &mdash; cost sensitivity</div><div class="video-topic-sub">Not just token budget &mdash; real money. GPU rentals, API charges, $20 vs $200 plans. Know your ceiling</div></div></div>
+                                </div>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">KEY TAKEAWAYS</div>
+                                <ul class="space-y-3">
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">You're a product manager now, not a coder or a journalist. Joe's clearest framing for the course is that the role these tools push you into is somewhere between traditional newsroom work and engineering &mdash; talking to computers and talking to people, orchestrating work instead of doing every step yourself. If you refuse to sit in that middle seat, nothing else in this course pays off.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Feature-by-feature comparisons go stale in weeks. Instead, carry the four questions &mdash; what is the task, how much context does it need, what tools does it need, and how cost-sensitive are you. Those questions will still work in two years when every specific product in this course has been replaced.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Remote control closes the "only at my desk" gap. If you set up wake-on-LAN (or just leave your machine awake) you can trigger a long-running local pipeline from your phone, upload photos from the road, and check in on work while you're doing actual reporting. That's the payoff for tolerating the terminal.</span></li>
+                                    <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Editorial judgment matters more as the tools get better, not less. When anyone can produce slop for $20 a month, the premium on human taste, skepticism, and review goes up. Joe's parting line is basically: use these tools to spend more time reporting and listening, not less.</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="video-section">
+                                <div class="video-section-label">TIMESTAMPS</div>
+                                <div class="video-timestamps">
+                                    <div class="video-timestamp"><span class="video-timestamp-time">00:00</span><span class="video-timestamp-label">The feature Joe tried to build himself</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">00:32</span><span class="video-timestamp-label">Almost exposing his shell to the internet</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">01:57</span><span class="video-timestamp-label"><code class="text-acid bg-surface px-1">/remote-control</code> demo</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">02:40</span><span class="video-timestamp-label">Driving the terminal from a phone</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">03:36</span><span class="video-timestamp-label">Uploading a photo from mobile</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">04:51</span><span class="video-timestamp-label">Wrapping the course</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">05:38</span><span class="video-timestamp-label">You are still very early</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">06:21</span><span class="video-timestamp-label">Product manager, not coder or journalist</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">07:50</span><span class="video-timestamp-label">Slop cannons and why judgment matters more</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">10:14</span><span class="video-timestamp-label">Four questions &mdash; task, context, tools, cost</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">13:02</span><span class="video-timestamp-label">Try more than one tool</span></div>
+                                    <div class="video-timestamp"><span class="video-timestamp-time">13:41</span><span class="video-timestamp-label">Know your minimum viable effectiveness</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -423,5 +583,6 @@
 
     <script>lucide.createIcons();</script>
     <script src="../assets/js/copy-code.js"></script>
+    <script src="../assets/js/video-tabs.js"></script>
 </body>
 </html>

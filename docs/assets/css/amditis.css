@@ -176,6 +176,180 @@ pre code {
     word-break: break-word;
 }
 
+/* ============================================================
+   Video tab switcher
+   Used on module pages to show multiple course videos in a
+   single container with tab navigation. One panel visible at a
+   time; switches on click or arrow keys. Non-JS fallback shows
+   all panels stacked — content is never hidden.
+   ============================================================ */
+
+.video-tabs {
+    /* Outer container — sits inside the <section> for "Watch" */
+}
+
+.video-tab-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.video-tab {
+    appearance: none;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.025em;
+    padding: 0.375rem 0.125rem;
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.video-tab::before { content: '[ '; }
+.video-tab::after { content: ' ]'; }
+
+.video-tab:hover {
+    color: #cbd5e1;
+}
+
+.video-tab[aria-selected="true"] {
+    color: #a3e635;
+}
+
+.video-tab:focus-visible {
+    outline: 2px solid #a3e635;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+.video-panel {
+    animation: video-panel-fade 0.2s ease;
+}
+
+.video-panel[hidden] {
+    display: none;
+}
+
+@keyframes video-panel-fade {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Video embed slot — 16:9 placeholder with "coming soon" text
+   until YouTube iframes are swapped in. */
+.video-embed-slot {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.video-embed-slot > .video-coming-soon,
+.video-embed-slot > iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-embed-slot > .video-coming-soon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.875rem;
+}
+
+/* Topics grid — 2 columns desktop, 1 column mobile */
+.video-topics {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .video-topics {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.video-topic {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.video-topic-icon {
+    color: #38bdf8;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+}
+
+.video-topic-icon svg {
+    width: 1rem;
+    height: 1rem;
+}
+
+.video-topic-title {
+    font-size: 0.875rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+.video-topic-sub {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    margin-top: 0.25rem;
+    line-height: 1.5;
+}
+
+/* Section divider inside a video panel */
+.video-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.video-section-label {
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    color: #94a3b8;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+}
+
+/* Timestamps — mono, two-column flex */
+.video-timestamps {
+    display: grid;
+    gap: 0.5rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.875rem;
+}
+
+.video-timestamp {
+    display: flex;
+    gap: 1rem;
+}
+
+.video-timestamp-time {
+    color: #38bdf8;
+    width: 3.5rem;
+    flex-shrink: 0;
+}
+
+.video-timestamp-label {
+    color: #cbd5e1;
+}
+
 /* Code syntax colors - all pass WCAG AA on #1e293b */
 .syntax-keyword {
     color: #f87171;
