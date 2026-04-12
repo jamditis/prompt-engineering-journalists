@@ -71,6 +71,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://mooc.amditis.tech/concepts/prompt-engineering-through-conversation.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://mooc.amditis.tech/credits/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>

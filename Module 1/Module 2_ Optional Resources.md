@@ -72,8 +72,8 @@ A practitioner's breakdown of what actually changes when you treat AI tools as a
 
 ### Context rot and session hygiene
 
-**"Context hygiene"** — extracted from *Advanced Claude Code Patterns That Move the Needle* by The Agentic Lab
-https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/04-context-hygiene.md
+**"Context hygiene"** — adapted from *Advanced Claude Code Patterns That Move the Needle* by The Agentic Lab
+https://mooc.amditis.tech/concepts/context-hygiene.html
 
 *Reading time: 10 minutes*
 
@@ -83,14 +83,14 @@ The strategies covered — manual compaction control, `/clear` breakpoints, the 
 
 Also worth noting: the instruction about treating each CLAUDE.md instruction as "earning its place" is the same logic behind this module's deletion test. Context hygiene and the deletion test are the same principle applied at different scales — one to individual instructions, one to full sessions.
 
-*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw). Extracted and organized in [jamditis/stash](https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns).*
+*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw).*
 
 ---
 
 ### Prompt engineering through conversation
 
-**"Prompt engineering on steroids"** — extracted from *Advanced Claude Code Patterns That Move the Needle* by The Agentic Lab
-https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/07-prompt-engineering.md
+**"Prompt engineering through conversation"** — adapted from *Advanced Claude Code Patterns That Move the Needle* by The Agentic Lab
+https://mooc.amditis.tech/concepts/prompt-engineering-through-conversation.html
 
 *Reading time: 8 minutes*
 
@@ -100,7 +100,7 @@ Second, the observation that prompt engineering best practices are themselves re
 
 Skip the voice dictation section if your setup doesn't support it. Focus on the model interview approach: it works with any CLI tool and requires no additional software.
 
-*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw). Extracted and organized in [jamditis/stash](https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns).*
+*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw).*
 
 ---
 
