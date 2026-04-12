@@ -86,12 +86,12 @@ A few months after Willison declared skills a bigger deal than MCP, OpenAI added
 
 The three resources below are drawn from *Advanced Claude Code Patterns That Move the Needle*, a guide based on 2,000+ hours of building with LLMs. They extend directly from this module's core topics — skills, hooks, and workflow automation. Read any or all, in order.
 
-*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw). Extracted and organized in [jamditis/stash](https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns).*
+*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw).*
 
 ---
 
-**"Commands as lightweight local apps"** — The Agentic Lab via jamditis/stash
-https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/02-commands-as-apps.md
+**"Skills vs. commands"** — adapted from *Advanced Claude Code Patterns That Move the Needle* by The Agentic Lab
+https://mooc.amditis.tech/concepts/skills-vs-commands.html
 
 *Reading time: 10 minutes*
 
@@ -103,8 +103,8 @@ For Module 3's exercise, the relevant distinction is: the source-verification sk
 
 ---
 
-**"Hooks for deterministic safety"** — The Agentic Lab via jamditis/stash
-https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/03-hooks-for-safety.md
+**"Hooks as guardrails"** — adapted from *Advanced Claude Code Patterns That Move the Needle* by The Agentic Lab
+https://mooc.amditis.tech/concepts/hooks-as-guardrails.html
 
 *Reading time: 12 minutes*
 
@@ -116,8 +116,8 @@ The bash examples translate directly. If you're building pipelines that touch so
 
 ---
 
-**"The error logging system"** — The Agentic Lab via jamditis/stash
-https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/01-error-logging-system.md
+**"Logging errors and wins"** — adapted from *Advanced Claude Code Patterns That Move the Needle* by The Agentic Lab
+https://mooc.amditis.tech/concepts/error-logging.html
 
 *Reading time: 10 minutes*
 

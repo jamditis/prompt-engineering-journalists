@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt engineering through conversation | Advanced prompt engineering for journalists</title>
+    <meta name="description" content="Instead of writing a perfect prompt upfront, ask the tool to interview you. Clarifying questions as a writing process for journalists who know what they want but can't yet phrase it.">
+    <meta property="og:title" content="Prompt engineering through conversation">
+    <meta property="og:description" content="Instead of writing a perfect prompt upfront, ask the tool to interview you. Clarifying questions as a writing process for journalists who know what they want but can't yet phrase it.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mooc.amditis.tech/concepts/prompt-engineering-through-conversation.html">
+    <meta property="og:image" content="https://mooc.amditis.tech/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Prompt engineering through conversation">
+    <meta name="twitter:description" content="Instead of writing a perfect prompt upfront, ask the tool to interview you.">
+    <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../assets/css/amditis.css">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../module-1/" class="text-acid">[ 01 ]</a>
+                    <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
+                    <a href="../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">CONCEPTS — MODULE 01</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">Prompt engineering through conversation</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Instead of writing a perfect prompt upfront, ask the tool to interview you. Clarifying questions as a writing process for journalists who know what they want but can't yet phrase it.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">The blank-prompt problem</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Most advice about prompting assumes you can write down exactly what you want before you start typing. In practice, journalists usually can't. You know the shape of the story, you know the source you're trying to verify, you know the type of output you want at the end — but the phrasing that gets you there isn't obvious until you've already started writing.</p>
+                    <p class="text-gray-300 leading-relaxed">A half-formed prompt produces a half-formed result. You get something vague back, revise, get something slightly better, revise again. Three rounds in, you've burned tokens and still don't have what you wanted. The problem isn't the model. It's that the prompt was never sharp enough to produce a sharp answer.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Interview instead of declare</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">A better move: don't write the prompt. Ask the tool to interview you about what you want, then write the prompt for you.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">A working version of this, pasted straight into a CLI session:</p>
+                    <pre class="text-sm font-mono bg-panel border border-white/10 p-4 mb-4 text-gray-300 whitespace-pre-wrap"><code>Before you help me with this, interview me about what I'm trying to do. Ask one clarifying question at a time. Don't try to solve the problem yet. When you have enough to write a well-structured request, stop asking and synthesize the request back to me so I can confirm it before you start work.</code></pre>
+                    <p class="text-gray-300 leading-relaxed">The pattern is the same one a good editor uses when a reporter pitches a story that's half-formed. Instead of writing the story for them, the editor asks: who's the source, what's the scope, what's the deadline, what are you trying to prove. The answers don't change what the reporter knows — they change what the reporter can put on paper.</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-6">
+                    <h3 class="font-display text-lg text-acid mb-3">Why this works for journalists specifically</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-3">Journalism training teaches you how to answer questions under pressure. Most reporters can explain their story in plain language even when they can't write a formal spec for it. The interview approach turns that verbal fluency into a structured prompt without asking you to change how you think.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">It also catches the thing you didn't realize you were assuming. If the tool asks "what format should the output be in?" and you hadn't thought about it, you now have to decide — and the decision shows up in the final prompt.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Prompt engineering is itself automatable</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">The guidance usually handed out as "prompt engineering best practices" — assign a role, use structured sections, specify output format, include examples, ask for clarification on ambiguity — is a checklist. Checklists are templates. Templates can be applied automatically.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">Which means you don't need to memorize the checklist. You need a tool that applies it for you. Once you've had the interview conversation, the tool can write the role assignment, structure the request, define the output format, and surface the edge cases — because all of that is boilerplate once the underlying intent is clear.</p>
+                    <p class="text-gray-300 leading-relaxed">The thing that's still yours to do is the intent. Knowing which question the story is trying to answer, which source is worth chasing, which framing is fair — that's reporting work, and no amount of templating replaces it. What the template replaces is the busywork of turning clear intent into a well-formed prompt.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">When to skip the interview</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">The interview pattern is overkill for short, single-step tasks. If you want to reformat a date string, you don't need a conversation — you need to paste the string and say what format you want.</p>
+                    <p class="text-gray-300 leading-relaxed">Reach for the interview pattern when the request has more than two moving parts, when you're not sure how to describe what "done" looks like, or when you've already tried a direct prompt and gotten something that wasn't quite right. The signal to use it is hesitation, not complexity on paper.</p>
+                </div>
+
+                <div class="border border-white/10 bg-panel p-4">
+                    <p class="text-xs font-sans text-gray-400"><span class="text-ice font-mono">SOURCE:</span> Adapted from the "Prompt engineering on steroids" pattern in <em>Advanced Claude Code Patterns That Move the Needle</em> by <a href="https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw" class="text-ice hover:text-acid transition-colors">The Agentic Lab</a>.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">NEXT:</span> Head to <a href="../module-1/" class="text-ice hover:text-acid transition-colors">Module 1</a> to set up your CLI tool and start writing context files that make these prompts sharper by default.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="./" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">CONCEPTS</a>
+                        <a href="../module-1/" class="text-xs font-mono text-acid">MODULE 01</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

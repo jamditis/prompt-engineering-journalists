@@ -48,8 +48,8 @@ Mollick's argument that you should treat new AI models the way you'd treat a new
 
 ## Context management and guardrails
 
-**"Subagent control"** — extracted from *Advanced Claude Code Patterns That Move the Needle* by The Agentic Lab
-https://github.com/jamditis/stash/blob/main/ai/claude-code-patterns/lessons/05-subagent-control.md
+**"Working with subagents"** — adapted from *Advanced Claude Code Patterns That Move the Needle* by The Agentic Lab
+https://mooc.amditis.tech/concepts/working-with-subagents.html
 
 *Reading time: 8 minutes*
 
@@ -59,7 +59,7 @@ The hallucination chain problem is directly relevant to journalism: when one sub
 
 The second failure mode is sub-agent overload: a single sub-agent handling multiple unrelated tasks accumulates the same context pollution problems that affect main sessions. More sub-agents, each focused on one task, consistently outperform fewer sub-agents with broader mandates.
 
-*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw). Extracted and organized in [jamditis/stash](https://github.com/jamditis/stash/tree/main/ai/claude-code-patterns).*
+*Original guide by [The Agentic Lab](https://www.youtube.com/channel/UCD-gasIQYzXqQ4dr7mGPRfw).*
 
 ---
 
