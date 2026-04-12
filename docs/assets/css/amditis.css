@@ -154,21 +154,17 @@ select:focus-visible,
 }
 
 /* Same fix applied to Tailwind-utility bullets (li.flex.items-start.gap-3).
-   Flex treats <code> and <strong> as separate flex children, so the marker
-   and text end up in the wrong columns on mobile. Block layout fixes it. */
-li.flex.items-start.gap-3 {
+   Flex treats <code> and <strong> as separate flex children, so on
+   marker-prefixed bullets the marker, text, and code pill end up in
+   the wrong columns on mobile. Scope block layout to marker bullets
+   only — non-marker two-child lists (code pill + description span)
+   still want their flex gap alignment. */
+li.flex.items-start.gap-3:has(> span:first-child:is(.text-ice, .text-acid, .text-signal)) {
     display: block;
-}
-
-li.flex.items-start.gap-3:has(> span:first-child.text-ice),
-li.flex.items-start.gap-3:has(> span:first-child.text-acid),
-li.flex.items-start.gap-3:has(> span:first-child.text-signal) {
     padding-left: 1.5rem;
 }
 
-li.flex.items-start.gap-3 > span:first-child.text-ice,
-li.flex.items-start.gap-3 > span:first-child.text-acid,
-li.flex.items-start.gap-3 > span:first-child.text-signal {
+li.flex.items-start.gap-3 > span:first-child:is(.text-ice, .text-acid, .text-signal) {
     display: inline;
     margin-left: -1.5rem;
     margin-right: 0.5rem;
@@ -326,15 +322,11 @@ pre:hover > .copy-btn,
         margin-left: -1.25rem;
     }
 
-    li.flex.items-start.gap-3:has(> span:first-child.text-ice),
-    li.flex.items-start.gap-3:has(> span:first-child.text-acid),
-    li.flex.items-start.gap-3:has(> span:first-child.text-signal) {
+    li.flex.items-start.gap-3:has(> span:first-child:is(.text-ice, .text-acid, .text-signal)) {
         padding-left: 1.25rem;
     }
 
-    li.flex.items-start.gap-3 > span:first-child.text-ice,
-    li.flex.items-start.gap-3 > span:first-child.text-acid,
-    li.flex.items-start.gap-3 > span:first-child.text-signal {
+    li.flex.items-start.gap-3 > span:first-child:is(.text-ice, .text-acid, .text-signal) {
         margin-left: -1.25rem;
     }
 }
