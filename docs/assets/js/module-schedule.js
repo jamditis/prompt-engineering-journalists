@@ -54,6 +54,18 @@
     return release !== null && (now || Date.now()) < release;
   }
 
+  // "Current" module = the highest-numbered module 1-4 that has already
+  // unlocked. Module 1 has no release gate, so it's the floor. Used by
+  // the featured hero on the homepage to highlight what the student
+  // should be working on this week. Bonus modules are never candidates.
+  function currentModuleKey(now) {
+    now = now || Date.now();
+    if (!isLocked('module-4', now)) return 'module-4';
+    if (!isLocked('module-3', now)) return 'module-3';
+    if (!isLocked('module-2', now)) return 'module-2';
+    return 'module-1';
+  }
+
   function unlockLabel(key) {
     return UNLOCK_LABELS[key] || '';
   }
@@ -111,6 +123,10 @@
       }
     }
 
+    // Mark the currently active module so CSS can reveal the matching
+    // featured hero and hide the matching card in the grid below it.
+    html.classList.add('mooc-featured-' + currentModuleKey(now).replace('module-', 'm'));
+
     var pathMatch = location.pathname.match(/\/module-([234])(?:\/|$)/);
     if (pathMatch) {
       var currentKey = 'module-' + pathMatch[1];
@@ -132,6 +148,7 @@
     isLocked: isLocked,
     releaseFor: releaseFor,
     unlockLabel: unlockLabel,
+    currentModuleKey: currentModuleKey,
     schedule: MODULE_SCHEDULE,
   };
 

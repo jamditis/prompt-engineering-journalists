@@ -189,10 +189,96 @@
                     Four weeks covering the fundamentals of CLI-based AI tools for journalism.
                 </p>
 
+                <!-- Featured: active module. Exactly one of these is shown at a
+                     time, picked by module-schedule.js in phase 1 via a
+                     mooc-featured-m{1-4} class on <html>. The matching card in
+                     the grid below is hidden so content isn't duplicated. -->
+                <div class="featured-module-wrap mb-10">
+                    <!-- Featured Module 1 -->
+                    <a href="module-1/" data-featured-module="module-1" class="featured-module group flex flex-col md:flex-row md:items-center gap-6 md:gap-10 border border-acid/40 bg-surface/40 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden p-6 sm:p-8">
+                        <div class="absolute top-0 right-0 p-5 opacity-20 text-acid pointer-events-none" aria-hidden="true">
+                            <i data-lucide="terminal" class="w-20 h-20 sm:w-24 sm:h-24"></i>
+                        </div>
+                        <div class="flex-1 relative z-10">
+                            <div class="text-xs text-acid font-mono mb-3 flex items-center gap-2">
+                                <span class="inline-block w-2 h-2 bg-acid rounded-full animate-pulse" aria-hidden="true"></span>
+                                CURRENT // MODULE 01
+                            </div>
+                            <h3 class="font-display text-2xl sm:text-3xl text-white font-bold mb-3 group-hover:text-acid transition-colors max-w-2xl">From chat window to command line</h3>
+                            <p class="text-base text-gray-300 font-sans leading-relaxed mb-6 max-w-2xl">
+                                Install CLI tools, compare web vs terminal workflows, and write a CLAUDE.md context file that persists across sessions.
+                            </p>
+                            <span class="inline-flex items-center gap-2 px-6 py-3 bg-acid text-void font-mono text-sm font-bold rounded group-hover:gap-3 transition-all">
+                                Begin module <span aria-hidden="true">&rarr;</span>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Featured Module 2 -->
+                    <a href="module-2/" data-featured-module="module-2" class="featured-module group flex flex-col md:flex-row md:items-center gap-6 md:gap-10 border border-acid/40 bg-surface/40 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden p-6 sm:p-8">
+                        <div class="absolute top-0 right-0 p-5 opacity-20 text-acid pointer-events-none" aria-hidden="true">
+                            <i data-lucide="folder-git-2" class="w-20 h-20 sm:w-24 sm:h-24"></i>
+                        </div>
+                        <div class="flex-1 relative z-10">
+                            <div class="text-xs text-acid font-mono mb-3 flex items-center gap-2">
+                                <span class="inline-block w-2 h-2 bg-acid rounded-full animate-pulse" aria-hidden="true"></span>
+                                CURRENT // MODULE 02
+                            </div>
+                            <h3 class="font-display text-2xl sm:text-3xl text-white font-bold mb-3 group-hover:text-acid transition-colors max-w-2xl">Custom skills, plugins, and hooks</h3>
+                            <p class="text-base text-gray-300 font-sans leading-relaxed mb-6 max-w-2xl">
+                                Watch a live demo scrape 76 videos across five platforms, then turn that workflow into reusable skills and a shareable plugin.
+                            </p>
+                            <span class="inline-flex items-center gap-2 px-6 py-3 bg-acid text-void font-mono text-sm font-bold rounded group-hover:gap-3 transition-all">
+                                Begin module <span aria-hidden="true">&rarr;</span>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Featured Module 3 -->
+                    <a href="module-3/" data-featured-module="module-3" class="featured-module group flex flex-col md:flex-row md:items-center gap-6 md:gap-10 border border-acid/40 bg-surface/40 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden p-6 sm:p-8">
+                        <div class="absolute top-0 right-0 p-5 opacity-20 text-acid pointer-events-none" aria-hidden="true">
+                            <i data-lucide="newspaper" class="w-20 h-20 sm:w-24 sm:h-24"></i>
+                        </div>
+                        <div class="flex-1 relative z-10">
+                            <div class="text-xs text-acid font-mono mb-3 flex items-center gap-2">
+                                <span class="inline-block w-2 h-2 bg-acid rounded-full animate-pulse" aria-hidden="true"></span>
+                                CURRENT // MODULE 03
+                            </div>
+                            <h3 class="font-display text-2xl sm:text-3xl text-white font-bold mb-3 group-hover:text-acid transition-colors max-w-2xl">Automation, pipelines, and triggered workflows</h3>
+                            <p class="text-base text-gray-300 font-sans leading-relaxed mb-6 max-w-2xl">
+                                Think in systems. Schedule workflows on cloud triggers and GitHub Actions, publish a live dashboard with GitHub Pages, and debug every step along the way.
+                            </p>
+                            <span class="inline-flex items-center gap-2 px-6 py-3 bg-acid text-void font-mono text-sm font-bold rounded group-hover:gap-3 transition-all">
+                                Begin module <span aria-hidden="true">&rarr;</span>
+                            </span>
+                        </div>
+                    </a>
+
+                    <!-- Featured Module 4 -->
+                    <a href="module-4/" data-featured-module="module-4" class="featured-module group flex flex-col md:flex-row md:items-center gap-6 md:gap-10 border border-acid/40 bg-surface/40 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden p-6 sm:p-8">
+                        <div class="absolute top-0 right-0 p-5 opacity-20 text-acid pointer-events-none" aria-hidden="true">
+                            <i data-lucide="rocket" class="w-20 h-20 sm:w-24 sm:h-24"></i>
+                        </div>
+                        <div class="flex-1 relative z-10">
+                            <div class="text-xs text-acid font-mono mb-3 flex items-center gap-2">
+                                <span class="inline-block w-2 h-2 bg-acid rounded-full animate-pulse" aria-hidden="true"></span>
+                                CURRENT // MODULE 04
+                            </div>
+                            <h3 class="font-display text-2xl sm:text-3xl text-white font-bold mb-3 group-hover:text-acid transition-colors max-w-2xl">Advanced prompting patterns</h3>
+                            <p class="text-base text-gray-300 font-sans leading-relaxed mb-6 max-w-2xl">
+                                Manage context, use sub-agents, run cross-model code review, drive your session remotely from your phone, and close with the editorial judgment that still matters.
+                            </p>
+                            <span class="inline-flex items-center gap-2 px-6 py-3 bg-acid text-void font-mono text-sm font-bold rounded group-hover:gap-3 transition-all">
+                                Begin module <span aria-hidden="true">&rarr;</span>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
                 <!-- Module cards grid -->
                 <div class="flex flex-wrap justify-center gap-4">
                     <!-- Module 1 -->
-                    <a href="module-1/" class="w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)] group flex flex-col border border-white/10 bg-surface/30 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden">
+                    <a href="module-1/" data-module-card="module-1" class="w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)] group flex flex-col border border-white/10 bg-surface/30 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-3 opacity-30 group-hover:opacity-100 transition-opacity text-acid" aria-hidden="true">
                             <i data-lucide="terminal" class="w-6 h-6"></i>
                         </div>
