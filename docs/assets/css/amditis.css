@@ -330,3 +330,143 @@ pre:hover > .copy-btn,
         margin-left: -1.25rem;
     }
 }
+
+/* ============================================================
+   Module time-gating for modules 2, 3, 4.
+   Controlled by module-schedule.js — see spec at
+   docs/superpowers/specs/2026-04-13-mooc-module-gating-design.md
+   ============================================================ */
+
+/* Visually-hidden utility for screen readers only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Dual-state markup on homepage cards: lock icon and locked CTA are
+   hidden by default; CSS reveals them only when the module is locked. */
+.module-icon-locked,
+.cta-locked {
+    display: none;
+}
+
+/* Locked placeholder screen on module pages. Hidden by default; shown
+   only when html.mooc-locked-here is set. The hide rule uses a type +
+   class compound selector to out-specificity Tailwind's runtime-generated
+   `.flex` and `.block` utility classes, which would otherwise win by
+   source order because Tailwind CDN inserts its styles after amditis.css. */
+section.module-locked-screen {
+    display: none;
+}
+
+html.mooc-locked-here section.module-locked-screen {
+    display: flex;
+    flex: 1 1 0%;
+    align-items: center;
+    justify-content: center;
+}
+
+/* On a locked module page, hide the real content containers
+   (module hero section + <main>). The `.module-live-content` marker
+   class is added to both in each module page's HTML. */
+html.mooc-locked-here .module-live-content {
+    display: none;
+}
+
+/* Homepage card: locked state for module 2, 3, 4.
+   Each selector is scoped by a `mooc-locked-m{N}` class on <html> so
+   that CSS is inert until module-schedule.js opts the page in. */
+html.mooc-locked-m2 a[data-module-card="module-2"],
+html.mooc-locked-m3 a[data-module-card="module-3"],
+html.mooc-locked-m4 a[data-module-card="module-4"] {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Neutralize hover state on locked cards — the existing markup uses
+   Tailwind's `hover:border-acid` and `group-hover:text-acid`, which
+   still fire when the anchor is dimmed. We set a solid border color
+   that wins by specificity. */
+html.mooc-locked-m2 a[data-module-card="module-2"]:hover,
+html.mooc-locked-m3 a[data-module-card="module-3"]:hover,
+html.mooc-locked-m4 a[data-module-card="module-4"]:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+html.mooc-locked-m2 a[data-module-card="module-2"]:hover h3,
+html.mooc-locked-m2 a[data-module-card="module-2"]:hover .bg-void\/50,
+html.mooc-locked-m3 a[data-module-card="module-3"]:hover h3,
+html.mooc-locked-m3 a[data-module-card="module-3"]:hover .bg-void\/50,
+html.mooc-locked-m4 a[data-module-card="module-4"]:hover h3,
+html.mooc-locked-m4 a[data-module-card="module-4"]:hover .bg-void\/50 {
+    color: inherit;
+}
+
+/* Swap icon: hide the default, reveal the lock. */
+html.mooc-locked-m2 a[data-module-card="module-2"] .module-icon-default,
+html.mooc-locked-m3 a[data-module-card="module-3"] .module-icon-default,
+html.mooc-locked-m4 a[data-module-card="module-4"] .module-icon-default {
+    display: none;
+}
+
+html.mooc-locked-m2 a[data-module-card="module-2"] .module-icon-locked,
+html.mooc-locked-m3 a[data-module-card="module-3"] .module-icon-locked,
+html.mooc-locked-m4 a[data-module-card="module-4"] .module-icon-locked {
+    display: inline-block;
+}
+
+/* Swap CTA text: hide the default `Begin module →`, reveal the
+   `Unlocks Sun 4/N 5pm ET` string that's hard-coded in the HTML. */
+html.mooc-locked-m2 a[data-module-card="module-2"] .cta-default,
+html.mooc-locked-m2 a[data-module-card="module-2"] .cta-arrow,
+html.mooc-locked-m3 a[data-module-card="module-3"] .cta-default,
+html.mooc-locked-m3 a[data-module-card="module-3"] .cta-arrow,
+html.mooc-locked-m4 a[data-module-card="module-4"] .cta-default,
+html.mooc-locked-m4 a[data-module-card="module-4"] .cta-arrow {
+    display: none;
+}
+
+html.mooc-locked-m2 a[data-module-card="module-2"] .cta-locked,
+html.mooc-locked-m3 a[data-module-card="module-3"] .cta-locked,
+html.mooc-locked-m4 a[data-module-card="module-4"] .cta-locked {
+    display: inline-block;
+}
+
+/* Inline locked links (syllabus, concepts, header nav, prose references).
+   Applied by module-schedule.js on DOMContentLoaded. Color is slate-400
+   on bg-void which stays above WCAG AA contrast. Line-through is a
+   language-independent locked signal. */
+.module-locked-link {
+    opacity: 0.5;
+    color: #94a3b8 !important;
+    cursor: not-allowed;
+    text-decoration: line-through dotted;
+}
+
+.module-locked-link:hover,
+.module-locked-link:focus {
+    color: #94a3b8 !important;
+    text-decoration: line-through dotted;
+}
+
+/* Locked placeholder screen styling — minimal because the markup
+   uses existing Tailwind utility classes for layout. */
+.module-locked-screen .module-lock-icon-wrap {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #1e293b;
+}
+
+/* On a locked module page, the skip-link's `#main` target is hidden,
+   so hide the skip-link itself to avoid sending keyboard users to a
+   display:none element. The locked placeholder is the only content. */
+html.mooc-locked-here .skip-link {
+    display: none;
+}
+
