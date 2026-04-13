@@ -481,3 +481,29 @@ html.mooc-locked-here .skip-link {
     display: none;
 }
 
+/* Featured/active module hero — exactly one variant is shown at a time,
+   selected by the mooc-featured-m{1-4} class set on <html> in phase 1
+   of module-schedule.js. All variants default to display:none so the
+   page never flashes the wrong one. Compound `.featured-module-wrap
+   .featured-module` selector is used throughout to beat Tailwind CDN's
+   `.flex` utility, which gets injected late and wins single-class ties
+   in the cascade. The matching card in the grid below is hidden to
+   keep 6 cards (2 clean rows of 3 at lg). */
+.featured-module-wrap .featured-module {
+    display: none;
+}
+
+html.mooc-featured-m1 .featured-module-wrap .featured-module[data-featured-module="module-1"],
+html.mooc-featured-m2 .featured-module-wrap .featured-module[data-featured-module="module-2"],
+html.mooc-featured-m3 .featured-module-wrap .featured-module[data-featured-module="module-3"],
+html.mooc-featured-m4 .featured-module-wrap .featured-module[data-featured-module="module-4"] {
+    display: flex;
+}
+
+html.mooc-featured-m1 a[data-module-card="module-1"],
+html.mooc-featured-m2 a[data-module-card="module-2"],
+html.mooc-featured-m3 a[data-module-card="module-3"],
+html.mooc-featured-m4 a[data-module-card="module-4"] {
+    display: none;
+}
+
