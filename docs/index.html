@@ -65,6 +65,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="assets/js/config.js"></script>
     <link rel="stylesheet" href="assets/css/amditis.css">
+    <script src="assets/js/module-schedule.js"></script>
 
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -209,9 +210,10 @@
                     </a>
 
                     <!-- Module 2 -->
-                    <a href="module-2/" class="w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)] group flex flex-col border border-white/10 bg-surface/30 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden">
+                    <a href="module-2/" data-module-card="module-2" class="w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)] group flex flex-col border border-white/10 bg-surface/30 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-3 opacity-30 group-hover:opacity-100 transition-opacity text-acid" aria-hidden="true">
-                            <i data-lucide="folder-git-2" class="w-6 h-6"></i>
+                            <i data-lucide="folder-git-2" class="module-icon-default w-6 h-6"></i>
+                            <i data-lucide="lock" class="module-icon-locked w-6 h-6"></i>
                         </div>
                         <div class="p-6">
                             <div class="text-xs text-acid font-mono mb-3">MODULE 02</div>
@@ -221,15 +223,17 @@
                             </p>
                         </div>
                         <div class="mt-auto bg-void/50 px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-400 group-hover:text-acid transition-colors">
-                            <span>Begin module</span>
-                            <span aria-hidden="true">&rarr;</span>
+                            <span class="cta-default">Begin module</span>
+                            <span class="cta-locked">Unlocks Sun 4/19 5pm ET</span>
+                            <span class="cta-arrow" aria-hidden="true">&rarr;</span>
                         </div>
                     </a>
 
                     <!-- Module 3 -->
-                    <a href="module-3/" class="w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)] group flex flex-col border border-white/10 bg-surface/30 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden">
+                    <a href="module-3/" data-module-card="module-3" class="w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)] group flex flex-col border border-white/10 bg-surface/30 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-3 opacity-30 group-hover:opacity-100 transition-opacity text-acid" aria-hidden="true">
-                            <i data-lucide="newspaper" class="w-6 h-6"></i>
+                            <i data-lucide="newspaper" class="module-icon-default w-6 h-6"></i>
+                            <i data-lucide="lock" class="module-icon-locked w-6 h-6"></i>
                         </div>
                         <div class="p-6">
                             <div class="text-xs text-acid font-mono mb-3">MODULE 03</div>
@@ -239,15 +243,17 @@
                             </p>
                         </div>
                         <div class="mt-auto bg-void/50 px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-400 group-hover:text-acid transition-colors">
-                            <span>Begin module</span>
-                            <span aria-hidden="true">&rarr;</span>
+                            <span class="cta-default">Begin module</span>
+                            <span class="cta-locked">Unlocks Sun 4/26 5pm ET</span>
+                            <span class="cta-arrow" aria-hidden="true">&rarr;</span>
                         </div>
                     </a>
 
                     <!-- Module 4 -->
-                    <a href="module-4/" class="w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)] group flex flex-col border border-white/10 bg-surface/30 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden">
+                    <a href="module-4/" data-module-card="module-4" class="w-full md:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.67rem)] group flex flex-col border border-white/10 bg-surface/30 hover:border-acid transition-all duration-300 rounded-lg relative overflow-hidden">
                         <div class="absolute top-0 right-0 p-3 opacity-30 group-hover:opacity-100 transition-opacity text-acid" aria-hidden="true">
-                            <i data-lucide="rocket" class="w-6 h-6"></i>
+                            <i data-lucide="rocket" class="module-icon-default w-6 h-6"></i>
+                            <i data-lucide="lock" class="module-icon-locked w-6 h-6"></i>
                         </div>
                         <div class="p-6">
                             <div class="text-xs text-acid font-mono mb-3">MODULE 04</div>
@@ -257,8 +263,9 @@
                             </p>
                         </div>
                         <div class="mt-auto bg-void/50 px-6 py-2 border-t border-white/10 flex justify-between items-center text-xs font-mono text-gray-400 group-hover:text-acid transition-colors">
-                            <span>Begin module</span>
-                            <span aria-hidden="true">&rarr;</span>
+                            <span class="cta-default">Begin module</span>
+                            <span class="cta-locked">Unlocks Sun 5/3 5pm ET</span>
+                            <span class="cta-arrow" aria-hidden="true">&rarr;</span>
                         </div>
                     </a>
 
