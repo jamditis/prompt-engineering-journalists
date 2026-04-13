@@ -65,35 +65,82 @@
                 <div class="border-b border-white/10 pb-4 mb-6">
                     <h2 class="font-display text-xl text-ice">Watch</h2>
                 </div>
-                <div class="max-w-3xl">
-                    <div class="video-tabs">
-                        <div class="video-tab-bar" role="tablist" aria-label="Module 1 videos">
-                            <button type="button" role="tab" id="m1-v1-tab" aria-controls="m1-v1-panel" aria-selected="true" tabindex="0" class="video-tab">V1 &middot; 26 MIN</button>
-                            <button type="button" role="tab" id="m1-v2-tab" aria-controls="m1-v2-panel" aria-selected="false" tabindex="-1" class="video-tab">V2 &middot; 22 MIN</button>
-                        </div>
+                <p class="text-gray-300 text-sm leading-relaxed mb-8 max-w-3xl">Module 1 is two videos. Watch them in order &mdash; the second one builds on the first.</p>
 
-                        <div id="m1-v1-panel" role="tabpanel" aria-labelledby="m1-v1-tab" class="video-panel">
-                            <div class="text-xs text-acid font-mono mb-2">VIDEO 1 &middot; ~26 MIN</div>
-                            <h3 class="font-display text-lg text-chrome mb-3">From chat window to command line</h3>
-                            <div class="video-embed-slot">
-                                <div class="video-coming-soon">Video coming soon</div>
+                <div class="space-y-8">
+
+                    <!-- V1: From chat window to command line -->
+                    <article class="border border-white/10 bg-surface/30 rounded-lg overflow-hidden">
+                        <div class="p-6 md:p-8">
+                            <div class="flex flex-wrap items-center gap-3 mb-4">
+                                <span class="text-xs font-mono text-acid bg-acid/10 px-2 py-1 rounded">V1</span>
+                                <span class="text-xs font-mono text-gray-500">MODULE 1</span>
+                                <span class="text-xs font-mono text-gray-500">~26 MIN</span>
                             </div>
-                            <p class="text-gray-300 text-sm leading-relaxed mb-4">Joe frames the shift from browser-based AI to terminal-based AI, walks through a PowerShell setup, then runs Claude Code and Claude on the Web on the same research task side by side. The video ends by running <code class="text-acid bg-surface px-1">/init</code> to scaffold a first <code class="text-acid bg-surface px-1">CLAUDE.md</code>.</p>
 
-                            <div class="video-section">
-                                <div class="video-section-label">TOPICS COVERED</div>
-                                <div class="video-topics">
-                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="layers"></i></div><div><div class="video-topic-title">Apps vs harnesses</div><div class="video-topic-sub">Mollick's framing &mdash; same model, different capabilities based on the tools and environment it's given</div></div></div>
-                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="arrow-right-from-line"></i></div><div><div class="video-topic-title">Why escape the browser</div><div class="video-topic-sub">Scripts, scheduled tasks, overnight scrapers &mdash; work a web chat can't do because it can't touch your files</div></div></div>
-                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="terminal"></i></div><div><div class="video-topic-title">PowerShell install and launch</div><div class="video-topic-sub">Open a terminal, <code class="text-acid bg-surface px-1">cd</code> into a folder, type <code class="text-acid bg-surface px-1">claude</code>, and you're in an interactive session</div></div></div>
-                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="split-square-horizontal"></i></div><div><div class="video-topic-title">Claude Code vs Claude on the Web</div><div class="video-topic-sub">Same prompt, side by side. Web hits a tool-use limit; the terminal keeps working and saves files that persist</div></div></div>
-                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="file-plus"></i></div><div><div class="video-topic-title">Running <code class="text-acid bg-surface px-1">/init</code></div><div class="video-topic-sub">Point Claude at a folder, let it read what's there, and have it scaffold your first <code class="text-acid bg-surface px-1">CLAUDE.md</code> automatically</div></div></div>
-                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="folder-tree"></i></div><div><div class="video-topic-title">Global vs project CLAUDE.md</div><div class="video-topic-sub">Two tiers. User-level settings live in <code class="text-acid bg-surface px-1">~/.claude/</code>; project-specific context lives in the folder. Edit both as you work</div></div></div>
+                            <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-3">From chat window to command line</h3>
+
+                            <p class="text-gray-300 font-sans leading-relaxed mb-6">Joe frames the shift from browser-based AI to terminal-based AI, walks through a PowerShell setup, then runs Claude Code and Claude on the Web on the same research task side by side. The video ends by running <code class="text-acid bg-surface px-1">/init</code> to scaffold a first <code class="text-acid bg-surface px-1">CLAUDE.md</code>.</p>
+
+                            <!-- Video embed placeholder -->
+                            <div class="mb-6">
+                                <div class="relative w-full rounded-lg overflow-hidden border border-white/10 bg-void" style="padding-bottom:56.25%">
+                                    <div class="absolute inset-0 flex items-center justify-center text-gray-400 font-mono text-sm">Video coming soon</div>
                                 </div>
                             </div>
 
-                            <div class="video-section">
-                                <div class="video-section-label">KEY TAKEAWAYS</div>
+                            <!-- Topics covered -->
+                            <div class="border-t border-white/10 pt-6">
+                                <h4 class="text-xs font-mono text-gray-400 mb-4 tracking-wider">TOPICS COVERED</h4>
+                                <div class="grid gap-4 md:grid-cols-2">
+                                    <div class="flex gap-3">
+                                        <div class="text-ice mt-0.5 flex-shrink-0"><i data-lucide="layers" class="w-4 h-4"></i></div>
+                                        <div>
+                                            <div class="text-sm text-white font-medium">Apps vs harnesses</div>
+                                            <div class="text-xs text-gray-400 mt-1">Mollick's framing &mdash; same model, different capabilities based on the tools and environment it's given</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <div class="text-ice mt-0.5 flex-shrink-0"><i data-lucide="arrow-right-from-line" class="w-4 h-4"></i></div>
+                                        <div>
+                                            <div class="text-sm text-white font-medium">Why escape the browser</div>
+                                            <div class="text-xs text-gray-400 mt-1">Scripts, scheduled tasks, overnight scrapers &mdash; work a web chat can't do because it can't touch your files</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <div class="text-ice mt-0.5 flex-shrink-0"><i data-lucide="terminal" class="w-4 h-4"></i></div>
+                                        <div>
+                                            <div class="text-sm text-white font-medium">PowerShell install and launch</div>
+                                            <div class="text-xs text-gray-400 mt-1">Open a terminal, <code class="text-acid bg-surface px-1">cd</code> into a folder, type <code class="text-acid bg-surface px-1">claude</code>, and you're in an interactive session</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <div class="text-ice mt-0.5 flex-shrink-0"><i data-lucide="split-square-horizontal" class="w-4 h-4"></i></div>
+                                        <div>
+                                            <div class="text-sm text-white font-medium">Claude Code vs Claude on the Web</div>
+                                            <div class="text-xs text-gray-400 mt-1">Same prompt, side by side. Web hits a tool-use limit; the terminal keeps working and saves files that persist</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <div class="text-ice mt-0.5 flex-shrink-0"><i data-lucide="file-plus" class="w-4 h-4"></i></div>
+                                        <div>
+                                            <div class="text-sm text-white font-medium">Running <code class="text-acid bg-surface px-1">/init</code></div>
+                                            <div class="text-xs text-gray-400 mt-1">Point Claude at a folder, let it read what's there, and have it scaffold your first <code class="text-acid bg-surface px-1">CLAUDE.md</code> automatically</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <div class="text-ice mt-0.5 flex-shrink-0"><i data-lucide="folder-tree" class="w-4 h-4"></i></div>
+                                        <div>
+                                            <div class="text-sm text-white font-medium">Global vs project CLAUDE.md</div>
+                                            <div class="text-xs text-gray-400 mt-1">Two tiers. User-level settings live in <code class="text-acid bg-surface px-1">~/.claude/</code>; project-specific context lives in the folder. Edit both as you work</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key takeaways -->
+                            <div class="border-t border-white/10 pt-6 mt-6">
+                                <h4 class="text-xs font-mono text-gray-400 mb-4 tracking-wider">KEY TAKEAWAYS</h4>
                                 <ul class="space-y-3">
                                     <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">You need a paid account for one of the three major models &mdash; Claude Code, Codex/ChatGPT, or Gemini CLI. The $20/month plan is fine. Free accounts can't do most of what this course covers (Gemini CLI's free tier is the one exception).</span></li>
                                     <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">GitHub is your Google Drive for code. Joe spent a year wrestling with Google Drive as a code store before moving to GitHub &mdash; version history mismatches, overwrites, accidental deletions. GitHub fixed all of it.</span></li>
@@ -102,47 +149,99 @@
                                 </ul>
                             </div>
 
-                            <div class="video-section">
-                                <div class="video-section-label">TIMESTAMPS</div>
-                                <div class="video-timestamps">
-                                    <div class="video-timestamp"><span class="video-timestamp-time">00:00</span><span class="video-timestamp-label">Introduction and course framing</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">01:17</span><span class="video-timestamp-label">IDE alternatives if you can't use the terminal</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">02:26</span><span class="video-timestamp-label">Why a GitHub account matters</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">03:27</span><span class="video-timestamp-label">Paid accounts for Claude, Gemini, or Codex</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">06:09</span><span class="video-timestamp-label">Apps vs harnesses &mdash; Mollick's framework</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">08:29</span><span class="video-timestamp-label">Setup walkthrough in PowerShell</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">11:14</span><span class="video-timestamp-label">Side by side &mdash; Claude Code vs Claude on the Web</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">17:03</span><span class="video-timestamp-label">The Web hits a tool-use limit, the CLI keeps going</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">19:13</span><span class="video-timestamp-label">Running <code class="text-acid bg-surface px-1">/init</code> to scaffold CLAUDE.md</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">22:00</span><span class="video-timestamp-label">The "Senator Joe" test &mdash; CLAUDE.md in action</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">23:20</span><span class="video-timestamp-label">Global vs project-level CLAUDE.md</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">25:31</span><span class="video-timestamp-label">Exercise prompt and wrap-up</span></div>
+                            <!-- Timestamps -->
+                            <div class="border-t border-white/10 pt-6 mt-6">
+                                <h4 class="text-xs font-mono text-gray-400 mb-4 tracking-wider">TIMESTAMPS</h4>
+                                <div class="grid gap-2 text-sm font-mono">
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">00:00</span><span class="text-gray-300">Introduction and course framing</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">01:17</span><span class="text-gray-300">IDE alternatives if you can't use the terminal</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">02:26</span><span class="text-gray-300">Why a GitHub account matters</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">03:27</span><span class="text-gray-300">Paid accounts for Claude, Gemini, or Codex</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">06:09</span><span class="text-gray-300">Apps vs harnesses &mdash; Mollick's framework</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">08:29</span><span class="text-gray-300">Setup walkthrough in PowerShell</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">11:14</span><span class="text-gray-300">Side by side &mdash; Claude Code vs Claude on the Web</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">17:03</span><span class="text-gray-300">The Web hits a tool-use limit, the CLI keeps going</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">19:13</span><span class="text-gray-300">Running <code class="text-acid bg-surface px-1">/init</code> to scaffold CLAUDE.md</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">22:00</span><span class="text-gray-300">The "Senator Joe" test &mdash; CLAUDE.md in action</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">23:20</span><span class="text-gray-300">Global vs project-level CLAUDE.md</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">25:31</span><span class="text-gray-300">Exercise prompt and wrap-up</span></div>
                                 </div>
                             </div>
                         </div>
+                    </article>
 
-                        <div id="m1-v2-panel" role="tabpanel" aria-labelledby="m1-v2-tab" class="video-panel">
-                            <div class="text-xs text-acid font-mono mb-2">VIDEO 2 &middot; ~22 MIN</div>
-                            <h3 class="font-display text-lg text-chrome mb-3">Context files, CLAUDE.md, and memory</h3>
-                            <div class="video-embed-slot">
-                                <div class="video-coming-soon">Video coming soon</div>
+                    <!-- V2: Context files, CLAUDE.md, and memory -->
+                    <article class="border border-white/10 bg-surface/30 rounded-lg overflow-hidden">
+                        <div class="p-6 md:p-8">
+                            <div class="flex flex-wrap items-center gap-3 mb-4">
+                                <span class="text-xs font-mono text-acid bg-acid/10 px-2 py-1 rounded">V2</span>
+                                <span class="text-xs font-mono text-gray-500">MODULE 1</span>
+                                <span class="text-xs font-mono text-gray-500">~22 MIN</span>
                             </div>
-                            <p class="text-gray-300 text-sm leading-relaxed mb-4">Joe walks through the three layers of context (global, project, session), what belongs in each <code class="text-acid bg-surface px-1">CLAUDE.md</code>, a "deletion test" for deciding what context is worth keeping, <code class="text-acid bg-surface px-1">MEMORY.md</code> and sub-memory files, and the four types of memory. The video closes with an argument for treating context files as workflow infrastructure &mdash; written once, committed to GitHub, reused forever.</p>
 
-                            <div class="video-section">
-                                <div class="video-section-label">TOPICS COVERED</div>
-                                <div class="video-topics">
-                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="database"></i></div><div><div class="video-topic-title">The stateless problem</div><div class="video-topic-sub">Every session starts from zero. Context files fix this so you stop re-explaining yourself each chat</div></div></div>
-                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="layers"></i></div><div><div class="video-topic-title">Three layers of context</div><div class="video-topic-sub">Global in <code class="text-acid bg-surface px-1">~/.claude/</code>, project in the folder, session is the live conversation. The first two auto-load</div></div></div>
-                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="scan-search"></i></div><div><div class="video-topic-title">The deletion test</div><div class="video-topic-sub">Strip a line from your context file, re-run the same prompt, compare outputs. If nothing changes, cut it</div></div></div>
-                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="target"></i></div><div><div class="video-topic-title">Specific beats generic</div><div class="video-topic-sub">"Verify facts" is useless. "Two-pass cross-check against the council spreadsheet" is actually useful</div></div></div>
-                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="brain"></i></div><div><div class="video-topic-title">MEMORY.md and the four memory types</div><div class="video-topic-sub">Auto-loads alongside <code class="text-acid bg-surface px-1">CLAUDE.md</code>. User, feedback, project, reference &mdash; four buckets for what the model should remember</div></div></div>
-                                    <div class="video-topic"><div class="video-topic-icon"><i data-lucide="git-branch"></i></div><div><div class="video-topic-title">Context as infrastructure</div><div class="video-topic-sub">Not personal notes &mdash; workflow pipelines. Commit them to Git so fork-and-clone inherits the knowledge. Strip PII first</div></div></div>
+                            <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-3">Context files, CLAUDE.md, and memory</h3>
+
+                            <p class="text-gray-300 font-sans leading-relaxed mb-6">Joe walks through the three layers of context (global, project, session), what belongs in each <code class="text-acid bg-surface px-1">CLAUDE.md</code>, a "deletion test" for deciding what context is worth keeping, <code class="text-acid bg-surface px-1">MEMORY.md</code> and sub-memory files, and the four types of memory. The video closes with an argument for treating context files as workflow infrastructure &mdash; written once, committed to GitHub, reused forever.</p>
+
+                            <!-- Video embed placeholder -->
+                            <div class="mb-6">
+                                <div class="relative w-full rounded-lg overflow-hidden border border-white/10 bg-void" style="padding-bottom:56.25%">
+                                    <div class="absolute inset-0 flex items-center justify-center text-gray-400 font-mono text-sm">Video coming soon</div>
                                 </div>
                             </div>
 
-                            <div class="video-section">
-                                <div class="video-section-label">KEY TAKEAWAYS</div>
+                            <!-- Topics covered -->
+                            <div class="border-t border-white/10 pt-6">
+                                <h4 class="text-xs font-mono text-gray-400 mb-4 tracking-wider">TOPICS COVERED</h4>
+                                <div class="grid gap-4 md:grid-cols-2">
+                                    <div class="flex gap-3">
+                                        <div class="text-ice mt-0.5 flex-shrink-0"><i data-lucide="database" class="w-4 h-4"></i></div>
+                                        <div>
+                                            <div class="text-sm text-white font-medium">The stateless problem</div>
+                                            <div class="text-xs text-gray-400 mt-1">Every session starts from zero. Context files fix this so you stop re-explaining yourself each chat</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <div class="text-ice mt-0.5 flex-shrink-0"><i data-lucide="layers" class="w-4 h-4"></i></div>
+                                        <div>
+                                            <div class="text-sm text-white font-medium">Three layers of context</div>
+                                            <div class="text-xs text-gray-400 mt-1">Global in <code class="text-acid bg-surface px-1">~/.claude/</code>, project in the folder, session is the live conversation. The first two auto-load</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <div class="text-ice mt-0.5 flex-shrink-0"><i data-lucide="scan-search" class="w-4 h-4"></i></div>
+                                        <div>
+                                            <div class="text-sm text-white font-medium">The deletion test</div>
+                                            <div class="text-xs text-gray-400 mt-1">Strip a line from your context file, re-run the same prompt, compare outputs. If nothing changes, cut it</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <div class="text-ice mt-0.5 flex-shrink-0"><i data-lucide="target" class="w-4 h-4"></i></div>
+                                        <div>
+                                            <div class="text-sm text-white font-medium">Specific beats generic</div>
+                                            <div class="text-xs text-gray-400 mt-1">"Verify facts" is useless. "Two-pass cross-check against the council spreadsheet" is actually useful</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <div class="text-ice mt-0.5 flex-shrink-0"><i data-lucide="brain" class="w-4 h-4"></i></div>
+                                        <div>
+                                            <div class="text-sm text-white font-medium">MEMORY.md and the four memory types</div>
+                                            <div class="text-xs text-gray-400 mt-1">Auto-loads alongside <code class="text-acid bg-surface px-1">CLAUDE.md</code>. User, feedback, project, reference &mdash; four buckets for what the model should remember</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <div class="text-ice mt-0.5 flex-shrink-0"><i data-lucide="git-branch" class="w-4 h-4"></i></div>
+                                        <div>
+                                            <div class="text-sm text-white font-medium">Context as infrastructure</div>
+                                            <div class="text-xs text-gray-400 mt-1">Not personal notes &mdash; workflow pipelines. Commit them to Git so fork-and-clone inherits the knowledge. Strip PII first</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key takeaways -->
+                            <div class="border-t border-white/10 pt-6 mt-6">
+                                <h4 class="text-xs font-mono text-gray-400 mb-4 tracking-wider">KEY TAKEAWAYS</h4>
                                 <ul class="space-y-3">
                                     <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">Write it once, reap it forever. A small investment up front stops you from re-explaining yourself on every new chat. The outputs slowly and iteratively improve as you refine the file over weeks and months.</span></li>
                                     <li class="flex gap-3"><span class="text-ice flex-shrink-0 mt-1">&rsaquo;</span><span class="text-gray-300 text-sm">The four memory types fit everything you'll ever want to remember &mdash; user (who you are), feedback (what you've corrected), project (the big picture), reference (pointers to external files). If you can't slot something into one of those four, it probably doesn't need to be saved.</span></li>
@@ -151,26 +250,28 @@
                                 </ul>
                             </div>
 
-                            <div class="video-section">
-                                <div class="video-section-label">TIMESTAMPS</div>
-                                <div class="video-timestamps">
-                                    <div class="video-timestamp"><span class="video-timestamp-time">00:00</span><span class="video-timestamp-label">Introduction and what this video covers</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">01:34</span><span class="video-timestamp-label">Why context files matter</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">02:33</span><span class="video-timestamp-label">The stateless problem</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">03:42</span><span class="video-timestamp-label">Three layers &mdash; global, project, session</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">08:02</span><span class="video-timestamp-label">The deletion test</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">09:32</span><span class="video-timestamp-label">Specific beats generic</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">11:47</span><span class="video-timestamp-label">MEMORY.md and the memory folder</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">13:51</span><span class="video-timestamp-label">The four memory types</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">15:04</span><span class="video-timestamp-label">Context as infrastructure</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">15:43</span><span class="video-timestamp-label">Committing CLAUDE.md to Git</span></div>
-                                    <div class="video-timestamp"><span class="video-timestamp-time">20:18</span><span class="video-timestamp-label">Exercise prompt and next module teaser</span></div>
+                            <!-- Timestamps -->
+                            <div class="border-t border-white/10 pt-6 mt-6">
+                                <h4 class="text-xs font-mono text-gray-400 mb-4 tracking-wider">TIMESTAMPS</h4>
+                                <div class="grid gap-2 text-sm font-mono">
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">00:00</span><span class="text-gray-300">Introduction and what this video covers</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">01:34</span><span class="text-gray-300">Why context files matter</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">02:33</span><span class="text-gray-300">The stateless problem</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">03:42</span><span class="text-gray-300">Three layers &mdash; global, project, session</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">08:02</span><span class="text-gray-300">The deletion test</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">09:32</span><span class="text-gray-300">Specific beats generic</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">11:47</span><span class="text-gray-300">MEMORY.md and the memory folder</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">13:51</span><span class="text-gray-300">The four memory types</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">15:04</span><span class="text-gray-300">Context as infrastructure</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">15:43</span><span class="text-gray-300">Committing CLAUDE.md to Git</span></div>
+                                    <div class="flex gap-4"><span class="text-ice w-14 flex-shrink-0">20:18</span><span class="text-gray-300">Exercise prompt and next module teaser</span></div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <p class="text-gray-400 text-xs mt-4">Two bonus interviews live on the <a href="../bonus-interviews/" class="text-ice hover:text-acid transition-colors">bonus interviews page</a>: Madi McCool on rebuilding a nonprofit site with Claude Code, and Mike Janssen on using Codex CLI in a small public media newsroom.</p>
+                    </article>
                 </div>
+
+                <p class="text-gray-400 text-xs mt-6 max-w-3xl">Two bonus interviews live on the <a href="../bonus-interviews/" class="text-ice hover:text-acid transition-colors">bonus interviews page</a>: Madi McCool on rebuilding a nonprofit site with Claude Code, and Mike Janssen on using Codex CLI in a small public media newsroom.</p>
             </section>
 
             <section>
@@ -721,6 +822,5 @@ claude</code></pre>
 
     <script>lucide.createIcons();</script>
     <script src="../assets/js/copy-code.js"></script>
-    <script src="../assets/js/video-tabs.js"></script>
 </body>
 </html>
