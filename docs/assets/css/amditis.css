@@ -409,6 +409,17 @@ html.mooc-locked-m4 a[data-module-card="module-4"]:hover .bg-void\/50 {
     color: inherit;
 }
 
+/* Neutralize the icon wrapper's hover opacity animation on locked cards.
+   The existing markup has `opacity-30 group-hover:opacity-100` on the
+   top-right icon container, which otherwise brightens the lock icon on
+   hover and makes a disabled card look interactive. Keep the icon at its
+   resting 0.3 opacity during hover when the card is locked. */
+html.mooc-locked-m2 a[data-module-card="module-2"]:hover .group-hover\:opacity-100,
+html.mooc-locked-m3 a[data-module-card="module-3"]:hover .group-hover\:opacity-100,
+html.mooc-locked-m4 a[data-module-card="module-4"]:hover .group-hover\:opacity-100 {
+    opacity: 0.3;
+}
+
 /* Swap icon: hide the default, reveal the lock. */
 html.mooc-locked-m2 a[data-module-card="module-2"] .module-icon-default,
 html.mooc-locked-m3 a[data-module-card="module-3"] .module-icon-default,

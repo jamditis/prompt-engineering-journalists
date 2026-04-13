@@ -1,7 +1,7 @@
 # MOOC module time-gating: modules 2, 3, 4
 
 **Date:** 2026-04-13
-**Status:** Approved design (v2 post-Copilot review), pending implementation
+**Status:** Approved design (v2 post-Copilot review), implemented (PR #43)
 **Context:** The course runs on the Knight Center LMS (Moodle), which enforces the real release schedule — modules 2, 3, and 4 unlock on successive Sundays at 5pm ET (EDT). The public site `mooc.amditis.tech` currently shows all four module pages and every cross-page link as live, which doesn't match what a student sees inside the LMS. Students who land on the public site pre-release can read ahead or jump into pages that should still be closed. We need the public site to visually mirror the LMS release schedule: module 2 unlocks Sunday 2026-04-19, module 3 unlocks 2026-04-26, module 4 unlocks 2026-05-03, all at 5:00 PM ET. Module 1 is already live and stays live unconditionally.
 
 ---
@@ -64,17 +64,21 @@ ET offset is `-04:00` for all three dates (DST runs 2026-03-08 through 2026-11-0
 │    - If the current URL matches /module-[234](/|$)         │
 │      and that module is locked, also add                   │
 │      `mooc-locked-here` to <html>                          │
+│    - Register delegated capturing click + keydown          │
+│      listeners on `document` so any activation of a        │
+│      locked anchor is default-prevented from the moment    │
+│      the element exists in the DOM — no click window       │
 │    - Expose window.MOOCSchedule = { isLocked, releaseFor } │
-│      for the DOMContentLoaded phase                        │
 │                                                            │
 │  Phase 2 — on DOMContentLoaded:                            │
 │    - Find every anchor marked `data-module-card="module-N"`│
-│      and if module N is locked, bind click + keydown       │
-│      preventDefault handlers                               │
+│      and if locked, set aria-disabled="true"               │
 │    - Find every other anchor matching module-[234]/path,   │
-│      and if the target module is locked, bind the same     │
-│      preventDefault handlers, set aria-disabled, and       │
-│      append a visually-hidden "(locked, unlocks …)" span   │
+│      and if the target module is locked, add               │
+│      .module-locked-link, set aria-disabled, and append    │
+│      a visually-hidden "(locked, unlocks …)" span          │
+│    - Click/keydown blocking is NOT done here — phase 1's   │
+│      delegated handlers already catch activation           │
 └────────────────────────────────────────────────────────────┘
 ```
 
@@ -83,7 +87,7 @@ ET offset is `-04:00` for all three dates (DST runs 2026-03-08 through 2026-11-0
 - Zero FOUC. The class is set before body parse, so every locked-state style is active before first paint.
 - Reversible at 5:00 PM ET without a reload trick — because the CSS rules are class-gated, flipping the class immediately flips the state. (Students still need to reload to re-run the JS phase-1 check, per the non-goals section. But the rule is that a page loaded AFTER 5:00 PM is correctly unlocked, which is the requirement.)
 
-**Click-blocking strategy: `preventDefault` on click + keydown, never `pointer-events: none`.** `pointer-events: none` sounds like the right disable but is the wrong tool for anchors: it doesn't stop keyboard Enter activation, it kills the `cursor: not-allowed` style we want to show, and it prevents `title` tooltip from firing. Every locked anchor instead gets real event handlers that call `preventDefault()` and `stopPropagation()` on both `click` and `keydown` (filtering keydown to Enter/Space to be polite to tabbing).
+**Click-blocking strategy: delegated `preventDefault` on click + keydown in phase 1, never `pointer-events: none`.** `pointer-events: none` sounds like the right disable but is the wrong tool for anchors: it doesn't stop keyboard Enter activation, it kills the `cursor: not-allowed` style we want to show, and it prevents `title` tooltip from firing. Instead, phase 1 registers capturing listeners on `document` itself — `document` exists before `<body>` parses, so the handlers are in place from the first moment any anchor is clickable. Each handler walks up from `event.target` to the nearest `<a>`, checks whether the anchor points at a currently-locked module (either by `data-module-card` or by `href`), and calls `preventDefault()` + `stopPropagation()` if so. Keydown is filtered to Enter and Space so Tab focus movement still works.
 
 ---
 
@@ -101,8 +105,8 @@ ET offset is `-04:00` for all three dates (DST runs 2026-03-08 through 2026-11-0
 |------|--------|
 | `docs/assets/css/amditis.css` | Add CSS for `html.mooc-locked-m{2,3,4}` + `html.mooc-locked-here` states: dim locked cards, swap CTA visibility, swap icon visibility, hide `.module-live-content` containers on locked module pages, style the locked placeholder screen, style inline locked links, provide an `.sr-only` utility if not already present. ~60 lines. |
 | `docs/index.html` | Add the sync `<script>` tag in `<head>`; add `data-module-card="module-2"` / `"module-3"` / `"module-4"` to the three card anchors; add the pre-rendered locked-state markup inside each card (second lucide icon with `data-lucide="lock"`, second CTA span containing the unlock date). Touch `lucide.createIcons()` call order if needed. |
-| `docs/module-2/index.html`, `docs/module-3/index.html`, `docs/module-4/index.html` | Add the sync `<script>` tag in `<head>`; add `class="module-live-content"` to the module-hero `<section>` AND to `<main>` (both need the class because both are direct children of `<body>` on these pages); add a pre-rendered `<section class="module-locked-screen">` placeholder right after `<main>` with lock icon, unlock date text, and "back to home" link. |
-| `docs/module-2/slides-skills-overview.html`, `docs/module-2/slides-video7.html` | Same treatment as module-2/index.html. `module-schedule.js` detects these by URL prefix `/module-2/` and applies `mooc-locked-here`. Content to hide + locked screen to show follow the same structure. |
+| `docs/module-2/index.html`, `docs/module-3/index.html`, `docs/module-4/index.html` | Add the sync `<script>` tag in `<head>`; add `class="module-live-content"` to the module-hero `<section>`, `<main>`, and the prev/next `<footer>`; insert a pre-rendered `<section class="module-locked-screen">` placeholder between the hero section and `<main>` (the flex-column layout on the wrapper div makes this work wherever in the column the placeholder lives, but keeping it near the top of the content area is the cleanest DOM order for reading). |
+| `docs/module-2/slides-skills-overview.html`, `docs/module-2/slides-video7.html` | These are self-contained slide decks with their own inline CSS, so they don't share `amditis.css`. Pattern is different: load `module-schedule.js` to get the `mooc-locked-here` class on `<html>`, then a tiny inline script right after checks that class and calls `location.replace('./')` so the user lands on the parent module index's locked placeholder. |
 | `docs/module-1/index.html` | Add the sync `<script>` tag only. Module 1 isn't gated, but pages on module 1 link to module 2/3/4 in the header nav — those links need the inline-link treatment. |
 | `docs/syllabus/index.html`, `docs/credits/index.html`, `docs/bonus-git-github/index.html`, `docs/bonus-interviews/index.html`, `docs/bonus-oss-etiquette/index.html`, `docs/starter-kit/index.html` | Add sync `<script>` tag. |
 | `docs/templates/index.html`, `docs/templates/quick-reference.html`, `docs/templates/troubleshooting.html` | Add sync `<script>` tag. |
@@ -131,9 +135,9 @@ Every file in that list needs the script tag. Currently that grep returns ~29 fi
 **Before release:**
 1. Browser parses `<head>` and hits the sync `<script>`. The script downloads (tiny, CF-cached), executes synchronously. It reads the schedule, determines module 2 is locked, adds `mooc-locked-m2` to `<html>`. It notices `location.pathname` starts with `/module-2/`, so it also adds `mooc-locked-here` to `<html>`.
 2. Browser resumes parsing `<body>`. CSS immediately applies:
-   - `html.mooc-locked-here .module-live-content { display: none }` — hides the module hero section AND `<main>` (both have the marker class).
-   - `html.mooc-locked-here .module-locked-screen { display: block }` — reveals the pre-rendered locked placeholder.
-3. First paint shows: site header (logo + nav), locked placeholder card, site footer. Real module content never paints.
+   - `html.mooc-locked-here .module-live-content { display: none }` — hides the module hero section, `<main>`, and the prev/next `<footer>` (all three carry the `.module-live-content` marker class).
+   - `html.mooc-locked-here section.module-locked-screen { display: flex }` — reveals the pre-rendered locked placeholder and gives it the flex-item layout it needs inside the wrapper column.
+3. First paint shows: sticky site header (logo + nav), locked placeholder card centered in the remaining vertical space. Real module content never paints. The skip-link is also hidden via `html.mooc-locked-here .skip-link { display: none }` since its `#main` target is hidden.
 
 **Locked placeholder markup (pre-rendered in each module page):**
 ```html
@@ -318,7 +322,7 @@ Ordered for easy bisection if something breaks:
 
 1. **Schedule file skeleton.** Create `docs/assets/js/module-schedule.js` with `MODULE_SCHEDULE`, `releaseFor()`, `isLocked()`, and the phase-1 class-setter. No DOM hooks yet. Confirm it runs without error in isolation.
 2. **CSS.** Add the locked-state rules to `amditis.css` (`.module-icon-locked`, `.cta-locked`, `.module-locked-link`, `.module-locked-screen`, `html.mooc-locked-m*` and `html.mooc-locked-here` selectors, `.sr-only` utility if absent).
-3. **Module page surgery (module 2 only, as a vertical slice).** In `docs/module-2/index.html`: add `<script src="../assets/js/module-schedule.js"></script>` in `<head>`, add `.module-live-content` to the hero `<section>` and `<main>`, add the pre-rendered `<section class="module-locked-screen">` placeholder after `<main>`. Load locally → verify direct URL shows locked placeholder. Edit schedule file to past date → verify real content. Revert. This is the pivot point for the whole design.
+3. **Module page surgery (module 2 only, as a vertical slice).** In `docs/module-2/index.html`: add `<script src="../assets/js/module-schedule.js"></script>` in `<head>`, add `.module-live-content` to the hero `<section>`, `<main>`, and `<footer>`, and insert the pre-rendered `<section class="module-locked-screen">` placeholder between the hero section and `<main>`. Load locally → verify direct URL shows locked placeholder. Edit schedule file to past date → verify real content. Revert. This is the pivot point for the whole design.
 4. **Repeat for module 3, module 4, and module 2 subpages.** `module-3/index.html`, `module-4/index.html`, `module-2/slides-skills-overview.html`, `module-2/slides-video7.html`. Same treatment.
 5. **Homepage cards.** In `docs/index.html`: add sync script tag, add `data-module-card` attributes to the three locked cards, add the pre-rendered dual-icon + dual-CTA markup. Load homepage locally → verify cards dim correctly. Click each locked card → verify no navigation. Verify module 1 and bonus cards are unaffected.
 6. **Phase-2 JS (click handlers).** Extend `module-schedule.js` to bind click/keydown preventDefault on `data-module-card` anchors on DOMContentLoaded.
