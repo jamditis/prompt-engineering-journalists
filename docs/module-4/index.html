@@ -97,16 +97,17 @@
                 </div>
                 <p class="text-gray-300 text-sm leading-relaxed mb-6 max-w-3xl">Module 4 is four short videos. Each one introduces one piece of the manager's toolkit.</p>
 
-                <div class="space-y-8">
+                <article class="border border-white/10 bg-surface/30 rounded-lg overflow-hidden video-tabs">
+                    <div class="p-6 md:p-8">
+                        <!-- Tab bar -->
+                        <div role="tablist" aria-label="Module 4 videos" class="flex flex-wrap gap-2 mb-8 pb-6 border-b border-white/10">
+                            <button type="button" role="tab" id="m4-v1-tab" aria-controls="m4-v1-panel" aria-selected="true" tabindex="0" class="px-4 py-2 rounded-md font-mono text-xs tracking-wide border border-white/10 bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white hover:border-white/20 aria-selected:bg-acid/20 aria-selected:border-acid/50 aria-selected:text-acid focus-visible:outline focus-visible:outline-2 focus-visible:outline-acid transition-colors">V1 &middot; 11 MIN</button>
+                            <button type="button" role="tab" id="m4-v2-tab" aria-controls="m4-v2-panel" aria-selected="false" tabindex="-1" class="px-4 py-2 rounded-md font-mono text-xs tracking-wide border border-white/10 bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white hover:border-white/20 aria-selected:bg-acid/20 aria-selected:border-acid/50 aria-selected:text-acid focus-visible:outline focus-visible:outline-2 focus-visible:outline-acid transition-colors">V2 &middot; 6 MIN</button>
+                            <button type="button" role="tab" id="m4-v3-tab" aria-controls="m4-v3-panel" aria-selected="false" tabindex="-1" class="px-4 py-2 rounded-md font-mono text-xs tracking-wide border border-white/10 bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white hover:border-white/20 aria-selected:bg-acid/20 aria-selected:border-acid/50 aria-selected:text-acid focus-visible:outline focus-visible:outline-2 focus-visible:outline-acid transition-colors">V3 &middot; 8 MIN</button>
+                            <button type="button" role="tab" id="m4-v4-tab" aria-controls="m4-v4-panel" aria-selected="false" tabindex="-1" class="px-4 py-2 rounded-md font-mono text-xs tracking-wide border border-white/10 bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white hover:border-white/20 aria-selected:bg-acid/20 aria-selected:border-acid/50 aria-selected:text-acid focus-visible:outline focus-visible:outline-2 focus-visible:outline-acid transition-colors">V4 &middot; 14 MIN</button>
+                        </div>
 
-                    <article class="border border-white/10 bg-surface/30 rounded-lg overflow-hidden">
-                        <div class="p-6 md:p-8">
-                            <div class="flex flex-wrap items-center gap-3 mb-4">
-                                <span class="text-xs font-mono text-acid bg-acid/10 px-2 py-1 rounded">V1</span>
-                                <span class="text-xs font-mono text-gray-500">MODULE 04</span>
-                                <span class="text-xs font-mono text-gray-500">~11 MIN</span>
-                            </div>
-
+                        <div id="m4-v1-panel" role="tabpanel" aria-labelledby="m4-v1-tab">
                             <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-3">Effort, thinking, and the shape of the context window</h3>
 
                             <p class="text-gray-300 font-sans leading-relaxed mb-6">Module 4 pivots away from live demos back to the core prompting techniques. Joe shows the <code class="text-acid bg-surface px-1">/effort</code> command (low through max), walks through every component that eats your context window — system prompt, tools, agents, memory, skills, messages, auto-compact buffer — and explains why the million-token context Anthropic announced doesn't actually give you a million usable tokens of good quality.</p>
@@ -196,16 +197,8 @@
                                 </div>
                             </div>
                         </div>
-                    </article>
 
-                    <article class="border border-white/10 bg-surface/30 rounded-lg overflow-hidden">
-                        <div class="p-6 md:p-8">
-                            <div class="flex flex-wrap items-center gap-3 mb-4">
-                                <span class="text-xs font-mono text-acid bg-acid/10 px-2 py-1 rounded">V2</span>
-                                <span class="text-xs font-mono text-gray-500">MODULE 04</span>
-                                <span class="text-xs font-mono text-gray-500">~6 MIN</span>
-                            </div>
-
+                        <div id="m4-v2-panel" role="tabpanel" aria-labelledby="m4-v2-tab" hidden>
                             <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-3">The 40% rule, rewinding, and sub-agents</h3>
 
                             <p class="text-gray-300 font-sans leading-relaxed mb-6">Joe gives you three moves for when a conversation gets too big: dump it at 40% and start fresh, rewind with double-escape to a known-good point, or delegate to sub-agents with their own context windows. He also warns about "agent telephone," where a sub-agent gets something slightly wrong and the error compounds into your main conversation.</p>
@@ -293,16 +286,8 @@
                                 </div>
                             </div>
                         </div>
-                    </article>
 
-                    <article class="border border-white/10 bg-surface/30 rounded-lg overflow-hidden">
-                        <div class="p-6 md:p-8">
-                            <div class="flex flex-wrap items-center gap-3 mb-4">
-                                <span class="text-xs font-mono text-acid bg-acid/10 px-2 py-1 rounded">V3</span>
-                                <span class="text-xs font-mono text-gray-500">MODULE 04</span>
-                                <span class="text-xs font-mono text-gray-500">~8 MIN</span>
-                            </div>
-
+                        <div id="m4-v3-panel" role="tabpanel" aria-labelledby="m4-v3-tab" hidden>
                             <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-3">Cross-model code review with Copilot CLI and Codex CLI</h3>
 
                             <p class="text-gray-300 font-sans leading-relaxed mb-6">Joe demonstrates calling one CLI agent from inside another using the <code class="text-acid bg-surface px-1">-p</code> non-interactive flag. From a Claude Code session, he spawns GitHub Copilot and Codex as sub-agents to review the same PR, compares their comments against each other, and watches his main conversation's token count stay flat because the reviews happen in separate contained contexts.</p>
@@ -390,16 +375,8 @@
                                 </div>
                             </div>
                         </div>
-                    </article>
 
-                    <article class="border border-white/10 bg-surface/30 rounded-lg overflow-hidden">
-                        <div class="p-6 md:p-8">
-                            <div class="flex flex-wrap items-center gap-3 mb-4">
-                                <span class="text-xs font-mono text-acid bg-acid/10 px-2 py-1 rounded">V4</span>
-                                <span class="text-xs font-mono text-gray-500">MODULE 04</span>
-                                <span class="text-xs font-mono text-gray-500">~14 MIN</span>
-                            </div>
-
+                        <div id="m4-v4-panel" role="tabpanel" aria-labelledby="m4-v4-tab" hidden>
                             <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-3">Remote control, mobile continuation, and four questions</h3>
 
                             <p class="text-gray-300 font-sans leading-relaxed mb-6">Joe demonstrates <code class="text-acid bg-surface px-1">/remote-control</code>, which lets you drive a local Claude Code session from claude.ai in a browser or phone — the feature he spent a month trying to build himself before Anthropic shipped it properly. Then he closes the course with a framework of four questions that will outlast any specific model or tool, plus a speech about why human judgment matters more as the models get more powerful, not less.</p>
@@ -490,8 +467,8 @@
                                 </div>
                             </div>
                         </div>
-                    </article>
-                </div>
+                    </div>
+                </article>
             </section>
 
             <!-- Key concepts -->
@@ -779,5 +756,6 @@
 
     <script>lucide.createIcons();</script>
     <script src="../assets/js/copy-code.js"></script>
+    <script src="../assets/js/video-tabs.js"></script>
 </body>
 </html>

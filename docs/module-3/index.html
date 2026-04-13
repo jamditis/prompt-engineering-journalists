@@ -65,16 +65,15 @@
                 <div class="border-b border-white/10 pb-4 mb-6">
                     <h2 class="font-display text-xl text-ice">Watch</h2>
                 </div>
-                <div class="space-y-8">
+                <article class="border border-white/10 bg-surface/30 rounded-lg overflow-hidden video-tabs">
+                    <div class="p-6 md:p-8">
+                        <!-- Tab bar -->
+                        <div role="tablist" aria-label="Module 3 videos" class="flex flex-wrap gap-2 mb-8 pb-6 border-b border-white/10">
+                            <button type="button" role="tab" id="m3-v1-tab" aria-controls="m3-v1-panel" aria-selected="true" tabindex="0" class="px-4 py-2 rounded-md font-mono text-xs tracking-wide border border-white/10 bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white hover:border-white/20 aria-selected:bg-acid/20 aria-selected:border-acid/50 aria-selected:text-acid focus-visible:outline focus-visible:outline-2 focus-visible:outline-acid transition-colors">V1 &middot; 12 MIN</button>
+                            <button type="button" role="tab" id="m3-v2-tab" aria-controls="m3-v2-panel" aria-selected="false" tabindex="-1" class="px-4 py-2 rounded-md font-mono text-xs tracking-wide border border-white/10 bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white hover:border-white/20 aria-selected:bg-acid/20 aria-selected:border-acid/50 aria-selected:text-acid focus-visible:outline focus-visible:outline-2 focus-visible:outline-acid transition-colors">V2 &middot; 29 MIN</button>
+                        </div>
 
-                    <article class="border border-white/10 bg-surface/30 rounded-lg overflow-hidden">
-                        <div class="p-6 md:p-8">
-                            <div class="flex flex-wrap items-center gap-3 mb-4">
-                                <span class="text-xs font-mono text-acid bg-acid/10 px-2 py-1 rounded">V1</span>
-                                <span class="text-xs font-mono text-gray-500">MODULE 03</span>
-                                <span class="text-xs font-mono text-gray-500">~12 MIN</span>
-                            </div>
-
+                        <div id="m3-v1-panel" role="tabpanel" aria-labelledby="m3-v1-tab">
                             <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-3">Systems thinking for non-programmers</h3>
 
                             <p class="text-gray-300 font-sans leading-relaxed mb-6">Module 3 opens with a reframe — instead of sitting at the terminal babysitting a one-shot task, you design pipelines that run themselves on a trigger. Joe argues the block most journalists hit here isn't code, it's systems thinking, and he walks through the conveyor-belt mental model, multi-stage pipeline design, secret hygiene, and the three rules he wants you to carry into the hands-on video.</p>
@@ -163,16 +162,8 @@
                                 </div>
                             </div>
                         </div>
-                    </article>
 
-                    <article class="border border-white/10 bg-surface/30 rounded-lg overflow-hidden">
-                        <div class="p-6 md:p-8">
-                            <div class="flex flex-wrap items-center gap-3 mb-4">
-                                <span class="text-xs font-mono text-acid bg-acid/10 px-2 py-1 rounded">V2</span>
-                                <span class="text-xs font-mono text-gray-500">MODULE 03</span>
-                                <span class="text-xs font-mono text-gray-500">~29 MIN</span>
-                            </div>
-
+                        <div id="m3-v2-panel" role="tabpanel" aria-labelledby="m3-v2-tab" hidden>
                             <h3 class="font-display text-2xl md:text-3xl font-bold text-white mb-3">Automating the Mamdani project end to end</h3>
 
                             <p class="text-gray-300 font-sans leading-relaxed mb-6">Joe picks up the Mamdani pipeline and automates it — a daily remote trigger on Anthropic's cloud that checks for new videos, a local run for the GPU-heavy transcription, a GitHub Actions workflow that deploys a live dashboard to GitHub Pages, and a Copilot-reviewed PR with 10 comments. The video ends by debugging a self-triggering PR loop Joe accidentally created by merging with his own account.</p>
@@ -263,8 +254,8 @@
                                 </div>
                             </div>
                         </div>
-                    </article>
-                </div>
+                    </div>
+                </article>
             </section>
 
             <!-- Learning objectives -->
@@ -573,5 +564,6 @@ and wait for my approval before taking any action."</span></code></pre>
 
     <script>lucide.createIcons();</script>
     <script src="../assets/js/copy-code.js"></script>
+    <script src="../assets/js/video-tabs.js"></script>
 </body>
 </html>
