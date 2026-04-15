@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code isn't available where I live. What now? | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../../assets/css/amditis.css">
+    <script src="../../assets/js/module-schedule.js"></script>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mooc.amditis.tech/faq/claude-code-not-available-in-my-region/" />
+    <meta property="og:title" content="Claude Code isn't available where I live. What now?" />
+    <meta property="og:description" content="If Claude Code, Gemini CLI, and Codex CLI are blocked in your region, GitHub Copilot CLI is a fine alternative. Joe uses it and mentions it in the course." />
+    <meta property="og:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Claude Code isn't available where I live. What now?" />
+    <meta name="twitter:description" content="If Claude Code, Gemini CLI, and Codex CLI are blocked in your region, GitHub Copilot CLI is a fine alternative." />
+    <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+<script src="../../assets/js/ask-ai.js" defer></script>
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
+                    <a href="../../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">FAQ &middot; REGIONAL ACCESS</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">Claude Code isn't available where I live. What now?</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Anthropic, OpenAI, and Google each have a list of countries where their services aren't sold. If you're in one of those countries, GitHub Copilot CLI is your best alternative &mdash; and Joe uses it himself.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-xs font-mono text-acid font-bold mb-2">SHORT ANSWER</p>
+                    <p class="text-gray-200 leading-relaxed">Use <a href="https://docs.github.com/en/copilot/github-copilot-in-the-cli" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">GitHub Copilot CLI</a>. It's a fourth CLI tool that isn't in the main Module 1 list but does the same job, and GitHub's regional availability is broader than Anthropic's, OpenAI's, or Google's. A student from Hong Kong asked about this exact problem in the Questions for the instructor forum, and Joe's answer was short: "GitHub Copilot is fine! I use it all the time and mention it in the course."</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What GitHub Copilot CLI is</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">GitHub Copilot started as an autocomplete feature inside VS Code. GitHub later built a standalone command-line version &mdash; the CLI &mdash; that works the same way Claude Code, Gemini CLI, and Codex CLI do: you open a terminal, type a command, and you're in an interactive session with an AI that can read and write files on your machine.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">Under the hood it can call different models, including Anthropic's Claude and OpenAI's GPT family. The difference is billing and availability: you pay GitHub instead of paying Anthropic or OpenAI directly, and GitHub distributes through the same channels as its other products &mdash; which means it's available in more places than the individual AI providers.</p>
+                    <p class="text-gray-300 leading-relaxed">Joe uses it as a cross-model code review tool in Module 4. If you're using it as your primary CLI instead of Claude Code, the same commands and workflows still apply &mdash; you're just talking to a different front end.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Getting started with Copilot CLI</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Three steps:</p>
+                    <ul class="space-y-4 text-gray-300 leading-relaxed list-none">
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0 font-mono">1.</span><span><strong class="text-chrome">Sign up for GitHub Copilot.</strong> Go to <a href="https://github.com/features/copilot" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">github.com/features/copilot</a> and pick a plan. The Individual plan is $10 per month. You'll need a GitHub account if you don't already have one.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0 font-mono">2.</span><span><strong class="text-chrome">Install the CLI.</strong> Follow GitHub's <a href="https://docs.github.com/en/copilot/github-copilot-in-the-cli/using-github-copilot-in-the-cli" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">installation instructions</a>. The steps vary slightly by operating system, but the process is similar to installing any other CLI tool &mdash; one command and you're done.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0 font-mono">3.</span><span><strong class="text-chrome">Authenticate with your GitHub account.</strong> The first time you run the tool it'll ask you to log in through a browser. Allow it.</span></li>
+                    </ul>
+                    <p class="text-gray-300 leading-relaxed mt-4">From there, everything the course teaches &mdash; context files, skills, sub-agents, pipelines &mdash; works the same way. You're still in a CLI session with an AI model that can read and write files in the folder you launched it from.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What changes compared to the course videos</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">A few small translation notes if Copilot CLI is your main tool:</p>
+                    <ul class="space-y-3 text-gray-300 leading-relaxed list-none">
+                        <li class="flex gap-3"><span class="text-ice flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">The launch command is different.</strong> Joe types <code class="text-acid bg-surface px-1">claude</code> in the videos. With Copilot CLI you'll type whatever GitHub's current command is (check the docs &mdash; they've renamed it once or twice). Everything after that looks similar.</span></li>
+                        <li class="flex gap-3"><span class="text-ice flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Context files.</strong> Copilot CLI reads a file similar to <code class="text-acid bg-surface px-1">CLAUDE.md</code>. Check the current docs for the exact filename &mdash; the concept is identical: a markdown file with project context that loads at session start.</span></li>
+                        <li class="flex gap-3"><span class="text-ice flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Slash commands.</strong> Similar menu of slash commands but with different names and options. When in doubt, type <code class="text-acid bg-surface px-1">/help</code> and read what's available.</span></li>
+                        <li class="flex gap-3"><span class="text-ice flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Everything else.</strong> The Module 1 story &mdash; leaving the browser, writing files to disk, keeping context across sessions &mdash; is identical. The Module 4 story &mdash; managing the context window, calling another model for a second opinion, delegating to sub-agents &mdash; is identical too.</span></li>
+                    </ul>
+                </div>
+
+                <div class="border border-ice/30 bg-iceDim p-6">
+                    <p class="text-xs font-mono text-ice font-bold mb-2">IF COPILOT CLI IS ALSO BLOCKED</p>
+                    <p class="text-gray-200 leading-relaxed">GitHub Copilot's availability is broader than the other three, but it's still subject to U.S. export restrictions. If none of the four CLI tools are available in your country, post in the Questions for the instructor forum. Joe will figure out a workaround with you, and the course team will flag it for the Knight Center so future cohorts get clearer guidance up front.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">RELATED:</span> The <a href="../which-claude-subscription/" class="text-ice hover:text-acid transition-colors">subscription FAQ</a> covers pricing for all four tools side by side.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">FAQ</a>
+                        <a href="../../module-1/" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">MODULE 01</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

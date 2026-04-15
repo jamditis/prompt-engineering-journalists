@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is an IDE? | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../../assets/css/amditis.css">
+    <script src="../../assets/js/module-schedule.js"></script>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mooc.amditis.tech/faq/what-is-an-ide/" />
+    <meta property="og:title" content="What is an IDE?" />
+    <meta property="og:description" content="VS Code, Cursor, Windsurf, AntiGravity — the names Joe drops in Module 1 demystified. When you need an IDE for this course and when you don't." />
+    <meta property="og:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="What is an IDE?" />
+    <meta name="twitter:description" content="VS Code, Cursor, Windsurf, AntiGravity — the names Joe drops in Module 1 demystified. When you need an IDE for this course and when you don't." />
+    <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+<script src="../../assets/js/ask-ai.js" defer></script>
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
+                    <a href="../../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">FAQ &middot; TOOLS</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">What is an IDE?</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">In the Module 1 video, Joe mentions VS Code, Cursor, Windsurf, and AntiGravity as alternatives if you can't use the terminal. If those names mean nothing to you, that's fine. Here's what an IDE actually is and whether you need one.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-xs font-mono text-acid font-bold mb-2">SHORT ANSWER</p>
+                    <p class="text-gray-200 leading-relaxed">An IDE is a fancy text editor that knows about code. You don't need one for this course. If your work IT blocks the terminal or if you strongly prefer a visual file browser, <a href="https://code.visualstudio.com" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">VS Code</a> is the default pick and it's free. Otherwise, stick with the terminal. Joe's videos show the terminal-first path because that's how most people will use these tools.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What an IDE actually is</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">IDE stands for "integrated development environment," which is a mouthful that means nothing useful. Here's what it actually is: a program that's half text editor, half file manager. You open a folder, see the files inside it in a sidebar, click one to read or edit it, and have a built-in terminal at the bottom for running commands. That's it.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">The "integrated" part is the pitch: instead of switching between Finder, a plain text editor, and a terminal, you do everything in one window. For people who work with code every day, that saves constant context switching. For people who only occasionally run a Claude Code session, it's usually overkill.</p>
+                    <p class="text-gray-300 leading-relaxed">Think of it as Microsoft Word for programmers. Same basic idea &mdash; a document editor with a bunch of smart features &mdash; but tuned for code instead of prose.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">The names Joe drops in the video</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Joe names four IDEs as fallback options. Here's what each one is, in plain terms:</p>
+                    <div class="space-y-4">
+                        <div class="border border-white/10 bg-panel p-6">
+                            <h3 class="font-display text-lg text-acid mb-2">VS Code</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-2">Made by Microsoft. Free. The most widely used IDE in the world, which means it has the biggest community, the most plugins, and the most help online when something goes wrong. If you pick one IDE and stop worrying about it, pick this one.</p>
+                            <p class="text-gray-400 text-xs">Mike Janssen, the digital editor at Current who Joe interviews in the <a href="../../bonus-interviews/" class="text-ice hover:text-acid transition-colors">bonus interviews</a>, uses VS Code with Codex. He'd never coded before, and says he didn't compare it to anything else because he didn't know anything else.</p>
+                        </div>
+
+                        <div class="border border-white/10 bg-panel p-6">
+                            <h3 class="font-display text-lg text-acid mb-2">Cursor</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed">A fork of VS Code with AI features built directly into the editor. Looks and feels like VS Code because it basically is VS Code, but the AI integration is more native. Paid subscription required for most of the good features.</p>
+                        </div>
+
+                        <div class="border border-white/10 bg-panel p-6">
+                            <h3 class="font-display text-lg text-acid mb-2">Windsurf</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed">Another AI-first IDE, made by a company called Codeium. Similar pitch to Cursor. Free tier available. Also a fork of VS Code under the hood, so if you've used VS Code you'll feel at home.</p>
+                        </div>
+
+                        <div class="border border-white/10 bg-panel p-6">
+                            <h3 class="font-display text-lg text-acid mb-2">AntiGravity</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed">Google's recent entry. Also AI-focused, also built for the "the AI is another collaborator in your editor" workflow. Newer than the others, so the community and plugin set are smaller.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">When you might actually want one</h2>
+                    <ul class="space-y-3 text-gray-300 leading-relaxed list-none">
+                        <li class="flex gap-3"><span class="text-ice flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Your work IT blocks the terminal.</strong> This is the main reason Joe mentions IDEs in the video. If you can't open Terminal on a company laptop, you can often still install VS Code and use its built-in terminal instead. Talk to your IT person first &mdash; they usually have a list of approved tools.</span></li>
+                        <li class="flex gap-3"><span class="text-ice flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">You want to see your files as a browsable tree while Claude works.</strong> Some people find this reassuring, especially early on. You watch the file list update live as Claude writes or edits things.</span></li>
+                        <li class="flex gap-3"><span class="text-ice flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">You're already using one for other work.</strong> If you have VS Code open for an unrelated project, it's easier to run Claude Code inside it than to switch apps.</span></li>
+                        <li class="flex gap-3"><span class="text-ice flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">You want to watch Claude edit files in real time.</strong> One participant, Sharon, mentioned in the course forums that she likes the VS Code extension because she can see the edits Claude is making as they happen. That kind of transparency is harder to get in a plain terminal.</span></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">When you don't need one</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Which is most of the time, for this course. Here's the honest version:</p>
+                    <ul class="space-y-3 text-gray-300 leading-relaxed list-none">
+                        <li class="flex gap-3"><span class="text-signal flex-shrink-0">&rsaquo;</span><span>Every command in Joe's Module 1 video works the same way in a plain terminal. There's no part of the course that requires an IDE.</span></li>
+                        <li class="flex gap-3"><span class="text-signal flex-shrink-0">&rsaquo;</span><span>Installing, configuring, and learning an IDE is real work. If you're new to all of this, it adds a second unfamiliar tool on top of the one you're trying to learn.</span></li>
+                        <li class="flex gap-3"><span class="text-signal flex-shrink-0">&rsaquo;</span><span>The terminal is where you'll end up anyway. Almost everything Claude Code does, it does by running commands in a terminal. Using an IDE just means running those commands in a window that has a file browser on the side.</span></li>
+                    </ul>
+                </div>
+
+                <div class="border border-ice/30 bg-iceDim p-6">
+                    <p class="text-xs font-mono text-ice font-bold mb-2">IF YOU STILL WANT TO TRY ONE</p>
+                    <p class="text-gray-200 leading-relaxed">Start with <a href="https://code.visualstudio.com" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">VS Code</a>. It's free, the install is a normal Mac or Windows installer (no terminal required), and Claude Code runs inside it the same way it runs anywhere else &mdash; open the built-in terminal from the <em>Terminal</em> menu, type <code class="text-ice bg-surface px-1">claude</code>, and you're off.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">RELATED:</span> The <a href="../../concepts/what-is-a-cli.html" class="text-ice hover:text-acid transition-colors">plain-English CLI explainer</a> covers what a terminal actually is. The <a href="../../bonus-interviews/" class="text-ice hover:text-acid transition-colors">bonus interviews</a> include Mike Janssen on using Codex inside VS Code with no coding background.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">FAQ</a>
+                        <a href="../../module-1/" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">MODULE 01</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

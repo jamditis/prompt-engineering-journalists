@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Does the CLI reduce hallucinations? | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../../assets/css/amditis.css">
+    <script src="../../assets/js/module-schedule.js"></script>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mooc.amditis.tech/faq/does-cli-reduce-hallucinations/" />
+    <meta property="og:title" content="Does the CLI reduce hallucinations?" />
+    <meta property="og:description" content="No. The CLI doesn't change how the model reasons — it only changes what the model can reach. Here's what the course actually teaches about verification, and why editorial judgment still has to come from you." />
+    <meta property="og:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Does the CLI reduce hallucinations?" />
+    <meta name="twitter:description" content="No. The CLI doesn't change how the model reasons. Here's what actually helps, and why editorial judgment still has to come from you." />
+    <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+<script src="../../assets/js/ask-ai.js" defer></script>
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
+                    <a href="../../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">FAQ &middot; VERIFICATION</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">Does the CLI reduce hallucinations?</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">No. The terminal doesn't change how the underlying model reasons &mdash; it only changes what the model can reach. Here's what the course actually teaches about verification, and what still has to come from you.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-xs font-mono text-acid font-bold mb-2">SHORT ANSWER</p>
+                    <p class="text-gray-200 leading-relaxed">Using Claude Code instead of the Claude web app doesn't make the model more factually reliable. Claude Sonnet is Claude Sonnet either way. What the CLI gives you isn't accuracy &mdash; it's file access, tool use, and the ability to chain steps together. Those matter, but they don't solve the hallucination problem. Fact-checking and editorial judgment are still your job, the same way they are in the browser.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Why the CLI doesn't change the underlying problem</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">An LLM hallucinates when it produces something that sounds plausible but isn't actually true: a wrong quote attribution, a source that doesn't exist, a date off by six months, a statute that was never passed. That happens inside the model, before any file gets written. The terminal doesn't sit between the model and your disk policing for factual errors &mdash; it just hands you what the model produced and saves it wherever you said to save it.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">Running the same prompt in a terminal instead of a browser doesn't change the model's reasoning, its training data, or the patterns that produce hallucinations. If you asked Claude on the web to "summarize this council meeting" and it made up a vote count, running the same prompt in Claude Code will make up a vote count too.</p>
+                    <p class="text-gray-300 leading-relaxed">The CLI does give you better tools for verification &mdash; real files you can diff, source documents you can reread, prompts you can reuse. But "better tools for verification" and "fewer hallucinations" are not the same thing.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What the course actually teaches about verification</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Module 4 introduces a pattern Joe calls cross-model code review: you call a second CLI tool &mdash; Copilot CLI, Codex CLI, or Gemini CLI &mdash; from inside your main Claude Code session using a <code class="text-acid bg-surface px-1">-p</code> flag. The second tool runs in its own isolated context window and gives you an independent second opinion on whatever Claude just built.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">In the Module 4 video, Joe demonstrates this by asking Claude to review a branch of code, then calling Copilot CLI and then Codex CLI to review the same branch as second and third passes. Codex catches two high-severity bugs that both Claude and Copilot had missed. The framing is "different models catch different bugs" &mdash; and the pattern works because the second model isn't just reading Claude's output, it's re-reading the underlying code with fresh eyes.</p>
+                    <p class="text-gray-300 leading-relaxed">That's a genuine accuracy boost &mdash; but it's specifically about <em>code</em> review. It's the pattern you'd use to catch a bug in a pipeline script before you commit it, not the pattern you'd use to fact-check a news story.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">The hard line: editorial judgment stays with you</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">This course is about using CLI tools to build the scripts, skills, pipelines, and context files that shape your workflow. It is not about delegating the reporting, writing, or editing of your journalism to an AI model. Module 4 makes this explicit: the journalist-as-manager shift is about managing the <em>code side</em> of your workflow the way a non-developer works with a developer. Reporting, writing, editing, and verification of factual claims stay with the journalist.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">That's not a disclaimer written to cover the Knight Center's legal department. It's the honest answer to what these tools can and can't do right now. A second model that's also trained on the same internet is not an independent source. Two LLMs agreeing that a quote is real doesn't make the quote real. The only thing that makes a fact true is the source it came from, and the only thing that verifies a fact is a human who reads the source and confirms it.</p>
+                    <p class="text-gray-300 leading-relaxed">The journalist in front of the keyboard is the ground truth. The CLI is a faster way to organize your notes.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What actually helps, in practice</h2>
+                    <ul class="space-y-3 text-gray-300 leading-relaxed list-none">
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Save source documents to disk.</strong> One of the biggest advantages of the CLI over the web interface is that when Claude reads a web page or a PDF, you can keep the extracted text. Read the source file, not just Claude's summary.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Ask for inline source links for every claim.</strong> Same pattern Eva Wolfangel used in the forums on her research prompt: after Claude writes the first draft, ask it to add a source link next to every factual claim. Then open each link and read it. If the link doesn't exist, the claim is suspect. If the link exists but doesn't say what Claude said it said, the claim is suspect.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Keep your CLAUDE.md specific about sources.</strong> Generic instructions like "verify facts" don't change output. Specific ones like "flag any dollar amount or vote count that isn't directly attributable to a document in the <code class="text-acid bg-surface px-1">sources/</code> folder" do.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">For code, use Module 4's cross-model review pattern.</strong> If Claude wrote a script that filters your dataset, ask Copilot or Codex to review that script before you trust its output. Codex found real bugs in Joe's demo that Claude and Copilot both missed.</span></li>
+                    </ul>
+                </div>
+
+                <div class="border border-ice/30 bg-iceDim p-6">
+                    <p class="text-xs font-mono text-ice font-bold mb-2">THE THING NOBODY LIKES TO SAY OUT LOUD</p>
+                    <p class="text-gray-200 leading-relaxed">There is no tool, flag, plugin, or subscription that turns an LLM into a reliable fact checker. The models are useful for a lot of things &mdash; reading long documents, extracting structured data, organizing notes, building pipelines &mdash; but they are not trustworthy as standalone verifiers of factual claims. Treat their output the way you'd treat a fast, confident intern who hasn't been on the beat long enough to know when they're wrong.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">GO DEEPER:</span> The cross-model review pattern is covered in <a href="../../module-4/" class="text-ice hover:text-acid transition-colors">Module 4</a>. The broader framing &mdash; what these tools can and can't do for journalism &mdash; runs through the whole course but lands hardest in Module 4's framing videos.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">FAQ</a>
+                        <a href="../../module-1/" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">MODULE 01</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

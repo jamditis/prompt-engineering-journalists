@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal basics for Mac users | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../../assets/css/amditis.css">
+    <script src="../../assets/js/module-schedule.js"></script>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mooc.amditis.tech/mac/terminal-basics/" />
+    <meta property="og:title" content="Terminal basics for Mac users" />
+    <meta property="og:description" content="The course video demos run in PowerShell on Windows. On a Mac, everything runs in Terminal instead. Here's how to open it, the commands that matter for Module 1, and how to translate what you see in the video." />
+    <meta property="og:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Terminal basics for Mac users" />
+    <meta name="twitter:description" content="The course video demos run in PowerShell on Windows. On a Mac, everything runs in Terminal instead. Here's how to open it and translate the commands you see in the video." />
+    <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+<script src="../../assets/js/ask-ai.js" defer></script>
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
+                    <a href="../../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">MAC &middot; FOLLOWING ALONG ON MACOS</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">Terminal basics for Mac users</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Joe's Module 1 demos run in PowerShell on Windows. On a Mac, you do the same work in a program called Terminal. The commands are almost identical. Here's what changes and what doesn't.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-xs font-mono text-acid font-bold mb-2">SHORT ANSWER</p>
+                    <p class="text-gray-200 leading-relaxed">Open Terminal, type <code class="text-acid bg-surface px-1">claude</code>, press Enter. That's the same first step Joe takes on Windows, just in a different program. The <code class="text-acid bg-surface px-1">cd</code>, <code class="text-acid bg-surface px-1">ls</code>, and <code class="text-acid bg-surface px-1">mkdir</code> commands you'll see him type all work exactly the same way in macOS Terminal.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Where Terminal lives on your Mac</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Terminal is an app that ships with every Mac. There are three easy ways to open it:</p>
+                    <ul class="space-y-3 text-gray-300 leading-relaxed mb-4 list-none">
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Spotlight.</strong> Press <kbd class="bg-surface border border-white/20 px-2 py-0.5 rounded text-xs font-mono">&#8984; Space</kbd>, type <em>terminal</em>, press Enter. Fastest way in.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Finder.</strong> Open the Applications folder, then the Utilities subfolder. Terminal is in there.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Launchpad.</strong> Open Launchpad, find the Other folder, open it, and Terminal is inside.</span></li>
+                    </ul>
+                    <p class="text-gray-300 leading-relaxed">When Terminal opens you'll see a window with a single line of text that looks something like this:</p>
+                    <pre class="bg-void border border-white/10 rounded-lg p-4 mt-4 mb-4 overflow-x-auto"><code class="text-ice font-mono text-sm">yourname@MacBook-Pro ~ %</code></pre>
+                    <p class="text-gray-300 leading-relaxed">That's a prompt. It's waiting for you to type something. The <code class="text-ice font-mono text-sm">~</code> (tilde) is a shortcut for "your home folder." The <code class="text-ice font-mono text-sm">%</code> at the end is where your cursor will sit. When you see the prompt, you're ready to type a command.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">The commands you'll actually need for Module 1</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Joe's video walks through a specific sequence: create a folder, move into it, launch Claude Code. Here's the macOS version of each step, with the exact commands you'd type.</p>
+
+                    <div class="border border-white/10 bg-panel p-6 mb-4">
+                        <h3 class="font-display text-lg text-acid mb-3">Make a folder for your course work</h3>
+                        <pre class="bg-void border border-white/10 rounded-lg p-4 mb-3 overflow-x-auto"><code class="text-acid font-mono text-sm">mkdir mooc</code></pre>
+                        <p class="text-gray-300 text-sm leading-relaxed"><code class="text-ice font-mono text-sm">mkdir</code> means "make directory." It creates a folder called <code class="text-ice font-mono text-sm">mooc</code> inside wherever you are right now. If you just opened Terminal, that's your home folder.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6 mb-4">
+                        <h3 class="font-display text-lg text-acid mb-3">Step into that folder</h3>
+                        <pre class="bg-void border border-white/10 rounded-lg p-4 mb-3 overflow-x-auto"><code class="text-acid font-mono text-sm">cd mooc</code></pre>
+                        <p class="text-gray-300 text-sm leading-relaxed"><code class="text-ice font-mono text-sm">cd</code> means "change directory." Think of it as double-clicking a folder &mdash; you're now inside it. Your prompt will update to show the folder name so you always know where you are.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6 mb-4">
+                        <h3 class="font-display text-lg text-acid mb-3">See what's in the current folder</h3>
+                        <pre class="bg-void border border-white/10 rounded-lg p-4 mb-3 overflow-x-auto"><code class="text-acid font-mono text-sm">ls</code></pre>
+                        <p class="text-gray-300 text-sm leading-relaxed"><code class="text-ice font-mono text-sm">ls</code> means "list." Shows you every file and folder in the folder you're currently in. Use this anytime you lose track of what's around you.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6 mb-4">
+                        <h3 class="font-display text-lg text-acid mb-3">Check where you are</h3>
+                        <pre class="bg-void border border-white/10 rounded-lg p-4 mb-3 overflow-x-auto"><code class="text-acid font-mono text-sm">pwd</code></pre>
+                        <p class="text-gray-300 text-sm leading-relaxed"><code class="text-ice font-mono text-sm">pwd</code> stands for "print working directory." Shows the full path of the folder you're in right now. Helpful when the prompt is ambiguous or you've been navigating for a while.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6 mb-4">
+                        <h3 class="font-display text-lg text-acid mb-3">Go back up one folder</h3>
+                        <pre class="bg-void border border-white/10 rounded-lg p-4 mb-3 overflow-x-auto"><code class="text-acid font-mono text-sm">cd ..</code></pre>
+                        <p class="text-gray-300 text-sm leading-relaxed">The two dots mean "the folder that contains this one." It's the Terminal version of clicking the back arrow in Finder.</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6">
+                        <h3 class="font-display text-lg text-acid mb-3">Launch Claude Code</h3>
+                        <pre class="bg-void border border-white/10 rounded-lg p-4 mb-3 overflow-x-auto"><code class="text-acid font-mono text-sm">claude</code></pre>
+                        <p class="text-gray-300 text-sm leading-relaxed">This is the same command Joe types in the video. Claude Code starts an interactive session inside whatever folder you're currently in. From this point forward you're not typing terminal commands anymore &mdash; you're talking to Claude, and Claude is running commands for you. To exit a Claude session, type <code class="text-ice font-mono text-sm">/quit</code> or press <kbd class="bg-surface border border-white/20 px-2 py-0.5 rounded text-xs font-mono">Ctrl C</kbd> twice.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">PowerShell to Terminal, command by command</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Everything in Joe's Module 1 walkthrough translates directly. Here's the cheat sheet:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden rounded-lg">
+                        <table class="w-full text-sm">
+                            <thead class="border-b border-white/10 bg-surface">
+                                <tr>
+                                    <th class="text-left py-3 px-4 font-mono text-xs text-acid tracking-wider">WHAT JOE TYPES (POWERSHELL)</th>
+                                    <th class="text-left py-3 px-4 font-mono text-xs text-acid tracking-wider">WHAT YOU TYPE (TERMINAL)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/5 text-gray-300 font-mono">
+                                <tr>
+                                    <td class="py-3 px-4"><code class="text-ice">cd ~/Desktop</code></td>
+                                    <td class="py-3 px-4"><code class="text-ice">cd ~/Desktop</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4"><code class="text-ice">mkdir MOOC</code></td>
+                                    <td class="py-3 px-4"><code class="text-ice">mkdir MOOC</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4"><code class="text-ice">cd MOOC</code></td>
+                                    <td class="py-3 px-4"><code class="text-ice">cd MOOC</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4"><code class="text-ice">ls</code></td>
+                                    <td class="py-3 px-4"><code class="text-ice">ls</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4"><code class="text-ice">claude</code></td>
+                                    <td class="py-3 px-4"><code class="text-ice">claude</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-gray-500"><em>Clear screen:</em> <code class="text-ice">cls</code></td>
+                                    <td class="py-3 px-4 text-gray-500"><em>Clear screen:</em> <code class="text-ice">clear</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-gray-500"><em>Show file contents:</em> <code class="text-ice">Get-Content file.md</code></td>
+                                    <td class="py-3 px-4 text-gray-500"><em>Show file contents:</em> <code class="text-ice">cat file.md</code></td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 text-gray-500"><em>Delete file:</em> <code class="text-ice">Remove-Item file.md</code></td>
+                                    <td class="py-3 px-4 text-gray-500"><em>Delete file:</em> <code class="text-ice">rm file.md</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-3">The top five commands are identical on both platforms. The bottom three are where PowerShell and macOS Terminal differ slightly &mdash; you probably won't need any of them for Module 1, but they're worth knowing.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">A faster way to get into a folder</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Sharon Machlis shared this tip in the Technical Questions forum, and it's a keeper. macOS has a built-in way to open Terminal already inside a specific folder, so you don't have to type <code class="text-ice font-mono text-sm">cd</code> commands to get there:</p>
+                    <ul class="space-y-3 text-gray-300 leading-relaxed mb-4 list-none">
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0 font-mono">1.</span><span>Open Finder and find the folder you want to work in.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0 font-mono">2.</span><span>Right-click (or two-finger click) the folder.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0 font-mono">3.</span><span>Hover over <strong class="text-chrome">Services</strong> and pick <strong class="text-chrome">New Terminal at Folder</strong>.</span></li>
+                    </ul>
+                    <p class="text-gray-300 leading-relaxed mb-4">If you don't see that option, it's probably turned off in System Settings. Go to <strong class="text-chrome">System Settings &rarr; Keyboard &rarr; Keyboard Shortcuts &rarr; Services &rarr; Files and Folders</strong> and check the box next to <em>New Terminal at Folder</em>. Takes ten seconds and saves typing every time after that.</p>
+                    <p class="text-gray-300 leading-relaxed">You can also drag a folder from Finder into an open Terminal window and it'll paste the full path &mdash; handy when you want to <code class="text-ice font-mono text-sm">cd</code> into a folder that's nested deep in your Documents.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Pasting, copying, and stopping a command</h2>
+                    <ul class="space-y-3 text-gray-300 leading-relaxed list-none">
+                        <li class="flex gap-3"><span class="text-ice flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Paste:</strong> <kbd class="bg-surface border border-white/20 px-2 py-0.5 rounded text-xs font-mono">&#8984; V</kbd>. Same as everywhere else on macOS. Works inside a Claude Code session too.</span></li>
+                        <li class="flex gap-3"><span class="text-ice flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Copy from the terminal:</strong> select the text with your mouse, then <kbd class="bg-surface border border-white/20 px-2 py-0.5 rounded text-xs font-mono">&#8984; C</kbd>.</span></li>
+                        <li class="flex gap-3"><span class="text-ice flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Stop a running command:</strong> <kbd class="bg-surface border border-white/20 px-2 py-0.5 rounded text-xs font-mono">Control C</kbd> (that's the literal Control key, not Command). This interrupts whatever the terminal is currently doing.</span></li>
+                        <li class="flex gap-3"><span class="text-ice flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Exit Claude Code:</strong> type <code class="text-acid bg-surface px-1">/quit</code>, or press <kbd class="bg-surface border border-white/20 px-2 py-0.5 rounded text-xs font-mono">Control C</kbd> twice in a row.</span></li>
+                        <li class="flex gap-3"><span class="text-ice flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Close the Terminal window:</strong> <kbd class="bg-surface border border-white/20 px-2 py-0.5 rounded text-xs font-mono">&#8984; W</kbd> or just click the red dot.</span></li>
+                    </ul>
+                </div>
+
+                <div class="border border-signal/30 bg-signalDim p-6">
+                    <p class="text-xs font-mono text-signal font-bold mb-2">IF "CLAUDE" SAYS "COMMAND NOT FOUND"</p>
+                    <p class="text-gray-200 leading-relaxed">You've installed Claude Code but the <code class="text-acid bg-surface px-1">claude</code> command doesn't work. This is a PATH problem &mdash; your shell doesn't know where Claude Code was installed. See the <a href="../fix-path-after-install/" class="text-ice hover:text-acid transition-colors">Fix PATH after install</a> page for the fix. It's usually a one-line change to your shell config.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">READY?</span> Head back to <a href="../../module-1/" class="text-ice hover:text-acid transition-colors">Module 1</a> with Terminal open, or read the <a href="../../concepts/what-is-a-cli.html" class="text-ice hover:text-acid transition-colors">plain-English CLI explainer</a> if you still want more context on what the terminal actually is.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">MAC</a>
+                        <a href="../../module-1/" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">MODULE 01</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
