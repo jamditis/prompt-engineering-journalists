@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is it safe to run AI tools on my machine? | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../../assets/css/amditis.css">
+    <script src="../../assets/js/module-schedule.js"></script>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mooc.amditis.tech/faq/is-it-safe-to-run-ai-tools-on-my-machine/" />
+    <meta property="og:title" content="Is it safe to run AI tools on my machine?" />
+    <meta property="og:description" content="How CLI AI tools use permission systems by default, four rules to keep the blast radius small, and what to do if something ever feels off." />
+    <meta property="og:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Is it safe to run AI tools on my machine?" />
+    <meta name="twitter:description" content="How CLI AI tools use permission systems by default, four rules to keep the blast radius small, and what to do if something ever feels off." />
+    <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+<script src="../../assets/js/ask-ai.js" defer></script>
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
+                    <a href="../../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
+                    <a href="../../faq/" class="text-acid">[ FAQ ]</a>
+                    <a href="../../mac/" class="text-gray-400 hover:text-ice transition-colors">[ MAC ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">FAQ &middot; COURSE HELP</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">Is it safe to run AI tools on my machine?</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">A fair question, and a common one. Here's how the permission system works, four rules that keep the blast radius small, and what to do if something ever feels off.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-xs font-mono text-acid font-bold mb-2">SHORT ANSWER</p>
+                    <p class="text-gray-200 leading-relaxed">Yes. Claude Code, Codex CLI, and Gemini CLI all use a permission system by default &mdash; they ask before running commands, editing files, or doing anything meaningful on your machine. You approve or deny each action. The scary stories you may have seen online almost always involve fully autonomous agents running with permissions turned off. That is not what this course does.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">How the permission system works</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">When Claude Code wants to read a file, write a file, run a shell command, or visit a website, it pauses and asks. A prompt appears in your terminal with the specific action it wants to take. You choose whether to allow it.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">If you deny the action, the tool explains what it was trying to do and asks for different instructions. Nothing happens on your machine that you didn't explicitly approve.</p>
+                    <p class="text-gray-300 leading-relaxed">This is the most important thing to understand about CLI agents: you are in the driver's seat at every step. The tool is watching you as much as you're watching it.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Four rules that keep the blast radius small</h2>
+                    <p class="text-gray-300 leading-relaxed mb-6">These come straight from an answer Joe gave in the Questions for the instructor forum. They apply no matter which tool you're using.</p>
+
+                    <div class="space-y-4">
+                        <div class="border border-white/10 bg-panel p-6">
+                            <h3 class="font-display text-lg text-acid mb-3">1. Keep the default permission settings</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed">All three tools ship in "ask before acting" mode. Don't turn that off. There is a flag called <code class="text-acid bg-surface px-1">--dangerously-skip-permissions</code> that lets Claude Code run without stopping to ask &mdash; the name is the warning. You won't need it for this course, and you probably won't need it for most of what you do after this course either.</p>
+                        </div>
+
+                        <div class="border border-white/10 bg-panel p-6">
+                            <h3 class="font-display text-lg text-acid mb-3">2. Work in a dedicated folder for the course</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed">Create one folder &mdash; something like <code class="text-acid bg-surface px-1">~/mooc-prompt-eng/</code> &mdash; and launch your sessions from inside it. That way if you ever say yes to something you didn't mean to, the blast radius is whatever files are in that folder. Your documents, your photos, your tax records, your browser profile &mdash; none of that is reachable unless you explicitly point the tool at it.</p>
+                        </div>
+
+                        <div class="border border-white/10 bg-panel p-6">
+                            <h3 class="font-display text-lg text-acid mb-3">3. Read what the tool is asking to do before you approve it</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed">The whole point of the permission prompt is to give you a chance to say no. It's not a "click through to continue" dialog. Glance at the command or the filename. Does it match what you asked for? If it does, approve. If it doesn't, deny and tell the tool what you actually wanted.</p>
+                        </div>
+
+                        <div class="border border-white/10 bg-panel p-6">
+                            <h3 class="font-display text-lg text-acid mb-3">4. You don't need a special IDE</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed">Your regular terminal is fine. You don't need VS Code, Cursor, or any other editor to use the CLI tools safely. The videos in this course run the tools in a plain terminal and that's the expected default. If your IT department blocks the terminal, see the <a href="../what-is-an-ide/" class="text-ice hover:text-acid transition-colors">IDE explainer</a> for alternatives.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What to do if something feels off</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Close the terminal. That's it. Closing the terminal window kills the session immediately &mdash; no ongoing process, no background daemon, no file half-written. The tool stops the moment the window closes.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">If you want to double-check nothing is still running, open a fresh terminal and run:</p>
+                    <pre class="bg-void border border-white/10 rounded-lg p-4 mb-4 overflow-x-auto"><code class="text-acid font-mono text-sm">ps aux | grep claude</code></pre>
+                    <p class="text-gray-300 leading-relaxed">You should see only the <code class="text-ice font-mono text-sm">grep</code> command itself in the output. If you see a <code class="text-ice font-mono text-sm">claude</code> process, note its PID (the number in the second column) and run <code class="text-ice font-mono text-sm">kill &lt;PID&gt;</code> to stop it. You almost certainly won't need to.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Where the horror stories come from</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">The scary accounts you might have read online almost always involve one of three things, none of which this course asks you to do:</p>
+                    <ul class="space-y-3 text-gray-300 text-base leading-relaxed mb-4 list-none">
+                        <li class="flex gap-3"><span class="text-signal flex-shrink-0">&rsaquo;</span><span>Fully autonomous agents running with <code class="text-acid bg-surface px-1">--dangerously-skip-permissions</code> enabled, iterating for hours without any human in the loop.</span></li>
+                        <li class="flex gap-3"><span class="text-signal flex-shrink-0">&rsaquo;</span><span>Agents given root or sudo access to system files &mdash; which they should never need for journalism work.</span></li>
+                        <li class="flex gap-3"><span class="text-signal flex-shrink-0">&rsaquo;</span><span>Long-running unattended sessions on production servers, where nobody is watching and the blast radius is a whole company's infrastructure.</span></li>
+                    </ul>
+                    <p class="text-gray-300 leading-relaxed">Interactive use inside a dedicated folder &mdash; which is everything Module 1 through Module 4 asks of you &mdash; has a blast radius measured in "the files you can see scrolling by in your own terminal." That is as safe as AI agents get right now.</p>
+                </div>
+
+                <div class="border border-ice/30 bg-iceDim p-6">
+                    <p class="text-xs font-mono text-ice font-bold mb-2">ONE MORE THING</p>
+                    <p class="text-gray-200 leading-relaxed">If anything ever feels off while a session is running, close the terminal. That kills the session immediately. You don't have to figure out the right command to stop it &mdash; just close the window.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">READY?</span> Head back to <a href="../../module-1/" class="text-ice hover:text-acid transition-colors">Module 1</a> to install the tools and run your first CLI command. Or read about <a href="../../concepts/what-is-a-cli.html" class="text-ice hover:text-acid transition-colors">what a CLI actually is</a> if you're still not sure what "the terminal" means.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">FAQ</a>
+                        <a href="../../module-1/" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">MODULE 01</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>

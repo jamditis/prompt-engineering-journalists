@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why didn't Claude Code save any files? | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../../assets/css/amditis.css">
+    <script src="../../assets/js/module-schedule.js"></script>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mooc.amditis.tech/faq/why-didnt-claude-save-the-files/" />
+    <meta property="og:title" content="Why didn't Claude Code save any files?" />
+    <meta property="og:description" content="Claude Code won't write files unless you ask it to. Here's what to add to your prompt so the work actually lands on disk, using a real example from the forums." />
+    <meta property="og:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Why didn't Claude Code save any files?" />
+    <meta name="twitter:description" content="Claude Code won't write files unless you ask it to. Here's what to add to your prompt so the work actually lands on disk." />
+    <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+<script src="../../assets/js/ask-ai.js" defer></script>
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
+                    <a href="../../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
+                    <a href="../../faq/" class="text-acid">[ FAQ ]</a>
+                    <a href="../../mac/" class="text-gray-400 hover:text-ice transition-colors">[ MAC ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">FAQ &middot; WORKFLOW</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">Why didn't Claude Code save any files?</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">You asked a good question. Claude answered in the terminal like a chatbot. No folders, no files, nothing on disk. Here's what's actually happening and how to fix it.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-xs font-mono text-acid font-bold mb-2">SHORT ANSWER</p>
+                    <p class="text-gray-200 leading-relaxed">Claude Code won't write files unless you tell it to. If you prompt it the way you'd prompt a chatbot, you get a chatbot-style reply &mdash; text in the terminal, nothing on disk. The fix is to add a sentence to your prompt that specifies where the output should go and what it should be called.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Why this catches people</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">When you watched the Module 1 video, Claude Code built a whole folder and populated it with organized research files. When you tried it yourself, you got a long text response in the terminal and nothing else. That feels broken. It isn't.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">The difference between the video and your session is one line of prompt. Joe asked Claude to save the output. You asked Claude to do the research. Claude did exactly what each of you said.</p>
+                    <p class="text-gray-300 leading-relaxed">This is the single biggest shift from browser AI to CLI AI: the model doesn't guess what you want on disk. You have to say so.</p>
+                </div>
+
+                <figure class="my-8">
+                    <svg viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg" class="w-full border border-white/10 rounded-lg" role="img" aria-labelledby="claude-save-files-title claude-save-files-desc">
+                        <title id="claude-save-files-title">Two ways of asking Claude Code to do the same task</title>
+                        <desc id="claude-save-files-desc">A side-by-side diagram. On the left, a prompt without file-saving instructions leads to terminal output that vanishes when the session ends. On the right, a prompt that names a destination file leads to a saved file on disk.</desc>
+                        <defs>
+                            <marker id="arrow-signal" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#f87171"/>
+                            </marker>
+                            <marker id="arrow-acid" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#a3e635"/>
+                            </marker>
+                        </defs>
+
+                        <rect width="960" height="560" fill="#0f172a"/>
+
+                        <text x="480" y="40" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#f1f5f9">Two ways of asking Claude Code to do the same task</text>
+
+                        <!-- LEFT COLUMN: without file instructions -->
+                        <rect x="40" y="70" width="420" height="460" rx="10" fill="#1e293b" stroke="#f87171" stroke-width="1.5" stroke-opacity="0.4"/>
+                        <text x="250" y="100" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#f87171">WITHOUT FILE INSTRUCTIONS</text>
+
+                        <text x="60" y="135" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#94a3b8">You type:</text>
+                        <rect x="60" y="148" width="380" height="70" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+                        <text x="75" y="175" font-family="'JetBrains Mono', monospace" font-size="13" fill="#f1f5f9">Research this person and tell me</text>
+                        <text x="75" y="195" font-family="'JetBrains Mono', monospace" font-size="13" fill="#f1f5f9">what you find.</text>
+
+                        <line x1="250" y1="230" x2="250" y2="270" stroke="#f87171" stroke-width="2" marker-end="url(#arrow-signal)"/>
+
+                        <text x="60" y="295" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#94a3b8">Claude responds:</text>
+                        <rect x="60" y="308" width="380" height="90" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+                        <text x="75" y="335" font-family="'JetBrains Mono', monospace" font-size="12" fill="#94a3b8">Here's what I found about the person</text>
+                        <text x="75" y="355" font-family="'JetBrains Mono', monospace" font-size="12" fill="#94a3b8">you mentioned. They appear to have</text>
+                        <text x="75" y="375" font-family="'JetBrains Mono', monospace" font-size="12" fill="#94a3b8">worked at three companies over...</text>
+
+                        <text x="60" y="430" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#f87171">What's on your disk:</text>
+                        <rect x="60" y="443" width="380" height="60" rx="6" fill="#0f172a" stroke="#f87171" stroke-width="1" stroke-opacity="0.5"/>
+                        <text x="250" y="480" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="13" fill="#f87171">(nothing)</text>
+
+                        <!-- RIGHT COLUMN: with file instructions -->
+                        <rect x="500" y="70" width="420" height="460" rx="10" fill="#1e293b" stroke="#a3e635" stroke-width="1.5" stroke-opacity="0.4"/>
+                        <text x="710" y="100" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#a3e635">WITH FILE INSTRUCTIONS</text>
+
+                        <text x="520" y="135" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#94a3b8">You type:</text>
+                        <rect x="520" y="148" width="380" height="70" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+                        <text x="535" y="170" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f1f5f9">Research this person. Save your</text>
+                        <text x="535" y="188" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f1f5f9">findings to research/person.md.</text>
+                        <text x="535" y="206" font-family="'JetBrains Mono', monospace" font-size="12" fill="#f1f5f9">Include source links for every claim.</text>
+
+                        <line x1="710" y1="230" x2="710" y2="270" stroke="#a3e635" stroke-width="2" marker-end="url(#arrow-acid)"/>
+
+                        <text x="520" y="295" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#94a3b8">Claude responds:</text>
+                        <rect x="520" y="308" width="380" height="90" rx="6" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+                        <text x="535" y="335" font-family="'JetBrains Mono', monospace" font-size="12" fill="#94a3b8">Writing research/person.md...</text>
+                        <text x="535" y="355" font-family="'JetBrains Mono', monospace" font-size="12" fill="#94a3b8">Done. I cited 8 sources and flagged</text>
+                        <text x="535" y="375" font-family="'JetBrains Mono', monospace" font-size="12" fill="#94a3b8">3 claims that need verification.</text>
+
+                        <text x="520" y="430" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#a3e635">What's on your disk:</text>
+                        <rect x="520" y="443" width="380" height="60" rx="6" fill="#0f172a" stroke="#a3e635" stroke-width="1" stroke-opacity="0.5"/>
+                        <text x="535" y="478" font-family="'JetBrains Mono', monospace" font-size="13" fill="#a3e635">research/person.md</text>
+                        <text x="760" y="478" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94a3b8">(still there tomorrow)</text>
+                    </svg>
+                    <figcaption class="text-xs text-gray-400 font-sans mt-2 text-center">The prompts are almost the same length. The difference is one sentence that names a file.</figcaption>
+                </figure>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">The three things your prompt needs</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">When you want Claude Code to leave files on your disk, tell it three things:</p>
+                    <ul class="space-y-4 text-gray-300 text-base leading-relaxed mb-6 list-none">
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0 font-mono">1.</span><span><strong class="text-chrome">What</strong> &mdash; the task. "Research this person," "summarize this PDF," "extract every quote from the transcript."</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0 font-mono">2.</span><span><strong class="text-chrome">Where</strong> &mdash; the file path. "Save the summary to <code class="text-acid bg-surface px-1">summary.md</code>." Or "save it to <code class="text-acid bg-surface px-1">notes/research.md</code>." A relative path works; Claude creates folders if they don't exist.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0 font-mono">3.</span><span><strong class="text-chrome">What shape</strong> &mdash; the format. "As a bulleted list." "In markdown with headings." "As a CSV with columns for name, source, date." Shape is optional but often the difference between a blob of text and something you can use.</span></li>
+                    </ul>
+                    <p class="text-gray-300 leading-relaxed">If you only give Claude the <em>what</em>, you'll get a terminal reply. If you add the <em>where</em>, you get a file. Add the <em>shape</em> and you get a file that's useful.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">A real example from the forums</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Eva Wolfangel, a cybersecurity journalist in the course, hit this exact problem. Her first attempt produced nothing on disk. Her second attempt, written like this, produced exactly what she was after:</p>
+
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Please conduct the search for [person] now. You should know
+that he is likely a fraud. [Context about what she already knew.]
+
+Please go online and look for conflicting information he has
+provided about himself, as well as potential interview subjects
+who have had dealings with him.
+
+Also: could you please organize/cluster your research results
+in a logical way, ideally in a file that you save in the
+Project folder?
+
+Please be thorough, follow every lead, and evaluate each one
+to see if there are further avenues for research.</code></pre>
+                    </div>
+
+                    <p class="text-gray-300 leading-relaxed mb-4">Notice what she did. She described the task. She gave Claude the context she already had. She asked for clustering. And she said where the output should go: <em>"in a file that you save in the Project folder."</em> That single clause is what turned a terminal-only reply into a saved research file.</p>
+                    <p class="text-gray-300 leading-relaxed">After Claude wrote the first version, she followed up:</p>
+
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Great research, thanks. What would help me: if you could
+link directly to the sources for each one.</code></pre>
+                    </div>
+
+                    <p class="text-gray-300 leading-relaxed">And Claude rewrote the file with source links inline. This is the pattern: ask for the work, ask for it to be saved somewhere, then iterate once you see what came back. You don't have to get the prompt perfect on the first try.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Common mistakes people make instead</h2>
+                    <ul class="space-y-4 text-gray-300 leading-relaxed list-none">
+                        <li class="flex gap-3"><span class="text-signal flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Asking for "a report" with no filename.</strong> Claude might write a report in the terminal and call it done. "Save it as <code class="text-acid bg-surface px-1">report.md</code>" is clearer.</span></li>
+                        <li class="flex gap-3"><span class="text-signal flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Assuming Claude will pick a good filename.</strong> It often will, but being specific removes the guesswork &mdash; and makes the file easier to find afterwards.</span></li>
+                        <li class="flex gap-3"><span class="text-signal flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Forgetting you're in a folder.</strong> Claude writes files into the folder you launched it from. If you ran <code class="text-acid bg-surface px-1">claude</code> from your Desktop, that's where files land. If you ran it from a project folder, that's where they land.</span></li>
+                        <li class="flex gap-3"><span class="text-signal flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Blaming the tool.</strong> Claude Code on Mac and Windows behaves identically here. If your files aren't landing, the fix is almost always in your prompt, not your operating system.</span></li>
+                    </ul>
+                </div>
+
+                <div class="border border-ice/30 bg-iceDim p-6">
+                    <p class="text-xs font-mono text-ice font-bold mb-2">THE ONE-LINE FIX</p>
+                    <p class="text-gray-200 leading-relaxed">If your session gave you text instead of files, don't retype the whole prompt. Just reply: <em>"Now save that to <code class="text-ice bg-surface px-1">[filename].md</code> in this folder."</em> Claude will write the same content to disk. No need to start over.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">NEXT:</span> See the <a href="../is-it-safe-to-run-ai-tools-on-my-machine/" class="text-ice hover:text-acid transition-colors">safety FAQ</a> for what the "Claude wants to write this file &mdash; approve?" prompt is actually asking, or head back to <a href="../../module-1/" class="text-ice hover:text-acid transition-colors">Module 1</a> to try this on the sample documents.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">FAQ</a>
+                        <a href="../../module-1/" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">MODULE 01</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>

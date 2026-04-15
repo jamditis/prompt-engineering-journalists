@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do I need Firecrawl for this course? | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../../assets/css/amditis.css">
+    <script src="../../assets/js/module-schedule.js"></script>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mooc.amditis.tech/faq/do-i-need-firecrawl/" />
+    <meta property="og:title" content="Do I need Firecrawl for this course?" />
+    <meta property="og:description" content="No. Joe uses Firecrawl in his Module 1 research demo to pull web page content into local files, but you can follow along without it. Here's what it is, what it does, and when you'd add it." />
+    <meta property="og:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Do I need Firecrawl for this course?" />
+    <meta name="twitter:description" content="No. Joe uses it in his Module 1 demo to pull web content into files, but you can follow along without it." />
+    <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+<script src="../../assets/js/ask-ai.js" defer></script>
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
+                    <a href="../../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
+                    <a href="../../faq/" class="text-acid">[ FAQ ]</a>
+                    <a href="../../mac/" class="text-gray-400 hover:text-ice transition-colors">[ MAC ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">FAQ &middot; TOOLS</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">Do I need Firecrawl for this course?</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">If you saw Firecrawl in Joe's Module 1 demo and wondered whether it was a required dependency, it isn't. You can finish the exercises without it. Here's what it is, why Joe uses it, and when you'd add it later.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-xs font-mono text-acid font-bold mb-2">SHORT ANSWER</p>
+                    <p class="text-gray-200 leading-relaxed">No. Firecrawl isn't a course requirement. Joe uses it in his Module 1 side-by-side demo because it makes Claude Code's web research deeper and cleaner, not because anything in the exercises depends on it. Claude Code on its own can already fetch web pages &mdash; Firecrawl just does a better job of extracting their content into local files. Think of it as an upgrade, not a prerequisite.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What Firecrawl actually is</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Firecrawl is a tool that pulls clean, readable content out of web pages. Feed it a URL, and instead of the raw HTML with all the menus, ads, pop-ups, and sidebars, you get the actual text of the article in a format that's easy for a large language model to work with. If you've ever used a "reader mode" in a browser, the idea is similar: strip the page down to the part you came for.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">In Claude Code, Firecrawl shows up as an MCP server &mdash; an external tool that Claude can call when it needs to extract a web page. When Claude decides to fetch and read a URL, it routes the request through Firecrawl, gets back the clean text, and writes it to a file in your project folder. That's why Joe's demo produces organized markdown files in a <code class="text-acid bg-surface px-1">firecrawl</code> folder: the tool is extracting each source page and saving it as it goes.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Why Joe uses it in the Module 1 demo</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">In the Module 1 video, Joe runs the same research prompt &mdash; "find everything you can about the Center for Cooperative Media and give me a report" &mdash; in Claude Code and Claude on the web at the same time. Claude on the web finishes a polished summary faster. Claude Code is slower because it asks for permissions and, among other things, uses Firecrawl to pull each source page into a local file before summarizing.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">That slower path is the whole point of the demo. The web app's summary lives only in that chat. Claude Code leaves behind a folder of extracted source material that any future session can read back. Firecrawl is what makes that folder of extracted sources cleaner and more usable than what you'd get from raw HTTP fetches.</p>
+                    <p class="text-gray-300 leading-relaxed">If you run the same research prompt without Firecrawl installed, Claude Code will still do the research and still save whatever it reads into files. The files just won't be as clean, and the overall workflow won't match the video quite as closely. That's the whole difference.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">If you want to install it</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Firecrawl is free to use at a modest rate limit. Signing up takes a few minutes:</p>
+                    <ul class="space-y-3 text-gray-300 leading-relaxed mb-4 list-none">
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0 font-mono">1.</span><span>Go to <a href="https://firecrawl.dev" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">firecrawl.dev</a> and create a free account.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0 font-mono">2.</span><span>Copy your API key from the dashboard.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0 font-mono">3.</span><span>Follow the Firecrawl docs to add it as an MCP server in your Claude Code configuration. The exact steps depend on your operating system.</span></li>
+                    </ul>
+                    <p class="text-gray-300 leading-relaxed">If installation feels like a detour from whatever you're actually trying to learn this week, skip it. Come back to Firecrawl when you have a real research task in front of you that needs clean web content in local files. That's when the upgrade will feel obviously worth it.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What to do if your demo doesn't match Joe's</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">One participant in the forums ran the same research-the-person prompt Joe demoed and got a terminal response but no files. She thought Firecrawl was the reason. It wasn't &mdash; the fix was adding one sentence to her prompt about where to save the output.</p>
+                    <p class="text-gray-300 leading-relaxed">If your research session isn't producing files, start with <a href="../why-didnt-claude-save-the-files/" class="text-ice hover:text-acid transition-colors">Why didn't Claude Code save any files?</a> before blaming Firecrawl's absence. It's almost always a prompting issue, not a tooling issue.</p>
+                </div>
+
+                <div class="border border-ice/30 bg-iceDim p-6">
+                    <p class="text-xs font-mono text-ice font-bold mb-2">MCP SERVERS IN GENERAL</p>
+                    <p class="text-gray-200 leading-relaxed">Firecrawl is one of many MCP servers you can plug into Claude Code. Others include Playwright (for controlling a real browser), file system tools, database connectors, and dozens more. MCP servers come up again in Module 2 when Joe talks about custom skills and plugins. You don't need any of them for Module 1, so don't feel like you have to install anything beyond Claude Code itself yet.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">RELATED:</span> <a href="../why-didnt-claude-save-the-files/" class="text-ice hover:text-acid transition-colors">Why didn't Claude Code save any files?</a> &mdash; the more common cause of "my demo didn't match Joe's."</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">FAQ</a>
+                        <a href="../../module-1/" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">MODULE 01</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
