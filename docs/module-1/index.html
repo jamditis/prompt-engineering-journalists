@@ -46,7 +46,6 @@
                     <a href="../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
                     <a href="../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
                     <a href="../faq/" class="text-gray-400 hover:text-ice transition-colors">[ FAQ ]</a>
-                    <a href="../mac/" class="text-gray-400 hover:text-ice transition-colors">[ MAC ]</a>
                 </nav>
             </div>
         </header>
@@ -587,7 +586,7 @@ Then read the file and summarize it in one sentence. Save the summary to summary
                     <div class="border border-ice/20 bg-iceDim p-4 mb-4">
                         <a href="https://github.com/jamditis/mooc-starter-kit" target="_blank" rel="noopener" class="font-mono text-sm text-ice hover:text-acid transition-colors">github.com/jamditis/mooc-starter-kit</a>
                     </div>
-                    <p class="text-gray-300 text-sm mb-4">Once you've forked it, clone your fork and step into the folder:</p>
+                    <p class="text-gray-300 text-sm mb-4">Once you've forked it, you'll clone your fork down to your machine &mdash; but you don't type <code class="text-acid bg-surface px-1">git clone</code> yourself. You let Claude do it. Open your terminal, go to your home folder, and launch Claude Code:</p>
                     <div class="border border-white/10 bg-panel overflow-hidden mb-4">
                         <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
                             <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
@@ -595,12 +594,26 @@ Then read the file and summarize it in one sentence. Save the summary to summary
                             <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
                             <span class="text-xs text-gray-400 ml-2 font-mono">terminal</span>
                         </div>
-                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">git clone https://github.com/YOUR-USERNAME/mooc-starter-kit.git
-cd mooc-starter-kit
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-acid">cd ~
 claude</code></pre>
                     </div>
-                    <p class="text-gray-300 text-sm mb-4">Replace <code class="text-acid bg-surface px-1">YOUR-USERNAME</code> with your GitHub username. The repo already contains sample journalism documents in <code class="text-acid bg-surface px-1">sample-docs/</code>, skill templates, starter scripts, and a <code class="text-acid bg-surface px-1">CLAUDE.md</code> with placeholder sections you'll customize.</p>
-                    <p class="text-gray-400 text-xs mt-2">This step matters: Claude Code reads context files from wherever you launch it. When you launch <code class="text-acid bg-surface px-1">claude</code> inside this folder, it reads the CLAUDE.md automatically.</p>
+                    <p class="text-gray-300 text-sm mb-4">You're now in an active Claude Code session running in your home folder. Paste the URL of your fork into the chat and ask Claude to clone it and stay in the new folder:</p>
+                    <div class="border border-white/10 bg-panel overflow-hidden mb-4">
+                        <div class="bg-surface px-4 py-2 border-b border-white/10 flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-signal/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-acid/50" aria-hidden="true"></div>
+                            <div class="w-3 h-3 rounded-full bg-ice/50" aria-hidden="true"></div>
+                            <span class="text-xs text-gray-400 ml-2 font-mono">claude code</span>
+                        </div>
+                        <pre class="p-4 text-sm overflow-x-auto"><code class="text-gray-300">Clone my fork of the course starter kit from
+https://github.com/YOUR-USERNAME/mooc-starter-kit and
+then stay in the new folder so we can work on the
+course exercises together. The repo has sample docs,
+skill templates, and a CLAUDE.md file you should read
+first.</code></pre>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Replace <code class="text-acid bg-surface px-1">YOUR-USERNAME</code> with your own GitHub username. Claude will run the clone, change into the new folder, and read the <code class="text-acid bg-surface px-1">CLAUDE.md</code> inside it. The repo already contains sample journalism documents in <code class="text-acid bg-surface px-1">sample-docs/</code>, skill templates, starter scripts, and a <code class="text-acid bg-surface px-1">CLAUDE.md</code> with placeholder sections you'll customize.</p>
+                    <p class="text-gray-400 text-xs mt-2">This is the course's default install pattern. You <code class="text-acid bg-surface px-1">cd</code> somewhere, you launch your agent, and from that point on everything happens inside the conversation. Anything that used to mean "type a command into your terminal" &mdash; cloning, creating folders, initializing git, installing tools &mdash; now means "ask your agent to do it." See <a href="../faq/following-along-on-macos/" class="text-ice hover:text-acid transition-colors">the Mac follow-along FAQ</a> for more on the two-commands-only rule.</p>
                 </div>
 
                 <!-- Step 10 -->
@@ -798,11 +811,11 @@ claude</code></pre>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">Git says "not a git repository"</h4>
-                        <p class="text-gray-400 text-sm">You need to run <code class="text-acid bg-surface px-1">git init</code> (or ask the CLI tool to do it) in your project directory before using Git commands. Check that you're in the right folder with <code class="text-acid bg-surface px-1">pwd</code>.</p>
+                        <p class="text-gray-400 text-sm">Ask your agent to handle it. Something like <em>"this folder isn't a git repo yet &mdash; can you set it up, and confirm we're in the right folder before doing anything else?"</em> will take care of both the <code class="text-acid bg-surface px-1">git init</code> and the folder check. You don't run either one yourself.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">The AI can't find my document file</h4>
-                        <p class="text-gray-400 text-sm">File names are case-sensitive on macOS and Linux. Make sure the name in your prompt matches the actual filename exactly. Use <code class="text-acid bg-surface px-1">ls</code> to list files in the current directory.</p>
+                        <p class="text-gray-400 text-sm">File names are case-sensitive on macOS and Linux. Ask your agent to list what's actually in the current folder &mdash; something like <em>"show me the exact filenames in this folder so I can reference them correctly"</em> &mdash; then use the exact names you see in your next prompt.</p>
                     </div>
                 </div>
             </section>

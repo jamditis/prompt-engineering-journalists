@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm on a Mac. Does anything change? | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../../assets/css/amditis.css">
+    <script src="../../assets/js/module-schedule.js"></script>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mooc.amditis.tech/faq/following-along-on-macos/" />
+    <meta property="og:title" content="I'm on a Mac. Does anything change?" />
+    <meta property="og:description" content="Joe's videos run in Windows PowerShell. On a Mac, you do the same work in a program called Terminal. You won't actually be typing most of what you see him type — Claude does the work inside the session. The two things you ever type are cd and claude." />
+    <meta property="og:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="I'm on a Mac. Does anything change?" />
+    <meta name="twitter:description" content="Almost nothing. The only two commands you type are cd and claude. Everything else is asked of Claude inside the session." />
+    <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+<script src="../../assets/js/ask-ai.js" defer></script>
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
+                    <a href="../../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
+                    <a href="../../faq/" class="text-acid">[ FAQ ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">FAQ &middot; FOLLOWING ALONG</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">I'm on a Mac. Does anything change?</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Joe's videos are recorded in Windows PowerShell. On a Mac, the same work happens in a program called Terminal. The good news: you will almost never be typing the commands you see him type, because Claude does the work inside the session. On any machine, there are really only two things you ever type yourself.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-xs font-mono text-acid font-bold mb-2">SHORT ANSWER</p>
+                    <p class="text-gray-200 leading-relaxed">Open Terminal, use <code class="text-acid bg-surface px-1">cd</code> to get to the folder you want to work in, then type <code class="text-acid bg-surface px-1">claude</code> and press Enter. That's the Mac version of everything Joe does to start a session. From that point on, you're inside Claude Code and you give instructions in plain English. You don't need to know what <code class="text-ice bg-surface px-1">mkdir</code>, <code class="text-ice bg-surface px-1">touch</code>, <code class="text-ice bg-surface px-1">git clone</code>, or any other command in the video actually does &mdash; Claude runs them for you.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Where Terminal lives on your Mac</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Terminal is an app that ships with every Mac. Three ways to open it:</p>
+                    <ul class="space-y-3 text-gray-300 leading-relaxed mb-4 list-none">
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Spotlight.</strong> Press <kbd class="bg-surface border border-white/20 px-2 py-0.5 rounded text-xs font-mono">&#8984; Space</kbd>, type <em>terminal</em>, press Enter. Fastest way in.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Finder.</strong> Open the Applications folder, then the Utilities subfolder. Terminal is in there.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Launchpad.</strong> Open Launchpad, find the Other folder, open it, and Terminal is inside.</span></li>
+                    </ul>
+                    <p class="text-gray-300 leading-relaxed">When Terminal opens, you see a window with a blinking cursor and a short line of text that ends in <code class="text-ice font-mono text-sm">%</code>. That's the prompt, waiting for you to type something. The Windows equivalent &mdash; the one in Joe's videos &mdash; looks different visually but works the same way.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">The two commands you actually type</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">In this whole course, these are the only commands you ever type into Terminal yourself:</p>
+
+                    <div class="border border-white/10 bg-panel p-6 mb-4">
+                        <h3 class="font-display text-lg text-acid mb-2">1. <code>cd</code> &mdash; go to a folder</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-2"><code class="text-ice bg-surface px-1">cd</code> stands for "change directory." You use it to tell Terminal which folder you want to work in. Example:</p>
+                        <pre class="bg-void border border-white/10 rounded-lg p-4 mb-2 overflow-x-auto"><code class="text-acid font-mono text-sm">cd ~/my-course-folder</code></pre>
+                        <p class="text-gray-300 text-sm leading-relaxed">The <code class="text-ice font-mono text-sm">~</code> is shorthand for your home folder. This says "take me to the <code class="text-ice font-mono text-sm">mooc-project</code> folder inside <code class="text-ice font-mono text-sm">Desktop</code> inside my home folder."</p>
+                    </div>
+
+                    <div class="border border-white/10 bg-panel p-6 mb-4">
+                        <h3 class="font-display text-lg text-acid mb-2">2. <code>claude</code> &mdash; launch the agent</h3>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-2">Once you're in the folder you want to work in, launch Claude Code:</p>
+                        <pre class="bg-void border border-white/10 rounded-lg p-4 mb-2 overflow-x-auto"><code class="text-acid font-mono text-sm">claude</code></pre>
+                        <p class="text-gray-300 text-sm leading-relaxed">That drops you into an interactive session with Claude Code in whatever folder you just cd'd into. Everything from this point on is English sentences, not shell commands. If you're using Gemini CLI instead, the command is <code class="text-ice font-mono text-sm">gemini</code>. For Codex CLI it's <code class="text-ice font-mono text-sm">codex</code>. Same pattern: <code class="text-ice font-mono text-sm">cd</code> somewhere, then launch your agent.</p>
+                    </div>
+
+                    <p class="text-gray-300 leading-relaxed">That's it. No other commands. If you ever find yourself tempted to type something else into Terminal, stop and ask Claude to do it for you instead. That's the whole shift this course is teaching.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">But Joe types things in the video. What are those?</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">Two situations, and neither one means you have to type the same thing on your Mac:</p>
+                    <ul class="space-y-3 text-gray-300 leading-relaxed mb-4 list-none">
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">He's inside a Claude Code session, typing a prompt.</strong> Those are plain English sentences he's giving to Claude. Everything he says to Claude works identically on Mac, Windows, and Linux. The language model doesn't care what operating system you're on.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">He's setting up the demo at the very beginning.</strong> Even here, he really only does <code class="text-ice bg-surface px-1">cd</code> and <code class="text-ice bg-surface px-1">claude</code>. Anything that looks like he's creating folders, touching files, running git, or installing something is usually Claude doing that inside the session in response to his prompt &mdash; not Joe typing it himself.</span></li>
+                    </ul>
+                    <p class="text-gray-300 leading-relaxed">Watch the video as a movie, not a recipe. You're watching what a session can look like, not memorizing keystrokes. Your own session will look different because your prompt will be different.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What if something goes wrong?</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">The course's official answer to any tool error, no matter how small: take a screenshot or copy the error text, open the web version of your preferred LLM (<a href="https://claude.ai" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">claude.ai</a>, <a href="https://gemini.google.com" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">gemini.google.com</a>, or <a href="https://chatgpt.com" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">chatgpt.com</a>), paste the error in, and ask the model to walk you through fixing it. Paste new screenshots as the conversation continues. That's the standard debugging approach this course uses, and it's how Joe handles his own errors too.</p>
+                    <p class="text-gray-300 leading-relaxed">If your <code class="text-ice bg-surface px-1">claude</code> command itself isn't launching, see the <a href="../claude-command-not-found/" class="text-ice hover:text-acid transition-colors">"command not found" FAQ</a>. That's a first-install issue rather than a Mac-specific one.</p>
+                </div>
+
+                <div class="border border-ice/30 bg-iceDim p-6">
+                    <p class="text-xs font-mono text-ice font-bold mb-2">IF YOU WANT THE QUICK MENTAL MODEL</p>
+                    <p class="text-gray-200 leading-relaxed">Terminal is a room. <code class="text-ice bg-surface px-1">cd</code> is you walking into a specific folder in that room. <code class="text-ice bg-surface px-1">claude</code> is you calling a colleague into that same folder and handing them the work. Everything after that is you and the colleague having a conversation about the work. You never pick up the tools yourself.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">FAQ</a>
+                        <a href="../../module-1/" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">MODULE 01</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
