@@ -23,7 +23,6 @@
     <meta name="twitter:title" content="Fix PATH after installing Claude Code on macOS" />
     <meta name="twitter:description" content="You installed Claude Code and typing 'claude' says 'command not found.' Here's the three-step fix that works for almost everyone." />
     <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png" />
-    <script src="https://unpkg.com/lucide@latest"></script>
 <script src="../../assets/js/ask-ai.js" defer></script>
 </head>
 <body class="antialiased font-sans bg-void text-chrome">
@@ -86,9 +85,9 @@
                     <pre class="bg-void border border-white/10 rounded-lg p-4 mb-4 overflow-x-auto"><code class="text-acid font-mono text-sm">npm list -g --depth=0 2&gt;/dev/null | head
 npm config get prefix</code></pre>
                     <p class="text-gray-300 leading-relaxed mb-4">The first command lists anything you installed globally with npm. The second prints the folder npm uses as its install prefix &mdash; usually something like <code class="text-ice font-mono text-sm">/usr/local</code>, <code class="text-ice font-mono text-sm">/opt/homebrew</code>, or <code class="text-ice font-mono text-sm">~/.npm-global</code>. The <code class="text-ice font-mono text-sm">claude</code> binary should be in the <code class="text-ice font-mono text-sm">bin</code> subfolder of whatever that prefix is.</p>
-                    <p class="text-gray-300 leading-relaxed mb-4">You can also just search for it:</p>
-                    <pre class="bg-void border border-white/10 rounded-lg p-4 mb-4 overflow-x-auto"><code class="text-acid font-mono text-sm">find / -name claude -type f 2&gt;/dev/null | head</code></pre>
-                    <p class="text-gray-300 leading-relaxed">Write down the folder it prints out. You'll need it for Step 3.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">If those two commands don't point you at it, check the usual install locations directly &mdash; this is much faster than searching the whole disk:</p>
+                    <pre class="bg-void border border-white/10 rounded-lg p-4 mb-4 overflow-x-auto"><code class="text-acid font-mono text-sm">command -v claude || find /usr/local/bin /opt/homebrew/bin "$HOME/.npm-global/bin" -name claude -type f 2&gt;/dev/null</code></pre>
+                    <p class="text-gray-300 leading-relaxed">If that prints a full path ending in <code class="text-ice font-mono text-sm">/claude</code>, write down the <em>directory</em> that contains it (usually a <code class="text-ice font-mono text-sm">bin</code> folder), not the full path. PATH entries have to be directories. You'll need that folder for Step 3.</p>
                 </div>
 
                 <div>
@@ -96,7 +95,7 @@ npm config get prefix</code></pre>
                     <p class="text-gray-300 leading-relaxed mb-4">macOS uses zsh by default (has since Catalina, released in 2019). Your zsh config lives in <code class="text-ice font-mono text-sm">~/.zshrc</code>. If that file doesn't exist yet, create it &mdash; it's just a plain text file.</p>
                     <p class="text-gray-300 leading-relaxed mb-4">Open it in any text editor:</p>
                     <pre class="bg-void border border-white/10 rounded-lg p-4 mb-4 overflow-x-auto"><code class="text-acid font-mono text-sm">open -e ~/.zshrc</code></pre>
-                    <p class="text-gray-300 leading-relaxed mb-4">Add this line at the bottom, replacing <code class="text-ice font-mono text-sm">/path/to/folder</code> with the folder you found in Step 2:</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">Add this line at the bottom, replacing <code class="text-ice font-mono text-sm">/path/to/folder</code> with the <em>directory</em> you identified in Step 2 (not a full path ending in <code class="text-ice font-mono text-sm">/claude</code> &mdash; PATH entries must be directories):</p>
                     <pre class="bg-void border border-white/10 rounded-lg p-4 mb-4 overflow-x-auto"><code class="text-acid font-mono text-sm">export PATH="$PATH:/path/to/folder"</code></pre>
                     <p class="text-gray-300 leading-relaxed mb-4">For example, if your npm prefix is <code class="text-ice font-mono text-sm">~/.npm-global</code>, the line would be:</p>
                     <pre class="bg-void border border-white/10 rounded-lg p-4 mb-4 overflow-x-auto"><code class="text-acid font-mono text-sm">export PATH="$PATH:$HOME/.npm-global/bin"</code></pre>
@@ -114,10 +113,12 @@ npm config get prefix</code></pre>
 
                 <div>
                     <h2 class="font-display text-2xl text-chrome mb-4">The escape hatch: reinstall with the native installer</h2>
-                    <p class="text-gray-300 leading-relaxed mb-4">If the PATH surgery in Step 3 feels like too much, you can start over using the official native installer from Anthropic, which handles PATH automatically:</p>
-                    <pre class="bg-void border border-white/10 rounded-lg p-4 mb-4 overflow-x-auto"><code class="text-acid font-mono text-sm">curl -fsSL https://claude.ai/install.sh | sh</code></pre>
-                    <p class="text-gray-300 leading-relaxed mb-4">This downloads and runs Anthropic's installer script, which drops the <code class="text-ice font-mono text-sm">claude</code> binary in a folder that's already in your PATH on most Macs. After it finishes, quit Terminal, reopen it, and try <code class="text-acid bg-surface px-1">claude</code> &mdash; it should just work.</p>
-                    <p class="text-gray-300 leading-relaxed">If you had previously installed via <code class="text-ice font-mono text-sm">npm install -g @anthropic-ai/claude-code</code>, you can leave that alone or remove it &mdash; the native installer uses its own path and won't conflict.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">If the PATH surgery in Step 3 feels like too much, you can start over using the official native installer from Anthropic, which handles PATH automatically. Download the installer first so you can eyeball what it does before running it &mdash; this is good hygiene for any <code class="text-ice font-mono text-sm">curl | sh</code> command you see on the internet:</p>
+                    <pre class="bg-void border border-white/10 rounded-lg p-4 mb-4 overflow-x-auto"><code class="text-acid font-mono text-sm">curl -fsSL https://claude.ai/install.sh -o install.sh
+less install.sh
+sh install.sh</code></pre>
+                    <p class="text-gray-300 leading-relaxed mb-4">The first line downloads the script from Anthropic's official domain. <code class="text-ice font-mono text-sm">less</code> lets you read through it (press <kbd class="px-1 py-0.5 border border-white/20 rounded text-xs font-mono">q</kbd> to quit). The third line runs it, dropping the <code class="text-ice font-mono text-sm">claude</code> binary into a folder that's already in your PATH on most Macs. After it finishes, quit Terminal, reopen it, and try <code class="text-acid bg-surface px-1">claude</code>.</p>
+                    <p class="text-gray-300 leading-relaxed">If you had previously installed via <code class="text-ice font-mono text-sm">npm install -g @anthropic-ai/claude-code</code>, the two installs can coexist but both provide a <code class="text-ice font-mono text-sm">claude</code> command, and which one runs depends on PATH order. If things still behave strangely after reinstalling, run <code class="text-ice bg-surface px-1">which claude</code> to see which binary your shell picks up, and remove or disable the npm install with <code class="text-ice font-mono text-sm">npm uninstall -g @anthropic-ai/claude-code</code> if you want the native one to win.</p>
                 </div>
 
                 <div class="border border-ice/30 bg-iceDim p-6">
@@ -149,6 +150,5 @@ npm config get prefix</code></pre>
         </footer>
     </div>
 
-    <script>lucide.createIcons();</script>
 </body>
 </html>

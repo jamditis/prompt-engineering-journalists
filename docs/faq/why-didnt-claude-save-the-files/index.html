@@ -23,7 +23,6 @@
     <meta name="twitter:title" content="Why didn't Claude Code save any files?" />
     <meta name="twitter:description" content="Claude Code won't write files unless you ask it to. Here's what to add to your prompt so the work actually lands on disk." />
     <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png" />
-    <script src="https://unpkg.com/lucide@latest"></script>
 <script src="../../assets/js/ask-ai.js" defer></script>
 </head>
 <body class="antialiased font-sans bg-void text-chrome">
@@ -72,7 +71,9 @@
                 </div>
 
                 <figure class="my-8">
-                    <svg viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg" class="w-full border border-white/10 rounded-lg">
+                    <svg viewBox="0 0 960 560" xmlns="http://www.w3.org/2000/svg" class="w-full border border-white/10 rounded-lg" role="img" aria-labelledby="claude-save-files-title claude-save-files-desc">
+                        <title id="claude-save-files-title">Two ways of asking Claude Code to do the same task</title>
+                        <desc id="claude-save-files-desc">A side-by-side diagram. On the left, a prompt without file-saving instructions leads to terminal output that vanishes when the session ends. On the right, a prompt that names a destination file leads to a saved file on disk.</desc>
                         <defs>
                             <marker id="arrow-signal" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
                                 <polygon points="0 0, 10 3.5, 0 7" fill="#f87171"/>
@@ -226,6 +227,5 @@ link directly to the sources for each one.</code></pre>
         </footer>
     </div>
 
-    <script>lucide.createIcons();</script>
 </body>
 </html>
