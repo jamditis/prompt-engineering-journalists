@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My claude command isn't working. What now? | Advanced prompt engineering for journalists</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../../assets/js/config.js"></script>
+    <link rel="stylesheet" href="../../assets/css/amditis.css">
+    <script src="../../assets/js/module-schedule.js"></script>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mooc.amditis.tech/faq/claude-command-not-found/" />
+    <meta property="og:title" content="My claude command isn't working. What now?" />
+    <meta property="og:description" content="If typing 'claude' gives you 'command not found' or any other error, take a screenshot and paste it into claude.ai, gemini.google.com, or chatgpt.com. Ask the model to walk you through fixing it. That's the course's standard debugging approach." />
+    <meta property="og:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="My claude command isn't working. What now?" />
+    <meta name="twitter:description" content="Paste the error into the web version of your preferred AI model and let it walk you through the fix." />
+    <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png" />
+<script src="../../assets/js/ask-ai.js" defer></script>
+</head>
+<body class="antialiased font-sans bg-void text-chrome">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="relative z-10 flex min-h-screen flex-col">
+        <header class="border-b border-white/10 bg-panel/50 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="../../" class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-acid text-void flex items-center justify-center font-bold font-display text-xl rounded-lg">P</div>
+                    <span class="font-display font-bold text-sm tracking-wider text-chrome">PROMPT_ENG</span>
+                </a>
+                <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
+                    <a href="../../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
+                    <a href="../../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
+                    <a href="../../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
+                    <a href="../../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
+                    <a href="../../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
+                    <a href="../../faq/" class="text-acid">[ FAQ ]</a>
+                </nav>
+            </div>
+        </header>
+
+        <section class="py-12 px-6 border-b border-white/10">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-xs text-acid font-mono mb-4">FAQ &middot; TROUBLESHOOTING</div>
+                <h1 class="font-display text-4xl md:text-5xl font-bold text-white">My <code class="text-acid bg-surface px-2 text-3xl md:text-4xl">claude</code> command isn't working. What now?</h1>
+                <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">You installed Claude Code, you typed <code class="text-acid bg-surface px-1">claude</code> into your terminal, and instead of an interactive session you got an error. Here's the single answer that works for this and every other tool error in the course.</p>
+            </div>
+        </section>
+
+        <main id="main" class="flex-1 max-w-5xl mx-auto w-full px-6 py-12">
+            <div class="max-w-prose space-y-8">
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-xs font-mono text-acid font-bold mb-2">SHORT ANSWER</p>
+                    <p class="text-gray-200 leading-relaxed">Take a screenshot of the error, or copy the text of the error message. Open the web version of your preferred AI model &mdash; <a href="https://claude.ai" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">claude.ai</a>, <a href="https://gemini.google.com" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">gemini.google.com</a>, or <a href="https://chatgpt.com" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">chatgpt.com</a>. Paste the screenshot or the text and say: "I'm trying to run Claude Code on my computer and I'm getting this error. Can you walk me through how to fix it? I'm new to this." The model will give you a step. Try it. If it doesn't work, paste the new error. Repeat until you're in.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Why this is the answer, not a step-by-step fix</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">There are at least a dozen reasons typing <code class="text-ice font-mono text-sm">claude</code> might not work on your machine. Your PATH isn't set up. npm installed it in a folder your shell can't see. You have two versions from different installers fighting each other. You installed it in a terminal window that needs to be restarted. Your shell is bash instead of zsh and the installer only updated one of them. And so on.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">A single webpage cannot cover every one of those cases in a way that's both clear and correct. But an AI model that can see your exact error and respond to you personally can. That's literally what these tools are for. The course's core idea is that you delegate work to a model instead of memorizing the steps yourself, and debugging your own tool install is no exception.</p>
+                    <p class="text-gray-300 leading-relaxed">Once your <code class="text-ice font-mono text-sm">claude</code> command launches successfully, you'll use Claude Code itself for most future troubleshooting. But right now, while it's still broken, you need an agent that isn't depending on the broken tool &mdash; which means the web version of Claude, Gemini, or ChatGPT in your browser.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">How to make the web model useful to you</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">A few tips that make this conversation go faster:</p>
+                    <ul class="space-y-3 text-gray-300 leading-relaxed list-none">
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Tell it your operating system upfront.</strong> "I'm on a Mac" or "I'm on Windows 11" saves it from guessing. If you know which version (macOS Sonoma, Windows 11 Home, etc.), that helps too, but the basic OS name is enough to get started.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Say how you installed Claude Code.</strong> Did you run the official installer from claude.ai? Did you install via npm? Did a colleague do it for you? The model will ask a different first question in each case, so telling it upfront saves a round trip.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Paste the exact error, not your paraphrase of it.</strong> "It says command not found" is less useful than a screenshot showing <code class="text-ice font-mono text-sm">zsh: command not found: claude</code>. Exact words matter because they tell the model which shell and which failure mode.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">Paste new screenshots as the conversation goes.</strong> The model will tell you to try something, then ask what happened. Show it what happened. Don't summarize &mdash; paste.</span></li>
+                        <li class="flex gap-3"><span class="text-acid flex-shrink-0">&rsaquo;</span><span><strong class="text-chrome">If it tells you to run a destructive command, ask what it does first.</strong> The model will sometimes suggest commands that delete files or change system settings. You can always ask "what does this command do before I run it?" and make sure you understand the answer before pressing Enter.</span></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">Plain-English PATH context, if you want it</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">You don't need this section to fix the problem. It's only here in case you're curious why "command not found" happens in the first place and want a mental model before the AI model starts walking you through the fix.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">When you type a command in your terminal, your shell doesn't search your whole computer for a program with that name. It only looks in a specific list of folders, called your PATH. PATH is just a list of folders separated by colons, stored as an environment variable on your machine. When you type <code class="text-ice font-mono text-sm">claude</code>, your shell walks through each folder in PATH in order and runs the first <code class="text-ice font-mono text-sm">claude</code> it finds.</p>
+                    <p class="text-gray-300 leading-relaxed">"Command not found" means the <code class="text-ice font-mono text-sm">claude</code> binary is definitely on your computer &mdash; it's just sitting in a folder that isn't on your PATH. The fix is always some variation of "tell your shell to look in the right folder." Which exact folder depends on how Claude Code was installed, which is why it's easier to let the AI model handle it than to guess.</p>
+                </div>
+
+                <div class="border border-ice/30 bg-iceDim p-6">
+                    <p class="text-xs font-mono text-ice font-bold mb-2">IF YOU WANT A SHORTCUT TO TRY FIRST</p>
+                    <p class="text-gray-200 leading-relaxed">Before pasting the error anywhere, try one thing: completely quit Terminal (Cmd+Q on Mac, close the window entirely on Windows) and reopen it. Many installers update your shell's config file, but the config only gets read when a new shell starts. If that brings <code class="text-ice bg-surface px-1">claude</code> back to life, you were just reading a stale terminal session and nothing is actually broken. If it still doesn't work after a fresh terminal, go to the web AI model.</p>
+                </div>
+
+                <div class="border border-acid/30 bg-acidDim p-6">
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">ONCE YOU'RE IN:</span> Head back to <a href="../../module-1/" class="text-ice hover:text-acid transition-colors">Module 1</a> and pick up where the video left off. If you're on a Mac and still unsure how any of this maps to what you see in Joe's Windows demos, the <a href="../following-along-on-macos/" class="text-ice hover:text-acid transition-colors">Mac follow-along FAQ</a> explains the one-paragraph version.</p>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="border-t border-white/10 bg-panel">
+            <div class="max-w-5xl mx-auto px-6 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="text-xs font-mono text-gray-300">Advanced prompt engineering for journalists</div>
+                    <div class="flex items-center gap-6">
+                        <a href="../../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
+                        <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">FAQ</a>
+                        <a href="../../module-1/" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">MODULE 01</a>
+                    </div>
+                </div>
+                <div class="mt-6 pt-6 border-t border-white/5 text-center">
+                    <p class="text-xs font-sans text-gray-300">&copy; 2026 Knight Center for Journalism in the Americas</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

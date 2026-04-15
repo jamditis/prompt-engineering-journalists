@@ -44,7 +44,6 @@
                     <a href="../../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
                     <a href="../../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
                     <a href="../../faq/" class="text-acid">[ FAQ ]</a>
-                    <a href="../../mac/" class="text-gray-400 hover:text-ice transition-colors">[ MAC ]</a>
                 </nav>
             </div>
         </header>
@@ -79,14 +78,21 @@
                 </div>
 
                 <div>
-                    <h2 class="font-display text-2xl text-chrome mb-4">If you want to install it</h2>
-                    <p class="text-gray-300 leading-relaxed mb-4">Firecrawl is free to use at a modest rate limit. Signing up takes a few minutes:</p>
-                    <ul class="space-y-3 text-gray-300 leading-relaxed mb-4 list-none">
-                        <li class="flex gap-3"><span class="text-acid flex-shrink-0 font-mono">1.</span><span>Go to <a href="https://firecrawl.dev" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">firecrawl.dev</a> and create a free account.</span></li>
-                        <li class="flex gap-3"><span class="text-acid flex-shrink-0 font-mono">2.</span><span>Copy your API key from the dashboard.</span></li>
-                        <li class="flex gap-3"><span class="text-acid flex-shrink-0 font-mono">3.</span><span>Follow the Firecrawl docs to add it as an MCP server in your Claude Code configuration. The exact steps depend on your operating system.</span></li>
-                    </ul>
-                    <p class="text-gray-300 leading-relaxed">If installation feels like a detour from whatever you're actually trying to learn this week, skip it. Come back to Firecrawl when you have a real research task in front of you that needs clean web content in local files. That's when the upgrade will feel obviously worth it.</p>
+                    <h2 class="font-display text-2xl text-chrome mb-4">You don't have to install it</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">The course does not require Firecrawl at any point. Nothing in Modules 1 through 4 or the final project assumes you have it. Claude Code can already read web pages without it &mdash; the output is just a little less clean, and the research demo in Joe's Module 1 video will look slightly different from yours. That's the whole difference.</p>
+                    <p class="text-gray-300 leading-relaxed">If you're short on time or energy this week, skip Firecrawl entirely. Come back to it later only if you hit a specific task where you actually want the cleaner content extraction it offers.</p>
+                </div>
+
+                <div>
+                    <h2 class="font-display text-2xl text-chrome mb-4">If you want it anyway, ask your agent</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">If you do decide you want Firecrawl set up, the way you install it in this course is the same way you install anything else: you ask your CLI agent to walk you through it. Inside an active Claude Code, Gemini CLI, or Codex CLI session, paste something like:</p>
+                    <pre class="bg-void border border-white/10 rounded-lg p-4 mb-4 overflow-x-auto"><code class="text-gray-300 font-mono text-sm">I want to install the Firecrawl MCP server so you can use it
+to extract clean content from web pages. Walk me through it
+step by step. Tell me what to click, what to copy, and where
+to paste it. Handle any config files yourself. I'm new to
+this, so assume I'm starting from zero.</code></pre>
+                    <p class="text-gray-300 leading-relaxed mb-4">The agent will hand you instructions one step at a time. Some of those steps might involve visiting <a href="https://firecrawl.dev" target="_blank" rel="noopener" class="text-ice hover:text-acid transition-colors">firecrawl.dev</a> in your browser, creating an account, copying an API key, and pasting it back into the conversation when the agent asks for it. That's fine &mdash; you're still following the rule. The rule is that <em>you</em> don't type install commands into a separate terminal yourself. Clicking around on a website or pasting a key into a chat message doesn't violate anything.</p>
+                    <p class="text-gray-300 leading-relaxed">This "ask your agent to walk you through it" pattern is the default way to install any new tool, MCP server, or plugin in this course. If you ever find yourself about to type something into a terminal that isn't <code class="text-ice bg-surface px-1">cd</code> or your agent's launch command (<code class="text-ice bg-surface px-1">claude</code>, <code class="text-ice bg-surface px-1">gemini</code>, <code class="text-ice bg-surface px-1">codex</code>), stop and go ask your agent instead.</p>
                 </div>
 
                 <div>

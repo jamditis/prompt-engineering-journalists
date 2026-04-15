@@ -46,9 +46,10 @@
                     <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
                     <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
                     <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
+                    <a href="../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
+                    <a href="../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
                     <a href="../syllabus/" class="text-gray-400 hover:text-ice transition-colors">[ SYL ]</a>
                     <a href="../faq/" class="text-gray-400 hover:text-ice transition-colors">[ FAQ ]</a>
-                    <a href="../mac/" class="text-gray-400 hover:text-ice transition-colors">[ MAC ]</a>
                 </nav>
             </div>
         </header>
@@ -98,27 +99,31 @@
                     <div class="border border-white/10 bg-panel p-6">
                         <div class="flex items-baseline gap-3 mb-3">
                             <span class="font-mono text-acid font-bold text-sm">2.</span>
-                            <span class="font-display text-chrome font-bold">Clone your fork</span>
+                            <span class="font-display text-chrome font-bold">Launch Claude Code from your home folder</span>
                         </div>
-                        <p class="text-gray-300 text-sm mb-3">Open a terminal and run:</p>
+                        <p class="text-gray-300 text-sm mb-3">You don't clone the repo yourself. Instead, you launch Claude Code from your home folder and let Claude clone the repo for you. Open a terminal and run:</p>
                         <div class="bg-surface border border-white/10 p-4 font-mono text-sm rounded overflow-x-auto">
-                            <pre class="m-0"><code><span class="text-gray-400">$</span> <span class="text-chrome">git clone https://github.com/YOUR-USERNAME/mooc-starter-kit.git</span>
-<span class="text-gray-400">$</span> <span class="text-chrome">cd mooc-starter-kit</span></code></pre>
+                            <pre class="m-0"><code><span class="text-gray-400">$</span> <span class="text-acid">cd ~</span>
+<span class="text-gray-400">$</span> <span class="text-acid">claude</span></code></pre>
                         </div>
-                        <p class="text-gray-400 text-xs mt-3">Replace <code class="text-acid bg-surface px-1">YOUR-USERNAME</code> with your GitHub username.</p>
+                        <p class="text-gray-400 text-xs mt-3">This is the course's rule of thumb: the only things you ever type into your terminal yourself are <code class="text-acid bg-surface px-1">cd</code> and your agent's launch command (<code class="text-acid bg-surface px-1">claude</code>, <code class="text-acid bg-surface px-1">gemini</code>, or <code class="text-acid bg-surface px-1">codex</code>). Everything else happens inside the agent session.</p>
                     </div>
 
                     <!-- Step 3 -->
                     <div class="border border-white/10 bg-panel p-6">
                         <div class="flex items-baseline gap-3 mb-3">
                             <span class="font-mono text-acid font-bold text-sm">3.</span>
-                            <span class="font-display text-chrome font-bold">Launch Claude Code</span>
+                            <span class="font-display text-chrome font-bold">Ask Claude to clone your fork</span>
                         </div>
-                        <p class="text-gray-300 text-sm mb-3">From inside the project folder, start a session:</p>
+                        <p class="text-gray-300 text-sm mb-3">You're inside an active Claude Code session now. Paste this prompt, swapping in the URL of your fork:</p>
                         <div class="bg-surface border border-white/10 p-4 font-mono text-sm rounded overflow-x-auto">
-                            <pre class="m-0"><code><span class="text-gray-400">$</span> <span class="text-acid">claude</span></code></pre>
+                            <pre class="m-0"><code class="text-gray-300">Clone my fork of the course starter kit from
+https://github.com/YOUR-USERNAME/mooc-starter-kit and
+stay in that new folder so we can work on the course
+exercises together. Read the CLAUDE.md file first so you
+understand the setup.</code></pre>
                         </div>
-                        <p class="text-gray-400 text-xs mt-3">Claude reads the <code class="text-acid bg-surface px-1">CLAUDE.md</code> file automatically when you launch from this directory.</p>
+                        <p class="text-gray-400 text-xs mt-3">Replace <code class="text-acid bg-surface px-1">YOUR-USERNAME</code> with your GitHub username. Claude will run the clone, change into the new folder, and read your <code class="text-acid bg-surface px-1">CLAUDE.md</code> automatically. From here on, every course exercise assumes you're inside your starter kit folder with a Claude Code session active.</p>
                     </div>
                 </div>
             </section>
