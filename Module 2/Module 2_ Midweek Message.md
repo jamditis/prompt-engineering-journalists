@@ -1,23 +1,28 @@
-# Module 2: Custom skills for Claude Code
-
-## Midweek message
+# Module 2: Midweek message
 
 Hello everyone,
 
-By mid-week, you should have watched both videos (the Mamdani content analysis pipeline and the skill/plugin creation process) and started building your own custom slash command for the exercise.
+By now, you should have watched both videos and started on this week's exercise — turning a repeatable prompt from your beat into a reusable tool. A lot has been moving on the forums, so here's a midweek check-in.
 
-Common issues I'm seeing when creating custom commands:
+**Erratum — skill file location.** Marjorie Roswell flagged two spots where we point to the wrong folder: Question 1 of the Module 2 quiz, and the slide at 1:26 in Video 2. Both say `.claude/commands/` where they should say `.claude/skills/` for skills specifically. Here's the clean version of the distinction in current Claude Code:
 
-**File location matters.** Your command file needs to go in `.claude/commands/` inside your project directory (for project-specific commands) or `~/.claude/commands/` in your home folder (for commands available everywhere). If the file isn't in the right place, the slash command won't show up. After adding a new command file, restart Claude Code.
+- **Custom slash commands** live in `.claude/commands/` (project) or `~/.claude/commands/` (personal). You type `/name` to invoke them.
+- **Skills** live in `.claude/skills/` (project) or `~/.claude/skills/` (personal) as folders containing a `SKILL.md` file with YAML frontmatter. Claude auto-loads them based on the description when it thinks one applies.
 
-**File naming = command name.** The filename determines the slash command. A file named `extract-minutes.md` becomes `/extract-minutes`. Don't add spaces or special characters to the filename. Keep it lowercase with hyphens.
+Filipa is updating the quiz on the Knight Center side. I'll re-record the slide clip before the next run of the course. The forum thread is a good spot if you have follow-up questions — I'll keep answering there.
 
-**Folder structure.** If your command needs supporting files (templates, examples), use a folder: `extract-minutes/SKILL.md` with optional subdirectories. A single markdown file works for simple commands.
+**Related fix on the journalism-skills repo.** Marjorie also caught a path typo in the install instructions for `claude-skills-journalism`. That's been fixed — the repo README now has the correct `~/.claude/skills/journalism` clone target.
 
-**"Claude isn't following my command instructions."** Make sure you invoke the command explicitly with the slash at the start of your task. Type `/your-command-name` first, then provide the input. If you just describe what you want without invoking the command, Claude won't load your custom instructions.
+**autocontext on Windows.** Eva started a thread in the instructor's forum about the autocontext skill misbehaving on Windows. If you've hit the same wall, drop a note in that thread — I want to collect enough signal to tell whether it's a genuine Windows limitation or a doc issue on my end.
 
-**The video demo used a social media content analysis pipeline.** Your skill doesn't need to be that complex. The point of the demo was to show the full range of what's possible in a CLI session — and then to show how you capture that workflow as reusable skills. Your custom command just needs to encode a specific, repeatable task from your beat. What makes it a skill is the beat-specific knowledge baked in.
+**Playwright skill vs. the Playwright CLI.** Sharon asked a fair question about whether the Playwright skill I mentioned is just a wrapper over Microsoft's Playwright MCP. Short answer: yes. The skill wraps it with journalism-friendly defaults — screenshot a page, pull text, follow a link. If you're already comfortable calling Playwright directly, you can skip the skill. Both paths work.
 
-Discussion posts are due Friday. The "what skills does your newsroom need" thread has useful ideas. If you haven't posted yet, think about tasks you do weekly that follow a consistent pattern — those are your best candidates for custom commands.
+**Thursday live session.** Our first live Q&A is Thursday, Apr 23, at 4:30 PM ET on the UT Austin Zoom. Link is in the Moodle course info — check the instructor's forum for any last-minute updates. Bring questions about your exercise.
 
-Joe Amditis
+**Lunch and share.** Marjorie also set up an unofficial noon-ET Zoom most weekdays for students to troubleshoot and swap projects. Not a course-run session, but a good option if you want real-time help from other students. The link is in her forum thread.
+
+Discussion posts are due Friday. The "what skills does your newsroom need" thread has the most useful ideas so far — if you're stuck for a topic, start there.
+
+Keep going. Most of the friction this week is about file paths and naming, not the underlying concept. Once one of your commands or skills loads cleanly, the rest click into place.
+
+Joe

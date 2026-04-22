@@ -79,6 +79,24 @@
         <!-- Content sections -->
         <main id="main" class="module-live-content flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
 
+            <!-- Erratum callout (Module 2 week: Apr 20–26) -->
+            <section aria-labelledby="erratum-heading">
+                <div class="border border-acid/40 bg-acid/5 p-5 text-sm">
+                    <div class="flex items-start gap-3">
+                        <span class="text-acid font-mono text-xs mt-0.5">ERRATUM</span>
+                        <div class="space-y-2 text-gray-300">
+                            <p id="erratum-heading" class="font-display text-chrome"><strong>Skill file location — <code class="text-acid bg-surface px-1">.claude/skills/</code>, not <code class="text-acid bg-surface px-1">.claude/commands/</code></strong></p>
+                            <p>Module 2 materials use <em>skill</em> and <em>custom slash command</em> somewhat interchangeably, but in current Claude Code they live in different folders:</p>
+                            <ul class="space-y-1 pl-4">
+                                <li><strong class="text-chrome">Custom slash commands:</strong> <code class="text-acid bg-surface px-1">.claude/commands/</code> (project) or <code class="text-acid bg-surface px-1">~/.claude/commands/</code> (personal). Invoked with <code class="text-acid bg-surface px-1">/name</code>.</li>
+                                <li><strong class="text-chrome">Skills:</strong> <code class="text-acid bg-surface px-1">.claude/skills/</code> (project) or <code class="text-acid bg-surface px-1">~/.claude/skills/</code> (personal), as folders containing a <code class="text-acid bg-surface px-1">SKILL.md</code> with YAML frontmatter. Auto-loaded when Claude thinks one applies.</li>
+                            </ul>
+                            <p>Question 1 of the Module 2 quiz and the slide at 1:26 in Video 2 point to the wrong folder for skills — the quiz is being corrected on the Knight Center side, and the slide clip will be re-recorded before the next run of the course.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Learning objectives -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
