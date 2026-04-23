@@ -79,6 +79,24 @@
         <!-- Content sections -->
         <main id="main" class="module-live-content flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-16">
 
+            <!-- Erratum callout (Module 2 week: Apr 20–26) -->
+            <section aria-labelledby="erratum-heading">
+                <div class="border border-acid/40 bg-acid/5 p-5 text-sm">
+                    <div class="flex items-start gap-3">
+                        <span class="text-acid font-mono text-xs mt-0.5">ERRATUM</span>
+                        <div class="space-y-2 text-gray-300">
+                            <h2 id="erratum-heading" class="font-display text-chrome"><strong>Skill file location — <code class="text-acid bg-surface px-1">.claude/skills/</code>, not <code class="text-acid bg-surface px-1">.claude/commands/</code></strong></h2>
+                            <p>Module 2 materials use <em>skill</em> and <em>custom slash command</em> somewhat interchangeably, but in current Claude Code they live in different folders and work differently:</p>
+                            <ul class="space-y-1 pl-4">
+                                <li><strong class="text-chrome">Custom slash commands:</strong> <code class="text-acid bg-surface px-1">.claude/commands/</code> (project) or <code class="text-acid bg-surface px-1">~/.claude/commands/</code> (personal). Typed by you as <code class="text-acid bg-surface px-1">/name</code>.</li>
+                                <li><strong class="text-chrome">Skills:</strong> <code class="text-acid bg-surface px-1">.claude/skills/</code> (project) or <code class="text-acid bg-surface px-1">~/.claude/skills/</code> (personal), as folders containing a <code class="text-acid bg-surface px-1">SKILL.md</code> with YAML frontmatter. Claude reads the description and invokes a skill when a task matches. Plugin-installed skills may also expose a slash command.</li>
+                            </ul>
+                            <p>Question 1 of the Module 2 quiz and the slide at 1:26 in Video 2 point to the wrong folder for skills — the quiz is being corrected on the Knight Center side, and the slide clip will be re-recorded before the next run of the course. For the full skills vs. commands breakdown, see the <a href="../concepts/skills-vs-commands.html" class="text-ice hover:text-acid underline decoration-acid/50 underline-offset-2">concepts page</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Learning objectives -->
             <section>
                 <div class="border-b border-white/10 pb-4 mb-6">
@@ -340,23 +358,24 @@
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Skills vs. commands</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Both are markdown files invoked with a slash, but they work differently. A <strong class="text-chrome">skill</strong> contains domain knowledge Claude consults and applies using judgment — the right tool when the task requires interpretation. A <strong class="text-chrome">command</strong> is a deterministic trigger — the same steps, the same sequence, every time. The journalism analogy: a skill is a style guide (reference material, applied with judgment). A command is a mandatory pre-publication checklist (fixed sequence, no skips).</p>
-                        <p class="text-gray-300 text-sm leading-relaxed">Both are stored as <code class="text-acid bg-surface px-1">.md</code> files in <code class="text-acid bg-surface px-1">.claude/commands/</code>. The filename becomes the slash command — save <code class="text-acid bg-surface px-1">source-verification.md</code> and Claude Code creates <code class="text-acid bg-surface px-1">/source-verification</code> automatically.</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Both are markdown, but they live in different folders and fire differently. A <strong class="text-chrome">skill</strong> contains domain knowledge Claude consults and applies using judgment — Claude reads the skill's description and invokes it when a task matches. A <strong class="text-chrome">custom slash command</strong> is a deterministic trigger you type yourself — the same steps, the same sequence, every time. The journalism analogy: a skill is a style guide (reference material, applied with judgment). A command is a mandatory pre-publication checklist (fixed sequence, no skips).</p>
+                        <p class="text-gray-300 text-sm leading-relaxed">Custom slash commands are single <code class="text-acid bg-surface px-1">.md</code> files in <code class="text-acid bg-surface px-1">.claude/commands/</code> — the filename becomes the slash (<code class="text-acid bg-surface px-1">source-check.md</code> → <code class="text-acid bg-surface px-1">/source-check</code>). Skills are folders in <code class="text-acid bg-surface px-1">.claude/skills/</code> containing a <code class="text-acid bg-surface px-1">SKILL.md</code> with YAML frontmatter. Plugin-installed skills (like <code class="text-acid bg-surface px-1">/source-verification</code> from the journalism-skills plugin) also expose a slash command so you can call them directly.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Where skills live</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Skills can be stored in several locations:</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Skills are stored in several locations:</p>
                         <ul class="space-y-2 text-sm font-sans text-gray-300">
-                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Global:</strong> <code class="text-acid bg-surface px-1">~/.claude/commands/</code> - Available in all projects</li>
-                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Project:</strong> <code class="text-acid bg-surface px-1">.claude/commands/</code> - Available only in that project</li>
-                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Remote:</strong> GitHub repositories that you clone or reference</li>
+                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Personal:</strong> <code class="text-acid bg-surface px-1">~/.claude/skills/</code> - Available in all your projects</li>
+                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Project:</strong> <code class="text-acid bg-surface px-1">.claude/skills/</code> - Available only in that project, can be checked into the repo</li>
+                            <li class="flex items-start gap-3"><span class="text-ice">></span> <strong class="text-chrome">Plugin:</strong> installed via <code class="text-acid bg-surface px-1">/install-github-plugin</code>, bundled with related skills and hooks</li>
                         </ul>
+                        <p class="text-gray-300 text-xs leading-relaxed mt-4">Custom slash commands are different — those live in <code class="text-acid bg-surface px-1">.claude/commands/</code> (project) or <code class="text-acid bg-surface px-1">~/.claude/commands/</code> (personal). The Module 2 exercise uses that folder because Part 1 has you build a custom slash command.</p>
                     </div>
 
                     <div class="border border-white/10 bg-panel p-6">
                         <h3 class="font-display text-lg text-acid mb-3">Hooks: notify vs. stop</h3>
-                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Hooks are skills that run automatically — you don't invoke them. They fire at specific points in your workflow without any input from you. There are two kinds, and the distinction matters:</p>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">Hooks are event-driven rules configured in <code class="text-acid bg-surface px-1">settings.json</code>. They fire automatically at specific points in your workflow — before a tool runs, after a session starts, when a file is written — without any input from you. There are two kinds, and the distinction matters:</p>
                         <ul class="space-y-2 text-sm font-sans text-gray-300">
                             <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Notify hooks</strong> run in the background and flag issues without stopping your work. Think of them as an automated second reader — problems get marked for your review, but the work continues. A notify hook might flag an unattributed quote or highlight filler language.</li>
                             <li class="flex items-start gap-3"><span class="text-acid">></span> <strong class="text-chrome">Stop hooks</strong> pause execution and ask for confirmation before proceeding. These exist for one-way doors — actions that are difficult or impossible to undo. Before Claude Code deletes files, pushes to a repository, or publishes something, a stop hook can pause and require your approval.</li>
@@ -373,8 +392,8 @@
                         <h3 class="font-display text-lg text-acid mb-3">Session commands</h3>
                         <p class="text-gray-300 text-sm leading-relaxed mb-4">Module 1 introduced the commands you use inside a Claude Code session. Here's a quick reference for the ones you'll use most this week:</p>
                         <ul class="space-y-2 text-sm font-sans text-gray-300">
-                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/help</code> <span class="ml-1">— list available commands and installed skills (use this to confirm your new skill shows up)</span></li>
-                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/plan</code> <span class="ml-1">— ask Claude to think through an approach before acting (useful before writing a skill file)</span></li>
+                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/help</code> <span class="ml-1">— list available slash commands, including the one you build this week</span></li>
+                            <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/plan</code> <span class="ml-1">— ask Claude to think through an approach before acting (useful before writing a command or skill file)</span></li>
                             <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/compact</code> <span class="ml-1">— compress conversation history when a long session slows down</span></li>
                             <li class="flex items-start gap-3"><code class="text-acid bg-surface px-1 text-xs">/clear</code> <span class="ml-1">— start fresh without leaving the session</span></li>
                         </ul>
@@ -601,20 +620,24 @@ Claim to verify: "A new study from Harvard Medical School found that drinking co
                 </div>
                 <div class="border border-white/10 bg-panel divide-y divide-white/5">
                     <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">Skill doesn't appear in /help</h4>
-                        <p class="text-gray-400 text-sm">Make sure the file is in the correct directory (<code class="text-acid bg-surface px-1">~/.claude/commands/</code>) and has the <code class="text-acid bg-surface px-1">.md</code> extension. The filename becomes the command name.</p>
+                        <h4 class="font-mono text-sm text-signal mb-2">Your new slash command doesn't appear in /help</h4>
+                        <p class="text-gray-400 text-sm">Make sure the file is in the correct directory (<code class="text-acid bg-surface px-1">~/.claude/commands/</code> for personal, or <code class="text-acid bg-surface px-1">.claude/commands/</code> in the project) and has the <code class="text-acid bg-surface px-1">.md</code> extension. The filename becomes the command name.</p>
                     </div>
                     <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">Skill doesn't seem to affect Claude's responses</h4>
-                        <p class="text-gray-400 text-sm">Remember to invoke the skill with the slash command (e.g., <code class="text-acid bg-surface px-1">/source-verification</code>) before asking your question. The skill context is loaded when you invoke it.</p>
+                        <h4 class="font-mono text-sm text-signal mb-2">Your slash command doesn't seem to affect Claude's responses</h4>
+                        <p class="text-gray-400 text-sm">Type it as <code class="text-acid bg-surface px-1">/your-command-name</code> in the session to run it. The file's instructions only load when the command is invoked.</p>
                     </div>
                     <div class="p-6">
                         <h4 class="font-mono text-sm text-signal mb-2">"Permission denied" when creating files</h4>
                         <p class="text-gray-400 text-sm">Ask your agent to create the <code class="text-acid bg-surface px-1">~/.claude/commands/</code> directory and make sure it's writable &mdash; something like <em>"can you make sure ~/.claude/commands exists and you can write to it?"</em> If the agent is still blocked after that, paste the exact error into the web version of claude.ai or gemini.google.com and let it walk you through fixing the permission.</p>
                     </div>
                     <div class="p-6">
-                        <h4 class="font-mono text-sm text-signal mb-2">Skill is too generic or not helpful</h4>
-                        <p class="text-gray-400 text-sm">Skills work best when they're specific. Edit the skill file to add more detailed instructions, examples, or checklists relevant to your work.</p>
+                        <h4 class="font-mono text-sm text-signal mb-2">Installed skill isn't firing on its own</h4>
+                        <p class="text-gray-400 text-sm">Skills load when Claude judges the task matches the skill's description, so your prompt needs to clearly name what you want. For <code class="text-acid bg-surface px-1">/source-verification</code>, type the slash command directly — the journalism-skills plugin exposes it as a command so you don't have to wait for auto-detection.</p>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-mono text-sm text-signal mb-2">Your command or skill is too generic or not helpful</h4>
+                        <p class="text-gray-400 text-sm">Both work best when they're specific. Edit the file to add detailed instructions, examples, or checklists relevant to your work.</p>
                     </div>
                 </div>
             </section>
