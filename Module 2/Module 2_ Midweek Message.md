@@ -1,4 +1,5 @@
-# Module 2: Midweek message
+# Module 2: Custom skills for Claude Code
+## Midweek message
 
 Hello everyone,
 
@@ -25,4 +26,4 @@ Discussion posts are due Friday. The "what skills does your newsroom need" threa
 
 Keep going. Most of the friction this week is about file paths and naming, not the underlying concept. Once one of your commands or skills loads cleanly, the rest click into place.
 
-Joe
+Joe Amditis

@@ -24,8 +24,8 @@
                 </a>
                 <nav aria-label="Module navigation" class="hidden md:flex gap-4 text-xs font-mono">
                     <a href="../module-1/" class="text-gray-400 hover:text-ice transition-colors">[ 01 ]</a>
-                    <a href="../module-2/" class="text-gray-400 hover:text-ice transition-colors">[ 02 ]</a>
-                    <a href="../module-3/" class="text-acid">[ 03 ]</a>
+                    <a href="../module-2/" class="text-acid">[ 02 ]</a>
+                    <a href="../module-3/" class="text-gray-400 hover:text-ice transition-colors">[ 03 ]</a>
                     <a href="../module-4/" class="text-gray-400 hover:text-ice transition-colors">[ 04 ]</a>
                     <a href="../bonus-git-github/" class="text-gray-400 hover:text-ice transition-colors">[ GIT ]</a>
                     <a href="../bonus-interviews/" class="text-gray-400 hover:text-ice transition-colors">[ INT ]</a>
@@ -37,7 +37,7 @@
 
         <section class="py-12 px-6 border-b border-white/10">
             <div class="max-w-5xl mx-auto">
-                <div class="text-xs text-acid font-mono mb-4">CONCEPTS — MODULE 03</div>
+                <div class="text-xs text-acid font-mono mb-4">CONCEPTS — MODULE 02</div>
                 <h1 class="font-display text-4xl md:text-5xl font-bold text-white">Skills vs. commands</h1>
                 <p class="text-gray-300 text-lg font-sans mt-4 max-w-2xl">Both are tools you can give Claude. They work in fundamentally different ways — knowing when to use which matters.</p>
             </div>
@@ -48,14 +48,15 @@
 
                 <div>
                     <h2 class="font-display text-2xl text-chrome mb-4">What skills are</h2>
-                    <p class="text-gray-300 leading-relaxed mb-4">Skills are instruction files Claude reads when you invoke them. When you call <code class="text-acid bg-surface px-1 text-sm">/source-verification</code>, Claude loads the skill's markdown file and applies its knowledge to your session.</p>
-                    <p class="text-gray-300 leading-relaxed">How closely it follows those instructions, which parts it emphasizes, how it formats output — all of that involves Claude's judgment. A skill is reference material the model consults, not a script it executes.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">Skills are folders in <code class="text-acid bg-surface px-1 text-sm">.claude/skills/</code> (project) or <code class="text-acid bg-surface px-1 text-sm">~/.claude/skills/</code> (personal), each containing a <code class="text-acid bg-surface px-1 text-sm">SKILL.md</code> file with YAML frontmatter. Claude reads the frontmatter description and invokes the skill when a task in your session matches — you don't have to ask for it by name.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">Plugin-installed skills (like <code class="text-acid bg-surface px-1 text-sm">/source-verification</code> from the journalism-skills plugin) often also expose a slash command so you can call the skill directly if you want to skip the auto-detection step.</p>
+                    <p class="text-gray-300 leading-relaxed">How closely Claude follows those instructions, which parts it emphasizes, how it formats output — all of that involves judgment. A skill is reference material the model consults, not a script it executes.</p>
                 </div>
 
                 <div>
-                    <h2 class="font-display text-2xl text-chrome mb-4">What commands are</h2>
-                    <p class="text-gray-300 leading-relaxed mb-4">A slash command is a deterministic trigger. When you invoke it, the workflow it specifies runs exactly as written, every time. Claude executes the specified steps — it doesn't interpret them.</p>
-                    <p class="text-gray-300 leading-relaxed">That's the core distinction: skills are probabilistic (Claude decides how to apply the knowledge); commands are deterministic (the workflow runs as defined, in the order defined, without Claude deciding whether each step is necessary).</p>
+                    <h2 class="font-display text-2xl text-chrome mb-4">What custom slash commands are</h2>
+                    <p class="text-gray-300 leading-relaxed mb-4">A custom slash command is a single <code class="text-acid bg-surface px-1 text-sm">.md</code> file in <code class="text-acid bg-surface px-1 text-sm">.claude/commands/</code> (project) or <code class="text-acid bg-surface px-1 text-sm">~/.claude/commands/</code> (personal). The filename becomes the slash — <code class="text-acid bg-surface px-1 text-sm">source-check.md</code> becomes <code class="text-acid bg-surface px-1 text-sm">/source-check</code>. You type the slash yourself to run it.</p>
+                    <p class="text-gray-300 leading-relaxed">That's the core distinction: skills are probabilistic and get picked up automatically (Claude decides how to apply the knowledge, based on the task at hand); custom slash commands are deterministic and explicit (you type the slash, the workflow runs as defined, in the order defined, every time).</p>
                 </div>
 
                 <div class="border border-white/10 bg-panel p-6">
@@ -66,13 +67,13 @@
 
                 <div>
                     <h2 class="font-display text-2xl text-chrome mb-4">Skill + command = reliable domain expertise</h2>
-                    <p class="text-gray-300 leading-relaxed mb-4">The pattern that works: put domain knowledge in a skill — the SIFT verification method, AP Style enforcement, FOIA request guidelines — then wrap that skill in a command for tasks where you need guaranteed execution.</p>
-                    <p class="text-gray-300 leading-relaxed">The skill holds the expertise. The command ensures it always runs when it should, not just when Claude decides it's relevant.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">The pattern that works: put domain knowledge in a skill — the SIFT verification method, AP Style enforcement, FOIA request guidelines — then add a custom slash command that explicitly invokes the skill for tasks where you need guaranteed execution.</p>
+                    <p class="text-gray-300 leading-relaxed">The skill holds the expertise. The slash command ensures it runs when you need it, not just when Claude decides it's relevant.</p>
                 </div>
 
                 <div>
                     <h2 class="font-display text-2xl text-chrome mb-4">When to use each</h2>
-                    <p class="text-gray-300 leading-relaxed mb-4">If you need contextual judgment about when and how to apply expertise, write a skill. If you need a defined workflow to execute the same way every time — batch processing, pre-publish checks, report generation — build a command around it.</p>
+                    <p class="text-gray-300 leading-relaxed mb-4">If you need contextual judgment about when and how to apply expertise, write a skill. If you need a defined workflow to execute the same way every time — batch processing, pre-publish checks, report generation — build a custom slash command around it.</p>
                     <p class="text-gray-300 leading-relaxed">Many tasks start as skills and get promoted to commands when the process stabilizes. When you find yourself using a skill the same way every time, that's the signal to wrap it in a command.</p>
                 </div>
 
@@ -81,7 +82,7 @@
                 </div>
 
                 <div class="border border-acid/30 bg-acidDim p-6">
-                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">NEXT:</span> Head to <a href="../module-3/" class="text-ice hover:text-acid transition-colors">Module 3</a> to write your first skill and understand when you'd convert it to a command.</p>
+                    <p class="text-sm font-sans text-gray-300"><span class="text-acid font-mono font-bold">NEXT:</span> Head to <a href="../module-2/" class="text-ice hover:text-acid transition-colors">Module 2</a> to write your first custom slash command and install the journalism-skills plugin.</p>
                 </div>
 
             </div>
@@ -94,7 +95,7 @@
                     <div class="flex items-center gap-6">
                         <a href="../" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">HOME</a>
                         <a href="./" class="text-xs font-mono text-gray-300 hover:text-acid transition-colors">CONCEPTS</a>
-                        <a href="../module-3/" class="text-xs font-mono text-acid">MODULE 03</a>
+                        <a href="../module-2/" class="text-xs font-mono text-acid">MODULE 02</a>
                     </div>
                 </div>
                 <div class="mt-6 pt-6 border-t border-white/5 text-center">
