@@ -12,7 +12,7 @@ Next week, we slow down a bit and return to first principles of advanced prompti
 
 **Before we jump into the student posts from this week, a quick reminder:**
 
-**Live office hours today at 4:30 PM ET.** Filipa and I will be on Zoom for an open Q&A — bring your pipeline, your error message, your plan-mode output, whatever's stuck. [Join here](https://utexas.zoom.us/j/81431451207). If you can't make it live, drop the question in the instructor's forum and I'll answer there.
+**Live office hours today at 4:30 PM ET.** Filipa and I will be on Zoom for an open Q&A — bring your pipeline, your error message, your plan-mode output, whatever's stuck. The Zoom link is in the Knight Center course info and the Course Announcements forum. If you can't make it live, drop the question in the instructor's forum and I'll answer there.
 
 **A few things from the forums this week:**
 
