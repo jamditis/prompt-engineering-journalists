@@ -347,6 +347,36 @@ Before accepting AI-generated text, ask:
 
 ---
 
+## Repo is public — what does and doesn't belong here
+
+This repo is published at `https://github.com/jamditis/prompt-engineering-journalists` (public) and rendered at `https://mooc.amditis.tech` (`docs/` only). The `Module N/` directories are NOT served on the site, but they ARE visible to anyone browsing the repo.
+
+**Don't put in any `.md` file in this repo:**
+- Direct Zoom / Google Meet / Teams meeting URLs. Reference instead: "The Zoom link is in the Knight Center course info / Course Announcements forum."
+- Calendar links with embedded tokens.
+- Internal API endpoints, auth tokens, or service URLs.
+- Specific student email addresses.
+
+**Where the live links DO go:**
+- The Google Doc in the Knight Center delivery folder (`https://drive.google.com/drive/folders/1awY_UgsS8yhFNpTTdNpsTQfs2BijBD91`). That folder is private — students never see it directly; Filipa and Amy paste from it into Moodle.
+- Course Announcements forum on kccourses.org (32770).
+- Direct emails Joe and Filipa send.
+
+The midweek/end-of-week message workflow ships a single piece of content to two channels: the local repo file (public, indirect references) and the Google Doc (private, direct hyperlinks). They are NOT identical files — strip-and-redirect the meeting URL in the repo version before commit. See the Module 2 midweek for the canonical pattern: `Link is in the Moodle course info — check the instructor's forum for any last-minute updates.` Copilot will catch this on PR review if it slips through (caught on PR #51, 2026-04-29).
+
+**Forum IDs reference (course shell `id=172`):**
+
+| ID | Name |
+|---|---|
+| 32770 | Course Announcements |
+| 32790 | Questions for the instructor |
+| 32789 | Participant Forum |
+| 33655 | M3: Weekly exercise |
+| 33656 | M3: Discussion Forum 1 (automation prompt) |
+| 33657 | M3: Discussion Forum 2 (safeguards prompt — Moodle title currently mislabels as "Discussion Forum 1") |
+
+Per-module exercise + discussion forum IDs change for M1/M2/M4 — scrape the course shell HTML to find them.
+
 ## Multi-machine workflow
 
 This repo is developed across multiple machines (MacBook, work Windows PC, home Windows PC). GitHub is the source of truth.
