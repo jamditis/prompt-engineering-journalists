@@ -358,7 +358,7 @@ This repo is published at `https://github.com/jamditis/prompt-engineering-journa
 - Specific student email addresses.
 
 **Where the live links DO go:**
-- The Google Doc in the Knight Center delivery folder (`https://drive.google.com/drive/folders/1awY_UgsS8yhFNpTTdNpsTQfs2BijBD91`). That folder is private — students never see it directly; Filipa and Amy paste from it into Moodle.
+- The Google Doc inside the Knight Center delivery folder in Drive. That folder is private — students never see it directly; Filipa and Amy paste from it into Moodle. The folder ID is recorded in private memory, not here.
 - Course Announcements forum on kccourses.org (32770).
 - Direct emails Joe and Filipa send.
 
