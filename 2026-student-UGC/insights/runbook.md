@@ -33,3 +33,23 @@ Each subagent's prompt is:
 
 ## Phase 3: Aggregation
 See per-step runbook sections — these are added incrementally as Tasks 9-12 land.
+
+## Phase 3a: Themes clustering
+
+In the main session:
+1. Run `python -m insights.aggregate.themes` to dump the freeform list to stdout.
+2. Read `insights/prompts/theme-cluster.md` for instructions.
+3. Send the prompt + the freeform list to Sonnet 4.6 (just call it once in this session — no subagent needed).
+4. Parse the model's JSON array. Save it to `insights/data/themes_emergent.json`.
+5. Run a one-liner to build the final `themes.json`:
+
+```python
+from pathlib import Path
+import json
+from insights.aggregate.themes import build_themes_json
+emergent = json.loads(Path("insights/data/themes_emergent.json").read_text(encoding="utf-8"))
+themes = build_themes_json(Path("insights/data/extracted"), emergent)
+Path("insights/data/themes.json").write_text(json.dumps(themes, indent=2, ensure_ascii=False), encoding="utf-8")
+```
+
+6. For each theme with `member_count >= 5`, send the theme + a sampling of its members' `summary_one_line` and `quotable_lines` back to the model and ask for a 4-sentence `ai_summary`. Patch the result into `themes.json`. (For now, themes with fewer members get an empty `ai_summary` — frontend handles that.)
