@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student UGC archive — Knight Center cohort</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap">
+  <link rel="stylesheet" href="./css/tokens.css?v=1">
+  <link rel="stylesheet" href="./css/shell.css?v=1">
+  <link rel="stylesheet" href="./css/views.css?v=1">
+</head>
+<body data-anon="on">
+  <header class="site-header">
+    <div class="brand">
+      <span class="kicker">Knight Center · spring 2026</span>
+      <h1>Student UGC archive</h1>
+    </div>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav id="primary-nav" class="primary-nav" aria-label="Views">
+      <a href="#/overview">Overview</a>
+      <a href="#/themes">Themes</a>
+      <a href="#/people">People</a>
+      <a href="#/skills">Skills</a>
+      <a href="#/forums">Forums</a>
+      <a href="#/students">Students</a>
+      <a href="#/quotes">Quotes</a>
+      <a href="#/search">Search</a>
+    </nav>
+    <label class="anon-toggle">
+      <input type="checkbox" id="anon-toggle">
+      <span>Show real names</span>
+    </label>
+  </header>
+  <main id="view-outlet" aria-live="polite"></main>
+  <footer class="site-footer">
+    <p>Local archive. Names anonymized by default. If you screenshot with names visible, do not share externally.</p>
+  </footer>
+  <script type="module" src="./js/app.js?v=1"></script>
+</body>
+</html>
