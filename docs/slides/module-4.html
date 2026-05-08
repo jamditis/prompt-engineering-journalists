@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4 — Power-user techniques and the landscape | Advanced prompt engineering for journalists</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+
+    <!-- OG / Twitter -->
+    <meta property="og:title" content="Module 4 — Power-user techniques and the landscape">
+    <meta property="og:description" content="Slide deck for Module 4 of Advanced prompt engineering for journalists — effort, context, sub-agents, cross-model review, remote control, and four questions for picking a tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mooc.amditis.tech/slides/module-4.html">
+    <meta property="og:image" content="https://mooc.amditis.tech/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Module 4 — Power-user techniques and the landscape">
+    <meta name="twitter:description" content="Slide deck for Module 4 of Advanced prompt engineering for journalists.">
+    <meta name="twitter:image" content="https://mooc.amditis.tech/assets/og-image.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --void: #0f172a;
+            --panel: #1e293b;
+            --surface: #334155;
+            --chrome: #f1f5f9;
+            --muted: #94a3b8;
+            --acid: #a3e635;
+            --ice: #67e8f9;
+            --signal: #f87171;
+            --amber: #fbbf24;
+            --font-display: 'Fraunces', serif;
+            --font-body: 'Inter', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+            --slide-w: 13.33in;
+            --slide-h: 7.5in;
+        }
+
+        html { background: #020617; }
+        body {
+            font-family: var(--font-body);
+            color: var(--chrome);
+            background: #020617;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem 1rem;
+        }
+
+        .slide {
+            width: var(--slide-w);
+            height: var(--slide-h);
+            background: var(--void);
+            border: 1px solid var(--surface);
+            border-radius: 4px;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            overflow: hidden;
+            page-break-after: always;
+            flex-shrink: 0;
+        }
+        .slide.title-slide,
+        .slide.divider-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide-header { padding: 2rem 3rem 0; }
+        .slide-header h2 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 2.4rem;
+            color: var(--chrome);
+            line-height: 1.2;
+        }
+        .slide-header .subtitle {
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-top: 0.3rem;
+        }
+
+        .slide-body {
+            padding: 1.2rem 3rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide-footer {
+            padding: 0.75rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--muted);
+            border-top: 1px solid var(--surface);
+        }
+        .slide-footer .section-tag {
+            color: var(--acid);
+            font-weight: 600;
+        }
+
+        h1 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            line-height: 1.15;
+        }
+
+        ul { list-style: none; padding: 0; }
+        ul li {
+            padding: 0.5rem 0 0.5rem 1.8rem;
+            position: relative;
+            font-size: 1.3rem;
+            line-height: 1.5;
+        }
+        ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 1.05rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--acid);
+        }
+        code {
+            font-family: var(--font-code);
+            background: var(--panel);
+            padding: 0.15em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+            color: var(--acid);
+        }
+        .accent { color: var(--acid); }
+        .accent-ice { color: var(--ice); }
+        .accent-amber { color: var(--amber); }
+        .accent-signal { color: var(--signal); }
+        .muted { color: var(--muted); }
+
+        /* Title slide */
+        .title-content {
+            text-align: center;
+            padding: 3rem;
+        }
+        .title-content .kicker {
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 1rem;
+        }
+        .title-content h1 {
+            font-size: 3.2rem;
+            background: linear-gradient(135deg, var(--acid), var(--ice));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.2rem;
+        }
+        .title-content .subtitle-line {
+            font-size: 1.3rem;
+            color: var(--chrome);
+            margin-bottom: 1rem;
+        }
+        .title-content .org {
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-top: 1.5rem;
+        }
+        .title-content .instructor {
+            font-size: 1.05rem;
+            color: var(--ice);
+        }
+        .title-bar {
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--acid), var(--ice));
+            border-radius: 2px;
+            margin: 1.2rem auto;
+        }
+
+        /* Divider slide (section intro between videos) */
+        .divider-content {
+            text-align: center;
+            padding: 3rem;
+            max-width: 11in;
+        }
+        .divider-content .section-num {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--acid);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .divider-content h1 {
+            font-size: 3rem;
+            color: var(--chrome);
+            margin-bottom: 1.5rem;
+        }
+        .divider-content .covers {
+            font-size: 1.2rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+        .divider-content .covers strong {
+            color: var(--ice);
+            font-weight: 600;
+        }
+
+        /* Diagram */
+        .diagram-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            overflow: hidden;
+        }
+        .diagram-container img,
+        .diagram-container svg {
+            max-width: 100%;
+            max-height: 5.5in;
+            height: auto;
+            width: auto;
+        }
+
+        /* Two-column cards */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: stretch;
+        }
+        .three-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            align-items: stretch;
+        }
+        .col-card {
+            background: var(--panel);
+            border-radius: 12px;
+            padding: 1.6rem 1.8rem;
+            border: 1px solid var(--surface);
+        }
+        .col-card.accent-border { border-color: var(--acid); }
+        .col-card.ice-border { border-color: var(--ice); }
+        .col-card.signal-border { border-color: var(--signal); }
+        .col-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .col-card p {
+            font-size: 1.05rem;
+            line-height: 1.5;
+            color: var(--chrome);
+        }
+        .col-card ul li {
+            font-size: 1.05rem;
+            padding: 0.35rem 0 0.35rem 1.4rem;
+            line-height: 1.4;
+        }
+        .col-card ul li::before {
+            top: 0.75rem;
+            width: 6px;
+            height: 6px;
+        }
+
+        /* Inline command block */
+        .cmd-block {
+            background: #020617;
+            border: 1px solid var(--surface);
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            font-family: var(--font-code);
+            font-size: 1.05rem;
+            color: var(--acid);
+            margin: 0.8rem 0;
+            display: inline-block;
+        }
+        .cmd-block .prompt { color: var(--muted); }
+        .cmd-block .comment { color: var(--muted); font-style: italic; }
+
+        /* Quote / pull-out */
+        .pullquote {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 1.9rem;
+            line-height: 1.35;
+            color: var(--chrome);
+            text-align: center;
+            max-width: 10in;
+            margin: 0 auto;
+        }
+        .pullquote .attribution {
+            display: block;
+            font-style: normal;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            color: var(--muted);
+            margin-top: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* Numbered list for frameworks */
+        .numbered-list {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+        }
+        .numbered-list li {
+            counter-increment: step;
+            position: relative;
+            padding: 0.8rem 0 0.8rem 3.2rem;
+            font-size: 1.25rem;
+            line-height: 1.4;
+        }
+        .numbered-list li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0.6rem;
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 50%;
+            background: var(--panel);
+            border: 1.5px solid var(--acid);
+            color: var(--acid);
+            font-family: var(--font-code);
+            font-weight: 700;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .callout {
+            background: rgba(163, 230, 53, 0.08);
+            border-left: 3px solid var(--acid);
+            padding: 1rem 1.4rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: var(--chrome);
+            margin-top: 1rem;
+        }
+        .callout.warn {
+            background: rgba(248, 113, 113, 0.08);
+            border-left-color: var(--signal);
+        }
+        .callout strong.warn-label { color: var(--signal); }
+
+        @page {
+            size: 13.333in 7.5in;
+            margin: 0;
+        }
+        @media print {
+            body { padding: 0; gap: 0; background: #0f172a; }
+            .slide { border: none; border-radius: 0; margin: 0; }
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+    </style>
+</head>
+<body>
+
+
+<!-- ================================================================
+     SLIDE 1 — Title
+     ================================================================ -->
+<div class="slide title-slide" style="background: linear-gradient(135deg, var(--void) 0%, #162317 50%, var(--void) 100%);">
+    <div class="title-content">
+        <div class="kicker">Module 4</div>
+        <h1>Power-user techniques<br>and the landscape</h1>
+        <div class="title-bar"></div>
+        <p class="subtitle-line">Effort and context &middot; sub-agents &middot; cross-model review &middot; remote control</p>
+        <p class="org">Advanced prompt engineering for journalists &middot; Knight Center for Journalism at UT Austin</p>
+        <p class="instructor">Joe Amditis &mdash; Center for Cooperative Media, Montclair State University</p>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     D1 DIVIDER — Effort, thinking, managing context
+     ================================================================ -->
+<div class="slide divider-slide" style="background: linear-gradient(135deg, var(--void) 0%, #0d1f1a 60%, var(--void) 100%);">
+    <div class="divider-content">
+        <div class="section-num">Video D1 &middot; Part 1 of 4</div>
+        <h1>Effort, thinking,<br>and managing context</h1>
+        <div class="title-bar"></div>
+        <p class="covers">
+            <strong>/effort</strong> levels and what they cost &middot;
+            the <strong>context window</strong> as a budget &middot;
+            <strong>/compact</strong> with and without instructions &middot;
+            <strong>Ctrl+O</strong> and your saved transcripts
+        </p>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — A different track
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Module 4 takes a different track</h2>
+        <div class="subtitle">Back to core patterns, regardless of which tool you use</div>
+    </div>
+    <div class="slide-body">
+        <ul>
+            <li>Modules 1&ndash;3 were a linear build &mdash; browser to CLI to skills to pipelines</li>
+            <li>Module 4 pulls back to the <span class="accent">prompting techniques</span> underneath all of it</li>
+            <li>Less real-time demo, more <span class="accent-ice">core patterns</span> that keep showing up</li>
+            <li>Patterns that work whether you're in Claude Code, Codex, or Gemini</li>
+        </ul>
+        <div class="callout" style="margin-top: 1.5rem;">
+            Four videos: effort and context &middot; sub-agents and the 40% rule &middot; cross-model review &middot; remote control and editorial judgment.
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D1</span> &middot; Advanced prompt engineering for journalists</span>
+        <span>2</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Effort levels
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Effort levels: how hard the model works</h2>
+        <div class="subtitle"><code>/effort</code> sets reasoning depth for the current session</div>
+    </div>
+    <div class="slide-body">
+        <div class="two-col">
+            <div class="col-card">
+                <h3 class="accent-ice">The options</h3>
+                <ul>
+                    <li><code>low</code> &mdash; fast, light reasoning</li>
+                    <li><code>medium</code> &mdash; default</li>
+                    <li><code>high</code> &mdash; deeper reasoning</li>
+                    <li><code>max</code> &mdash; maximum capability, deepest reasoning</li>
+                    <li><code>auto</code> &mdash; model decides per step</li>
+                </ul>
+            </div>
+            <div class="col-card accent-border">
+                <h3 class="accent">How it changes behavior</h3>
+                <ul>
+                    <li>Applies to <strong>this session only</strong></li>
+                    <li>Higher effort &rarr; more tokens burned</li>
+                    <li>More tokens &rarr; more cost, faster limit hits</li>
+                    <li>Fast mode on Opus 4.6 burns tokens hard</li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 1.2rem; font-size: 1.1rem; color: var(--muted);">
+            The more compute the tool throws at your problem, the more it costs you.
+        </p>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D1</span> &middot; Effort, thinking, and managing context</span>
+        <span>3</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Extended thinking diagram
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Thinking before responding</h2>
+        <div class="subtitle">Extended thinking trades speed for depth &mdash; useful when the quick pass misses things</div>
+    </div>
+    <div class="slide-body">
+        <div class="diagram-container">
+            <img src="module-4-diagrams/extended-thinking.svg" alt="Diagram comparing a surface-level response with and without extended thinking">
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D1</span> &middot; Effort, thinking, and managing context</span>
+        <span>4</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Context window as a budget
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>The context window is a budget</h2>
+        <div class="subtitle">Anthropic raised Sonnet and Opus from 200k to 1M tokens &mdash; but that's the ceiling, not the target</div>
+    </div>
+    <div class="slide-body">
+        <div class="two-col">
+            <div class="col-card">
+                <h3 class="accent-ice">What takes up context</h3>
+                <ul>
+                    <li>System prompt (Anthropic's, baked in) &mdash; ~0.7%</li>
+                    <li>System tools &mdash; ~0.7%</li>
+                    <li>Custom agents (skills, code review, audits)</li>
+                    <li>Memory files &mdash; CLAUDE.md, lessons, rules</li>
+                    <li>Session-start skills loaded via hooks</li>
+                    <li>Your messages and model responses</li>
+                    <li>Auto-compact buffer &mdash; reserved space</li>
+                </ul>
+            </div>
+            <div class="col-card signal-border">
+                <h3 class="accent-signal">The part nobody tells you</h3>
+                <p>The window went 200k &rarr; 1M, <strong>but response quality starts degrading past 20&ndash;30%</strong> of the window used.</p>
+                <p style="margin-top: 0.8rem;">Once you cross the old 200k line, you'll see it in the outputs &mdash; repetition, dropped details, threads from unrelated parts of the session.</p>
+                <p style="margin-top: 0.8rem; color: var(--muted);">Pro tip: put token percent in your status line so you can see it.</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D1</span> &middot; Effort, thinking, and managing context</span>
+        <span>5</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Context window over time diagram
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>How context fills up over a session</h2>
+        <div class="subtitle">And where /compact lands on the timeline</div>
+    </div>
+    <div class="slide-body">
+        <div class="diagram-container">
+            <img src="module-4-diagrams/context-window-session.svg" alt="Timeline showing a context window filling up during a session and recovering space after /compact">
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D1</span> &middot; Effort, thinking, and managing context</span>
+        <span>6</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — /compact
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>/compact: clear the desk, keep the notes</h2>
+        <div class="subtitle">Compresses the conversation to a summary, frees up the window</div>
+    </div>
+    <div class="slide-body">
+        <div class="two-col">
+            <div class="col-card">
+                <h3 class="accent-ice">Basic compact</h3>
+                <p style="margin-bottom: 0.8rem;">Run it when you're climbing past 20&ndash;30% used, or when you notice the model repeating or missing details.</p>
+                <div class="cmd-block"><span class="prompt">&gt;</span> /compact</div>
+                <p style="margin-top: 0.8rem; color: var(--muted); font-size: 1rem;">The model writes a summary of what you've done, keeps it in context, and drops everything else.</p>
+            </div>
+            <div class="col-card accent-border">
+                <h3 class="accent">Compact with instructions</h3>
+                <p style="margin-bottom: 0.8rem;">Tell the compactor what matters. Useful on long-running work where a naive summary drops the part you care about.</p>
+                <div class="cmd-block"><span class="prompt">&gt;</span> /compact VLC streaming<br>&nbsp;&nbsp;configuration and errors</div>
+                <p style="margin-top: 0.8rem; color: var(--muted); font-size: 1rem;">That hint reshapes the summary toward your current task.</p>
+            </div>
+        </div>
+        <div class="callout" style="margin-top: 1rem;">
+            <strong>Ctrl+O</strong> opens the full conversation history &mdash; including the compaction summary the model wrote, all prior messages, and pending tasks.
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D1</span> &middot; Effort, thinking, and managing context</span>
+        <span>7</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Saved transcripts + security
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Every session is saved to disk</h2>
+        <div class="subtitle">Full transcript in JSONL &mdash; sub-agents too &mdash; on your local machine</div>
+    </div>
+    <div class="slide-body">
+        <ul>
+            <li>Each Claude Code conversation is written out as <code>.jsonl</code> as you work</li>
+            <li>Sub-agent conversations get their own transcript files</li>
+            <li>There's an index file so you can point the tool at an old transcript and say <span class="accent-ice">"tell me about this conversation"</span></li>
+            <li>Most people don't realize this is happening</li>
+        </ul>
+        <div class="callout warn" style="margin-top: 1.2rem;">
+            <strong class="warn-label">Security implication:</strong> don't paste environment secrets, tokens, or API keys into the terminal. The transcript keeps them. Treat the transcript folder the same way you'd treat a shell history file.
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D1</span> &middot; Effort, thinking, and managing context</span>
+        <span>8</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Memory vs context
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Memory and context work together</h2>
+        <div class="subtitle">Two different layers, two different jobs</div>
+    </div>
+    <div class="slide-body">
+        <div class="two-col">
+            <div class="col-card ice-border">
+                <h3 class="accent-ice">Context window</h3>
+                <p>Short-term. Scoped to the current session. Fills up as you work, compacted or dropped when it gets full.</p>
+                <ul style="margin-top: 0.6rem;">
+                    <li>Your messages + model responses</li>
+                    <li>Files read into the session</li>
+                    <li>Tool results, sub-agent returns</li>
+                </ul>
+            </div>
+            <div class="col-card accent-border">
+                <h3 class="accent">Memory files</h3>
+                <p>Long-term. Loaded every session. The persistent layer you build up for a project or beat.</p>
+                <ul style="margin-top: 0.6rem;">
+                    <li>CLAUDE.md, AGENTS.md, GEMINI.md</li>
+                    <li>lessons.md, rules.md, memory.md</li>
+                    <li>Skills pulled in at session start</li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 1.2rem; font-size: 1.1rem; color: var(--muted);">
+            You manage context. You build memory.
+        </p>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D1</span> &middot; Effort, thinking, and managing context</span>
+        <span>9</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     D2 DIVIDER
+     ================================================================ -->
+<div class="slide divider-slide" style="background: linear-gradient(135deg, var(--void) 0%, #1a1d30 60%, var(--void) 100%);">
+    <div class="divider-content">
+        <div class="section-num">Video D2 &middot; Part 2 of 4</div>
+        <h1>The 40% rule,<br>sub-agents, and rewinding</h1>
+        <div class="title-bar"></div>
+        <p class="covers">
+            Keeping conversations under the <strong>40% load line</strong> &middot;
+            <strong>sub-agents</strong> for fresh context &middot;
+            the <strong>agent-telephone</strong> problem &middot;
+            <strong>double-escape</strong> to rewind
+        </p>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — The 40% rule
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>The 40% rule</h2>
+        <div class="subtitle">Your work fills 70&ndash;80% of any context window &mdash; I'd cap it at 40%</div>
+    </div>
+    <div class="slide-body">
+        <ul>
+            <li>One conversation per <span class="accent">task</span> or tight group of tasks</li>
+            <li>Hit 40% load &mdash; save state, compact, or start fresh</li>
+            <li>If you can't go from the end of one conversation to a fresh one and get the same quality, <span class="accent-signal">you're under-documenting</span> &mdash; not the tool's fault</li>
+            <li>Save points and checkpoints: tell the model to write to CLAUDE.md as you go</li>
+        </ul>
+        <div class="callout" style="margin-top: 1.2rem;">
+            The test: can a brand-new session pick up where the last one left off, with the same continuity? If yes, your project state is healthy. If no, the model was carrying things it shouldn't have been.
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D2</span> &middot; Advanced prompt engineering for journalists</span>
+        <span>10</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Context hygiene diagram
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Warning signs of context decay</h2>
+        <div class="subtitle">You'll feel it before the tool flags it</div>
+    </div>
+    <div class="slide-body">
+        <div class="diagram-container">
+            <img src="module-4-diagrams/04-context-hygiene.svg" alt="Context hygiene diagram showing how quality degrades as context fills with stale or unrelated information">
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D2</span> &middot; The 40% rule, sub-agents, and rewinding</span>
+        <span>11</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Signs to compact or quit
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>When to compact, clear, or quit</h2>
+        <div class="subtitle">If you see any of these, stop adding and reset</div>
+    </div>
+    <div class="slide-body">
+        <div class="two-col">
+            <div class="col-card signal-border">
+                <h3 class="accent-signal">The signs</h3>
+                <ul>
+                    <li>Claude starts repeating itself</li>
+                    <li>Responses miss earlier details</li>
+                    <li>Threads from unrelated subtopics leak in</li>
+                    <li>CLAUDE.md is referencing stale info</li>
+                    <li>Multiple unrelated projects in one session</li>
+                </ul>
+            </div>
+            <div class="col-card accent-border">
+                <h3 class="accent">Your moves</h3>
+                <ul>
+                    <li><code>/compact</code> &mdash; keep this conversation, free space</li>
+                    <li><code>/clear</code> &mdash; wipe the window, reload CLAUDE.md</li>
+                    <li><code>/quit</code> &mdash; close and start a fresh session</li>
+                    <li>Save state to CLAUDE.md before any of the above</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D2</span> &middot; The 40% rule, sub-agents, and rewinding</span>
+        <span>12</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Sub-agents
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Sub-agents: fresh context on demand</h2>
+        <div class="subtitle">Each sub-agent gets its own 1M-token window &mdash; separate from your main conversation</div>
+    </div>
+    <div class="slide-body">
+        <ul>
+            <li>Already used 100k tokens in the main session? Launch a sub-agent and it <span class="accent">starts clean</span></li>
+            <li>Sub-agent runs its task, returns the result &mdash; main conversation's tokens stay intact</li>
+            <li>Great for: research, review, exploration, parallel analysis</li>
+            <li>One rule: <span class="accent-ice">one job per sub-agent</span>. Scope tight, return clean</li>
+        </ul>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D2</span> &middot; The 40% rule, sub-agents, and rewinding</span>
+        <span>13</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Sub-agent control diagram
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>How to scope sub-agents</h2>
+        <div class="subtitle">More focused sub-agents beats fewer overloaded ones</div>
+    </div>
+    <div class="slide-body">
+        <div class="diagram-container">
+            <img src="module-4-diagrams/05-subagent-control.svg" alt="Diagram showing overloaded sub-agents versus focused sub-agents with one job each">
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D2</span> &middot; The 40% rule, sub-agents, and rewinding</span>
+        <span>14</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Agent telephone
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>The agent-telephone problem</h2>
+        <div class="subtitle">Errors compound when you trust sub-agent output without checking</div>
+    </div>
+    <div class="slide-body">
+        <div class="pullquote">
+            "Something is wrong, some minutia got garbled, and the main agent has no idea that's wrong. That error gets carried into your next conversation, and the next, and it compounds."
+            <span class="attribution">&mdash; Joe Amditis, Module 4</span>
+        </div>
+        <div class="callout warn" style="margin-top: 1.5rem;">
+            <strong class="warn-label">The fix:</strong> don't automatically trust sub-agent returns. Spot-check the result before it lands in your main conversation. The smaller the scope, the easier this is.
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D2</span> &middot; The 40% rule, sub-agents, and rewinding</span>
+        <span>15</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Double-escape rewind
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Double-escape to rewind</h2>
+        <div class="subtitle">Undo a decision, revert to a prior point in the conversation</div>
+    </div>
+    <div class="slide-body">
+        <div class="two-col">
+            <div class="col-card">
+                <h3 class="accent-ice">How it works</h3>
+                <ul>
+                    <li>Double-tap <code>Esc</code></li>
+                    <li>Menu lets you rewind all the way up the conversation</li>
+                    <li>Pick the point you want to revert to</li>
+                    <li>Continue from there</li>
+                </ul>
+            </div>
+            <div class="col-card signal-border">
+                <h3 class="accent-signal">The catch</h3>
+                <p>Once you've run <code>/compact</code>, you can't rewind past that compaction.</p>
+                <p style="margin-top: 0.8rem;">The pre-compact exchanges are gone as discrete turns &mdash; only the summary remains.</p>
+                <p style="margin-top: 0.8rem; color: var(--muted);">Yet another reason to keep conversations per-task, not stacked.</p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D2</span> &middot; The 40% rule, sub-agents, and rewinding</span>
+        <span>16</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     D3 DIVIDER
+     ================================================================ -->
+<div class="slide divider-slide" style="background: linear-gradient(135deg, var(--void) 0%, #1a2b22 60%, var(--void) 100%);">
+    <div class="divider-content">
+        <div class="section-num">Video D3 &middot; Part 3 of 4</div>
+        <h1>Cross-model code review<br>from the CLI</h1>
+        <div class="title-bar"></div>
+        <p class="covers">
+            <strong>GitHub Copilot CLI</strong> and <strong>Codex CLI</strong> as sub-agents &middot;
+            the <strong>-p flag</strong> pattern &middot;
+            context isolation &middot;
+            second opinions before a PR
+        </p>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — The scenario
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>The scenario: second opinion before a PR</h2>
+        <div class="subtitle">You've got a branch ready. Before you push and notify the whole team, check it against another model.</div>
+    </div>
+    <div class="slide-body">
+        <ul>
+            <li>You're on a branch in Claude Code, about to open a PR</li>
+            <li>Claude Code has been giving you some rough edges this week &mdash; you want a second read</li>
+            <li>You don't want to formally open the PR yet &mdash; that notifies everyone watching</li>
+            <li>Call another CLI agent <span class="accent">from inside</span> your current Claude Code session</li>
+            <li>Get its critique, act on the findings, <em>then</em> open the PR</li>
+        </ul>
+        <p style="text-align: center; margin-top: 1.5rem; color: var(--muted); font-size: 1.1rem;">
+            Same input, two different models, two different blind spots. Together they catch more than either one alone.
+        </p>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D3</span> &middot; Advanced prompt engineering for journalists</span>
+        <span>17</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — CLI agents landscape
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>The four major CLI agents</h2>
+        <div class="subtitle">Different companies, different models, different context-file formats</div>
+    </div>
+    <div class="slide-body">
+        <div class="diagram-container">
+            <img src="module-4-diagrams/cli-agents-landscape.svg" alt="Four CLI agents: Claude Code, Gemini CLI, Codex CLI, and GitHub Copilot CLI">
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D3</span> &middot; Cross-model code review from the CLI</span>
+        <span>18</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — The -p flag pattern
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>The <code>-p</code> flag: non-interactive mode</h2>
+        <div class="subtitle">A one-shot prompt to an external agent &mdash; it runs, returns, exits</div>
+    </div>
+    <div class="slide-body">
+        <div class="two-col">
+            <div class="col-card">
+                <h3 class="accent-ice">The pattern</h3>
+                <p>From inside your Claude Code session, ask Claude to shell out to another CLI agent.</p>
+                <div class="cmd-block" style="display: block; margin-top: 1rem;">
+<span class="comment"># Claude runs this as a subprocess</span><br>
+copilot -p "review the code on this branch"<br>
+codex -p "review this PR for issues"<br>
+gemini -p "summarize this article"
+                </div>
+                <p style="margin-top: 0.8rem; color: var(--muted); font-size: 1rem;">
+                    <code>-p</code> = non-interactive prompt. One turn, no session, done.
+                </p>
+            </div>
+            <div class="col-card accent-border">
+                <h3 class="accent">What you have to install</h3>
+                <ul>
+                    <li>Copilot CLI: <code>npm install -g @github/copilot</code></li>
+                    <li>Codex CLI: <code>npm install -g @openai/codex</code></li>
+                    <li>Gemini CLI: <code>npm install -g @google/gemini-cli</code></li>
+                </ul>
+                <p style="margin-top: 0.8rem; font-size: 1.05rem;">
+                    Auth inherits from existing logins &mdash; already signed into GitHub? Copilot is signed in.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D3</span> &middot; Cross-model code review from the CLI</span>
+        <span>19</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Cross-agent workflow diagram
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Calling external agents from Claude Code</h2>
+        <div class="subtitle">The subprocess runs in its own context &mdash; results come back into yours</div>
+    </div>
+    <div class="slide-body">
+        <div class="diagram-container">
+            <img src="module-4-diagrams/cross-agent-workflow.svg" alt="Workflow diagram showing Claude Code delegating to Gemini and Copilot via subprocess calls and integrating the results">
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D3</span> &middot; Cross-model code review from the CLI</span>
+        <span>20</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Context isolation
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>The sub-process stays isolated</h2>
+        <div class="subtitle">Copilot's and Codex's analysis doesn't bloat your main context window</div>
+    </div>
+    <div class="slide-body">
+        <ul>
+            <li>All that external analysis runs in its own process, its own context</li>
+            <li>Main session's token count barely moves &mdash; stayed at <span class="accent">6%</span> while two reviews ran</li>
+            <li>Main session only absorbs the <span class="accent-ice">returned text</span> &mdash; not the subprocess's internal reasoning</li>
+            <li>The returned review still costs tokens when it lands in your session &mdash; cheaper, not free</li>
+        </ul>
+        <div class="callout warn" style="margin-top: 1.2rem;">
+            <strong class="warn-label">Cost caveat:</strong> if you're running Copilot or Codex on an API key (not a subscription), those subprocess calls still cost per-token. Subscription plan = flat rate. Know which mode you're in.
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D3</span> &middot; Cross-model code review from the CLI</span>
+        <span>21</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — What each catches
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Different models, different blind spots</h2>
+        <div class="subtitle">From an actual Module 4 review session</div>
+    </div>
+    <div class="slide-body">
+        <div class="three-col">
+            <div class="col-card ice-border">
+                <h3 class="accent-ice">Claude Code</h3>
+                <p>Your main session. Ran the feature work. Missed a loop-fix issue and a gating bug.</p>
+            </div>
+            <div class="col-card accent-border">
+                <h3 class="accent">Copilot CLI</h3>
+                <p>Flagged same-day rerun collisions, a branch that runs unconditionally, and some dead code.</p>
+            </div>
+            <div class="col-card signal-border">
+                <h3 class="accent-signal">Codex CLI</h3>
+                <p>Sharper critique. <strong>Two high-severity findings</strong> Copilot missed: the PR loop wasn't actually fixed, and gating blocked non-video updates.</p>
+            </div>
+        </div>
+        <div class="callout" style="margin-top: 1.2rem;">
+            Claude Code's built-in <code>/code-review</code> plugin is also worth running &mdash; install the official Claude Code plugins to unlock it. But nothing replaces the cross-model read.
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D3</span> &middot; Cross-model code review from the CLI</span>
+        <span>22</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     D4 DIVIDER
+     ================================================================ -->
+<div class="slide divider-slide" style="background: linear-gradient(135deg, var(--void) 0%, #2a1d1d 60%, var(--void) 100%);">
+    <div class="divider-content">
+        <div class="section-num">Video D4 &middot; Part 4 of 4</div>
+        <h1>Remote control, editorial<br>judgment, and four questions</h1>
+        <div class="title-bar"></div>
+        <p class="covers">
+            <strong>/remote-control</strong> for your session from anywhere &middot;
+            the role you're actually playing &middot;
+            <strong>four questions</strong> for picking a tool &middot;
+            course send-off
+        </p>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Remote control, Joe's near-miss story
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Remote control: the feature I almost built myself</h2>
+        <div class="subtitle">Spent a month trying to port-forward my shell. Almost exposed it to the internet.</div>
+    </div>
+    <div class="slide-body">
+        <div class="pullquote" style="font-size: 1.5rem;">
+            "How hard can it be to send text from my phone and see it happen on the computer? I got it to work &mdash; and dangerously exposed the shell of my machine to the internet with very little protection. Luckily I came to my senses. Around the same time, Anthropic shipped remote control."
+            <span class="attribution">&mdash; Joe Amditis, Module 4</span>
+        </div>
+        <div class="callout" style="margin-top: 1.5rem;">
+            The lesson: when a feature you need looks like infrastructure, wait a beat. Someone at Anthropic or Google has probably already built the safe version.
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D4</span> &middot; Advanced prompt engineering for journalists</span>
+        <span>23</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — How /remote-control works
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>How <code>/remote-control</code> works</h2>
+        <div class="subtitle">Bridge a local Claude Code session to the Claude.ai web interface &mdash; and to your phone</div>
+    </div>
+    <div class="slide-body">
+        <div class="two-col">
+            <div class="col-card">
+                <h3 class="accent-ice">Turn it on</h3>
+                <ul>
+                    <li>Rename your session (<code>/session</code>) so it's easy to find</li>
+                    <li>Run <code>/remote-control</code> &mdash; session flags as active</li>
+                    <li>Web shows a new "Remote" session with a green status dot</li>
+                    <li>Type in the web, it appears in your terminal &mdash; and vice versa</li>
+                </ul>
+            </div>
+            <div class="col-card accent-border">
+                <h3 class="accent">What it unlocks</h3>
+                <ul>
+                    <li>Drive your local machine from the Claude.ai mobile web</li>
+                    <li>Upload a photo from your phone &mdash; it lands in the terminal</li>
+                    <li>Change models, add files, continue sessions on the move</li>
+                    <li>Pair with Wake-on-LAN to keep the machine available</li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 1.2rem; color: var(--muted); font-size: 1.1rem;">
+            Anthropic-only for now. Codex and Gemini don't ship an equivalent.
+        </p>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D4</span> &middot; Remote control, editorial judgment, four questions</span>
+        <span>24</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Course wrap: you're early
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>You're early. I cannot stress that enough.</h2>
+        <div class="subtitle">Claude Code has existed for a little over a year</div>
+    </div>
+    <div class="slide-body">
+        <ul>
+            <li>Nobody knows what they're doing &mdash; we're all scraping around in the dark</li>
+            <li>Disruptions are still hitting these tools every few weeks</li>
+            <li>If you feel like you're behind, <span class="accent">you're not</span>. You're early</li>
+            <li>The fact that you're investing time to <span class="accent-ice">manage</span> the machine, not just chat with it, puts you ahead</li>
+        </ul>
+        <div class="callout" style="margin-top: 1.5rem;">
+            The people who'll get the most out of these tools aren't the ones who chased every release note. They're the ones who built durable habits: context files, skills, pipelines, review loops.
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D4</span> &middot; Remote control, editorial judgment, four questions</span>
+        <span>25</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — The role you're actually playing (scoped to code side)
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>The role you're actually playing</h2>
+        <div class="subtitle">Less coder, less journalist &mdash; more project manager for the code-side work</div>
+    </div>
+    <div class="slide-body">
+        <div class="two-col">
+            <div class="col-card accent-border">
+                <h3 class="accent">Model does</h3>
+                <ul>
+                    <li>Writes the scripts and skills</li>
+                    <li>Builds the pipelines</li>
+                    <li>Runs the code review</li>
+                    <li>Processes the documents</li>
+                </ul>
+            </div>
+            <div class="col-card ice-border">
+                <h3 class="accent-ice">You do</h3>
+                <ul>
+                    <li>Reporting, interviewing, sourcing</li>
+                    <li>Writing and editing the journalism</li>
+                    <li>Editorial judgment on every decision</li>
+                    <li>Coordinating what the model builds</li>
+                </ul>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 1.3rem; font-size: 1.1rem; color: var(--muted); max-width: 10in; margin-left: auto; margin-right: auto;">
+            Talk to computers, talk to people. The machine runs in the background, assisting &mdash; the reporting and writing stay with you.
+        </p>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D4</span> &middot; Remote control, editorial judgment, four questions</span>
+        <span>26</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Autonomy spectrum diagram
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>The autonomy spectrum</h2>
+        <div class="subtitle">As tools get more capable, your oversight gets more important &mdash; not less</div>
+    </div>
+    <div class="slide-body">
+        <div class="diagram-container">
+            <img src="module-4-diagrams/autonomy-spectrum.svg" alt="Autonomy spectrum from read-only through supervised action to autonomous">
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D4</span> &middot; Remote control, editorial judgment, four questions</span>
+        <span>27</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Editorial judgment gets harder
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Editorial judgment gets harder, not easier</h2>
+        <div class="subtitle">A model that's right 99% of the time is more dangerous than one that's right 80%</div>
+    </div>
+    <div class="slide-body">
+        <div class="pullquote">
+            "When anybody can produce the slop, it doesn't matter, and nothing you make is special. You have to find a way to break through that noise and differentiate yourself from everyone else who has the same access to this slop shotgun."
+            <span class="attribution">&mdash; Joe Amditis, Module 4</span>
+        </div>
+        <div class="callout" style="margin-top: 1.5rem;">
+            The more capable the tool, the more the human-in-the-loop principle matters. Not less. Review, verify, attribute, show your work &mdash; on the code side and on the journalism side.
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D4</span> &middot; Remote control, editorial judgment, four questions</span>
+        <span>28</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Four questions intro
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Four questions for picking a tool</h2>
+        <div class="subtitle">Feature-by-feature comparisons go stale in months. These don't.</div>
+    </div>
+    <div class="slide-body">
+        <ol class="numbered-list">
+            <li><strong>What is the task?</strong> What am I trying to do, and what does a good outcome look like?</li>
+            <li><strong>How much context does this task need?</strong> What do I need to gather, clean, and provide to the tool?</li>
+            <li><strong>Do I need access to tools?</strong> Does the agent need Firecrawl, Airtable, Firebase, ytdlp, ffmpeg &mdash; and the permissions to use them?</li>
+            <li><strong>How cost-sensitive am I?</strong> What's my real-money budget, not just my token budget?</li>
+        </ol>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D4</span> &middot; Remote control, editorial judgment, four questions</span>
+        <span>29</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Tool evaluation framework diagram
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Four durable questions, visualized</h2>
+        <div class="subtitle">File access, context files, tool use, transparency &mdash; check these before picking anything</div>
+    </div>
+    <div class="slide-body">
+        <div class="diagram-container">
+            <img src="module-4-diagrams/tool-evaluation-framework.svg" alt="Four-question framework for evaluating new AI tools">
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D4</span> &middot; Remote control, editorial judgment, four questions</span>
+        <span>30</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Q1 Task
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Q1 &middot; What is the task?</h2>
+        <div class="subtitle">Start concrete &mdash; what does success look like?</div>
+    </div>
+    <div class="slide-body">
+        <ul>
+            <li>What am I actually trying to produce? A script? A summary? A data extraction?</li>
+            <li>What does a <span class="accent">good outcome</span> look like &mdash; exactly?</li>
+            <li>What does <span class="accent-signal">failure</span> look like, and how would I spot it?</li>
+            <li>If I can't describe the task in a sentence, I'm not ready to pick a tool for it</li>
+        </ul>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D4</span> &middot; Remote control, editorial judgment, four questions</span>
+        <span>31</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Q2 Context
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Q2 &middot; How much context does this task need?</h2>
+        <div class="subtitle">Think like you're onboarding a new hire &mdash; informed, not overloaded</div>
+    </div>
+    <div class="slide-body">
+        <ul>
+            <li>What information, sources, or institutional knowledge does the model need to do this well?</li>
+            <li>What's the <span class="accent-ice">minimum</span> that still makes the output trustworthy?</li>
+            <li>Can the context travel in a CLAUDE.md, or does it need to be pulled fresh each time?</li>
+            <li>Too little context &mdash; generic output. Too much &mdash; noise, cost, lost focus</li>
+        </ul>
+        <div class="callout" style="margin-top: 1.2rem;">
+            Same instinct you'd use bringing a new reporter onto your beat: enough to be useful, not so much they can't see what matters.
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D4</span> &middot; Remote control, editorial judgment, four questions</span>
+        <span>32</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Q3 Tools
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Q3 &middot; Do I need access to tools?</h2>
+        <div class="subtitle">What gear does the agent need to actually finish the job?</div>
+    </div>
+    <div class="slide-body">
+        <div class="two-col">
+            <div class="col-card">
+                <h3 class="accent-ice">External tools</h3>
+                <ul>
+                    <li>Firecrawl (scraping)</li>
+                    <li>Airtable, Firebase, Supabase (data)</li>
+                    <li>ytdlp, ffmpeg (media)</li>
+                    <li>GitHub, Drive, Slack (platforms)</li>
+                </ul>
+            </div>
+            <div class="col-card accent-border">
+                <h3 class="accent">What you have to provide</h3>
+                <ul>
+                    <li>Credentials and API keys</li>
+                    <li>Scoped permissions (least privilege)</li>
+                    <li>File-system access boundaries</li>
+                    <li>Rate limits and budget caps</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D4</span> &middot; Remote control, editorial judgment, four questions</span>
+        <span>33</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Q4 Cost
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Q4 &middot; How cost-sensitive am I?</h2>
+        <div class="subtitle">Budget isn't just tokens &mdash; it's real dollars too</div>
+    </div>
+    <div class="slide-body">
+        <ul>
+            <li>Am I willing to spend $10, $20, $100 on a one-off run?</li>
+            <li>Do I need to rent GPUs, pay for an API, pay for a plan?</li>
+            <li>What's my <span class="accent">real-money budget</span>, not my token budget?</li>
+            <li>For most journalism tasks, any of these tools will be sufficient &mdash; the question is which is best for you</li>
+        </ul>
+        <p style="text-align: center; margin-top: 1.5rem; font-size: 1.2rem; color: var(--chrome); max-width: 10in; margin-left: auto; margin-right: auto;">
+            Long documents, complex multi-step reasoning, or structured reliable output? Pick the tool that fits. Not the one you saw a video about.
+        </p>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D4</span> &middot; Remote control, editorial judgment, four questions</span>
+        <span>34</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Try more than one tool
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>Try more than one tool</h2>
+        <div class="subtitle">Don't get loyal to a methodology &mdash; develop a feel</div>
+    </div>
+    <div class="slide-body">
+        <ul>
+            <li>This course focused on Claude Code &mdash; but I've tried all of them</li>
+            <li>Each has values, gaps, and moods</li>
+            <li>Find your <span class="accent">minimum viable effectiveness</span> &mdash; what you can fall back to when something important comes up</li>
+            <li>It's okay to play around. You know your beat. You know your task</li>
+        </ul>
+        <div class="callout" style="margin-top: 1.5rem;">
+            The goal isn't to pick the right tool forever. It's to know enough tools that you can pick the right one <em>for this task</em>.
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D4</span> &middot; Remote control, editorial judgment, four questions</span>
+        <span>35</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Course arc diagram
+     ================================================================ -->
+<div class="slide">
+    <div class="slide-header">
+        <h2>The course arc: from prompting to managing</h2>
+        <div class="subtitle">Four weeks, one shared repository</div>
+    </div>
+    <div class="slide-body">
+        <div class="diagram-container">
+            <img src="module-4-diagrams/course-arc.svg" alt="Course arc from Module 1 through Module 4 showing the shift from prompting to managing">
+        </div>
+    </div>
+    <div class="slide-footer">
+        <span><span class="section-tag">D4</span> &middot; Course close</span>
+        <span>36</span>
+    </div>
+</div>
+
+
+<!-- ================================================================
+     SLIDE — Send-off
+     ================================================================ -->
+<div class="slide title-slide" style="background: linear-gradient(135deg, var(--void) 0%, #162317 50%, var(--void) 100%);">
+    <div class="title-content" style="max-width: 11in;">
+        <div class="kicker">Module 4 &middot; Send-off</div>
+        <h1 style="font-size: 2.6rem;">Use them to do your work better.<br>Use them to reach more people.</h1>
+        <div class="title-bar"></div>
+        <p class="subtitle-line" style="font-size: 1.2rem; color: var(--muted); line-height: 1.5; max-width: 9in; margin-left: auto; margin-right: auto;">
+            Not as a shortcut. Not to cheat. As tools in the background that free you up to listen, engage, report, and edit &mdash; so the work you produce is still worth producing.
+        </p>
+        <p class="instructor" style="margin-top: 2rem;">See you in the forums for the final project.</p>
+    </div>
+</div>
+
+
+</body>
+</html>
