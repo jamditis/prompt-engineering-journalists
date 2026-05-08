@@ -67,3 +67,19 @@ In the main session:
 2. For each forum input, send the JSON + the prompt at `insights/prompts/forum-narrative.md` to Sonnet 4.6. Parse the JSON response.
 3. Merge each narrative back into its input via `merge_narratives(forum_input, narrative)`.
 4. Write the array to `insights/data/forums.json`.
+
+## Phase 3c: Student profiles
+
+In the main session:
+1. Build the inputs:
+   ```python
+   from insights.aggregate.students import build_student_inputs, finalize_students
+   inputs = build_student_inputs(Path("insights/data/posts.jsonl"), Path("insights/data/extracted"))
+   ```
+2. For each student where `post_count >= 2`, send `{"real_name": ..., "post_count": ..., "modules_active": [...], "extractions": [...]}` to Sonnet 4.6 with the prompt at `insights/prompts/student-profile.md`. Parse the JSON response. Collect `{student_id: response}` into a dict.
+3. Finalize:
+   ```python
+   students, name_map = finalize_students(inputs, model_responses)
+   Path("insights/data/students.json").write_text(json.dumps(students, indent=2, ensure_ascii=False), encoding="utf-8")
+   Path("insights/data/name_map.json").write_text(json.dumps(name_map, indent=2, ensure_ascii=False), encoding="utf-8")
+   ```
