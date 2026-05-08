@@ -63,3 +63,39 @@ def test_build_dashboard_data_copies_files(tmp_path):
 
     for fname in ("themes.json", "forums.json", "students.json", "overview.json", "name_map.json"):
         assert (dest / fname).exists()
+
+
+def test_build_search_index_emits_minisearch_documents(tmp_path):
+    from insights.build import build_search_index
+
+    posts = tmp_path / "posts.jsonl"
+    posts.write_text(
+        json.dumps({
+            "post_id": "p1", "content_text": "Hello world",
+            "discussion_subject": "Greeting", "forum_slug": "m1-discussion-forum-1",
+            "forum_category": "module-discussion", "language_guess": "en",
+            "author_name": "Alice", "permalink": "https://x.test/p1",
+        }) + "\n",
+        encoding="utf-8",
+    )
+    extracted = tmp_path / "extracted"
+    extracted.mkdir()
+    rec = {
+        "post_id": "p1",
+        "themes": ["coding-help"],
+        "skill_level": "intermediate",
+        "sentiment": "curious",
+        "role": "reporter",
+        "language": "en",
+    }
+    (extracted / "p1.json").write_text(json.dumps(rec), encoding="utf-8")
+
+    docs = build_search_index(posts, extracted)
+    assert len(docs) == 1
+    d = docs[0]
+    assert d["id"] == "p1"
+    assert "Hello world" in d["text"]
+    assert d["theme"] == "coding-help"
+    assert d["forum_slug"] == "m1-discussion-forum-1"
+    assert d["role"] == "reporter"
+    assert d["skill_level"] == "intermediate"

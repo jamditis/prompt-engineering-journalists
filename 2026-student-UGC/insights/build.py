@@ -38,6 +38,37 @@ def flatten_quotes(posts_path: Path, extracted_dir: Path) -> list[dict]:
     return out
 
 
+def build_search_index(posts_path: Path, extracted_dir: Path) -> list[dict]:
+    extractions = {}
+    for p in extracted_dir.glob("*.json"):
+        r = json.loads(p.read_text(encoding="utf-8"))
+        extractions[r["post_id"]] = r
+
+    docs = []
+    for line in posts_path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        post = json.loads(line)
+        ext = extractions.get(post["post_id"]) or {}
+        themes = ext.get("themes") or []
+        docs.append({
+            "id": post["post_id"],
+            "text": post.get("content_text", ""),
+            "subject": post.get("discussion_subject", ""),
+            "author_name": post.get("author_name", ""),
+            "permalink": post.get("permalink", ""),
+            "forum_slug": post.get("forum_slug", ""),
+            "forum_category": post.get("forum_category", ""),
+            "language": ext.get("language") or post.get("language_guess", ""),
+            "theme": themes[0] if themes else None,
+            "themes": themes,
+            "role": ext.get("role"),
+            "skill_level": ext.get("skill_level"),
+            "sentiment": ext.get("sentiment"),
+        })
+    return docs
+
+
 def build_dashboard_data(src: Path, dest: Path) -> None:
     dest.mkdir(parents=True, exist_ok=True)
     for fname in ("themes.json", "forums.json", "students.json", "overview.json", "name_map.json"):
@@ -51,6 +82,10 @@ def build_dashboard_data(src: Path, dest: Path) -> None:
         quotes = flatten_quotes(posts, extracted)
         (dest / "quotes.json").write_text(
             json.dumps(quotes, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
+        docs = build_search_index(posts, extracted)
+        (dest / "search-docs.json").write_text(
+            json.dumps(docs, ensure_ascii=False), encoding="utf-8"
         )
 
 
