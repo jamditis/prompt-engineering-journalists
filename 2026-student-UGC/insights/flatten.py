@@ -11,16 +11,14 @@ from langdetect import DetectorFactory, detect, LangDetectException
 DetectorFactory.seed = 0
 
 
-COURSE_OPS_KEYWORDS = (
-    "course-announcements",
-    "questions-for-the-instructor",
-    "questions-about-the-course-platform",
-    "participant-forum",
-    "technical-questions-for-the-instructor",
-)
-
-
 def classify_forum(slug: str) -> str:
+    """Map a forum slug to one of four categories.
+
+    Order matters: the more specific patterns are checked first.
+    Anything that doesn't match a more specific category falls through
+    to "course-ops" (which covers announcements, instructor Q&A,
+    platform questions, and informal participant chat).
+    """
     s = slug.lower()
     if s.startswith("final-project"):
         return "final-project"
@@ -28,9 +26,6 @@ def classify_forum(slug: str) -> str:
         return "weekly-exercise"
     if re.match(r"^m\d-discussion-forum-", s):
         return "module-discussion"
-    for kw in COURSE_OPS_KEYWORDS:
-        if kw in s:
-            return "course-ops"
     return "course-ops"
 
 
@@ -93,10 +88,9 @@ def flatten_corpus(corpus_root: Path, out_path: Path) -> int:
 
 
 def main() -> None:
-    repo_root = Path(__file__).parent.parent
-    corpus = repo_root
-    out = repo_root / "insights" / "data" / "posts.jsonl"
-    n = flatten_corpus(corpus, out)
+    corpus_root = Path(__file__).parent.parent
+    out = corpus_root / "insights" / "data" / "posts.jsonl"
+    n = flatten_corpus(corpus_root, out)
     print(f"flattened {n} posts to {out}")
 
 

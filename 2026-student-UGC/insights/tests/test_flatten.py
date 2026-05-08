@@ -70,3 +70,11 @@ def test_flatten_corpus_writes_one_line_per_post(tmp_path):
     p3 = by_id["p3"]
     assert p3["forum_category"] == "weekly-exercise"
     assert p3["language_guess"] == "fr"
+
+
+def test_flatten_corpus_skips_underscore_prefixed_files(tmp_path):
+    out = tmp_path / "posts.jsonl"
+    flatten_corpus(FIXTURE_ROOT, out)
+    lines = [json.loads(line) for line in out.read_text(encoding="utf-8").splitlines()]
+    post_ids = {r["post_id"] for r in lines}
+    assert "skip-me" not in post_ids
