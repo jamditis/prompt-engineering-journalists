@@ -1,0 +1,14 @@
+{
+  "forum_name": "M1 Weekly",
+  "discussion_id": "300002",
+  "subject": "My exercise",
+  "posts": [{
+    "post_id": "p3",
+    "author_name": "Carol",
+    "author_url": "https://example.test/u/3",
+    "posted_at": "2026-04-08T09:00:00-04:00",
+    "content_text": "Voici mon exercice en français.",
+    "permalink": "https://example.test/d/300002#p3",
+    "attachments": []
+  }]
+}

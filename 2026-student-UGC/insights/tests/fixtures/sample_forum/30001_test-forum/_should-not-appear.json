@@ -1,0 +1,14 @@
+{
+  "discussion_id": "300099",
+  "subject": "Should be skipped",
+  "posts": [
+    {
+      "post_id": "skip-me",
+      "author_name": "ZZZ",
+      "author_url": "https://example.test/u/zzz",
+      "posted_at": "2026-04-01T00:00:00-04:00",
+      "content_text": "This should not appear in flattened output.",
+      "permalink": "https://example.test/d/300099#skip-me"
+    }
+  ]
+}
