@@ -28,8 +28,7 @@ def validate_corpus(posts_path: Path, extracted_dir: Path) -> list[str]:
             continue
         if ext.get("post_id") != post_id:
             errors.append(f"{post_id}: post_id mismatch in extraction file (got {ext.get('post_id')!r})")
-        for err in validate_extraction(ext):
-            errors.append(f"{post_id}: {err}")
+        errors.extend(validate_extraction(ext))
 
     if extracted_dir.exists():
         for ext_path in extracted_dir.glob("*.json"):
