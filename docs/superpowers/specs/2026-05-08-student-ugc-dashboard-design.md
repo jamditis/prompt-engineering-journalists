@@ -10,7 +10,7 @@ Give the instructor (Joe) a single static dashboard he can open locally to read 
 
 ## Scope
 
-In: eight views over already-aggregated data, render-time anonymization with a session-scoped toggle, client-side search, mobile-responsive editorial-archive aesthetic.
+In: eight views over already-aggregated data, render-time anonymization with a localStorage-persisted toggle, client-side search, mobile-responsive editorial-archive aesthetic.
 
 Out: live data refresh, multi-cohort comparison, authoring/editing tools, deployment to a public URL (the corpus contains real student names — local-only).
 
