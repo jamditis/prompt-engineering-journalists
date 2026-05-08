@@ -77,7 +77,7 @@ Return:
   "ai_use_cases": ["code generation", "data analysis"],
   "challenges": ["copy-paste workflow friction between chat and editor"],
   "project_ideas": [],
-  "themes": ["coding-help", "cli-vs-web", "workflow-friction"],
+  "themes": ["coding-help", "cli-vs-web"],
   "theme_freeform": ["workflow-friction"],
   "sentiment": "frustrated",
   "is_question_for_instructor": false,
