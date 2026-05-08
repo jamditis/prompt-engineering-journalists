@@ -53,3 +53,17 @@ Path("insights/data/themes.json").write_text(json.dumps(themes, indent=2, ensure
 ```
 
 6. For each theme with `member_count >= 5`, send the theme + a sampling of its members' `summary_one_line` and `quotable_lines` back to the model and ask for a 4-sentence `ai_summary`. Patch the result into `themes.json`. (For now, themes with fewer members get an empty `ai_summary` — frontend handles that.)
+
+## Phase 3b: Forum narratives
+
+In the main session:
+1. Build the per-forum inputs:
+   ```python
+   from pathlib import Path
+   import json
+   from insights.aggregate.forums import build_forum_inputs, merge_narratives
+   inputs = build_forum_inputs(Path("insights/data/posts.jsonl"), Path("insights/data/extracted"))
+   ```
+2. For each forum input, send the JSON + the prompt at `insights/prompts/forum-narrative.md` to Sonnet 4.6. Parse the JSON response.
+3. Merge each narrative back into its input via `merge_narratives(forum_input, narrative)`.
+4. Write the array to `insights/data/forums.json`.
