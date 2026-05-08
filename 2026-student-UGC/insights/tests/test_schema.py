@@ -35,11 +35,11 @@ def test_validate_extraction_accepts_minimal_valid_record():
     assert validate_extraction(record) == []
 
 
-def test_validate_extraction_rejects_missing_field():
-    record = {"post_id": "p1"}
+def test_validate_extraction_rejects_one_missing_field():
+    record = _minimal_valid()
+    del record["role"]
     errors = validate_extraction(record)
-    assert any("missing required field" in e for e in errors)
-    assert len(errors) >= len(REQUIRED_EXTRACTION_FIELDS) - 1
+    assert any("missing required field: role" in e for e in errors)
 
 
 def test_validate_extraction_rejects_bad_skill_level():
@@ -65,7 +65,13 @@ def test_validate_extraction_rejects_bad_quotable_line_shape():
 
 def test_skill_levels_constants():
     assert SKILL_LEVELS == ("beginner", "intermediate", "advanced")
+
+
+def test_sentiments_includes_neutral():
     assert "neutral" in SENTIMENTS
+
+
+def test_confidence_values_constants():
     assert CONFIDENCE_VALUES == ("stated", "inferred", "unknown")
 
 
