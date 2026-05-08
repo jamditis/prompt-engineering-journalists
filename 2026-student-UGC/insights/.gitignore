@@ -1,0 +1,22 @@
+# venv
+venv/
+__pycache__/
+*.pyc
+
+# generated data
+data/extracted/
+data/failed/
+data/extraction_log.jsonl
+data/validation_errors.json
+data/posts.jsonl
+data/students.json
+data/themes.json
+data/forums.json
+data/overview.json
+data/quotes.json
+data/name_map.json
+data/slices/
+
+# but keep .keep markers so empty dirs persist
+!data/.keep
+!data/*/.keep
