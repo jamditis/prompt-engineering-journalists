@@ -115,6 +115,7 @@ function timelineBars(points) {
   const max = Math.max(...points.map(p => p.count), 1);
   return html`${points.map(p => {
     const h = ((p.count / max) * 80).toFixed(0);
-    return html`<span class="tl-bar" title="${p.week}: ${p.count} posts" style="height:${h}px"></span>`;
+    const when = p.date || p.week || "";
+    return html`<span class="tl-bar" title="${when}: ${p.count} posts" style="height:${h}px"></span>`;
   })}`;
 }

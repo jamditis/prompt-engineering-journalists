@@ -15,10 +15,11 @@ def _load_posts(posts_path: Path) -> list[dict]:
 
 
 def _load_extractions(extracted_dir: Path) -> dict[str, dict]:
-    return {
-        json.loads(p.read_text(encoding="utf-8"))["post_id"]: json.loads(p.read_text(encoding="utf-8"))
-        for p in extracted_dir.glob("*.json")
-    }
+    out: dict[str, dict] = {}
+    for p in extracted_dir.glob("*.json"):
+        rec = json.loads(p.read_text(encoding="utf-8"))
+        out[rec["post_id"]] = rec
+    return out
 
 
 def build_overview(posts_path: Path, extracted_dir: Path) -> dict:

@@ -59,7 +59,7 @@ Every place a real name would render, the dashboard substitutes `name_map[real_n
 - `quotes.json[].author_name`
 - Any `top_discussions` author fields in `overview.json`
 
-Toggle in the header labeled "Show real names" — off by default. State persists in `localStorage` under `ugc-dashboard:show-real-names`. The toggle never affects the JSON files; it switches a CSS class on `<body>` and a JS flag the renderers consult on every render. Closing the tab re-defaults to anonymized.
+Toggle in the header labeled "Show real names" — off by default. State persists across sessions in `localStorage` under `ugc-dashboard:show-real-names`, so a previously-set choice survives a tab close. The toggle never affects the JSON files; it switches a CSS attribute on `<body>` and a JS flag the renderers consult on every render. To reset to anonymized after enabling, the user toggles it back off.
 
 ## Aesthetic
 

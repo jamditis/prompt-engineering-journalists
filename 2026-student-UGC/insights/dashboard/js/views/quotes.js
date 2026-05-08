@@ -91,9 +91,9 @@ export async function render() {
     });
   });
 
-  onAnonChange(() => paint(false));
+  const unsubscribe = onAnonChange(() => paint(false));
   paint(false);
-  return root;
+  return { node: root, cleanup: unsubscribe };
 }
 
 function distinct(arr) {

@@ -27,14 +27,27 @@ navLinks.forEach(a => a.addEventListener("click", () => {
   navToggle.setAttribute("aria-expanded", "false");
 }));
 
+let teardownCurrentView = null;
+
 async function render() {
   const hash = window.location.hash.replace(/^#\//, "") || "overview";
   const path = VIEWS[hash] || VIEWS.overview;
   navLinks.forEach(a => a.classList.toggle("is-active", a.getAttribute("href") === `#/${hash}`));
+  if (typeof teardownCurrentView === "function") {
+    try { teardownCurrentView(); } catch (err) { console.error("view teardown failed", err); }
+    teardownCurrentView = null;
+  }
   mount(outlet, html`<p class="loading">Loading…</p>`);
   try {
     const mod = await import(path);
-    const node = await mod.render();
+    const result = await mod.render();
+    let node = result;
+    let cleanup = null;
+    if (result && typeof result === "object" && !(result instanceof Node) && result.node) {
+      node = result.node;
+      cleanup = typeof result.cleanup === "function" ? result.cleanup : null;
+    }
+    teardownCurrentView = cleanup;
     outlet.replaceChildren(node);
   } catch (err) {
     console.error(err);

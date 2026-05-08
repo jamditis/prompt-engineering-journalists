@@ -37,9 +37,9 @@ export async function render() {
     paint();
   });
 
-  onAnonChange(paint);
+  const unsubscribe = onAnonChange(paint);
   paint();
-  return root;
+  return { node: root, cleanup: unsubscribe };
 }
 
 function dimBody(students, key) {

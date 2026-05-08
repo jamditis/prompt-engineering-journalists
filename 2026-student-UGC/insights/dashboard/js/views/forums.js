@@ -3,15 +3,15 @@ import { anonymize } from "../anonymize.js";
 import { html, mount } from "../dom.js";
 import { fmtNumber } from "../format.js";
 
-const CATEGORY_ORDER = [
+const SECTION_ORDER = [
   "course-ops",
   "m1-discussion", "m1-exercise",
   "m2-discussion", "m2-exercise",
   "m3-discussion", "m3-exercise",
   "m4-discussion", "m4-exercise",
-  "final",
+  "final-project",
 ];
-const CATEGORY_LABELS = {
+const SECTION_LABELS = {
   "course-ops": "Course operations",
   "m1-discussion": "Module 1 — discussion",
   "m1-exercise": "Module 1 — weekly exercise",
@@ -21,20 +21,30 @@ const CATEGORY_LABELS = {
   "m3-exercise": "Module 3 — weekly exercise",
   "m4-discussion": "Module 4 — discussion",
   "m4-exercise": "Module 4 — weekly exercise",
-  "final": "Final project",
+  "final-project": "Final project",
 };
+
+function sectionKey(forum) {
+  const cat = forum.forum_category || "other";
+  if (cat === "course-ops" || cat === "final-project") return cat;
+  const m = (forum.forum_slug || "").match(/^(m\d)-/);
+  const mod = m ? m[1] : "m?";
+  if (cat === "module-discussion") return `${mod}-discussion`;
+  if (cat === "weekly-exercise") return `${mod}-exercise`;
+  return cat;
+}
 
 export async function render() {
   const [forums, quotes] = await Promise.all([getForums(), getQuotes()]);
-  const quoteById = new Map(quotes.map(q => [q.post_id, q]));
+  const quoteById = groupQuotesByPost(quotes);
   const grouped = new Map();
   for (const f of forums) {
-    const key = f.forum_category || "other";
+    const key = sectionKey(f);
     if (!grouped.has(key)) grouped.set(key, []);
     grouped.get(key).push(f);
   }
 
-  const orderedKeys = [...CATEGORY_ORDER, ...[...grouped.keys()].filter(k => !CATEGORY_ORDER.includes(k))];
+  const orderedKeys = [...SECTION_ORDER, ...[...grouped.keys()].filter(k => !SECTION_ORDER.includes(k))];
 
   const root = document.createElement("section");
   root.className = "view view-forums";
@@ -45,7 +55,7 @@ export async function render() {
       <p class="lede">Forums are grouped by week. Narrative summaries are added in a later pass — until then, structural rollups and standout quotes show what each forum was about.</p>
     </header>
     ${orderedKeys.filter(c => grouped.has(c)).map(c => html`
-      <h3 class="category-head">${CATEGORY_LABELS[c] || c}</h3>
+      <h3 class="category-head">${SECTION_LABELS[c] || c}</h3>
       <div class="forum-grid">
         ${grouped.get(c).map(f => forumCard(f, quoteById))}
       </div>
@@ -56,8 +66,19 @@ export async function render() {
   return root;
 }
 
+function groupQuotesByPost(quotes) {
+  const map = new Map();
+  for (const q of quotes) {
+    if (!map.has(q.post_id)) map.set(q.post_id, []);
+    map.get(q.post_id).push(q);
+  }
+  return map;
+}
+
 function forumCard(f, quoteById) {
-  const standouts = (f.standout_quote_ids || []).map(id => quoteById.get(id)).filter(Boolean).slice(0, 2);
+  const standouts = (f.standout_quote_ids || [])
+    .flatMap(id => quoteById.get(id) || [])
+    .slice(0, 2);
   return html`
     <article class="forum-card">
       <header>

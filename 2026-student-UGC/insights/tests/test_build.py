@@ -73,7 +73,9 @@ def test_build_search_index_emits_minisearch_documents(tmp_path):
         json.dumps({
             "post_id": "p1", "content_text": "Hello world",
             "discussion_subject": "Greeting", "forum_slug": "m1-discussion-forum-1",
+            "forum_name": "M1 Discussion Forum 1",
             "forum_category": "module-discussion", "language_guess": "en",
+            "posted_at": "2026-04-01T12:00:00Z",
             "author_name": "Alice", "permalink": "https://x.test/p1",
         }) + "\n",
         encoding="utf-8",
@@ -95,7 +97,10 @@ def test_build_search_index_emits_minisearch_documents(tmp_path):
     d = docs[0]
     assert d["id"] == "p1"
     assert "Hello world" in d["text"]
-    assert d["theme"] == "coding-help"
+    assert d["themes"] == ["coding-help"]
+    assert d["discussion_subject"] == "Greeting"
+    assert d["forum_name"] == "M1 Discussion Forum 1"
     assert d["forum_slug"] == "m1-discussion-forum-1"
+    assert d["posted_at"] == "2026-04-01T12:00:00Z"
     assert d["role"] == "reporter"
     assert d["skill_level"] == "intermediate"
