@@ -16,6 +16,8 @@ This course moves you from web-based AI chat interfaces to terminal CLI tools. B
 
 **Course site:** [mooc.amditis.tech](https://mooc.amditis.tech)
 
+**2027 planning:** [Tentative schedule and preparation checklist](2027_COURSE_PREPARATION.md). The materials below describe the 2026 course until the next syllabus is approved.
+
 ## Course modules
 
 | Week | Topic | What you'll build |
