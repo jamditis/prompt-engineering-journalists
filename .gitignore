@@ -34,3 +34,12 @@ build/
 desktop.ini
 nul
 Resources/favorites_*.html
+
+# Student forum exports and course archives hold students' names and posts.
+# Never commit them; .github/scripts/student-data-guard.sh fails CI if they appear.
+/[0-9][0-9][0-9][0-9]-student-UGC/*
+!/[0-9][0-9][0-9][0-9]-student-UGC/CLAUDE.md
+!/[0-9][0-9][0-9][0-9]-student-UGC/README.md
+!/[0-9][0-9][0-9][0-9]-student-UGC/docs/
+!/[0-9][0-9][0-9][0-9]-student-UGC/insights/
+*.zip
